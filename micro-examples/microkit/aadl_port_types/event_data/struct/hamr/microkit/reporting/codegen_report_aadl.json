@@ -39,16 +39,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/include\/sb_queue_event_data_2_prod_2_cons_struct_struct_i_1.h",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "types\/src\/sb_queue_event_data_2_prod_2_cons_struct_struct_i_1.c",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "types\/include\/sb_types.h",
               "overwrittenIfExists" : true
             },

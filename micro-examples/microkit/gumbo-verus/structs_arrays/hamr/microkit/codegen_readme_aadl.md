@@ -47,9 +47,9 @@
  - **Entry Points**
 
 
-    Initialize: [Rust](crates/consumer_consumer/src/component/consumer_consumer_app.rs#L19)
+    Initialize: [Rust](crates/consumer_consumer/src/component/consumer_consumer_app.rs#L21)
 
-    TimeTriggered: [Rust](crates/consumer_consumer/src/component/consumer_consumer_app.rs#L26)
+    TimeTriggered: [Rust](crates/consumer_consumer/src/component/consumer_consumer_app.rs#L30)
 
 
 - **APIs**
@@ -72,134 +72,134 @@
     <tr><th colspan=4>Compute</th></tr>
     <tr><td>assume specUsage</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L266>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L56>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L60>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L186>GUMBOX</a></td>
     </tr>
     <tr><td>assume atLeastOneZero_ArrayInt32</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L269>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L58>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L62>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L196>GUMBOX</a></td>
     </tr>
     <tr><td>assume isSorted_ArrayInt32</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L273>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L60>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L64>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L208>GUMBOX</a></td>
     </tr>
     <tr><td>assume atLeastOneZero_StructArray</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L278>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L62>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L66>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L220>GUMBOX</a></td>
     </tr>
     <tr><td>assume isSorted_StructArray</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L282>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L64>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L68>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L232>GUMBOX</a></td>
     </tr>
     <tr><td>assume atLeastOneZero_ArrayStruct</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L287>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L66>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L70>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L244>GUMBOX</a></td>
     </tr>
     <tr><td>assume isSorted_ArrayStruct</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L291>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L68>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L72>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L258>GUMBOX</a></td>
     </tr>
     <tr><td>assume assume_valid_velocity</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L296>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L76>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L80>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L274>GUMBOX</a></td>
     </tr>
     <tr><td>guarantee conversions</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L301>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L82>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L86>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L326>GUMBOX</a></td>
     </tr>
     <tr><td>guarantee guarantee_valid_velocity</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L317>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L92>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L96>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L343>GUMBOX</a></td>
     </tr>
     <tr><td>guarantee all_zero</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L321>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L95>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L99>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L355>GUMBOX</a></td>
     </tr></table>
     <table>
     <tr><th colspan=4>GUMBO Methods</th></tr>
     <tr><td>convertB</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L187>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L145>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L148>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L17>GUMBOX</a></td>
     </tr>
     <tr><td>convertS8</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L197>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L157>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L160>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L29>GUMBOX</a></td>
     </tr>
     <tr><td>convertS16</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L201>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L169>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L172>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L41>GUMBOX</a></td>
     </tr>
     <tr><td>convertS32</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L205>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L181>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L184>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L53>GUMBOX</a></td>
     </tr>
     <tr><td>convertS64</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L209>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L193>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L196>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L65>GUMBOX</a></td>
     </tr>
     <tr><td>convertU8</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L213>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L205>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L208>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L77>GUMBOX</a></td>
     </tr>
     <tr><td>convertU16</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L217>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L217>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L220>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L89>GUMBOX</a></td>
     </tr>
     <tr><td>convertU32</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L221>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L229>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L232>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L101>GUMBOX</a></td>
     </tr>
     <tr><td>convertU64</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L225>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L241>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L244>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L113>GUMBOX</a></td>
     </tr>
     <tr><td>add</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L243>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L253>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L256>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L125>GUMBOX</a></td>
     </tr>
     <tr><td>addMinAndMax</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L246>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L260>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L263>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L132>GUMBOX</a></td>
     </tr>
     <tr><td>test</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L254>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L280>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L283>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L152>GUMBOX</a></td>
     </tr>
     <tr><td>abs</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L256>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L285>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L288>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L157>GUMBOX</a></td>
     </tr>
     <tr><td>square</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L260>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L294>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L297>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L166>GUMBOX</a></td>
     </tr>
     <tr><td>testSpec</td>
     <td><a href=../../aadl/Gumbo_Structs_Arrays.aadl#L262>GUMBO</a></td>
-    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L305>Verus</a></td>
+    <td><a href=crates/consumer_consumer/src/component/consumer_consumer_app.rs#L308>Verus</a></td>
     <td><a href=crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs#L177>GUMBOX</a></td>
     </tr></table>
 

@@ -12,7 +12,16 @@
 #![allow(unused_unsafe)]
 #![allow(unused_variables)]
 
-// This file will not be overwritten if codegen is rerun
+// The two features below are required by the Verus build but go unused on a
+// plain cargo build, and `verus_keep_ghost` is set by Verus rather than
+// declared to cargo, so both lints fire only on the non-Verus path.
+#![allow(unused_features)]
+#![allow(unexpected_cfgs)]
+
+#![feature(proc_macro_hygiene)]
+#![cfg_attr(not(verus_keep_ghost), feature(stmt_expr_attributes))]
+
+// This file will not be overwritten if HAMR codegen is rerun
 
 use data::*;
 use vstd::prelude::*;
@@ -59,6 +68,7 @@ pub fn librarySpecFunction_Guarantee(a: Gubmo_Structs_Arrays::MyArrayInt32) -> b
 // END MARKER GUMBO RUST MARKER
 
 verus! {
+
   // BEGIN MARKER GUMBO VERUS MARKER
   pub open spec fn normalLibraryFunction_spec(a: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
   {
@@ -139,4 +149,5 @@ verus! {
     //   specification to reflect the intended semantics of the GUMBO spec function.
     true
   }
+
 }

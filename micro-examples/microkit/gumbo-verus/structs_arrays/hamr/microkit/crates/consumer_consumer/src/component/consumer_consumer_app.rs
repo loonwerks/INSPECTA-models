@@ -1,4 +1,4 @@
-// This file will not be overwritten if codegen is rerun
+// This file will not be overwritten if HAMR codegen is rerun
 
 use data::*;
 use crate::bridge::consumer_consumer_api::*;
@@ -7,18 +7,22 @@ use vstd::prelude::*;
 verus! {
 
   pub struct consumer_consumer {
+    // PLACEHOLDER MARKER STATE VARS
   }
 
   impl consumer_consumer {
     pub fn new() -> Self
     {
       Self {
+        // PLACEHOLDER MARKER STATE VAR INIT
       }
     }
 
     pub fn initialize<API: consumer_consumer_Put_Api> (
       &mut self,
       api: &mut consumer_consumer_Application_Api<API>)
+      ensures
+        // PLACEHOLDER MARKER INITIALIZATION ENSURES
     {
       log_info("initialize entrypoint invoked");
     }
@@ -96,7 +100,6 @@ verus! {
         (final(api).MyArrayInt32.is_some() ==> forall|i:int| 0 <= i < final(api).MyArrayInt32.unwrap().len() ==> #[trigger] test(final(api).MyArrayInt32.unwrap()[i]) && true) ==>
           true,
         // END MARKER TIME TRIGGERED ENSURES
-
     {
       log_info("compute entrypoint invoked");
 
@@ -308,14 +311,30 @@ verus! {
   }
   // END MARKER GUMBO METHODS
 
-  pub open spec fn testSpec__developer_verus() -> (res: bool) {
-      true
+  /// Developer-supplied Verus realization of the GUMBO spec function `test`.
+  /// 
+  /// This function may be freely refined as long as it remains a pure Verus `spec fn`.
+  pub open spec fn testSpec__developer_verus() -> (res: bool)
+  {
+    // This default implementation returns `true`, which is safe but weak:
+    // * In `assume` contexts, returning `false` may allow Verus to prove `false`.
+    // * To obtain meaningful guarantees, developers should strengthen this
+    //   specification to reflect the intended semantics of the GUMBO spec function.
+    true
   }
 
+  /// Developer-supplied GUMBOX realization of the GUMBO spec function `test`.
+  /// 
+  /// This function may be freely refined.
   pub exec fn testSpec__developer_gumbox() -> (res: bool)
     ensures
-      res == testSpec__developer_verus()
+      res == testSpec__developer_verus(),
   {
-      true
+    // This default implementation returns `true`, which is safe but weak:
+    // * In `assume` contexts, returning `false` may allow GUMBOX to prove `false`.
+    // * To obtain meaningful guarantees, developers should strengthen this
+    //   specification to reflect the intended semantics of the GUMBO spec function.
+    true
   }
+
 }
