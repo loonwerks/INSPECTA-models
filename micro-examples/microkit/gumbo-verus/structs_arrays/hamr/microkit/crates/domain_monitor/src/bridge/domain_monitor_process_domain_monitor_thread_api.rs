@@ -59,28 +59,28 @@ verus! {
   impl<API: domain_monitor_process_domain_monitor_thread_Get_Api> domain_monitor_process_domain_monitor_thread_Application_Api<API> {
     pub fn get_producer_producer_myStructArray(&mut self) -> (res : Option<Gumbo_Structs_Arrays::MyStructArray_i>)
       ensures
-        old(self).producer_producer_myStructArray == self.producer_producer_myStructArray,
-        res == self.producer_producer_myStructArray,
-        old(self).producer_producer_MyArrayStruct == self.producer_producer_MyArrayStruct,
-        old(self).consumer_consumer_MyArrayInt32 == self.consumer_consumer_MyArrayInt32,
+        old(self).producer_producer_myStructArray == final(self).producer_producer_myStructArray,
+        res == final(self).producer_producer_myStructArray,
+        old(self).producer_producer_MyArrayStruct == final(self).producer_producer_MyArrayStruct,
+        old(self).consumer_consumer_MyArrayInt32 == final(self).consumer_consumer_MyArrayInt32,
     {
       self.api.unverified_get_producer_producer_myStructArray(&Ghost(self.producer_producer_myStructArray))
     }
     pub fn get_producer_producer_MyArrayStruct(&mut self) -> (res : Option<Gumbo_Structs_Arrays::MyArrayStruct>)
       ensures
-        old(self).producer_producer_myStructArray == self.producer_producer_myStructArray,
-        old(self).producer_producer_MyArrayStruct == self.producer_producer_MyArrayStruct,
-        res == self.producer_producer_MyArrayStruct,
-        old(self).consumer_consumer_MyArrayInt32 == self.consumer_consumer_MyArrayInt32,
+        old(self).producer_producer_myStructArray == final(self).producer_producer_myStructArray,
+        old(self).producer_producer_MyArrayStruct == final(self).producer_producer_MyArrayStruct,
+        res == final(self).producer_producer_MyArrayStruct,
+        old(self).consumer_consumer_MyArrayInt32 == final(self).consumer_consumer_MyArrayInt32,
     {
       self.api.unverified_get_producer_producer_MyArrayStruct(&Ghost(self.producer_producer_MyArrayStruct))
     }
     pub fn get_consumer_consumer_MyArrayInt32(&mut self) -> (res : Option<Gumbo_Structs_Arrays::MyArrayInt32>)
       ensures
-        old(self).producer_producer_myStructArray == self.producer_producer_myStructArray,
-        old(self).producer_producer_MyArrayStruct == self.producer_producer_MyArrayStruct,
-        old(self).consumer_consumer_MyArrayInt32 == self.consumer_consumer_MyArrayInt32,
-        res == self.consumer_consumer_MyArrayInt32,
+        old(self).producer_producer_myStructArray == final(self).producer_producer_myStructArray,
+        old(self).producer_producer_MyArrayStruct == final(self).producer_producer_MyArrayStruct,
+        old(self).consumer_consumer_MyArrayInt32 == final(self).consumer_consumer_MyArrayInt32,
+        res == final(self).consumer_consumer_MyArrayInt32,
     {
       self.api.unverified_get_consumer_consumer_MyArrayInt32(&Ghost(self.consumer_consumer_MyArrayInt32))
     }

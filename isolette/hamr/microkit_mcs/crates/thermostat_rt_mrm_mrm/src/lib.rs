@@ -12,6 +12,12 @@
 #![allow(unused_unsafe)]
 #![allow(unused_variables)]
 
+// The two features below are required by the Verus build but go unused on a
+// plain cargo build, and `verus_keep_ghost` is set by Verus rather than
+// declared to cargo, so both lints fire only on the non-Verus path.
+#![allow(unused_features)]
+#![allow(unexpected_cfgs)]
+
 #![feature(proc_macro_hygiene)]
 #![cfg_attr(not(verus_keep_ghost), feature(stmt_expr_attributes))]
 
@@ -21,6 +27,8 @@ mod bridge;
 mod component;
 mod logging;
 
+#[cfg(test)]
+mod test;
 
 use crate::bridge::thermostat_rt_mrm_mrm_api::{self as api, *};
 use crate::bridge::extern_c_api;

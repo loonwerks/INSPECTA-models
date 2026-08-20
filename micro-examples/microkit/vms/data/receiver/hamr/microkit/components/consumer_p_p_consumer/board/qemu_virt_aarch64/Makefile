@@ -19,17 +19,18 @@ consumer_p_p_consumer_DIR := $(shell dirname $(shell pwd))
 
 # @ivanv: incremental builds don't work with LINUX_IMAGE_DIR changing
 
-LIB_VMM_DIR ?= $(VMM_DIR)
-ifeq ("$(wildcard $(LIB_VMM_DIR)/tools)","")
-LIB_VMM_DIR := $(consumer_p_p_consumer_DIR)/libvmm
-ifeq ("$(wildcard $(LIB_VMM_DIR)/tools)","")
-$(error Set VMM_DIR to point to a copy of https://github.com/au-ts/libvmm")
-endif
+# This component runs a virtual machine, which is built with libvmm.
+# Point LIBVMM at a copy of https://github.com/au-ts/libvmm, or set
+# LIONSOS to a LionsOS checkout, which vendors it at dep/libvmm.
+LIBVMM ?= $(LIONSOS)/dep/libvmm
+override LIBVMM := $(abspath $(LIBVMM))
+ifeq ("$(wildcard $(LIBVMM)/tools)","")
+$(error Set LIBVMM to a copy of https://github.com/au-ts/libvmm, or LIONSOS to a checkout that vendors it at dep/libvmm)
 endif
 
-LIB_VMM_TOOLS_DIR := $(LIB_VMM_DIR)/tools
-LIB_VMM_SRC_DIR := $(LIB_VMM_DIR)/src
-export SDDF=$(LIB_VMM_DIR)/dep/sddf
+LIBVMM_TOOLS_DIR := $(LIBVMM)/tools
+LIBVMM_SRC_DIR := $(LIBVMM)/src
+export SDDF = $(LIBVMM)/dep/sddf
 
 ARCH := aarch64
 SDDF_CUSTOM_LIBC := 1
@@ -59,7 +60,7 @@ CFLAGS := \
 	-Wall -Wno-unused-function -Werror \
 	-DMICROKIT_CONFIG_$(MICROKIT_CONFIG) \
 	-DBOARD_$(MICROKIT_BOARD) \
-	-I$(LIB_VMM_DIR)/include \
+	-I$(LIBVMM)/include \
 	-I$(MICROKIT_BOARD_DIR)/include \
 	-I$(SDDF)/include \
 	-I$(SDDF)/include/sddf/util \
@@ -93,12 +94,12 @@ $(DTB):
 ifeq ("", "$(shell which $(DTC))")
 	$(error "Could not find dependency: Device Tree Compiler (dtc)")
 endif
-	$(LIB_VMM_TOOLS_DIR)/dtscat $(DTS) $(LINUX_IMAGE_DIR)/overlay.dts > $(TOP_BUILD_DIR)/linux.dts
+	$(LIBVMM_TOOLS_DIR)/dtscat $(DTS) $(LINUX_IMAGE_DIR)/overlay.dts > $(TOP_BUILD_DIR)/linux.dts
 	# @ivanv: Shouldn't supress warnings
 	$(DTC) -q -I dts -O dtb $(TOP_BUILD_DIR)/linux.dts > $@
 
-#$(TOP_BUILD_DIR)/package_guest_images.o: $(LIB_VMM_TOOLS_DIR)/package_guest_images.S $(LINUX_IMAGE_DIR) $(LINUX) $(INITRD) $(DTB)
-$(TOP_BUILD_DIR)/package_guest_images.o: $(LIB_VMM_TOOLS_DIR)/package_guest_images.S $(LINUX) $(INITRD) $(DTB)
+#$(TOP_BUILD_DIR)/package_guest_images.o: $(LIBVMM_TOOLS_DIR)/package_guest_images.S $(LINUX_IMAGE_DIR) $(LINUX) $(INITRD) $(DTB)
+$(TOP_BUILD_DIR)/package_guest_images.o: $(LIBVMM_TOOLS_DIR)/package_guest_images.S $(LINUX) $(INITRD) $(DTB)
 	$(CC) -c -g3 -x assembler-with-cpp \
 		-DGUEST_KERNEL_IMAGE_PATH=\"$(LINUX)\" \
 		-DGUEST_DTB_IMAGE_PATH=\"$(DTB)\" \
@@ -113,11 +114,17 @@ $(TOP_BUILD_DIR)/%.o: $(consumer_p_p_consumer_DIR)/src/%.c $(TOP_BUILD_DIR)/Make
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_TYPES_INCLUDE) $(consumer_p_p_consumer_INCLUDE)
 
 -include vmm.d
-include $(LIB_VMM_DIR)/vmm.mk
+include $(LIBVMM)/vmm.mk
 include $(SDDF)/util/util.mk
-vpath %.c $(LIB_VMM_DIR)
+vpath %.c $(LIBVMM)
 
-$(TOP_BUILD_DIR)/consumer_p_p_consumer.a: libvmm.a libsddf_util.a $(TOP_BUILD_DIR)/consumer_p_p_consumer.o $(TOP_BUILD_DIR)/consumer_p_p_consumer_user.o $(TOP_BUILD_DIR)/package_guest_images.o Makefile
-	mkdir -p libsddf_util; cd libsddf_util; $(AR) -x ../libsddf_util.a
+# libvmm routes printf through sddf, so one of sddf's two putchar backends has
+# to be linked in.  It must be the debug one: libsddf_util.a's putchar writes
+# into a serial transmit queue that serial_putchar_init has to be handed, and
+# a generated system has no sddf serial virtualiser to supply one, so its
+# queue handle stays null and the first LOG_VMM faults the whole component.
+# libsddf_util_debug.a's putchar goes straight to seL4_DebugPutChar instead.
+$(TOP_BUILD_DIR)/consumer_p_p_consumer.a: libvmm.a libsddf_util_debug.a $(TOP_BUILD_DIR)/consumer_p_p_consumer.o $(TOP_BUILD_DIR)/consumer_p_p_consumer_user.o $(TOP_BUILD_DIR)/package_guest_images.o Makefile
+	mkdir -p libsddf_util; cd libsddf_util; $(AR) -x ../libsddf_util_debug.a
 	$(AR) r libvmm.a libsddf_util/*.o $(TOP_BUILD_DIR)/consumer_p_p_consumer.o $(TOP_BUILD_DIR)/consumer_p_p_consumer_user.o $(TOP_BUILD_DIR)/package_guest_images.o
 	cp libvmm.a $@

@@ -44,20 +44,20 @@ verus! {
       &mut self,
       value: SW::StructuredEthernetMessage_i)
       ensures
-        old(self).EthernetFramesRx == self.EthernetFramesRx,
-        self.EthernetFramesTx == Some(value),
+        old(self).EthernetFramesRx == final(self).EthernetFramesRx,
+        final(self).EthernetFramesTx == Some(value),
     {
       self.api.unverified_put_EthernetFramesTx(value);
-      self.EthernetFramesTx = Some(value);
+      proof { self.EthernetFramesTx = Some(value); }
     }
   }
 
   impl<API: seL4_ArduPilot_ArduPilot_Get_Api> seL4_ArduPilot_ArduPilot_Application_Api<API> {
     pub fn get_EthernetFramesRx(&mut self) -> (res : Option<SW::StructuredEthernetMessage_i>)
       ensures
-        old(self).EthernetFramesRx == self.EthernetFramesRx,
-        res == self.EthernetFramesRx,
-        old(self).EthernetFramesTx == self.EthernetFramesTx,
+        old(self).EthernetFramesRx == final(self).EthernetFramesRx,
+        res == final(self).EthernetFramesRx,
+        old(self).EthernetFramesTx == final(self).EthernetFramesTx,
     {
       self.api.unverified_get_EthernetFramesRx(&Ghost(self.EthernetFramesRx))
     }

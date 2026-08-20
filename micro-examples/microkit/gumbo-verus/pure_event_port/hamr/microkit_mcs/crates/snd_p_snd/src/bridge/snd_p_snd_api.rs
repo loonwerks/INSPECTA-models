@@ -44,19 +44,19 @@ verus! {
         // guarantee out_val_range
         value <= 100i32,
       ensures
-        self.out_val == value,
-        old(self).evt == self.evt,
+        final(self).out_val == value,
+        old(self).evt == final(self).evt,
     {
       self.api.unverified_put_out_val(value);
-      self.out_val = value;
+      proof { self.out_val = value; }
     }
     pub fn put_evt(&mut self)
       ensures
-        old(self).out_val == self.out_val,
-        self.evt == Some(0u8),
+        old(self).out_val == final(self).out_val,
+        final(self).evt == Some(0u8),
     {
       self.api.unverified_put_evt();
-      self.evt = Some(0u8);
+      proof { self.evt = Some(0u8); }
     }
   }
 

@@ -149,46 +149,38 @@ if (result == 0 && hasMicrokit) {
   removeBuildArtifacts()
 }
 
-if (Os.env("MICROKIT_SDK_CURRENT").nonEmpty) {
- 
-  // use 2.x.x microkit sdk for user-land scheduling
-  val envs: ISZ[(String, String)] = ISZ(("MICROKIT_SDK", Os.env("MICROKIT_SDK_CURRENT").get))
+println(st"""╔═════════════════════════════════════════════════════════════════════════════════════════╗
+            |║  SysMLv2 + Microkit + user-land scheduler + runtime monitoring + verus attribute syntax ║
+            |╚═════════════════════════════════════════════════════════════════════════════════════════╝""".render)
+val microkitMcsDir = homeDir / "hamr" / "microkit_mcs"
+clean(microkitMcsDir)
 
-  println(st"""╔═════════════════════════════════════════════════════════════════════════════════════════╗
-              |║  SysMLv2 + Microkit + user-land scheduler + runtime monitoring + verus attribute syntax ║
-              |╚═════════════════════════════════════════════════════════════════════════════════════════╝""".render)
-  val microkitMcsDir = homeDir / "hamr" / "microkit_mcs"
-  clean(microkitMcsDir)
+if (result == 0) {
+  val args = s"--platform Microkit --runtime-monitoring --scheduling UserLand --verus-attribute-syntax --sel4-output-dir $microkitMcsDir"
+
+  result = run("Running codegen from SysMLv2 model targeting Microkit with user-land scheduler", F,
+    proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args")
+}
+
+if (result == 0 && hasMicrokit) {
+  result = run("Building and verifying the image", F, proc"make".at(microkitMcsDir))
 
   if (result == 0) {
-    val args = s"--platform Microkit --runtime-monitoring --scheduling UserLand --verus-attribute-syntax --sel4-output-dir $microkitMcsDir"
-
-    result = run("Running codegen from SysMLv2 model targeting Microkit with user-land scheduler", F,
-      proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args".env(envs))
+    result = run("Building with GUMBO runtime monitoring", F, proc"make CONFIG=gumbo_monitor.mk".at(microkitMcsDir))
   }
 
-  if (result == 0 && hasMicrokit) {
-    result = run("Building and verifying the image", F, proc"make".at(microkitMcsDir).env(envs))
-
-    if (result == 0) {
-      result = run("Building with GUMBO runtime monitoring", F, proc"make CONFIG=gumbo_monitor.mk".at(microkitMcsDir).env(envs))
-    }
-
-    if (result == 0) {
-      result = run("Building with System Verification runtime monitoring", F, proc"make CONFIG=sys_nominal_monitor.mk".at(microkitMcsDir).env(envs))
-    }
-
-    if (result == 0) {
-      result = run("Building/Verifying component and system contracts", F, proc"make verus".at(microkitMcsDir).env(envs))
-    }
-
-    if (result == 0) {
-      result = run("Running the microkit unit tests", F, proc"make test".at(microkitMcsDir).env(envs))
-    }
-
-    removeBuildArtifacts()
+  if (result == 0) {
+    result = run("Building with System Verification runtime monitoring", F, proc"make CONFIG=sys_nominal_monitor.mk".at(microkitMcsDir))
   }
 
-  
+  if (result == 0) {
+    result = run("Building/Verifying component and system contracts", F, proc"make verus".at(microkitMcsDir))
+  }
+
+  if (result == 0) {
+    result = run("Running the microkit unit tests", F, proc"make test".at(microkitMcsDir))
+  }
+
+  removeBuildArtifacts()
 }
 Os.exit(result)

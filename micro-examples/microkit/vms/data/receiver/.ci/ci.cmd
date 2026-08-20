@@ -84,9 +84,6 @@ if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
 
 // user land scheduling
 
-// use 2.x.x microkit sdk for user-land scheduling
-val env: ISZ[(String, String)] = ISZ(("MICROKIT_SDK", Os.env("MICROKIT_SDK_CURRENT").get))
-
 val microkitMcsDir = homeDir / "hamr" / "microkit_mcs"
 clean(microkitMcsDir)
 
@@ -98,7 +95,7 @@ if (result == 0) {
 }
 
 if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
-  result = run(s"Building the image at $microkitMcsDir", F, proc"make".at(microkitMcsDir).env(env))
+  result = run(s"Building the image at $microkitMcsDir", F, proc"make".at(microkitMcsDir))
   removeBuildArtifacts()
 }
 

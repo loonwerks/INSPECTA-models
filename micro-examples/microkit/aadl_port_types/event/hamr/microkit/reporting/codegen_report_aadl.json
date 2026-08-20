@@ -39,16 +39,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/include\/sb_queue_uint8_t_1.h",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "types\/src\/sb_queue_uint8_t_1.c",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "types\/include\/sb_types.h",
               "overwrittenIfExists" : true
             },
@@ -175,11 +165,6 @@
             {
               "type" : "ResourceReport",
               "path" : "util\/src\/printf.c",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "util\/include\/util.h",
               "overwrittenIfExists" : true
             },
             {
@@ -422,9 +407,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 11,
+                                "beginLine" : 14,
                                 "beginColumn" : 7,
-                                "endLine" : 15,
+                                "endLine" : 18,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -568,9 +553,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 29,
+                                "beginLine" : 32,
                                 "beginColumn" : 7,
-                                "endLine" : 33,
+                                "endLine" : 36,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -714,9 +699,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 47,
+                                "beginLine" : 50,
                                 "beginColumn" : 7,
-                                "endLine" : 51,
+                                "endLine" : 54,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -804,9 +789,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 52,
+                                "beginLine" : 55,
                                 "beginColumn" : 7,
-                                "endLine" : 56,
+                                "endLine" : 59,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -950,9 +935,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 70,
+                                "beginLine" : 73,
                                 "beginColumn" : 7,
-                                "endLine" : 74,
+                                "endLine" : 77,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1040,9 +1025,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 75,
+                                "beginLine" : 78,
                                 "beginColumn" : 7,
-                                "endLine" : 79,
+                                "endLine" : 82,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0

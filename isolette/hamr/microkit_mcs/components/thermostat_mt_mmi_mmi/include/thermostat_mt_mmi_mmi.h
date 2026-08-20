@@ -1,14 +1,21 @@
 #pragma once
 
-#if __has_include("libvmm/util/util.h")
+#if __has_include(<libvmm/util/util.h>)
 #include <libvmm/util/util.h>
-#elif __has_include("util.h")
-#include <util.h>
-#elif __has_include("sddf/util/util.h")
+#elif __has_include(<sddf/util/util.h>)
 #include <sddf/util/printf.h>
 #include <sddf/util/util.h>
 #define printf sddf_dprintf
+#else
+#include <printf.h>
 #endif
+
+#include <stddef.h>
+
+// These match musl's prototypes, so re-declaring them is harmless where sddf's
+// custom libc is on the include path too.
+void *memcpy(void *restrict dest, const void *restrict src, size_t n);
+void *memset(void *dest, int c, size_t n);
 
 #include <stdint.h>
 #include <microkit.h>

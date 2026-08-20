@@ -64,46 +64,46 @@ verus! {
       &mut self,
       value: SW::RawEthernetMessage)
       ensures
-        old(self).EthernetFramesRxIn == self.EthernetFramesRxIn,
-        self.EthernetFramesRxOut == Some(value),
-        old(self).EthernetFramesTxIn == self.EthernetFramesTxIn,
-        old(self).EthernetFramesTxOut == self.EthernetFramesTxOut,
+        old(self).EthernetFramesRxIn == final(self).EthernetFramesRxIn,
+        final(self).EthernetFramesRxOut == Some(value),
+        old(self).EthernetFramesTxIn == final(self).EthernetFramesTxIn,
+        old(self).EthernetFramesTxOut == final(self).EthernetFramesTxOut,
     {
       self.api.unverified_put_EthernetFramesRxOut(value);
-      self.EthernetFramesRxOut = Some(value);
+      proof { self.EthernetFramesRxOut = Some(value); }
     }
     pub fn put_EthernetFramesTxOut(
       &mut self,
       value: SW::RawEthernetMessage)
       ensures
-        old(self).EthernetFramesRxIn == self.EthernetFramesRxIn,
-        old(self).EthernetFramesRxOut == self.EthernetFramesRxOut,
-        old(self).EthernetFramesTxIn == self.EthernetFramesTxIn,
-        self.EthernetFramesTxOut == Some(value),
+        old(self).EthernetFramesRxIn == final(self).EthernetFramesRxIn,
+        old(self).EthernetFramesRxOut == final(self).EthernetFramesRxOut,
+        old(self).EthernetFramesTxIn == final(self).EthernetFramesTxIn,
+        final(self).EthernetFramesTxOut == Some(value),
     {
       self.api.unverified_put_EthernetFramesTxOut(value);
-      self.EthernetFramesTxOut = Some(value);
+      proof { self.EthernetFramesTxOut = Some(value); }
     }
   }
 
   impl<API: Firewall_Firewall_Get_Api> Firewall_Firewall_Application_Api<API> {
     pub fn get_EthernetFramesRxIn(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        old(self).EthernetFramesRxIn == self.EthernetFramesRxIn,
-        res == self.EthernetFramesRxIn,
-        old(self).EthernetFramesRxOut == self.EthernetFramesRxOut,
-        old(self).EthernetFramesTxIn == self.EthernetFramesTxIn,
-        old(self).EthernetFramesTxOut == self.EthernetFramesTxOut,
+        old(self).EthernetFramesRxIn == final(self).EthernetFramesRxIn,
+        res == final(self).EthernetFramesRxIn,
+        old(self).EthernetFramesRxOut == final(self).EthernetFramesRxOut,
+        old(self).EthernetFramesTxIn == final(self).EthernetFramesTxIn,
+        old(self).EthernetFramesTxOut == final(self).EthernetFramesTxOut,
     {
       self.api.unverified_get_EthernetFramesRxIn(&Ghost(self.EthernetFramesRxIn))
     }
     pub fn get_EthernetFramesTxIn(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        old(self).EthernetFramesRxIn == self.EthernetFramesRxIn,
-        old(self).EthernetFramesRxOut == self.EthernetFramesRxOut,
-        old(self).EthernetFramesTxIn == self.EthernetFramesTxIn,
-        res == self.EthernetFramesTxIn,
-        old(self).EthernetFramesTxOut == self.EthernetFramesTxOut,
+        old(self).EthernetFramesRxIn == final(self).EthernetFramesRxIn,
+        old(self).EthernetFramesRxOut == final(self).EthernetFramesRxOut,
+        old(self).EthernetFramesTxIn == final(self).EthernetFramesTxIn,
+        res == final(self).EthernetFramesTxIn,
+        old(self).EthernetFramesTxOut == final(self).EthernetFramesTxOut,
     {
       self.api.unverified_get_EthernetFramesTxIn(&Ghost(self.EthernetFramesTxIn))
     }

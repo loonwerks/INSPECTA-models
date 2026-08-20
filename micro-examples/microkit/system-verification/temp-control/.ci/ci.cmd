@@ -60,13 +60,7 @@ def removeBuildArtifacts(): Unit = {
   }
 }
 
-// user-land scheduling requires a 2.x.x microkit sdk; environments that default
-// MICROKIT_SDK to the domain-scheduling sdk provide the 2.x.x one via MICROKIT_SDK_CURRENT
-val envs: ISZ[(String, String)] =
-  if (Os.env("MICROKIT_SDK_CURRENT").nonEmpty) ISZ(("MICROKIT_SDK", Os.env("MICROKIT_SDK_CURRENT").get))
-  else ISZ()
-
-val hasMicrokit: B = Os.env("MICROKIT_SDK").nonEmpty || Os.env("MICROKIT_SDK_CURRENT").nonEmpty
+val hasMicrokit: B = Os.env("MICROKIT_SDK").nonEmpty
 
 val microkitMcsDir = homeDir / "hamr" / "microkit_mcs"
 
@@ -93,34 +87,34 @@ if (result == 0) {
   val args = s"--platform Microkit --runtime-monitoring --scheduling UserLand --verus-attribute-syntax --sel4-aux-code-dirs $auxCodeDirs --sel4-aux-code-symlink --sel4-output-dir $microkitMcsDir"
 
   result = run("Running codegen from SysMLv2 model targeting Microkit with user-land scheduler", F,
-    proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args".env(envs))
+    proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args")
 }
 
 if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
-  result = run("Running SysMLv2 attestation", F, proc"$sireum slang run ${microkitMcsDir / "attestation" / "sysml_attestation.cmd"} appraise".env(envs))
+  result = run("Running SysMLv2 attestation", F, proc"$sireum slang run ${microkitMcsDir / "attestation" / "sysml_attestation.cmd"} appraise")
 }
 
 if (result == 0 && hasMicrokit) {
-  result = run("Building the image", F, proc"make".at(microkitMcsDir).env(envs))
+  result = run("Building the image", F, proc"make".at(microkitMcsDir))
 
   if (result == 0) {
-    result = run("Building with GUMBO runtime monitoring", F, proc"make CONFIG=gumbo_monitor.mk".at(microkitMcsDir).env(envs))
+    result = run("Building with GUMBO runtime monitoring", F, proc"make CONFIG=gumbo_monitor.mk".at(microkitMcsDir))
   }
 
   if (result == 0) {
-    result = run("Building with System Verification runtime monitoring", F, proc"make CONFIG=sys_nominal_monitor.mk".at(microkitMcsDir).env(envs))
+    result = run("Building with System Verification runtime monitoring", F, proc"make CONFIG=sys_nominal_monitor.mk".at(microkitMcsDir))
   }
 
   if (result == 0) {
-    result = run("Building with user-land schedule runtime monitoring", F, proc"make CONFIG=userland_monitor.mk".at(microkitMcsDir).env(envs))
+    result = run("Building with user-land schedule runtime monitoring", F, proc"make CONFIG=userland_monitor.mk".at(microkitMcsDir))
   }
 
   if (result == 0 && !disable_verus) {
-    result = run("Building/Verifying component and system contracts", F, proc"make verus".at(microkitMcsDir).env(envs))
+    result = run("Building/Verifying component and system contracts", F, proc"make verus".at(microkitMcsDir))
   }
 
   if (result == 0) {
-    result = run("Running the microkit unit tests", F, proc"make test".at(microkitMcsDir).env(envs))
+    result = run("Running the microkit unit tests", F, proc"make test".at(microkitMcsDir))
   }
 
   removeBuildArtifacts()

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <libvmm/util/printf.h>
 #include <libvmm/util/util.h>
 
 #include <stdint.h>

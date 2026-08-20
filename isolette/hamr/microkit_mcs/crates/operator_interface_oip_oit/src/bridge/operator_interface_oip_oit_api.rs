@@ -104,33 +104,33 @@ verus! {
       &mut self,
       value: Isolette_Data_Model::TempWstatus_i)
       ensures
-        old(self).regulator_status == self.regulator_status,
-        old(self).monitor_status == self.monitor_status,
-        old(self).display_temperature == self.display_temperature,
-        old(self).alarm_control == self.alarm_control,
-        self.lower_desired_tempWstatus == value,
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
+        old(self).regulator_status == final(self).regulator_status,
+        old(self).monitor_status == final(self).monitor_status,
+        old(self).display_temperature == final(self).display_temperature,
+        old(self).alarm_control == final(self).alarm_control,
+        final(self).lower_desired_tempWstatus == value,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        old(self).lower_alarm_tempWstatus == final(self).lower_alarm_tempWstatus,
+        old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
     {
       self.api.unverified_put_lower_desired_tempWstatus(value);
-      self.lower_desired_tempWstatus = value;
+      proof { self.lower_desired_tempWstatus = value; }
     }
     pub fn put_upper_desired_tempWstatus(
       &mut self,
       value: Isolette_Data_Model::TempWstatus_i)
       ensures
-        old(self).regulator_status == self.regulator_status,
-        old(self).monitor_status == self.monitor_status,
-        old(self).display_temperature == self.display_temperature,
-        old(self).alarm_control == self.alarm_control,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        self.upper_desired_tempWstatus == value,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
+        old(self).regulator_status == final(self).regulator_status,
+        old(self).monitor_status == final(self).monitor_status,
+        old(self).display_temperature == final(self).display_temperature,
+        old(self).alarm_control == final(self).alarm_control,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        final(self).upper_desired_tempWstatus == value,
+        old(self).lower_alarm_tempWstatus == final(self).lower_alarm_tempWstatus,
+        old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
     {
       self.api.unverified_put_upper_desired_tempWstatus(value);
-      self.upper_desired_tempWstatus = value;
+      proof { self.upper_desired_tempWstatus = value; }
     }
     pub fn put_lower_alarm_tempWstatus(
       &mut self,
@@ -143,17 +143,17 @@ verus! {
           ((96i32 <= value.degrees) &&
             (value.degrees <= 101i32)),
       ensures
-        old(self).regulator_status == self.regulator_status,
-        old(self).monitor_status == self.monitor_status,
-        old(self).display_temperature == self.display_temperature,
-        old(self).alarm_control == self.alarm_control,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        self.lower_alarm_tempWstatus == value,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
+        old(self).regulator_status == final(self).regulator_status,
+        old(self).monitor_status == final(self).monitor_status,
+        old(self).display_temperature == final(self).display_temperature,
+        old(self).alarm_control == final(self).alarm_control,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        final(self).lower_alarm_tempWstatus == value,
+        old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
     {
       self.api.unverified_put_lower_alarm_tempWstatus(value);
-      self.lower_alarm_tempWstatus = value;
+      proof { self.lower_alarm_tempWstatus = value; }
     }
     pub fn put_upper_alarm_tempWstatus(
       &mut self,
@@ -164,74 +164,74 @@ verus! {
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 
         crate::component::operator_interface_oip_oit_app::Allowed_UpperAlarmTempWStatus(value),
       ensures
-        old(self).regulator_status == self.regulator_status,
-        old(self).monitor_status == self.monitor_status,
-        old(self).display_temperature == self.display_temperature,
-        old(self).alarm_control == self.alarm_control,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        self.upper_alarm_tempWstatus == value,
+        old(self).regulator_status == final(self).regulator_status,
+        old(self).monitor_status == final(self).monitor_status,
+        old(self).display_temperature == final(self).display_temperature,
+        old(self).alarm_control == final(self).alarm_control,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        old(self).lower_alarm_tempWstatus == final(self).lower_alarm_tempWstatus,
+        final(self).upper_alarm_tempWstatus == value,
     {
       self.api.unverified_put_upper_alarm_tempWstatus(value);
-      self.upper_alarm_tempWstatus = value;
+      proof { self.upper_alarm_tempWstatus = value; }
     }
   }
 
   impl<API: operator_interface_oip_oit_Get_Api> operator_interface_oip_oit_Application_Api<API> {
     pub fn get_regulator_status(&mut self) -> (res : Isolette_Data_Model::Status)
       ensures
-        old(self).regulator_status == self.regulator_status,
-        res == self.regulator_status,
-        old(self).monitor_status == self.monitor_status,
-        old(self).display_temperature == self.display_temperature,
-        old(self).alarm_control == self.alarm_control,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
+        old(self).regulator_status == final(self).regulator_status,
+        res == final(self).regulator_status,
+        old(self).monitor_status == final(self).monitor_status,
+        old(self).display_temperature == final(self).display_temperature,
+        old(self).alarm_control == final(self).alarm_control,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        old(self).lower_alarm_tempWstatus == final(self).lower_alarm_tempWstatus,
+        old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
     {
       self.api.unverified_get_regulator_status(&Ghost(self.regulator_status))
     }
     pub fn get_monitor_status(&mut self) -> (res : Isolette_Data_Model::Status)
       ensures
-        old(self).regulator_status == self.regulator_status,
-        old(self).monitor_status == self.monitor_status,
-        res == self.monitor_status,
-        old(self).display_temperature == self.display_temperature,
-        old(self).alarm_control == self.alarm_control,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
+        old(self).regulator_status == final(self).regulator_status,
+        old(self).monitor_status == final(self).monitor_status,
+        res == final(self).monitor_status,
+        old(self).display_temperature == final(self).display_temperature,
+        old(self).alarm_control == final(self).alarm_control,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        old(self).lower_alarm_tempWstatus == final(self).lower_alarm_tempWstatus,
+        old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
     {
       self.api.unverified_get_monitor_status(&Ghost(self.monitor_status))
     }
     pub fn get_display_temperature(&mut self) -> (res : Isolette_Data_Model::Temp_i)
       ensures
-        old(self).regulator_status == self.regulator_status,
-        old(self).monitor_status == self.monitor_status,
-        old(self).display_temperature == self.display_temperature,
-        res == self.display_temperature,
-        old(self).alarm_control == self.alarm_control,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
+        old(self).regulator_status == final(self).regulator_status,
+        old(self).monitor_status == final(self).monitor_status,
+        old(self).display_temperature == final(self).display_temperature,
+        res == final(self).display_temperature,
+        old(self).alarm_control == final(self).alarm_control,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        old(self).lower_alarm_tempWstatus == final(self).lower_alarm_tempWstatus,
+        old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
     {
       self.api.unverified_get_display_temperature(&Ghost(self.display_temperature))
     }
     pub fn get_alarm_control(&mut self) -> (res : Isolette_Data_Model::On_Off)
       ensures
-        old(self).regulator_status == self.regulator_status,
-        old(self).monitor_status == self.monitor_status,
-        old(self).display_temperature == self.display_temperature,
-        old(self).alarm_control == self.alarm_control,
-        res == self.alarm_control,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
+        old(self).regulator_status == final(self).regulator_status,
+        old(self).monitor_status == final(self).monitor_status,
+        old(self).display_temperature == final(self).display_temperature,
+        old(self).alarm_control == final(self).alarm_control,
+        res == final(self).alarm_control,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        old(self).lower_alarm_tempWstatus == final(self).lower_alarm_tempWstatus,
+        old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
     {
       self.api.unverified_get_alarm_control(&Ghost(self.alarm_control))
     }

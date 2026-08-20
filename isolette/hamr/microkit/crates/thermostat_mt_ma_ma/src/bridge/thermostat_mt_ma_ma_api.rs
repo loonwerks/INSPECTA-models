@@ -77,59 +77,59 @@ verus! {
       &mut self,
       value: Isolette_Data_Model::On_Off)
       ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).lower_alarm_temp == self.lower_alarm_temp,
-        old(self).upper_alarm_temp == self.upper_alarm_temp,
-        old(self).monitor_mode == self.monitor_mode,
-        self.alarm_control == value,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).lower_alarm_temp == final(self).lower_alarm_temp,
+        old(self).upper_alarm_temp == final(self).upper_alarm_temp,
+        old(self).monitor_mode == final(self).monitor_mode,
+        final(self).alarm_control == value,
     {
       self.api.unverified_put_alarm_control(value);
-      self.alarm_control = value;
+      proof { self.alarm_control = value; }
     }
   }
 
   impl<API: thermostat_mt_ma_ma_Get_Api> thermostat_mt_ma_ma_Application_Api<API> {
     pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        res == self.current_tempWstatus,
-        old(self).lower_alarm_temp == self.lower_alarm_temp,
-        old(self).upper_alarm_temp == self.upper_alarm_temp,
-        old(self).monitor_mode == self.monitor_mode,
-        old(self).alarm_control == self.alarm_control,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        res == final(self).current_tempWstatus,
+        old(self).lower_alarm_temp == final(self).lower_alarm_temp,
+        old(self).upper_alarm_temp == final(self).upper_alarm_temp,
+        old(self).monitor_mode == final(self).monitor_mode,
+        old(self).alarm_control == final(self).alarm_control,
     {
       self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
     }
     pub fn get_lower_alarm_temp(&mut self) -> (res : Isolette_Data_Model::Temp_i)
       ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).lower_alarm_temp == self.lower_alarm_temp,
-        res == self.lower_alarm_temp,
-        old(self).upper_alarm_temp == self.upper_alarm_temp,
-        old(self).monitor_mode == self.monitor_mode,
-        old(self).alarm_control == self.alarm_control,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).lower_alarm_temp == final(self).lower_alarm_temp,
+        res == final(self).lower_alarm_temp,
+        old(self).upper_alarm_temp == final(self).upper_alarm_temp,
+        old(self).monitor_mode == final(self).monitor_mode,
+        old(self).alarm_control == final(self).alarm_control,
     {
       self.api.unverified_get_lower_alarm_temp(&Ghost(self.lower_alarm_temp))
     }
     pub fn get_upper_alarm_temp(&mut self) -> (res : Isolette_Data_Model::Temp_i)
       ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).lower_alarm_temp == self.lower_alarm_temp,
-        old(self).upper_alarm_temp == self.upper_alarm_temp,
-        res == self.upper_alarm_temp,
-        old(self).monitor_mode == self.monitor_mode,
-        old(self).alarm_control == self.alarm_control,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).lower_alarm_temp == final(self).lower_alarm_temp,
+        old(self).upper_alarm_temp == final(self).upper_alarm_temp,
+        res == final(self).upper_alarm_temp,
+        old(self).monitor_mode == final(self).monitor_mode,
+        old(self).alarm_control == final(self).alarm_control,
     {
       self.api.unverified_get_upper_alarm_temp(&Ghost(self.upper_alarm_temp))
     }
     pub fn get_monitor_mode(&mut self) -> (res : Isolette_Data_Model::Monitor_Mode)
       ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).lower_alarm_temp == self.lower_alarm_temp,
-        old(self).upper_alarm_temp == self.upper_alarm_temp,
-        old(self).monitor_mode == self.monitor_mode,
-        res == self.monitor_mode,
-        old(self).alarm_control == self.alarm_control,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).lower_alarm_temp == final(self).lower_alarm_temp,
+        old(self).upper_alarm_temp == final(self).upper_alarm_temp,
+        old(self).monitor_mode == final(self).monitor_mode,
+        res == final(self).monitor_mode,
+        old(self).alarm_control == final(self).alarm_control,
     {
       self.api.unverified_get_monitor_mode(&Ghost(self.monitor_mode))
     }

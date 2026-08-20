@@ -73,24 +73,24 @@ verus! {
       &mut self,
       value: TempControl_SysVerif::FanCmd)
       ensures
-        old(self).currentTemp == self.currentTemp,
-        old(self).fanAck == self.fanAck,
-        old(self).setPoint == self.setPoint,
-        self.fanCmd == Some(value),
+        old(self).currentTemp == final(self).currentTemp,
+        old(self).fanAck == final(self).fanAck,
+        old(self).setPoint == final(self).setPoint,
+        final(self).fanCmd == Some(value),
     {
       self.api.unverified_put_fanCmd(value);
-      self.fanCmd = Some(value);
+      proof { self.fanCmd = Some(value); }
     }
   }
 
   impl<API: tcp_tct_Get_Api> tcp_tct_Application_Api<API> {
     pub fn get_currentTemp(&mut self) -> (res : Option<TempControl_SysVerif::Temperature>)
       ensures
-        old(self).currentTemp == self.currentTemp,
-        res == self.currentTemp,
-        old(self).fanAck == self.fanAck,
-        old(self).setPoint == self.setPoint,
-        old(self).fanCmd == self.fanCmd,
+        old(self).currentTemp == final(self).currentTemp,
+        res == final(self).currentTemp,
+        old(self).fanAck == final(self).fanAck,
+        old(self).setPoint == final(self).setPoint,
+        old(self).fanCmd == final(self).fanCmd,
         (res.is_none() ||
           // assume currentTempRange
           crate::component::tcp_tct_app::validRange(if (true) {
@@ -103,21 +103,21 @@ verus! {
     }
     pub fn get_fanAck(&mut self) -> (res : Option<TempControl_SysVerif::FanAck>)
       ensures
-        old(self).currentTemp == self.currentTemp,
-        old(self).fanAck == self.fanAck,
-        res == self.fanAck,
-        old(self).setPoint == self.setPoint,
-        old(self).fanCmd == self.fanCmd,
+        old(self).currentTemp == final(self).currentTemp,
+        old(self).fanAck == final(self).fanAck,
+        res == final(self).fanAck,
+        old(self).setPoint == final(self).setPoint,
+        old(self).fanCmd == final(self).fanCmd,
     {
       self.api.unverified_get_fanAck(&Ghost(self.fanAck))
     }
     pub fn get_setPoint(&mut self) -> (res : Option<TempControl_SysVerif::SetPoint>)
       ensures
-        old(self).currentTemp == self.currentTemp,
-        old(self).fanAck == self.fanAck,
-        old(self).setPoint == self.setPoint,
-        res == self.setPoint,
-        old(self).fanCmd == self.fanCmd,
+        old(self).currentTemp == final(self).currentTemp,
+        old(self).fanAck == final(self).fanAck,
+        old(self).setPoint == final(self).setPoint,
+        res == final(self).setPoint,
+        old(self).fanCmd == final(self).fanCmd,
     {
       self.api.unverified_get_setPoint(&Ghost(self.setPoint))
     }

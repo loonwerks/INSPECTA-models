@@ -113,147 +113,147 @@ verus! {
       &mut self,
       value: Isolette_Data_Model::Temp_i)
       ensures
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).regulator_mode == self.regulator_mode,
-        self.upper_desired_temp == value,
-        old(self).lower_desired_temp == self.lower_desired_temp,
-        old(self).displayed_temp == self.displayed_temp,
-        old(self).regulator_status == self.regulator_status,
-        old(self).interface_failure == self.interface_failure,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).regulator_mode == final(self).regulator_mode,
+        final(self).upper_desired_temp == value,
+        old(self).lower_desired_temp == final(self).lower_desired_temp,
+        old(self).displayed_temp == final(self).displayed_temp,
+        old(self).regulator_status == final(self).regulator_status,
+        old(self).interface_failure == final(self).interface_failure,
     {
       self.api.unverified_put_upper_desired_temp(value);
-      self.upper_desired_temp = value;
+      proof { self.upper_desired_temp = value; }
     }
     pub fn put_lower_desired_temp(
       &mut self,
       value: Isolette_Data_Model::Temp_i)
       ensures
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).regulator_mode == self.regulator_mode,
-        old(self).upper_desired_temp == self.upper_desired_temp,
-        self.lower_desired_temp == value,
-        old(self).displayed_temp == self.displayed_temp,
-        old(self).regulator_status == self.regulator_status,
-        old(self).interface_failure == self.interface_failure,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).regulator_mode == final(self).regulator_mode,
+        old(self).upper_desired_temp == final(self).upper_desired_temp,
+        final(self).lower_desired_temp == value,
+        old(self).displayed_temp == final(self).displayed_temp,
+        old(self).regulator_status == final(self).regulator_status,
+        old(self).interface_failure == final(self).interface_failure,
     {
       self.api.unverified_put_lower_desired_temp(value);
-      self.lower_desired_temp = value;
+      proof { self.lower_desired_temp = value; }
     }
     pub fn put_displayed_temp(
       &mut self,
       value: Isolette_Data_Model::Temp_i)
       ensures
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).regulator_mode == self.regulator_mode,
-        old(self).upper_desired_temp == self.upper_desired_temp,
-        old(self).lower_desired_temp == self.lower_desired_temp,
-        self.displayed_temp == value,
-        old(self).regulator_status == self.regulator_status,
-        old(self).interface_failure == self.interface_failure,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).regulator_mode == final(self).regulator_mode,
+        old(self).upper_desired_temp == final(self).upper_desired_temp,
+        old(self).lower_desired_temp == final(self).lower_desired_temp,
+        final(self).displayed_temp == value,
+        old(self).regulator_status == final(self).regulator_status,
+        old(self).interface_failure == final(self).interface_failure,
     {
       self.api.unverified_put_displayed_temp(value);
-      self.displayed_temp = value;
+      proof { self.displayed_temp = value; }
     }
     pub fn put_regulator_status(
       &mut self,
       value: Isolette_Data_Model::Status)
       ensures
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).regulator_mode == self.regulator_mode,
-        old(self).upper_desired_temp == self.upper_desired_temp,
-        old(self).lower_desired_temp == self.lower_desired_temp,
-        old(self).displayed_temp == self.displayed_temp,
-        self.regulator_status == value,
-        old(self).interface_failure == self.interface_failure,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).regulator_mode == final(self).regulator_mode,
+        old(self).upper_desired_temp == final(self).upper_desired_temp,
+        old(self).lower_desired_temp == final(self).lower_desired_temp,
+        old(self).displayed_temp == final(self).displayed_temp,
+        final(self).regulator_status == value,
+        old(self).interface_failure == final(self).interface_failure,
     {
       self.api.unverified_put_regulator_status(value);
-      self.regulator_status = value;
+      proof { self.regulator_status = value; }
     }
     pub fn put_interface_failure(
       &mut self,
       value: Isolette_Data_Model::Failure_Flag_i)
       ensures
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).regulator_mode == self.regulator_mode,
-        old(self).upper_desired_temp == self.upper_desired_temp,
-        old(self).lower_desired_temp == self.lower_desired_temp,
-        old(self).displayed_temp == self.displayed_temp,
-        old(self).regulator_status == self.regulator_status,
-        self.interface_failure == value,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).regulator_mode == final(self).regulator_mode,
+        old(self).upper_desired_temp == final(self).upper_desired_temp,
+        old(self).lower_desired_temp == final(self).lower_desired_temp,
+        old(self).displayed_temp == final(self).displayed_temp,
+        old(self).regulator_status == final(self).regulator_status,
+        final(self).interface_failure == value,
     {
       self.api.unverified_put_interface_failure(value);
-      self.interface_failure = value;
+      proof { self.interface_failure = value; }
     }
   }
 
   impl<API: thermostat_rt_mri_mri_Get_Api> thermostat_rt_mri_mri_Application_Api<API> {
     pub fn get_upper_desired_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        res == self.upper_desired_tempWstatus,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).regulator_mode == self.regulator_mode,
-        old(self).upper_desired_temp == self.upper_desired_temp,
-        old(self).lower_desired_temp == self.lower_desired_temp,
-        old(self).displayed_temp == self.displayed_temp,
-        old(self).regulator_status == self.regulator_status,
-        old(self).interface_failure == self.interface_failure,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        res == final(self).upper_desired_tempWstatus,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).regulator_mode == final(self).regulator_mode,
+        old(self).upper_desired_temp == final(self).upper_desired_temp,
+        old(self).lower_desired_temp == final(self).lower_desired_temp,
+        old(self).displayed_temp == final(self).displayed_temp,
+        old(self).regulator_status == final(self).regulator_status,
+        old(self).interface_failure == final(self).interface_failure,
     {
       self.api.unverified_get_upper_desired_tempWstatus(&Ghost(self.upper_desired_tempWstatus))
     }
     pub fn get_lower_desired_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        res == self.lower_desired_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).regulator_mode == self.regulator_mode,
-        old(self).upper_desired_temp == self.upper_desired_temp,
-        old(self).lower_desired_temp == self.lower_desired_temp,
-        old(self).displayed_temp == self.displayed_temp,
-        old(self).regulator_status == self.regulator_status,
-        old(self).interface_failure == self.interface_failure,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        res == final(self).lower_desired_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).regulator_mode == final(self).regulator_mode,
+        old(self).upper_desired_temp == final(self).upper_desired_temp,
+        old(self).lower_desired_temp == final(self).lower_desired_temp,
+        old(self).displayed_temp == final(self).displayed_temp,
+        old(self).regulator_status == final(self).regulator_status,
+        old(self).interface_failure == final(self).interface_failure,
     {
       self.api.unverified_get_lower_desired_tempWstatus(&Ghost(self.lower_desired_tempWstatus))
     }
     pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        res == self.current_tempWstatus,
-        old(self).regulator_mode == self.regulator_mode,
-        old(self).upper_desired_temp == self.upper_desired_temp,
-        old(self).lower_desired_temp == self.lower_desired_temp,
-        old(self).displayed_temp == self.displayed_temp,
-        old(self).regulator_status == self.regulator_status,
-        old(self).interface_failure == self.interface_failure,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        res == final(self).current_tempWstatus,
+        old(self).regulator_mode == final(self).regulator_mode,
+        old(self).upper_desired_temp == final(self).upper_desired_temp,
+        old(self).lower_desired_temp == final(self).lower_desired_temp,
+        old(self).displayed_temp == final(self).displayed_temp,
+        old(self).regulator_status == final(self).regulator_status,
+        old(self).interface_failure == final(self).interface_failure,
     {
       self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
     }
     pub fn get_regulator_mode(&mut self) -> (res : Isolette_Data_Model::Regulator_Mode)
       ensures
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).regulator_mode == self.regulator_mode,
-        res == self.regulator_mode,
-        old(self).upper_desired_temp == self.upper_desired_temp,
-        old(self).lower_desired_temp == self.lower_desired_temp,
-        old(self).displayed_temp == self.displayed_temp,
-        old(self).regulator_status == self.regulator_status,
-        old(self).interface_failure == self.interface_failure,
+        old(self).upper_desired_tempWstatus == final(self).upper_desired_tempWstatus,
+        old(self).lower_desired_tempWstatus == final(self).lower_desired_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).regulator_mode == final(self).regulator_mode,
+        res == final(self).regulator_mode,
+        old(self).upper_desired_temp == final(self).upper_desired_temp,
+        old(self).lower_desired_temp == final(self).lower_desired_temp,
+        old(self).displayed_temp == final(self).displayed_temp,
+        old(self).regulator_status == final(self).regulator_status,
+        old(self).interface_failure == final(self).interface_failure,
     {
       self.api.unverified_get_regulator_mode(&Ghost(self.regulator_mode))
     }

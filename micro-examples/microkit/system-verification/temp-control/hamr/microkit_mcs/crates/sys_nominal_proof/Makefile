@@ -12,10 +12,27 @@ CARGO_FLAGS = -Z build-std=core,alloc,compiler_builtins \
               -Z build-std-features=compiler-builtins-mem \
               --target aarch64-unknown-none
 
+# Extra arguments forwarded to Verus (placed after `--`), for every
+# cargo-verus target below. These apply to dependency crates too -- notably
+# vstd, which is verified from source on a clean build, so its proofs must
+# discharge under these settings as well as our own.
+#
+# --rlimit 100
+#   Verus' SMT resource limit for a function body check. Its default of 10
+#   is not enough here. 100 is an order-of-magnitude bump that stays inside
+#   the range Verus itself uses on its heavier projects.
+#
+# --smt-option smt.random_seed=7
+#   7 is arbitrary. Z3's default seed is 0, and 0 is the one value at which
+#   vstd's GhostSubseq::agree_map (resource/impls/seq.rs) fails its
+#   postcondition; seeds 1, 2, 3, 7 and 42 all discharge it. The point is to
+#   be off the default and identical on every machine, not this number.
+SMT_OPTS ?= --rlimit 100 --smt-option smt.random_seed=7
+
 # verify the entire crate (every property plus the shared Commutativity VCs)
 .PHONY: all
 all: trust-notice
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS)
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- $(SMT_OPTS)
 
 # Compile every crate WITHOUT verification so the dependency crates (vstd,
 # data, the GUMBO library crates) are cached as Verus import libraries before
@@ -23,17 +40,17 @@ all: trust-notice
 # to the dependency crates too and fails on a clean build (see header note).
 .PHONY: warm-deps
 warm-deps:
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --no-verify
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- $(SMT_OPTS) --no-verify
 
 # verify only property 'tc_req_01'
 .PHONY: tc_req_01
 tc_req_01: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module tc_req_01::vc_init --verify-module tc_req_01::vc_sequential --verify-module tc_req_01::vc_post_pre --verify-module tc_req_01::vc_non_disabling
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- $(SMT_OPTS) --verify-module tc_req_01::vc_init --verify-module tc_req_01::vc_sequential --verify-module tc_req_01::vc_post_pre --verify-module tc_req_01::vc_non_disabling
 
 # verify only property 'tc_req_02'
 .PHONY: tc_req_02
 tc_req_02: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module tc_req_02::vc_init --verify-module tc_req_02::vc_sequential --verify-module tc_req_02::vc_post_pre --verify-module tc_req_02::vc_non_disabling
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- $(SMT_OPTS) --verify-module tc_req_02::vc_init --verify-module tc_req_02::vc_sequential --verify-module tc_req_02::vc_post_pre --verify-module tc_req_02::vc_non_disabling
 
 # Announce the non-Rust component contracts this proof trusts (see
 # TRUSTED_ASSUMPTIONS.md / src/trusted_assumptions.rs). `all` depends on this.

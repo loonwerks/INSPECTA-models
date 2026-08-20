@@ -51,7 +51,7 @@ p1_t1_MON.o: $(TOP_DIR)/components/p1_t1/src/p1_t1_MON.c Makefile
 
 # user code
 p1_t1_user.o: $(TOP_DIR)/components/p1_t1/src/p1_t1_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/p1_t1/include
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/p1_t1/include
 
 p1_t1.o: $(TOP_DIR)/components/p1_t1/src/p1_t1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/p1_t1/include
@@ -62,7 +62,7 @@ p2_t2_MON.o: $(TOP_DIR)/components/p2_t2/src/p2_t2_MON.c Makefile
 
 # user code
 p2_t2_user.o: $(TOP_DIR)/components/p2_t2/src/p2_t2_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/p2_t2/include
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/p2_t2/include
 
 p2_t2.o: $(TOP_DIR)/components/p2_t2/src/p2_t2.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/p2_t2/include
@@ -73,7 +73,7 @@ p3_t3_MON.o: $(TOP_DIR)/components/p3_t3/src/p3_t3_MON.c Makefile
 
 # user code
 p3_t3_user.o: $(TOP_DIR)/components/p3_t3/src/p3_t3_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/p3_t3/include
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/p3_t3/include
 
 p3_t3.o: $(TOP_DIR)/components/p3_t3/src/p3_t3.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/p3_t3/include
@@ -90,7 +90,7 @@ domain_monitor_process_domain_monitor_thread.o: $(TOP_DIR)/components/domain_mon
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/include
 
 pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_INCLUDE)
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 p1_t1_MON.elf: p1_t1_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@

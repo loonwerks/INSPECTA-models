@@ -110,14 +110,14 @@ if (result == 0 && hasMicrokit) {
 }
 */
 
-
-val microkitSysmlDir = homeDir / "hamr" / "microkit_sysml"
-clean(microkitAadlDir)
-
-
 ///////////////////////////////////////////////////////////////////////////////////////
 // SysMLv2
 ///////////////////////////////////////////////////////////////////////////////////////
+
+
+val microkitSysmlDir = homeDir / "hamr" / "microkit_sysml"
+clean(microkitSysmlDir)
+
 
 /*
 if (result == 0) {

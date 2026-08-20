@@ -44,20 +44,20 @@ verus! {
       &mut self,
       value: SW::StructuredEthernetMessage_i)
       ensures
-        self.EthernetFramesRx == Some(value),
-        old(self).EthernetFramesTx == self.EthernetFramesTx,
+        final(self).EthernetFramesRx == Some(value),
+        old(self).EthernetFramesTx == final(self).EthernetFramesTx,
     {
       self.api.unverified_put_EthernetFramesRx(value);
-      self.EthernetFramesRx = Some(value);
+      proof { self.EthernetFramesRx = Some(value); }
     }
   }
 
   impl<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Get_Api> seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API> {
     pub fn get_EthernetFramesTx(&mut self) -> (res : Option<SW::StructuredEthernetMessage_i>)
       ensures
-        old(self).EthernetFramesRx == self.EthernetFramesRx,
-        old(self).EthernetFramesTx == self.EthernetFramesTx,
-        res == self.EthernetFramesTx,
+        old(self).EthernetFramesRx == final(self).EthernetFramesRx,
+        old(self).EthernetFramesTx == final(self).EthernetFramesTx,
+        res == final(self).EthernetFramesTx,
     {
       self.api.unverified_get_EthernetFramesTx(&Ghost(self.EthernetFramesTx))
     }

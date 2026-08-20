@@ -52,11 +52,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 56,
+                  "beginLine": 60,
                   "beginCol": 11,
-                  "endLine": 57,
+                  "endLine": 61,
                   "endCol": 18,
-                  "offset": 2701,
+                  "offset": 2855,
                   "length": 19
                 }
             },
@@ -68,11 +68,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 305,
+                  "beginLine": 308,
                   "beginCol": 3,
-                  "endLine": 308,
+                  "endLine": 311,
                   "endCol": 3,
-                  "offset": 10449,
+                  "offset": 10644,
                   "length": 74
                 }
             }
@@ -108,11 +108,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 58,
+                  "beginLine": 62,
                   "beginCol": 11,
-                  "endLine": 59,
+                  "endLine": 63,
                   "endCol": 159,
-                  "offset": 2765,
+                  "offset": 2919,
                   "length": 160
                 }
             }
@@ -148,11 +148,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 60,
+                  "beginLine": 64,
                   "beginCol": 11,
-                  "endLine": 61,
+                  "endLine": 65,
                   "endCol": 198,
-                  "offset": 2964,
+                  "offset": 3118,
                   "length": 199
                 }
             }
@@ -188,11 +188,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 62,
+                  "beginLine": 66,
                   "beginCol": 11,
-                  "endLine": 63,
+                  "endLine": 67,
                   "endCol": 196,
-                  "offset": 3209,
+                  "offset": 3363,
                   "length": 197
                 }
             }
@@ -228,11 +228,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 64,
+                  "beginLine": 68,
                   "beginCol": 11,
-                  "endLine": 65,
+                  "endLine": 69,
                   "endCol": 258,
-                  "offset": 3446,
+                  "offset": 3600,
                   "length": 259
                 }
             }
@@ -268,11 +268,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 66,
+                  "beginLine": 70,
                   "beginCol": 11,
-                  "endLine": 67,
+                  "endLine": 71,
                   "endCol": 174,
-                  "offset": 3751,
+                  "offset": 3905,
                   "length": 175
                 }
             }
@@ -308,11 +308,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 68,
+                  "beginLine": 72,
                   "beginCol": 11,
-                  "endLine": 71,
+                  "endLine": 75,
                   "endCol": 114,
-                  "offset": 3966,
+                  "offset": 4120,
                   "length": 332
                 }
             }
@@ -380,11 +380,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 76,
+                  "beginLine": 80,
                   "beginCol": 11,
-                  "endLine": 78,
+                  "endLine": 82,
                   "endCol": 147,
-                  "offset": 4517,
+                  "offset": 4671,
                   "length": 193
                 }
             },
@@ -396,11 +396,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 294,
+                  "beginLine": 297,
                   "beginCol": 3,
-                  "endLine": 297,
+                  "endLine": 300,
                   "endCol": 3,
-                  "offset": 10009,
+                  "offset": 10204,
                   "length": 64
                 }
             }
@@ -580,11 +580,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 82,
+                  "beginLine": 86,
                   "beginCol": 11,
-                  "endLine": 91,
+                  "endLine": 95,
                   "endCol": 26,
-                  "offset": 4851,
+                  "offset": 5005,
                   "length": 292
                 }
             },
@@ -596,11 +596,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 145,
+                  "beginLine": 148,
                   "beginCol": 3,
-                  "endLine": 155,
+                  "endLine": 158,
                   "endCol": 3,
-                  "offset": 6730,
+                  "offset": 6925,
                   "length": 296
                 }
             },
@@ -612,11 +612,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 157,
+                  "beginLine": 160,
                   "beginCol": 3,
-                  "endLine": 167,
+                  "endLine": 170,
                   "endCol": 3,
-                  "offset": 7031,
+                  "offset": 7226,
                   "length": 295
                 }
             },
@@ -628,11 +628,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 169,
+                  "beginLine": 172,
                   "beginCol": 3,
-                  "endLine": 179,
+                  "endLine": 182,
                   "endCol": 3,
-                  "offset": 7331,
+                  "offset": 7526,
                   "length": 297
                 }
             },
@@ -644,11 +644,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 181,
+                  "beginLine": 184,
                   "beginCol": 3,
-                  "endLine": 191,
+                  "endLine": 194,
                   "endCol": 3,
-                  "offset": 7633,
+                  "offset": 7828,
                   "length": 297
                 }
             },
@@ -660,11 +660,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 193,
+                  "beginLine": 196,
                   "beginCol": 3,
-                  "endLine": 203,
+                  "endLine": 206,
                   "endCol": 3,
-                  "offset": 7935,
+                  "offset": 8130,
                   "length": 297
                 }
             },
@@ -676,11 +676,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 205,
+                  "beginLine": 208,
                   "beginCol": 3,
-                  "endLine": 215,
+                  "endLine": 218,
                   "endCol": 3,
-                  "offset": 8237,
+                  "offset": 8432,
                   "length": 295
                 }
             },
@@ -692,11 +692,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 217,
+                  "beginLine": 220,
                   "beginCol": 3,
-                  "endLine": 227,
+                  "endLine": 230,
                   "endCol": 3,
-                  "offset": 8537,
+                  "offset": 8732,
                   "length": 297
                 }
             },
@@ -708,11 +708,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 229,
+                  "beginLine": 232,
                   "beginCol": 3,
-                  "endLine": 239,
+                  "endLine": 242,
                   "endCol": 3,
-                  "offset": 8839,
+                  "offset": 9034,
                   "length": 297
                 }
             },
@@ -724,11 +724,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 241,
+                  "beginLine": 244,
                   "beginCol": 3,
-                  "endLine": 251,
+                  "endLine": 254,
                   "endCol": 3,
-                  "offset": 9141,
+                  "offset": 9336,
                   "length": 297
                 }
             }
@@ -796,12 +796,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 92,
+                  "beginLine": 96,
                   "beginCol": 11,
-                  "endLine": 94,
-                  "endCol": 137,
-                  "offset": 5190,
-                  "length": 178
+                  "endLine": 98,
+                  "endCol": 151,
+                  "offset": 5344,
+                  "length": 199
                 }
             },
             {
@@ -812,11 +812,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 294,
+                  "beginLine": 297,
                   "beginCol": 3,
-                  "endLine": 297,
+                  "endLine": 300,
                   "endCol": 3,
-                  "offset": 10009,
+                  "offset": 10204,
                   "length": 64
                 }
             }
@@ -868,12 +868,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 95,
+                  "beginLine": 99,
                   "beginCol": 11,
-                  "endLine": 97,
+                  "endLine": 101,
                   "endCol": 14,
-                  "offset": 5399,
-                  "length": 173
+                  "offset": 5574,
+                  "length": 194
                 }
             },
             {
@@ -884,11 +884,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 280,
+                  "beginLine": 283,
                   "beginCol": 3,
-                  "endLine": 283,
+                  "endLine": 286,
                   "endCol": 3,
-                  "offset": 9823,
+                  "offset": 10018,
                   "length": 53
                 }
             }

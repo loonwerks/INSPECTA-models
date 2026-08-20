@@ -38,19 +38,19 @@ verus! {
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
         // guarantee rx
-        (api.EthernetFramesRxIn.is_some() ==>
-          (api.EthernetFramesRxOut.is_some() ==>
-            should_allow_inbound_frame_rx(api.EthernetFramesRxIn.unwrap(), true) &&
-              (api.EthernetFramesRxIn.unwrap() == api.EthernetFramesRxOut.unwrap())) &&
-            (api.EthernetFramesRxOut.is_none() ==> should_allow_inbound_frame_rx(api.EthernetFramesRxIn.unwrap(), false))) &&
-          (!(api.EthernetFramesRxIn.is_some()) ==> api.EthernetFramesRxOut.is_none()),
+        (final(api).EthernetFramesRxIn.is_some() ==>
+          (final(api).EthernetFramesRxOut.is_some() ==>
+            should_allow_inbound_frame_rx(final(api).EthernetFramesRxIn.unwrap(), true) &&
+              (final(api).EthernetFramesRxIn.unwrap() == final(api).EthernetFramesRxOut.unwrap())) &&
+            (final(api).EthernetFramesRxOut.is_none() ==> should_allow_inbound_frame_rx(final(api).EthernetFramesRxIn.unwrap(), false))) &&
+          (!(final(api).EthernetFramesRxIn.is_some()) ==> final(api).EthernetFramesRxOut.is_none()),
         // guarantee tx
-        (api.EthernetFramesTxIn.is_some() ==>
-          (api.EthernetFramesTxOut.is_some() ==>
-            should_allow_outbound_frame_tx(api.EthernetFramesTxIn.unwrap(), true) &&
-              (api.EthernetFramesTxIn.unwrap() == api.EthernetFramesTxOut.unwrap())) &&
-            (api.EthernetFramesTxOut.is_none() ==> should_allow_outbound_frame_tx(api.EthernetFramesTxIn.unwrap(), false))) &&
-          (!(api.EthernetFramesTxIn.is_some()) ==> api.EthernetFramesTxOut.is_none()),
+        (final(api).EthernetFramesTxIn.is_some() ==>
+          (final(api).EthernetFramesTxOut.is_some() ==>
+            should_allow_outbound_frame_tx(final(api).EthernetFramesTxIn.unwrap(), true) &&
+              (final(api).EthernetFramesTxIn.unwrap() == final(api).EthernetFramesTxOut.unwrap())) &&
+            (final(api).EthernetFramesTxOut.is_none() ==> should_allow_outbound_frame_tx(final(api).EthernetFramesTxIn.unwrap(), false))) &&
+          (!(final(api).EthernetFramesTxIn.is_some()) ==> final(api).EthernetFramesTxOut.is_none()),
         // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");  

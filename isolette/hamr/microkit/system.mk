@@ -182,7 +182,7 @@ temperature_sensor_cpi_thermostat_MON.o: $(TOP_DIR)/components/temperature_senso
 
 # user code
 temperature_sensor_cpi_thermostat_user.o: $(TOP_DIR)/components/temperature_sensor_cpi_thermostat/src/temperature_sensor_cpi_thermostat_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/temperature_sensor_cpi_thermostat/include
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/temperature_sensor_cpi_thermostat/include
 
 temperature_sensor_cpi_thermostat.o: $(TOP_DIR)/components/temperature_sensor_cpi_thermostat/src/temperature_sensor_cpi_thermostat.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/temperature_sensor_cpi_thermostat/include
@@ -193,7 +193,7 @@ heat_source_cpi_heat_controller_MON.o: $(TOP_DIR)/components/heat_source_cpi_hea
 
 # user code
 heat_source_cpi_heat_controller_user.o: $(TOP_DIR)/components/heat_source_cpi_heat_controller/src/heat_source_cpi_heat_controller_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/heat_source_cpi_heat_controller/include
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/heat_source_cpi_heat_controller/include
 
 heat_source_cpi_heat_controller.o: $(TOP_DIR)/components/heat_source_cpi_heat_controller/src/heat_source_cpi_heat_controller.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/heat_source_cpi_heat_controller/include
@@ -210,7 +210,7 @@ domain_monitor_process_domain_monitor_thread.o: $(TOP_DIR)/components/domain_mon
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/include
 
 pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_INCLUDE)
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 thermostat_rt_mri_mri_MON.elf: thermostat_rt_mri_mri_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@

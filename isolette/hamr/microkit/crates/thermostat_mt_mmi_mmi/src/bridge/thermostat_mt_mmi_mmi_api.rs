@@ -108,80 +108,80 @@ verus! {
       &mut self,
       value: Isolette_Data_Model::Temp_i)
       ensures
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).monitor_mode == self.monitor_mode,
-        self.upper_alarm_temp == value,
-        old(self).lower_alarm_temp == self.lower_alarm_temp,
-        old(self).monitor_status == self.monitor_status,
-        old(self).interface_failure == self.interface_failure,
+        old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
+        old(self).lower_alarm_tempWstatus == final(self).lower_alarm_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).monitor_mode == final(self).monitor_mode,
+        final(self).upper_alarm_temp == value,
+        old(self).lower_alarm_temp == final(self).lower_alarm_temp,
+        old(self).monitor_status == final(self).monitor_status,
+        old(self).interface_failure == final(self).interface_failure,
     {
       self.api.unverified_put_upper_alarm_temp(value);
-      self.upper_alarm_temp = value;
+      proof { self.upper_alarm_temp = value; }
     }
     pub fn put_lower_alarm_temp(
       &mut self,
       value: Isolette_Data_Model::Temp_i)
       ensures
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).monitor_mode == self.monitor_mode,
-        old(self).upper_alarm_temp == self.upper_alarm_temp,
-        self.lower_alarm_temp == value,
-        old(self).monitor_status == self.monitor_status,
-        old(self).interface_failure == self.interface_failure,
+        old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
+        old(self).lower_alarm_tempWstatus == final(self).lower_alarm_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).monitor_mode == final(self).monitor_mode,
+        old(self).upper_alarm_temp == final(self).upper_alarm_temp,
+        final(self).lower_alarm_temp == value,
+        old(self).monitor_status == final(self).monitor_status,
+        old(self).interface_failure == final(self).interface_failure,
     {
       self.api.unverified_put_lower_alarm_temp(value);
-      self.lower_alarm_temp = value;
+      proof { self.lower_alarm_temp = value; }
     }
     pub fn put_monitor_status(
       &mut self,
       value: Isolette_Data_Model::Status)
       ensures
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).monitor_mode == self.monitor_mode,
-        old(self).upper_alarm_temp == self.upper_alarm_temp,
-        old(self).lower_alarm_temp == self.lower_alarm_temp,
-        self.monitor_status == value,
-        old(self).interface_failure == self.interface_failure,
+        old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
+        old(self).lower_alarm_tempWstatus == final(self).lower_alarm_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).monitor_mode == final(self).monitor_mode,
+        old(self).upper_alarm_temp == final(self).upper_alarm_temp,
+        old(self).lower_alarm_temp == final(self).lower_alarm_temp,
+        final(self).monitor_status == value,
+        old(self).interface_failure == final(self).interface_failure,
     {
       self.api.unverified_put_monitor_status(value);
-      self.monitor_status = value;
+      proof { self.monitor_status = value; }
     }
     pub fn put_interface_failure(
       &mut self,
       value: Isolette_Data_Model::Failure_Flag_i)
       ensures
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).monitor_mode == self.monitor_mode,
-        old(self).upper_alarm_temp == self.upper_alarm_temp,
-        old(self).lower_alarm_temp == self.lower_alarm_temp,
-        old(self).monitor_status == self.monitor_status,
-        self.interface_failure == value,
+        old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
+        old(self).lower_alarm_tempWstatus == final(self).lower_alarm_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).monitor_mode == final(self).monitor_mode,
+        old(self).upper_alarm_temp == final(self).upper_alarm_temp,
+        old(self).lower_alarm_temp == final(self).lower_alarm_temp,
+        old(self).monitor_status == final(self).monitor_status,
+        final(self).interface_failure == value,
     {
       self.api.unverified_put_interface_failure(value);
-      self.interface_failure = value;
+      proof { self.interface_failure = value; }
     }
   }
 
   impl<API: thermostat_mt_mmi_mmi_Get_Api> thermostat_mt_mmi_mmi_Application_Api<API> {
     pub fn get_upper_alarm_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
-        res == self.upper_alarm_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).monitor_mode == self.monitor_mode,
-        old(self).upper_alarm_temp == self.upper_alarm_temp,
-        old(self).lower_alarm_temp == self.lower_alarm_temp,
-        old(self).monitor_status == self.monitor_status,
-        old(self).interface_failure == self.interface_failure,
+        old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
+        res == final(self).upper_alarm_tempWstatus,
+        old(self).lower_alarm_tempWstatus == final(self).lower_alarm_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).monitor_mode == final(self).monitor_mode,
+        old(self).upper_alarm_temp == final(self).upper_alarm_temp,
+        old(self).lower_alarm_temp == final(self).lower_alarm_temp,
+        old(self).monitor_status == final(self).monitor_status,
+        old(self).interface_failure == final(self).interface_failure,
         // assume Allowed_UpperAlarmTemp
         GUMBO_Library::Allowed_UpperAlarmTempWStatus_spec(res),
     {
@@ -189,15 +189,15 @@ verus! {
     }
     pub fn get_lower_alarm_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        res == self.lower_alarm_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).monitor_mode == self.monitor_mode,
-        old(self).upper_alarm_temp == self.upper_alarm_temp,
-        old(self).lower_alarm_temp == self.lower_alarm_temp,
-        old(self).monitor_status == self.monitor_status,
-        old(self).interface_failure == self.interface_failure,
+        old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
+        old(self).lower_alarm_tempWstatus == final(self).lower_alarm_tempWstatus,
+        res == final(self).lower_alarm_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).monitor_mode == final(self).monitor_mode,
+        old(self).upper_alarm_temp == final(self).upper_alarm_temp,
+        old(self).lower_alarm_temp == final(self).lower_alarm_temp,
+        old(self).monitor_status == final(self).monitor_status,
+        old(self).interface_failure == final(self).interface_failure,
         // assume Allowed_LowerAlarmTemp
         GUMBO_Library::Allowed_LowerAlarmTempWStatus_spec(res),
     {
@@ -205,29 +205,29 @@ verus! {
     }
     pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        res == self.current_tempWstatus,
-        old(self).monitor_mode == self.monitor_mode,
-        old(self).upper_alarm_temp == self.upper_alarm_temp,
-        old(self).lower_alarm_temp == self.lower_alarm_temp,
-        old(self).monitor_status == self.monitor_status,
-        old(self).interface_failure == self.interface_failure,
+        old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
+        old(self).lower_alarm_tempWstatus == final(self).lower_alarm_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        res == final(self).current_tempWstatus,
+        old(self).monitor_mode == final(self).monitor_mode,
+        old(self).upper_alarm_temp == final(self).upper_alarm_temp,
+        old(self).lower_alarm_temp == final(self).lower_alarm_temp,
+        old(self).monitor_status == final(self).monitor_status,
+        old(self).interface_failure == final(self).interface_failure,
     {
       self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
     }
     pub fn get_monitor_mode(&mut self) -> (res : Isolette_Data_Model::Monitor_Mode)
       ensures
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).monitor_mode == self.monitor_mode,
-        res == self.monitor_mode,
-        old(self).upper_alarm_temp == self.upper_alarm_temp,
-        old(self).lower_alarm_temp == self.lower_alarm_temp,
-        old(self).monitor_status == self.monitor_status,
-        old(self).interface_failure == self.interface_failure,
+        old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
+        old(self).lower_alarm_tempWstatus == final(self).lower_alarm_tempWstatus,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).monitor_mode == final(self).monitor_mode,
+        res == final(self).monitor_mode,
+        old(self).upper_alarm_temp == final(self).upper_alarm_temp,
+        old(self).lower_alarm_temp == final(self).lower_alarm_temp,
+        old(self).monitor_status == final(self).monitor_status,
+        old(self).interface_failure == final(self).interface_failure,
     {
       self.api.unverified_get_monitor_mode(&Ghost(self.monitor_mode))
     }

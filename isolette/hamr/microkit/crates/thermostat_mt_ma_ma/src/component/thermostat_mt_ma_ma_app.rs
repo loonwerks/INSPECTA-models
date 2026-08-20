@@ -32,8 +32,8 @@ verus! {
         //   If the Monitor Mode is INIT, the Alarm Control shall be set
         //   to Off.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 
-        (api.alarm_control == Isolette_Data_Model::On_Off::Off) &&
-          (self.lastCmd == Isolette_Data_Model::On_Off::Off),
+        (final(api).alarm_control == Isolette_Data_Model::On_Off::Off) &&
+          (final(self).lastCmd == Isolette_Data_Model::On_Off::Off),
         // END MARKER INITIALIZATION ENSURES
     {
       log_info("initialize entrypoint invoked");
@@ -70,8 +70,8 @@ verus! {
         //   to Off.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 
         (old(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode) ==>
-          ((api.alarm_control == Isolette_Data_Model::On_Off::Off) &&
-             (self.lastCmd == Isolette_Data_Model::On_Off::Off)),
+          ((final(api).alarm_control == Isolette_Data_Model::On_Off::Off) &&
+             (final(self).lastCmd == Isolette_Data_Model::On_Off::Off)),
         // case REQ_MA_2
         //   If the Monitor Mode is NORMAL and the Current Temperature is
         //   less than the Lower Alarm Temperature or greater than the Upper Alarm
@@ -80,8 +80,8 @@ verus! {
         ((old(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &&
           ((old(api).current_tempWstatus.degrees < old(api).lower_alarm_temp.degrees) ||
             (old(api).current_tempWstatus.degrees > old(api).upper_alarm_temp.degrees))) ==>
-          ((api.alarm_control == Isolette_Data_Model::On_Off::Onn) &&
-             (self.lastCmd == Isolette_Data_Model::On_Off::Onn)),
+          ((final(api).alarm_control == Isolette_Data_Model::On_Off::Onn) &&
+             (final(self).lastCmd == Isolette_Data_Model::On_Off::Onn)),
         // case REQ_MA_3
         //   If the Monitor Mode is NORMAL and the Current Temperature
         //   is greater than or equal to the Lower Alarm Temperature and less than
@@ -95,8 +95,8 @@ verus! {
             (old(api).current_tempWstatus.degrees < old(api).lower_alarm_temp.degrees + 1i32) ||
             (old(api).current_tempWstatus.degrees > old(api).upper_alarm_temp.degrees - 1i32) &&
               (old(api).current_tempWstatus.degrees <= old(api).upper_alarm_temp.degrees))) ==>
-          ((api.alarm_control == old(self).lastCmd) &&
-             (self.lastCmd == old(self).lastCmd)),
+          ((final(api).alarm_control == old(self).lastCmd) &&
+             (final(self).lastCmd == old(self).lastCmd)),
         // case REQ_MA_4
         //   If the Monitor Mode is NORMAL and the value of the Current
         //   Temperature is greater than or equal to the Lower Alarm Temperature
@@ -106,15 +106,15 @@ verus! {
         ((old(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &&
           ((old(api).current_tempWstatus.degrees >= old(api).lower_alarm_temp.degrees + 1i32) &&
             (old(api).current_tempWstatus.degrees <= old(api).upper_alarm_temp.degrees - 1i32))) ==>
-          ((api.alarm_control == Isolette_Data_Model::On_Off::Off) &&
-             (self.lastCmd == Isolette_Data_Model::On_Off::Off)),
+          ((final(api).alarm_control == Isolette_Data_Model::On_Off::Off) &&
+             (final(self).lastCmd == Isolette_Data_Model::On_Off::Off)),
         // case REQ_MA_5
         //   If the Monitor Mode is FAILED, the Alarm Control shall be
         //   set to On.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=116 
         (old(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode) ==>
-          ((api.alarm_control == Isolette_Data_Model::On_Off::Onn) &&
-             (self.lastCmd == Isolette_Data_Model::On_Off::Onn)),
+          ((final(api).alarm_control == Isolette_Data_Model::On_Off::Onn) &&
+             (final(self).lastCmd == Isolette_Data_Model::On_Off::Onn)),
         // END MARKER TIME TRIGGERED ENSURES
     {
       //log_info("compute entrypoint invoked");

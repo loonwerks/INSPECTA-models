@@ -66,44 +66,44 @@ verus! {
       &mut self,
       value: Isolette_Data_Model::Regulator_Mode)
       ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).interface_failure == self.interface_failure,
-        old(self).internal_failure == self.internal_failure,
-        self.regulator_mode == value,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).interface_failure == final(self).interface_failure,
+        old(self).internal_failure == final(self).internal_failure,
+        final(self).regulator_mode == value,
     {
       self.api.unverified_put_regulator_mode(value);
-      self.regulator_mode = value;
+      proof { self.regulator_mode = value; }
     }
   }
 
   impl<API: thermostat_rt_mrm_mrm_Get_Api> thermostat_rt_mrm_mrm_Application_Api<API> {
     pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        res == self.current_tempWstatus,
-        old(self).interface_failure == self.interface_failure,
-        old(self).internal_failure == self.internal_failure,
-        old(self).regulator_mode == self.regulator_mode,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        res == final(self).current_tempWstatus,
+        old(self).interface_failure == final(self).interface_failure,
+        old(self).internal_failure == final(self).internal_failure,
+        old(self).regulator_mode == final(self).regulator_mode,
     {
       self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
     }
     pub fn get_interface_failure(&mut self) -> (res : Isolette_Data_Model::Failure_Flag_i)
       ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).interface_failure == self.interface_failure,
-        res == self.interface_failure,
-        old(self).internal_failure == self.internal_failure,
-        old(self).regulator_mode == self.regulator_mode,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).interface_failure == final(self).interface_failure,
+        res == final(self).interface_failure,
+        old(self).internal_failure == final(self).internal_failure,
+        old(self).regulator_mode == final(self).regulator_mode,
     {
       self.api.unverified_get_interface_failure(&Ghost(self.interface_failure))
     }
     pub fn get_internal_failure(&mut self) -> (res : Isolette_Data_Model::Failure_Flag_i)
       ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).interface_failure == self.interface_failure,
-        old(self).internal_failure == self.internal_failure,
-        res == self.internal_failure,
-        old(self).regulator_mode == self.regulator_mode,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).interface_failure == final(self).interface_failure,
+        old(self).internal_failure == final(self).internal_failure,
+        res == final(self).internal_failure,
+        old(self).regulator_mode == final(self).regulator_mode,
     {
       self.api.unverified_get_internal_failure(&Ghost(self.internal_failure))
     }

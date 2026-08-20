@@ -34,20 +34,21 @@
  * the ELF from ~1100 sections to ~25, producing smaller binaries and
  * faster tool/loader processing.
  *
- * Why we are on SDK 1.4.1: HAMR codegen that targets domain scheduling
+ * Why this file exists: HAMR codegen that targets domain scheduling
  * (seL4's kernel-level mechanism for deterministic temporal isolation,
  * where the kernel cycles through a fixed table of time domains) rather
- * than MCS user-land scheduling (budget/period) currently requires a
- * custom fork of the microkit SDK based on 1.4.1. The upstream SDK does
- * not yet expose domain scheduling through its system description format.
- * This pins us to a 1.4.1-era codebase that predates the u16 overflow
- * fix, making this custom linker script necessary for Rust/Verus builds.
+ * than MCS user-land scheduling (budget/period) used to require a custom
+ * fork of the microkit SDK based on 1.4.1, because the upstream SDK did
+ * not expose domain scheduling through its system description format.
+ * That pinned these builds to a 1.4.1-era codebase predating the u16
+ * overflow fix, which is what made this custom linker script necessary
+ * for Rust/Verus builds.
  *
- * UNSW is working on mainlining domain scheduling support into the
- * upstream microkit SDK, but the 2.2.0 release (2025-03-31) does not
- * yet include it. Once domain scheduling lands upstream, upgrading to
- * that SDK version should both remove the need for the custom fork and
- * resolve the ELF parsing issue, making this file unnecessary.
+ * Domain scheduling landed upstream in the 2.3.0 release, and the PROVERS
+ * environment now ships that single released SDK rather than the fork
+ * (see provers-env/bin/versions.sh). On 2.3.0 the overflow fix is present,
+ * so this file should no longer be needed for the ELF to parse -- it is
+ * kept for the section-count reduction described above.
  *
  * Note: projects that only use Vest's generated parse methods (e.g. the
  * ardupilot-basic MavlinkFirewall) may not hit this issue on SDK 1.4.1

@@ -181,8 +181,8 @@ pub fn compute_spec_myArrayInt32_FunctionParam_Assume_assume(In_myArrayInt32_Sta
   */
 pub fn compute_spec_specFunctionAssumeTest_assume(api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
-  subclauseSpecFunction_Assume(api_c_myArrayInt32_DataPort) &
-    (GumboLib::normalLibraryFunction(api_c_myArrayInt32_DataPort) & GumboLib::librarySpecFunction_Assume(api_c_myArrayInt32_DataPort))
+  subclauseSpecFunction_Assume(api_c_myArrayInt32_DataPort) & GumboLib::normalLibraryFunction(api_c_myArrayInt32_DataPort) &
+    GumboLib::librarySpecFunction_Assume(api_c_myArrayInt32_DataPort)
 }
 
 /** Compute Entrypoint Contract
@@ -480,9 +480,9 @@ pub fn compute_spec_myArrayInt32_FunctionParam_Guarantee_guarantee(In_myArrayInt
   */
 pub fn compute_spec_librarySpecFunctionTest_guarantee(api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
-  subclauseSpecFunction_Assume(api_c_myArrayInt32_DataPort) &
-    (subclauseSpecFunction_Guarantee(api_c_myArrayInt32_DataPort) &
-      (GumboLib::normalLibraryFunction(api_c_myArrayInt32_DataPort) & GumboLib::librarySpecFunction_Guarantee(api_c_myArrayInt32_DataPort)))
+  subclauseSpecFunction_Assume(api_c_myArrayInt32_DataPort) & subclauseSpecFunction_Guarantee(api_c_myArrayInt32_DataPort) &
+    GumboLib::normalLibraryFunction(api_c_myArrayInt32_DataPort) &
+    GumboLib::librarySpecFunction_Guarantee(api_c_myArrayInt32_DataPort)
 }
 
 /** Compute Entrypoint Contract

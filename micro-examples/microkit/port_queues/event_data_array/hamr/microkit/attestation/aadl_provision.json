@@ -44,7 +44,6 @@
           "%%codegen_dir%%/system.mk",
           "%%codegen_dir%%/util/include/printf.h",
           "%%codegen_dir%%/util/src/printf.c",
-          "%%codegen_dir%%/util/include/util.h",
           "%%codegen_dir%%/util/src/util.c",
           "%%codegen_dir%%/crates/data/src/event_data_array_port_queues/struct_i.rs",
           "%%codegen_dir%%/crates/data/src/event_data_array_port_queues/ArrayOfStruct.rs",

@@ -34,7 +34,7 @@ verus! {
     {
       log_info("initialize entrypoint invoked");
     }
-
+ 
     pub fn timeTriggered<API: consumer_consumer_Full_Api> (
       &mut self,
       api: &mut consumer_consumer_Application_Api<API>)
@@ -53,8 +53,8 @@ verus! {
         //   ensure functions can operate on arrays
         myArrayInt32_FunctionParam(old(self).myArrayInt32_StateVar),
         // assume specFunctionAssumeTest
-        subclauseSpecFunction_Assume(old(api).c_myArrayInt32_DataPort) &&
-          (GumboLib::normalLibraryFunction_spec(old(api).c_myArrayInt32_DataPort) && GumboLib::librarySpecFunction_Assume_spec(old(api).c_myArrayInt32_DataPort)),
+        (subclauseSpecFunction_Assume(old(api).c_myArrayInt32_DataPort) && GumboLib::normalLibraryFunction_spec(old(api).c_myArrayInt32_DataPort)) &&
+          GumboLib::librarySpecFunction_Assume_spec(old(api).c_myArrayInt32_DataPort),
         // assume isSorted_MyArrayStruct_Function_Assume
         //   Ensure operations on an array returned by a function work as expected
         forall|i:int| 0 <= i <= myArrayStruct_FunctionReturn(old(self).myArrayStruct_StateVar).len() - 2 ==> #[trigger] myArrayStruct_FunctionReturn(old(self).myArrayStruct_StateVar)[i].fieldSInt32 <= myArrayStruct_FunctionReturn(old(self).myArrayStruct_StateVar)[i + 1].fieldSInt32,
@@ -85,51 +85,51 @@ verus! {
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
         // guarantee noChange_MyArrayInt32_StateVar_Guarantee
-        old(self).myArrayInt32_StateVar[0] == self.myArrayInt32_StateVar[0],
+        old(self).myArrayInt32_StateVar[0] == final(self).myArrayInt32_StateVar[0],
         // guarantee noChange_MyArrayStruct_StateVar_Guarantee
-        old(self).myArrayStruct_StateVar[0].fieldSInt32 == self.myArrayStruct_StateVar[0].fieldSInt32,
+        old(self).myArrayStruct_StateVar[0].fieldSInt32 == final(self).myArrayStruct_StateVar[0].fieldSInt32,
         // guarantee isSorted_MyArrayInt32_StateVar_Guarantee
-        forall|i:int| 0 <= i <= self.myArrayInt32_StateVar.len() - 2 ==> #[trigger] old(self).myArrayInt32_StateVar[i] <= self.myArrayInt32_StateVar[i + 1],
+        forall|i:int| 0 <= i <= final(self).myArrayInt32_StateVar.len() - 2 ==> #[trigger] old(self).myArrayInt32_StateVar[i] <= final(self).myArrayInt32_StateVar[i + 1],
         // guarantee isSorted_MyArrayStruct_StateVar_Guarantee
-        forall|i:int| 0 <= i <= self.myArrayStruct_StateVar.len() - 2 ==> #[trigger] old(self).myArrayStruct_StateVar[i].fieldSInt32 <= self.myArrayStruct_StateVar[i + 1].fieldSInt32,
+        forall|i:int| 0 <= i <= final(self).myArrayStruct_StateVar.len() - 2 ==> #[trigger] old(self).myArrayStruct_StateVar[i].fieldSInt32 <= final(self).myArrayStruct_StateVar[i + 1].fieldSInt32,
         // guarantee isSorted_MyStructArray_StateVar_Guarantee
-        forall|i:int| 0 <= i <= self.myStructArray_StateVar.fieldArray.len() - 2 ==> #[trigger] (old(self).myStructArray_StateVar).fieldArray[i].fieldSInt32 <= self.myStructArray_StateVar.fieldArray[i + 1].fieldSInt32,
+        forall|i:int| 0 <= i <= final(self).myStructArray_StateVar.fieldArray.len() - 2 ==> #[trigger] (old(self).myStructArray_StateVar).fieldArray[i].fieldSInt32 <= final(self).myStructArray_StateVar.fieldArray[i + 1].fieldSInt32,
         // guarantee isSorted_MyArrayInt32_Function_Guarantee
         //   Ensure operations on an array returned by a function work as expected
-        forall|i:int| 0 <= i <= myArrayInt32_FunctionReturn(self.myArrayInt32_StateVar).len() - 2 ==> #[trigger] myArrayInt32_FunctionReturn(old(self).myArrayInt32_StateVar)[i] <= myArrayInt32_FunctionReturn(self.myArrayInt32_StateVar)[i + 1],
+        forall|i:int| 0 <= i <= myArrayInt32_FunctionReturn(final(self).myArrayInt32_StateVar).len() - 2 ==> #[trigger] myArrayInt32_FunctionReturn(old(self).myArrayInt32_StateVar)[i] <= myArrayInt32_FunctionReturn(final(self).myArrayInt32_StateVar)[i + 1],
         // guarantee myArrayInt32_FunctionParam_Guarantee
         //   ensure functions can operate on arrays
         myArrayInt32_FunctionParam(old(self).myArrayInt32_StateVar),
         // guarantee librarySpecFunctionTest
-        subclauseSpecFunction_Assume(api.c_myArrayInt32_DataPort) &&
-          (subclauseSpecFunction_Guarantee(api.c_myArrayInt32_DataPort) &&
-            (GumboLib::normalLibraryFunction_spec(api.c_myArrayInt32_DataPort) && GumboLib::librarySpecFunction_Guarantee_spec(api.c_myArrayInt32_DataPort))),
+        ((subclauseSpecFunction_Assume(final(api).c_myArrayInt32_DataPort) && subclauseSpecFunction_Guarantee(final(api).c_myArrayInt32_DataPort)) &&
+          GumboLib::normalLibraryFunction_spec(final(api).c_myArrayInt32_DataPort)) &&
+          GumboLib::librarySpecFunction_Guarantee_spec(final(api).c_myArrayInt32_DataPort),
         // guarantee isSorted_MyArrayStruct_Function_Guarantee
         //   Ensure operations on an array returned by a function work as expected
-        forall|i:int| 0 <= i <= myArrayStruct_FunctionReturn(self.myArrayStruct_StateVar).len() - 2 ==> #[trigger] myArrayStruct_FunctionReturn(old(self).myArrayStruct_StateVar)[i].fieldSInt32 <= myArrayStruct_FunctionReturn(self.myArrayStruct_StateVar)[i + 1].fieldSInt32,
+        forall|i:int| 0 <= i <= myArrayStruct_FunctionReturn(final(self).myArrayStruct_StateVar).len() - 2 ==> #[trigger] myArrayStruct_FunctionReturn(old(self).myArrayStruct_StateVar)[i].fieldSInt32 <= myArrayStruct_FunctionReturn(final(self).myArrayStruct_StateVar)[i + 1].fieldSInt32,
         // guarantee myArrayStruct_FunctionParam_Guarantee
         //   ensure functions can operate on arrays
         myArrayStruct_FunctionParam(old(self).myArrayStruct_StateVar),
         // guarantee isSorted_MyStructArray_i_Function_Guarantee
         //   Ensure operations on an array returned by a function work as expected
-        forall|i:int| 0 <= i <= myStructArray_i_FunctionReturn(self.myStructArray_StateVar).fieldArray.len() - 2 ==> #[trigger] myStructArray_i_FunctionReturn(old(self).myStructArray_StateVar).fieldArray[i].fieldSInt32 <= myStructArray_i_FunctionReturn(self.myStructArray_StateVar).fieldArray[i + 1].fieldSInt32,
+        forall|i:int| 0 <= i <= myStructArray_i_FunctionReturn(final(self).myStructArray_StateVar).fieldArray.len() - 2 ==> #[trigger] myStructArray_i_FunctionReturn(old(self).myStructArray_StateVar).fieldArray[i].fieldSInt32 <= myStructArray_i_FunctionReturn(final(self).myStructArray_StateVar).fieldArray[i + 1].fieldSInt32,
         // guarantee myStructArray_i_FunctionParam_Guarantee
         //   ensure functions can operate on arrays
         myStructArray_i_FunctionParam(old(self).myStructArray_StateVar),
         // guarantee atLeastOneZero_MyArrayInt32_DataPort_Guarantee
-        exists|i:int| 0 <= i <= api.c_myArrayInt32_DataPort.len() - 1 && #[trigger] api.c_myArrayInt32_DataPort[i] == 0i32,
+        exists|i:int| 0 <= i <= final(api).c_myArrayInt32_DataPort.len() - 1 && #[trigger] final(api).c_myArrayInt32_DataPort[i] == 0i32,
         // guarantee isSorted_MyArrayInt32_DataPort_Guarantee
-        forall|i:int| 0 <= i <= api.c_myArrayInt32_DataPort.len() - 2 ==> #[trigger] api.c_myArrayInt32_DataPort[i] <= api.c_myArrayInt32_DataPort[i + 1],
+        forall|i:int| 0 <= i <= final(api).c_myArrayInt32_DataPort.len() - 2 ==> #[trigger] final(api).c_myArrayInt32_DataPort[i] <= final(api).c_myArrayInt32_DataPort[i + 1],
         // guarantee isSorted_MyArrayStruct_DataPort_Guarantee
-        forall|i:int| 0 <= i <= api.c_myArrayStruct_DataPort.len() - 2 ==> #[trigger] api.c_myArrayStruct_DataPort[i].fieldSInt32 <= api.c_myArrayStruct_DataPort[i + 1].fieldSInt32,
+        forall|i:int| 0 <= i <= final(api).c_myArrayStruct_DataPort.len() - 2 ==> #[trigger] final(api).c_myArrayStruct_DataPort[i].fieldSInt32 <= final(api).c_myArrayStruct_DataPort[i + 1].fieldSInt32,
         // guarantee isSorted_MyStructArray_DataPort_Guarantee
-        forall|i:int| 0 <= i <= api.c_myStructArray_DataPort.fieldArray.len() - 2 ==> #[trigger] api.c_myStructArray_DataPort.fieldArray[i].fieldSInt32 <= api.c_myStructArray_DataPort.fieldArray[i + 1].fieldSInt32,
+        forall|i:int| 0 <= i <= final(api).c_myStructArray_DataPort.fieldArray.len() - 2 ==> #[trigger] final(api).c_myStructArray_DataPort.fieldArray[i].fieldSInt32 <= final(api).c_myStructArray_DataPort.fieldArray[i + 1].fieldSInt32,
         // guarantee isSorted_MyArrayInt32_EventDataPort_Guarantee
-        api.c_myArrayInt32_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= api.c_myArrayInt32_EventDataPort.unwrap().len() - 2 ==> #[trigger] api.c_myArrayInt32_EventDataPort.unwrap()[i] <= api.c_myArrayInt32_EventDataPort.unwrap()[i + 1],
+        final(api).c_myArrayInt32_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= final(api).c_myArrayInt32_EventDataPort.unwrap().len() - 2 ==> #[trigger] final(api).c_myArrayInt32_EventDataPort.unwrap()[i] <= final(api).c_myArrayInt32_EventDataPort.unwrap()[i + 1],
         // guarantee isSorted_MyArrayStruct_EventDataPort_Guarantee
-        api.c_myArrayStruct_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= api.c_myArrayStruct_EventDataPort.unwrap().len() - 2 ==> #[trigger] api.c_myArrayStruct_EventDataPort.unwrap()[i].fieldSInt32 <= api.c_myArrayStruct_EventDataPort.unwrap()[i + 1].fieldSInt32,
+        final(api).c_myArrayStruct_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= final(api).c_myArrayStruct_EventDataPort.unwrap().len() - 2 ==> #[trigger] final(api).c_myArrayStruct_EventDataPort.unwrap()[i].fieldSInt32 <= final(api).c_myArrayStruct_EventDataPort.unwrap()[i + 1].fieldSInt32,
         // guarantee isSorted_MyStructArray_EventDataPort_Guarantee
-        api.c_myStructArray_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= api.c_myStructArray_EventDataPort.unwrap().fieldArray.len() - 2 ==> #[trigger] api.c_myStructArray_EventDataPort.unwrap().fieldArray[i].fieldSInt32 <= api.c_myStructArray_EventDataPort.unwrap().fieldArray[i + 1].fieldSInt32,
+        final(api).c_myStructArray_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= final(api).c_myStructArray_EventDataPort.unwrap().fieldArray.len() - 2 ==> #[trigger] final(api).c_myStructArray_EventDataPort.unwrap().fieldArray[i].fieldSInt32 <= final(api).c_myStructArray_EventDataPort.unwrap().fieldArray[i + 1].fieldSInt32,
         // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");

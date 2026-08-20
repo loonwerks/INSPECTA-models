@@ -87,7 +87,7 @@ domain_monitor_process_domain_monitor_thread.o: $(TOP_DIR)/components/domain_mon
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/include
 
 pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_INCLUDE)
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 producer_producer_MON.elf: producer_producer_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@

@@ -130,8 +130,9 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
     - Docker Desktop
 
     Run the following from this repository's root directory.  The docker image
-    `jasonbelt/microkit_provers` contains customized versions of Microkit and seL4 that
-    support domain scheduling, built off
+    `jasonbelt/microkit_provers` ships the official Microkit SDK (2.3.0), the first
+    release to support domain scheduling; before it, this variant required customized
+    Microkit and seL4 builds off
     [microkit #175](https://github.com/seL4/microkit/pull/175) and
     [seL4 #1308](https://github.com/seL4/seL4/pull/1308).
 

@@ -189,11 +189,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "util\/include\/util.h",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "util\/src\/util.c",
               "overwrittenIfExists" : true
             },
@@ -433,9 +428,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 11,
+                                "beginLine" : 14,
                                 "beginColumn" : 7,
-                                "endLine" : 15,
+                                "endLine" : 18,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -580,9 +575,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 39,
+                                "beginLine" : 42,
                                 "beginColumn" : 7,
-                                "endLine" : 43,
+                                "endLine" : 46,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -727,9 +722,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 57,
+                                "beginLine" : 60,
                                 "beginColumn" : 7,
-                                "endLine" : 61,
+                                "endLine" : 64,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -874,9 +869,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 75,
+                                "beginLine" : 78,
                                 "beginColumn" : 7,
-                                "endLine" : 79,
+                                "endLine" : 82,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
