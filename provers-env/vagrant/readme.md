@@ -39,6 +39,7 @@ it, which is what keeps the VM and the image on the same tools and versions.
   * [Choosing the IDEs](#choosing-the-ides)
   * [Hosts](#hosts)
 * [Using The Prebuilt OVA](#using-the-prebuilt-ova)
+  * [Earlier Appliances](#earlier-appliances)
 * [Setting Up A VirtualBox VM Using Vagrant](#setting-up-a-virtualbox-vm-using-vagrant)
   * [Requirements](#requirements)
   * [Notes](#notes)
@@ -211,25 +212,35 @@ architectures:
 
 | host | appliance | size | exported | versions pinned as of |
 | --- | --- | --- | --- | --- |
-| Apple Silicon / aarch64 | [provers-env-arm64-2026.08.13.ova](https://drive.google.com/file/d/1Ts_zRfmRGkWSU2jz1-j_AthrZ1doUD0K/view?usp=sharing) | 12.61 GB | 2026-08-17 | [52a1822](https://github.com/loonwerks/INSPECTA-models/commit/52a18225) |
-| x86_64 | [provers-env-amd64-2026.08.13.ova](https://drive.google.com/file/d/16-7AmlTBj9AsrHB80anUvI8fV7Qdt1YE/view?usp=sharing) | 12.32 GB | 2026-08-17 | [52a1822](https://github.com/loonwerks/INSPECTA-models/commit/52a18225) |
+| Apple Silicon / aarch64 | [provers-env-arm64-2026.08.18.ova](https://drive.google.com/file/d/1UG0GYIzaaPI4s79HCOz1eL6-qckicYDO/view?usp=sharing) | 11.91 GB | 2026-08-18 | [b21508df](https://github.com/loonwerks/INSPECTA-models/commit/b21508df) |
+| x86_64 | [provers-env-amd64-2026.08.18.ova](https://drive.google.com/file/d/1XWEYQeakpsD7811wUgdWrtQrN8qqH4Yv/view?usp=sharing) | 11.95 GB | 2026-08-18 | [b21508df](https://github.com/loonwerks/INSPECTA-models/commit/b21508df) |
+
+Both carry **Microkit SDK 2.3.0**, and only that one -- `MICROKIT_SDK` points at
+`~/provers/microkit-sdk-2.3.0` and everything, domain-scheduled or not, builds
+against it, so nothing has to pass `MICROKIT_SDK=` to pick a side.  2.3.0 is the
+first release to ship domain scheduling itself, which is what made the second
+SDK the older appliances carry unnecessary.
+
+It is the released SDK with one difference: its `microkit` tool is rebuilt from
+the 2.3.0 tag with the
+[seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain fix,
+without which a domain-scheduled virtual machine hangs in the guest's
+`arch_timer` probe.  The fix changes only the capDL spec the host tool emits --
+the kernel, loader, monitor, libmicrokit and headers are exactly as released --
+and the SDK records it in a `VCPU-DOMAIN-PATCH` note beside the tool.  See
+[bin/microkit-vcpu-domain.sh](../bin/microkit-vcpu-domain.sh); it goes away with
+the first release after 2.3.0, which will carry #586 itself.
 
 Both are named for `PROVERS_BUILD_VER` rather than for the day they were
-written: a rebuild that *replaces* a published build keeps that build's version,
-which is why the pair above are named 2026.08.13 but were exported later.  See
+written: a rebuild that *replaces* a published build keeps that build's version
+rather than taking the day it was made, which is why the 2026.08.13 pair below
+carry a version four days older than their export.  See
 [Exporting An OVA](#exporting-an-ova).
 
 The `versions pinned as of` column is the commit whose `bin/versions.sh` each
-appliance was built from, and it is worth reading.  The pair above predate the
-move to a single patched Microkit SDK and the 2026.08 Verus toolchain, so a VM
-built from the current scripts installs a different set; publishing a matching
-appliance means rebuilding and re-exporting.
-
-An [earlier x86_64 appliance](https://drive.google.com/file/d/1GFuthWnaLRnPwMoOwR_hU7_4tFs5UXyg/view?usp=drive_link)
-(2026-08-04, pinned at
-[5edff3d](https://github.com/loonwerks/INSPECTA-models/commit/5edff3d306b7527f12141ef578eb230a3ec30d7d))
-remains available, but the pair above are built from the same pins and are what
-to use unless you need to reproduce something against the older one.
+appliance was built from, and it is worth reading -- it is the full list of what
+is inside, and a VM built from a later commit installs whatever has been pinned
+since.
 
 Take the one matching your host, not your preference: VirtualBox virtualizes
 only its own architecture, so the x86_64 appliance will not start on Apple
@@ -237,7 +248,7 @@ Silicon and vice versa.  Import into VirtualBox 7.1 or above --
 `File > Import Appliance...`, or:
 
 ```bash
-VBoxManage import provers-env-arm64-2026.08.13.ova
+VBoxManage import provers-env-arm64-2026.08.18.ova
 ```
 
 Then start it and log in as `vagrant` / `vagrant`.  The virtual disk comes from
@@ -254,10 +265,33 @@ without guessing from the name -- `cat ~/provers/build-info` in the running VM,
 or before importing:
 
 ```bash
-VBoxManage import provers-env-arm64-2026.08.13.ova -n
+VBoxManage import provers-env-arm64-2026.08.18.ova -n
 ```
 
 which prints the tool versions and build date as the appliance's description.
+
+### Earlier Appliances
+
+The appliances published before the move to 2.3.0 remain available:
+
+| host | appliance | size | exported | versions pinned as of |
+| --- | --- | --- | --- | --- |
+| Apple Silicon / aarch64 | [provers-env-arm64-2026.08.13.ova](https://drive.google.com/file/d/1Ts_zRfmRGkWSU2jz1-j_AthrZ1doUD0K/view?usp=sharing) | 12.61 GB | 2026-08-17 | [52a1822](https://github.com/loonwerks/INSPECTA-models/commit/52a18225) |
+| x86_64 | [provers-env-amd64-2026.08.13.ova](https://drive.google.com/file/d/16-7AmlTBj9AsrHB80anUvI8fV7Qdt1YE/view?usp=sharing) | 12.32 GB | 2026-08-17 | [52a1822](https://github.com/loonwerks/INSPECTA-models/commit/52a18225) |
+| x86_64 | [provers-env-2026.08.04.ova](https://drive.google.com/file/d/1GFuthWnaLRnPwMoOwR_hU7_4tFs5UXyg/view?usp=drive_link) | 13.31 GB | 2026-08-04 | [5edff3d](https://github.com/loonwerks/INSPECTA-models/commit/5edff3d306b7527f12141ef578eb230a3ec30d7d) |
+
+All three predate Microkit 2.3.0 and so install **two** SDKs, because no release
+then carried domain scheduling:
+
+| | | |
+| --- | --- | --- |
+| `MICROKIT_SDK` | `~/provers/microkit-sdk-1.4.1` | a custom 1.4.1 SDK, built from [Ivan-Velickovic/seL4@microkit_domains](https://github.com/Ivan-Velickovic/seL4/tree/microkit_domains) and [JE-Archer/microkit@domains](https://github.com/JE-Archer/microkit/tree/domains) through `build_sdk.py` -- 1.4.1 plus domain-scheduling support.  Domain-scheduled models built against this one |
+| `MICROKIT_SDK_CURRENT` | `~/provers/microkit-sdk-2.2.0` | the stock **2.2.0** release, which everything else built against |
+
+Which meant a model had to name the SDK it wanted -- the readmes and `.ci/`
+scripts of that era pass `MICROKIT_SDK=` per command for exactly that reason.
+Current models do not, so they expect the 2.3.0 appliances above; take an older
+one only to reproduce something against the environment it was built for.
 
 ## Setting Up A VirtualBox VM Using Vagrant
 
@@ -435,7 +469,7 @@ which IDEs are installed -- so the appliance answers "what is in this?" without
 being started.
 
 The name it chooses is `provers-env-<arch>-<build version>`, e.g.
-`provers-env-arm64-2026.08.13`, and it is passed as `--vmname` so that it is both
+`provers-env-arm64-2026.08.18`, and it is passed as `--vmname` so that it is both
 the OVA's filename and what VirtualBox calls the VM on import.
 
 The build version is `PROVERS_BUILD_VER`, pinned in

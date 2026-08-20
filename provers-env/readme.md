@@ -3,8 +3,8 @@
 The DARPA PROVERS development environment: Verus, the seL4 Microkit SDK,
 LionsOS, sdfgen, Rust and Sireum/HAMR, at one pinned set of versions.
 
-The Microkit SDK is the released one with a single fix applied to its `microkit`
-tool, without which a domain-scheduled virtual machine hangs; see
+The Microkit SDK is the released 2.3.0 one with a single fix applied to
+its `microkit` tool, without which a domain-scheduled virtual machine hangs; see
 [bin/microkit-vcpu-domain.sh](bin/microkit-vcpu-domain.sh).
 
 It is defined once, as the install scripts in [bin](bin), and delivered four
