@@ -10,6 +10,7 @@ verus! {
   pub struct producer_producer {
     // PLACEHOLDER MARKER STATE VARS
     // PLACEHOLDER MARKER R2U2 MONITOR STATE VAR
+    pub next_sample: i32, // The value sent on the next periodic dispatch.
   }
 
   impl producer_producer {
@@ -18,6 +19,7 @@ verus! {
       Self {
         // PLACEHOLDER MARKER STATE VAR INIT
         // PLACEHOLDER MARKER R2U2 MONITOR STATE VAR INIT
+        next_sample: 0,
       }
     }
 
@@ -40,7 +42,24 @@ verus! {
       ensures
         // PLACEHOLDER MARKER TIME TRIGGERED ENSURES
     {
-      log_info("compute entrypoint invoked");
+      // Event alert ports are emitted only when their mapped guarantee is false.
+      if api.get_sample_alert() {
+        log_warn("Oh no! Its been too long since I dispatched a message...doing it now!");
+        api.put_sample(self.next_sample);
+        self.next_sample = self.next_sample.wrapping_add(1);
+        return
+      }
+
+      // Send for three dispatches, then remain silent for three dispatches.
+      // The silent run violates F[0,2](sample_nonEmpty), allowing the consumer
+      // to demonstrate both true and false R2U2 verdicts.
+      let sample = self.next_sample;
+      let phase = sample % 6;
+      if phase < 3 {
+        api.put_sample(sample);
+        log_info("Sent sample!");
+      }
+      self.next_sample = sample.wrapping_add(1);
     }
 
     pub fn notify(
@@ -60,6 +79,12 @@ verus! {
   pub fn log_info(msg: &str)
   {
     log::info!("{0}", msg);
+  }
+
+  #[verifier::external_body]
+  pub fn log_warn(msg: &str)
+  {
+    log::warn!("{0}", msg);
   }
 
   #[verifier::external_body]
