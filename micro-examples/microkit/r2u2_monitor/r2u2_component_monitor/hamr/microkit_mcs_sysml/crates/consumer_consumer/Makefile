@@ -35,17 +35,22 @@ CARGO_FLAGS = -Z build-std=core,alloc,compiler_builtins \
               -Z build-std-features=compiler-builtins-mem \
               --target aarch64-unknown-none
 
-# Extra arguments forwarded to Verus (placed after `--`). Verus proofs can be
-# sensitive to the SMT solver's search order, which is not identical across
-# platforms, so a proof that verifies elsewhere may fail here. Such a proof
-# usually discharges under a different random seed:
-#   make SMT_OPTS="--smt-option smt.random_seed=7"
-# `?=` so an exported SMT_OPTS is honored too (a plain `=` would override the
-# environment):
-#   export SMT_OPTS="--smt-option smt.random_seed=7"
-# This applies to dependency crates too (e.g. vstd), which are verified from
-# source on a clean build.
-SMT_OPTS ?=
+# Extra arguments forwarded to Verus (placed after `--`), for every
+# cargo-verus target below. These apply to dependency crates too -- notably
+# vstd, which is verified from source on a clean build, so its proofs must
+# discharge under these settings as well as our own.
+#
+# --rlimit 100
+#   Verus' SMT resource limit for a function body check. Its default of 10
+#   is not enough here. 100 is an order-of-magnitude bump that stays inside
+#   the range Verus itself uses on its heavier projects.
+#
+# --smt-option smt.random_seed=7
+#   7 is arbitrary. Z3's default seed is 0, and 0 is the one value at which
+#   vstd's GhostSubseq::agree_map (resource/impls/seq.rs) fails its
+#   postcondition; seeds 1, 2, 3, 7 and 42 all discharge it. The point is to
+#   be off the default and identical on every machine, not this number.
+SMT_OPTS ?= --rlimit 100 --smt-option smt.random_seed=7
 
 all: build-verus-release
 

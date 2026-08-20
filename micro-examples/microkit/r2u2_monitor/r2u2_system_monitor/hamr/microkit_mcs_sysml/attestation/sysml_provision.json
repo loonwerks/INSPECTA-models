@@ -19,8 +19,6 @@
           "%%codegen_dir%%/types/include/sb_event_counter.h",
           "%%codegen_dir%%/types/include/sb_queue_int32_t_1.h",
           "%%codegen_dir%%/types/src/sb_queue_int32_t_1.c",
-          "%%codegen_dir%%/types/include/sb_queue_int32_t_1.h",
-          "%%codegen_dir%%/types/src/sb_queue_int32_t_1.c",
           "%%codegen_dir%%/types/include/sb_queue_bool_1.h",
           "%%codegen_dir%%/types/src/sb_queue_bool_1.c",
           "%%codegen_dir%%/types/include/sb_types.h",
