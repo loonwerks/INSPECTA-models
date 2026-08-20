@@ -49,7 +49,10 @@ verus! {
         // PLACEHOLDER MARKER TIME TRIGGERED ENSURES
     {
       let sample = api.get_sample();
-      log_info("compute entrypoint invoked");
+      match sample {
+        Some(value) => log_info("Received sample"),
+        None => log_info("No sample received this dispatch"),
+      }
     }
 
     pub fn notify(
