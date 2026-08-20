@@ -56,7 +56,6 @@ pub extern "C" fn monitor_process_monitor_thread_initialize() {
 pub extern "C" fn monitor_process_monitor_thread_timeTriggered() {
   unsafe {
     if let Some(_app) = app.as_mut() {
-      // R2U2 observes inputs before the component computes and outputs afterward.
       _app.pre_timeTriggered(&compute_api);
       _app.timeTriggered(&mut compute_api);
       _app.post_timeTriggered(&mut compute_api);
