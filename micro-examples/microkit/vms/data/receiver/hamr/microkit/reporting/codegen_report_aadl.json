@@ -207,7 +207,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-vmR-data-ports-base-type\/vmR_data.aadl"
+                        "value" : "..\/..\/aadl\/vmR_data.aadl"
                       },
                       "beginLine" : 35,
                       "beginColumn" : 4,
@@ -354,7 +354,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-vmR-data-ports-base-type\/vmR_data.aadl"
+                        "value" : "..\/..\/aadl\/vmR_data.aadl"
                       },
                       "beginLine" : 66,
                       "beginColumn" : 4,

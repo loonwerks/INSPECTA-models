@@ -290,7 +290,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
+                        "value" : "..\/..\/aadl\/test_data_port_periodic_three_domains.aadl"
                       },
                       "beginLine" : 37,
                       "beginColumn" : 4,
@@ -437,7 +437,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
+                        "value" : "..\/..\/aadl\/test_data_port_periodic_three_domains.aadl"
                       },
                       "beginLine" : 72,
                       "beginColumn" : 4,
@@ -675,7 +675,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
+                        "value" : "..\/..\/aadl\/test_data_port_periodic_three_domains.aadl"
                       },
                       "beginLine" : 107,
                       "beginColumn" : 4,

@@ -46,9 +46,6 @@ val toKeep = ISZ(
   KeepPattern("tests.rs"), // any file ending in tests.rs
 
   KeepPattern(".gitignore"),
-
-  KeepPattern("attestation"), // attestation files
-  KeepPattern("reporting"), // reporting files
 )
 
 @pure def keep(f: Os.Path): B = {

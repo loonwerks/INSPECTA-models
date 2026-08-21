@@ -540,7 +540,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/firewall-simple-byte-array\/SW.aadl"
+                        "value" : "..\/..\/aadl\/SW.aadl"
                       },
                       "beginLine" : 300,
                       "beginColumn" : 7,
@@ -975,7 +975,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/firewall-simple-byte-array\/SW.aadl"
+                        "value" : "..\/..\/aadl\/SW.aadl"
                       },
                       "beginLine" : 266,
                       "beginColumn" : 7,
@@ -2765,7 +2765,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/firewall-simple-byte-array\/SW.aadl"
+                        "value" : "..\/..\/aadl\/SW.aadl"
                       },
                       "beginLine" : 54,
                       "beginColumn" : 7,

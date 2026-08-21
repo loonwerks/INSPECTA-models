@@ -530,7 +530,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-aadl-datatypes\/Aadl_Datatypes_System.aadl"
+                        "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                       },
                       "beginLine" : 145,
                       "beginColumn" : 7,
@@ -2042,7 +2042,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-aadl-datatypes\/Aadl_Datatypes_System.aadl"
+                        "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                       },
                       "beginLine" : 231,
                       "beginColumn" : 7,

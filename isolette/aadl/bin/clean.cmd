@@ -49,9 +49,6 @@ val toKeep = ISZ(
   KeepPath(slangDir / "src" / "main" / "component"),
   KeepPath(slangDir / "src" / "test" / "bridge"),
   KeepPath(slangDir / "src" / "test" / "system"),
-  
-  KeepPattern("attestation"), // attestation files
-  KeepPattern("reporting"), // reporting files
 
   KeepPattern(".md"), // readmes
 

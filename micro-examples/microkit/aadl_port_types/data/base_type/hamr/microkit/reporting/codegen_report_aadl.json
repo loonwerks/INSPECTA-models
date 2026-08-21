@@ -290,7 +290,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons_base_type.aadl"
+                        "value" : "..\/..\/aadl\/data_1_prod_2_cons_base_type.aadl"
                       },
                       "beginLine" : 35,
                       "beginColumn" : 4,
@@ -437,7 +437,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons_base_type.aadl"
+                        "value" : "..\/..\/aadl\/data_1_prod_2_cons_base_type.aadl"
                       },
                       "beginLine" : 66,
                       "beginColumn" : 4,
@@ -584,7 +584,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons_base_type.aadl"
+                        "value" : "..\/..\/aadl\/data_1_prod_2_cons_base_type.aadl"
                       },
                       "beginLine" : 83,
                       "beginColumn" : 4,

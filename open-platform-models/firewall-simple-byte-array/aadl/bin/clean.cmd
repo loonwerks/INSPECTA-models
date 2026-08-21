@@ -50,9 +50,6 @@ val toKeep = ISZ(
 
   KeepPattern("src/test/mod.rs"), // keep any user additions
   KeepPattern("tests.rs"), // any file ending in tests.rs
-
-  KeepPattern("attestation"), // attestation files
-  KeepPattern("reporting"), // reporting files
 )
 
 @pure def keep(f: Os.Path): B = {

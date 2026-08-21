@@ -46,9 +46,6 @@ val toKeep = ISZ(
 
   KeepPattern(".gitignore"),
   KeepPattern("src/main/component"),
-
-  KeepPattern("attestation"), // attestation files
-  KeepPattern("reporting"), // reporting files
 )
 
 @pure def keep(f: Os.Path): B = {

@@ -505,7 +505,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/Gumbo_Structs_Arrays.sysml"
+                        "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
                       },
                       "beginLine" : 90,
                       "beginColumn" : 8,
@@ -1809,7 +1809,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/Gumbo_Structs_Arrays.sysml"
+                        "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
                       },
                       "beginLine" : 134,
                       "beginColumn" : 8,

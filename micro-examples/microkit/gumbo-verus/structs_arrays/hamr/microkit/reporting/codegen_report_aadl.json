@@ -495,7 +495,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-gumbo-verus-structs-arrays\/Gumbo_Structs_Arrays.aadl"
+                        "value" : "..\/..\/aadl\/Gumbo_Structs_Arrays.aadl"
                       },
                       "beginLine" : 126,
                       "beginColumn" : 7,
@@ -930,7 +930,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-gumbo-verus-structs-arrays\/Gumbo_Structs_Arrays.aadl"
+                        "value" : "..\/..\/aadl\/Gumbo_Structs_Arrays.aadl"
                       },
                       "beginLine" : 144,
                       "beginColumn" : 7,

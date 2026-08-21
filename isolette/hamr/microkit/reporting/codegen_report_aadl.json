@@ -2031,7 +2031,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Regulate.aadl"
+                        "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                       },
                       "beginLine" : 140,
                       "beginColumn" : 4,
@@ -4204,7 +4204,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Regulate.aadl"
+                        "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                       },
                       "beginLine" : 491,
                       "beginColumn" : 4,
@@ -5613,7 +5613,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Regulate.aadl"
+                        "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                       },
                       "beginLine" : 337,
                       "beginColumn" : 4,
@@ -6827,7 +6827,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Regulate.aadl"
+                        "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                       },
                       "beginLine" : 611,
                       "beginColumn" : 4,
@@ -7108,7 +7108,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Monitor.aadl"
+                        "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                       },
                       "beginLine" : 130,
                       "beginColumn" : 4,
@@ -9101,7 +9101,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Monitor.aadl"
+                        "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                       },
                       "beginLine" : 438,
                       "beginColumn" : 4,
@@ -10526,7 +10526,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Monitor.aadl"
+                        "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                       },
                       "beginLine" : 296,
                       "beginColumn" : 4,
@@ -11724,7 +11724,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Monitor.aadl"
+                        "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                       },
                       "beginLine" : 586,
                       "beginColumn" : 4,
@@ -12005,7 +12005,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Operator_Interface.aadl"
+                        "value" : "..\/..\/aadl\/aadl\/packages\/Operator_Interface.aadl"
                       },
                       "beginLine" : 82,
                       "beginColumn" : 4,
@@ -13710,7 +13710,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Devices.aadl"
+                        "value" : "..\/..\/aadl\/aadl\/packages\/Devices.aadl"
                       },
                       "beginLine" : 80,
                       "beginColumn" : 4,
@@ -13948,7 +13948,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Devices.aadl"
+                        "value" : "..\/..\/aadl\/aadl\/packages\/Devices.aadl"
                       },
                       "beginLine" : 124,
                       "beginColumn" : 4,

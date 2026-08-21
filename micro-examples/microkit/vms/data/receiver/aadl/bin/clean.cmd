@@ -52,9 +52,6 @@ val toKeep = ISZ(
 
   KeepPath(microkitDir / "components" / "consumer_p_p_consumer" / "libvmm"),
   KeepPath(microkitDir / "components" / "consumer_p_p_consumer" / "board"),
-
-  KeepPattern("attestation"), // attestation files
-  KeepPattern("reporting"), // reporting files
 )
 
 @pure def keep(f: Os.Path): B = {

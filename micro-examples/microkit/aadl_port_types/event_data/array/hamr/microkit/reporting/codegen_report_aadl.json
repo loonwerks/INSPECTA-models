@@ -325,7 +325,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-event-data-ports-array\/event_data_2_prod_2_cons_array.aadl"
+                        "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_array.aadl"
                       },
                       "beginLine" : 56,
                       "beginColumn" : 4,
@@ -472,7 +472,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-event-data-ports-array\/event_data_2_prod_2_cons_array.aadl"
+                        "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_array.aadl"
                       },
                       "beginLine" : 75,
                       "beginColumn" : 4,
@@ -619,7 +619,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-event-data-ports-array\/event_data_2_prod_2_cons_array.aadl"
+                        "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_array.aadl"
                       },
                       "beginLine" : 109,
                       "beginColumn" : 4,
@@ -857,7 +857,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-event-data-ports-array\/event_data_2_prod_2_cons_array.aadl"
+                        "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_array.aadl"
                       },
                       "beginLine" : 127,
                       "beginColumn" : 4,

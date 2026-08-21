@@ -584,7 +584,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/isolate-ethernet-simple\/SW.aadl"
+                        "value" : "..\/..\/aadl\/SW.aadl"
                       },
                       "beginLine" : 212,
                       "beginColumn" : 4,
@@ -1028,7 +1028,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/isolate-ethernet-simple\/SW.aadl"
+                        "value" : "..\/..\/aadl\/SW.aadl"
                       },
                       "beginLine" : 178,
                       "beginColumn" : 4,
@@ -2466,7 +2466,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/isolate-ethernet-simple\/SW.aadl"
+                        "value" : "..\/..\/aadl\/SW.aadl"
                       },
                       "beginLine" : 84,
                       "beginColumn" : 4,

@@ -345,7 +345,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-array\/event_data_array_port_queues.aadl"
+                        "value" : "..\/..\/aadl\/event_data_array_port_queues.aadl"
                       },
                       "beginLine" : 50,
                       "beginColumn" : 4,
@@ -492,7 +492,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-array\/event_data_array_port_queues.aadl"
+                        "value" : "..\/..\/aadl\/event_data_array_port_queues.aadl"
                       },
                       "beginLine" : 78,
                       "beginColumn" : 4,
@@ -639,7 +639,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-array\/event_data_array_port_queues.aadl"
+                        "value" : "..\/..\/aadl\/event_data_array_port_queues.aadl"
                       },
                       "beginLine" : 102,
                       "beginColumn" : 4,
@@ -786,7 +786,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-array\/event_data_array_port_queues.aadl"
+                        "value" : "..\/..\/aadl\/event_data_array_port_queues.aadl"
                       },
                       "beginLine" : 126,
                       "beginColumn" : 4,
