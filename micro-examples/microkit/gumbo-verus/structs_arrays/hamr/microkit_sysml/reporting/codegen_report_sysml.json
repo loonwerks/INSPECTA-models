@@ -505,7 +505,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                        "value" : "\/Gumbo_Structs_Arrays.sysml"
                       },
                       "beginLine" : 90,
                       "beginColumn" : 8,
@@ -1809,7 +1809,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                        "value" : "\/Gumbo_Structs_Arrays.sysml"
                       },
                       "beginLine" : 134,
                       "beginColumn" : 8,

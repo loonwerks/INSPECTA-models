@@ -28,11 +28,13 @@ _provers_launch() {
 }
 
 # macOS installs each IDE as an .app bundle, which is launched through 'open'
-# rather than by executing a file: -n so that asking for a second project opens
-# a second instance instead of raising the running one, and -a because the
-# directory is an argument to the application, not the thing being opened.
-# 'open' returns immediately, so unlike the Linux path there is nothing to
-# background.
+# rather than by executing a file.  The directory is passed as a document for
+# 'open' to hand to the application, which is what resolves a relative path such
+# as the '.' in 'codium .': the application itself is started with / as its
+# working directory, so anything reaching it as a plain argument -- which is
+# what 'open -n ... --args' does -- is resolved against / and the IDE opens the
+# whole file system.  'open' returns immediately, so unlike the Linux path there
+# is nothing to background.
 _provers_launch_app() {
   local what=$1; shift
   local app=$1; shift
@@ -41,7 +43,7 @@ _provers_launch_app() {
     echo "${what} is not installed (${app} not found)" >&2
     return 1
   fi
-  open -na "${app}" --args "${dir}"
+  open -a "${app}" "${dir}"
 }
 
 ive() {

@@ -134,9 +134,11 @@ fmide                  # FMIDE on $PWD
 
 They resolve the right path for the host (`bin/linux`, `bin/linux/arm` or
 `bin/mac`) and background the process so the terminal stays usable.  On macOS
-they launch the `.app` bundle through `open -na`, which opens a second instance
-rather than raising the running one, so `ive ~/a` and `ive ~/b` give you two
-windows as they do on Linux.
+they hand the directory to `open` as a document for the `.app` bundle, so `ive
+~/a` and `ive ~/b` give you two windows as they do on Linux.  Passing it to the
+application instead, as `open -n ... --args` does, does not work: `open` starts
+the application with `/` as its working directory, so a relative path -- the `.`
+in `codium .` -- resolves to the root of the file system.
 
 ### Choosing the IDEs
 
