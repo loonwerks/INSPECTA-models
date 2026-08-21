@@ -307,8 +307,8 @@ one only to reproduce something against the environment it was built for.
 
 * [Vagrant](https://www.vagrantup.com/) 2.4 or above
 
-* ~60 GB free disk and a few hours (the Sireum/IVE build, Rust and TeX Live
-  dominate, plus Z3 and Verus on aarch64)
+* ~60 GB free disk and a few hours (the Sireum/IVE build and Rust dominate,
+  plus Z3 and Verus on aarch64)
 
 The [Vagrantfile](Vagrantfile) selects the box architecture from the host, so
 no configuration is needed either way; `PROVERS_ARCH` overrides it if you have
@@ -605,9 +605,9 @@ deleting that directory.  Outside it, the setup:
 
 * installs Homebrew formulae: `llvm`, `lld`, `dtc`, `make`, `wget`, `git`,
   `python@3.12`, `qemu`, and -- unless `PROVERS_DEPS_PROFILE=runtime` -- `cmake`,
-  `ninja`, `pandoc`, `autoconf`, `automake`, `riscv64-elf-gcc`.  TeX Live is
-  *not* installed; the Linux side pulls it in for the VM image, but on a Mac
-  that is the ~6 GB `mactex` cask and nothing here needs it
+  `autoconf`, `automake`.  TeX Live is *not* installed, on either host: it was
+  needed when the Microkit SDK was built from source, which built its manual,
+  and only the `microkit` tool is built now
 
 * installs `rustup` and the pinned toolchain into `~/.cargo`, and makes that
   toolchain the rustup default.  On a machine with its own Rust work, skip that

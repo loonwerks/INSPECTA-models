@@ -74,15 +74,15 @@ if [ "${PROVERS_OS}" = "darwin" ]; then
   # Needed only while building the tools.
   if [ "${PROVERS_DEPS_PROFILE}" != "runtime" ]; then
     BREW_PKGS+=(
-      cmake ninja pandoc
+      cmake
       # Sireum's Init.deps() -- which 'sireum setup ive' and 'setup vscode' both
       # run -- runs autoconf and ./configure in a verilator checkout to get its
-      # headers.  Without these it reports "Cannot install Verilator" from
-      # inside a shutdown hook, so the install still exits 0 and the failure is
-      # easy to miss.  (Only configure runs, so the rest of the GNU build chain
-      # the apt side installs -- flex, bison, help2man -- is not needed.)
+      # headers, and then downloads a prebuilt verilator rather than making one.
+      # Without these it reports "Cannot install Verilator" from inside a
+      # shutdown hook, so the install still exits 0 and the failure is easy to
+      # miss.  Nothing runs verilator's own build, so the rest of the GNU chain
+      # -- flex, bison, help2man -- is not needed on either host.
       autoconf automake
-      riscv64-elf-gcc
     )
   fi
 
@@ -92,9 +92,11 @@ if [ "${PROVERS_OS}" = "darwin" ]; then
   # script re-runnable.
   brew install "${BREW_PKGS[@]}"
 
-  # TeX Live is not installed.  The apt side pulls it in for the VM image; on a
-  # Mac it is the ~6GB mactex cask and nothing in this environment needs it, so
-  # it is left to whoever does:  brew install --cask mactex-no-gui
+  # TeX Live is not installed, and neither host installs it any more: it was
+  # needed to build the Microkit SDK from source, which built the SDK manual,
+  # and only the `microkit` tool is built now.  On a Mac it is the ~6GB mactex
+  # cask, so it is left to whoever does want it:
+  #   brew install --cask mactex-no-gui
 
   set +x
   # The acceptance test for this script: every tool the generated makefiles name
@@ -150,8 +152,10 @@ PKGS=(
   clang llvm lld device-tree-compiler
   libxml2-utils
   curl wget git
-  python3.12 python3-pip python3.12-venv
-  qemu-system-arm qemu-system-misc
+  python3.12 python3.12-venv
+  # qemu-system-arm is what supplies qemu-system-aarch64, which the generated
+  # makefiles name; the other architectures are not built for.
+  qemu-system-arm
   # Sireum's own bootstrap (bin/init.sh) needs unzip or 7z to unpack what it
   # downloads, so this belongs in every profile: without it a container cannot
   # re-run 'sireum --init', let alone a full Sireum install.
@@ -160,16 +164,14 @@ PKGS=(
 # Needed only while building the tools.
 if [ "${PROVERS_DEPS_PROFILE}" != "runtime" ]; then
   PKGS+=(
-    software-properties-common
-    gcc-riscv64-unknown-elf
-    cmake pandoc ninja-build
+    cmake
     # Sireum's Init.deps() -- which 'sireum setup ive' and 'setup vscode' both
-    # run -- builds verilator from source for Anvil.  Without these it fails
-    # with 'Cannot run program "autoconf"' from inside a shutdown hook, so the
-    # install still exits 0 and the failure is easy to miss.
-    autoconf flex bison help2man
-    texlive-latex-base texlive-latex-recommended
-    texlive-fonts-recommended texlive-fonts-extra
+    # run -- runs autoconf and ./configure in a verilator checkout to get its
+    # headers, and then downloads a prebuilt verilator rather than making one.
+    # Without this it fails with 'Cannot run program "autoconf"' from inside a
+    # shutdown hook, so the install still exits 0 and the failure is easy to
+    # miss.
+    autoconf
   )
 fi
 
