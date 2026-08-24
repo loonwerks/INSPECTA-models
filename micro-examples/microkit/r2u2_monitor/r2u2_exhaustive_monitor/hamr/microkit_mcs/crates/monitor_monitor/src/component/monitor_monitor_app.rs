@@ -3,9 +3,6 @@
 use data::*;
 use crate::bridge::monitor_monitor_api::*;
 use vstd::prelude::*;
-// BEGIN MARKER R2U2 MONITOR IMPORT
-use super::r2u2_monitor::*;
-// END MARKER R2U2 MONITOR IMPORT
 
 verus! {
 
@@ -13,9 +10,6 @@ verus! {
     // BEGIN MARKER STATE VARS
     pub sprevious_level: i32,
     // END MARKER STATE VARS
-    // BEGIN MARKER R2U2 MONITOR STATE VAR
-    pub r2u2_monitor: R2U2Monitor,
-    // END MARKER R2U2 MONITOR STATE VAR
   }
 
   impl monitor_monitor {
@@ -25,9 +19,6 @@ verus! {
         // BEGIN MARKER STATE VAR INIT
         sprevious_level: 0,
         // END MARKER STATE VAR INIT
-        // BEGIN MARKER R2U2 MONITOR STATE VAR INIT
-        r2u2_monitor: default_r2u2_monitor(),
-        // END MARKER R2U2 MONITOR STATE VAR INIT
       }
     }
 
@@ -37,10 +28,6 @@ verus! {
       ensures
         // PLACEHOLDER MARKER INITIALIZATION ENSURES
     {
-      // BEGIN MARKER R2U2 MONITOR INITIALIZE
-      load_spec(&mut self.r2u2_monitor);
-      // END MARKER R2U2 MONITOR INITIALIZE
-
       log_info("initialize entrypoint invoked");
     }
 
