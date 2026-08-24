@@ -1,0 +1,135 @@
+name: hamr-codegen-mac
+
+# The counterpart of ci-hamr-linux.yml on the other host provers-setup.sh
+# supports.
+# macOS is where the install scripts diverge most -- Homebrew rather than apt,
+# clang/lld and Homebrew's GNU make rather than the system ones, and Verus, Z3
+# and sdfgen unpacked from arm64 releases rather than built -- so it is the
+# second host that keeps bin/ honest, not a duplicate of the first.
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'micro-examples/**'
+      - 'isolette/**'
+      - 'open-platform-models/isolate-ethernet-simple/**'
+      # the environment the models are built against, installed onto the runner
+      # by ci-hamr-linux.yml and ci-hamr-mac.yml straight from this checkout
+      - 'provers-env/**'
+  schedule:
+    - cron: "0 2 * * 6" # every sunday at 2am
+
+jobs:
+  ci:
+    # macos-latest is Apple Silicon, which is what provers-setup.sh supports;
+    # the Intel runners fall out of the same derivation in bin/versions.sh but
+    # are not tested.
+    runs-on: macos-latest
+    name: hamr-codegen-mac
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: INSPECTA-models
+          submodules: recursive
+          ref: main
+          fetch-depth: 1
+          fetch-tags: false
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: Sireum
+          repository: sireum/kekinian
+          submodules: recursive
+          ref: master
+          fetch-depth: 1
+          fetch-tags: false
+      - name: Cache Java
+        id: cache-java
+        uses: actions/cache@v4
+        with:
+          path: Sireum/bin/mac/java
+          key: ${{ runner.os }}-${{ hashFiles('Sireum/versions.properties') }}-java
+      - name: Cache Scala
+        id: cache-scala
+        uses: actions/cache@v4
+        with:
+          path: Sireum/bin/scala
+          key: ${{ runner.os }}-${{ hashFiles('Sireum/versions.properties') }}-scala
+      - name: Cache Coursier
+        id: cache-coursier
+        uses: actions/cache@v4
+        with:
+          path: cache/coursier
+          key: ${{ runner.os }}-${{ hashFiles('Sireum/versions.properties') }}-coursier
+      - name: Cache SMT2 solvers
+        id: cache-smt2
+        uses: actions/cache@v4
+        with:
+          path: |
+            Sireum/bin/mac/cvc
+            Sireum/bin/mac/.cvc.ver
+            Sireum/bin/mac/cvc5
+            Sireum/bin/mac/.cvc5.ver
+            Sireum/bin/mac/z3
+          key: ${{ runner.os }}-${{ hashFiles('Sireum/versions.properties') }}-smt2
+      - name: Cache FMIDE
+        id: cache-fmide
+        uses: actions/cache@v4
+        with:
+          path: Sireum/bin/mac/fmide.app
+          key: ${{ runner.os }}-${{ hashFiles('Sireum/bin/install/fmide*') }}-fmide
+      - name: Install the PROVERS environment
+        shell: bash
+        run: |
+          # provers-env adopts an existing Sireum rather than installing the one
+          # it pins: bin/sireum.sh sees SIREUM_HOME already set and leaves that
+          # tree alone, so Verus, the Microkit SDK, LionsOS and sdfgen are
+          # installed around the kekinian checked out above -- which is the
+          # Sireum this build is meant to test -- and the Build step below is
+          # what bootstraps it.
+          export SIREUM_HOME=$GITHUB_WORKSPACE/Sireum
+          bash INSPECTA-models/provers-env/provers-setup.sh
+      - name: Build
+        shell: bash
+        run: |
+          rm -rf INSPECTA-models/.git # free up disk space
+
+          export COURSIER_CACHE=$GITHUB_WORKSPACE/cache/coursier
+
+          # provers-setup.sh wires the environment into the shell startup file,
+          # which the non-interactive shell a workflow step runs in never reads,
+          # so it is sourced here instead.  SIREUM_HOME is exported first for the
+          # same reason as in the step above: env.sh keeps the one it is given
+          # and would otherwise name ${PROVERS_DIR}/Sireum.  It is env.sh that
+          # supplies MICROKIT_SDK, MICROKIT_BOARD and LIONSOS -- without which
+          # each project's ci.cmd skips its `make` and the images never get
+          # built -- and that puts Homebrew's GNU make and keg-only llvm ahead of
+          # the system ones, which is what the generated makefiles are written
+          # for.
+          export SIREUM_HOME=$GITHUB_WORKSPACE/Sireum
+          export PROVERS_BIN_DIR=$GITHUB_WORKSPACE/INSPECTA-models/provers-env/bin
+          . ${PROVERS_BIN_DIR}/env.sh
+
+          ${SIREUM_HOME}/bin/build.cmd setup
+          rm -rf ${SIREUM_HOME}/.git
+          rm -rf ${SIREUM_HOME}/out
+
+          export JAVA_HOME=$SIREUM_HOME/bin/mac/java
+          export PATH=$JAVA_HOME/bin:$PATH
+
+          sireum -v
+
+          ${SIREUM_HOME}/bin/install/fmide.cmd -v
+
+          git clone --depth 1 https://github.com/santoslab/sysml-aadl-libraries.git sysml-aadl-libraries
+          # Remove .git to save space and to prevent actions/checkout post-job
+          # cleanup from mistaking this for a submodule (which causes a fatal
+          # error since there is no .gitmodules entry for it)
+          rm -rf sysml-aadl-libraries/.git
+          export SYSML_AADL_LIBRARIES=$(pwd)/sysml-aadl-libraries
+
+          INSPECTA-models/.github/workflows/hamr/hamr-ci.cmd

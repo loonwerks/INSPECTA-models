@@ -1,6 +1,20 @@
-name: HAMR-codegen
+name: hamr-codegen-docker
 
-on: 
+# The build inside the published container.  Every tool it builds against --
+# Verus, the Microkit SDK, LionsOS, sdfgen, Rust -- is the version baked into
+# jasonbelt/microkit_provers when that image was last published, not whatever
+# provers-env/bin/versions.sh pins today; the image is rebuilt and pushed as its
+# own step.  Sireum is the one exception: the image's copy is discarded and
+# kekinian is checked out at the current master tip and built, so what this
+# tests is today's codegen against a fixed environment.
+#
+# Which is why provers-env/** is not among the triggers -- a change to it cannot
+# reach this job.  ci-hamr-linux.yml and ci-hamr-mac.yml install the environment
+# from provers-env/provers-setup.sh onto the runner instead, so they are what
+# tests the scripts, and running both is what keeps the two deliveries of one
+# environment from drifting apart.
+
+on:
   workflow_dispatch:
   push:
     branches:
@@ -11,7 +25,7 @@ on:
       - 'open-platform-models/isolate-ethernet-simple/**'
   schedule:
     - cron: "0 2 * * 6" # every sunday at 2am
-    
+
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -20,7 +34,7 @@ jobs:
       credentials:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    name: HAMR-codegen
+    name: hamr-codegen-docker
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -75,7 +89,7 @@ jobs:
           # Microkit 2.3.0 SDK.
           source ${HOME}/bin/env.sh
           
-          rm -rf ${PROVERS_DIR}/Sireum # remove bootstrap version
+          rm -rf ${PROVERS_DIR}/Sireum # the master checkout below replaces it
           export SIREUM_HOME=$(pwd)/Sireum
           export PATH=${SIREUM_HOME}/bin:${PATH}
 
