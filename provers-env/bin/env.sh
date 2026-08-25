@@ -198,9 +198,20 @@ export SIREUM_HOME MICROKIT_SDK MICROKIT_BOARD LIONSOS
 
 # Prepend the tool directories only once so that repeated sourcing (e.g. nested
 # shells) does not keep growing PATH.
+#
+# The sdfgen venv goes first, ahead of ${_PROVERS_OS_PATH}.  A user-land system's
+# meta.py is run as `python3` -- system.mk defaults PYTHON to it -- and imports
+# sdfgen, which is installed into that venv and nowhere else.  On macOS
+# _PROVERS_OS_PATH carries ${HOMEBREW_PREFIX}/bin, where deps.sh's python@3.12
+# also puts a python3, so a venv placed after it never got to answer and the
+# build died with "ModuleNotFoundError: No module named 'sdfgen'".  Linux never
+# saw this: _PROVERS_OS_PATH is empty there, so the venv already won.
+#
+# Going first costs nothing else: the venv holds python and pip and no other
+# tool, so nothing Homebrew provides is shadowed by it.
 case ":${PATH}:" in
   *":${VERUS_DIR}:"*) ;;
-  *) export PATH="${_PROVERS_OS_PATH}${VERUS_DIR}:${SIREUM_HOME}/bin:${SDFGEN_VENV}/bin:${HOME}/.cargo/bin:${PATH}" ;;
+  *) export PATH="${SDFGEN_VENV}/bin:${_PROVERS_OS_PATH}${VERUS_DIR}:${SIREUM_HOME}/bin:${HOME}/.cargo/bin:${PATH}" ;;
 esac
 
 unset _PROVERS_BIN_DIR _PROVERS_OS_PATH
