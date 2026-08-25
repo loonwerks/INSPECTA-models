@@ -57,7 +57,8 @@
 #
 # SIREUM_V may name a release, or a commit or branch, and bin/sireum.sh tells
 # them apart by asking whether a release of that name publishes an install.cmd.
-# The difference is an hour of wall clock:
+# Both are quick; the difference is minutes rather than the hour a full toolchain
+# build would suggest, since only Sireum itself is built:
 #
 #   4.20260810.80aad0c2  a numbered release: its `cli` distribution is
 #                        unpacked, about a minute, and it is reproducible
@@ -66,7 +67,9 @@
 #                        run weeks apart get different Sireums.  For tracking
 #                        the tip deliberately, not for a pin
 #   e8f69b3d... / master a commit or branch: no release exists, so kekinian is
-#                        cloned and built from source
+#                        cloned and built from source -- around ten minutes on
+#                        recent hardware, for the jar and the IVE distribution
+#                        together, and more on a slower machine
 #
 # So prefer a numbered release unless the environment needs a revision newer
 # than the last one -- which is the situation this pin is in today.

@@ -542,8 +542,8 @@ filesystem, a fixed appliance to hand out, or isolation from your own machine).
   and makes lasting changes to the machine, which is your call rather than a
   setup script's
 
-* ~30 GB free disk, and an hour or two -- dominated by the Sireum build, which
-  you can skip entirely if you already have Sireum (see below)
+* ~30 GB free disk, and about a quarter of an hour -- dominated by the Sireum
+  build, which you can skip entirely if you already have Sireum (see below)
 
 ### Steps
 
@@ -742,7 +742,7 @@ them apart by asking whether a release of that name publishes an `install.cmd`:
 | --- | --- | --- |
 | a numbered release, e.g. `4.20260810.80aad0c2` | its `cli` distribution is unpacked, by running the release's own `install.cmd` with `DISTRO=cli` and `DIR=$SIREUM_HOME` | ~1 minute |
 | `dev` | the same, since `dev` is a real release -- but a *moving* one, re-cut as kekinian advances, so it tracks the tip rather than pinning anything | ~1 minute |
-| a commit or branch, e.g. `e8f69b3d...` or `master` | kekinian is cloned at it and built | ~an hour |
+| a commit or branch, e.g. `e8f69b3d...` or `master` | kekinian is cloned at it and built | ~10 minutes |
 
 `PROVERS_SIREUM_FROM_SOURCE` overrides the choice -- `true` builds from source
 even for a release, `false` refuses rather than falling back to a source build.

@@ -11,7 +11,7 @@
 #            release this unpacks that release's `cli` distribution, which takes
 #            a couple of minutes; where it names a commit there is nothing to
 #            unpack, so kekinian is cloned at that commit and built, which takes
-#            the better part of an hour.  See "release or source" below.
+#            around ten minutes.  See "release or source" below.
 #   minimal  fetch the prebuilt sireum.jar for that revision, which is enough
 #            to run Slang (.cmd) scripts and HAMR codegen but cannot rebuild
 #            Sireum itself -- what the container wants
