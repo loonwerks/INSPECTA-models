@@ -23,6 +23,9 @@ on:
       - 'micro-examples/**'
       - 'isolette/**'
       - 'open-platform-models/isolate-ethernet-simple/**'
+      # the environment the models are built against, installed onto the runner
+      # by ci-hamr-linux.yml and ci-hamr-mac.yml straight from this checkout
+      - 'provers-env/**'
   schedule:
     - cron: "0 2 * * 6" # every sunday at 2am
 
