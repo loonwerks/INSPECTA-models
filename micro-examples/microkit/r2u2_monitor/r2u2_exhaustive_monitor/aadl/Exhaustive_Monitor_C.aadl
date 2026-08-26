@@ -1,0 +1,502 @@
+-- Coverage model for the GUMBO monitor-to-C2PO/R2U2 translation.
+--
+-- The guarantees are intentionally independent.  They are a code-generation
+-- test matrix, not a claim that every guarantee can hold simultaneously.
+package Exhaustive_Monitor_C
+public
+  with Base_Types;
+  with CASE_Scheduling;
+  with Data_Model;
+  with HAMR;
+
+  -- Representative complex payloads accepted by GUMBO.
+  data OperatingState
+    properties
+      Data_Model::Data_Representation => Enum;
+      Data_Model::Enumerators => ("Idle", "Active", "Fault");
+  end OperatingState;
+
+  data Samples
+    properties
+      Data_Model::Data_Representation => Array;
+      Data_Model::Base_Type => (classifier (Base_Types::Integer_32));
+      Data_Model::Dimension => (4);
+      Data_Size => 16 Bytes;
+      HAMR::Array_Size_Kind => Fixed;
+  end Samples;
+
+  data Telemetry
+    properties
+      Data_Model::Data_Representation => Struct;
+  end Telemetry;
+
+  data implementation Telemetry.i
+    subcomponents
+      sequence_number : data Base_Types::Integer_32;
+      valid    : data Base_Types::Boolean;
+      operating_state : data OperatingState;
+      values   : data Samples;
+  end Telemetry.i;
+
+  data TelemetryHistory
+    properties
+      Data_Model::Data_Representation => Array;
+      Data_Model::Base_Type => (classifier (Telemetry.i));
+      Data_Model::Dimension => (2);
+      Data_Size => 64 Bytes;
+      HAMR::Array_Size_Kind => Fixed;
+  end TelemetryHistory;
+
+  data NestedTelemetry
+    properties
+      Data_Model::Data_Representation => Struct;
+  end NestedTelemetry;
+
+  data implementation NestedTelemetry.i
+    subcomponents
+      latest  : data Telemetry.i;
+      history : data TelemetryHistory;
+  end NestedTelemetry.i;
+
+  system Sys
+  end Sys;
+
+  system implementation Sys.i
+    subcomponents
+      producer : process ProducerProc.i;
+      monitor : process MonitorProc.i;
+      consumer : process ConsumerProc.i;
+      cpu     : processor MicrokitProcessor;
+    connections
+      pulse_connection     : port producer.pulse -> monitor.pulse;
+      sample_connection    : port producer.sample -> monitor.sample;
+      level_connection     : port producer.level -> monitor.level;
+      flag_connection      : port producer.flag -> monitor.flag;
+      boolean_connection   : port producer.boolean_value -> monitor.boolean_value;
+      character_connection : port producer.character_value -> monitor.character_value;
+      signed_8_connection  : port producer.signed_8_value -> monitor.signed_8_value;
+      signed_16_connection : port producer.signed_16_value -> monitor.signed_16_value;
+      unsigned_8_connection  : port producer.unsigned_8_value -> monitor.unsigned_8_value;
+      unsigned_16_connection : port producer.unsigned_16_value -> monitor.unsigned_16_value;
+      state_connection     : port producer.operating_state -> monitor.operating_state;
+      samples_connection   : port producer.samples -> monitor.samples;
+      telemetry_connection : port producer.telemetry -> monitor.telemetry;
+
+      ack_connection       : port monitor.ack -> consumer.ack;
+      echo_connection      : port monitor.echo -> consumer.echo;
+      alert_result_connection : port monitor.alert_result -> consumer.alert_result;
+      healthy_connection   : port monitor.healthy -> consumer.healthy;
+    properties
+      Actual_Processor_Binding => (reference (cpu)) applies to producer, monitor, consumer;
+  end Sys.i;
+
+  processor MicrokitProcessor
+    properties
+      Frame_Period => 1000 ms;
+      Clock_Period => 1 ms;
+  end MicrokitProcessor;
+
+  -- Produces every incoming signal category used by the monitor.
+  process ProducerProc
+    features
+      pulse     : out event port;
+      sample    : out event data port Base_Types::Integer_32;
+      level     : out data port Base_Types::Integer_32;
+      flag      : out event data port Base_Types::Boolean;
+      boolean_value   : out data port Base_Types::Boolean;
+      character_value : out data port Base_Types::Character;
+      signed_8_value  : out data port Base_Types::Integer_8;
+      signed_16_value : out data port Base_Types::Integer_16;
+      unsigned_8_value  : out data port Base_Types::Unsigned_8;
+      unsigned_16_value : out data port Base_Types::Unsigned_16;
+      operating_state : out event data port OperatingState;
+      samples   : out event data port Samples;
+      telemetry : out event data port Telemetry.i;
+  end ProducerProc;
+
+  process implementation ProducerProc.i
+    subcomponents
+      producer : thread ProducerThr.i;
+    connections
+      pulse_connection     : port producer.pulse -> pulse;
+      sample_connection    : port producer.sample -> sample;
+      level_connection     : port producer.level -> level;
+      flag_connection      : port producer.flag -> flag;
+      boolean_connection   : port producer.boolean_value -> boolean_value;
+      character_connection : port producer.character_value -> character_value;
+      signed_8_connection  : port producer.signed_8_value -> signed_8_value;
+      signed_16_connection : port producer.signed_16_value -> signed_16_value;
+      unsigned_8_connection  : port producer.unsigned_8_value -> unsigned_8_value;
+      unsigned_16_connection : port producer.unsigned_16_value -> unsigned_16_value;
+      state_connection     : port producer.operating_state -> operating_state;
+      samples_connection   : port producer.samples -> samples;
+      telemetry_connection : port producer.telemetry -> telemetry;
+    properties
+      CASE_Scheduling::Domain => 2;
+      HAMR::Microkit_Language => Rust;
+  end ProducerProc.i;
+
+  thread ProducerThr
+    features
+      pulse     : out event port;
+      sample    : out event data port Base_Types::Integer_32;
+      level     : out data port Base_Types::Integer_32;
+      flag      : out event data port Base_Types::Boolean;
+      boolean_value   : out data port Base_Types::Boolean;
+      character_value : out data port Base_Types::Character;
+      signed_8_value  : out data port Base_Types::Integer_8;
+      signed_16_value : out data port Base_Types::Integer_16;
+      unsigned_8_value  : out data port Base_Types::Unsigned_8;
+      unsigned_16_value : out data port Base_Types::Unsigned_16;
+      operating_state : out event data port OperatingState;
+      samples   : out event data port Samples;
+      telemetry : out event data port Telemetry.i;
+  end ProducerThr;
+
+  thread implementation ProducerThr.i
+    properties
+      Dispatch_Protocol => Periodic;
+      Period => 1000 ms;
+      Compute_Execution_Time => 10 ms .. 10 ms;
+  end ProducerThr.i;
+
+  process MonitorProc
+    features
+      -- All three incoming AADL port categories.
+      pulse     : in event port;
+      sample    : in event data port Base_Types::Integer_32;
+      level     : in data port Base_Types::Integer_32;
+
+      -- Remaining R2U2 scalar and complex signal payloads.
+      flag      : in event data port Base_Types::Boolean;
+      boolean_value   : in data port Base_Types::Boolean;
+      character_value : in data port Base_Types::Character;
+      signed_8_value  : in data port Base_Types::Integer_8;
+      signed_16_value : in data port Base_Types::Integer_16;
+      unsigned_8_value  : in data port Base_Types::Unsigned_8;
+      unsigned_16_value : in data port Base_Types::Unsigned_16;
+      operating_state : in event data port OperatingState;
+      samples   : in event data port Samples;
+      telemetry : in event data port Telemetry.i;
+
+      -- All three outgoing AADL port categories.
+      ack       : out event port;
+      echo      : out event data port Base_Types::Integer_32;
+      alert_result : out event data port Base_Types::Boolean;
+      healthy   : out data port Base_Types::Boolean;
+  end MonitorProc;
+
+  process implementation MonitorProc.i
+    subcomponents
+      monitor : thread MonitorThr.i;
+    connections
+      pulse_connection     : port pulse -> monitor.pulse;
+      sample_connection    : port sample -> monitor.sample;
+      level_connection     : port level -> monitor.level;
+      flag_connection      : port flag -> monitor.flag;
+      boolean_connection   : port boolean_value -> monitor.boolean_value;
+      character_connection : port character_value -> monitor.character_value;
+      signed_8_connection  : port signed_8_value -> monitor.signed_8_value;
+      signed_16_connection : port signed_16_value -> monitor.signed_16_value;
+      unsigned_8_connection  : port unsigned_8_value -> monitor.unsigned_8_value;
+      unsigned_16_connection : port unsigned_16_value -> monitor.unsigned_16_value;
+      state_connection     : port operating_state -> monitor.operating_state;
+      samples_connection   : port samples -> monitor.samples;
+      telemetry_connection : port telemetry -> monitor.telemetry;
+
+      ack_connection       : port monitor.ack -> ack;
+      echo_connection      : port monitor.echo -> echo;
+      alert_result_connection : port monitor.alert_result -> alert_result;
+      healthy_connection   : port monitor.healthy -> healthy;
+    properties
+      CASE_Scheduling::Domain => 3;
+      HAMR::Microkit_Language => C;
+  end MonitorProc.i;
+
+  thread MonitorThr
+    features
+      pulse     : in event port;
+      sample    : in event data port Base_Types::Integer_32;
+      level     : in data port Base_Types::Integer_32;
+      flag      : in event data port Base_Types::Boolean;
+      boolean_value   : in data port Base_Types::Boolean;
+      character_value : in data port Base_Types::Character;
+      signed_8_value  : in data port Base_Types::Integer_8;
+      signed_16_value : in data port Base_Types::Integer_16;
+      unsigned_8_value  : in data port Base_Types::Unsigned_8;
+      unsigned_16_value : in data port Base_Types::Unsigned_16;
+      operating_state : in event data port OperatingState;
+      samples   : in event data port Samples;
+      telemetry : in event data port Telemetry.i;
+
+      ack       : out event port;
+      echo      : out event data port Base_Types::Integer_32;
+      alert_result : out event data port Base_Types::Boolean;
+      healthy   : out data port Base_Types::Boolean;
+
+    annex GUMBO {**
+      state
+        sprevious_level: Base_Types::Integer_32;
+
+      functions
+        def isNonNegative(value: Base_Types::Integer_32): Base_Types::Boolean :=
+          value >= s32"0";
+
+        def absoluteValue(value: Base_Types::Integer_32): Base_Types::Integer_32 :=
+          if (value < s32"0") -value else value;
+
+      monitor
+        -- Incoming event and event-data presence predicates.
+        guarantee input_event
+          "An untyped incoming event port":
+          HasEvent(pulse);
+
+        guarantee input_event_data
+          "A typed incoming event-data port and its payload":
+          HasEvent(sample) ~~>: sample >= s32"0";
+
+        -- Incoming data ports are continuously sampled and need no HasEvent guard.
+        guarantee input_data
+          "An incoming integer data port":
+          level >= s32"0";
+
+        -- AADL Base_Types normalized to C2PO bool and int inputs.
+        -- Integer_64, Unsigned_32, and Unsigned_64 are omitted because the
+        -- R2U2 integer signal is i32. Unbounded types and strings are omitted.
+        -- Floating-point Base_Types are omitted because HAMR rejects them.
+        guarantee base_type_boolean:
+          boolean_value == true;
+
+        guarantee base_type_character:
+          character_value == c"A";
+
+        guarantee base_type_integer_8:
+          signed_8_value >= s8"0";
+
+        guarantee base_type_integer_16:
+          signed_16_value >= s16"0";
+
+        guarantee base_type_integer_32:
+          level >= s32"0";
+
+        guarantee base_type_unsigned_8:
+          unsigned_8_value >= u8"0";
+
+        guarantee base_type_unsigned_16:
+          unsigned_16_value >= u16"0";
+
+
+        guarantee bool_signal
+          "A Boolean event-data payload":
+          HasEvent(flag) ~~>: flag;
+
+        -- Outgoing event predicates, including both MustSend overloads.
+        guarantee output_event_must_send
+          "An outgoing event must be emitted":
+          MustSend(ack);
+
+        guarantee output_event_data_must_send
+          "An outgoing event-data port must be emitted":
+          MustSend(echo);
+
+        guarantee output_event_no_send
+          "An outgoing event must not be emitted":
+          NoSend(ack);
+
+        guarantee output_event_data_no_send
+          "An outgoing event-data port must not be emitted":
+          NoSend(echo);
+
+        guarantee output_event_data_must_send_value
+          "An outgoing event-data port must carry the expected value":
+          MustSend(echo, s32"1");
+
+        guarantee output_data
+          "An outgoing data port used as a signal":
+          healthy == true;
+
+        -- Every temporal unary spelling accepted by the GUMBO grammar.
+        guarantee temporal_future:
+          Future[0,3] HasEvent(pulse);
+
+        guarantee temporal_eventually:
+          Eventually[0,3] HasEvent(sample);
+
+        guarantee temporal_globally:
+          Globally[0,3] (level >= s32"0");
+
+        guarantee temporal_once:
+          Once[0,3] HasEvent(pulse);
+
+        guarantee temporal_historically:
+          Historically[0,3] (level >= s32"0");
+
+        -- Every temporal binary operator accepted by the GUMBO grammar.
+        guarantee temporal_until:
+          (level >= s32"0") Until[0,5] HasEvent(pulse);
+
+        guarantee temporal_release:
+          (level >= s32"0") Release[0,5] HasEvent(pulse);
+
+        guarantee temporal_since:
+          (level >= s32"0") Since[0,5] HasEvent(pulse);
+
+        guarantee temporal_trigger:
+          (level >= s32"0") Trigger[0,5] HasEvent(pulse);
+
+        -- Scalar expression/operator coverage used by monitor inputs.
+        guarantee comparison_operators:
+          level == level &
+          level != s32"-1" &
+          level < s32"1000" &
+          level <= s32"1000" &
+          level > s32"-1000" &
+          level >= s32"-1000";
+
+        guarantee arithmetic_operators:
+          level + s32"1" - s32"1" == level &
+          level * s32"2" / s32"2" == level &
+          level % s32"2" >= s32"0";
+
+        guarantee bitwise_operators:
+          (level & s32"1") >= s32"0" &
+          (level | s32"1") >= level &
+          (level |^ s32"1") >= s32"0";
+
+        guarantee boolean_operators:
+          not false &&
+          (HasEvent(pulse) || HasEvent(sample)) ~~>:
+            (HasEvent(pulse) | HasEvent(sample));
+
+        guarantee implication_operator:
+          (level >= s32"0") ->: (level + s32"1" > s32"0");
+
+        -- Enum, array, record, member-access, array-access, and size coverage.
+        guarantee enum_signal:
+          HasEvent(operating_state) ~~>:
+            operating_state != Exhaustive_Monitor_C::OperatingState.Fault;
+
+        guarantee array_signal:
+          HasEvent(samples) ~~>:
+            (samples.size == z"4" & samples(0) >= s32"0");
+
+        guarantee record_signal:
+          HasEvent(telemetry) ~~>:
+            (telemetry.sequence_number >= s32"0" &
+             telemetry.valid &
+             telemetry.operating_state != Exhaustive_Monitor_C::OperatingState.Fault &
+             telemetry.values(0) >= s32"0");
+
+        -- Conditional expressions can produce either the guarantee Boolean or
+        -- a value consumed by the surrounding Boolean expression.
+        guarantee conditional_boolean:
+          if (level >= s32"0") (telemetry.sequence_number >= s32"0") else telemetry.sequence_number >= s32"5";
+
+--        guarantee conditional_value:
+--          (if (level < s32"0") (-1*level) else level) >= s32"0";
+
+--		guarantee selected_command:
+--		  telemetry.operating_state ==
+--		    (if (telemetry.sequence_number > s32"0")
+--		       Exhaustive_Monitor_C::OperatingState.Fault
+--		     else
+--		       Exhaustive_Monitor_C::OperatingState.Idle);
+
+        -- Whole-array ranges with both quantifiers and upper-bound forms.
+        guarantee quantified_all_until:
+          HasEvent(samples) ~~>:
+            (All (0 until samples.size)(i => samples(i) >= s32"0"));
+
+        guarantee quantified_all_to:
+          HasEvent(samples) ~~>:
+            (All (0 to samples.size - 1)(i => samples(i) >= s32"0"));
+
+        guarantee quantified_exists_until:
+          HasEvent(samples) ~~>:
+            (Exists (0 until samples.size)(i => samples(i) == s32"0"));
+
+        guarantee quantified_exists_to:
+          HasEvent(samples) ~~>:
+            (Exists (0 to samples.size - 1)(i => samples(i) == s32"0"));
+
+        -- A proper subrange becomes a C2PO array slice.
+        guarantee quantified_slice:
+          HasEvent(samples) ~~>:
+            (All (1 until 3)(i => samples(i) >= s32"0"));
+
+        -- Index-sensitive predicates are statically instantiated for C2PO.
+        guarantee quantified_index_sensitive:
+          HasEvent(samples) ~~>:
+            (All (0 to samples.size - 2)(i => samples(i) <= samples(i + 1)));
+
+        -- Distinct binders exercise nested C2PO aggregations.
+        guarantee quantified_nested:
+          HasEvent(samples) ~~>:
+            (All (0 until samples.size)(i =>
+              Exists (0 until samples.size)(j => samples(i) <= samples(j))));
+
+        -- Current and pre-dispatch state-variable values.
+        guarantee state_variable:
+          sprevious_level <= level;
+
+        guarantee state_variable_in:
+          In(sprevious_level) == sprevious_level;
+
+        -- Boolean- and value-returning GUMBO function calls.
+        guarantee boolean_function:
+          isNonNegative(level);
+
+        guarantee value_function:
+          absoluteValue(level) >= s32"0";
+
+        -- Event alert ports are emitted only for false verdicts. Boolean
+        -- event-data alert ports carry the latest mapped verdict.
+        alert comparison_operators on ack;
+        alert base_type_boolean on alert_result;
+    **};
+  end MonitorThr;
+
+  thread implementation MonitorThr.i
+    properties
+      Dispatch_Protocol => Periodic;
+      Period => 1000 ms;
+      Compute_Execution_Time => 10 ms .. 10 ms;
+      Stack_size => 2097152 Bytes;
+  end MonitorThr.i;
+
+  process ConsumerProc
+    features
+      ack     : in event port;
+      echo    : in event data port Base_Types::Integer_32;
+      alert_result : in event data port Base_Types::Boolean;
+      healthy : in data port Base_Types::Boolean;
+  end ConsumerProc;
+
+  process implementation ConsumerProc.i
+    subcomponents
+      consumer : thread ConsumerThr.i;
+    connections
+      ack_connection     : port ack -> consumer.ack;
+      echo_connection    : port echo -> consumer.echo;
+      alert_result_connection : port alert_result -> consumer.alert_result;
+      healthy_connection : port healthy -> consumer.healthy;
+    properties
+      CASE_Scheduling::Domain => 4;
+      HAMR::Microkit_Language => Rust;
+  end ConsumerProc.i;
+
+  thread ConsumerThr
+    features
+      ack     : in event port;
+      echo    : in event data port Base_Types::Integer_32;
+      alert_result : in event data port Base_Types::Boolean;
+      healthy : in data port Base_Types::Boolean;
+  end ConsumerThr;
+
+  thread implementation ConsumerThr.i
+    properties
+      Dispatch_Protocol => Periodic;
+      Period => 1000 ms;
+      Compute_Execution_Time => 10 ms .. 10 ms;
+  end ConsumerThr.i;
+end Exhaustive_Monitor_C;
