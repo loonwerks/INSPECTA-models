@@ -20,12 +20,6 @@ static r2u2_monitor_state_t r2u2_monitor = {
   .monitor = R2U2_DEFAULT_MONITOR
 };
 
-
-
-
-
-
-
 // Cache the newest verdict returned for each specification.
 static r2u2_status_t r2u2_cache_output(
     r2u2_mltl_instruction_t instruction,
@@ -60,13 +54,9 @@ void r2u2_monitor_initialize(void) {
 void r2u2_monitor_pre_timeTriggered(void) {
   int32_t r2u2_port_sent_sample = {0};
   bool r2u2_port_sent_sample_present = peek_sent_sample(&r2u2_port_sent_sample);
-  (void) r2u2_port_sent_sample;
-  (void) r2u2_port_sent_sample_present;
 
   int32_t r2u2_port_observed_sample = {0};
   bool r2u2_port_observed_sample_present = peek_observed_sample(&r2u2_port_observed_sample);
-  (void) r2u2_port_observed_sample;
-  (void) r2u2_port_observed_sample_present;
 
   r2u2_load_bool_signal(&r2u2_monitor.monitor, 0, r2u2_port_sent_sample_present); // Loading signal api_sent_sample_nonEmpty into index 0
   r2u2_load_bool_signal(&r2u2_monitor.monitor, 1, r2u2_port_observed_sample_present); // Loading signal api_observed_sample_nonEmpty into index 1
@@ -75,9 +65,6 @@ void r2u2_monitor_pre_timeTriggered(void) {
 }
 
 void r2u2_monitor_post_timeTriggered(void) {
-
-
-
   for (size_t i = 0; i < R2U2_SPEC_COUNT; ++i) {
     r2u2_monitor.verdict_updated[i] = false;
   }
@@ -86,6 +73,7 @@ void r2u2_monitor_post_timeTriggered(void) {
     printf("R2U2 monitor step failed: %d\n", (int) status);
     return;
   }
+
   // The callback runs during r2u2_step. Expire older cached verdicts
   // against the new timestamp without discarding this step's outputs.
   for (size_t i = 0; i < R2U2_SPEC_COUNT; ++i) {

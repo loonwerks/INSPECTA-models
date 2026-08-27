@@ -36,7 +36,16 @@ verus! {
       &mut self,
       api: &mut producer_producer_Application_Api<API>)
       requires
-        // PLACEHOLDER MARKER TIME TRIGGERED REQUIRES
+        // BEGIN MARKER TIME TRIGGERED REQUIRES
+        // assume AADL_Requirement
+        //   All outgoing event ports must be empty
+        old(api).pulse.is_none(),
+        old(api).sample.is_none(),
+        old(api).flag.is_none(),
+        old(api).operating_state.is_none(),
+        old(api).samples.is_none(),
+        old(api).telemetry.is_none(),
+        // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // PLACEHOLDER MARKER TIME TRIGGERED ENSURES
     {

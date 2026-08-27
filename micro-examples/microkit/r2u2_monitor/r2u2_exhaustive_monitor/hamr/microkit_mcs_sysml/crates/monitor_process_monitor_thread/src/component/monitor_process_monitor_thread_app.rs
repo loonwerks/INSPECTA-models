@@ -35,9 +35,20 @@ verus! {
       &mut self,
       api: &mut monitor_process_monitor_thread_Application_Api<API>)
       requires
-        // PLACEHOLDER MARKER TIME TRIGGERED REQUIRES
+        // BEGIN MARKER TIME TRIGGERED REQUIRES
+        // assume AADL_Requirement
+        //   All outgoing event ports must be empty
+        old(api).ack.is_none(),
+        old(api).echo.is_none(),
+        old(api).alert_result.is_none(),
+        // END MARKER TIME TRIGGERED REQUIRES
       ensures
-        // PLACEHOLDER MARKER TIME TRIGGERED ENSURES
+        // BEGIN MARKER TIME TRIGGERED ENSURES
+        // guarantee Monitor_Requirement
+        //   Alert ports are reserved for the monitor
+        old(api).ack == final(api).ack,
+        old(api).alert_result == final(api).alert_result,
+        // END MARKER TIME TRIGGERED ENSURES
     {
       let pulse = api.get_pulse();
       let sample = api.get_sample();

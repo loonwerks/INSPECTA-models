@@ -123,63 +123,45 @@ void r2u2_monitor_initialize(void) {
 }
 
 void r2u2_monitor_pre_timeTriggered(void) {
-  int32_t r2u2_port_level = {0};
-  (void) peek_level(&r2u2_port_level);
-  (void) r2u2_port_level;
+  int32_t r2u2_port_level;
+  peek_level(&r2u2_port_level);
 
-  bool r2u2_port_boolean_value = {0};
-  (void) peek_boolean_value(&r2u2_port_boolean_value);
-  (void) r2u2_port_boolean_value;
+  bool r2u2_port_boolean_value;
+  peek_boolean_value(&r2u2_port_boolean_value);
 
-  char r2u2_port_character_value = {0};
-  (void) peek_character_value(&r2u2_port_character_value);
-  (void) r2u2_port_character_value;
+  char r2u2_port_character_value;
+  peek_character_value(&r2u2_port_character_value);
 
-  int8_t r2u2_port_signed_8_value = {0};
-  (void) peek_signed_8_value(&r2u2_port_signed_8_value);
-  (void) r2u2_port_signed_8_value;
+  int8_t r2u2_port_signed_8_value;
+  peek_signed_8_value(&r2u2_port_signed_8_value);
 
-  int16_t r2u2_port_signed_16_value = {0};
-  (void) peek_signed_16_value(&r2u2_port_signed_16_value);
-  (void) r2u2_port_signed_16_value;
+  int16_t r2u2_port_signed_16_value;
+  peek_signed_16_value(&r2u2_port_signed_16_value);
 
-  uint8_t r2u2_port_unsigned_8_value = {0};
-  (void) peek_unsigned_8_value(&r2u2_port_unsigned_8_value);
-  (void) r2u2_port_unsigned_8_value;
+  uint8_t r2u2_port_unsigned_8_value;
+  peek_unsigned_8_value(&r2u2_port_unsigned_8_value);
 
-  uint16_t r2u2_port_unsigned_16_value = {0};
-  (void) peek_unsigned_16_value(&r2u2_port_unsigned_16_value);
-  (void) r2u2_port_unsigned_16_value;
+  uint16_t r2u2_port_unsigned_16_value;
+  peek_unsigned_16_value(&r2u2_port_unsigned_16_value);
 
   int32_t r2u2_port_sample = {0};
   bool r2u2_port_sample_present = peek_sample(&r2u2_port_sample);
-  (void) r2u2_port_sample;
-  (void) r2u2_port_sample_present;
 
   bool r2u2_port_flag = {0};
   bool r2u2_port_flag_present = peek_flag(&r2u2_port_flag);
-  (void) r2u2_port_flag;
-  (void) r2u2_port_flag_present;
 
   Exhaustive_Monitor_C_OperatingState r2u2_port_operating_state = {0};
   bool r2u2_port_operating_state_present = peek_operating_state(&r2u2_port_operating_state);
-  (void) r2u2_port_operating_state;
-  (void) r2u2_port_operating_state_present;
 
   Exhaustive_Monitor_C_Samples r2u2_port_samples = {0};
   bool r2u2_port_samples_present = peek_samples(&r2u2_port_samples);
-  (void) r2u2_port_samples;
-  (void) r2u2_port_samples_present;
 
   Exhaustive_Monitor_C_Telemetry_i r2u2_port_telemetry = {0};
   bool r2u2_port_telemetry_present = peek_telemetry(&r2u2_port_telemetry);
-  (void) r2u2_port_telemetry;
-  (void) r2u2_port_telemetry_present;
 
   r2u2_port_echo_count = echo_queue_1->numSent;
 
   bool r2u2_port_pulse_present = peek_pulse();
-  (void) r2u2_port_pulse_present;
 
   r2u2_port_ack_count = ack_queue_1->numSent;
 
@@ -221,16 +203,14 @@ void r2u2_monitor_pre_timeTriggered(void) {
 }
 
 void r2u2_monitor_post_timeTriggered(void) {
-  bool r2u2_port_healthy = {0};
-  (void) peek_healthy(&r2u2_port_healthy);
-  (void) r2u2_port_healthy;
+  bool r2u2_port_healthy;
+  peek_healthy(&r2u2_port_healthy);
 
   int32_t r2u2_port_echo = {0};
   bool r2u2_port_echo_present = echo_queue_1->numSent != r2u2_port_echo_count;
   if (r2u2_port_echo_present) {
-    (void) peek_echo(&r2u2_port_echo);
+    peek_echo(&r2u2_port_echo);
   }
-  (void) r2u2_port_echo;
 
   bool r2u2_port_ack_present = ack_queue_1->numSent != r2u2_port_ack_count;
 
@@ -250,6 +230,7 @@ void r2u2_monitor_post_timeTriggered(void) {
     printf("R2U2 monitor step failed: %d\n", (int) status);
     return;
   }
+
   // The callback runs during r2u2_step. Expire older cached verdicts
   // against the new timestamp without discarding this step's outputs.
   for (size_t i = 0; i < R2U2_SPEC_COUNT; ++i) {
