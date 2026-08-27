@@ -31,9 +31,17 @@ verus! {
       &mut self,
       api: &mut consumer_consumer_Application_Api<API>)
       requires
-        // PLACEHOLDER MARKER TIME TRIGGERED REQUIRES
+        // BEGIN MARKER TIME TRIGGERED REQUIRES
+        // assume AADL_Requirement
+        //   All outgoing event ports must be empty
+        old(api).sample_alert.is_none(),
+        // END MARKER TIME TRIGGERED REQUIRES
       ensures
-        // PLACEHOLDER MARKER TIME TRIGGERED ENSURES
+        // BEGIN MARKER TIME TRIGGERED ENSURES
+        // guarantee Monitor_Requirement
+        //   Alert ports are reserved for the monitor
+        old(api).sample_alert == final(api).sample_alert,
+        // END MARKER TIME TRIGGERED ENSURES
     {
       let sample = api.get_sample();
       match sample {

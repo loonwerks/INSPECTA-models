@@ -5,7 +5,8 @@
       "aadl_dir_targ": {
         "env_var": "",
         "paths": [
-          "%%workspace_dir%%/System_Monitor.aadl"
+          "%%workspace_dir%%/System_Monitor.aadl",
+          "%%workspace_dir%%/System_Monitor_C.aadl"
         ],
         "omit_file_suffixes": [],
         "recursive": false,

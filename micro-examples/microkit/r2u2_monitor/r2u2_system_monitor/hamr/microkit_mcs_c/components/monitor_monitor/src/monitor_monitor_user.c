@@ -8,9 +8,10 @@ void monitor_monitor_initialize(void) {
 
 void monitor_monitor_timeTriggered(void) {
   int32_t sent_sample;
-  int32_t observed_sample;
   get_sent_sample(&sent_sample);
+  int32_t observed_sample;
   get_observed_sample(&observed_sample);
+  printf("%s: monitor_monitor_timeTriggered invoked\n", microkit_name);
 }
 
 void monitor_monitor_notify(microkit_channel channel) {
