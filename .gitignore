@@ -9,9 +9,6 @@
 **/__pycache__/
 **/out/
 **/target/
-**/dep/
-**/spec.bin
-**/config.toml
 **/.claude/
 compile_commands.json
 sysml-aadl-libraries
