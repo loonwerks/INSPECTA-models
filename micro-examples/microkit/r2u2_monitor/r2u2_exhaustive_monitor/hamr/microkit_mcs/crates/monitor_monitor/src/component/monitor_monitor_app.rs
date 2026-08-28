@@ -1,0 +1,110 @@
+// This file will not be overwritten if HAMR codegen is rerun
+
+use data::*;
+use crate::bridge::monitor_monitor_api::*;
+use vstd::prelude::*;
+
+verus! {
+
+  pub struct monitor_monitor {
+    // BEGIN MARKER STATE VARS
+    pub sprevious_level: i32,
+    // END MARKER STATE VARS
+  }
+
+  impl monitor_monitor {
+    pub fn new() -> Self
+    {
+      Self {
+        // BEGIN MARKER STATE VAR INIT
+        sprevious_level: 0,
+        // END MARKER STATE VAR INIT
+      }
+    }
+
+    pub fn initialize<API: monitor_monitor_Put_Api> (
+      &mut self,
+      api: &mut monitor_monitor_Application_Api<API>)
+      ensures
+        // PLACEHOLDER MARKER INITIALIZATION ENSURES
+    {
+      log_info("initialize entrypoint invoked");
+    }
+
+    pub fn timeTriggered<API: monitor_monitor_Full_Api> (
+      &mut self,
+      api: &mut monitor_monitor_Application_Api<API>)
+      requires
+        // BEGIN MARKER TIME TRIGGERED REQUIRES
+        // assume AADL_Requirement
+        //   All outgoing event ports must be empty
+        old(api).echo.is_none(),
+        old(api).alert_result.is_none(),
+        old(api).ack.is_none(),
+        // END MARKER TIME TRIGGERED REQUIRES
+      ensures
+        // BEGIN MARKER TIME TRIGGERED ENSURES
+        // guarantee Monitor_Requirement
+        //   Alert ports are reserved for the monitor
+        old(api).ack == final(api).ack,
+        old(api).alert_result == final(api).alert_result,
+        // END MARKER TIME TRIGGERED ENSURES
+    {
+      let level = api.get_level();
+      let boolean_value = api.get_boolean_value();
+      let character_value = api.get_character_value();
+      let signed_8_value = api.get_signed_8_value();
+      let signed_16_value = api.get_signed_16_value();
+      let unsigned_8_value = api.get_unsigned_8_value();
+      let unsigned_16_value = api.get_unsigned_16_value();
+      let sample = api.get_sample();
+      let flag = api.get_flag();
+      let operating_state = api.get_operating_state();
+      let samples = api.get_samples();
+      let telemetry = api.get_telemetry();
+      let pulse = api.get_pulse();
+      log_info("compute entrypoint invoked");
+    }
+
+    pub fn notify(
+      &mut self,
+      channel: microkit_channel)
+    {
+      // this method is called when the monitor does not handle the passed in channel
+      match channel {
+        _ => {
+          log_warn_channel(channel)
+        }
+      }
+    }
+  }
+
+  #[verifier::external_body]
+  pub fn log_info(msg: &str)
+  {
+    log::info!("{0}", msg);
+  }
+
+  #[verifier::external_body]
+  pub fn log_warn_channel(channel: u32)
+  {
+    log::warn!("Unexpected channel: {0}", channel);
+  }
+
+  // BEGIN MARKER GUMBO METHODS
+  pub open spec fn isNonNegative(value: i32) -> bool
+  {
+    value >= 0i32
+  }
+
+  pub open spec fn absoluteValue(value: i32) -> i32
+  {
+    if (value < 0i32) {
+      (-value) as i32
+    } else {
+      value
+    }
+  }
+  // END MARKER GUMBO METHODS
+
+}

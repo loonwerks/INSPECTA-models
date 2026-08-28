@@ -1,0 +1,141 @@
+-- A minimal HAMR/Microkit example with a dedicated R2U2 monitor component.
+package System_Monitor
+public
+  with Base_Types;
+  with CASE_Scheduling;
+  with HAMR;
+
+  system Sys
+  end Sys;
+
+  system implementation Sys.i
+    subcomponents
+      producer : process ProducerProc.i;
+      consumer : process ConsumerProc.i;
+      monitor  : process MonitorProc.i;
+      cpu      : processor MicrokitProcessor;
+    connections
+      producer_to_consumer : port producer.sample -> consumer.sample;
+      producer_to_monitor  : port producer.sample -> monitor.sent_sample;
+      consumer_to_monitor  : port consumer.observed_sample -> monitor.observed_sample;
+      monitor_to_consumer  : port monitor.alert_flag -> consumer.alert_flag;
+    properties
+      Actual_Processor_Binding => (reference (cpu)) applies to producer, consumer, monitor;
+  end Sys.i;
+
+  processor MicrokitProcessor
+    properties
+      Frame_Period => 1000 ms;
+      Clock_Period => 1 ms;
+  end MicrokitProcessor;
+
+  process ProducerProc
+    features
+      sample : out event data port Base_Types::Integer_32;
+  end ProducerProc;
+
+  process implementation ProducerProc.i
+    subcomponents
+      producer : thread ProducerThr.i;
+    connections
+      sample_connection : port producer.sample -> sample;
+    properties
+      CASE_Scheduling::Domain => 2;
+      HAMR::Microkit_Language => Rust;
+  end ProducerProc.i;
+
+  thread ProducerThr
+    features
+      sample : out event data port Base_Types::Integer_32;
+  end ProducerThr;
+
+  thread implementation ProducerThr.i
+    properties
+      Dispatch_Protocol => Periodic;
+      Period => 1000 ms;
+      Compute_Execution_Time => 10 ms .. 10 ms;
+  end ProducerThr.i;
+
+  process ConsumerProc
+    features
+      sample          : in event data port Base_Types::Integer_32;
+      observed_sample : out event data port Base_Types::Integer_32;
+      alert_flag      : in event data port Base_Types::Boolean;
+  end ConsumerProc;
+
+  process implementation ConsumerProc.i
+    subcomponents
+      consumer : thread ConsumerThr.i;
+    connections
+      sample_connection   : port sample -> consumer.sample;
+      observed_connection : port consumer.observed_sample -> observed_sample;
+      alert_connection    : port alert_flag -> consumer.alert_flag;
+    properties
+      CASE_Scheduling::Domain => 3;
+      HAMR::Microkit_Language => Rust;
+  end ConsumerProc.i;
+
+  thread ConsumerThr
+    features
+      sample          : in event data port Base_Types::Integer_32;
+      observed_sample : out event data port Base_Types::Integer_32;
+      alert_flag      : in event data port Base_Types::Boolean;
+  end ConsumerThr;
+
+  thread implementation ConsumerThr.i
+    properties
+      Dispatch_Protocol => Periodic;
+      Period => 1000 ms;
+      Compute_Execution_Time => 10 ms .. 10 ms;
+  end ConsumerThr.i;
+
+  -- This component has no application responsibility. It receives independent
+  -- observations of what the producer sent and what the consumer processed.
+  process MonitorProc
+    features
+      sent_sample     : in event data port Base_Types::Integer_32;
+      observed_sample : in event data port Base_Types::Integer_32;
+      alert_flag      : out event data port Base_Types::Boolean;
+  end MonitorProc;
+
+  process implementation MonitorProc.i
+    subcomponents
+      monitor : thread MonitorThr.i;
+    connections
+      sent_connection     : port sent_sample -> monitor.sent_sample;
+      observed_connection : port observed_sample -> monitor.observed_sample;
+      alert_connection    : port monitor.alert_flag -> alert_flag;
+    properties
+      CASE_Scheduling::Domain => 4;
+      HAMR::Microkit_Language => Rust;
+  end MonitorProc.i;
+
+  thread MonitorThr
+    features
+      sent_sample     : in event data port Base_Types::Integer_32;
+      observed_sample : in event data port Base_Types::Integer_32;
+      alert_flag      : out event data port Base_Types::Boolean;
+
+    annex GUMBO {**
+      monitor
+        guarantee samples_match_until_producer_pauses
+          "The consumer matches every produced sample until the producer pauses, which must occur within five dispatches":
+          (
+            HasEvent(sent_sample) &
+            HasEvent(observed_sample) &
+            observed_sample == sent_sample
+          ) Until[0,5] (
+            not HasEvent(sent_sample)
+          );
+
+        alert samples_match_until_producer_pauses on alert_flag;
+    **};
+  end MonitorThr;
+
+  thread implementation MonitorThr.i
+    properties
+      Dispatch_Protocol => Periodic;
+      Period => 1000 ms;
+      Compute_Execution_Time => 10 ms .. 10 ms;
+  end MonitorThr.i;
+end System_Monitor;
