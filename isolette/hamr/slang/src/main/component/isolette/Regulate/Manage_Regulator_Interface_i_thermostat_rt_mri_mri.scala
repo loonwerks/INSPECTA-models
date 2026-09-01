@@ -45,7 +45,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri {
         //   The ordering of the desired temperature range is only a meaningful
         //   constraint on Valid readings
         api.lower_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
-          api.upper_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid ___>:
+          api.upper_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid __>:
           api.lower_desired_tempWstatus.degrees <= api.upper_desired_tempWstatus.degrees
         // END COMPUTE REQUIRES timeTriggered
       ),

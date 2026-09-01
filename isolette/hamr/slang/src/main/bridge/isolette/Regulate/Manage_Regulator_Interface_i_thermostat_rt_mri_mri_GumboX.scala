@@ -82,7 +82,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_lower_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_upper_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
     api_lower_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
-      api_upper_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid ___>:
+      api_upper_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid __>:
       api_lower_desired_tempWstatus.degrees <= api_upper_desired_tempWstatus.degrees
 
   /** CEP-T-Assm: Top-level assume contracts for mri's compute entrypoint

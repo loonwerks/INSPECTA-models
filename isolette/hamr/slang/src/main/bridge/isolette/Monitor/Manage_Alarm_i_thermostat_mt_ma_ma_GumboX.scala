@@ -68,7 +68,7 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
       api_lower_alarm_temp: Isolette_Data_Model.Temp_i,
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type,
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i): B =
-    api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode ___>:
+    api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode __>:
       api_lower_alarm_temp.degrees <= api_upper_alarm_temp.degrees
 
   /** Compute Entrypoint Contract
@@ -82,7 +82,7 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
   @strictpure def compute_spec_Table_A_12_LowerAlarmTemp_assume(
       api_lower_alarm_temp: Isolette_Data_Model.Temp_i,
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
-    api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode ___>:
+    api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode __>:
       GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTemp(api_lower_alarm_temp.degrees)
 
   /** Compute Entrypoint Contract
@@ -96,7 +96,7 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
   @strictpure def compute_spec_Table_A_12_UpperAlarmTemp_assume(
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type,
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i): B =
-    api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode ___>:
+    api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode __>:
       GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTemp(api_upper_alarm_temp.degrees)
 
   /** CEP-T-Assm: Top-level assume contracts for ma's compute entrypoint

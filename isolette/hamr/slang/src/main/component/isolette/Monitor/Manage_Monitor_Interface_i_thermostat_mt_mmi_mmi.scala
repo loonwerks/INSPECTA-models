@@ -104,7 +104,7 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi {
         //   If the Monitor Interface Failure is True,
         //   the Alarm Range variable is UNSPECIFIED
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 
-        api.interface_failure.flag ___>: T
+        api.interface_failure.flag __>: T
         // END COMPUTE ENSURES timeTriggered
       )
     )

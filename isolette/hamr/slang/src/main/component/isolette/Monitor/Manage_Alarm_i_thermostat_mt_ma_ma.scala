@@ -47,17 +47,17 @@ object Manage_Alarm_i_thermostat_mt_ma_ma {
         // assume Figure_A_7
         //   Unordered bounds make REQ-MA-2 and REQ-MA-3 contradictory
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 
-        api.monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode ___>:
+        api.monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode __>:
           api.lower_alarm_temp.degrees <= api.upper_alarm_temp.degrees,
         // assume Table_A_12_LowerAlarmTemp
         //   Range [96..101]
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 
-        api.monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode ___>:
+        api.monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode __>:
           GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTemp(api.lower_alarm_temp.degrees),
         // assume Table_A_12_UpperAlarmTemp
         //   Range [97..102]
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 
-        api.monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode ___>:
+        api.monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode __>:
           GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTemp(api.upper_alarm_temp.degrees)
         // END COMPUTE REQUIRES timeTriggered
       ),
