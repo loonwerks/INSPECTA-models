@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 data = { path = "../data" }
 linux-raw-sys = { version = "=0.12.1", default-features = false }
-log = "0.4.33"
+log = "0.4.34"
 GL = { path = "../GL" }
 
 # -----------------------------------------------------------------------------
