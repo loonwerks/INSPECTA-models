@@ -5016,6 +5016,9 @@
                     "compute" : {
                       "type" : "None"
                     },
+                    "monitor" : {
+                      "type" : "None"
+                    },
                     "compositions" : [
                     ],
                     "attr" : {
@@ -40761,6 +40764,9 @@
                           }
                         }
                       }
+                    },
+                    "monitor" : {
+                      "type" : "None"
                     },
                     "compositions" : [
                     ],

@@ -1480,6 +1480,9 @@
                         }
                       }
                     },
+                    "monitor" : {
+                      "type" : "None"
+                    },
                     "compositions" : [
                     ],
                     "attr" : {
@@ -4142,6 +4145,9 @@
                           }
                         }
                       }
+                    },
+                    "monitor" : {
+                      "type" : "None"
                     },
                     "compositions" : [
                     ],
