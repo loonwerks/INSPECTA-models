@@ -9,7 +9,7 @@ use proptest::prelude::*;
 pub struct PreStateContainer {
   pub api_currentTemp: Option<TempControl_SysVerif::Temperature>,
   pub api_fanAck: Option<TempControl_SysVerif::FanAck>,
-  pub api_setPoint: Option<TempControl_SysVerif::SetPoint>
+  pub api_setPoint: Option<TempControl_SysVerif::SetPoint>,
 }
 
 /// container for component's incoming port values and GUMBO state variables
@@ -20,7 +20,7 @@ pub struct PreStateContainer_wGSV {
   pub In_fanError: bool,
   pub api_currentTemp: Option<TempControl_SysVerif::Temperature>,
   pub api_fanAck: Option<TempControl_SysVerif::FanAck>,
-  pub api_setPoint: Option<TempControl_SysVerif::SetPoint>
+  pub api_setPoint: Option<TempControl_SysVerif::SetPoint>,
 }
 
 /// setter for component's incoming port values

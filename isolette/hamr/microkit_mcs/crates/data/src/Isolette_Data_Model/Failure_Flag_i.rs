@@ -9,7 +9,7 @@ verus! {
   #[repr(C)]
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct Failure_Flag_i {
-    pub flag: bool
+    pub flag: bool,
   }
 
   impl Default for Failure_Flag_i {

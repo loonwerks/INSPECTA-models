@@ -248,7 +248,7 @@ verus! {
     pub ghost thermostat_mt_mmi_mmi_interface_failure: Isolette_Data_Model::Failure_Flag_i,
     pub ghost thermostat_mt_mmm_mmm_monitor_mode: Isolette_Data_Model::Monitor_Mode,
     pub ghost thermostat_mt_dmf_dmf_internal_failure: Isolette_Data_Model::Failure_Flag_i,
-    pub ghost temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i
+    pub ghost temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i,
   }
 
   impl<API: domain_monitor_process_domain_monitor_thread_Put_Api> domain_monitor_process_domain_monitor_thread_Application_Api<API> {

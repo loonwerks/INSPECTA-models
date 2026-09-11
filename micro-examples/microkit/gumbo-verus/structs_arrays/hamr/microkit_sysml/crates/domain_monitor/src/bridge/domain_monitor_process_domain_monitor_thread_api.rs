@@ -83,7 +83,7 @@ verus! {
     pub ghost producer_producer_p_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i,
     pub ghost producer_producer_p_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
     pub ghost producer_producer_p_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-    pub ghost producer_producer_p_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>
+    pub ghost producer_producer_p_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
   }
 
   impl<API: domain_monitor_process_domain_monitor_thread_Put_Api> domain_monitor_process_domain_monitor_thread_Application_Api<API> {

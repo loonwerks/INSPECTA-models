@@ -15,7 +15,7 @@ verus! {
     pub fieldStr: String,
     pub fieldEnum: MyEnum,
     pub fieldRec: MyStruct2_i,
-    pub fieldArray: MyArrayOneDim
+    pub fieldArray: MyArrayOneDim,
   }
 
   impl Default for MyStruct_i {

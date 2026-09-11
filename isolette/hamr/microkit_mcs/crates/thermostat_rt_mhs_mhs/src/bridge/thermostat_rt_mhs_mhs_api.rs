@@ -69,7 +69,7 @@ verus! {
     pub ghost lower_desired_temp: Isolette_Data_Model::Temp_i,
     pub ghost upper_desired_temp: Isolette_Data_Model::Temp_i,
     pub ghost regulator_mode: Isolette_Data_Model::Regulator_Mode,
-    pub ghost heat_control: Isolette_Data_Model::On_Off
+    pub ghost heat_control: Isolette_Data_Model::On_Off,
   }
 
   impl<API: thermostat_rt_mhs_mhs_Put_Api> thermostat_rt_mhs_mhs_Application_Api<API> {

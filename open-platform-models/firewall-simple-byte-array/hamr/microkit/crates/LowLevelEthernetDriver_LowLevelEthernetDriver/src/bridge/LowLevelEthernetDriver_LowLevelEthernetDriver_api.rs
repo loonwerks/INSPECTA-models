@@ -36,7 +36,7 @@ verus! {
     pub api: API,
 
     pub ghost EthernetFramesTx: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRx: Option<SW::RawEthernetMessage>
+    pub ghost EthernetFramesRx: Option<SW::RawEthernetMessage>,
   }
 
   impl<API: LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api> LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API> {

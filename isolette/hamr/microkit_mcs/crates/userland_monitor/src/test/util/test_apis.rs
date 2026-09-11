@@ -29,7 +29,7 @@ pub struct PreStateContainer {
   pub api_thermostat_mt_dmf_dmf_internal_failure: Isolette_Data_Model::Failure_Flag_i,
   pub api_temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i,
   pub api_sched_state: hamr::SchedState,
-  pub api_sched_schedule: hamr::Schedule
+  pub api_sched_schedule: hamr::Schedule,
 }
 
 /// setter for component's incoming port values

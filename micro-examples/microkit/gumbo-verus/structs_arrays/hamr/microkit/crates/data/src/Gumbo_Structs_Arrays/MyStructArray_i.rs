@@ -12,7 +12,7 @@ verus! {
     pub fieldInt64: i64,
     pub fieldEnum: MyEnum,
     pub fieldRec: MyStruct2_i,
-    pub fieldArray: MyArrayStruct
+    pub fieldArray: MyArrayStruct,
   }
 
   impl Default for MyStructArray_i {

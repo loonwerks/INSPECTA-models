@@ -100,7 +100,7 @@ verus! {
     pub ghost upper_alarm_temp: Isolette_Data_Model::Temp_i,
     pub ghost lower_alarm_temp: Isolette_Data_Model::Temp_i,
     pub ghost monitor_status: Isolette_Data_Model::Status,
-    pub ghost interface_failure: Isolette_Data_Model::Failure_Flag_i
+    pub ghost interface_failure: Isolette_Data_Model::Failure_Flag_i,
   }
 
   impl<API: thermostat_mt_mmi_mmi_Put_Api> thermostat_mt_mmi_mmi_Application_Api<API> {

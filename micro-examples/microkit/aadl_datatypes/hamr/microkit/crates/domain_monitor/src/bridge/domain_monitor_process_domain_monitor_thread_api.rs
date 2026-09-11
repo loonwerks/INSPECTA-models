@@ -193,7 +193,7 @@ verus! {
     pub ghost producer_producer_myFloat64: Option<f64>,
     pub ghost producer_producer_myEnum: Option<Aadl_Datatypes::MyEnum>,
     pub ghost producer_producer_myStruct: Option<Aadl_Datatypes::MyStruct_i>,
-    pub ghost producer_producer_myArray1: Option<Aadl_Datatypes::MyArrayOneDim>
+    pub ghost producer_producer_myArray1: Option<Aadl_Datatypes::MyArrayOneDim>,
   }
 
   impl<API: domain_monitor_process_domain_monitor_thread_Put_Api> domain_monitor_process_domain_monitor_thread_Application_Api<API> {

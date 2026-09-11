@@ -10,7 +10,7 @@ pub struct PreStateContainer {
   pub api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   pub api_lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   pub api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-  pub api_regulator_mode: Isolette_Data_Model::Regulator_Mode
+  pub api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
 }
 
 /// setter for component's incoming port values

@@ -127,7 +127,7 @@ verus! {
     pub ghost tcp_tct_sv_currentSetPoint: TempControl_SysVerif::SetPoint,
     pub ghost tcp_tct_sv_currentFanState: TempControl_SysVerif::FanCmd,
     pub ghost tcp_tct_sv_latestTemp: TempControl_SysVerif::Temperature,
-    pub ghost tcp_tct_sv_fanError: bool
+    pub ghost tcp_tct_sv_fanError: bool,
   }
 
   impl<API: gumbo_monitor_process_gumbo_monitor_thread_Put_Api> gumbo_monitor_process_gumbo_monitor_thread_Application_Api<API> {

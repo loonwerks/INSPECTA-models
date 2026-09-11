@@ -325,7 +325,7 @@ verus! {
     pub ghost thermostat_mt_mmm_mmm_sv_lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
     pub ghost temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i,
     pub ghost sched_state: hamr::SchedState,
-    pub ghost sched_schedule: hamr::Schedule
+    pub ghost sched_schedule: hamr::Schedule,
   }
 
   impl<API: sys_nominal_monitor_process_sys_nominal_monitor_thread_Put_Api> sys_nominal_monitor_process_sys_nominal_monitor_thread_Application_Api<API> {

@@ -10,7 +10,7 @@ pub struct PreStateContainer {
   pub api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   pub api_lower_desired_temp: Isolette_Data_Model::Temp_i,
   pub api_upper_desired_temp: Isolette_Data_Model::Temp_i,
-  pub api_regulator_mode: Isolette_Data_Model::Regulator_Mode
+  pub api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
 }
 
 /// container for component's incoming port values and GUMBO state variables
@@ -19,7 +19,7 @@ pub struct PreStateContainer_wGSV {
   pub api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   pub api_lower_desired_temp: Isolette_Data_Model::Temp_i,
   pub api_upper_desired_temp: Isolette_Data_Model::Temp_i,
-  pub api_regulator_mode: Isolette_Data_Model::Regulator_Mode
+  pub api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
 }
 
 /// setter for component's incoming port values

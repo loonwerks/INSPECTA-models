@@ -36,7 +36,7 @@ verus! {
     pub api: API,
 
     pub ghost fanCmd: Option<TempControl_SysVerif::FanCmd>,
-    pub ghost fanAck: Option<TempControl_SysVerif::FanAck>
+    pub ghost fanAck: Option<TempControl_SysVerif::FanAck>,
   }
 
   impl<API: fp_ft_Put_Api> fp_ft_Application_Api<API> {

@@ -50,7 +50,7 @@ verus! {
 
     pub ghost myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>,
     pub ghost MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>,
-    pub ghost MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>
+    pub ghost MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>,
   }
 
   impl<API: consumer_consumer_Put_Api> consumer_consumer_Application_Api<API> {

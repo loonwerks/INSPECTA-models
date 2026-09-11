@@ -26,7 +26,7 @@ verus! {
   pub struct thermostat_rt_drf_drf_Application_Api<API: thermostat_rt_drf_drf_Api> {
     pub api: API,
 
-    pub ghost internal_failure: Isolette_Data_Model::Failure_Flag_i
+    pub ghost internal_failure: Isolette_Data_Model::Failure_Flag_i,
   }
 
   impl<API: thermostat_rt_drf_drf_Put_Api> thermostat_rt_drf_drf_Application_Api<API> {

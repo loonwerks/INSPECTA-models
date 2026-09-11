@@ -39,7 +39,7 @@ verus! {
     pub api: API,
 
     pub ghost producer_p_p1_producer_write_port: Option<u8>,
-    pub ghost producer_p_p2_producer_write_port: Option<u8>
+    pub ghost producer_p_p2_producer_write_port: Option<u8>,
   }
 
   impl<API: domain_monitor_process_domain_monitor_thread_Put_Api> domain_monitor_process_domain_monitor_thread_Application_Api<API> {

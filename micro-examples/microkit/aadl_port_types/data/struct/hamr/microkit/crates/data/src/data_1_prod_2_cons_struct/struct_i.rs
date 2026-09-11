@@ -10,7 +10,7 @@ verus! {
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct struct_i {
     pub size: i32,
-    pub elements: ArrayOfInts
+    pub elements: ArrayOfInts,
   }
 
   impl Default for struct_i {

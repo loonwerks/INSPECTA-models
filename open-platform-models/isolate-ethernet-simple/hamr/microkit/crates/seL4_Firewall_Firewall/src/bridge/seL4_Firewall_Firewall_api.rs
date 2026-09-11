@@ -56,7 +56,7 @@ verus! {
     pub ghost EthernetFramesRxIn: Option<SW::StructuredEthernetMessage_i>,
     pub ghost EthernetFramesTxIn: Option<SW::StructuredEthernetMessage_i>,
     pub ghost EthernetFramesRxOut: Option<SW::StructuredEthernetMessage_i>,
-    pub ghost EthernetFramesTxOut: Option<SW::StructuredEthernetMessage_i>
+    pub ghost EthernetFramesTxOut: Option<SW::StructuredEthernetMessage_i>,
   }
 
   impl<API: seL4_Firewall_Firewall_Put_Api> seL4_Firewall_Firewall_Application_Api<API> {

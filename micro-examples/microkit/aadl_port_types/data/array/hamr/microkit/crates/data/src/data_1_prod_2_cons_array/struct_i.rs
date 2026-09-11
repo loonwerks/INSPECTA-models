@@ -10,7 +10,7 @@ verus! {
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct struct_i {
     pub currentEvent: i32,
-    pub totalEventsSent: i32
+    pub totalEventsSent: i32,
   }
 
   impl Default for struct_i {

@@ -96,7 +96,7 @@ verus! {
     pub ghost lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
     pub ghost upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
     pub ghost lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-    pub ghost upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i
+    pub ghost upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   }
 
   impl<API: operator_interface_oip_oit_Put_Api> operator_interface_oip_oit_Application_Api<API> {

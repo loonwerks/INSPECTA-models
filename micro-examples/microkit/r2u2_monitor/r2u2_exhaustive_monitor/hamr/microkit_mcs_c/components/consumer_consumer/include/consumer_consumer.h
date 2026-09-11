@@ -25,16 +25,12 @@ void *memset(void *dest, int c, size_t n);
 
 
 bool get_healthy(bool *data);
-bool peek_healthy(bool *data);
 bool echo_is_empty(void);
 bool get_echo_poll(sb_event_counter_t *numDropped, int32_t *data);
 bool get_echo(int32_t *data);
-bool peek_echo(int32_t *data);
 bool alert_result_is_empty(void);
 bool get_alert_result_poll(sb_event_counter_t *numDropped, bool *data);
 bool get_alert_result(bool *data);
-bool peek_alert_result(bool *data);
 bool ack_is_empty(void);
 bool get_ack_poll(sb_event_counter_t *numDropped);
 bool get_ack();
-bool peek_ack();

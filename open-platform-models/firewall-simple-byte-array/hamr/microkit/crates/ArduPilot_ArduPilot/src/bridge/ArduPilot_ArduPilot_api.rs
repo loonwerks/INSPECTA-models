@@ -36,7 +36,7 @@ verus! {
     pub api: API,
 
     pub ghost EthernetFramesRx: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesTx: Option<SW::RawEthernetMessage>
+    pub ghost EthernetFramesTx: Option<SW::RawEthernetMessage>,
   }
 
   impl<API: ArduPilot_ArduPilot_Put_Api> ArduPilot_ArduPilot_Application_Api<API> {

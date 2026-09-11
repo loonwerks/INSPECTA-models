@@ -65,7 +65,7 @@ verus! {
     pub ghost currentTemp: Option<TempControl_SysVerif::Temperature>,
     pub ghost fanAck: Option<TempControl_SysVerif::FanAck>,
     pub ghost setPoint: Option<TempControl_SysVerif::SetPoint>,
-    pub ghost fanCmd: Option<TempControl_SysVerif::FanCmd>
+    pub ghost fanCmd: Option<TempControl_SysVerif::FanCmd>,
   }
 
   impl<API: tcp_tct_Put_Api> tcp_tct_Application_Api<API> {

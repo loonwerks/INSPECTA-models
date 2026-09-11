@@ -35,7 +35,7 @@ verus! {
     pub api: API,
 
     pub ghost myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>,
-    pub ghost MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>
+    pub ghost MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>,
   }
 
   impl<API: producer_producer_Put_Api> producer_producer_Application_Api<API> {

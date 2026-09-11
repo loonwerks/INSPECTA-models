@@ -71,7 +71,7 @@ verus! {
     pub ghost p_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i,
     pub ghost p_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
     pub ghost p_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-    pub ghost p_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>
+    pub ghost p_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
   }
 
   impl<API: producer_producer_Put_Api> producer_producer_Application_Api<API> {

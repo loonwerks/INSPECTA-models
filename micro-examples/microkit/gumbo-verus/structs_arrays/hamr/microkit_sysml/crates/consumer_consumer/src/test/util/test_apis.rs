@@ -12,7 +12,7 @@ pub struct PreStateContainer {
   pub api_c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i,
   pub api_c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
   pub api_c_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-  pub api_c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>
+  pub api_c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
 }
 
 /// container for component's incoming port values and GUMBO state variables
@@ -25,7 +25,7 @@ pub struct PreStateContainer_wGSV {
   pub api_c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i,
   pub api_c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
   pub api_c_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-  pub api_c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>
+  pub api_c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
 }
 
 /// setter for component's incoming port values

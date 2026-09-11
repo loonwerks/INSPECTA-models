@@ -50,7 +50,7 @@ verus! {
 
     pub ghost producer_producer_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>,
     pub ghost producer_producer_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>,
-    pub ghost consumer_consumer_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>
+    pub ghost consumer_consumer_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>,
   }
 
   impl<API: domain_monitor_process_domain_monitor_thread_Put_Api> domain_monitor_process_domain_monitor_thread_Application_Api<API> {

@@ -5,10 +5,7 @@ microkit_sdk_config_dir := $(MICROKIT_SDK)/board/$(MICROKIT_BOARD)/$(MICROKIT_CO
 sel4_include_dirs := $(firstword $(wildcard $(microkit_sdk_config_dir)/include \
                                             $(microkit_sdk_config_dir)/debug/include))
 
-# BEGIN MARKER R2U2 MAKE RULES
-# END MARKER R2U2 MAKE RULES
-
-R2U2_BUILD_DEPS = $(R2U2_SPEC_BIN)
+# PLACEHOLDER MARKER R2U2 MAKE RULES
 
 # The toolchain is pinned to a stable release channel (see rust-toolchain.toml),
 # which rejects the #![feature(..)] attributes the generated crates declare, so

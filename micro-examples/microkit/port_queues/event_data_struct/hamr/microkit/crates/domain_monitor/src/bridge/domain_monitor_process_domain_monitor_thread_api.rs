@@ -28,7 +28,7 @@ verus! {
   pub struct domain_monitor_process_domain_monitor_thread_Application_Api<API: domain_monitor_process_domain_monitor_thread_Api> {
     pub api: API,
 
-    pub ghost producer_p_p_producer_write_port: Option<event_data_struct_port_queues::struct_i>
+    pub ghost producer_p_p_producer_write_port: Option<event_data_struct_port_queues::struct_i>,
   }
 
   impl<API: domain_monitor_process_domain_monitor_thread_Put_Api> domain_monitor_process_domain_monitor_thread_Application_Api<API> {

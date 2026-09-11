@@ -22,7 +22,7 @@ pub struct PreStateContainer {
   pub api_myFloat64: Option<f64>,
   pub api_myEnum: Option<Aadl_Datatypes::MyEnum>,
   pub api_myStruct: Option<Aadl_Datatypes::MyStruct_i>,
-  pub api_myArray1: Option<Aadl_Datatypes::MyArrayOneDim>
+  pub api_myArray1: Option<Aadl_Datatypes::MyArrayOneDim>,
 }
 
 /// setter for component's incoming port values

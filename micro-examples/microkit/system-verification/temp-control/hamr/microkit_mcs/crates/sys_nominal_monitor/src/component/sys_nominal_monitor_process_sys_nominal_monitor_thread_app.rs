@@ -12,14 +12,14 @@ use crate::gumbox::fp_ft_containers::*;
 use sys_assert_functions::*;
 
 pub struct sys_nominal_monitor_process_sys_nominal_monitor_thread {
-  // PLACEHOLDER MARKER STATE VARS,
+  // PLACEHOLDER MARKER STATE VARS
   frame_period: i32,
   last_index: u32,
   prev_user_ch: hamr::ScheduleChannels,
   next_user_ch: hamr::ScheduleChannels,
   pre_tcp_tct: Option<PreState_tcp_tct>,
   sys_assert_last_index: u32,
-  sys_assert_ready: u64
+  sys_assert_ready: u64,
 }
 
 impl sys_nominal_monitor_process_sys_nominal_monitor_thread {

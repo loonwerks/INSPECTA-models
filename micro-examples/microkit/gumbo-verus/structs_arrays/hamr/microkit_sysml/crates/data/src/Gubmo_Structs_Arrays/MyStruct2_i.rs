@@ -9,7 +9,7 @@ verus! {
   #[repr(C)]
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct MyStruct2_i {
-    pub fieldSInt32: i32
+    pub fieldSInt32: i32,
   }
 
   impl Default for MyStruct2_i {

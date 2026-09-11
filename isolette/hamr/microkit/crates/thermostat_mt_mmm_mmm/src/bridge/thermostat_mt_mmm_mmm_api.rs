@@ -58,7 +58,7 @@ verus! {
     pub ghost current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
     pub ghost interface_failure: Isolette_Data_Model::Failure_Flag_i,
     pub ghost internal_failure: Isolette_Data_Model::Failure_Flag_i,
-    pub ghost monitor_mode: Isolette_Data_Model::Monitor_Mode
+    pub ghost monitor_mode: Isolette_Data_Model::Monitor_Mode,
   }
 
   impl<API: thermostat_mt_mmm_mmm_Put_Api> thermostat_mt_mmm_mmm_Application_Api<API> {

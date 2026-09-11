@@ -12,7 +12,7 @@ pub struct PreStateContainer {
   pub api_fp_ft_fanAck: Option<TempControl_SysVerif::FanAck>,
   pub api_tcp_tct_setPoint: Option<TempControl_SysVerif::SetPoint>,
   pub api_sched_state: hamr::SchedState,
-  pub api_sched_schedule: hamr::Schedule
+  pub api_sched_schedule: hamr::Schedule,
 }
 
 /// setter for component's incoming port values

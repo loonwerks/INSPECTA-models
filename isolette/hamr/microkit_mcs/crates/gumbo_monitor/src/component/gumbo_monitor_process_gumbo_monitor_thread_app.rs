@@ -14,7 +14,7 @@ use crate::gumbox::thermostat_mt_dmf_dmf_containers::*;
 use crate::gumbox::operator_interface_oip_oit_containers::*;
 
 pub struct gumbo_monitor_process_gumbo_monitor_thread {
-  // PLACEHOLDER MARKER STATE VARS,
+  // PLACEHOLDER MARKER STATE VARS
   frame_period: i32,
   last_index: u32,
   prev_user_ch: hamr::ScheduleChannels,
@@ -25,7 +25,7 @@ pub struct gumbo_monitor_process_gumbo_monitor_thread {
   pre_thermostat_mt_mmi_mmi: Option<PreState_thermostat_mt_mmi_mmi>,
   pre_thermostat_mt_ma_ma: Option<PreState_thermostat_mt_ma_ma>,
   pre_thermostat_mt_mmm_mmm: Option<PreState_thermostat_mt_mmm_mmm>,
-  pre_operator_interface_oip_oit: Option<PreState_operator_interface_oip_oit>
+  pre_operator_interface_oip_oit: Option<PreState_operator_interface_oip_oit>,
 }
 
 impl gumbo_monitor_process_gumbo_monitor_thread {

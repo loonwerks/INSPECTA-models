@@ -10,7 +10,7 @@ verus! {
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct TempWstatus_i {
     pub degrees: i32,
-    pub status: ValueStatus
+    pub status: ValueStatus,
   }
 
   impl Default for TempWstatus_i {

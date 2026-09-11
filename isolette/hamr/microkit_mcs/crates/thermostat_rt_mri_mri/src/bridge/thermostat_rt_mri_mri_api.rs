@@ -105,7 +105,7 @@ verus! {
     pub ghost lower_desired_temp: Isolette_Data_Model::Temp_i,
     pub ghost displayed_temp: Isolette_Data_Model::Temp_i,
     pub ghost regulator_status: Isolette_Data_Model::Status,
-    pub ghost interface_failure: Isolette_Data_Model::Failure_Flag_i
+    pub ghost interface_failure: Isolette_Data_Model::Failure_Flag_i,
   }
 
   impl<API: thermostat_rt_mri_mri_Put_Api> thermostat_rt_mri_mri_Application_Api<API> {

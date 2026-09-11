@@ -28,18 +28,10 @@ bool put_level(const int32_t *data) {
   return true;
 }
 
-bool peek_level(int32_t *data) {
-  return sb_queue_int32_t_1_peek_latest((sb_queue_int32_t_1_t *) level_queue_1, data);
-}
-
 bool put_boolean_value(const bool *data) {
   sb_queue_bool_1_enqueue((sb_queue_bool_1_t *) boolean_value_queue_1, (bool *) data);
 
   return true;
-}
-
-bool peek_boolean_value(bool *data) {
-  return sb_queue_bool_1_peek_latest((sb_queue_bool_1_t *) boolean_value_queue_1, data);
 }
 
 bool put_character_value(const char *data) {
@@ -48,18 +40,10 @@ bool put_character_value(const char *data) {
   return true;
 }
 
-bool peek_character_value(char *data) {
-  return sb_queue_char_1_peek_latest((sb_queue_char_1_t *) character_value_queue_1, data);
-}
-
 bool put_signed_8_value(const int8_t *data) {
   sb_queue_int8_t_1_enqueue((sb_queue_int8_t_1_t *) signed_8_value_queue_1, (int8_t *) data);
 
   return true;
-}
-
-bool peek_signed_8_value(int8_t *data) {
-  return sb_queue_int8_t_1_peek_latest((sb_queue_int8_t_1_t *) signed_8_value_queue_1, data);
 }
 
 bool put_signed_16_value(const int16_t *data) {
@@ -68,18 +52,10 @@ bool put_signed_16_value(const int16_t *data) {
   return true;
 }
 
-bool peek_signed_16_value(int16_t *data) {
-  return sb_queue_int16_t_1_peek_latest((sb_queue_int16_t_1_t *) signed_16_value_queue_1, data);
-}
-
 bool put_unsigned_8_value(const uint8_t *data) {
   sb_queue_uint8_t_1_enqueue((sb_queue_uint8_t_1_t *) unsigned_8_value_queue_1, (uint8_t *) data);
 
   return true;
-}
-
-bool peek_unsigned_8_value(uint8_t *data) {
-  return sb_queue_uint8_t_1_peek_latest((sb_queue_uint8_t_1_t *) unsigned_8_value_queue_1, data);
 }
 
 bool put_unsigned_16_value(const uint16_t *data) {
@@ -88,18 +64,10 @@ bool put_unsigned_16_value(const uint16_t *data) {
   return true;
 }
 
-bool peek_unsigned_16_value(uint16_t *data) {
-  return sb_queue_uint16_t_1_peek_latest((sb_queue_uint16_t_1_t *) unsigned_16_value_queue_1, data);
-}
-
 bool put_sample(const int32_t *data) {
   sb_queue_int32_t_1_enqueue((sb_queue_int32_t_1_t *) sample_queue_1, (int32_t *) data);
 
   return true;
-}
-
-bool peek_sample(int32_t *data) {
-  return sb_queue_int32_t_1_peek_latest((sb_queue_int32_t_1_t *) sample_queue_1, data);
 }
 
 bool put_flag(const bool *data) {
@@ -108,18 +76,10 @@ bool put_flag(const bool *data) {
   return true;
 }
 
-bool peek_flag(bool *data) {
-  return sb_queue_bool_1_peek_latest((sb_queue_bool_1_t *) flag_queue_1, data);
-}
-
 bool put_operating_state(const Exhaustive_Monitor_C_OperatingState *data) {
   sb_queue_Exhaustive_Monitor_C_OperatingState_1_enqueue((sb_queue_Exhaustive_Monitor_C_OperatingState_1_t *) operating_state_queue_1, (Exhaustive_Monitor_C_OperatingState *) data);
 
   return true;
-}
-
-bool peek_operating_state(Exhaustive_Monitor_C_OperatingState *data) {
-  return sb_queue_Exhaustive_Monitor_C_OperatingState_1_peek_latest((sb_queue_Exhaustive_Monitor_C_OperatingState_1_t *) operating_state_queue_1, data);
 }
 
 bool put_samples(const Exhaustive_Monitor_C_Samples *data) {
@@ -128,18 +88,10 @@ bool put_samples(const Exhaustive_Monitor_C_Samples *data) {
   return true;
 }
 
-bool peek_samples(Exhaustive_Monitor_C_Samples *data) {
-  return sb_queue_Exhaustive_Monitor_C_Samples_1_peek_latest((sb_queue_Exhaustive_Monitor_C_Samples_1_t *) samples_queue_1, data);
-}
-
 bool put_telemetry(const Exhaustive_Monitor_C_Telemetry_i *data) {
   sb_queue_Exhaustive_Monitor_C_Telemetry_i_1_enqueue((sb_queue_Exhaustive_Monitor_C_Telemetry_i_1_t *) telemetry_queue_1, (Exhaustive_Monitor_C_Telemetry_i *) data);
 
   return true;
-}
-
-bool peek_telemetry(Exhaustive_Monitor_C_Telemetry_i *data) {
-  return sb_queue_Exhaustive_Monitor_C_Telemetry_i_1_peek_latest((sb_queue_Exhaustive_Monitor_C_Telemetry_i_1_t *) telemetry_queue_1, data);
 }
 
 bool put_pulse() {
@@ -148,12 +100,6 @@ bool put_pulse() {
   sb_queue_uint8_t_1_enqueue((sb_queue_uint8_t_1_t *) pulse_queue_1, (uint8_t *) data);
 
   return true;
-}
-
-bool peek_pulse() {
-  uint8_t eventPortPayload;
-  uint8_t *data = &eventPortPayload;
-  return sb_queue_uint8_t_1_peek_latest((sb_queue_uint8_t_1_t *) pulse_queue_1, data);
 }
 
 void init(void) {

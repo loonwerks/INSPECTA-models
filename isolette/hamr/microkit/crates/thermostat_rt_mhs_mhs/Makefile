@@ -5,6 +5,8 @@ microkit_sdk_config_dir := $(MICROKIT_SDK)/board/$(MICROKIT_BOARD)/$(MICROKIT_CO
 sel4_include_dirs := $(firstword $(wildcard $(microkit_sdk_config_dir)/include \
                                             $(microkit_sdk_config_dir)/debug/include))
 
+# PLACEHOLDER MARKER R2U2 MAKE RULES
+
 # The toolchain is pinned to a stable release channel (see rust-toolchain.toml),
 # which rejects the #![feature(..)] attributes the generated crates declare, so
 # every cargo invocation -- building, verifying and testing alike -- needs this.
@@ -41,22 +43,22 @@ all: build-verus-release
 #       ones (e.g. --target, -Z ...), otherwise it errors out.  CARGO_FLAGS
 #       holds the Verus-irrelevant options, so it must come last.
 
-build-verus-release:
+build-verus-release: $(R2U2_BUILD_DEPS)
 	$(BUILD_ENV_VARS) cargo-verus build --features sel4 --release $(CARGO_FLAGS) -- $(SMT_OPTS)
 
-build-verus:
+build-verus: $(R2U2_BUILD_DEPS)
 	$(BUILD_ENV_VARS) cargo-verus build --features sel4 $(CARGO_FLAGS) -- $(SMT_OPTS)
 
-build-release:
+build-release: $(R2U2_BUILD_DEPS)
 	$(BUILD_ENV_VARS) cargo build --features sel4 $(CARGO_FLAGS) --release
 
-build:
+build: $(R2U2_BUILD_DEPS)
 	$(BUILD_ENV_VARS) cargo build --features sel4 $(CARGO_FLAGS)
 
-verus:
+verus: $(R2U2_BUILD_DEPS)
 	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- $(SMT_OPTS)
 
-verus-json:
+verus-json: $(R2U2_BUILD_DEPS)
 	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- $(SMT_OPTS) --output-json --time > verus_results.json
 
 # Test Example:
@@ -66,10 +68,10 @@ verus-json:
 #   Run only unit tests whose name contains 'proptest'
 #   Usage: make test args=proptest
 
-test-release:
+test-release: $(R2U2_BUILD_DEPS)
 	$(ENV_VARS) cargo test $(args) --release
 
-test:
+test: $(R2U2_BUILD_DEPS)
 	$(ENV_VARS) cargo test $(args)
 
 # Coverage Example:
@@ -79,7 +81,7 @@ test:
 #   Generate a test coverage report for unit tests whose name contains 'proptest'
 #   Usage: make coverage args=proptest
 
-coverage:
+coverage: $(R2U2_BUILD_DEPS)
 	cargo install grcov
 	@exists=0; if [ -f target/coverage/report/index.html ]; then exists=1; fi; \
 	rm -rf target/coverage; \
@@ -90,3 +92,4 @@ coverage:
 
 clean:
 	cargo clean
+	rm -f src/component/spec.bin

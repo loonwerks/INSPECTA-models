@@ -193,7 +193,7 @@ verus! {
     pub ghost myFloat64: Option<f64>,
     pub ghost myEnum: Option<Aadl_Datatypes::MyEnum>,
     pub ghost myStruct: Option<Aadl_Datatypes::MyStruct_i>,
-    pub ghost myArray1: Option<Aadl_Datatypes::MyArrayOneDim>
+    pub ghost myArray1: Option<Aadl_Datatypes::MyArrayOneDim>,
   }
 
   impl<API: consumer_consumer_Put_Api> consumer_consumer_Application_Api<API> {

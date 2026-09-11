@@ -111,7 +111,7 @@ jobs:
           export PROVERS_BIN_DIR=$GITHUB_WORKSPACE/INSPECTA-models/provers-env/bin
           . ${PROVERS_BIN_DIR}/env.sh
 
-          ${SIREUM_HOME}/bin/build.cmd setup
+          ${SIREUM_HOME}/bin/build.cmd jar
           rm -rf ${SIREUM_HOME}/.git
           rm -rf ${SIREUM_HOME}/out
 

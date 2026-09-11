@@ -61,7 +61,7 @@ verus! {
     pub ghost ArduPilot_ArduPilot_EthernetFramesTx: Option<SW::RawEthernetMessage>,
     pub ghost Firewall_Firewall_EthernetFramesRxOut: Option<SW::RawEthernetMessage>,
     pub ghost Firewall_Firewall_EthernetFramesTxOut: Option<SW::RawEthernetMessage>,
-    pub ghost LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx: Option<SW::RawEthernetMessage>
+    pub ghost LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx: Option<SW::RawEthernetMessage>,
   }
 
   impl<API: domain_monitor_process_domain_monitor_thread_Put_Api> domain_monitor_process_domain_monitor_thread_Application_Api<API> {

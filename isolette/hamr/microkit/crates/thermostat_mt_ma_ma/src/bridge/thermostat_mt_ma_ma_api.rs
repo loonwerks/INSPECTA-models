@@ -69,7 +69,7 @@ verus! {
     pub ghost lower_alarm_temp: Isolette_Data_Model::Temp_i,
     pub ghost upper_alarm_temp: Isolette_Data_Model::Temp_i,
     pub ghost monitor_mode: Isolette_Data_Model::Monitor_Mode,
-    pub ghost alarm_control: Isolette_Data_Model::On_Off
+    pub ghost alarm_control: Isolette_Data_Model::On_Off,
   }
 
   impl<API: thermostat_mt_ma_ma_Put_Api> thermostat_mt_ma_ma_Application_Api<API> {

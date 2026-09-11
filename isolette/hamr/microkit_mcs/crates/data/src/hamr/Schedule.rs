@@ -12,7 +12,7 @@ verus! {
     pub timeslices: ScheduleTimeslices,
     pub timeslice_ch: ScheduleChannels,
     pub is_user_partition: ScheduleUserPartitions,
-    pub num_timeslices: u32
+    pub num_timeslices: u32,
   }
 
   impl Default for Schedule {

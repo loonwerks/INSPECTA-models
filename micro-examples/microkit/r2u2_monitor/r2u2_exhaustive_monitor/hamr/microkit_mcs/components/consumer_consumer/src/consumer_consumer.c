@@ -30,14 +30,6 @@ bool get_healthy(bool *data) {
   return isFresh;
 }
 
-bool peek_healthy(bool *data) {
-  sb_event_counter_t numDropped;
-  bool freshData;
-  bool isFresh = sb_queue_bool_1_peek((sb_queue_bool_1_Recv_t *) &healthy_recv_queue, &numDropped, &freshData);
-  *data = isFresh ? freshData : last_healthy_payload;
-  return isFresh;
-}
-
 bool echo_is_empty(void) {
   return sb_queue_int32_t_1_is_empty(&echo_recv_queue);
 }
@@ -49,11 +41,6 @@ bool get_echo_poll(sb_event_counter_t *numDropped, int32_t *data) {
 bool get_echo(int32_t *data) {
   sb_event_counter_t numDropped;
   return get_echo_poll (&numDropped, data);
-}
-
-bool peek_echo(int32_t *data) {
-  sb_event_counter_t numDropped;
-  return sb_queue_int32_t_1_peek((sb_queue_int32_t_1_Recv_t *) &echo_recv_queue, &numDropped, data);
 }
 
 bool alert_result_is_empty(void) {
@@ -69,11 +56,6 @@ bool get_alert_result(bool *data) {
   return get_alert_result_poll (&numDropped, data);
 }
 
-bool peek_alert_result(bool *data) {
-  sb_event_counter_t numDropped;
-  return sb_queue_bool_1_peek((sb_queue_bool_1_Recv_t *) &alert_result_recv_queue, &numDropped, data);
-}
-
 bool ack_is_empty(void) {
   return sb_queue_uint8_t_1_is_empty(&ack_recv_queue);
 }
@@ -87,13 +69,6 @@ bool get_ack_poll(sb_event_counter_t *numDropped) {
 bool get_ack() {
   sb_event_counter_t numDropped;
   return get_ack_poll (&numDropped);
-}
-
-bool peek_ack() {
-  uint8_t eventPortPayload;
-  uint8_t *data = &eventPortPayload;
-  sb_event_counter_t numDropped;
-  return sb_queue_uint8_t_1_peek((sb_queue_uint8_t_1_Recv_t *) &ack_recv_queue, &numDropped, data);
 }
 
 void init(void) {

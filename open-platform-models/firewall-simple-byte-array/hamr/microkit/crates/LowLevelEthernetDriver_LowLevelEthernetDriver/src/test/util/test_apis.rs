@@ -7,7 +7,7 @@ use proptest::prelude::*;
 
 /// container for component's incoming port values
 pub struct PreStateContainer {
-  pub api_EthernetFramesTx: Option<SW::RawEthernetMessage>
+  pub api_EthernetFramesTx: Option<SW::RawEthernetMessage>,
 }
 
 /// setter for component's incoming port values

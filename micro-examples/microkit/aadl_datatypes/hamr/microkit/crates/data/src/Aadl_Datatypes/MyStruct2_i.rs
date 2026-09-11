@@ -9,7 +9,7 @@ verus! {
   #[repr(C)]
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct MyStruct2_i {
-    pub fieldSChar: u8
+    pub fieldSChar: u8,
   }
 
   impl Default for MyStruct2_i {

@@ -9,7 +9,7 @@ use proptest::prelude::*;
 pub struct PreStateContainer {
   pub api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>,
   pub api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>,
-  pub api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>
+  pub api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>,
 }
 
 /// setter for component's incoming port values

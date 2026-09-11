@@ -39,7 +39,7 @@ verus! {
     pub api: API,
 
     pub ghost p1_t1_write_port: i32,
-    pub ghost p2_t2_write_port: i32
+    pub ghost p2_t2_write_port: i32,
   }
 
   impl<API: domain_monitor_process_domain_monitor_thread_Put_Api> domain_monitor_process_domain_monitor_thread_Application_Api<API> {

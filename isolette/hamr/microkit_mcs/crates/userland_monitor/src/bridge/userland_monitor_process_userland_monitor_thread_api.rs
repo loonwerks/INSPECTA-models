@@ -270,7 +270,7 @@ verus! {
     pub ghost thermostat_mt_dmf_dmf_internal_failure: Isolette_Data_Model::Failure_Flag_i,
     pub ghost temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i,
     pub ghost sched_state: hamr::SchedState,
-    pub ghost sched_schedule: hamr::Schedule
+    pub ghost sched_schedule: hamr::Schedule,
   }
 
   impl<API: userland_monitor_process_userland_monitor_thread_Put_Api> userland_monitor_process_userland_monitor_thread_Application_Api<API> {

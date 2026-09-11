@@ -325,7 +325,7 @@ verus! {
     pub ghost thermostat_rt_mrm_mrm_sv_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
     pub ghost thermostat_mt_mmi_mmi_sv_lastCmd: Isolette_Data_Model::On_Off,
     pub ghost thermostat_mt_ma_ma_sv_lastCmd: Isolette_Data_Model::On_Off,
-    pub ghost thermostat_mt_mmm_mmm_sv_lastMonitorMode: Isolette_Data_Model::Monitor_Mode
+    pub ghost thermostat_mt_mmm_mmm_sv_lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
   }
 
   impl<API: gumbo_monitor_process_gumbo_monitor_thread_Put_Api> gumbo_monitor_process_gumbo_monitor_thread_Application_Api<API> {

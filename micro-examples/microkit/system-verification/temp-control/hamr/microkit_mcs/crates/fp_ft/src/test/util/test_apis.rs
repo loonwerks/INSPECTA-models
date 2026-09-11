@@ -7,7 +7,7 @@ use proptest::prelude::*;
 
 /// container for component's incoming port values
 pub struct PreStateContainer {
-  pub api_fanCmd: Option<TempControl_SysVerif::FanCmd>
+  pub api_fanCmd: Option<TempControl_SysVerif::FanCmd>,
 }
 
 /// setter for component's incoming port values

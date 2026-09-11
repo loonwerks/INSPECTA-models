@@ -10,7 +10,7 @@ verus! {
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct Temperature {
     pub degrees: i32,
-    pub unit: TempUnit
+    pub unit: TempUnit,
   }
 
   impl Default for Temperature {

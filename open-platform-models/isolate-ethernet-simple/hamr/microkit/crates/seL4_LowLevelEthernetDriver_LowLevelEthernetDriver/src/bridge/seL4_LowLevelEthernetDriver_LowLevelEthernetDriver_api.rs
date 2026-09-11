@@ -36,7 +36,7 @@ verus! {
     pub api: API,
 
     pub ghost EthernetFramesTx: Option<SW::StructuredEthernetMessage_i>,
-    pub ghost EthernetFramesRx: Option<SW::StructuredEthernetMessage_i>
+    pub ghost EthernetFramesRx: Option<SW::StructuredEthernetMessage_i>,
   }
 
   impl<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api> seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API> {

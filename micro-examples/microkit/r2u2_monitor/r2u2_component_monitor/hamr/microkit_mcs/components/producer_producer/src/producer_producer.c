@@ -18,10 +18,6 @@ bool put_sample(const int32_t *data) {
   return true;
 }
 
-bool peek_sample(int32_t *data) {
-  return sb_queue_int32_t_1_peek_latest((sb_queue_int32_t_1_t *) sample_queue_1, data);
-}
-
 bool sample_alert_is_empty(void) {
   return sb_queue_uint8_t_1_is_empty(&sample_alert_recv_queue);
 }
@@ -35,13 +31,6 @@ bool get_sample_alert_poll(sb_event_counter_t *numDropped) {
 bool get_sample_alert() {
   sb_event_counter_t numDropped;
   return get_sample_alert_poll (&numDropped);
-}
-
-bool peek_sample_alert() {
-  uint8_t eventPortPayload;
-  uint8_t *data = &eventPortPayload;
-  sb_event_counter_t numDropped;
-  return sb_queue_uint8_t_1_peek((sb_queue_uint8_t_1_Recv_t *) &sample_alert_recv_queue, &numDropped, data);
 }
 
 void init(void) {

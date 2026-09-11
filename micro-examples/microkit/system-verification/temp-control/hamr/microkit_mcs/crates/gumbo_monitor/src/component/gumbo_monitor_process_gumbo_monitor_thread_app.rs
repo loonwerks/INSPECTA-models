@@ -7,12 +7,12 @@ use crate::gumbox::tcp_tct_containers::*;
 use crate::gumbox::fp_ft_containers::*;
 
 pub struct gumbo_monitor_process_gumbo_monitor_thread {
-  // PLACEHOLDER MARKER STATE VARS,
+  // PLACEHOLDER MARKER STATE VARS
   frame_period: i32,
   last_index: u32,
   prev_user_ch: hamr::ScheduleChannels,
   next_user_ch: hamr::ScheduleChannels,
-  pre_tcp_tct: Option<PreState_tcp_tct>
+  pre_tcp_tct: Option<PreState_tcp_tct>,
 }
 
 impl gumbo_monitor_process_gumbo_monitor_thread {

@@ -96,7 +96,7 @@ jobs:
           export SIREUM_HOME=$(pwd)/Sireum
           export PATH=${SIREUM_HOME}/bin:${PATH}
 
-          ${SIREUM_HOME}/bin/build.cmd setup
+          ${SIREUM_HOME}/bin/build.cmd jar
           rm -rf ${SIREUM_HOME}/.git
           rm -rf ${SIREUM_HOME}/out
           

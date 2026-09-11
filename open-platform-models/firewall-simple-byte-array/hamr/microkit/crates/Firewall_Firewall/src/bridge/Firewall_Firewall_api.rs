@@ -56,7 +56,7 @@ verus! {
     pub ghost EthernetFramesRxIn: Option<SW::RawEthernetMessage>,
     pub ghost EthernetFramesTxIn: Option<SW::RawEthernetMessage>,
     pub ghost EthernetFramesRxOut: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesTxOut: Option<SW::RawEthernetMessage>
+    pub ghost EthernetFramesTxOut: Option<SW::RawEthernetMessage>,
   }
 
   impl<API: Firewall_Firewall_Put_Api> Firewall_Firewall_Application_Api<API> {

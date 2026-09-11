@@ -127,7 +127,7 @@ verus! {
     pub ghost tcp_tct_sv_fanError: bool,
     pub ghost tcp_tct_setPoint: Option<TempControl_SysVerif::SetPoint>,
     pub ghost sched_state: hamr::SchedState,
-    pub ghost sched_schedule: hamr::Schedule
+    pub ghost sched_schedule: hamr::Schedule,
   }
 
   impl<API: sys_nominal_monitor_process_sys_nominal_monitor_thread_Put_Api> sys_nominal_monitor_process_sys_nominal_monitor_thread_Application_Api<API> {

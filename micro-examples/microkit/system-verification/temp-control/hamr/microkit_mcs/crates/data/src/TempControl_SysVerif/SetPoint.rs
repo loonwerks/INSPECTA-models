@@ -10,7 +10,7 @@ verus! {
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct SetPoint {
     pub low: Temperature,
-    pub high: Temperature
+    pub high: Temperature,
   }
 
   impl Default for SetPoint {

@@ -19,7 +19,7 @@ use crate::gumbox::operator_interface_oip_oit_containers::*;
 use sys_assert_functions::*;
 
 pub struct sys_nominal_monitor_process_sys_nominal_monitor_thread {
-  // PLACEHOLDER MARKER STATE VARS,
+  // PLACEHOLDER MARKER STATE VARS
   frame_period: i32,
   last_index: u32,
   prev_user_ch: hamr::ScheduleChannels,
@@ -32,7 +32,7 @@ pub struct sys_nominal_monitor_process_sys_nominal_monitor_thread {
   pre_thermostat_mt_mmm_mmm: Option<PreState_thermostat_mt_mmm_mmm>,
   pre_operator_interface_oip_oit: Option<PreState_operator_interface_oip_oit>,
   sys_assert_last_index: u32,
-  sys_assert_ready: u64
+  sys_assert_ready: u64,
 }
 
 impl sys_nominal_monitor_process_sys_nominal_monitor_thread {

@@ -14,7 +14,7 @@ verus! {
     pub frameProtocol: FrameProtocol,
     pub portIsWhitelisted: bool,
     pub arpType: ARP_Type,
-    pub rawMessage: RawEthernetMessage
+    pub rawMessage: RawEthernetMessage,
   }
 
   impl Default for StructuredEthernetMessage_i {

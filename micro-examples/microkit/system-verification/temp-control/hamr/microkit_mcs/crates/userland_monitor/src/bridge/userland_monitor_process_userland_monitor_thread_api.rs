@@ -83,7 +83,7 @@ verus! {
     pub ghost fp_ft_fanAck: Option<TempControl_SysVerif::FanAck>,
     pub ghost tcp_tct_setPoint: Option<TempControl_SysVerif::SetPoint>,
     pub ghost sched_state: hamr::SchedState,
-    pub ghost sched_schedule: hamr::Schedule
+    pub ghost sched_schedule: hamr::Schedule,
   }
 
   impl<API: userland_monitor_process_userland_monitor_thread_Put_Api> userland_monitor_process_userland_monitor_thread_Application_Api<API> {

@@ -9,7 +9,7 @@ verus! {
   #[repr(C)]
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct Temp_i {
-    pub degrees: i32
+    pub degrees: i32,
   }
 
   impl Default for Temp_i {

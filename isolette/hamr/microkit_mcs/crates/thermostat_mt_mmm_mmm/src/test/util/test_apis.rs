@@ -9,7 +9,7 @@ use proptest::prelude::*;
 pub struct PreStateContainer {
   pub api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   pub api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
-  pub api_internal_failure: Isolette_Data_Model::Failure_Flag_i
+  pub api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
 }
 
 /// container for component's incoming port values and GUMBO state variables
@@ -17,7 +17,7 @@ pub struct PreStateContainer_wGSV {
   pub In_lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
   pub api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   pub api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
-  pub api_internal_failure: Isolette_Data_Model::Failure_Flag_i
+  pub api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
 }
 
 /// setter for component's incoming port values
