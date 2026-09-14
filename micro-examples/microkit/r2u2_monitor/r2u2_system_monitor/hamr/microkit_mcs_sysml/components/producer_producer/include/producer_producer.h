@@ -25,4 +25,3 @@ void *memset(void *dest, int c, size_t n);
 
 
 bool put_sample(const int32_t *data);
-bool peek_sample(int32_t *data);

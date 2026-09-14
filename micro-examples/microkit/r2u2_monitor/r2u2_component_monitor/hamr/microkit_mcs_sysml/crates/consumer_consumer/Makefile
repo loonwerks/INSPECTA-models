@@ -5,23 +5,21 @@ microkit_sdk_config_dir := $(MICROKIT_SDK)/board/$(MICROKIT_BOARD)/$(MICROKIT_CO
 sel4_include_dirs := $(firstword $(wildcard $(microkit_sdk_config_dir)/include \
                                             $(microkit_sdk_config_dir)/debug/include))
 
-# BEGIN MARKER R2U2 MAKE RULES
+# BEGIN MARKER FOR R2U2_BUILD_DEPS RULE
 .DEFAULT_GOAL := all
-R2U2_SPEC_BIN := src/component/spec.bin
+R2U2_BUILD_DEPS := src/component/spec.bin
 
 r2u2_cli:
 	@echo "Checking/Updating r2u2_cli from crates.io..."
 	cargo +stable install r2u2_cli --version 4.2.4
 
-$(R2U2_SPEC_BIN): r2u2_cli
+$(R2U2_BUILD_DEPS): r2u2_cli
 	mkdir -p .cargo && \
 	cd src/component && \
 	sed '/^--/d' spec.map > temp.map && \
 	r2u2_cli compile -o . -b ../../.cargo/config.toml spec.c2po temp.map && \
 	rm temp.map
-# END MARKER R2U2 MAKE RULES
-
-R2U2_BUILD_DEPS = $(R2U2_SPEC_BIN)
+# END MARKER FOR R2U2_BUILD_DEPS RULE
 
 # The toolchain is pinned to a stable release channel (see rust-toolchain.toml),
 # which rejects the #![feature(..)] attributes the generated crates declare, so
