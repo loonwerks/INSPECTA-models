@@ -160,6 +160,12 @@ PKGS=(
   # downloads, so this belongs in every profile: without it a container cannot
   # re-run 'sireum --init', let alone a full Sireum install.
   unzip
+  # The generated R2U2 C monitors' makefiles turn spec.bin into a C array with
+  # 'xxd -i -n', so building a model needs it and the runtime profile does too.
+  # GitHub's Ubuntu runner images carry xxd incidentally, so its absence is felt
+  # only inside the container, where the microkit_mcs_c build dies with
+  # 'xxd: not found' and make reports exit 127.
+  xxd
 )
 # Needed only while building the tools.
 if [ "${PROVERS_DEPS_PROFILE}" != "runtime" ]; then

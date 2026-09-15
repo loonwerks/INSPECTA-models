@@ -80,6 +80,17 @@ jobs:
         with:
           path: Sireum/bin/linux/fmide
           key: ${{ runner.os }}-${{ hashFiles('Sireum/bin/install/fmide*') }}-fmide
+      # TEMPORARY -- remove once jasonbelt/microkit_provers:latest is rebuilt with
+      # the xxd added to provers-env/bin/deps.sh. The generated R2U2 C monitors'
+      # makefiles convert spec.bin into a C array with 'xxd -i -n', and the published
+      # image predates that requirement, so every microkit_mcs_c build fails with
+      # 'xxd: not found' (make exit 127). Kept separate from the Build step so that
+      # deleting it later is a clean revert.
+      - name: Install xxd (until the image carries it)
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xxd
       - name: Build
         shell: bash
         run: |
