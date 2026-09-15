@@ -18,9 +18,13 @@ package Integer_Toy_Extended {
         port Output: DataPort { out :>> type : Base_Types::Integer_32; }
 
         language "GUMBO" /*{
+            initialize
+                guarantee A_Initial_Input_Range "A input is initially in the system range":
+                    Input < 10 [i32];
+
             compute
                 assume A_Input_Range "A input range":
-                    Input < 20 [i32];
+                    Input < 50 [i32];
 
                 guarantee A_Output_Range "A output range":
                     Output < 2 [i32] * Input;
@@ -34,7 +38,7 @@ package Integer_Toy_Extended {
         language "GUMBO" /*{
             compute
                 assume B_Input_Range "B input range":
-                    Input < 20 [i32];
+                    Input < 50 [i32];
 
                 guarantee B_Output_Range "B output range":
                     Output < Input + 15 [i32];
@@ -143,15 +147,19 @@ package Integer_Toy_Extended {
                     after a "A establishes its output bound and B's input assumption":
                         (system_input < 10 [i32]) &
                         (a_output < 2 [i32] * system_input) &
-                        (b_input < 20 [i32]);
+                        (b_input < 50 [i32]);
 
                     after b "B establishes its output bound for C":
                         (system_input < 10 [i32]) &
                         (c_input1 < 2 [i32] * system_input) &
                         (c_input2 < c_input1 + 15 [i32]);
 
-                    after c "the top-level result is available":
-                        system_output < 50 [i32];
+                    after c "the top-level result is available and the input invariant is preserved":
+                        (system_input < 10 [i32]) &
+                        (system_output < 50 [i32]);
+
+                    at END "the input invariant is preserved across the schedule boundary":
+                        system_input < 10 [i32];
                 }
             }
         }*/
@@ -212,23 +220,28 @@ package Integer_Toy_Extended {
                 }
 
                 property System_Output_Range :> System_Input_Range
-                    "System output range: Output < 55." {
+                    "System output range: Output < 100." {
 
                     after top_a "the nested A establishes its output bound and B's input assumption":
                         (system_input < 10 [i32]) &
                         (top_a_output < 2 [i32] * system_input) &
-                        (top_b_input < 20 [i32]);
+                        (top_b_input < 50 [i32]);
 
                     after top_b "the nested B establishes its output bound for C":
                         (system_input < 10 [i32]) &
                         (top_c_input1 < 2 [i32] * system_input) &
                         (top_c_input2 < top_c_input1 + 15 [i32]);
 
-                    after top_c "the nested top-level result is available":
-                        top_output < 50 [i32];
+                    after top_c "the nested top-level result is available and the input invariant is preserved":
+                        (system_input < 10 [i32]) &
+                        (top_output < 50 [i32]);
 
-                    after outer_a "the above-top result is available":
-                        system_output < 55 [i32];
+                    after outer_a "the above-top result is available and the input invariant is preserved":
+                        (system_input < 10 [i32]) &
+                        (system_output < 100 [i32]);
+
+                    at END "the input invariant is preserved across the schedule boundary":
+                        system_input < 10 [i32];
                 }
             }
         }*/
