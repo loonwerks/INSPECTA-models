@@ -75,6 +75,8 @@ Consequently, GUMBO’s system proof is compositional at individual schedule tra
      - **RESTRICTION:** A parent proof must therefore flatten those internals again or restate the result instead of relying only on the verified subsystem contract. This requires more lines of code because it does not promote reusability.
  9. GUMBO's `In(x)` refers only to a state variable's value at the beginning of the current component dispatch. It does not provide general temporal operators for referring to earlier system cycles, expressing historical conditions, or stating bounded response properties across multiple dispatches.
      - **RESTRICTION:** Temporal properties are difficult to encode in the current GUMBO grammar.
+ 10. GUMBO does not provide realizability checking; GUMBO treats each guarantee as a premise for proving compositional validity.
+     - **RESTRICTION:** There could be contradictory GUMBO guarantees that are not identified as contradictory until the code is implemented and verified and/or tested.
 
 ### <u>Solutions to Problems Above:</u>
 
@@ -86,12 +88,12 @@ Consequently, GUMBO’s system proof is compositional at individual schedule tra
     b. Hide the system proof by default to avoid confusing users.
     c. Create a VS Code plugin that simply verifies the model.
  4. For system-proof-only generation from the HAMR CLI, allow models that do not conform to HAMR's deployment structure.
- 5. Verus does not directly produce AGREE-style counterexample traces. As an immediate improvement, HAMR should map a failed VC back to its GUMBO property, schedule place, available premises, and unproved goal. Full traces would require HAMR to obtain a model for the failed VC from the underlying solver and reconstruct the corresponding schedule-ordered system states; if Verus does not expose that model, its solver interface would need to be extended.
+ 5. ***OPEN ISSUE:*** Verus does not directly produce model-level counterexample traces.
  6. Automatically chain component contracts by automatically deriving intermediate place assertions through the schedule.
  7. Add first-class system `assume`, `guarantee`, and `invariant` clauses.
  8. Add hierarchical closure. After verifying a subsystem, HAMR should generate a reusable boundary-level transition relation and a proved theorem stating that the subsystem assumptions imply its guarantees. A parent proof should import and use that theorem for the direct child rather than flattening the child's internal components. The summary must be regenerated or invalidated whenever the subsystem model, contracts, or schedule changes.
  9. Add temporal constructs to GUMBO and lower them to Verus ghost state and history. HAMR can generate the initialization, transition, and loop-closure obligations needed for historical and bounded-time safety properties. Verus can discharge these inductive obligations, but it does not provide temporal model checking automatically; some properties may require user-supplied invariants or deeper induction, and unbounded liveness should be treated as a separate capability.  
-
+ 10. ***OPEN ISSUE:*** Verus does not directly provide realizability checking.
 ---
 
 ## SOLUTION 2: Support AGREE in SysMLv2
