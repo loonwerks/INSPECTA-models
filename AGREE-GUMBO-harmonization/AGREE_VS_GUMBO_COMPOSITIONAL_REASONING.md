@@ -88,7 +88,8 @@ Consequently, GUMBO’s system proof is compositional at individual schedule tra
     b. Hide the system proof by default to avoid confusing users.
     c. Create a VS Code plugin that simply verifies the model.
  4. For system-proof-only generation from the HAMR CLI, allow models that do not conform to HAMR's deployment structure.
- 5. ***OPEN ISSUE:*** Verus does not directly produce model-level counterexample traces.
+ 5. ***OPEN ISSUE:*** Verus does not directly produce model-level counterexample traces. We can definitely add more details to the error message with Verus `proof_note`. See image below for an example.
+ <p align="center"><img src="./Toy_Example/image5.png" width="500"></p>
  6. Automatically chain component contracts by automatically deriving intermediate place assertions through the schedule.
  7. Add first-class system `assume`, `guarantee`, and `invariant` clauses.
  8. Add hierarchical closure. After verifying a subsystem, HAMR should generate a reusable boundary-level transition relation and a proved theorem stating that the subsystem assumptions imply its guarantees. A parent proof should import and use that theorem for the direct child rather than flattening the child's internal components. The summary must be regenerated or invalidated whenever the subsystem model, contracts, or schedule changes.
