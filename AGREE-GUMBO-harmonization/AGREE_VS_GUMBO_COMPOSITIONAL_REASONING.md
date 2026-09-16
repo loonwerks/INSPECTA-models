@@ -34,6 +34,10 @@ Consequently, GUMBO’s system proof is compositional at individual schedule tra
 
 ## Problems with GUMBO Compositional Reasoning
 
+**NOTE:** GUMBO currently notes the following here: https://hamr.sireum.org/hamr-doc/gumbo-system-properties/
+
+     "The current state of a the tool is a “usable prototype”. The approach currently has a number of manual features (like adding support system assertions to enable system properties to be proved) that we will automate in the future. Moreover, other then syntax highlighting and checking, there is no high-level model IDE support that, for example, reports failure of VCs to verify in terms of problem markers in model-level specifications. All of these features will be added later."
+
  1. The schedule in the model is ill-defined as follows:
    
      a. The generated schedule by HAMR is defined by the `Domain` attribute set in the model based on increasing order (i.e., smaller domains are run before larger domains)
@@ -44,18 +48,18 @@ Consequently, GUMBO’s system proof is compositional at individual schedule tra
      b. The `composition` clause has a schedule redefined in the `schema` section.
 
      - **RESTRICTION:** The only check that this `schema` matches the schedule occurs if the `runtime-monitoring` feature is enabled
- 2. Each component, port, and state variable that is utilized in the GUMBO `composition` subclause MUST be assiegned an alias.
+ 2. Each component, port, and state variable that is utilized in the GUMBO `composition` subclause MUST be assigned an alias.
      - **RESTRICTION:** Cannot refer to components, ports, or states natively in property, which can unnecessarily inflate the `composition` subclause. Refer to below for an example.
        <p align="center"><img src="./Toy_Example/image4.png" width="250"></p>
  3. The GUMBO system proof is generated into a Verus proof alongside all the other HAMR artifacts. To verify, the user has to verify a specific rust crate within the generated code.
-     - **RESTRICTION:** The GUMBO system proof is not restricted to the model level anaylsis (i.e., analyzed before a user moves to implementation).
+     - **RESTRICTION:** System verification is not currently available as a model-only action; users must generate HAMR artifacts and invoke the generated proof crate.
  4. The structure of the model must follow HAMR expected structure, e.g., single thread to a single process.
      - **RESTRICTION:** Cannot use GUMBO to analyze models without HAMR targets.
  5. No counterexamples or guidance produced when VCs fail. See image below for an example.
 
      <p align="center"><img src="./Toy_Example/image.png" width="750"></p>
- 6. GUMBO does not directly chain component contracts to prove a system property; each contract is used only to prove the assertions immediately before and after that component (using `before` and `after` assertions), and those assertions are then used to continue the proof through the schedule.
-     - **RESTRICTION:** Contracts are duplicated or restated. Review below the AGREE and GUMBO system property side-by-side.
+ 6. GUMBO does not directly chain component contracts to prove a system property; each contract is used only to prove the assertions immediately before and after that component (using `before` and `after` assertions), and those assertions are then used to continue the proof through the schedule. (This restriction is even noted here: https://hamr.sireum.org/hamr-doc/gumbo-system-properties/)
+     - **RESTRICTION:** Facts derived from component contracts must often be restated in intermediate place assertions. Review below the AGREE and GUMBO system property side-by-side.
 <table>
   <tr>
     <td><img src="./Toy_Example/image2.png" width="80%"></td>
@@ -63,19 +67,29 @@ Consequently, GUMBO’s system proof is compositional at individual schedule tra
   </tr>
 </table>
 
+ 7. GUMBO doesn't allow first class system properties like `assume`, `guarantee`, and `invariant`. (See image above for GUMBO's alternative.)
+    - **RESTRICTION:**  System-level properties are difficult to compose by human users (LLM's appear to not struggle with the current structure but humans definitely will).
+ 8. GUMBO system proofs do not provide hierarchical closure. A composition is verified over a flattened state containing its leaf components, but the verified result is not emitted as a reusable boundary contract for the enclosing subsystem. 
+     - **RESTRICTION:** A parent proof must therefore flatten those internals again or restate the result instead of relying only on the verified subsystem contract; therefore, requiring more LOC as its not promoting reusability.
+ 9.  GUMBO's `In(x)` refers only to a state variable's value at the beginning of the current component dispatch. It does not provide general temporal operators for referring to earlier system cycles, expressing historical conditions, or stating bounded response properties across multiple dispatches.
+     - **RESTRICTION:** Temporal properties are difficult to encode in the current GUMBO grammar.
 
-## Possible Solutions to Problems Above
+## Solutions to Problems Above
 
  1. Define the schedule in SysMLv2, and use this for HAMR code generation and the schedule in the proof.
- 2. Remove the alias restriction
+ 2. Make aliases optional by allowing direct references to SysML components, ports, and state variables.
  3. Enable true model-level GUMBO analysis (while retaining whats already been done) by:
    
-    a. Enable system proof only generation from HAMR CLI
-    b. Create VSCode plugin that simply verifies the model
-    c. No longer generate the system proof in the regular HAMR output (to avoid confusion with user).
- 4. For the system proof only generation body from HAMR CLI, allow non-HAMR conformed models.
- 5. This CANNOT be solved as Verus does not give counterexamples.
- 6. Directly utilize component contracts as assertions on the schedule. 
+    a. Create a command such as `hamr sysml verify` that performs system verification without generating or building the application.
+    b. Hide the system proof by default.
+    c. Create VSCode plugin that simply verifies the model
+    d. No longer generate the system proof in the regular HAMR output (to avoid confusion with user).
+ 4. For the system proof only generation from HAMR CLI, allow non-HAMR conformed models.
+ 5. Verus does not directly produce AGREE-style counterexample traces. As an immediate improvement, HAMR should map a failed VC back to its GUMBO property, schedule place, available premises, and unproved goal. Full traces would require HAMR to obtain a model for the failed VC from the underlying solver and reconstruct the corresponding schedule-ordered system states; if Verus does not expose that model, its solver interface would need to be extended.
+ 6. Automatically chain component contracts by automatically deriving intermediate place assertions through the schedule.
+ 7. Add first-class system `assume`, `guarantee`, and `invariant` clauses.
+ 8. Add hierarchical closure. After verifying a subsystem, HAMR should generate a reusable boundary-level transition relation and a proved theorem stating that the subsystem assumptions imply its guarantees. A parent proof should import and use that theorem for the direct child rather than flattening the child's internal components. The summary must be regenerated or invalidated whenever the subsystem model, contracts, or schedule changes.
+ 9. Add temporal constructs to GUMBO and lower them to Verus ghost state and history. HAMR can generate the initialization, transition, and loop-closure obligations needed for historical and bounded-time safety properties. Verus can discharge these inductive obligations, but it does not provide temporal model checking automatically; some properties may require user-supplied invariants or deeper induction, and unbounded liveness should be treated as a separate capability.
 
 ## What do we value most? Let's prioritize!
 - Temporal Reasoning
