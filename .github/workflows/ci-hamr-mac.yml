@@ -28,7 +28,44 @@ jobs:
     # the Intel runners fall out of the same derivation in bin/versions.sh but
     # are not tested.
     runs-on: macos-latest
-    name: hamr-codegen-mac
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Shards are balanced against per-model wall times measured from the 2026-09-15 run.
+          # isolette is ~70 min -- 41% of all model time and 4.8x the next largest -- so it runs
+          # alone and sets the floor for the matrix: adding rows cannot bring the run in under it.
+          # The other three land near 35 min each, so they have slack and need no fine balancing.
+          # hamr-ci.cmd prints a per-model timing summary, so rebalancing means reading a log
+          # rather than reconstructing durations from timestamps.
+          #
+          # The 'rest' shard names what the other shards cover rather than listing its own models,
+          # so a model added to the repo is picked up here automatically instead of going untested.
+          - name: isolette        # ~70 min
+            models: |
+              isolette
+          - name: verification    # ~37 min
+            models: |
+              micro-examples/microkit/system-verification/temp-control
+              open-platform-models/firewall-simple-byte-array
+              micro-examples/microkit/r2u2_monitor/r2u2_component_monitor
+          - name: r2u2-gumbo      # ~35 min
+            models: |
+              micro-examples/microkit/r2u2_monitor/r2u2_system_monitor
+              micro-examples/microkit/r2u2_monitor/r2u2_exhaustive_monitor
+              micro-examples/microkit/gumbo-verus/structs_arrays
+              micro-examples/microkit/gumbo-verus/pure_event_port
+          - name: rest            # ~29 min
+            skip: |
+              isolette
+              micro-examples/microkit/system-verification/temp-control
+              open-platform-models/firewall-simple-byte-array
+              micro-examples/microkit/r2u2_monitor/r2u2_component_monitor
+              micro-examples/microkit/r2u2_monitor/r2u2_system_monitor
+              micro-examples/microkit/r2u2_monitor/r2u2_exhaustive_monitor
+              micro-examples/microkit/gumbo-verus/structs_arrays
+              micro-examples/microkit/gumbo-verus/pure_event_port
+    name: hamr-codegen-mac (${{ matrix.name }})
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -95,6 +132,10 @@ jobs:
           bash INSPECTA-models/provers-env/provers-setup.sh
       - name: Build
         shell: bash
+        env:
+          # Empty for a shard that does not set them; the driver treats blank as unset.
+          HAMR_CI_MODELS: ${{ matrix.models }}
+          HAMR_CI_SKIP_MODELS: ${{ matrix.skip }}
         run: |
           rm -rf INSPECTA-models/.git # free up disk space
 
