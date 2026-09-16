@@ -45,6 +45,17 @@ pub proof fn vc_pre_assert_top_b(st: SystemState)
     b::compute_spec_B_Input_Range_assume(st.top_a_output),
 {}
 
+/** TEST-ONLY: B's guarantees must admit at least one output for every allowed input. */
+pub proof fn vc_contract_feasibility_top_b(pre: SystemState)
+  requires
+    sys_assert_system_output_range_after_top_a(pre),
+    b::compute_spec_B_Input_Range_assume(pre.top_a_output),
+  ensures
+    exists|output: i32|
+      b::compute_spec_B_Output_Range_guarantee(pre.top_a_output, output) &&
+      b::compute_spec_B_Output_Range_Contradiction_guarantee(pre.top_a_output, output),
+{}
+
 /** VC[4]: Next-Assert (task) -- after_top_a + frames + B postcondition |- after_top_b */
 pub proof fn vc_next_assert_task_top_b(pre: SystemState, post: SystemState)
   requires
