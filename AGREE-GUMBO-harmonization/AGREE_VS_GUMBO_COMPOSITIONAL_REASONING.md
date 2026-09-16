@@ -1,6 +1,7 @@
 # AGREE vs. GUMBO Compositional Reasoning
 
-## AGREE and GUMBO side by side
+## Comparison of AGREE and Current Gumbo
+### AGREE and Current GUMBO side by side
 
 | Dimension | AGREE | GUMBO system specifications | Advantage |
 |---|---|---|---|
@@ -18,11 +19,9 @@
 | Contract activation | Direct-child contracts participate in proving the parent contract. | A component contract participates in a property only when the property binds one of the component’s `after` places. | **AGREE** — contract participation is more automatic and predictable. |
 | Hierarchical closure | A verified parent contract becomes a reusable abstraction at the next level. | The system proof consumes component contracts but does not automatically produce a reusable verified system contract for the next level. | **AGREE** — it supports hierarchical compositional reasoning directly. |
 
-### Scheduled AGREE
+***Scheduled AGREE:*** The statement that AGREE does not model dispatch order applies to standard synchronous AGREE. The scheduled-AGREE extension introduces explicit dispatch and completion events, input-freezing rules, and a declared component schedule. However, it retains AGREE’s hierarchical assume-guarantee composition: upstream guarantees are used to establish downstream assumptions, and a verified subsystem can be abstracted by its system contract at the next level. Paper available here: https://loonwerks.com/publications/pdf/liu2022nfm.pdf
 
-The statement that AGREE does not model dispatch order applies to standard synchronous AGREE. The scheduled-AGREE extension introduces explicit dispatch and completion events, input-freezing rules, and a declared component schedule. However, it retains AGREE’s hierarchical assume-guarantee composition: upstream guarantees are used to establish downstream assumptions, and a verified subsystem can be abstracted by its system contract at the next level. Paper available here: https://loonwerks.com/publications/pdf/liu2022nfm.pdf
-
-## What “compositional reasoning” means in each approach
+### What “compositional reasoning” means in each approach
 
 Both AGREE and GUMBO use component contracts compositionally, but the composition occurs differently.
 
@@ -32,7 +31,11 @@ GUMBO applies a covered component’s contract locally at that component’s dis
 
 Consequently, GUMBO’s system proof is compositional at individual schedule transitions, but the end-to-end reasoning is assertion-mediated: component contracts do not automatically form the direct hierarchical contract chain used by AGREE.
 
-## Problems with GUMBO Compositional Reasoning
+--- 
+
+## SOLUTION 1: Make GUMBO more AGREE-like
+
+### <u>Problems with GUMBO Compositional Reasoning:</u>
 
 **NOTE:** GUMBO currently notes the following here: https://hamr.sireum.org/hamr-doc/gumbo-system-properties/
 
@@ -74,7 +77,7 @@ Consequently, GUMBO’s system proof is compositional at individual schedule tra
  9.  GUMBO's `In(x)` refers only to a state variable's value at the beginning of the current component dispatch. It does not provide general temporal operators for referring to earlier system cycles, expressing historical conditions, or stating bounded response properties across multiple dispatches.
      - **RESTRICTION:** Temporal properties are difficult to encode in the current GUMBO grammar.
 
-## Solutions to Problems Above
+### <u>Solutions to Problems Above:</u>
 
  1. Define the schedule in SysMLv2, and use this for HAMR code generation and the schedule in the proof.
  2. Make aliases optional by allowing direct references to SysML components, ports, and state variables.
@@ -89,15 +92,10 @@ Consequently, GUMBO’s system proof is compositional at individual schedule tra
  6. Automatically chain component contracts by automatically deriving intermediate place assertions through the schedule.
  7. Add first-class system `assume`, `guarantee`, and `invariant` clauses.
  8. Add hierarchical closure. After verifying a subsystem, HAMR should generate a reusable boundary-level transition relation and a proved theorem stating that the subsystem assumptions imply its guarantees. A parent proof should import and use that theorem for the direct child rather than flattening the child's internal components. The summary must be regenerated or invalidated whenever the subsystem model, contracts, or schedule changes.
- 9. Add temporal constructs to GUMBO and lower them to Verus ghost state and history. HAMR can generate the initialization, transition, and loop-closure obligations needed for historical and bounded-time safety properties. Verus can discharge these inductive obligations, but it does not provide temporal model checking automatically; some properties may require user-supplied invariants or deeper induction, and unbounded liveness should be treated as a separate capability.
+ 9. Add temporal constructs to GUMBO and lower them to Verus ghost state and history. HAMR can generate the initialization, transition, and loop-closure obligations needed for historical and bounded-time safety properties. Verus can discharge these inductive obligations, but it does not provide temporal model checking automatically; some properties may require user-supplied invariants or deeper induction, and unbounded liveness should be treated as a separate capability.  
 
-## What do we value most? Let's prioritize!
-- Temporal Reasoning
-- Counterexample explanation
-- One supported contract language and verification workflow
-- Proof scalability
-- Model level verification (i.e., does not require code generation)
-- Hierarchical structure such that verified subsystem contracts can be used by its parent
-- Schedule-aware reasoning
-- Control over the tool and its release roadmap
-- Support for models outside HAMR’s expected architecture and deployment structure (i.e., outside of a single thread to a single process structure)
+---
+
+## SOLUTION 2: AGREE Supported in SysMLv2
+
+This seems like the less desired solutions so details are currently not provided for this solution.
