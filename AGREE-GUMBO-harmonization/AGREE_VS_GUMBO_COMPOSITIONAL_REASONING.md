@@ -88,7 +88,7 @@ Consequently, GUMBO’s system proof is compositional at individual schedule tra
     b. Hide the system proof by default to avoid confusing users.
     c. Create a VS Code plugin that simply verifies the model.
  4. For system-proof-only generation from the HAMR CLI, allow models that do not conform to HAMR's deployment structure.
- 5. ***OPEN ISSUE:*** Verus does not directly produce model-level counterexample traces. We can definitely add more details to the error message with Verus `proof_note`. See image below for an example.
+ 5. ***OPEN ISSUE:*** Verus does not directly produce model-level counterexample traces. We can definitely add more details to the error message with Verus `assert` statements and `proof_note` comments. See image below for an example.
  <p align="center"><img src="./Toy_Example/image5.png" width="500"></p>
  6. Automatically chain component contracts by automatically deriving intermediate place assertions through the schedule.
  7. Add first-class system `assume`, `guarantee`, and `invariant` clauses.
