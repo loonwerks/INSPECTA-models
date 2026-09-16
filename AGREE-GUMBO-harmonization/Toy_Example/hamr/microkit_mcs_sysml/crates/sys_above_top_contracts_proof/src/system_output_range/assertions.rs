@@ -29,7 +29,7 @@ pub open spec fn sys_assert_system_output_range_after_top_a(st: SystemState) -> 
 {
   ((st.system_input < 10i32) &&
     (st.top_a_output < 2i32 * st.system_input)) &&
-    (st.top_a_output < 50i32)
+    (st.top_a_output < 20i32)
 }
 
 /** property system_output_range, bound 'after top_b' (place after_top_b)

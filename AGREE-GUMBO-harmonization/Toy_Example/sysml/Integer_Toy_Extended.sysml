@@ -38,7 +38,7 @@ package Integer_Toy_Extended {
         language "GUMBO" /*{
             compute
                 assume B_Input_Range "B input range":
-                    Input < 50 [i32];
+                    Input < 20 [i32];
 
                 guarantee B_Output_Range "B output range":
                     Output < Input + 15 [i32];
@@ -147,7 +147,7 @@ package Integer_Toy_Extended {
                     after a "A establishes its output bound and B's input assumption":
                         (system_input < 10 [i32]) &
                         (a_output < 2 [i32] * system_input) &
-                        (b_input < 50 [i32]);
+                        (b_input < 20 [i32]);
 
                     after b "B establishes its output bound for C":
                         (system_input < 10 [i32]) &
@@ -225,7 +225,7 @@ package Integer_Toy_Extended {
                     after top_a "the nested A establishes its output bound and B's input assumption":
                         (system_input < 10 [i32]) &
                         (top_a_output < 2 [i32] * system_input) &
-                        (top_b_input < 50 [i32]);
+                        (top_b_input < 20 [i32]);
 
                     after top_b "the nested B establishes its output bound for C":
                         (system_input < 10 [i32]) &

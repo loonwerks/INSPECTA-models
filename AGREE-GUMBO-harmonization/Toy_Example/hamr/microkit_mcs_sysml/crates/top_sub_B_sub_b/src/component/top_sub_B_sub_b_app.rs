@@ -34,7 +34,7 @@ verus! {
         // BEGIN MARKER TIME TRIGGERED REQUIRES
         // assume B_Input_Range
         //   B input range
-        old(api).Input < 50i32,
+        old(api).Input < 20i32,
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES

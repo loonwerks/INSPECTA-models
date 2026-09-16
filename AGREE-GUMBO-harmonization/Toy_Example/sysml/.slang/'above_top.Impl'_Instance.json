@@ -4418,7 +4418,7 @@
                                     "lits" : [
                                       {
                                         "type" : "org.sireum.lang.ast.Exp.LitString",
-                                        "value" : "50",
+                                        "value" : "20",
                                         "attr" : {
                                           "type" : "org.sireum.lang.ast.Attr",
                                           "posOpt" : {
@@ -9720,7 +9720,7 @@
                                   "lits" : [
                                     {
                                       "type" : "org.sireum.lang.ast.Exp.LitString",
-                                      "value" : "50",
+                                      "value" : "20",
                                       "attr" : {
                                         "type" : "org.sireum.lang.ast.Attr",
                                         "posOpt" : {
@@ -14089,7 +14089,7 @@
                               "lits" : [
                                 {
                                   "type" : "org.sireum.lang.ast.Exp.LitString",
-                                  "value" : "50",
+                                  "value" : "20",
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
                                     "posOpt" : {

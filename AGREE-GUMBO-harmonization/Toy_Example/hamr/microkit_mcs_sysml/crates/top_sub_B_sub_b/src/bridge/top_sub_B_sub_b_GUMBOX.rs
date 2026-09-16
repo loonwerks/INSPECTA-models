@@ -22,7 +22,7 @@ macro_rules! impliesL {
   */
 pub fn compute_spec_B_Input_Range_assume(api_Input: i32) -> bool
 {
-  api_Input < 50i32
+  api_Input < 20i32
 }
 
 /** CEP-T-Assm: Top-level assume contracts for b's compute entrypoint

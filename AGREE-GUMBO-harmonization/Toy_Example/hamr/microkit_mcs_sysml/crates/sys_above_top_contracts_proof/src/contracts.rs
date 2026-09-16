@@ -88,7 +88,7 @@ pub mod b {
   pub open spec fn compute_spec_B_Input_Range_assume(
     api_Input: i32) -> bool
   {
-    api_Input < 50i32
+    api_Input < 20i32
   }
 
   /** compute guarantee B_Output_Range
