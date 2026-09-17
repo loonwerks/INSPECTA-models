@@ -52,6 +52,7 @@ pub proof fn vc_next_assert_task_top_b(pre: SystemState, post: SystemState)
     b_local_write_frame(pre, post),
     b_global_write_frame(pre, post),
     b::compute_spec_B_Output_Range_guarantee(pre.top_a_output, post.top_b_output),
+    b::compute_spec_B_Conditional_Output_Range_guarantee(pre.top_a_output, post.top_b_output),
   ensures
     sys_assert_system_output_range_after_top_b(post),
 {}

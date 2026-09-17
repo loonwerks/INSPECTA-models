@@ -62,6 +62,22 @@ pub fn compute_spec_B_Output_Range_guarantee(
   api_Output < api_Input + 15i32
 }
 
+/** Compute Entrypoint Contract
+  *
+  * guarantee B_Conditional_Output_Range
+  *   B has a conflicting output bound only when its input is one
+  * @param api_Input incoming data port
+  * @param api_Output outgoing data port
+  */
+pub fn compute_spec_B_Conditional_Output_Range_guarantee(
+  api_Input: i32,
+  api_Output: i32) -> bool
+{
+  implies!(
+    (api_Input == 1i32),
+    (api_Output >= api_Input + 15i32))
+}
+
 /** CEP-T-Guar: Top-level guarantee contracts for b's compute entrypoint
   *
   * @param api_Input incoming data port
@@ -72,8 +88,9 @@ pub fn compute_CEP_T_Guar(
   api_Output: i32) -> bool
 {
   let r0: bool = compute_spec_B_Output_Range_guarantee(api_Input, api_Output);
+  let r1: bool = compute_spec_B_Conditional_Output_Range_guarantee(api_Input, api_Output);
 
-  return r0;
+  return r0 && r1;
 }
 
 /** CEP-Post: Compute Entrypoint Post-Condition for b

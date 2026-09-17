@@ -32,6 +32,7 @@
 pub mod actions;
 pub mod assertions;
 pub mod contracts;
+pub mod realizability;
 pub mod system_state;
 pub mod vc_commutativity;
 pub mod vc_integration;

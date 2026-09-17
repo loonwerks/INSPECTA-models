@@ -100,6 +100,17 @@ pub mod b {
   {
     api_Output < api_Input + 15i32
   }
+
+  /** compute guarantee B_Conditional_Output_Range
+    *   B has a conflicting output bound only when its input is one
+    */
+  pub open spec fn compute_spec_B_Conditional_Output_Range_guarantee(
+    api_Input: i32,
+    api_Output: i32) -> bool
+  {
+    (api_Input == 1i32) ==>
+      (api_Output >= api_Input + 15i32)
+  }
 }
 
 // -- 'above_top.Impl'_Instance.top_sub.C_sub.c --

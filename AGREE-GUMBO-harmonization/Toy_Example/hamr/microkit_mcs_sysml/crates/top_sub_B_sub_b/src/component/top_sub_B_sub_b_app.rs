@@ -41,6 +41,10 @@ verus! {
         // guarantee B_Output_Range
         //   B output range
         final(api).Output < final(api).Input + 15i32,
+        // guarantee B_Conditional_Output_Range
+        //   B has a conflicting output bound only when its input is one
+        (final(api).Input == 1i32) ==>
+          (final(api).Output >= final(api).Input + 15i32),
         // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");

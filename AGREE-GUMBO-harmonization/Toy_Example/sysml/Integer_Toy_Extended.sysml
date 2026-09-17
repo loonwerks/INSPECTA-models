@@ -42,6 +42,9 @@ package Integer_Toy_Extended {
 
                 guarantee B_Output_Range "B output range":
                     Output < Input + 15 [i32];
+
+                guarantee B_Conditional_Output_Range "B has a conflicting output bound only when its input is one":
+                    (Input == 1 [i32]) implies (Output >= Input + 15 [i32]);
         }*/
     }
 
