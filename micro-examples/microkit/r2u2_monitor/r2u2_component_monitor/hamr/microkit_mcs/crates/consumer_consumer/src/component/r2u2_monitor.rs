@@ -62,15 +62,21 @@ impl consumer_consumer {
             *verdict = None;
         }
     }
-    // Cache the newest verdict returned for each specification.
+    // Keep false verdicts visible when a later output replaces the cache entry.
     let output_buffer = r2u2_core::get_output_buffer(&r2u2_monitor.monitor);
     let verdict_cache = &mut r2u2_monitor.verdict_cache;
+    let mut false_verdict_seen = [false; 1];
     for out in output_buffer {
-        verdict_cache[out.spec_num as usize] = Some(out.verdict);
+        let spec_num = out.spec_num as usize;
+        if !out.verdict.truth {
+            false_verdict_seen[spec_num] = true;
+        }
+        verdict_cache[spec_num] = Some(out.verdict);
     }
-    // Send the latest cached verdict through each mapped alert port.
+    // Send one result through each mapped alert port.
     if let Some(verdict) = r2u2_monitor.verdict_cache[0] {
-        if !verdict.truth {
+        let truth = verdict.truth && !false_verdict_seen[0];
+        if !truth {
             api.put_sample_alert();
         }
     }
