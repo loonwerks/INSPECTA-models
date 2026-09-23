@@ -156,7 +156,9 @@ val microkitMcsDir = homeDir / "hamr" / "microkit_mcs"
 clean(microkitMcsDir)
 
 if (result == 0) {
-  val args = s"--platform Microkit --runtime-monitoring --scheduling UserLand --verus-attribute-syntax --sel4-output-dir $microkitMcsDir"
+  // ENABLE_TEST_SCHEDULER adds the test_scheduler.mk variant that the system tests in
+  // crates/test_controller run under (bin/run-tests.cmd); the default image is unaffected
+  val args = s"--platform Microkit --runtime-monitoring --scheduling UserLand --verus-attribute-syntax --experimental-options ENABLE_TEST_SCHEDULER --sel4-output-dir $microkitMcsDir"
 
   result = run("Running codegen from SysMLv2 model targeting Microkit with user-land scheduler", F,
     proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args")
@@ -179,6 +181,18 @@ if (result == 0 && hasMicrokit) {
 
   if (result == 0) {
     result = run("Running the microkit unit tests", F, proc"make test".at(microkitMcsDir))
+  }
+
+  // The system tests ported from the JVM ones (crates/test_controller/src/system_tests),
+  // run on seL4 under QEMU with the test scheduler.  run-tests.cmd builds the
+  // test_scheduler.mk image itself and fails unless every selected test passes.
+  if (result == 0) {
+    if (proc"which qemu-system-aarch64".run().ok) {
+      result = run("Running the system tests under QEMU", F,
+        proc"$sireum slang run ${microkitMcsDir / "bin" / "run-tests.cmd"}")
+    } else {
+      println("Running the system tests under QEMU ... skipped: qemu-system-aarch64 not found")
+    }
   }
 
   removeBuildArtifacts()

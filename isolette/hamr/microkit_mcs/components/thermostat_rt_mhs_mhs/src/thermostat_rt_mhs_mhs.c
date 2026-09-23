@@ -85,6 +85,21 @@ bool get_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data) {
   return isFresh;
 }
 
+volatile sb_queue_Isolette_Data_Model_On_Off_1_t *inj_sv_lastCmd_queue;
+sb_queue_Isolette_Data_Model_On_Off_1_Recv_t inj_sv_lastCmd_recv;
+
+bool get_inj_sv_lastCmd(Isolette_Data_Model_On_Off *value) {
+  if (inj_sv_lastCmd_queue == NULL) {
+    return false;
+  }
+  sb_event_counter_t numDropped;
+  return sb_queue_Isolette_Data_Model_On_Off_1_dequeue(&inj_sv_lastCmd_recv, &numDropped, value);
+}
+
+bool is_injection_enabled(void) {
+  return inj_sv_lastCmd_queue != NULL;
+}
+
 bool is_monitoring_enabled(void) {
   return sv_lastCmd_queue_1 != NULL;
 }
@@ -104,6 +119,10 @@ void init(void) {
 
   sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_init(&current_tempWstatus_recv_queue, (sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) current_tempWstatus_queue_1);
 
+  if (inj_sv_lastCmd_queue != NULL) {
+    sb_queue_Isolette_Data_Model_On_Off_1_Recv_init(&inj_sv_lastCmd_recv, (sb_queue_Isolette_Data_Model_On_Off_1_t *) inj_sv_lastCmd_queue);
+  }
+
   thermostat_rt_mhs_mhs_initialize();
 
   microkit_notify(PORT_FROM_MON);
@@ -113,6 +132,13 @@ void notified(microkit_channel channel) {
   switch (channel) {
     case PORT_FROM_MON:
       thermostat_rt_mhs_mhs_timeTriggered();
+      // Report that this dispatch has finished.  The _MON wrapper forwards it to
+      // the scheduler.  The default scheduler ignores runtime signals from
+      // partitions -- the schedule is static and each partition runs for its full
+      // allotted time -- so this is inert there; the test scheduler uses it as the
+      // slot-complete event, which is what lets it step as fast as threads run
+      // rather than waiting out each slot's wall-clock budget.
+      microkit_notify(PORT_FROM_MON);
       break;
     default:
       thermostat_rt_mhs_mhs_notify(channel);

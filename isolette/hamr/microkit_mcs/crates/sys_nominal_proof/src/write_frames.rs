@@ -653,6 +653,62 @@ pub open spec fn userland_monitor_thread_local_write_frame(pre: SystemState, pos
   true
 }
 
+/** TEST_CONTROLLER_THREAD writes: nothing.
+  * Everything else must be unchanged.
+  */
+pub open spec fn test_controller_thread_global_write_frame(pre: SystemState, post: SystemState) -> bool
+{
+  pre.upper_desired_temp == post.upper_desired_temp
+  && pre.lower_desired_temp == post.lower_desired_temp
+  && pre.displayed_temp == post.displayed_temp
+  && pre.regulator_status == post.regulator_status
+  && pre.reg_interface_failure == post.reg_interface_failure
+  && pre.heat_control == post.heat_control
+  && pre.mhs_sv_lastCmd == post.mhs_sv_lastCmd
+  && pre.lastCmd == post.lastCmd
+  && pre.regulator_mode == post.regulator_mode
+  && pre.sv_lastRegulatorMode == post.sv_lastRegulatorMode
+  && pre.reg_last_mode == post.reg_last_mode
+  && pre.internal_failure == post.internal_failure
+  && pre.upper_alarm_temp == post.upper_alarm_temp
+  && pre.lower_alarm_temp == post.lower_alarm_temp
+  && pre.monitor_status == post.monitor_status
+  && pre.mon_interface_failure == post.mon_interface_failure
+  && pre.mmi_sv_lastCmd == post.mmi_sv_lastCmd
+  && pre.mmi_lastCmd == post.mmi_lastCmd
+  && pre.alarm_control == post.alarm_control
+  && pre.ma_sv_lastCmd == post.ma_sv_lastCmd
+  && pre.ma_lastCmd == post.ma_lastCmd
+  && pre.monitor_mode == post.monitor_mode
+  && pre.sv_lastMonitorMode == post.sv_lastMonitorMode
+  && pre.lastMonitorMode == post.lastMonitorMode
+  && pre.mon_internal_failure == post.mon_internal_failure
+  && pre.lower_desired_tempWstatus == post.lower_desired_tempWstatus
+  && pre.upper_desired_tempWstatus == post.upper_desired_tempWstatus
+  && pre.lower_alarm_tempWstatus == post.lower_alarm_tempWstatus
+  && pre.upper_alarm_tempWstatus == post.upper_alarm_tempWstatus
+  && pre.air == post.air
+  && pre.current_tempWstatus == post.current_tempWstatus
+  && pre.heat_out == post.heat_out
+  && pre.userland_monitor_thread_temperature_sensor_cpi_thermostat_air == post.userland_monitor_thread_temperature_sensor_cpi_thermostat_air
+  && pre.userland_monitor_thread_sched_state == post.userland_monitor_thread_sched_state
+  && pre.userland_monitor_thread_sched_schedule == post.userland_monitor_thread_sched_schedule
+  && pre.gumbo_monitor_thread_temperature_sensor_cpi_thermostat_air == post.gumbo_monitor_thread_temperature_sensor_cpi_thermostat_air
+  && pre.gumbo_monitor_thread_sched_state == post.gumbo_monitor_thread_sched_state
+  && pre.gumbo_monitor_thread_sched_schedule == post.gumbo_monitor_thread_sched_schedule
+  && pre.sys_nominal_monitor_thread_temperature_sensor_cpi_thermostat_air == post.sys_nominal_monitor_thread_temperature_sensor_cpi_thermostat_air
+  && pre.sys_nominal_monitor_thread_sched_state == post.sys_nominal_monitor_thread_sched_state
+  && pre.sys_nominal_monitor_thread_sched_schedule == post.sys_nominal_monitor_thread_sched_schedule
+}
+
+/** TEST_CONTROLLER_THREAD local write frame: the component may modify anything in its
+  * own scope (Isabelle `lFrame := (λ_ _. True)`).
+  */
+pub open spec fn test_controller_thread_local_write_frame(pre: SystemState, post: SystemState) -> bool
+{
+  true
+}
+
 /** GUMBO_MONITOR_THREAD writes: nothing.
   * Everything else must be unchanged.
   */

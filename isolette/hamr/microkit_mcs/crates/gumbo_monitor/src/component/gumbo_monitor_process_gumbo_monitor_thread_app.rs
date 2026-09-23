@@ -439,7 +439,7 @@ pub const thermostat_rt_mhs_mhs_MON: u32 = 11;
 
 pub const heat_source_cpi_heat_controller_MON: u32 = 12;
 
-pub const gumbo_monitor_process_gumbo_monitor_thread_MON: u32 = 14;
+pub const gumbo_monitor_process_gumbo_monitor_thread_MON: u32 = 15;
 
 // For each timeslice index, finds the nearest preceding and following user
 // partition channels. This lets the monitor know which thread just yielded

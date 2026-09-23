@@ -2,6 +2,13 @@
 
 MICROKIT_TOOL ?= $(MICROKIT_SDK)/bin/microkit
 
+# Which cargo profile directory the Rust staticlibs land in.  The crate Makefiles'
+# default target is build-verus-release, and the *-release targets pass --release, so
+# those produce target/<triple>/release; the plain build / build-verus targets do not
+# and produce target/<triple>/debug.  The link rules below have to look in whichever
+# one RUST_MAKE_TARGET actually populated.
+RUST_PROFILE_DIR := $(if $(RUST_MAKE_TARGET),$(if $(filter %-release,$(RUST_MAKE_TARGET)),release,debug),release)
+
 CFLAGS := -mcpu=$(CPU) \
 	-mstrict-align \
 	-ffreestanding \

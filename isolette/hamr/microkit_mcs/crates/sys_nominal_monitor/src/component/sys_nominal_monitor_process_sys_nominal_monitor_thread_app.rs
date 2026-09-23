@@ -1384,7 +1384,7 @@ pub const thermostat_rt_mhs_mhs_MON: u32 = 11;
 
 pub const heat_source_cpi_heat_controller_MON: u32 = 12;
 
-pub const sys_nominal_monitor_process_sys_nominal_monitor_thread_MON: u32 = 15;
+pub const sys_nominal_monitor_process_sys_nominal_monitor_thread_MON: u32 = 16;
 
 // For each timeslice index, finds the nearest preceding and following user
 // partition channels. This lets the monitor know which thread just yielded

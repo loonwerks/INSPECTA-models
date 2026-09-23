@@ -30,4 +30,6 @@ bool put_alarm_control(const Isolette_Data_Model_On_Off *data);
 bool put_sv_lastCmd(const Isolette_Data_Model_On_Off *data);
 bool get_monitor_mode(Isolette_Data_Model_Monitor_Mode *data);
 bool get_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data);
+bool get_inj_sv_lastCmd(Isolette_Data_Model_On_Off *value);
+bool is_injection_enabled(void);
 bool is_monitoring_enabled(void);

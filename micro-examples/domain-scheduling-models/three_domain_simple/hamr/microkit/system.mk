@@ -2,6 +2,13 @@
 
 MICROKIT_TOOL ?= $(MICROKIT_SDK)/bin/microkit
 
+# Which cargo profile directory the Rust staticlibs land in.  The crate Makefiles'
+# default target is build-verus-release, and the *-release targets pass --release, so
+# those produce target/<triple>/release; the plain build / build-verus targets do not
+# and produce target/<triple>/debug.  The link rules below have to look in whichever
+# one RUST_MAKE_TARGET actually populated.
+RUST_PROFILE_DIR := $(if $(RUST_MAKE_TARGET),$(if $(filter %-release,$(RUST_MAKE_TARGET)),release,debug),release)
+
 CFLAGS := -mcpu=$(CPU) \
 	-mstrict-align \
 	-ffreestanding \
@@ -114,7 +121,7 @@ domain_monitor_process_domain_monitor_thread_MON.elf: domain_monitor_process_dom
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ldomain_monitor -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -ldomain_monitor -o $@
 
 pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@

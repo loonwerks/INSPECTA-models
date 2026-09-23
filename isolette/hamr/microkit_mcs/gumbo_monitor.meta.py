@@ -418,7 +418,7 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     channel_operator_interface_oip_oit_MON = 2
     channel_temperature_sensor_cpi_thermostat_MON = 3
     channel_heat_source_cpi_heat_controller_MON = 12
-    channel_gumbo_monitor_process_gumbo_monitor_thread_MON = 14
+    channel_gumbo_monitor_process_gumbo_monitor_thread_MON = 15
 
     sdf.add_channel(Channel(a=scheduler, a_id=9, b=thermostat_rt_mri_mri_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_rt_mri_mri_MON, a_id=1, b=thermostat_rt_mri_mri, b_id=0))
@@ -442,7 +442,7 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     sdf.add_channel(Channel(a=temperature_sensor_cpi_thermostat_MON, a_id=1, b=temperature_sensor_cpi_thermostat, b_id=0))
     sdf.add_channel(Channel(a=scheduler, a_id=12, b=heat_source_cpi_heat_controller_MON, b_id=0))
     sdf.add_channel(Channel(a=heat_source_cpi_heat_controller_MON, a_id=1, b=heat_source_cpi_heat_controller, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=14, b=gumbo_monitor_process_gumbo_monitor_thread_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=15, b=gumbo_monitor_process_gumbo_monitor_thread_MON, b_id=0))
     sdf.add_channel(Channel(a=gumbo_monitor_process_gumbo_monitor_thread_MON, a_id=1, b=gumbo_monitor_process_gumbo_monitor_thread, b_id=0))
 
     #######################################
@@ -514,6 +514,9 @@ if __name__ == '__main__':
     parser.add_argument("--output", required=True)
     parser.add_argument("--sdf", required=True)
     parser.add_argument("--objcopy", required=True)
+    # Substring filter selecting which system tests to run; empty means all of
+    # them.  Only the test scheduler variant consumes it.
+    parser.add_argument("--tests", required=False, default="")
 
     args = parser.parse_args()
 
@@ -528,6 +531,9 @@ if __name__ == '__main__':
 
     global obj_copy
     obj_copy = args.objcopy
+
+    global tests_filter
+    tests_filter = args.tests
 
     with open(args.dtb, "rb") as f:
         dtb = DeviceTree(f.read())

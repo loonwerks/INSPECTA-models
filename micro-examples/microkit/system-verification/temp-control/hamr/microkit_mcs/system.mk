@@ -31,6 +31,13 @@ MICROKIT_TOOL ?= $(MICROKIT_SDK)/bin/microkit
 DTC := dtc
 PYTHON ?= python3
 
+# Which cargo profile directory the Rust staticlibs land in.  The crate Makefiles'
+# default target is build-verus-release, and the *-release targets pass --release, so
+# those produce target/<triple>/release; the plain build / build-verus targets do not
+# and produce target/<triple>/debug.  The link rules below have to look in whichever
+# one RUST_MAKE_TARGET actually populated.
+RUST_PROFILE_DIR := $(if $(RUST_MAKE_TARGET),$(if $(filter %-release,$(RUST_MAKE_TARGET)),release,debug),release)
+
 SYSTEM_FILE := arinc_scheduling.system
 IMAGE_FILE := loader.img
 REPORT_FILE := report.txt
@@ -110,7 +117,11 @@ all: cache.o
 # Sentinel file whose name encodes a hash of build-affecting variables.
 # When any of these change the old sentinel is removed and a new one is created,
 # forcing dependent targets to rebuild.
-CHECK_FLAGS_BOARD_MD5:=.board_cflags-$(shell echo -- ${CFLAGS} ${BOARD} ${MICROKIT_CONFIG} ${MICROKIT_SDK} ${MSD} ${SCHEDULER_C} ${SCHEDULER_CONFIG_HEADERS}| shasum | sed 's/ *-//')
+# TESTS is part of the hash because it is patched into an ELF section by the MSD step
+# below.  Without it, changing TESTS leaves this stamp -- and therefore $(SYSTEM_FILE)
+# -- up to date, the metaprogram never re-runs, and the image silently keeps running
+# the previous selection.
+CHECK_FLAGS_BOARD_MD5:=.board_cflags-$(shell echo -- ${CFLAGS} ${BOARD} ${MICROKIT_CONFIG} ${MICROKIT_SDK} ${MSD} ${SCHEDULER_C} ${SCHEDULER_CONFIG_HEADERS} ${TESTS}| shasum | sed 's/ *-//')
 
 ${CHECK_FLAGS_BOARD_MD5}:
 	-rm -f .board_cflags-*
@@ -234,37 +245,37 @@ tcp_tct_MON.elf: tcp_tct_MON_user.o tcp_tct_MON.o $(AUX_OBJS)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 tcp_tct.elf: $(UTIL_OBJS) $(TYPE_OBJS) tcp_tct_rust tcp_tct.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/tcp_tct/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ltcp_tct -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/tcp_tct/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -ltcp_tct -o $@
 
 fp_ft_MON.elf: fp_ft_MON_user.o fp_ft_MON.o $(AUX_OBJS)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 fp_ft.elf: $(UTIL_OBJS) $(TYPE_OBJS) fp_ft_rust fp_ft.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/fp_ft/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lfp_ft -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/fp_ft/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lfp_ft -o $@
 
 userland_monitor_process_userland_monitor_thread_MON.elf: userland_monitor_process_userland_monitor_thread_MON_user.o userland_monitor_process_userland_monitor_thread_MON.o $(AUX_OBJS)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 userland_monitor_process_userland_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) userland_monitor_process_userland_monitor_thread_rust userland_monitor_process_userland_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/userland_monitor/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -luserland_monitor -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/userland_monitor/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -luserland_monitor -o $@
 
 gumbo_monitor_process_gumbo_monitor_thread_MON.elf: gumbo_monitor_process_gumbo_monitor_thread_MON_user.o gumbo_monitor_process_gumbo_monitor_thread_MON.o $(AUX_OBJS)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 gumbo_monitor_process_gumbo_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) gumbo_monitor_process_gumbo_monitor_thread_rust gumbo_monitor_process_gumbo_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/gumbo_monitor/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lgumbo_monitor -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/gumbo_monitor/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lgumbo_monitor -o $@
 
 sys_nominal_monitor_process_sys_nominal_monitor_thread_MON.elf: sys_nominal_monitor_process_sys_nominal_monitor_thread_MON_user.o sys_nominal_monitor_process_sys_nominal_monitor_thread_MON.o $(AUX_OBJS)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 sys_nominal_monitor_process_sys_nominal_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) sys_nominal_monitor_process_sys_nominal_monitor_thread_rust sys_nominal_monitor_process_sys_nominal_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/sys_nominal_monitor/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lsys_nominal_monitor -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/sys_nominal_monitor/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lsys_nominal_monitor -o $@
 
 
 
 $(SYSTEM_FILE): $(IMAGES) $(DTB) ${CHECK_FLAGS_BOARD_MD5}
 	$(PYTHON) $(SDFGEN_HELPER) --macros "$(SDFGEN_UNKOWN_MACROS)" --configs "$(SCHEDULER_CONFIG_HEADERS)" --output $(TOP_BUILD_DIR)/config_structs.py
-	$(PYTHON) $(MSD) --sddf $(SDDF) --board $(MICROKIT_BOARD) --dtb $(DTB) --output . --sdf $(SYSTEM_FILE) --objcopy $(OBJCOPY)
+	$(PYTHON) $(MSD) --sddf $(SDDF) --board $(MICROKIT_BOARD) --dtb $(DTB) --output . --sdf $(SYSTEM_FILE) --objcopy $(OBJCOPY) --tests "$(TESTS)"
 	$(OBJCOPY) --update-section .device_resources=timer_driver_device_resources.data timer_driver.elf
 	$(OBJCOPY) --update-section .timer_client_config=timer_client_scheduler.data scheduler.elf
 

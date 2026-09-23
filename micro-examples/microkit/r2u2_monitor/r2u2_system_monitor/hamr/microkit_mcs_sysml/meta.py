@@ -186,6 +186,9 @@ if __name__ == '__main__':
     parser.add_argument("--output", required=True)
     parser.add_argument("--sdf", required=True)
     parser.add_argument("--objcopy", required=True)
+    # Substring filter selecting which system tests to run; empty means all of
+    # them.  Only the test scheduler variant consumes it.
+    parser.add_argument("--tests", required=False, default="")
 
     args = parser.parse_args()
 
@@ -200,6 +203,9 @@ if __name__ == '__main__':
 
     global obj_copy
     obj_copy = args.objcopy
+
+    global tests_filter
+    tests_filter = args.tests
 
     with open(args.dtb, "rb") as f:
         dtb = DeviceTree(f.read())

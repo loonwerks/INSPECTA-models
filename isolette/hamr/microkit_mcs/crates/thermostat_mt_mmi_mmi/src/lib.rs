@@ -38,6 +38,10 @@ use data::*;
 static mut app: Option<thermostat_mt_mmi_mmi> = None;
 static mut init_api: thermostat_mt_mmi_mmi_Application_Api<thermostat_mt_mmi_mmi_Initialization_Api> = api::init_api();
 static mut compute_api: thermostat_mt_mmi_mmi_Application_Api<thermostat_mt_mmi_mmi_Compute_Api> = api::compute_api();
+extern "C" {
+  fn get_inj_sv_lastCmd(value: *mut Isolette_Data_Model::On_Off) -> bool;
+  fn is_injection_enabled() -> bool;
+}
 static mut monitoring_enabled: bool = false;
 
 #[no_mangle]
@@ -65,6 +69,13 @@ pub extern "C" fn thermostat_mt_mmi_mmi_initialize() {
 pub extern "C" fn thermostat_mt_mmi_mmi_timeTriggered() {
   unsafe {
     if let Some(_app) = app.as_mut() {
+      // Injected GUMBO state variables, if the test controller set any.
+      if is_injection_enabled() {
+        let mut inj_lastCmd: Isolette_Data_Model::On_Off = Isolette_Data_Model::On_Off::default();
+        if get_inj_sv_lastCmd(&mut inj_lastCmd) {
+          _app.lastCmd = inj_lastCmd;
+        }
+      }
       _app.timeTriggered(&mut compute_api);
       if monitoring_enabled {
         extern_c_api::unsafe_put_sv_lastCmd(&_app.lastCmd);
