@@ -11,6 +11,7 @@ extern unsigned int r2u2_spec_bin_len;
 typedef struct {
   r2u2_monitor_t monitor;
   r2u2_verdict verdict_cache[R2U2_SPEC_COUNT]; // Cache latest verdict (if applicable) per C2PO specification between monitor steps.
+  bool false_verdict_seen[R2U2_SPEC_COUNT]; // True if a false verdict arrived in this step.
   bool verdict_valid[R2U2_SPEC_COUNT]; // Track whether each cached verdict is current.
   bool verdict_updated[R2U2_SPEC_COUNT]; // Track whether each verdict was updated during this monitor step.
 } r2u2_monitor_state_t;
@@ -91,13 +92,16 @@ static const r2u2_logged_spec_t r2u2_logged_specs[44] = {
   {45, "temporal_trigger"}
 };
 
-// Cache the newest verdict returned for each specification.
+// Cache the latest verdict and remember any false verdict in this step.
 static r2u2_status_t r2u2_cache_output(
     r2u2_mltl_instruction_t instruction,
     r2u2_verdict *verdict) {
   size_t spec_number = instruction.op2_value;
   if (verdict == NULL || spec_number >= R2U2_SPEC_COUNT) {
     return R2U2_ERR_OTHER;
+  }
+  if (!get_verdict_truth(*verdict)) {
+    r2u2_monitor.false_verdict_seen[spec_number] = true;
   }
   r2u2_monitor.verdict_cache[spec_number] = *verdict;
   r2u2_monitor.verdict_valid[spec_number] = true;
@@ -224,6 +228,7 @@ void r2u2_monitor_post_timeTriggered(void) {
 
   for (size_t i = 0; i < R2U2_SPEC_COUNT; ++i) {
     r2u2_monitor.verdict_updated[i] = false;
+    r2u2_monitor.false_verdict_seen[i] = false;
   }
   r2u2_status_t status = r2u2_step(&r2u2_monitor.monitor);
   if (status != R2U2_OK) {
@@ -240,23 +245,30 @@ void r2u2_monitor_post_timeTriggered(void) {
     }
   }
 
-  // Report the current status of specifications without alert ports.
+  // Report one status for each specification without an alert port.
   for (size_t i = 0; i < 44; ++i) {
     size_t spec_number = r2u2_logged_specs[i].spec_number;
     const char *status = "unknown";
     if (r2u2_monitor.verdict_valid[spec_number]) {
-      status = get_verdict_truth(r2u2_monitor.verdict_cache[spec_number]) ? "true" : "false";
+      bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[spec_number]) &&
+          !r2u2_monitor.false_verdict_seen[spec_number];
+      status = truth ? "true" : "false";
     }
     printf("%s is currently %s\n",
         r2u2_logged_specs[i].spec_name, status);
   }
 
-  // Send the latest cached verdict through each mapped alert port.
+  // Send one result through each mapped alert port.
   if (r2u2_monitor.verdict_valid[3]) {
-    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[3]);
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[3]) &&
+        !r2u2_monitor.false_verdict_seen[3];
     (void) put_alert_result(&truth);
   }
-  if (r2u2_monitor.verdict_valid[22] && !get_verdict_truth(r2u2_monitor.verdict_cache[22])) {
-    (void) put_ack();
+  if (r2u2_monitor.verdict_valid[22]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[22]) &&
+        !r2u2_monitor.false_verdict_seen[22];
+    if (!truth) {
+      (void) put_ack();
+    }
   }
 }
