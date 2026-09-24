@@ -74,7 +74,7 @@ pub fn compute_spec_Figure_A_7_assume(
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
 {
-  implies!(
+  impliesL!(
     (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
     (api_lower_alarm_temp.degrees <= api_upper_alarm_temp.degrees))
 }
@@ -91,7 +91,7 @@ pub fn compute_spec_Table_A_12_LowerAlarmTemp_assume(
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
 {
-  implies!(
+  impliesL!(
     (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
     GUMBO_Library::Allowed_LowerAlarmTemp(api_lower_alarm_temp.degrees))
 }
@@ -108,7 +108,7 @@ pub fn compute_spec_Table_A_12_UpperAlarmTemp_assume(
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
 {
-  implies!(
+  impliesL!(
     (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
     GUMBO_Library::Allowed_UpperAlarmTemp(api_upper_alarm_temp.degrees))
 }

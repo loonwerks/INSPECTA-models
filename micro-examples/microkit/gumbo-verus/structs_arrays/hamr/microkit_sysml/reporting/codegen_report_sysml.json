@@ -129,6 +129,51 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/observers\/src\/gumbox\/producer_producer_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/observers\/src\/gumbox\/producer_producer_containers.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/observers\/src\/gumbox\/consumer_consumer_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/observers\/src\/gumbox\/consumer_consumer_containers.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/observers\/src\/components.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/observers\/src\/gumbox\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/observers\/src\/lib.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/observers\/Cargo.toml",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/observers\/rust-toolchain.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "Makefile",
               "overwrittenIfExists" : true
             },
@@ -345,7 +390,7 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/domain_monitor\/Cargo.toml",
-              "overwrittenIfExists" : false
+              "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",

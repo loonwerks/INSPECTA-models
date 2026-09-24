@@ -62,6 +62,7 @@
           "%%codegen_dir%%/crates/consumer_consumer/src/lib.rs",
           "%%codegen_dir%%/crates/domain_monitor/src/lib.rs",
           "%%codegen_dir%%/crates/domain_monitor/src/component/domain_monitor_process_domain_monitor_thread_app.rs",
+          "%%codegen_dir%%/crates/domain_monitor/Cargo.toml",
           "%%codegen_dir%%/crates/producer_producer/src/test/util/mod.rs",
           "%%codegen_dir%%/crates/producer_producer/src/test/util/generators.rs",
           "%%codegen_dir%%/crates/producer_producer/src/test/util/test_apis.rs",
