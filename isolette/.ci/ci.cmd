@@ -188,6 +188,9 @@ if (result == 0 && hasMicrokit) {
   // test_scheduler.mk image itself and fails unless every selected test passes.
   if (result == 0) {
     if (proc"which qemu-system-aarch64".run().ok) {
+      println(st"""╔═════════════════════════════════════════════════════════════╗
+                  |║  SysMLv2 + Microkit + user-land scheduler + system testing  ║
+                  |╚═════════════════════════════════════════════════════════════╝""".render)      
       result = run("Running the system tests under QEMU", F,
         proc"$sireum slang run ${microkitMcsDir / "bin" / "run-tests.cmd"}")
     } else {

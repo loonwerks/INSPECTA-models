@@ -20,6 +20,8 @@ extern "C" {
   fn put_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool;
   fn put_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
   fn put_sv_lastCmd(value: *mut Isolette_Data_Model::On_Off) -> bool;
+  fn is_injection_enabled() -> bool;
+  fn get_inj_sv_lastCmd(value: *mut Isolette_Data_Model::On_Off) -> bool;
   fn is_monitoring_enabled() -> bool;
 }
 
@@ -94,6 +96,25 @@ pub fn unsafe_put_sv_lastCmd(value: &Isolette_Data_Model::On_Off) -> bool
   }
 }
 
+pub fn unsafe_is_injection_enabled() -> bool
+{
+  unsafe {
+    return is_injection_enabled();
+  }
+}
+
+pub fn unsafe_get_inj_sv_lastCmd() -> Option<Isolette_Data_Model::On_Off>
+{
+  unsafe {
+    let mut value: Isolette_Data_Model::On_Off = Isolette_Data_Model::On_Off::default();
+    if get_inj_sv_lastCmd(&mut value) {
+      return Some(value);
+    } else {
+      return None;
+    }
+  }
+}
+
 pub fn unsafe_is_monitoring_enabled() -> bool
 {
   unsafe {
@@ -119,6 +140,8 @@ lazy_static::lazy_static! {
   pub static ref OUT_monitor_status: Mutex<Option<Isolette_Data_Model::Status>> = Mutex::new(None);
   pub static ref OUT_interface_failure: Mutex<Option<Isolette_Data_Model::Failure_Flag_i>> = Mutex::new(None);
   pub static ref OUT_sv_lastCmd: Mutex<Option<Isolette_Data_Model::On_Off>> = Mutex::new(None);
+  pub static ref INJECTION_ENABLED: Mutex<Option<bool>> = Mutex::new(None);
+  pub static ref INJ_SV_lastCmd: Mutex<Option<Isolette_Data_Model::On_Off>> = Mutex::new(None);
   pub static ref MONITORING_ENABLED: Mutex<Option<bool>> = Mutex::new(None);
 }
 
@@ -134,6 +157,8 @@ pub fn initialize_test_globals() {
     *OUT_monitor_status.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *OUT_interface_failure.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *OUT_sv_lastCmd.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *INJECTION_ENABLED.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *INJ_SV_lastCmd.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *MONITORING_ENABLED.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
@@ -220,6 +245,31 @@ pub fn put_sv_lastCmd(value: *mut Isolette_Data_Model::On_Off) -> bool
   unsafe {
     *OUT_sv_lastCmd.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
+  }
+}
+
+#[cfg(test)]
+pub fn is_injection_enabled() -> bool
+{
+  unsafe {
+    match *INJECTION_ENABLED.lock().unwrap_or_else(|e| e.into_inner()) {
+      Some(v) => return v,
+      None => return false,
+    }
+  }
+}
+
+#[cfg(test)]
+pub fn get_inj_sv_lastCmd(value: *mut Isolette_Data_Model::On_Off) -> bool
+{
+  unsafe {
+    match *INJ_SV_lastCmd.lock().unwrap_or_else(|e| e.into_inner()) {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
   }
 }
 

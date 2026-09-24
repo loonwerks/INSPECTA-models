@@ -38,10 +38,6 @@ use data::*;
 static mut app: Option<thermostat_rt_mrm_mrm> = None;
 static mut init_api: thermostat_rt_mrm_mrm_Application_Api<thermostat_rt_mrm_mrm_Initialization_Api> = api::init_api();
 static mut compute_api: thermostat_rt_mrm_mrm_Application_Api<thermostat_rt_mrm_mrm_Compute_Api> = api::compute_api();
-extern "C" {
-  fn get_inj_sv_lastRegulatorMode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool;
-  fn is_injection_enabled() -> bool;
-}
 static mut monitoring_enabled: bool = false;
 
 #[no_mangle]
@@ -70,10 +66,9 @@ pub extern "C" fn thermostat_rt_mrm_mrm_timeTriggered() {
   unsafe {
     if let Some(_app) = app.as_mut() {
       // Injected GUMBO state variables, if the test controller set any.
-      if is_injection_enabled() {
-        let mut inj_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode = Isolette_Data_Model::Regulator_Mode::default();
-        if get_inj_sv_lastRegulatorMode(&mut inj_lastRegulatorMode) {
-          _app.lastRegulatorMode = inj_lastRegulatorMode;
+      if crate::bridge::extern_c_api::unsafe_is_injection_enabled() {
+        if let Some(v) = crate::bridge::extern_c_api::unsafe_get_inj_sv_lastRegulatorMode() {
+          _app.lastRegulatorMode = v;
         }
       }
       _app.timeTriggered(&mut compute_api);
