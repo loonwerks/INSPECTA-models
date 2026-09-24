@@ -73,9 +73,12 @@ impl consumer_consumer {
         }
         verdict_cache[spec_num] = Some(out.verdict);
     }
+    // Delegate each current verdict to the component's editable policy callback.
+    let r2u2_sample_arrives_verdict = r2u2_monitor.verdict_cache[0]
+        .map(|verdict| verdict.truth && !false_verdict_seen[0]);
+    self.handle_sample_arrives_verdict(api, r2u2_sample_arrives_verdict);
     // Send one result through each mapped alert port.
-    if let Some(verdict) = r2u2_monitor.verdict_cache[0] {
-        let truth = verdict.truth && !false_verdict_seen[0];
+    if let Some(truth) = r2u2_sample_arrives_verdict {
         if !truth {
             api.put_sample_alert();
         }

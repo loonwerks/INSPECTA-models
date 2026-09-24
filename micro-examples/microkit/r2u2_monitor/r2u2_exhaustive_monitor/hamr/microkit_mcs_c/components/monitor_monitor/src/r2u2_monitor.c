@@ -39,59 +39,6 @@ static int32_t r2u2_gumbo_absoluteValue(int32_t value) {
   return ((((value) < (0))) ? (-value) : (value));
 }
 
-typedef struct {
-  size_t spec_number;
-  const char *spec_name;
-} r2u2_logged_spec_t;
-
-// Specifications without an alert mapping are logged after every monitor step.
-static const r2u2_logged_spec_t r2u2_logged_specs[44] = {
-  {0, "input_event"},
-  {1, "input_event_data"},
-  {2, "input_data"},
-  {4, "base_type_character"},
-  {5, "base_type_integer_8"},
-  {6, "base_type_integer_16"},
-  {7, "base_type_integer_32"},
-  {8, "base_type_unsigned_8"},
-  {9, "base_type_unsigned_16"},
-  {10, "bool_signal"},
-  {11, "output_event_must_send"},
-  {12, "output_event_data_must_send"},
-  {13, "output_event_no_send"},
-  {14, "output_event_data_no_send"},
-  {15, "output_event_data_must_send_value"},
-  {16, "output_data"},
-  {17, "temporal_future"},
-  {18, "temporal_eventually"},
-  {19, "temporal_globally"},
-  {20, "temporal_until"},
-  {21, "temporal_release"},
-  {23, "arithmetic_operators"},
-  {24, "bitwise_operators"},
-  {25, "boolean_operators"},
-  {26, "implication_operator"},
-  {27, "enum_signal"},
-  {28, "array_signal"},
-  {29, "record_signal"},
-  {30, "conditional_boolean"},
-  {31, "quantified_all_until"},
-  {32, "quantified_all_to"},
-  {33, "quantified_exists_until"},
-  {34, "quantified_exists_to"},
-  {35, "quantified_slice"},
-  {36, "quantified_index_sensitive"},
-  {37, "quantified_nested"},
-  {38, "state_variable"},
-  {39, "state_variable_in"},
-  {40, "boolean_function"},
-  {41, "value_function"},
-  {42, "temporal_once"},
-  {43, "temporal_historically"},
-  {44, "temporal_since"},
-  {45, "temporal_trigger"}
-};
-
 // Cache the latest verdict and remember any false verdict in this step.
 static r2u2_status_t r2u2_cache_output(
     r2u2_mltl_instruction_t instruction,
@@ -245,28 +192,337 @@ void r2u2_monitor_post_timeTriggered(void) {
     }
   }
 
-  // Report one status for each specification without an alert port.
-  for (size_t i = 0; i < 44; ++i) {
-    size_t spec_number = r2u2_logged_specs[i].spec_number;
-    const char *status = "unknown";
-    if (r2u2_monitor.verdict_valid[spec_number]) {
-      bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[spec_number]) &&
-          !r2u2_monitor.false_verdict_seen[spec_number];
-      status = truth ? "true" : "false";
-    }
-    printf("%s is currently %s\n",
-        r2u2_logged_specs[i].spec_name, status);
+  // Delegate each current verdict to the component's editable policy callback.
+  r2u2_verdict_status_t r2u2_input_event_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[0]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[0]) &&
+        !r2u2_monitor.false_verdict_seen[0];
+    r2u2_input_event_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
   }
-
-  // Send one result through each mapped alert port.
+  handle_input_event_verdict(r2u2_input_event_verdict);
+  r2u2_verdict_status_t r2u2_input_event_data_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[1]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[1]) &&
+        !r2u2_monitor.false_verdict_seen[1];
+    r2u2_input_event_data_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_input_event_data_verdict(r2u2_input_event_data_verdict);
+  r2u2_verdict_status_t r2u2_input_data_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[2]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[2]) &&
+        !r2u2_monitor.false_verdict_seen[2];
+    r2u2_input_data_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_input_data_verdict(r2u2_input_data_verdict);
+  r2u2_verdict_status_t r2u2_base_type_boolean_verdict = R2U2_VERDICT_UNKNOWN;
   if (r2u2_monitor.verdict_valid[3]) {
     bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[3]) &&
         !r2u2_monitor.false_verdict_seen[3];
-    (void) put_alert_result(&truth);
+    r2u2_base_type_boolean_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
   }
+  handle_base_type_boolean_verdict(r2u2_base_type_boolean_verdict);
+  r2u2_verdict_status_t r2u2_base_type_character_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[4]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[4]) &&
+        !r2u2_monitor.false_verdict_seen[4];
+    r2u2_base_type_character_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_base_type_character_verdict(r2u2_base_type_character_verdict);
+  r2u2_verdict_status_t r2u2_base_type_integer_8_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[5]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[5]) &&
+        !r2u2_monitor.false_verdict_seen[5];
+    r2u2_base_type_integer_8_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_base_type_integer_8_verdict(r2u2_base_type_integer_8_verdict);
+  r2u2_verdict_status_t r2u2_base_type_integer_16_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[6]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[6]) &&
+        !r2u2_monitor.false_verdict_seen[6];
+    r2u2_base_type_integer_16_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_base_type_integer_16_verdict(r2u2_base_type_integer_16_verdict);
+  r2u2_verdict_status_t r2u2_base_type_integer_32_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[7]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[7]) &&
+        !r2u2_monitor.false_verdict_seen[7];
+    r2u2_base_type_integer_32_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_base_type_integer_32_verdict(r2u2_base_type_integer_32_verdict);
+  r2u2_verdict_status_t r2u2_base_type_unsigned_8_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[8]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[8]) &&
+        !r2u2_monitor.false_verdict_seen[8];
+    r2u2_base_type_unsigned_8_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_base_type_unsigned_8_verdict(r2u2_base_type_unsigned_8_verdict);
+  r2u2_verdict_status_t r2u2_base_type_unsigned_16_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[9]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[9]) &&
+        !r2u2_monitor.false_verdict_seen[9];
+    r2u2_base_type_unsigned_16_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_base_type_unsigned_16_verdict(r2u2_base_type_unsigned_16_verdict);
+  r2u2_verdict_status_t r2u2_bool_signal_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[10]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[10]) &&
+        !r2u2_monitor.false_verdict_seen[10];
+    r2u2_bool_signal_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_bool_signal_verdict(r2u2_bool_signal_verdict);
+  r2u2_verdict_status_t r2u2_output_event_must_send_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[11]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[11]) &&
+        !r2u2_monitor.false_verdict_seen[11];
+    r2u2_output_event_must_send_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_output_event_must_send_verdict(r2u2_output_event_must_send_verdict);
+  r2u2_verdict_status_t r2u2_output_event_data_must_send_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[12]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[12]) &&
+        !r2u2_monitor.false_verdict_seen[12];
+    r2u2_output_event_data_must_send_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_output_event_data_must_send_verdict(r2u2_output_event_data_must_send_verdict);
+  r2u2_verdict_status_t r2u2_output_event_no_send_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[13]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[13]) &&
+        !r2u2_monitor.false_verdict_seen[13];
+    r2u2_output_event_no_send_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_output_event_no_send_verdict(r2u2_output_event_no_send_verdict);
+  r2u2_verdict_status_t r2u2_output_event_data_no_send_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[14]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[14]) &&
+        !r2u2_monitor.false_verdict_seen[14];
+    r2u2_output_event_data_no_send_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_output_event_data_no_send_verdict(r2u2_output_event_data_no_send_verdict);
+  r2u2_verdict_status_t r2u2_output_event_data_must_send_value_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[15]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[15]) &&
+        !r2u2_monitor.false_verdict_seen[15];
+    r2u2_output_event_data_must_send_value_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_output_event_data_must_send_value_verdict(r2u2_output_event_data_must_send_value_verdict);
+  r2u2_verdict_status_t r2u2_output_data_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[16]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[16]) &&
+        !r2u2_monitor.false_verdict_seen[16];
+    r2u2_output_data_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_output_data_verdict(r2u2_output_data_verdict);
+  r2u2_verdict_status_t r2u2_temporal_future_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[17]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[17]) &&
+        !r2u2_monitor.false_verdict_seen[17];
+    r2u2_temporal_future_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_temporal_future_verdict(r2u2_temporal_future_verdict);
+  r2u2_verdict_status_t r2u2_temporal_eventually_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[18]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[18]) &&
+        !r2u2_monitor.false_verdict_seen[18];
+    r2u2_temporal_eventually_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_temporal_eventually_verdict(r2u2_temporal_eventually_verdict);
+  r2u2_verdict_status_t r2u2_temporal_globally_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[19]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[19]) &&
+        !r2u2_monitor.false_verdict_seen[19];
+    r2u2_temporal_globally_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_temporal_globally_verdict(r2u2_temporal_globally_verdict);
+  r2u2_verdict_status_t r2u2_temporal_until_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[20]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[20]) &&
+        !r2u2_monitor.false_verdict_seen[20];
+    r2u2_temporal_until_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_temporal_until_verdict(r2u2_temporal_until_verdict);
+  r2u2_verdict_status_t r2u2_temporal_release_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[21]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[21]) &&
+        !r2u2_monitor.false_verdict_seen[21];
+    r2u2_temporal_release_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_temporal_release_verdict(r2u2_temporal_release_verdict);
+  r2u2_verdict_status_t r2u2_comparison_operators_verdict = R2U2_VERDICT_UNKNOWN;
   if (r2u2_monitor.verdict_valid[22]) {
     bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[22]) &&
         !r2u2_monitor.false_verdict_seen[22];
+    r2u2_comparison_operators_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_comparison_operators_verdict(r2u2_comparison_operators_verdict);
+  r2u2_verdict_status_t r2u2_arithmetic_operators_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[23]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[23]) &&
+        !r2u2_monitor.false_verdict_seen[23];
+    r2u2_arithmetic_operators_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_arithmetic_operators_verdict(r2u2_arithmetic_operators_verdict);
+  r2u2_verdict_status_t r2u2_bitwise_operators_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[24]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[24]) &&
+        !r2u2_monitor.false_verdict_seen[24];
+    r2u2_bitwise_operators_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_bitwise_operators_verdict(r2u2_bitwise_operators_verdict);
+  r2u2_verdict_status_t r2u2_boolean_operators_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[25]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[25]) &&
+        !r2u2_monitor.false_verdict_seen[25];
+    r2u2_boolean_operators_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_boolean_operators_verdict(r2u2_boolean_operators_verdict);
+  r2u2_verdict_status_t r2u2_implication_operator_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[26]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[26]) &&
+        !r2u2_monitor.false_verdict_seen[26];
+    r2u2_implication_operator_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_implication_operator_verdict(r2u2_implication_operator_verdict);
+  r2u2_verdict_status_t r2u2_enum_signal_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[27]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[27]) &&
+        !r2u2_monitor.false_verdict_seen[27];
+    r2u2_enum_signal_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_enum_signal_verdict(r2u2_enum_signal_verdict);
+  r2u2_verdict_status_t r2u2_array_signal_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[28]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[28]) &&
+        !r2u2_monitor.false_verdict_seen[28];
+    r2u2_array_signal_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_array_signal_verdict(r2u2_array_signal_verdict);
+  r2u2_verdict_status_t r2u2_record_signal_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[29]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[29]) &&
+        !r2u2_monitor.false_verdict_seen[29];
+    r2u2_record_signal_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_record_signal_verdict(r2u2_record_signal_verdict);
+  r2u2_verdict_status_t r2u2_conditional_boolean_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[30]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[30]) &&
+        !r2u2_monitor.false_verdict_seen[30];
+    r2u2_conditional_boolean_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_conditional_boolean_verdict(r2u2_conditional_boolean_verdict);
+  r2u2_verdict_status_t r2u2_quantified_all_until_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[31]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[31]) &&
+        !r2u2_monitor.false_verdict_seen[31];
+    r2u2_quantified_all_until_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_quantified_all_until_verdict(r2u2_quantified_all_until_verdict);
+  r2u2_verdict_status_t r2u2_quantified_all_to_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[32]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[32]) &&
+        !r2u2_monitor.false_verdict_seen[32];
+    r2u2_quantified_all_to_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_quantified_all_to_verdict(r2u2_quantified_all_to_verdict);
+  r2u2_verdict_status_t r2u2_quantified_exists_until_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[33]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[33]) &&
+        !r2u2_monitor.false_verdict_seen[33];
+    r2u2_quantified_exists_until_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_quantified_exists_until_verdict(r2u2_quantified_exists_until_verdict);
+  r2u2_verdict_status_t r2u2_quantified_exists_to_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[34]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[34]) &&
+        !r2u2_monitor.false_verdict_seen[34];
+    r2u2_quantified_exists_to_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_quantified_exists_to_verdict(r2u2_quantified_exists_to_verdict);
+  r2u2_verdict_status_t r2u2_quantified_slice_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[35]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[35]) &&
+        !r2u2_monitor.false_verdict_seen[35];
+    r2u2_quantified_slice_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_quantified_slice_verdict(r2u2_quantified_slice_verdict);
+  r2u2_verdict_status_t r2u2_quantified_index_sensitive_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[36]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[36]) &&
+        !r2u2_monitor.false_verdict_seen[36];
+    r2u2_quantified_index_sensitive_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_quantified_index_sensitive_verdict(r2u2_quantified_index_sensitive_verdict);
+  r2u2_verdict_status_t r2u2_quantified_nested_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[37]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[37]) &&
+        !r2u2_monitor.false_verdict_seen[37];
+    r2u2_quantified_nested_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_quantified_nested_verdict(r2u2_quantified_nested_verdict);
+  r2u2_verdict_status_t r2u2_state_variable_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[38]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[38]) &&
+        !r2u2_monitor.false_verdict_seen[38];
+    r2u2_state_variable_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_state_variable_verdict(r2u2_state_variable_verdict);
+  r2u2_verdict_status_t r2u2_state_variable_in_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[39]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[39]) &&
+        !r2u2_monitor.false_verdict_seen[39];
+    r2u2_state_variable_in_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_state_variable_in_verdict(r2u2_state_variable_in_verdict);
+  r2u2_verdict_status_t r2u2_boolean_function_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[40]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[40]) &&
+        !r2u2_monitor.false_verdict_seen[40];
+    r2u2_boolean_function_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_boolean_function_verdict(r2u2_boolean_function_verdict);
+  r2u2_verdict_status_t r2u2_value_function_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[41]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[41]) &&
+        !r2u2_monitor.false_verdict_seen[41];
+    r2u2_value_function_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_value_function_verdict(r2u2_value_function_verdict);
+  r2u2_verdict_status_t r2u2_temporal_once_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[42]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[42]) &&
+        !r2u2_monitor.false_verdict_seen[42];
+    r2u2_temporal_once_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_temporal_once_verdict(r2u2_temporal_once_verdict);
+  r2u2_verdict_status_t r2u2_temporal_historically_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[43]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[43]) &&
+        !r2u2_monitor.false_verdict_seen[43];
+    r2u2_temporal_historically_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_temporal_historically_verdict(r2u2_temporal_historically_verdict);
+  r2u2_verdict_status_t r2u2_temporal_since_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[44]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[44]) &&
+        !r2u2_monitor.false_verdict_seen[44];
+    r2u2_temporal_since_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_temporal_since_verdict(r2u2_temporal_since_verdict);
+  r2u2_verdict_status_t r2u2_temporal_trigger_verdict = R2U2_VERDICT_UNKNOWN;
+  if (r2u2_monitor.verdict_valid[45]) {
+    bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[45]) &&
+        !r2u2_monitor.false_verdict_seen[45];
+    r2u2_temporal_trigger_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_temporal_trigger_verdict(r2u2_temporal_trigger_verdict);
+
+  // Send one result through each mapped alert port.
+  if (r2u2_base_type_boolean_verdict != R2U2_VERDICT_UNKNOWN) {
+    bool truth = r2u2_base_type_boolean_verdict == R2U2_VERDICT_TRUE;
+    (void) put_alert_result(&truth);
+  }
+  if (r2u2_comparison_operators_verdict != R2U2_VERDICT_UNKNOWN) {
+    bool truth = r2u2_comparison_operators_verdict == R2U2_VERDICT_TRUE;
     if (!truth) {
       (void) put_ack();
     }

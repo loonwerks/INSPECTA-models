@@ -61,6 +61,22 @@ verus! {
         }
       }
     }
+
+    /// Optional implementation placeholder for the R2U2 verdict of monitored property `sample_arrives`.
+    pub fn handle_sample_arrives_verdict<API: consumer_consumer_Full_Api> (
+      &mut self,
+      api: &mut consumer_consumer_Application_Api<API>,
+      verdict: Option<bool>)
+      ensures
+        // BEGIN MARKER R2U2 sample_arrives VERDICT ENSURES
+        // guarantee Monitor_Requirement
+        //   Alert ports are reserved for the monitor
+        old(api).sample_alert == final(api).sample_alert,
+        // END MARKER R2U2 sample_arrives VERDICT ENSURES
+    {
+      // This verdict is already mapped to monitor-owned alert port
+      // sample_alert. Do not write this port from this callback.
+    }
   }
 
   #[verifier::external_body]

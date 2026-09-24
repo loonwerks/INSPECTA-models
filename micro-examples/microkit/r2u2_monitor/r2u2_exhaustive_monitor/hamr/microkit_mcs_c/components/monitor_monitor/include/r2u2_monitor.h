@@ -6,6 +6,59 @@
 
 extern int32_t r2u2_state_sprevious_level;
 
+typedef enum {
+  R2U2_VERDICT_UNKNOWN,
+  R2U2_VERDICT_FALSE,
+  R2U2_VERDICT_TRUE
+} r2u2_verdict_status_t;
+
+void handle_input_event_verdict(r2u2_verdict_status_t verdict);
+void handle_input_event_data_verdict(r2u2_verdict_status_t verdict);
+void handle_input_data_verdict(r2u2_verdict_status_t verdict);
+void handle_base_type_boolean_verdict(r2u2_verdict_status_t verdict);
+void handle_base_type_character_verdict(r2u2_verdict_status_t verdict);
+void handle_base_type_integer_8_verdict(r2u2_verdict_status_t verdict);
+void handle_base_type_integer_16_verdict(r2u2_verdict_status_t verdict);
+void handle_base_type_integer_32_verdict(r2u2_verdict_status_t verdict);
+void handle_base_type_unsigned_8_verdict(r2u2_verdict_status_t verdict);
+void handle_base_type_unsigned_16_verdict(r2u2_verdict_status_t verdict);
+void handle_bool_signal_verdict(r2u2_verdict_status_t verdict);
+void handle_output_event_must_send_verdict(r2u2_verdict_status_t verdict);
+void handle_output_event_data_must_send_verdict(r2u2_verdict_status_t verdict);
+void handle_output_event_no_send_verdict(r2u2_verdict_status_t verdict);
+void handle_output_event_data_no_send_verdict(r2u2_verdict_status_t verdict);
+void handle_output_event_data_must_send_value_verdict(r2u2_verdict_status_t verdict);
+void handle_output_data_verdict(r2u2_verdict_status_t verdict);
+void handle_temporal_future_verdict(r2u2_verdict_status_t verdict);
+void handle_temporal_eventually_verdict(r2u2_verdict_status_t verdict);
+void handle_temporal_globally_verdict(r2u2_verdict_status_t verdict);
+void handle_temporal_until_verdict(r2u2_verdict_status_t verdict);
+void handle_temporal_release_verdict(r2u2_verdict_status_t verdict);
+void handle_comparison_operators_verdict(r2u2_verdict_status_t verdict);
+void handle_arithmetic_operators_verdict(r2u2_verdict_status_t verdict);
+void handle_bitwise_operators_verdict(r2u2_verdict_status_t verdict);
+void handle_boolean_operators_verdict(r2u2_verdict_status_t verdict);
+void handle_implication_operator_verdict(r2u2_verdict_status_t verdict);
+void handle_enum_signal_verdict(r2u2_verdict_status_t verdict);
+void handle_array_signal_verdict(r2u2_verdict_status_t verdict);
+void handle_record_signal_verdict(r2u2_verdict_status_t verdict);
+void handle_conditional_boolean_verdict(r2u2_verdict_status_t verdict);
+void handle_quantified_all_until_verdict(r2u2_verdict_status_t verdict);
+void handle_quantified_all_to_verdict(r2u2_verdict_status_t verdict);
+void handle_quantified_exists_until_verdict(r2u2_verdict_status_t verdict);
+void handle_quantified_exists_to_verdict(r2u2_verdict_status_t verdict);
+void handle_quantified_slice_verdict(r2u2_verdict_status_t verdict);
+void handle_quantified_index_sensitive_verdict(r2u2_verdict_status_t verdict);
+void handle_quantified_nested_verdict(r2u2_verdict_status_t verdict);
+void handle_state_variable_verdict(r2u2_verdict_status_t verdict);
+void handle_state_variable_in_verdict(r2u2_verdict_status_t verdict);
+void handle_boolean_function_verdict(r2u2_verdict_status_t verdict);
+void handle_value_function_verdict(r2u2_verdict_status_t verdict);
+void handle_temporal_once_verdict(r2u2_verdict_status_t verdict);
+void handle_temporal_historically_verdict(r2u2_verdict_status_t verdict);
+void handle_temporal_since_verdict(r2u2_verdict_status_t verdict);
+void handle_temporal_trigger_verdict(r2u2_verdict_status_t verdict);
+
 void r2u2_monitor_initialize(void);
 void r2u2_monitor_pre_timeTriggered(void);
 void r2u2_monitor_post_timeTriggered(void);

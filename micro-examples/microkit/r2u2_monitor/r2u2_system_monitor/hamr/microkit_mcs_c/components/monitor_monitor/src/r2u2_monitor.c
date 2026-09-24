@@ -88,10 +88,18 @@ void r2u2_monitor_post_timeTriggered(void) {
     }
   }
 
-  // Send one result through each mapped alert port.
+  // Delegate each current verdict to the component's editable policy callback.
+  r2u2_verdict_status_t r2u2_samples_match_until_producer_pauses_verdict = R2U2_VERDICT_UNKNOWN;
   if (r2u2_monitor.verdict_valid[0]) {
     bool truth = get_verdict_truth(r2u2_monitor.verdict_cache[0]) &&
         !r2u2_monitor.false_verdict_seen[0];
+    r2u2_samples_match_until_producer_pauses_verdict = truth ? R2U2_VERDICT_TRUE : R2U2_VERDICT_FALSE;
+  }
+  handle_samples_match_until_producer_pauses_verdict(r2u2_samples_match_until_producer_pauses_verdict);
+
+  // Send one result through each mapped alert port.
+  if (r2u2_samples_match_until_producer_pauses_verdict != R2U2_VERDICT_UNKNOWN) {
+    bool truth = r2u2_samples_match_until_producer_pauses_verdict == R2U2_VERDICT_TRUE;
     (void) put_alert_flag(&truth);
   }
 }

@@ -22,3 +22,9 @@ void consumer_consumer_notify(microkit_channel channel) {
       printf("%s: Unexpected channel %d\n", microkit_name, channel);
   }
 }
+
+// Optional implementation placeholder for the R2U2 verdict of monitored property `sample_arrives`.
+void handle_sample_arrives_verdict(r2u2_verdict_status_t verdict) {
+  // This verdict is already mapped to monitor-owned alert port
+  // sample_alert. Do not write this port from this callback.
+}

@@ -8,53 +8,6 @@ use super::monitor_monitor_app::monitor_monitor;
 // Instance of the R2U2 monitor.
 static mut R2U2_MONITOR: Option<R2U2Monitor> = None;
 
-// Specifications without an alert mapping are logged after every monitor step.
-const R2U2_LOGGED_SPECS: [(usize, &'static str); 44] = [
-    (0, "input_event"),
-    (1, "input_event_data"),
-    (2, "input_data"),
-    (4, "base_type_character"),
-    (5, "base_type_integer_8"),
-    (6, "base_type_integer_16"),
-    (7, "base_type_integer_32"),
-    (8, "base_type_unsigned_8"),
-    (9, "base_type_unsigned_16"),
-    (10, "bool_signal"),
-    (11, "output_event_must_send"),
-    (12, "output_event_data_must_send"),
-    (13, "output_event_no_send"),
-    (14, "output_event_data_no_send"),
-    (15, "output_event_data_must_send_value"),
-    (16, "output_data"),
-    (17, "temporal_future"),
-    (18, "temporal_eventually"),
-    (19, "temporal_globally"),
-    (20, "temporal_until"),
-    (21, "temporal_release"),
-    (23, "arithmetic_operators"),
-    (24, "bitwise_operators"),
-    (25, "boolean_operators"),
-    (26, "implication_operator"),
-    (27, "enum_signal"),
-    (28, "array_signal"),
-    (29, "record_signal"),
-    (30, "conditional_boolean"),
-    (31, "quantified_all_until"),
-    (32, "quantified_all_to"),
-    (33, "quantified_exists_until"),
-    (34, "quantified_exists_to"),
-    (35, "quantified_slice"),
-    (36, "quantified_index_sensitive"),
-    (37, "quantified_nested"),
-    (38, "state_variable"),
-    (39, "state_variable_in"),
-    (40, "boolean_function"),
-    (41, "value_function"),
-    (42, "temporal_once"),
-    (43, "temporal_historically"),
-    (44, "temporal_since"),
-    (45, "temporal_trigger")
-];
 
 struct R2U2Monitor {
   monitor: r2u2_core::Monitor,
@@ -167,24 +120,150 @@ impl monitor_monitor {
         }
         verdict_cache[spec_num] = Some(out.verdict);
     }
-    // Report one status for each specification without an alert port.
-    for (spec_num, spec_name) in R2U2_LOGGED_SPECS {
-        let status = match r2u2_monitor.verdict_cache[spec_num] {
-            Some(verdict) => {
-                let truth = verdict.truth && !false_verdict_seen[spec_num];
-                if truth { "true" } else { "false" }
-            },
-            None => "unknown",
-        };
-        log::info!("{} is currently {}", spec_name, status);
-    }
+    // Delegate each current verdict to the component's editable policy callback.
+    let r2u2_input_event_verdict = r2u2_monitor.verdict_cache[0]
+        .map(|verdict| verdict.truth && !false_verdict_seen[0]);
+    self.handle_input_event_verdict(api, r2u2_input_event_verdict);
+    let r2u2_input_event_data_verdict = r2u2_monitor.verdict_cache[1]
+        .map(|verdict| verdict.truth && !false_verdict_seen[1]);
+    self.handle_input_event_data_verdict(api, r2u2_input_event_data_verdict);
+    let r2u2_input_data_verdict = r2u2_monitor.verdict_cache[2]
+        .map(|verdict| verdict.truth && !false_verdict_seen[2]);
+    self.handle_input_data_verdict(api, r2u2_input_data_verdict);
+    let r2u2_base_type_boolean_verdict = r2u2_monitor.verdict_cache[3]
+        .map(|verdict| verdict.truth && !false_verdict_seen[3]);
+    self.handle_base_type_boolean_verdict(api, r2u2_base_type_boolean_verdict);
+    let r2u2_base_type_character_verdict = r2u2_monitor.verdict_cache[4]
+        .map(|verdict| verdict.truth && !false_verdict_seen[4]);
+    self.handle_base_type_character_verdict(api, r2u2_base_type_character_verdict);
+    let r2u2_base_type_integer_8_verdict = r2u2_monitor.verdict_cache[5]
+        .map(|verdict| verdict.truth && !false_verdict_seen[5]);
+    self.handle_base_type_integer_8_verdict(api, r2u2_base_type_integer_8_verdict);
+    let r2u2_base_type_integer_16_verdict = r2u2_monitor.verdict_cache[6]
+        .map(|verdict| verdict.truth && !false_verdict_seen[6]);
+    self.handle_base_type_integer_16_verdict(api, r2u2_base_type_integer_16_verdict);
+    let r2u2_base_type_integer_32_verdict = r2u2_monitor.verdict_cache[7]
+        .map(|verdict| verdict.truth && !false_verdict_seen[7]);
+    self.handle_base_type_integer_32_verdict(api, r2u2_base_type_integer_32_verdict);
+    let r2u2_base_type_unsigned_8_verdict = r2u2_monitor.verdict_cache[8]
+        .map(|verdict| verdict.truth && !false_verdict_seen[8]);
+    self.handle_base_type_unsigned_8_verdict(api, r2u2_base_type_unsigned_8_verdict);
+    let r2u2_base_type_unsigned_16_verdict = r2u2_monitor.verdict_cache[9]
+        .map(|verdict| verdict.truth && !false_verdict_seen[9]);
+    self.handle_base_type_unsigned_16_verdict(api, r2u2_base_type_unsigned_16_verdict);
+    let r2u2_bool_signal_verdict = r2u2_monitor.verdict_cache[10]
+        .map(|verdict| verdict.truth && !false_verdict_seen[10]);
+    self.handle_bool_signal_verdict(api, r2u2_bool_signal_verdict);
+    let r2u2_output_event_must_send_verdict = r2u2_monitor.verdict_cache[11]
+        .map(|verdict| verdict.truth && !false_verdict_seen[11]);
+    self.handle_output_event_must_send_verdict(api, r2u2_output_event_must_send_verdict);
+    let r2u2_output_event_data_must_send_verdict = r2u2_monitor.verdict_cache[12]
+        .map(|verdict| verdict.truth && !false_verdict_seen[12]);
+    self.handle_output_event_data_must_send_verdict(api, r2u2_output_event_data_must_send_verdict);
+    let r2u2_output_event_no_send_verdict = r2u2_monitor.verdict_cache[13]
+        .map(|verdict| verdict.truth && !false_verdict_seen[13]);
+    self.handle_output_event_no_send_verdict(api, r2u2_output_event_no_send_verdict);
+    let r2u2_output_event_data_no_send_verdict = r2u2_monitor.verdict_cache[14]
+        .map(|verdict| verdict.truth && !false_verdict_seen[14]);
+    self.handle_output_event_data_no_send_verdict(api, r2u2_output_event_data_no_send_verdict);
+    let r2u2_output_event_data_must_send_value_verdict = r2u2_monitor.verdict_cache[15]
+        .map(|verdict| verdict.truth && !false_verdict_seen[15]);
+    self.handle_output_event_data_must_send_value_verdict(api, r2u2_output_event_data_must_send_value_verdict);
+    let r2u2_output_data_verdict = r2u2_monitor.verdict_cache[16]
+        .map(|verdict| verdict.truth && !false_verdict_seen[16]);
+    self.handle_output_data_verdict(api, r2u2_output_data_verdict);
+    let r2u2_temporal_future_verdict = r2u2_monitor.verdict_cache[17]
+        .map(|verdict| verdict.truth && !false_verdict_seen[17]);
+    self.handle_temporal_future_verdict(api, r2u2_temporal_future_verdict);
+    let r2u2_temporal_eventually_verdict = r2u2_monitor.verdict_cache[18]
+        .map(|verdict| verdict.truth && !false_verdict_seen[18]);
+    self.handle_temporal_eventually_verdict(api, r2u2_temporal_eventually_verdict);
+    let r2u2_temporal_globally_verdict = r2u2_monitor.verdict_cache[19]
+        .map(|verdict| verdict.truth && !false_verdict_seen[19]);
+    self.handle_temporal_globally_verdict(api, r2u2_temporal_globally_verdict);
+    let r2u2_temporal_until_verdict = r2u2_monitor.verdict_cache[20]
+        .map(|verdict| verdict.truth && !false_verdict_seen[20]);
+    self.handle_temporal_until_verdict(api, r2u2_temporal_until_verdict);
+    let r2u2_temporal_release_verdict = r2u2_monitor.verdict_cache[21]
+        .map(|verdict| verdict.truth && !false_verdict_seen[21]);
+    self.handle_temporal_release_verdict(api, r2u2_temporal_release_verdict);
+    let r2u2_comparison_operators_verdict = r2u2_monitor.verdict_cache[22]
+        .map(|verdict| verdict.truth && !false_verdict_seen[22]);
+    self.handle_comparison_operators_verdict(api, r2u2_comparison_operators_verdict);
+    let r2u2_arithmetic_operators_verdict = r2u2_monitor.verdict_cache[23]
+        .map(|verdict| verdict.truth && !false_verdict_seen[23]);
+    self.handle_arithmetic_operators_verdict(api, r2u2_arithmetic_operators_verdict);
+    let r2u2_bitwise_operators_verdict = r2u2_monitor.verdict_cache[24]
+        .map(|verdict| verdict.truth && !false_verdict_seen[24]);
+    self.handle_bitwise_operators_verdict(api, r2u2_bitwise_operators_verdict);
+    let r2u2_boolean_operators_verdict = r2u2_monitor.verdict_cache[25]
+        .map(|verdict| verdict.truth && !false_verdict_seen[25]);
+    self.handle_boolean_operators_verdict(api, r2u2_boolean_operators_verdict);
+    let r2u2_implication_operator_verdict = r2u2_monitor.verdict_cache[26]
+        .map(|verdict| verdict.truth && !false_verdict_seen[26]);
+    self.handle_implication_operator_verdict(api, r2u2_implication_operator_verdict);
+    let r2u2_enum_signal_verdict = r2u2_monitor.verdict_cache[27]
+        .map(|verdict| verdict.truth && !false_verdict_seen[27]);
+    self.handle_enum_signal_verdict(api, r2u2_enum_signal_verdict);
+    let r2u2_array_signal_verdict = r2u2_monitor.verdict_cache[28]
+        .map(|verdict| verdict.truth && !false_verdict_seen[28]);
+    self.handle_array_signal_verdict(api, r2u2_array_signal_verdict);
+    let r2u2_record_signal_verdict = r2u2_monitor.verdict_cache[29]
+        .map(|verdict| verdict.truth && !false_verdict_seen[29]);
+    self.handle_record_signal_verdict(api, r2u2_record_signal_verdict);
+    let r2u2_conditional_boolean_verdict = r2u2_monitor.verdict_cache[30]
+        .map(|verdict| verdict.truth && !false_verdict_seen[30]);
+    self.handle_conditional_boolean_verdict(api, r2u2_conditional_boolean_verdict);
+    let r2u2_quantified_all_until_verdict = r2u2_monitor.verdict_cache[31]
+        .map(|verdict| verdict.truth && !false_verdict_seen[31]);
+    self.handle_quantified_all_until_verdict(api, r2u2_quantified_all_until_verdict);
+    let r2u2_quantified_all_to_verdict = r2u2_monitor.verdict_cache[32]
+        .map(|verdict| verdict.truth && !false_verdict_seen[32]);
+    self.handle_quantified_all_to_verdict(api, r2u2_quantified_all_to_verdict);
+    let r2u2_quantified_exists_until_verdict = r2u2_monitor.verdict_cache[33]
+        .map(|verdict| verdict.truth && !false_verdict_seen[33]);
+    self.handle_quantified_exists_until_verdict(api, r2u2_quantified_exists_until_verdict);
+    let r2u2_quantified_exists_to_verdict = r2u2_monitor.verdict_cache[34]
+        .map(|verdict| verdict.truth && !false_verdict_seen[34]);
+    self.handle_quantified_exists_to_verdict(api, r2u2_quantified_exists_to_verdict);
+    let r2u2_quantified_slice_verdict = r2u2_monitor.verdict_cache[35]
+        .map(|verdict| verdict.truth && !false_verdict_seen[35]);
+    self.handle_quantified_slice_verdict(api, r2u2_quantified_slice_verdict);
+    let r2u2_quantified_index_sensitive_verdict = r2u2_monitor.verdict_cache[36]
+        .map(|verdict| verdict.truth && !false_verdict_seen[36]);
+    self.handle_quantified_index_sensitive_verdict(api, r2u2_quantified_index_sensitive_verdict);
+    let r2u2_quantified_nested_verdict = r2u2_monitor.verdict_cache[37]
+        .map(|verdict| verdict.truth && !false_verdict_seen[37]);
+    self.handle_quantified_nested_verdict(api, r2u2_quantified_nested_verdict);
+    let r2u2_state_variable_verdict = r2u2_monitor.verdict_cache[38]
+        .map(|verdict| verdict.truth && !false_verdict_seen[38]);
+    self.handle_state_variable_verdict(api, r2u2_state_variable_verdict);
+    let r2u2_state_variable_in_verdict = r2u2_monitor.verdict_cache[39]
+        .map(|verdict| verdict.truth && !false_verdict_seen[39]);
+    self.handle_state_variable_in_verdict(api, r2u2_state_variable_in_verdict);
+    let r2u2_boolean_function_verdict = r2u2_monitor.verdict_cache[40]
+        .map(|verdict| verdict.truth && !false_verdict_seen[40]);
+    self.handle_boolean_function_verdict(api, r2u2_boolean_function_verdict);
+    let r2u2_value_function_verdict = r2u2_monitor.verdict_cache[41]
+        .map(|verdict| verdict.truth && !false_verdict_seen[41]);
+    self.handle_value_function_verdict(api, r2u2_value_function_verdict);
+    let r2u2_temporal_once_verdict = r2u2_monitor.verdict_cache[42]
+        .map(|verdict| verdict.truth && !false_verdict_seen[42]);
+    self.handle_temporal_once_verdict(api, r2u2_temporal_once_verdict);
+    let r2u2_temporal_historically_verdict = r2u2_monitor.verdict_cache[43]
+        .map(|verdict| verdict.truth && !false_verdict_seen[43]);
+    self.handle_temporal_historically_verdict(api, r2u2_temporal_historically_verdict);
+    let r2u2_temporal_since_verdict = r2u2_monitor.verdict_cache[44]
+        .map(|verdict| verdict.truth && !false_verdict_seen[44]);
+    self.handle_temporal_since_verdict(api, r2u2_temporal_since_verdict);
+    let r2u2_temporal_trigger_verdict = r2u2_monitor.verdict_cache[45]
+        .map(|verdict| verdict.truth && !false_verdict_seen[45]);
+    self.handle_temporal_trigger_verdict(api, r2u2_temporal_trigger_verdict);
     // Send one result through each mapped alert port.
-    if let Some(verdict) = r2u2_monitor.verdict_cache[3] {
-        let truth = verdict.truth && !false_verdict_seen[3];
+    if let Some(truth) = r2u2_base_type_boolean_verdict {
         api.put_alert_result(truth);
     }
-    if let Some(verdict) = r2u2_monitor.verdict_cache[22] {
-        let truth = verdict.truth && !false_verdict_seen[22];
+    if let Some(truth) = r2u2_comparison_operators_verdict {
         if !truth {
             api.put_ack();
         }
