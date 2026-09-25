@@ -33,6 +33,10 @@ UTIL_OBJS = printf.o util.o
 TYPES_DIR = $(TOP_DIR)/types
 TYPE_OBJS := $(TOP_DIR)/build/sb_queue_int32_t_1.o
 
+# The queue objects as an archive: each protection domain's link pulls in only the
+# queues it uses, not every queue in the system
+TYPES_LIB := libhamr_types.a
+
 # exporting TOP_TYPES_INCLUDE in case other makefiles need it
 export TOP_TYPES_INCLUDE = -I$(TYPES_DIR)/include
 
@@ -47,6 +51,10 @@ ${CHECK_FLAGS_BOARD_MD5}:
 
 %.o: ${TOP_DIR}/util/src/%.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_DIR)/util/include
+
+$(TYPES_LIB): $(TYPE_OBJS)
+	rm -f $@
+	$(AR) rcs $@ $^
 
 $(TOP_DIR)/build/sb_queue_int32_t_1.o: $(TOP_DIR)/types/src/sb_queue_int32_t_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
@@ -102,28 +110,28 @@ pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 p1_t1_MON.elf: p1_t1_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-p1_t1.elf: $(UTIL_OBJS) $(TYPE_OBJS) p1_t1_user.o p1_t1.o
+p1_t1.elf: $(UTIL_OBJS) p1_t1_user.o p1_t1.o $(TYPES_LIB)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 p2_t2_MON.elf: p2_t2_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-p2_t2.elf: $(UTIL_OBJS) $(TYPE_OBJS) p2_t2_user.o p2_t2.o
+p2_t2.elf: $(UTIL_OBJS) p2_t2_user.o p2_t2.o $(TYPES_LIB)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 p3_t3_MON.elf: p3_t3_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-p3_t3.elf: $(UTIL_OBJS) $(TYPE_OBJS) p3_t3_user.o p3_t3.o
+p3_t3.elf: $(UTIL_OBJS) p3_t3_user.o p3_t3.o $(TYPES_LIB)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 domain_monitor_process_domain_monitor_thread_MON.elf: domain_monitor_process_domain_monitor_thread_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -ldomain_monitor -o $@
+domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -ldomain_monitor -o $@
 
-pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
+pacer.elf: $(UTIL_OBJS) pacer.o $(TYPES_LIB)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 $(IMAGE_FILE): $(IMAGES) $(TOP_DIR)/$(MSD)

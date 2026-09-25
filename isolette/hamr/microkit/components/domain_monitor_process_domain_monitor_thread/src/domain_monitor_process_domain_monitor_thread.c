@@ -64,6 +64,10 @@ bool get_thermostat_rt_mri_mri_upper_desired_temp(Isolette_Data_Model_Temp_i *da
   return isFresh;
 }
 
+uintmax_t get_thermostat_rt_mri_mri_upper_desired_temp_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Temp_i_1_numInvalid((sb_queue_Isolette_Data_Model_Temp_i_1_Recv_t *) &thermostat_rt_mri_mri_upper_desired_temp_recv_queue);
+}
+
 Isolette_Data_Model_Temp_i last_thermostat_rt_mri_mri_lower_desired_temp_payload;
 
 bool get_thermostat_rt_mri_mri_lower_desired_temp(Isolette_Data_Model_Temp_i *data) {
@@ -75,6 +79,10 @@ bool get_thermostat_rt_mri_mri_lower_desired_temp(Isolette_Data_Model_Temp_i *da
   }
   *data = last_thermostat_rt_mri_mri_lower_desired_temp_payload;
   return isFresh;
+}
+
+uintmax_t get_thermostat_rt_mri_mri_lower_desired_temp_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Temp_i_1_numInvalid((sb_queue_Isolette_Data_Model_Temp_i_1_Recv_t *) &thermostat_rt_mri_mri_lower_desired_temp_recv_queue);
 }
 
 Isolette_Data_Model_Temp_i last_thermostat_rt_mri_mri_displayed_temp_payload;
@@ -90,6 +98,10 @@ bool get_thermostat_rt_mri_mri_displayed_temp(Isolette_Data_Model_Temp_i *data) 
   return isFresh;
 }
 
+uintmax_t get_thermostat_rt_mri_mri_displayed_temp_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Temp_i_1_numInvalid((sb_queue_Isolette_Data_Model_Temp_i_1_Recv_t *) &thermostat_rt_mri_mri_displayed_temp_recv_queue);
+}
+
 Isolette_Data_Model_Status last_thermostat_rt_mri_mri_regulator_status_payload;
 
 bool get_thermostat_rt_mri_mri_regulator_status(Isolette_Data_Model_Status *data) {
@@ -101,6 +113,10 @@ bool get_thermostat_rt_mri_mri_regulator_status(Isolette_Data_Model_Status *data
   }
   *data = last_thermostat_rt_mri_mri_regulator_status_payload;
   return isFresh;
+}
+
+uintmax_t get_thermostat_rt_mri_mri_regulator_status_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Status_1_numInvalid((sb_queue_Isolette_Data_Model_Status_1_Recv_t *) &thermostat_rt_mri_mri_regulator_status_recv_queue);
 }
 
 Isolette_Data_Model_Failure_Flag_i last_thermostat_rt_mri_mri_interface_failure_payload;
@@ -116,6 +132,10 @@ bool get_thermostat_rt_mri_mri_interface_failure(Isolette_Data_Model_Failure_Fla
   return isFresh;
 }
 
+uintmax_t get_thermostat_rt_mri_mri_interface_failure_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Failure_Flag_i_1_numInvalid((sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_t *) &thermostat_rt_mri_mri_interface_failure_recv_queue);
+}
+
 Isolette_Data_Model_On_Off last_thermostat_rt_mhs_mhs_heat_control_payload;
 
 bool get_thermostat_rt_mhs_mhs_heat_control(Isolette_Data_Model_On_Off *data) {
@@ -127,6 +147,10 @@ bool get_thermostat_rt_mhs_mhs_heat_control(Isolette_Data_Model_On_Off *data) {
   }
   *data = last_thermostat_rt_mhs_mhs_heat_control_payload;
   return isFresh;
+}
+
+uintmax_t get_thermostat_rt_mhs_mhs_heat_control_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_On_Off_1_numInvalid((sb_queue_Isolette_Data_Model_On_Off_1_Recv_t *) &thermostat_rt_mhs_mhs_heat_control_recv_queue);
 }
 
 Isolette_Data_Model_Regulator_Mode last_thermostat_rt_mrm_mrm_regulator_mode_payload;
@@ -142,6 +166,10 @@ bool get_thermostat_rt_mrm_mrm_regulator_mode(Isolette_Data_Model_Regulator_Mode
   return isFresh;
 }
 
+uintmax_t get_thermostat_rt_mrm_mrm_regulator_mode_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Regulator_Mode_1_numInvalid((sb_queue_Isolette_Data_Model_Regulator_Mode_1_Recv_t *) &thermostat_rt_mrm_mrm_regulator_mode_recv_queue);
+}
+
 Isolette_Data_Model_Failure_Flag_i last_thermostat_rt_drf_drf_internal_failure_payload;
 
 bool get_thermostat_rt_drf_drf_internal_failure(Isolette_Data_Model_Failure_Flag_i *data) {
@@ -153,6 +181,10 @@ bool get_thermostat_rt_drf_drf_internal_failure(Isolette_Data_Model_Failure_Flag
   }
   *data = last_thermostat_rt_drf_drf_internal_failure_payload;
   return isFresh;
+}
+
+uintmax_t get_thermostat_rt_drf_drf_internal_failure_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Failure_Flag_i_1_numInvalid((sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_t *) &thermostat_rt_drf_drf_internal_failure_recv_queue);
 }
 
 Isolette_Data_Model_Temp_i last_thermostat_mt_mmi_mmi_upper_alarm_temp_payload;
@@ -168,6 +200,10 @@ bool get_thermostat_mt_mmi_mmi_upper_alarm_temp(Isolette_Data_Model_Temp_i *data
   return isFresh;
 }
 
+uintmax_t get_thermostat_mt_mmi_mmi_upper_alarm_temp_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Temp_i_1_numInvalid((sb_queue_Isolette_Data_Model_Temp_i_1_Recv_t *) &thermostat_mt_mmi_mmi_upper_alarm_temp_recv_queue);
+}
+
 Isolette_Data_Model_Temp_i last_thermostat_mt_mmi_mmi_lower_alarm_temp_payload;
 
 bool get_thermostat_mt_mmi_mmi_lower_alarm_temp(Isolette_Data_Model_Temp_i *data) {
@@ -179,6 +215,10 @@ bool get_thermostat_mt_mmi_mmi_lower_alarm_temp(Isolette_Data_Model_Temp_i *data
   }
   *data = last_thermostat_mt_mmi_mmi_lower_alarm_temp_payload;
   return isFresh;
+}
+
+uintmax_t get_thermostat_mt_mmi_mmi_lower_alarm_temp_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Temp_i_1_numInvalid((sb_queue_Isolette_Data_Model_Temp_i_1_Recv_t *) &thermostat_mt_mmi_mmi_lower_alarm_temp_recv_queue);
 }
 
 Isolette_Data_Model_Status last_thermostat_mt_mmi_mmi_monitor_status_payload;
@@ -194,6 +234,10 @@ bool get_thermostat_mt_mmi_mmi_monitor_status(Isolette_Data_Model_Status *data) 
   return isFresh;
 }
 
+uintmax_t get_thermostat_mt_mmi_mmi_monitor_status_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Status_1_numInvalid((sb_queue_Isolette_Data_Model_Status_1_Recv_t *) &thermostat_mt_mmi_mmi_monitor_status_recv_queue);
+}
+
 Isolette_Data_Model_Failure_Flag_i last_thermostat_mt_mmi_mmi_interface_failure_payload;
 
 bool get_thermostat_mt_mmi_mmi_interface_failure(Isolette_Data_Model_Failure_Flag_i *data) {
@@ -205,6 +249,10 @@ bool get_thermostat_mt_mmi_mmi_interface_failure(Isolette_Data_Model_Failure_Fla
   }
   *data = last_thermostat_mt_mmi_mmi_interface_failure_payload;
   return isFresh;
+}
+
+uintmax_t get_thermostat_mt_mmi_mmi_interface_failure_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Failure_Flag_i_1_numInvalid((sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_t *) &thermostat_mt_mmi_mmi_interface_failure_recv_queue);
 }
 
 Isolette_Data_Model_On_Off last_thermostat_mt_ma_ma_alarm_control_payload;
@@ -220,6 +268,10 @@ bool get_thermostat_mt_ma_ma_alarm_control(Isolette_Data_Model_On_Off *data) {
   return isFresh;
 }
 
+uintmax_t get_thermostat_mt_ma_ma_alarm_control_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_On_Off_1_numInvalid((sb_queue_Isolette_Data_Model_On_Off_1_Recv_t *) &thermostat_mt_ma_ma_alarm_control_recv_queue);
+}
+
 Isolette_Data_Model_Monitor_Mode last_thermostat_mt_mmm_mmm_monitor_mode_payload;
 
 bool get_thermostat_mt_mmm_mmm_monitor_mode(Isolette_Data_Model_Monitor_Mode *data) {
@@ -231,6 +283,10 @@ bool get_thermostat_mt_mmm_mmm_monitor_mode(Isolette_Data_Model_Monitor_Mode *da
   }
   *data = last_thermostat_mt_mmm_mmm_monitor_mode_payload;
   return isFresh;
+}
+
+uintmax_t get_thermostat_mt_mmm_mmm_monitor_mode_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Monitor_Mode_1_numInvalid((sb_queue_Isolette_Data_Model_Monitor_Mode_1_Recv_t *) &thermostat_mt_mmm_mmm_monitor_mode_recv_queue);
 }
 
 Isolette_Data_Model_Failure_Flag_i last_thermostat_mt_dmf_dmf_internal_failure_payload;
@@ -246,6 +302,10 @@ bool get_thermostat_mt_dmf_dmf_internal_failure(Isolette_Data_Model_Failure_Flag
   return isFresh;
 }
 
+uintmax_t get_thermostat_mt_dmf_dmf_internal_failure_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Failure_Flag_i_1_numInvalid((sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_t *) &thermostat_mt_dmf_dmf_internal_failure_recv_queue);
+}
+
 Isolette_Data_Model_TempWstatus_i last_operator_interface_oip_oit_lower_desired_tempWstatus_payload;
 
 bool get_operator_interface_oip_oit_lower_desired_tempWstatus(Isolette_Data_Model_TempWstatus_i *data) {
@@ -257,6 +317,10 @@ bool get_operator_interface_oip_oit_lower_desired_tempWstatus(Isolette_Data_Mode
   }
   *data = last_operator_interface_oip_oit_lower_desired_tempWstatus_payload;
   return isFresh;
+}
+
+uintmax_t get_operator_interface_oip_oit_lower_desired_tempWstatus_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_TempWstatus_i_1_numInvalid((sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &operator_interface_oip_oit_lower_desired_tempWstatus_recv_queue);
 }
 
 Isolette_Data_Model_TempWstatus_i last_operator_interface_oip_oit_upper_desired_tempWstatus_payload;
@@ -272,6 +336,10 @@ bool get_operator_interface_oip_oit_upper_desired_tempWstatus(Isolette_Data_Mode
   return isFresh;
 }
 
+uintmax_t get_operator_interface_oip_oit_upper_desired_tempWstatus_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_TempWstatus_i_1_numInvalid((sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &operator_interface_oip_oit_upper_desired_tempWstatus_recv_queue);
+}
+
 Isolette_Data_Model_TempWstatus_i last_operator_interface_oip_oit_lower_alarm_tempWstatus_payload;
 
 bool get_operator_interface_oip_oit_lower_alarm_tempWstatus(Isolette_Data_Model_TempWstatus_i *data) {
@@ -283,6 +351,10 @@ bool get_operator_interface_oip_oit_lower_alarm_tempWstatus(Isolette_Data_Model_
   }
   *data = last_operator_interface_oip_oit_lower_alarm_tempWstatus_payload;
   return isFresh;
+}
+
+uintmax_t get_operator_interface_oip_oit_lower_alarm_tempWstatus_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_TempWstatus_i_1_numInvalid((sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &operator_interface_oip_oit_lower_alarm_tempWstatus_recv_queue);
 }
 
 Isolette_Data_Model_TempWstatus_i last_operator_interface_oip_oit_upper_alarm_tempWstatus_payload;
@@ -298,6 +370,10 @@ bool get_operator_interface_oip_oit_upper_alarm_tempWstatus(Isolette_Data_Model_
   return isFresh;
 }
 
+uintmax_t get_operator_interface_oip_oit_upper_alarm_tempWstatus_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_TempWstatus_i_1_numInvalid((sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &operator_interface_oip_oit_upper_alarm_tempWstatus_recv_queue);
+}
+
 Isolette_Data_Model_TempWstatus_i last_temperature_sensor_cpi_thermostat_current_tempWstatus_payload;
 
 bool get_temperature_sensor_cpi_thermostat_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data) {
@@ -311,6 +387,10 @@ bool get_temperature_sensor_cpi_thermostat_current_tempWstatus(Isolette_Data_Mod
   return isFresh;
 }
 
+uintmax_t get_temperature_sensor_cpi_thermostat_current_tempWstatus_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_TempWstatus_i_1_numInvalid((sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &temperature_sensor_cpi_thermostat_current_tempWstatus_recv_queue);
+}
+
 Isolette_Data_Model_PhysicalTemp_i last_temperature_sensor_cpi_thermostat_air_payload;
 
 bool get_temperature_sensor_cpi_thermostat_air(Isolette_Data_Model_PhysicalTemp_i *data) {
@@ -322,6 +402,10 @@ bool get_temperature_sensor_cpi_thermostat_air(Isolette_Data_Model_PhysicalTemp_
   }
   *data = last_temperature_sensor_cpi_thermostat_air_payload;
   return isFresh;
+}
+
+uintmax_t get_temperature_sensor_cpi_thermostat_air_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_numInvalid((sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_Recv_t *) &temperature_sensor_cpi_thermostat_air_recv_queue);
 }
 
 void init(void) {

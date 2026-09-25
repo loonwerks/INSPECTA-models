@@ -27,6 +27,10 @@ bool get_read_port1(event_data_2_prod_2_cons_struct_struct_i *data) {
   return get_read_port1_poll (&numDropped, data);
 }
 
+uintmax_t get_read_port1_num_invalid(void) {
+  return sb_queue_event_data_2_prod_2_cons_struct_struct_i_1_numInvalid((sb_queue_event_data_2_prod_2_cons_struct_struct_i_1_Recv_t *) &read_port1_recv_queue);
+}
+
 bool read_port2_is_empty(void) {
   return sb_queue_event_data_2_prod_2_cons_struct_struct_i_1_is_empty(&read_port2_recv_queue);
 }
@@ -38,6 +42,10 @@ bool get_read_port2_poll(sb_event_counter_t *numDropped, event_data_2_prod_2_con
 bool get_read_port2(event_data_2_prod_2_cons_struct_struct_i *data) {
   sb_event_counter_t numDropped;
   return get_read_port2_poll (&numDropped, data);
+}
+
+uintmax_t get_read_port2_num_invalid(void) {
+  return sb_queue_event_data_2_prod_2_cons_struct_struct_i_1_numInvalid((sb_queue_event_data_2_prod_2_cons_struct_struct_i_1_Recv_t *) &read_port2_recv_queue);
 }
 
 void init(void) {

@@ -12,7 +12,9 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_producer_p_p1_producer_write_port(value: *mut event_data_2_prod_2_cons_array::ArrayOfStruct) -> bool;
+  fn get_producer_p_p1_producer_write_port_num_invalid() -> u64;
   fn get_producer_p_p2_producer_write_port(value: *mut event_data_2_prod_2_cons_array::ArrayOfStruct) -> bool;
+  fn get_producer_p_p2_producer_write_port_num_invalid() -> u64;
 }
 
 pub fn unsafe_get_producer_p_p1_producer_write_port() -> Option<event_data_2_prod_2_cons_array::ArrayOfStruct>
@@ -27,6 +29,13 @@ pub fn unsafe_get_producer_p_p1_producer_write_port() -> Option<event_data_2_pro
   }
 }
 
+pub fn unsafe_get_producer_p_p1_producer_write_port_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_p_p1_producer_write_port_num_invalid();
+  }
+}
+
 pub fn unsafe_get_producer_p_p2_producer_write_port() -> Option<event_data_2_prod_2_cons_array::ArrayOfStruct>
 {
   unsafe {
@@ -36,6 +45,13 @@ pub fn unsafe_get_producer_p_p2_producer_write_port() -> Option<event_data_2_pro
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_producer_p_p2_producer_write_port_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_p_p2_producer_write_port_num_invalid();
   }
 }
 
@@ -75,6 +91,12 @@ pub fn get_producer_p_p1_producer_write_port(value: *mut event_data_2_prod_2_con
 }
 
 #[cfg(test)]
+pub fn get_producer_p_p1_producer_write_port_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_producer_p_p2_producer_write_port(value: *mut event_data_2_prod_2_cons_array::ArrayOfStruct) -> bool
 {
   unsafe {
@@ -86,4 +108,10 @@ pub fn get_producer_p_p2_producer_write_port(value: *mut event_data_2_prod_2_con
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_producer_p_p2_producer_write_port_num_invalid() -> u64
+{
+  return 0;
 }

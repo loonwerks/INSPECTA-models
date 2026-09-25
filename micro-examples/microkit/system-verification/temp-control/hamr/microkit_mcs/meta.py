@@ -123,11 +123,11 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
 
     tsp_tst.add_map(Map(TempControlSystem_Instance_tsp_tst_currentTemp_1_Memory_Region, 0x10_000_000, perms="rw", setvar_vaddr="currentTemp_queue_1"))
     tcp_tct.add_map(Map(TempControlSystem_Instance_tsp_tst_currentTemp_1_Memory_Region, 0x10_000_000, perms="r", setvar_vaddr="currentTemp_queue_1"))
-    tcp_tct.add_map(Map(TempControlSystem_Instance_tcp_tct_fanCmd_1_Memory_Region, 0x10_001_000, perms="rw", setvar_vaddr="fanCmd_queue_1"))
+    tcp_tct.add_map(Map(TempControlSystem_Instance_tcp_tct_fanCmd_1_Memory_Region, 0x10_002_000, perms="rw", setvar_vaddr="fanCmd_queue_1"))
     fp_ft.add_map(Map(TempControlSystem_Instance_tcp_tct_fanCmd_1_Memory_Region, 0x10_000_000, perms="r", setvar_vaddr="fanCmd_queue_1"))
-    tcp_tct.add_map(Map(TempControlSystem_Instance_tcp_tct_setPoint_1_Memory_Region, 0x10_002_000, perms="r", setvar_vaddr="setPoint_queue_1"))
-    tcp_tct.add_map(Map(TempControlSystem_Instance_fp_ft_fanAck_1_Memory_Region, 0x10_003_000, perms="r", setvar_vaddr="fanAck_queue_1"))
-    fp_ft.add_map(Map(TempControlSystem_Instance_fp_ft_fanAck_1_Memory_Region, 0x10_001_000, perms="rw", setvar_vaddr="fanAck_queue_1"))
+    tcp_tct.add_map(Map(TempControlSystem_Instance_tcp_tct_setPoint_1_Memory_Region, 0x10_004_000, perms="r", setvar_vaddr="setPoint_queue_1"))
+    tcp_tct.add_map(Map(TempControlSystem_Instance_fp_ft_fanAck_1_Memory_Region, 0x10_006_000, perms="r", setvar_vaddr="fanAck_queue_1"))
+    fp_ft.add_map(Map(TempControlSystem_Instance_fp_ft_fanAck_1_Memory_Region, 0x10_002_000, perms="rw", setvar_vaddr="fanAck_queue_1"))
 
 
 

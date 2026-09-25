@@ -28,6 +28,12 @@ verus! {
     {
       return extern_api::unsafe_get_EthernetFramesTx();
     }
+
+    #[verifier::external_body]
+    fn unverified_get_EthernetFramesTx_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_EthernetFramesTx_num_invalid();
+    }
   }
 
   pub trait LowLevelEthernetDriver_LowLevelEthernetDriver_Full_Api: LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api + LowLevelEthernetDriver_LowLevelEthernetDriver_Get_Api {}
@@ -60,6 +66,12 @@ verus! {
         res == final(self).EthernetFramesTx,
     {
       self.api.unverified_get_EthernetFramesTx(&Ghost(self.EthernetFramesTx))
+    }/// The number of messages received on EthernetFramesTx that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_EthernetFramesTx_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_EthernetFramesTx_num_invalid()
     }
   }
 

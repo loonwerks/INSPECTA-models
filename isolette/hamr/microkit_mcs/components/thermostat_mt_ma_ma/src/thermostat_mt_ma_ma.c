@@ -32,6 +32,10 @@ bool get_upper_alarm_temp(Isolette_Data_Model_Temp_i *data) {
   return isFresh;
 }
 
+uintmax_t get_upper_alarm_temp_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Temp_i_1_numInvalid((sb_queue_Isolette_Data_Model_Temp_i_1_Recv_t *) &upper_alarm_temp_recv_queue);
+}
+
 Isolette_Data_Model_Temp_i last_lower_alarm_temp_payload;
 
 bool get_lower_alarm_temp(Isolette_Data_Model_Temp_i *data) {
@@ -43,6 +47,10 @@ bool get_lower_alarm_temp(Isolette_Data_Model_Temp_i *data) {
   }
   *data = last_lower_alarm_temp_payload;
   return isFresh;
+}
+
+uintmax_t get_lower_alarm_temp_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Temp_i_1_numInvalid((sb_queue_Isolette_Data_Model_Temp_i_1_Recv_t *) &lower_alarm_temp_recv_queue);
 }
 
 bool put_alarm_control(const Isolette_Data_Model_On_Off *data) {
@@ -72,6 +80,10 @@ bool get_monitor_mode(Isolette_Data_Model_Monitor_Mode *data) {
   return isFresh;
 }
 
+uintmax_t get_monitor_mode_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Monitor_Mode_1_numInvalid((sb_queue_Isolette_Data_Model_Monitor_Mode_1_Recv_t *) &monitor_mode_recv_queue);
+}
+
 Isolette_Data_Model_TempWstatus_i last_current_tempWstatus_payload;
 
 bool get_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data) {
@@ -83,6 +95,10 @@ bool get_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data) {
   }
   *data = last_current_tempWstatus_payload;
   return isFresh;
+}
+
+uintmax_t get_current_tempWstatus_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_TempWstatus_i_1_numInvalid((sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &current_tempWstatus_recv_queue);
 }
 
 volatile sb_queue_Isolette_Data_Model_On_Off_1_t *inj_sv_lastCmd_queue;

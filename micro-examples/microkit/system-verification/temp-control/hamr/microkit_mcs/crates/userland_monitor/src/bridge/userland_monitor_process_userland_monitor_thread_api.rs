@@ -23,6 +23,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_tsp_tst_currentTemp_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_tsp_tst_currentTemp_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_tcp_tct_fanCmd(
       &mut self,
       value: &Ghost<Option<TempControl_SysVerif::FanCmd>>) -> (res : Option<TempControl_SysVerif::FanCmd>)
@@ -30,6 +36,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_tcp_tct_fanCmd();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_tcp_tct_fanCmd_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_tcp_tct_fanCmd_num_invalid();
     }
 
     #[verifier::external_body]
@@ -43,6 +55,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_fp_ft_fanAck_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_fp_ft_fanAck_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_tcp_tct_setPoint(
       &mut self,
       value: &Ghost<Option<TempControl_SysVerif::SetPoint>>) -> (res : Option<TempControl_SysVerif::SetPoint>)
@@ -50,6 +68,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_tcp_tct_setPoint();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_tcp_tct_setPoint_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_tcp_tct_setPoint_num_invalid();
     }
 
     #[verifier::external_body]
@@ -63,6 +87,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_sched_state_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_sched_state_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_sched_schedule(
       &mut self,
       value: &Ghost<hamr::Schedule>) -> (res : hamr::Schedule)
@@ -70,6 +100,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_sched_schedule();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_sched_schedule_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_sched_schedule_num_invalid();
     }
   }
 
@@ -101,6 +137,12 @@ verus! {
         old(self).sched_schedule == final(self).sched_schedule,
     {
       self.api.unverified_get_tsp_tst_currentTemp(&Ghost(self.tsp_tst_currentTemp))
+    }/// The number of messages received on tsp_tst_currentTemp that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_tsp_tst_currentTemp_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_tsp_tst_currentTemp_num_invalid()
     }
     pub fn get_tcp_tct_fanCmd(&mut self) -> (res : Option<TempControl_SysVerif::FanCmd>)
       ensures
@@ -113,6 +155,12 @@ verus! {
         old(self).sched_schedule == final(self).sched_schedule,
     {
       self.api.unverified_get_tcp_tct_fanCmd(&Ghost(self.tcp_tct_fanCmd))
+    }/// The number of messages received on tcp_tct_fanCmd that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_tcp_tct_fanCmd_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_tcp_tct_fanCmd_num_invalid()
     }
     pub fn get_fp_ft_fanAck(&mut self) -> (res : Option<TempControl_SysVerif::FanAck>)
       ensures
@@ -125,6 +173,12 @@ verus! {
         old(self).sched_schedule == final(self).sched_schedule,
     {
       self.api.unverified_get_fp_ft_fanAck(&Ghost(self.fp_ft_fanAck))
+    }/// The number of messages received on fp_ft_fanAck that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_fp_ft_fanAck_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_fp_ft_fanAck_num_invalid()
     }
     pub fn get_tcp_tct_setPoint(&mut self) -> (res : Option<TempControl_SysVerif::SetPoint>)
       ensures
@@ -137,6 +191,12 @@ verus! {
         old(self).sched_schedule == final(self).sched_schedule,
     {
       self.api.unverified_get_tcp_tct_setPoint(&Ghost(self.tcp_tct_setPoint))
+    }/// The number of messages received on tcp_tct_setPoint that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_tcp_tct_setPoint_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_tcp_tct_setPoint_num_invalid()
     }
     pub fn get_sched_state(&mut self) -> (res : hamr::SchedState)
       ensures
@@ -149,6 +209,12 @@ verus! {
         old(self).sched_schedule == final(self).sched_schedule,
     {
       self.api.unverified_get_sched_state(&Ghost(self.sched_state))
+    }/// The number of messages received on sched_state that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_sched_state_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_sched_state_num_invalid()
     }
     pub fn get_sched_schedule(&mut self) -> (res : hamr::Schedule)
       ensures
@@ -161,6 +227,12 @@ verus! {
         res == final(self).sched_schedule,
     {
       self.api.unverified_get_sched_schedule(&Ghost(self.sched_schedule))
+    }/// The number of messages received on sched_schedule that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_sched_schedule_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_sched_schedule_num_invalid()
     }
   }
 

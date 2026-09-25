@@ -12,7 +12,9 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_sample(value: *mut i32) -> bool;
+  fn get_sample_num_invalid() -> u64;
   fn get_alert_flag(value: *mut bool) -> bool;
+  fn get_alert_flag_num_invalid() -> u64;
   fn put_observed_sample(value: *mut i32) -> bool;
 }
 
@@ -28,6 +30,13 @@ pub fn unsafe_get_sample() -> Option<i32>
   }
 }
 
+pub fn unsafe_get_sample_num_invalid() -> u64
+{
+  unsafe {
+    return get_sample_num_invalid();
+  }
+}
+
 pub fn unsafe_get_alert_flag() -> Option<bool>
 {
   unsafe {
@@ -37,6 +46,13 @@ pub fn unsafe_get_alert_flag() -> Option<bool>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_alert_flag_num_invalid() -> u64
+{
+  unsafe {
+    return get_alert_flag_num_invalid();
   }
 }
 
@@ -85,6 +101,12 @@ pub fn get_sample(value: *mut i32) -> bool
 }
 
 #[cfg(test)]
+pub fn get_sample_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_alert_flag(value: *mut bool) -> bool
 {
   unsafe {
@@ -96,6 +118,12 @@ pub fn get_alert_flag(value: *mut bool) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_alert_flag_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]

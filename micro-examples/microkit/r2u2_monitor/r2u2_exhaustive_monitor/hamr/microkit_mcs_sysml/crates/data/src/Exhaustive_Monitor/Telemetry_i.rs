@@ -23,3 +23,11 @@ verus! {
   }
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<Telemetry_i>() == 28);
+const _: () = assert!(core::mem::align_of::<Telemetry_i>() == 4);
+const _: () = assert!(core::mem::offset_of!(Telemetry_i, sequence_number) == 0);
+const _: () = assert!(core::mem::offset_of!(Telemetry_i, valid) == 4);
+const _: () = assert!(core::mem::offset_of!(Telemetry_i, values) == 8);
+const _: () = assert!(core::mem::offset_of!(Telemetry_i, operating_state) == 24);

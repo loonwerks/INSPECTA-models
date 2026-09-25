@@ -28,6 +28,12 @@ verus! {
     {
       return extern_api::unsafe_get_fanCmd();
     }
+
+    #[verifier::external_body]
+    fn unverified_get_fanCmd_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_fanCmd_num_invalid();
+    }
   }
 
   pub trait fp_ft_Full_Api: fp_ft_Put_Api + fp_ft_Get_Api {}
@@ -60,6 +66,12 @@ verus! {
         old(self).fanAck == final(self).fanAck,
     {
       self.api.unverified_get_fanCmd(&Ghost(self.fanCmd))
+    }/// The number of messages received on fanCmd that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_fanCmd_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_fanCmd_num_invalid()
     }
   }
 

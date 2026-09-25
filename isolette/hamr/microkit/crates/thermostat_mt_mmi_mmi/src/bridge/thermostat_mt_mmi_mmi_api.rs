@@ -56,6 +56,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_upper_alarm_tempWstatus_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_upper_alarm_tempWstatus_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_lower_alarm_tempWstatus(
       &mut self,
       value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
@@ -65,6 +71,12 @@ verus! {
         GUMBO_Library::Allowed_LowerAlarmTempWStatus_spec(res),
     {
       return extern_api::unsafe_get_lower_alarm_tempWstatus();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_lower_alarm_tempWstatus_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_lower_alarm_tempWstatus_num_invalid();
     }
 
     #[verifier::external_body]
@@ -78,6 +90,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_current_tempWstatus_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_current_tempWstatus_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_monitor_mode(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Monitor_Mode>) -> (res : Isolette_Data_Model::Monitor_Mode)
@@ -85,6 +103,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_monitor_mode();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_monitor_mode_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_monitor_mode_num_invalid();
     }
   }
 
@@ -186,6 +210,12 @@ verus! {
         GUMBO_Library::Allowed_UpperAlarmTempWStatus_spec(res),
     {
       self.api.unverified_get_upper_alarm_tempWstatus(&Ghost(self.upper_alarm_tempWstatus))
+    }/// The number of messages received on upper_alarm_tempWstatus that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_upper_alarm_tempWstatus_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_upper_alarm_tempWstatus_num_invalid()
     }
     pub fn get_lower_alarm_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -202,6 +232,12 @@ verus! {
         GUMBO_Library::Allowed_LowerAlarmTempWStatus_spec(res),
     {
       self.api.unverified_get_lower_alarm_tempWstatus(&Ghost(self.lower_alarm_tempWstatus))
+    }/// The number of messages received on lower_alarm_tempWstatus that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_lower_alarm_tempWstatus_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_lower_alarm_tempWstatus_num_invalid()
     }
     pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -216,6 +252,12 @@ verus! {
         old(self).interface_failure == final(self).interface_failure,
     {
       self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
+    }/// The number of messages received on current_tempWstatus that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_current_tempWstatus_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_current_tempWstatus_num_invalid()
     }
     pub fn get_monitor_mode(&mut self) -> (res : Isolette_Data_Model::Monitor_Mode)
       ensures
@@ -230,6 +272,12 @@ verus! {
         old(self).interface_failure == final(self).interface_failure,
     {
       self.api.unverified_get_monitor_mode(&Ghost(self.monitor_mode))
+    }/// The number of messages received on monitor_mode that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_monitor_mode_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_monitor_mode_num_invalid()
     }
   }
 

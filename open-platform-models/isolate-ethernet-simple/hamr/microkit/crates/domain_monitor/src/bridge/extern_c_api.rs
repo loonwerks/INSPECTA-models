@@ -12,9 +12,13 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_seL4_ArduPilot_ArduPilot_EthernetFramesTx(value: *mut SW::StructuredEthernetMessage_i) -> bool;
+  fn get_seL4_ArduPilot_ArduPilot_EthernetFramesTx_num_invalid() -> u64;
   fn get_seL4_Firewall_Firewall_EthernetFramesRxOut(value: *mut SW::StructuredEthernetMessage_i) -> bool;
+  fn get_seL4_Firewall_Firewall_EthernetFramesRxOut_num_invalid() -> u64;
   fn get_seL4_Firewall_Firewall_EthernetFramesTxOut(value: *mut SW::StructuredEthernetMessage_i) -> bool;
+  fn get_seL4_Firewall_Firewall_EthernetFramesTxOut_num_invalid() -> u64;
   fn get_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx(value: *mut SW::StructuredEthernetMessage_i) -> bool;
+  fn get_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_num_invalid() -> u64;
 }
 
 pub fn unsafe_get_seL4_ArduPilot_ArduPilot_EthernetFramesTx() -> Option<SW::StructuredEthernetMessage_i>
@@ -26,6 +30,13 @@ pub fn unsafe_get_seL4_ArduPilot_ArduPilot_EthernetFramesTx() -> Option<SW::Stru
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_seL4_ArduPilot_ArduPilot_EthernetFramesTx_num_invalid() -> u64
+{
+  unsafe {
+    return get_seL4_ArduPilot_ArduPilot_EthernetFramesTx_num_invalid();
   }
 }
 
@@ -41,6 +52,13 @@ pub fn unsafe_get_seL4_Firewall_Firewall_EthernetFramesRxOut() -> Option<SW::Str
   }
 }
 
+pub fn unsafe_get_seL4_Firewall_Firewall_EthernetFramesRxOut_num_invalid() -> u64
+{
+  unsafe {
+    return get_seL4_Firewall_Firewall_EthernetFramesRxOut_num_invalid();
+  }
+}
+
 pub fn unsafe_get_seL4_Firewall_Firewall_EthernetFramesTxOut() -> Option<SW::StructuredEthernetMessage_i>
 {
   unsafe {
@@ -53,6 +71,13 @@ pub fn unsafe_get_seL4_Firewall_Firewall_EthernetFramesTxOut() -> Option<SW::Str
   }
 }
 
+pub fn unsafe_get_seL4_Firewall_Firewall_EthernetFramesTxOut_num_invalid() -> u64
+{
+  unsafe {
+    return get_seL4_Firewall_Firewall_EthernetFramesTxOut_num_invalid();
+  }
+}
+
 pub fn unsafe_get_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx() -> Option<SW::StructuredEthernetMessage_i>
 {
   unsafe {
@@ -62,6 +87,13 @@ pub fn unsafe_get_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFra
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_num_invalid() -> u64
+{
+  unsafe {
+    return get_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_num_invalid();
   }
 }
 
@@ -105,6 +137,12 @@ pub fn get_seL4_ArduPilot_ArduPilot_EthernetFramesTx(value: *mut SW::StructuredE
 }
 
 #[cfg(test)]
+pub fn get_seL4_ArduPilot_ArduPilot_EthernetFramesTx_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_seL4_Firewall_Firewall_EthernetFramesRxOut(value: *mut SW::StructuredEthernetMessage_i) -> bool
 {
   unsafe {
@@ -116,6 +154,12 @@ pub fn get_seL4_Firewall_Firewall_EthernetFramesRxOut(value: *mut SW::Structured
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_seL4_Firewall_Firewall_EthernetFramesRxOut_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -133,6 +177,12 @@ pub fn get_seL4_Firewall_Firewall_EthernetFramesTxOut(value: *mut SW::Structured
 }
 
 #[cfg(test)]
+pub fn get_seL4_Firewall_Firewall_EthernetFramesTxOut_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx(value: *mut SW::StructuredEthernetMessage_i) -> bool
 {
   unsafe {
@@ -144,4 +194,10 @@ pub fn get_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx(v
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_num_invalid() -> u64
+{
+  return 0;
 }

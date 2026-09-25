@@ -28,6 +28,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_sample_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_sample_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_peek_sample(
       &self,
       value: &Ghost<Option<i32>>) -> (res : Option<i32>)
@@ -76,6 +82,12 @@ verus! {
         old(self).sample_alert == final(self).sample_alert,
     {
       self.api.unverified_get_sample(&Ghost(self.sample))
+    }/// The number of messages received on sample that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_sample_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_sample_num_invalid()
     }
     pub fn peek_sample(&self) -> (res : Option<i32>)
       ensures

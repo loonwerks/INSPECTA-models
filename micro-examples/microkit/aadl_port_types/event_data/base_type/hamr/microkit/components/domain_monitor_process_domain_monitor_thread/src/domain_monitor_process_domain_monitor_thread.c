@@ -26,6 +26,10 @@ bool get_producer_p_p1_producer_write_port(int8_t *data) {
   return get_producer_p_p1_producer_write_port_poll (&numDropped, data);
 }
 
+uintmax_t get_producer_p_p1_producer_write_port_num_invalid(void) {
+  return sb_queue_int8_t_1_numInvalid((sb_queue_int8_t_1_Recv_t *) &producer_p_p1_producer_write_port_recv_queue);
+}
+
 bool producer_p_p2_producer_write_port_is_empty(void) {
   return sb_queue_int8_t_1_is_empty(&producer_p_p2_producer_write_port_recv_queue);
 }
@@ -37,6 +41,10 @@ bool get_producer_p_p2_producer_write_port_poll(sb_event_counter_t *numDropped, 
 bool get_producer_p_p2_producer_write_port(int8_t *data) {
   sb_event_counter_t numDropped;
   return get_producer_p_p2_producer_write_port_poll (&numDropped, data);
+}
+
+uintmax_t get_producer_p_p2_producer_write_port_num_invalid(void) {
+  return sb_queue_int8_t_1_numInvalid((sb_queue_int8_t_1_Recv_t *) &producer_p_p2_producer_write_port_recv_queue);
 }
 
 void init(void) {

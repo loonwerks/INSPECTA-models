@@ -12,6 +12,7 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_sample(value: *mut i32) -> bool;
+  fn get_sample_num_invalid() -> u64;
   fn put_sample_alert() -> bool;
   fn peek_sample(value: *mut i32) -> bool;
   fn peek_sample_alert() -> bool;
@@ -26,6 +27,13 @@ pub fn unsafe_get_sample() -> Option<i32>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_sample_num_invalid() -> u64
+{
+  unsafe {
+    return get_sample_num_invalid();
   }
 }
 
@@ -88,6 +96,12 @@ pub fn get_sample(value: *mut i32) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_sample_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]

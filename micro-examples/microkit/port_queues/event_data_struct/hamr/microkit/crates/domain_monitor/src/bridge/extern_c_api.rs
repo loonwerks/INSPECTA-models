@@ -12,6 +12,7 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_producer_p_p_producer_write_port(value: *mut event_data_struct_port_queues::struct_i) -> bool;
+  fn get_producer_p_p_producer_write_port_num_invalid() -> u64;
 }
 
 pub fn unsafe_get_producer_p_p_producer_write_port() -> Option<event_data_struct_port_queues::struct_i>
@@ -23,6 +24,13 @@ pub fn unsafe_get_producer_p_p_producer_write_port() -> Option<event_data_struct
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_producer_p_p_producer_write_port_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_p_p_producer_write_port_num_invalid();
   }
 }
 
@@ -57,4 +65,10 @@ pub fn get_producer_p_p_producer_write_port(value: *mut event_data_struct_port_q
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_producer_p_p_producer_write_port_num_invalid() -> u64
+{
+  return 0;
 }

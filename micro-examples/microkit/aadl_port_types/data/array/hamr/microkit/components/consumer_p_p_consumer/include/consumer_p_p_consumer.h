@@ -25,3 +25,4 @@ void *memset(void *dest, int c, size_t n);
 
 
 bool get_read_port(data_1_prod_2_cons_array_ArrayOfStruct *data);
+uintmax_t get_read_port_num_invalid(void);

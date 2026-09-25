@@ -12,15 +12,25 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_tsp_tst_currentTemp(value: *mut TempControl_SysVerif::Temperature) -> bool;
+  fn get_tsp_tst_currentTemp_num_invalid() -> u64;
   fn get_tcp_tct_fanCmd(value: *mut TempControl_SysVerif::FanCmd) -> bool;
+  fn get_tcp_tct_fanCmd_num_invalid() -> u64;
   fn get_fp_ft_fanAck(value: *mut TempControl_SysVerif::FanAck) -> bool;
+  fn get_fp_ft_fanAck_num_invalid() -> u64;
   fn get_tcp_tct_sv_currentSetPoint(value: *mut TempControl_SysVerif::SetPoint) -> bool;
+  fn get_tcp_tct_sv_currentSetPoint_num_invalid() -> u64;
   fn get_tcp_tct_sv_currentFanState(value: *mut TempControl_SysVerif::FanCmd) -> bool;
+  fn get_tcp_tct_sv_currentFanState_num_invalid() -> u64;
   fn get_tcp_tct_sv_latestTemp(value: *mut TempControl_SysVerif::Temperature) -> bool;
+  fn get_tcp_tct_sv_latestTemp_num_invalid() -> u64;
   fn get_tcp_tct_sv_fanError(value: *mut bool) -> bool;
+  fn get_tcp_tct_sv_fanError_num_invalid() -> u64;
   fn get_tcp_tct_setPoint(value: *mut TempControl_SysVerif::SetPoint) -> bool;
+  fn get_tcp_tct_setPoint_num_invalid() -> u64;
   fn get_sched_state(value: *mut hamr::SchedState) -> bool;
+  fn get_sched_state_num_invalid() -> u64;
   fn get_sched_schedule(value: *mut hamr::Schedule) -> bool;
+  fn get_sched_schedule_num_invalid() -> u64;
 }
 
 pub fn unsafe_get_tsp_tst_currentTemp() -> Option<TempControl_SysVerif::Temperature>
@@ -32,6 +42,13 @@ pub fn unsafe_get_tsp_tst_currentTemp() -> Option<TempControl_SysVerif::Temperat
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_tsp_tst_currentTemp_num_invalid() -> u64
+{
+  unsafe {
+    return get_tsp_tst_currentTemp_num_invalid();
   }
 }
 
@@ -47,6 +64,13 @@ pub fn unsafe_get_tcp_tct_fanCmd() -> Option<TempControl_SysVerif::FanCmd>
   }
 }
 
+pub fn unsafe_get_tcp_tct_fanCmd_num_invalid() -> u64
+{
+  unsafe {
+    return get_tcp_tct_fanCmd_num_invalid();
+  }
+}
+
 pub fn unsafe_get_fp_ft_fanAck() -> Option<TempControl_SysVerif::FanAck>
 {
   unsafe {
@@ -59,12 +83,26 @@ pub fn unsafe_get_fp_ft_fanAck() -> Option<TempControl_SysVerif::FanAck>
   }
 }
 
+pub fn unsafe_get_fp_ft_fanAck_num_invalid() -> u64
+{
+  unsafe {
+    return get_fp_ft_fanAck_num_invalid();
+  }
+}
+
 pub fn unsafe_get_tcp_tct_sv_currentSetPoint() -> TempControl_SysVerif::SetPoint
 {
   unsafe {
     let value: *mut TempControl_SysVerif::SetPoint = &mut TempControl_SysVerif::SetPoint::default();
     get_tcp_tct_sv_currentSetPoint(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_tcp_tct_sv_currentSetPoint_num_invalid() -> u64
+{
+  unsafe {
+    return get_tcp_tct_sv_currentSetPoint_num_invalid();
   }
 }
 
@@ -77,6 +115,13 @@ pub fn unsafe_get_tcp_tct_sv_currentFanState() -> TempControl_SysVerif::FanCmd
   }
 }
 
+pub fn unsafe_get_tcp_tct_sv_currentFanState_num_invalid() -> u64
+{
+  unsafe {
+    return get_tcp_tct_sv_currentFanState_num_invalid();
+  }
+}
+
 pub fn unsafe_get_tcp_tct_sv_latestTemp() -> TempControl_SysVerif::Temperature
 {
   unsafe {
@@ -86,12 +131,26 @@ pub fn unsafe_get_tcp_tct_sv_latestTemp() -> TempControl_SysVerif::Temperature
   }
 }
 
+pub fn unsafe_get_tcp_tct_sv_latestTemp_num_invalid() -> u64
+{
+  unsafe {
+    return get_tcp_tct_sv_latestTemp_num_invalid();
+  }
+}
+
 pub fn unsafe_get_tcp_tct_sv_fanError() -> bool
 {
   unsafe {
     let value: *mut bool = &mut false;
     get_tcp_tct_sv_fanError(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_tcp_tct_sv_fanError_num_invalid() -> u64
+{
+  unsafe {
+    return get_tcp_tct_sv_fanError_num_invalid();
   }
 }
 
@@ -107,6 +166,13 @@ pub fn unsafe_get_tcp_tct_setPoint() -> Option<TempControl_SysVerif::SetPoint>
   }
 }
 
+pub fn unsafe_get_tcp_tct_setPoint_num_invalid() -> u64
+{
+  unsafe {
+    return get_tcp_tct_setPoint_num_invalid();
+  }
+}
+
 pub fn unsafe_get_sched_state() -> hamr::SchedState
 {
   unsafe {
@@ -116,12 +182,26 @@ pub fn unsafe_get_sched_state() -> hamr::SchedState
   }
 }
 
+pub fn unsafe_get_sched_state_num_invalid() -> u64
+{
+  unsafe {
+    return get_sched_state_num_invalid();
+  }
+}
+
 pub fn unsafe_get_sched_schedule() -> hamr::Schedule
 {
   unsafe {
     let value: *mut hamr::Schedule = &mut hamr::Schedule::default();
     get_sched_schedule(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_sched_schedule_num_invalid() -> u64
+{
+  unsafe {
+    return get_sched_schedule_num_invalid();
   }
 }
 
@@ -177,6 +257,12 @@ pub fn get_tsp_tst_currentTemp(value: *mut TempControl_SysVerif::Temperature) ->
 }
 
 #[cfg(test)]
+pub fn get_tsp_tst_currentTemp_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_tcp_tct_fanCmd(value: *mut TempControl_SysVerif::FanCmd) -> bool
 {
   unsafe {
@@ -188,6 +274,12 @@ pub fn get_tcp_tct_fanCmd(value: *mut TempControl_SysVerif::FanCmd) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_tcp_tct_fanCmd_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -205,6 +297,12 @@ pub fn get_fp_ft_fanAck(value: *mut TempControl_SysVerif::FanAck) -> bool
 }
 
 #[cfg(test)]
+pub fn get_fp_ft_fanAck_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_tcp_tct_sv_currentSetPoint(value: *mut TempControl_SysVerif::SetPoint) -> bool
 {
   unsafe {
@@ -212,6 +310,12 @@ pub fn get_tcp_tct_sv_currentSetPoint(value: *mut TempControl_SysVerif::SetPoint
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_tcp_tct_sv_currentSetPoint_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -225,6 +329,12 @@ pub fn get_tcp_tct_sv_currentFanState(value: *mut TempControl_SysVerif::FanCmd) 
 }
 
 #[cfg(test)]
+pub fn get_tcp_tct_sv_currentFanState_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_tcp_tct_sv_latestTemp(value: *mut TempControl_SysVerif::Temperature) -> bool
 {
   unsafe {
@@ -235,6 +345,12 @@ pub fn get_tcp_tct_sv_latestTemp(value: *mut TempControl_SysVerif::Temperature) 
 }
 
 #[cfg(test)]
+pub fn get_tcp_tct_sv_latestTemp_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_tcp_tct_sv_fanError(value: *mut bool) -> bool
 {
   unsafe {
@@ -242,6 +358,12 @@ pub fn get_tcp_tct_sv_fanError(value: *mut bool) -> bool
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_tcp_tct_sv_fanError_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -259,6 +381,12 @@ pub fn get_tcp_tct_setPoint(value: *mut TempControl_SysVerif::SetPoint) -> bool
 }
 
 #[cfg(test)]
+pub fn get_tcp_tct_setPoint_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_sched_state(value: *mut hamr::SchedState) -> bool
 {
   unsafe {
@@ -269,6 +397,12 @@ pub fn get_sched_state(value: *mut hamr::SchedState) -> bool
 }
 
 #[cfg(test)]
+pub fn get_sched_state_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_sched_schedule(value: *mut hamr::Schedule) -> bool
 {
   unsafe {
@@ -276,4 +410,10 @@ pub fn get_sched_schedule(value: *mut hamr::Schedule) -> bool
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_sched_schedule_num_invalid() -> u64
+{
+  return 0;
 }

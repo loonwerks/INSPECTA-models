@@ -83,6 +83,12 @@ typedef struct sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1 {
 
 } sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t;
 
+// The shared memory region HAMR allocates for this queue: the whole struct, in whole
+// pages.  The build fails if the struct outgrows it.
+#define SB_QUEUE_GUBMO_STRUCTS_ARRAYS_MYARRAYINT32_1_REGION_BYTES 4096
+_Static_assert(sizeof(sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t) <= SB_QUEUE_GUBMO_STRUCTS_ARRAYS_MYARRAYINT32_1_REGION_BYTES,
+  "sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t outgrows its shared memory region");
+
 //------------------------------------------------------------------------------
 // Sender API
 //
@@ -116,6 +122,13 @@ typedef struct sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_Recv {
   // that is shared by the sender and all receivers.
   sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t *queue;
 
+  // Number of elements this receiver rejected because they held an invalid bit
+  // pattern -- an out-of-range enum, a bool that is neither 0 nor 1, or a string with
+  // no terminating NUL.  Private to the receiver, so not atomic.  Always 0 for an
+  // element type with no bool, enum or string in it: every bit pattern of such a type
+  // is a value, so its elements are not checked.
+  uintmax_t numInvalid;
+
 } sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_Recv_t;
 
 // Each receiver must call this exactly once before any calls to other queue
@@ -144,10 +157,18 @@ void sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_Recv_init(
 // numDropped. Since COUNTER_MAX is very large (typically on the order of 2^64,
 // see sb_event_counter.h), this is very unlikely.  If the sender is ever this far
 // ahead of a receiver the system is probably in a very bad state.
+//
+// An element holding an invalid bit pattern (see sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_numInvalid) is never
+// copied to *data: the dequeue returns false and counts it.
 bool sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_dequeue(
   sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_Recv_t *recvQueue,
   sb_event_counter_t *numDropped,
   Gubmo_Structs_Arrays_MyArrayInt32 *data);
+
+// Number of elements this receiver has rejected as invalid.
+static inline uintmax_t sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_numInvalid(sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_Recv_t *recvQueue) {
+  return recvQueue->numInvalid;
+}
 
 // Is queue empty? If the queue is not empty, it will stay that way until the
 // receiver dequeues all data. If the queue is empty you can make no

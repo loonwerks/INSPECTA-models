@@ -45,6 +45,10 @@ bool get_echo(int32_t *data) {
   return get_echo_poll (&numDropped, data);
 }
 
+uintmax_t get_echo_num_invalid(void) {
+  return sb_queue_int32_t_1_numInvalid((sb_queue_int32_t_1_Recv_t *) &echo_recv_queue);
+}
+
 bool alert_result_is_empty(void) {
   return sb_queue_bool_1_is_empty(&alert_result_recv_queue);
 }
@@ -58,6 +62,10 @@ bool get_alert_result(bool *data) {
   return get_alert_result_poll (&numDropped, data);
 }
 
+uintmax_t get_alert_result_num_invalid(void) {
+  return sb_queue_bool_1_numInvalid((sb_queue_bool_1_Recv_t *) &alert_result_recv_queue);
+}
+
 bool last_healthy_payload;
 
 bool get_healthy(bool *data) {
@@ -69,6 +77,10 @@ bool get_healthy(bool *data) {
   }
   *data = last_healthy_payload;
   return isFresh;
+}
+
+uintmax_t get_healthy_num_invalid(void) {
+  return sb_queue_bool_1_numInvalid((sb_queue_bool_1_Recv_t *) &healthy_recv_queue);
 }
 
 void init(void) {

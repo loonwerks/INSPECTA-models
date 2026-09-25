@@ -38,6 +38,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_EthernetFramesRxIn_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_EthernetFramesRxIn_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_EthernetFramesTxIn(
       &mut self,
       value: &Ghost<Option<SW::StructuredEthernetMessage_i>>) -> (res : Option<SW::StructuredEthernetMessage_i>)
@@ -45,6 +51,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_EthernetFramesTxIn();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_EthernetFramesTxIn_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_EthernetFramesTxIn_num_invalid();
     }
   }
 
@@ -96,6 +108,12 @@ verus! {
         old(self).EthernetFramesTxOut == final(self).EthernetFramesTxOut,
     {
       self.api.unverified_get_EthernetFramesRxIn(&Ghost(self.EthernetFramesRxIn))
+    }/// The number of messages received on EthernetFramesRxIn that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_EthernetFramesRxIn_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_EthernetFramesRxIn_num_invalid()
     }
     pub fn get_EthernetFramesTxIn(&mut self) -> (res : Option<SW::StructuredEthernetMessage_i>)
       ensures
@@ -106,6 +124,12 @@ verus! {
         old(self).EthernetFramesTxOut == final(self).EthernetFramesTxOut,
     {
       self.api.unverified_get_EthernetFramesTxIn(&Ghost(self.EthernetFramesTxIn))
+    }/// The number of messages received on EthernetFramesTxIn that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_EthernetFramesTxIn_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_EthernetFramesTxIn_num_invalid()
     }
   }
 

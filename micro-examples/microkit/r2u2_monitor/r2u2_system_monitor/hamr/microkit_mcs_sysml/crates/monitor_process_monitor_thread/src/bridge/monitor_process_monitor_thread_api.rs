@@ -30,6 +30,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_sent_sample_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_sent_sample_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_observed_sample(
       &mut self,
       value: &Ghost<Option<i32>>) -> (res : Option<i32>)
@@ -37,6 +43,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_observed_sample();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_observed_sample_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_observed_sample_num_invalid();
     }
 
     #[verifier::external_body]
@@ -103,6 +115,12 @@ verus! {
         old(self).alert_flag == final(self).alert_flag,
     {
       self.api.unverified_get_sent_sample(&Ghost(self.sent_sample))
+    }/// The number of messages received on sent_sample that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_sent_sample_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_sent_sample_num_invalid()
     }
     pub fn get_observed_sample(&mut self) -> (res : Option<i32>)
       ensures
@@ -112,6 +130,12 @@ verus! {
         old(self).alert_flag == final(self).alert_flag,
     {
       self.api.unverified_get_observed_sample(&Ghost(self.observed_sample))
+    }/// The number of messages received on observed_sample that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_observed_sample_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_observed_sample_num_invalid()
     }
     pub fn peek_sent_sample(&self) -> (res : Option<i32>)
       ensures

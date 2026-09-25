@@ -21,3 +21,7 @@ verus! {
   }
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<FanCmd>() == 4);
+const _: () = assert!(core::mem::align_of::<FanCmd>() == 4);

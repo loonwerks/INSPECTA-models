@@ -56,7 +56,7 @@
         <td>Base_Types::Integer_32</td><td><a title='Memory Map: Lines 32-36' href='microkit.system#L32'>Memory Map</a> → <a title='C Shared Memory Variable: Line 9' href='components/p2_t2/src/p2_t2.c#L9'>C var_addr</a> → <a title='C Interface: Lines 17-26' href='components/p2_t2/src/p2_t2.c#L17'>C Interface</a></td></tr>
     <tr><td><a title='Model' href='../../aadl/test_data_port_periodic_three_domains.aadl#L51'>write_port</a></td>
         <td>Out</td><td>Data</td>
-        <td>Base_Types::Integer_32</td><td><a title='C Interface: Lines 28-32' href='components/p2_t2/src/p2_t2.c#L28'>C Interface</a> → <a title='C Shared Memory Variable: Line 11' href='components/p2_t2/src/p2_t2.c#L11'>C var_addr</a> → <a title='Memory Map: Lines 37-41' href='microkit.system#L37'>Memory Map</a></td></tr>
+        <td>Base_Types::Integer_32</td><td><a title='C Interface: Lines 32-36' href='components/p2_t2/src/p2_t2.c#L32'>C Interface</a> → <a title='C Shared Memory Variable: Line 11' href='components/p2_t2/src/p2_t2.c#L11'>C var_addr</a> → <a title='Memory Map: Lines 37-41' href='microkit.system#L37'>Memory Map</a></td></tr>
     </table>
 
 

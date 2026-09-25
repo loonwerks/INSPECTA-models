@@ -515,11 +515,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
-                  "beginLine": 113,
+                  "beginLine": 149,
                   "beginCol": 11,
-                  "endLine": 115,
+                  "endLine": 151,
                   "endCol": 51,
-                  "offset": 4596,
+                  "offset": 5780,
                   "length": 80
                 }
             }
@@ -907,11 +907,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
-                  "beginLine": 113,
+                  "beginLine": 149,
                   "beginCol": 11,
-                  "endLine": 115,
+                  "endLine": 151,
                   "endCol": 51,
-                  "offset": 4596,
+                  "offset": 5780,
                   "length": 80
                 }
             }
@@ -1011,11 +1011,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
-                  "beginLine": 113,
+                  "beginLine": 149,
                   "beginCol": 11,
-                  "endLine": 115,
+                  "endLine": 151,
                   "endCol": 51,
-                  "offset": 4596,
+                  "offset": 5780,
                   "length": 80
                 }
             }
@@ -1163,11 +1163,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
-                  "beginLine": 153,
+                  "beginLine": 207,
                   "beginCol": 13,
-                  "endLine": 154,
+                  "endLine": 208,
                   "endCol": 111,
-                  "offset": 7177,
+                  "offset": 9489,
                   "length": 112
                 }
             }
@@ -1867,11 +1867,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
-                  "beginLine": 113,
+                  "beginLine": 149,
                   "beginCol": 11,
-                  "endLine": 115,
+                  "endLine": 151,
                   "endCol": 51,
-                  "offset": 4596,
+                  "offset": 5780,
                   "length": 80
                 }
             },
@@ -2275,11 +2275,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
-                  "beginLine": 113,
+                  "beginLine": 149,
                   "beginCol": 11,
-                  "endLine": 115,
+                  "endLine": 151,
                   "endCol": 51,
-                  "offset": 4596,
+                  "offset": 5780,
                   "length": 80
                 }
             }
@@ -2379,11 +2379,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
-                  "beginLine": 113,
+                  "beginLine": 149,
                   "beginCol": 11,
-                  "endLine": 115,
+                  "endLine": 151,
                   "endCol": 51,
-                  "offset": 4596,
+                  "offset": 5780,
                   "length": 80
                 }
             }
@@ -2531,11 +2531,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
-                  "beginLine": 153,
+                  "beginLine": 207,
                   "beginCol": 13,
-                  "endLine": 154,
+                  "endLine": 208,
                   "endCol": 111,
-                  "offset": 7177,
+                  "offset": 9489,
                   "length": 112
                 }
             }

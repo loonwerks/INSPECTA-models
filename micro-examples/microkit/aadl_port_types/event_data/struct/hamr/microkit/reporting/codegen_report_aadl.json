@@ -772,11 +772,11 @@
                                   "type" : "Some",
                                   "value" : "components\/consumer_p_p_consumer\/src\/consumer_p_p_consumer.c"
                                 },
-                                "beginLine" : 37,
+                                "beginLine" : 41,
                                 "beginColumn" : 1,
-                                "endLine" : 40,
+                                "endLine" : 44,
                                 "endColumn" : 1,
-                                "offset" : 1615,
+                                "offset" : 1823,
                                 "length" : 153
                               }
                             },
@@ -1010,11 +1010,11 @@
                                   "type" : "Some",
                                   "value" : "components\/consumer_p_s_consumer\/src\/consumer_p_s_consumer.c"
                                 },
-                                "beginLine" : 38,
+                                "beginLine" : 42,
                                 "beginColumn" : 1,
-                                "endLine" : 41,
+                                "endLine" : 45,
                                 "endColumn" : 1,
-                                "offset" : 1627,
+                                "offset" : 1835,
                                 "length" : 153
                               }
                             },

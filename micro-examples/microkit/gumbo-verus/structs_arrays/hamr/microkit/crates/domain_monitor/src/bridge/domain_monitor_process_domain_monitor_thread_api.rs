@@ -23,6 +23,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_producer_producer_myStructArray_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_producer_producer_myStructArray_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_producer_producer_MyArrayStruct(
       &mut self,
       value: &Ghost<Option<Gumbo_Structs_Arrays::MyArrayStruct>>) -> (res : Option<Gumbo_Structs_Arrays::MyArrayStruct>)
@@ -33,6 +39,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_producer_producer_MyArrayStruct_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_producer_producer_MyArrayStruct_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_consumer_consumer_MyArrayInt32(
       &mut self,
       value: &Ghost<Option<Gumbo_Structs_Arrays::MyArrayInt32>>) -> (res : Option<Gumbo_Structs_Arrays::MyArrayInt32>)
@@ -40,6 +52,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_consumer_consumer_MyArrayInt32();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_consumer_consumer_MyArrayInt32_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_consumer_consumer_MyArrayInt32_num_invalid();
     }
   }
 
@@ -65,6 +83,12 @@ verus! {
         old(self).consumer_consumer_MyArrayInt32 == final(self).consumer_consumer_MyArrayInt32,
     {
       self.api.unverified_get_producer_producer_myStructArray(&Ghost(self.producer_producer_myStructArray))
+    }/// The number of messages received on producer_producer_myStructArray that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_producer_producer_myStructArray_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_producer_producer_myStructArray_num_invalid()
     }
     pub fn get_producer_producer_MyArrayStruct(&mut self) -> (res : Option<Gumbo_Structs_Arrays::MyArrayStruct>)
       ensures
@@ -74,6 +98,12 @@ verus! {
         old(self).consumer_consumer_MyArrayInt32 == final(self).consumer_consumer_MyArrayInt32,
     {
       self.api.unverified_get_producer_producer_MyArrayStruct(&Ghost(self.producer_producer_MyArrayStruct))
+    }/// The number of messages received on producer_producer_MyArrayStruct that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_producer_producer_MyArrayStruct_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_producer_producer_MyArrayStruct_num_invalid()
     }
     pub fn get_consumer_consumer_MyArrayInt32(&mut self) -> (res : Option<Gumbo_Structs_Arrays::MyArrayInt32>)
       ensures
@@ -83,6 +113,12 @@ verus! {
         res == final(self).consumer_consumer_MyArrayInt32,
     {
       self.api.unverified_get_consumer_consumer_MyArrayInt32(&Ghost(self.consumer_consumer_MyArrayInt32))
+    }/// The number of messages received on consumer_consumer_MyArrayInt32 that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_consumer_consumer_MyArrayInt32_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_consumer_consumer_MyArrayInt32_num_invalid()
     }
   }
 

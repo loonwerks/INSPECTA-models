@@ -25,3 +25,13 @@ verus! {
   }
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<StructuredEthernetMessage_i>() == 1620);
+const _: () = assert!(core::mem::align_of::<StructuredEthernetMessage_i>() == 4);
+const _: () = assert!(core::mem::offset_of!(StructuredEthernetMessage_i, malformedFrame) == 0);
+const _: () = assert!(core::mem::offset_of!(StructuredEthernetMessage_i, internetProtocol) == 4);
+const _: () = assert!(core::mem::offset_of!(StructuredEthernetMessage_i, frameProtocol) == 8);
+const _: () = assert!(core::mem::offset_of!(StructuredEthernetMessage_i, portIsWhitelisted) == 12);
+const _: () = assert!(core::mem::offset_of!(StructuredEthernetMessage_i, arpType) == 16);
+const _: () = assert!(core::mem::offset_of!(StructuredEthernetMessage_i, rawMessage) == 20);

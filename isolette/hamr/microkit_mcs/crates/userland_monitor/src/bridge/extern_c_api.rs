@@ -12,28 +12,51 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_thermostat_rt_mri_mri_displayed_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool;
+  fn get_thermostat_rt_mri_mri_displayed_temp_num_invalid() -> u64;
   fn get_thermostat_rt_mri_mri_regulator_status(value: *mut Isolette_Data_Model::Status) -> bool;
+  fn get_thermostat_rt_mri_mri_regulator_status_num_invalid() -> u64;
   fn get_thermostat_rt_mhs_mhs_heat_control(value: *mut Isolette_Data_Model::On_Off) -> bool;
+  fn get_thermostat_rt_mhs_mhs_heat_control_num_invalid() -> u64;
   fn get_thermostat_mt_mmi_mmi_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool;
+  fn get_thermostat_mt_mmi_mmi_monitor_status_num_invalid() -> u64;
   fn get_thermostat_mt_ma_ma_alarm_control(value: *mut Isolette_Data_Model::On_Off) -> bool;
+  fn get_thermostat_mt_ma_ma_alarm_control_num_invalid() -> u64;
   fn get_operator_interface_oip_oit_lower_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
+  fn get_operator_interface_oip_oit_lower_desired_tempWstatus_num_invalid() -> u64;
   fn get_operator_interface_oip_oit_upper_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
+  fn get_operator_interface_oip_oit_upper_desired_tempWstatus_num_invalid() -> u64;
   fn get_operator_interface_oip_oit_lower_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
+  fn get_operator_interface_oip_oit_lower_alarm_tempWstatus_num_invalid() -> u64;
   fn get_operator_interface_oip_oit_upper_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
+  fn get_operator_interface_oip_oit_upper_alarm_tempWstatus_num_invalid() -> u64;
   fn get_temperature_sensor_cpi_thermostat_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
+  fn get_temperature_sensor_cpi_thermostat_current_tempWstatus_num_invalid() -> u64;
   fn get_thermostat_rt_mri_mri_upper_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool;
+  fn get_thermostat_rt_mri_mri_upper_desired_temp_num_invalid() -> u64;
   fn get_thermostat_rt_mri_mri_lower_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool;
+  fn get_thermostat_rt_mri_mri_lower_desired_temp_num_invalid() -> u64;
   fn get_thermostat_rt_mri_mri_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
+  fn get_thermostat_rt_mri_mri_interface_failure_num_invalid() -> u64;
   fn get_thermostat_rt_mrm_mrm_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool;
+  fn get_thermostat_rt_mrm_mrm_regulator_mode_num_invalid() -> u64;
   fn get_thermostat_rt_drf_drf_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
+  fn get_thermostat_rt_drf_drf_internal_failure_num_invalid() -> u64;
   fn get_thermostat_mt_mmi_mmi_upper_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool;
+  fn get_thermostat_mt_mmi_mmi_upper_alarm_temp_num_invalid() -> u64;
   fn get_thermostat_mt_mmi_mmi_lower_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool;
+  fn get_thermostat_mt_mmi_mmi_lower_alarm_temp_num_invalid() -> u64;
   fn get_thermostat_mt_mmi_mmi_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
+  fn get_thermostat_mt_mmi_mmi_interface_failure_num_invalid() -> u64;
   fn get_thermostat_mt_mmm_mmm_monitor_mode(value: *mut Isolette_Data_Model::Monitor_Mode) -> bool;
+  fn get_thermostat_mt_mmm_mmm_monitor_mode_num_invalid() -> u64;
   fn get_thermostat_mt_dmf_dmf_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
+  fn get_thermostat_mt_dmf_dmf_internal_failure_num_invalid() -> u64;
   fn get_temperature_sensor_cpi_thermostat_air(value: *mut Isolette_Data_Model::PhysicalTemp_i) -> bool;
+  fn get_temperature_sensor_cpi_thermostat_air_num_invalid() -> u64;
   fn get_sched_state(value: *mut hamr::SchedState) -> bool;
+  fn get_sched_state_num_invalid() -> u64;
   fn get_sched_schedule(value: *mut hamr::Schedule) -> bool;
+  fn get_sched_schedule_num_invalid() -> u64;
 }
 
 pub fn unsafe_get_thermostat_rt_mri_mri_displayed_temp() -> Isolette_Data_Model::Temp_i
@@ -42,6 +65,13 @@ pub fn unsafe_get_thermostat_rt_mri_mri_displayed_temp() -> Isolette_Data_Model:
     let value: *mut Isolette_Data_Model::Temp_i = &mut Isolette_Data_Model::Temp_i::default();
     get_thermostat_rt_mri_mri_displayed_temp(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_thermostat_rt_mri_mri_displayed_temp_num_invalid() -> u64
+{
+  unsafe {
+    return get_thermostat_rt_mri_mri_displayed_temp_num_invalid();
   }
 }
 
@@ -54,12 +84,26 @@ pub fn unsafe_get_thermostat_rt_mri_mri_regulator_status() -> Isolette_Data_Mode
   }
 }
 
+pub fn unsafe_get_thermostat_rt_mri_mri_regulator_status_num_invalid() -> u64
+{
+  unsafe {
+    return get_thermostat_rt_mri_mri_regulator_status_num_invalid();
+  }
+}
+
 pub fn unsafe_get_thermostat_rt_mhs_mhs_heat_control() -> Isolette_Data_Model::On_Off
 {
   unsafe {
     let value: *mut Isolette_Data_Model::On_Off = &mut Isolette_Data_Model::On_Off::default();
     get_thermostat_rt_mhs_mhs_heat_control(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_thermostat_rt_mhs_mhs_heat_control_num_invalid() -> u64
+{
+  unsafe {
+    return get_thermostat_rt_mhs_mhs_heat_control_num_invalid();
   }
 }
 
@@ -72,12 +116,26 @@ pub fn unsafe_get_thermostat_mt_mmi_mmi_monitor_status() -> Isolette_Data_Model:
   }
 }
 
+pub fn unsafe_get_thermostat_mt_mmi_mmi_monitor_status_num_invalid() -> u64
+{
+  unsafe {
+    return get_thermostat_mt_mmi_mmi_monitor_status_num_invalid();
+  }
+}
+
 pub fn unsafe_get_thermostat_mt_ma_ma_alarm_control() -> Isolette_Data_Model::On_Off
 {
   unsafe {
     let value: *mut Isolette_Data_Model::On_Off = &mut Isolette_Data_Model::On_Off::default();
     get_thermostat_mt_ma_ma_alarm_control(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_thermostat_mt_ma_ma_alarm_control_num_invalid() -> u64
+{
+  unsafe {
+    return get_thermostat_mt_ma_ma_alarm_control_num_invalid();
   }
 }
 
@@ -90,12 +148,26 @@ pub fn unsafe_get_operator_interface_oip_oit_lower_desired_tempWstatus() -> Isol
   }
 }
 
+pub fn unsafe_get_operator_interface_oip_oit_lower_desired_tempWstatus_num_invalid() -> u64
+{
+  unsafe {
+    return get_operator_interface_oip_oit_lower_desired_tempWstatus_num_invalid();
+  }
+}
+
 pub fn unsafe_get_operator_interface_oip_oit_upper_desired_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
   unsafe {
     let value: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
     get_operator_interface_oip_oit_upper_desired_tempWstatus(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_operator_interface_oip_oit_upper_desired_tempWstatus_num_invalid() -> u64
+{
+  unsafe {
+    return get_operator_interface_oip_oit_upper_desired_tempWstatus_num_invalid();
   }
 }
 
@@ -108,12 +180,26 @@ pub fn unsafe_get_operator_interface_oip_oit_lower_alarm_tempWstatus() -> Isolet
   }
 }
 
+pub fn unsafe_get_operator_interface_oip_oit_lower_alarm_tempWstatus_num_invalid() -> u64
+{
+  unsafe {
+    return get_operator_interface_oip_oit_lower_alarm_tempWstatus_num_invalid();
+  }
+}
+
 pub fn unsafe_get_operator_interface_oip_oit_upper_alarm_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
   unsafe {
     let value: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
     get_operator_interface_oip_oit_upper_alarm_tempWstatus(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_operator_interface_oip_oit_upper_alarm_tempWstatus_num_invalid() -> u64
+{
+  unsafe {
+    return get_operator_interface_oip_oit_upper_alarm_tempWstatus_num_invalid();
   }
 }
 
@@ -126,12 +212,26 @@ pub fn unsafe_get_temperature_sensor_cpi_thermostat_current_tempWstatus() -> Iso
   }
 }
 
+pub fn unsafe_get_temperature_sensor_cpi_thermostat_current_tempWstatus_num_invalid() -> u64
+{
+  unsafe {
+    return get_temperature_sensor_cpi_thermostat_current_tempWstatus_num_invalid();
+  }
+}
+
 pub fn unsafe_get_thermostat_rt_mri_mri_upper_desired_temp() -> Isolette_Data_Model::Temp_i
 {
   unsafe {
     let value: *mut Isolette_Data_Model::Temp_i = &mut Isolette_Data_Model::Temp_i::default();
     get_thermostat_rt_mri_mri_upper_desired_temp(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_thermostat_rt_mri_mri_upper_desired_temp_num_invalid() -> u64
+{
+  unsafe {
+    return get_thermostat_rt_mri_mri_upper_desired_temp_num_invalid();
   }
 }
 
@@ -144,12 +244,26 @@ pub fn unsafe_get_thermostat_rt_mri_mri_lower_desired_temp() -> Isolette_Data_Mo
   }
 }
 
+pub fn unsafe_get_thermostat_rt_mri_mri_lower_desired_temp_num_invalid() -> u64
+{
+  unsafe {
+    return get_thermostat_rt_mri_mri_lower_desired_temp_num_invalid();
+  }
+}
+
 pub fn unsafe_get_thermostat_rt_mri_mri_interface_failure() -> Isolette_Data_Model::Failure_Flag_i
 {
   unsafe {
     let value: *mut Isolette_Data_Model::Failure_Flag_i = &mut Isolette_Data_Model::Failure_Flag_i::default();
     get_thermostat_rt_mri_mri_interface_failure(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_thermostat_rt_mri_mri_interface_failure_num_invalid() -> u64
+{
+  unsafe {
+    return get_thermostat_rt_mri_mri_interface_failure_num_invalid();
   }
 }
 
@@ -162,12 +276,26 @@ pub fn unsafe_get_thermostat_rt_mrm_mrm_regulator_mode() -> Isolette_Data_Model:
   }
 }
 
+pub fn unsafe_get_thermostat_rt_mrm_mrm_regulator_mode_num_invalid() -> u64
+{
+  unsafe {
+    return get_thermostat_rt_mrm_mrm_regulator_mode_num_invalid();
+  }
+}
+
 pub fn unsafe_get_thermostat_rt_drf_drf_internal_failure() -> Isolette_Data_Model::Failure_Flag_i
 {
   unsafe {
     let value: *mut Isolette_Data_Model::Failure_Flag_i = &mut Isolette_Data_Model::Failure_Flag_i::default();
     get_thermostat_rt_drf_drf_internal_failure(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_thermostat_rt_drf_drf_internal_failure_num_invalid() -> u64
+{
+  unsafe {
+    return get_thermostat_rt_drf_drf_internal_failure_num_invalid();
   }
 }
 
@@ -180,12 +308,26 @@ pub fn unsafe_get_thermostat_mt_mmi_mmi_upper_alarm_temp() -> Isolette_Data_Mode
   }
 }
 
+pub fn unsafe_get_thermostat_mt_mmi_mmi_upper_alarm_temp_num_invalid() -> u64
+{
+  unsafe {
+    return get_thermostat_mt_mmi_mmi_upper_alarm_temp_num_invalid();
+  }
+}
+
 pub fn unsafe_get_thermostat_mt_mmi_mmi_lower_alarm_temp() -> Isolette_Data_Model::Temp_i
 {
   unsafe {
     let value: *mut Isolette_Data_Model::Temp_i = &mut Isolette_Data_Model::Temp_i::default();
     get_thermostat_mt_mmi_mmi_lower_alarm_temp(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_thermostat_mt_mmi_mmi_lower_alarm_temp_num_invalid() -> u64
+{
+  unsafe {
+    return get_thermostat_mt_mmi_mmi_lower_alarm_temp_num_invalid();
   }
 }
 
@@ -198,12 +340,26 @@ pub fn unsafe_get_thermostat_mt_mmi_mmi_interface_failure() -> Isolette_Data_Mod
   }
 }
 
+pub fn unsafe_get_thermostat_mt_mmi_mmi_interface_failure_num_invalid() -> u64
+{
+  unsafe {
+    return get_thermostat_mt_mmi_mmi_interface_failure_num_invalid();
+  }
+}
+
 pub fn unsafe_get_thermostat_mt_mmm_mmm_monitor_mode() -> Isolette_Data_Model::Monitor_Mode
 {
   unsafe {
     let value: *mut Isolette_Data_Model::Monitor_Mode = &mut Isolette_Data_Model::Monitor_Mode::default();
     get_thermostat_mt_mmm_mmm_monitor_mode(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_thermostat_mt_mmm_mmm_monitor_mode_num_invalid() -> u64
+{
+  unsafe {
+    return get_thermostat_mt_mmm_mmm_monitor_mode_num_invalid();
   }
 }
 
@@ -216,12 +372,26 @@ pub fn unsafe_get_thermostat_mt_dmf_dmf_internal_failure() -> Isolette_Data_Mode
   }
 }
 
+pub fn unsafe_get_thermostat_mt_dmf_dmf_internal_failure_num_invalid() -> u64
+{
+  unsafe {
+    return get_thermostat_mt_dmf_dmf_internal_failure_num_invalid();
+  }
+}
+
 pub fn unsafe_get_temperature_sensor_cpi_thermostat_air() -> Isolette_Data_Model::PhysicalTemp_i
 {
   unsafe {
     let value: *mut Isolette_Data_Model::PhysicalTemp_i = &mut Isolette_Data_Model::PhysicalTemp_i::default();
     get_temperature_sensor_cpi_thermostat_air(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_temperature_sensor_cpi_thermostat_air_num_invalid() -> u64
+{
+  unsafe {
+    return get_temperature_sensor_cpi_thermostat_air_num_invalid();
   }
 }
 
@@ -234,12 +404,26 @@ pub fn unsafe_get_sched_state() -> hamr::SchedState
   }
 }
 
+pub fn unsafe_get_sched_state_num_invalid() -> u64
+{
+  unsafe {
+    return get_sched_state_num_invalid();
+  }
+}
+
 pub fn unsafe_get_sched_schedule() -> hamr::Schedule
 {
   unsafe {
     let value: *mut hamr::Schedule = &mut hamr::Schedule::default();
     get_sched_schedule(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_sched_schedule_num_invalid() -> u64
+{
+  unsafe {
+    return get_sched_schedule_num_invalid();
   }
 }
 
@@ -317,6 +501,12 @@ pub fn get_thermostat_rt_mri_mri_displayed_temp(value: *mut Isolette_Data_Model:
 }
 
 #[cfg(test)]
+pub fn get_thermostat_rt_mri_mri_displayed_temp_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_thermostat_rt_mri_mri_regulator_status(value: *mut Isolette_Data_Model::Status) -> bool
 {
   unsafe {
@@ -324,6 +514,12 @@ pub fn get_thermostat_rt_mri_mri_regulator_status(value: *mut Isolette_Data_Mode
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_thermostat_rt_mri_mri_regulator_status_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -337,6 +533,12 @@ pub fn get_thermostat_rt_mhs_mhs_heat_control(value: *mut Isolette_Data_Model::O
 }
 
 #[cfg(test)]
+pub fn get_thermostat_rt_mhs_mhs_heat_control_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_thermostat_mt_mmi_mmi_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool
 {
   unsafe {
@@ -344,6 +546,12 @@ pub fn get_thermostat_mt_mmi_mmi_monitor_status(value: *mut Isolette_Data_Model:
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_thermostat_mt_mmi_mmi_monitor_status_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -357,6 +565,12 @@ pub fn get_thermostat_mt_ma_ma_alarm_control(value: *mut Isolette_Data_Model::On
 }
 
 #[cfg(test)]
+pub fn get_thermostat_mt_ma_ma_alarm_control_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_operator_interface_oip_oit_lower_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
@@ -364,6 +578,12 @@ pub fn get_operator_interface_oip_oit_lower_desired_tempWstatus(value: *mut Isol
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_operator_interface_oip_oit_lower_desired_tempWstatus_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -377,6 +597,12 @@ pub fn get_operator_interface_oip_oit_upper_desired_tempWstatus(value: *mut Isol
 }
 
 #[cfg(test)]
+pub fn get_operator_interface_oip_oit_upper_desired_tempWstatus_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_operator_interface_oip_oit_lower_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
@@ -384,6 +610,12 @@ pub fn get_operator_interface_oip_oit_lower_alarm_tempWstatus(value: *mut Isolet
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_operator_interface_oip_oit_lower_alarm_tempWstatus_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -397,6 +629,12 @@ pub fn get_operator_interface_oip_oit_upper_alarm_tempWstatus(value: *mut Isolet
 }
 
 #[cfg(test)]
+pub fn get_operator_interface_oip_oit_upper_alarm_tempWstatus_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_temperature_sensor_cpi_thermostat_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
@@ -404,6 +642,12 @@ pub fn get_temperature_sensor_cpi_thermostat_current_tempWstatus(value: *mut Iso
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_temperature_sensor_cpi_thermostat_current_tempWstatus_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -417,6 +661,12 @@ pub fn get_thermostat_rt_mri_mri_upper_desired_temp(value: *mut Isolette_Data_Mo
 }
 
 #[cfg(test)]
+pub fn get_thermostat_rt_mri_mri_upper_desired_temp_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_thermostat_rt_mri_mri_lower_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 {
   unsafe {
@@ -424,6 +674,12 @@ pub fn get_thermostat_rt_mri_mri_lower_desired_temp(value: *mut Isolette_Data_Mo
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_thermostat_rt_mri_mri_lower_desired_temp_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -437,6 +693,12 @@ pub fn get_thermostat_rt_mri_mri_interface_failure(value: *mut Isolette_Data_Mod
 }
 
 #[cfg(test)]
+pub fn get_thermostat_rt_mri_mri_interface_failure_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_thermostat_rt_mrm_mrm_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool
 {
   unsafe {
@@ -444,6 +706,12 @@ pub fn get_thermostat_rt_mrm_mrm_regulator_mode(value: *mut Isolette_Data_Model:
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_thermostat_rt_mrm_mrm_regulator_mode_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -457,6 +725,12 @@ pub fn get_thermostat_rt_drf_drf_internal_failure(value: *mut Isolette_Data_Mode
 }
 
 #[cfg(test)]
+pub fn get_thermostat_rt_drf_drf_internal_failure_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_thermostat_mt_mmi_mmi_upper_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 {
   unsafe {
@@ -464,6 +738,12 @@ pub fn get_thermostat_mt_mmi_mmi_upper_alarm_temp(value: *mut Isolette_Data_Mode
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_thermostat_mt_mmi_mmi_upper_alarm_temp_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -477,6 +757,12 @@ pub fn get_thermostat_mt_mmi_mmi_lower_alarm_temp(value: *mut Isolette_Data_Mode
 }
 
 #[cfg(test)]
+pub fn get_thermostat_mt_mmi_mmi_lower_alarm_temp_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_thermostat_mt_mmi_mmi_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool
 {
   unsafe {
@@ -484,6 +770,12 @@ pub fn get_thermostat_mt_mmi_mmi_interface_failure(value: *mut Isolette_Data_Mod
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_thermostat_mt_mmi_mmi_interface_failure_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -497,6 +789,12 @@ pub fn get_thermostat_mt_mmm_mmm_monitor_mode(value: *mut Isolette_Data_Model::M
 }
 
 #[cfg(test)]
+pub fn get_thermostat_mt_mmm_mmm_monitor_mode_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_thermostat_mt_dmf_dmf_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool
 {
   unsafe {
@@ -504,6 +802,12 @@ pub fn get_thermostat_mt_dmf_dmf_internal_failure(value: *mut Isolette_Data_Mode
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_thermostat_mt_dmf_dmf_internal_failure_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -517,6 +821,12 @@ pub fn get_temperature_sensor_cpi_thermostat_air(value: *mut Isolette_Data_Model
 }
 
 #[cfg(test)]
+pub fn get_temperature_sensor_cpi_thermostat_air_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_sched_state(value: *mut hamr::SchedState) -> bool
 {
   unsafe {
@@ -527,6 +837,12 @@ pub fn get_sched_state(value: *mut hamr::SchedState) -> bool
 }
 
 #[cfg(test)]
+pub fn get_sched_state_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_sched_schedule(value: *mut hamr::Schedule) -> bool
 {
   unsafe {
@@ -534,4 +850,10 @@ pub fn get_sched_schedule(value: *mut hamr::Schedule) -> bool
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_sched_schedule_num_invalid() -> u64
+{
+  return 0;
 }

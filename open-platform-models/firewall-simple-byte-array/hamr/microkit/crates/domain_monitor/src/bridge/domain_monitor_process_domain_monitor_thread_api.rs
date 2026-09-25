@@ -23,6 +23,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_ArduPilot_ArduPilot_EthernetFramesTx_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_ArduPilot_ArduPilot_EthernetFramesTx_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_Firewall_Firewall_EthernetFramesRxOut(
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
@@ -30,6 +36,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_Firewall_Firewall_EthernetFramesRxOut();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_Firewall_Firewall_EthernetFramesRxOut_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_Firewall_Firewall_EthernetFramesRxOut_num_invalid();
     }
 
     #[verifier::external_body]
@@ -43,6 +55,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_Firewall_Firewall_EthernetFramesTxOut_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_Firewall_Firewall_EthernetFramesTxOut_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx(
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
@@ -50,6 +68,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_num_invalid();
     }
   }
 
@@ -77,6 +101,12 @@ verus! {
         old(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == final(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
     {
       self.api.unverified_get_ArduPilot_ArduPilot_EthernetFramesTx(&Ghost(self.ArduPilot_ArduPilot_EthernetFramesTx))
+    }/// The number of messages received on ArduPilot_ArduPilot_EthernetFramesTx that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_ArduPilot_ArduPilot_EthernetFramesTx_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_ArduPilot_ArduPilot_EthernetFramesTx_num_invalid()
     }
     pub fn get_Firewall_Firewall_EthernetFramesRxOut(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
@@ -87,6 +117,12 @@ verus! {
         old(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == final(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
     {
       self.api.unverified_get_Firewall_Firewall_EthernetFramesRxOut(&Ghost(self.Firewall_Firewall_EthernetFramesRxOut))
+    }/// The number of messages received on Firewall_Firewall_EthernetFramesRxOut that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_Firewall_Firewall_EthernetFramesRxOut_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_Firewall_Firewall_EthernetFramesRxOut_num_invalid()
     }
     pub fn get_Firewall_Firewall_EthernetFramesTxOut(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
@@ -97,6 +133,12 @@ verus! {
         old(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == final(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
     {
       self.api.unverified_get_Firewall_Firewall_EthernetFramesTxOut(&Ghost(self.Firewall_Firewall_EthernetFramesTxOut))
+    }/// The number of messages received on Firewall_Firewall_EthernetFramesTxOut that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_Firewall_Firewall_EthernetFramesTxOut_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_Firewall_Firewall_EthernetFramesTxOut_num_invalid()
     }
     pub fn get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
@@ -107,6 +149,12 @@ verus! {
         res == final(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
     {
       self.api.unverified_get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx(&Ghost(self.LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx))
+    }/// The number of messages received on LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_num_invalid()
     }
   }
 

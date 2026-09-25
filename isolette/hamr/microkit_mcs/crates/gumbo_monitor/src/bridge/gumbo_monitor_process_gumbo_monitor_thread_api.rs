@@ -23,6 +23,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_thermostat_rt_mri_mri_displayed_temp_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_rt_mri_mri_displayed_temp_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_thermostat_rt_mri_mri_regulator_status(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Status>) -> (res : Isolette_Data_Model::Status)
@@ -30,6 +36,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_thermostat_rt_mri_mri_regulator_status();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_thermostat_rt_mri_mri_regulator_status_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_rt_mri_mri_regulator_status_num_invalid();
     }
 
     #[verifier::external_body]
@@ -43,6 +55,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_thermostat_rt_mhs_mhs_heat_control_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_rt_mhs_mhs_heat_control_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_thermostat_mt_mmi_mmi_monitor_status(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Status>) -> (res : Isolette_Data_Model::Status)
@@ -50,6 +68,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_thermostat_mt_mmi_mmi_monitor_status();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_thermostat_mt_mmi_mmi_monitor_status_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_mt_mmi_mmi_monitor_status_num_invalid();
     }
 
     #[verifier::external_body]
@@ -63,6 +87,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_thermostat_mt_ma_ma_alarm_control_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_mt_ma_ma_alarm_control_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_operator_interface_oip_oit_lower_desired_tempWstatus(
       &mut self,
       value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
@@ -70,6 +100,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_operator_interface_oip_oit_lower_desired_tempWstatus();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_operator_interface_oip_oit_lower_desired_tempWstatus_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_operator_interface_oip_oit_lower_desired_tempWstatus_num_invalid();
     }
 
     #[verifier::external_body]
@@ -83,6 +119,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_operator_interface_oip_oit_upper_desired_tempWstatus_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_operator_interface_oip_oit_upper_desired_tempWstatus_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_operator_interface_oip_oit_lower_alarm_tempWstatus(
       &mut self,
       value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
@@ -90,6 +132,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_operator_interface_oip_oit_lower_alarm_tempWstatus();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_operator_interface_oip_oit_lower_alarm_tempWstatus_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_operator_interface_oip_oit_lower_alarm_tempWstatus_num_invalid();
     }
 
     #[verifier::external_body]
@@ -103,6 +151,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_operator_interface_oip_oit_upper_alarm_tempWstatus_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_operator_interface_oip_oit_upper_alarm_tempWstatus_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_temperature_sensor_cpi_thermostat_current_tempWstatus(
       &mut self,
       value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
@@ -110,6 +164,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_temperature_sensor_cpi_thermostat_current_tempWstatus();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_temperature_sensor_cpi_thermostat_current_tempWstatus_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_temperature_sensor_cpi_thermostat_current_tempWstatus_num_invalid();
     }
 
     #[verifier::external_body]
@@ -123,6 +183,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_thermostat_rt_mri_mri_upper_desired_temp_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_rt_mri_mri_upper_desired_temp_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_thermostat_rt_mri_mri_lower_desired_temp(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Temp_i>) -> (res : Isolette_Data_Model::Temp_i)
@@ -130,6 +196,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_thermostat_rt_mri_mri_lower_desired_temp();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_thermostat_rt_mri_mri_lower_desired_temp_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_rt_mri_mri_lower_desired_temp_num_invalid();
     }
 
     #[verifier::external_body]
@@ -143,6 +215,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_thermostat_rt_mri_mri_interface_failure_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_rt_mri_mri_interface_failure_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_thermostat_rt_mrm_mrm_regulator_mode(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Regulator_Mode>) -> (res : Isolette_Data_Model::Regulator_Mode)
@@ -150,6 +228,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_thermostat_rt_mrm_mrm_regulator_mode();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_thermostat_rt_mrm_mrm_regulator_mode_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_rt_mrm_mrm_regulator_mode_num_invalid();
     }
 
     #[verifier::external_body]
@@ -163,6 +247,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_thermostat_rt_drf_drf_internal_failure_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_rt_drf_drf_internal_failure_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_thermostat_mt_mmi_mmi_upper_alarm_temp(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Temp_i>) -> (res : Isolette_Data_Model::Temp_i)
@@ -170,6 +260,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_thermostat_mt_mmi_mmi_upper_alarm_temp();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_thermostat_mt_mmi_mmi_upper_alarm_temp_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_mt_mmi_mmi_upper_alarm_temp_num_invalid();
     }
 
     #[verifier::external_body]
@@ -183,6 +279,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_thermostat_mt_mmi_mmi_lower_alarm_temp_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_mt_mmi_mmi_lower_alarm_temp_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_thermostat_mt_mmi_mmi_interface_failure(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Failure_Flag_i>) -> (res : Isolette_Data_Model::Failure_Flag_i)
@@ -190,6 +292,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_thermostat_mt_mmi_mmi_interface_failure();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_thermostat_mt_mmi_mmi_interface_failure_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_mt_mmi_mmi_interface_failure_num_invalid();
     }
 
     #[verifier::external_body]
@@ -203,6 +311,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_thermostat_mt_mmm_mmm_monitor_mode_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_mt_mmm_mmm_monitor_mode_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_thermostat_mt_dmf_dmf_internal_failure(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Failure_Flag_i>) -> (res : Isolette_Data_Model::Failure_Flag_i)
@@ -210,6 +324,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_thermostat_mt_dmf_dmf_internal_failure();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_thermostat_mt_dmf_dmf_internal_failure_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_mt_dmf_dmf_internal_failure_num_invalid();
     }
 
     #[verifier::external_body]
@@ -223,6 +343,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_temperature_sensor_cpi_thermostat_air_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_temperature_sensor_cpi_thermostat_air_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_sched_state(
       &mut self,
       value: &Ghost<hamr::SchedState>) -> (res : hamr::SchedState)
@@ -230,6 +356,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_sched_state();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_sched_state_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_sched_state_num_invalid();
     }
 
     #[verifier::external_body]
@@ -243,6 +375,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_sched_schedule_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_sched_schedule_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_thermostat_rt_mhs_mhs_sv_lastCmd(
       &mut self,
       value: &Ghost<Isolette_Data_Model::On_Off>) -> (res : Isolette_Data_Model::On_Off)
@@ -250,6 +388,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_thermostat_rt_mhs_mhs_sv_lastCmd();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_thermostat_rt_mhs_mhs_sv_lastCmd_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_rt_mhs_mhs_sv_lastCmd_num_invalid();
     }
 
     #[verifier::external_body]
@@ -263,6 +407,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_thermostat_mt_mmi_mmi_sv_lastCmd(
       &mut self,
       value: &Ghost<Isolette_Data_Model::On_Off>) -> (res : Isolette_Data_Model::On_Off)
@@ -270,6 +420,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_thermostat_mt_mmi_mmi_sv_lastCmd();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_thermostat_mt_mmi_mmi_sv_lastCmd_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_mt_mmi_mmi_sv_lastCmd_num_invalid();
     }
 
     #[verifier::external_body]
@@ -283,6 +439,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_thermostat_mt_ma_ma_sv_lastCmd_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_mt_ma_ma_sv_lastCmd_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_thermostat_mt_mmm_mmm_sv_lastMonitorMode(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Monitor_Mode>) -> (res : Isolette_Data_Model::Monitor_Mode)
@@ -290,6 +452,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_thermostat_mt_mmm_mmm_sv_lastMonitorMode();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_thermostat_mt_mmm_mmm_sv_lastMonitorMode_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_thermostat_mt_mmm_mmm_sv_lastMonitorMode_num_invalid();
     }
   }
 
@@ -365,6 +533,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_rt_mri_mri_displayed_temp(&Ghost(self.thermostat_rt_mri_mri_displayed_temp))
+    }/// The number of messages received on thermostat_rt_mri_mri_displayed_temp that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_rt_mri_mri_displayed_temp_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_rt_mri_mri_displayed_temp_num_invalid()
     }
     pub fn get_thermostat_rt_mri_mri_regulator_status(&mut self) -> (res : Isolette_Data_Model::Status)
       ensures
@@ -399,6 +573,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_rt_mri_mri_regulator_status(&Ghost(self.thermostat_rt_mri_mri_regulator_status))
+    }/// The number of messages received on thermostat_rt_mri_mri_regulator_status that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_rt_mri_mri_regulator_status_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_rt_mri_mri_regulator_status_num_invalid()
     }
     pub fn get_thermostat_rt_mhs_mhs_heat_control(&mut self) -> (res : Isolette_Data_Model::On_Off)
       ensures
@@ -433,6 +613,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_rt_mhs_mhs_heat_control(&Ghost(self.thermostat_rt_mhs_mhs_heat_control))
+    }/// The number of messages received on thermostat_rt_mhs_mhs_heat_control that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_rt_mhs_mhs_heat_control_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_rt_mhs_mhs_heat_control_num_invalid()
     }
     pub fn get_thermostat_mt_mmi_mmi_monitor_status(&mut self) -> (res : Isolette_Data_Model::Status)
       ensures
@@ -467,6 +653,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_mt_mmi_mmi_monitor_status(&Ghost(self.thermostat_mt_mmi_mmi_monitor_status))
+    }/// The number of messages received on thermostat_mt_mmi_mmi_monitor_status that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_mt_mmi_mmi_monitor_status_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_mt_mmi_mmi_monitor_status_num_invalid()
     }
     pub fn get_thermostat_mt_ma_ma_alarm_control(&mut self) -> (res : Isolette_Data_Model::On_Off)
       ensures
@@ -501,6 +693,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_mt_ma_ma_alarm_control(&Ghost(self.thermostat_mt_ma_ma_alarm_control))
+    }/// The number of messages received on thermostat_mt_ma_ma_alarm_control that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_mt_ma_ma_alarm_control_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_mt_ma_ma_alarm_control_num_invalid()
     }
     pub fn get_operator_interface_oip_oit_lower_desired_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -535,6 +733,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_operator_interface_oip_oit_lower_desired_tempWstatus(&Ghost(self.operator_interface_oip_oit_lower_desired_tempWstatus))
+    }/// The number of messages received on operator_interface_oip_oit_lower_desired_tempWstatus that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_operator_interface_oip_oit_lower_desired_tempWstatus_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_operator_interface_oip_oit_lower_desired_tempWstatus_num_invalid()
     }
     pub fn get_operator_interface_oip_oit_upper_desired_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -569,6 +773,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_operator_interface_oip_oit_upper_desired_tempWstatus(&Ghost(self.operator_interface_oip_oit_upper_desired_tempWstatus))
+    }/// The number of messages received on operator_interface_oip_oit_upper_desired_tempWstatus that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_operator_interface_oip_oit_upper_desired_tempWstatus_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_operator_interface_oip_oit_upper_desired_tempWstatus_num_invalid()
     }
     pub fn get_operator_interface_oip_oit_lower_alarm_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -603,6 +813,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_operator_interface_oip_oit_lower_alarm_tempWstatus(&Ghost(self.operator_interface_oip_oit_lower_alarm_tempWstatus))
+    }/// The number of messages received on operator_interface_oip_oit_lower_alarm_tempWstatus that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_operator_interface_oip_oit_lower_alarm_tempWstatus_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_operator_interface_oip_oit_lower_alarm_tempWstatus_num_invalid()
     }
     pub fn get_operator_interface_oip_oit_upper_alarm_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -637,6 +853,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_operator_interface_oip_oit_upper_alarm_tempWstatus(&Ghost(self.operator_interface_oip_oit_upper_alarm_tempWstatus))
+    }/// The number of messages received on operator_interface_oip_oit_upper_alarm_tempWstatus that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_operator_interface_oip_oit_upper_alarm_tempWstatus_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_operator_interface_oip_oit_upper_alarm_tempWstatus_num_invalid()
     }
     pub fn get_temperature_sensor_cpi_thermostat_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -671,6 +893,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_temperature_sensor_cpi_thermostat_current_tempWstatus(&Ghost(self.temperature_sensor_cpi_thermostat_current_tempWstatus))
+    }/// The number of messages received on temperature_sensor_cpi_thermostat_current_tempWstatus that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_temperature_sensor_cpi_thermostat_current_tempWstatus_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_temperature_sensor_cpi_thermostat_current_tempWstatus_num_invalid()
     }
     pub fn get_thermostat_rt_mri_mri_upper_desired_temp(&mut self) -> (res : Isolette_Data_Model::Temp_i)
       ensures
@@ -705,6 +933,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_rt_mri_mri_upper_desired_temp(&Ghost(self.thermostat_rt_mri_mri_upper_desired_temp))
+    }/// The number of messages received on thermostat_rt_mri_mri_upper_desired_temp that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_rt_mri_mri_upper_desired_temp_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_rt_mri_mri_upper_desired_temp_num_invalid()
     }
     pub fn get_thermostat_rt_mri_mri_lower_desired_temp(&mut self) -> (res : Isolette_Data_Model::Temp_i)
       ensures
@@ -739,6 +973,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_rt_mri_mri_lower_desired_temp(&Ghost(self.thermostat_rt_mri_mri_lower_desired_temp))
+    }/// The number of messages received on thermostat_rt_mri_mri_lower_desired_temp that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_rt_mri_mri_lower_desired_temp_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_rt_mri_mri_lower_desired_temp_num_invalid()
     }
     pub fn get_thermostat_rt_mri_mri_interface_failure(&mut self) -> (res : Isolette_Data_Model::Failure_Flag_i)
       ensures
@@ -773,6 +1013,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_rt_mri_mri_interface_failure(&Ghost(self.thermostat_rt_mri_mri_interface_failure))
+    }/// The number of messages received on thermostat_rt_mri_mri_interface_failure that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_rt_mri_mri_interface_failure_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_rt_mri_mri_interface_failure_num_invalid()
     }
     pub fn get_thermostat_rt_mrm_mrm_regulator_mode(&mut self) -> (res : Isolette_Data_Model::Regulator_Mode)
       ensures
@@ -807,6 +1053,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_rt_mrm_mrm_regulator_mode(&Ghost(self.thermostat_rt_mrm_mrm_regulator_mode))
+    }/// The number of messages received on thermostat_rt_mrm_mrm_regulator_mode that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_rt_mrm_mrm_regulator_mode_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_rt_mrm_mrm_regulator_mode_num_invalid()
     }
     pub fn get_thermostat_rt_drf_drf_internal_failure(&mut self) -> (res : Isolette_Data_Model::Failure_Flag_i)
       ensures
@@ -841,6 +1093,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_rt_drf_drf_internal_failure(&Ghost(self.thermostat_rt_drf_drf_internal_failure))
+    }/// The number of messages received on thermostat_rt_drf_drf_internal_failure that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_rt_drf_drf_internal_failure_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_rt_drf_drf_internal_failure_num_invalid()
     }
     pub fn get_thermostat_mt_mmi_mmi_upper_alarm_temp(&mut self) -> (res : Isolette_Data_Model::Temp_i)
       ensures
@@ -875,6 +1133,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_mt_mmi_mmi_upper_alarm_temp(&Ghost(self.thermostat_mt_mmi_mmi_upper_alarm_temp))
+    }/// The number of messages received on thermostat_mt_mmi_mmi_upper_alarm_temp that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_mt_mmi_mmi_upper_alarm_temp_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_mt_mmi_mmi_upper_alarm_temp_num_invalid()
     }
     pub fn get_thermostat_mt_mmi_mmi_lower_alarm_temp(&mut self) -> (res : Isolette_Data_Model::Temp_i)
       ensures
@@ -909,6 +1173,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_mt_mmi_mmi_lower_alarm_temp(&Ghost(self.thermostat_mt_mmi_mmi_lower_alarm_temp))
+    }/// The number of messages received on thermostat_mt_mmi_mmi_lower_alarm_temp that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_mt_mmi_mmi_lower_alarm_temp_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_mt_mmi_mmi_lower_alarm_temp_num_invalid()
     }
     pub fn get_thermostat_mt_mmi_mmi_interface_failure(&mut self) -> (res : Isolette_Data_Model::Failure_Flag_i)
       ensures
@@ -943,6 +1213,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_mt_mmi_mmi_interface_failure(&Ghost(self.thermostat_mt_mmi_mmi_interface_failure))
+    }/// The number of messages received on thermostat_mt_mmi_mmi_interface_failure that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_mt_mmi_mmi_interface_failure_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_mt_mmi_mmi_interface_failure_num_invalid()
     }
     pub fn get_thermostat_mt_mmm_mmm_monitor_mode(&mut self) -> (res : Isolette_Data_Model::Monitor_Mode)
       ensures
@@ -977,6 +1253,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_mt_mmm_mmm_monitor_mode(&Ghost(self.thermostat_mt_mmm_mmm_monitor_mode))
+    }/// The number of messages received on thermostat_mt_mmm_mmm_monitor_mode that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_mt_mmm_mmm_monitor_mode_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_mt_mmm_mmm_monitor_mode_num_invalid()
     }
     pub fn get_thermostat_mt_dmf_dmf_internal_failure(&mut self) -> (res : Isolette_Data_Model::Failure_Flag_i)
       ensures
@@ -1011,6 +1293,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_mt_dmf_dmf_internal_failure(&Ghost(self.thermostat_mt_dmf_dmf_internal_failure))
+    }/// The number of messages received on thermostat_mt_dmf_dmf_internal_failure that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_mt_dmf_dmf_internal_failure_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_mt_dmf_dmf_internal_failure_num_invalid()
     }
     pub fn get_temperature_sensor_cpi_thermostat_air(&mut self) -> (res : Isolette_Data_Model::PhysicalTemp_i)
       ensures
@@ -1045,6 +1333,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_temperature_sensor_cpi_thermostat_air(&Ghost(self.temperature_sensor_cpi_thermostat_air))
+    }/// The number of messages received on temperature_sensor_cpi_thermostat_air that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_temperature_sensor_cpi_thermostat_air_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_temperature_sensor_cpi_thermostat_air_num_invalid()
     }
     pub fn get_sched_state(&mut self) -> (res : hamr::SchedState)
       ensures
@@ -1079,6 +1373,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_sched_state(&Ghost(self.sched_state))
+    }/// The number of messages received on sched_state that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_sched_state_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_sched_state_num_invalid()
     }
     pub fn get_sched_schedule(&mut self) -> (res : hamr::Schedule)
       ensures
@@ -1113,6 +1413,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_sched_schedule(&Ghost(self.sched_schedule))
+    }/// The number of messages received on sched_schedule that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_sched_schedule_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_sched_schedule_num_invalid()
     }
     pub fn get_thermostat_rt_mhs_mhs_sv_lastCmd(&mut self) -> (res : Isolette_Data_Model::On_Off)
       ensures
@@ -1147,6 +1453,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_rt_mhs_mhs_sv_lastCmd(&Ghost(self.thermostat_rt_mhs_mhs_sv_lastCmd))
+    }/// The number of messages received on thermostat_rt_mhs_mhs_sv_lastCmd that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_rt_mhs_mhs_sv_lastCmd_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_rt_mhs_mhs_sv_lastCmd_num_invalid()
     }
     pub fn get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(&mut self) -> (res : Isolette_Data_Model::Regulator_Mode)
       ensures
@@ -1181,6 +1493,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(&Ghost(self.thermostat_rt_mrm_mrm_sv_lastRegulatorMode))
+    }/// The number of messages received on thermostat_rt_mrm_mrm_sv_lastRegulatorMode that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode_num_invalid()
     }
     pub fn get_thermostat_mt_mmi_mmi_sv_lastCmd(&mut self) -> (res : Isolette_Data_Model::On_Off)
       ensures
@@ -1215,6 +1533,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_mt_mmi_mmi_sv_lastCmd(&Ghost(self.thermostat_mt_mmi_mmi_sv_lastCmd))
+    }/// The number of messages received on thermostat_mt_mmi_mmi_sv_lastCmd that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_mt_mmi_mmi_sv_lastCmd_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_mt_mmi_mmi_sv_lastCmd_num_invalid()
     }
     pub fn get_thermostat_mt_ma_ma_sv_lastCmd(&mut self) -> (res : Isolette_Data_Model::On_Off)
       ensures
@@ -1249,6 +1573,12 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_mt_ma_ma_sv_lastCmd(&Ghost(self.thermostat_mt_ma_ma_sv_lastCmd))
+    }/// The number of messages received on thermostat_mt_ma_ma_sv_lastCmd that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_mt_ma_ma_sv_lastCmd_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_mt_ma_ma_sv_lastCmd_num_invalid()
     }
     pub fn get_thermostat_mt_mmm_mmm_sv_lastMonitorMode(&mut self) -> (res : Isolette_Data_Model::Monitor_Mode)
       ensures
@@ -1283,6 +1613,12 @@ verus! {
         res == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
     {
       self.api.unverified_get_thermostat_mt_mmm_mmm_sv_lastMonitorMode(&Ghost(self.thermostat_mt_mmm_mmm_sv_lastMonitorMode))
+    }/// The number of messages received on thermostat_mt_mmm_mmm_sv_lastMonitorMode that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_thermostat_mt_mmm_mmm_sv_lastMonitorMode_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_thermostat_mt_mmm_mmm_sv_lastMonitorMode_num_invalid()
     }
   }
 

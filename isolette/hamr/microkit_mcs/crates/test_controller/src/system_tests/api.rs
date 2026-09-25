@@ -14,6 +14,9 @@ pub const TEST_CMD_VADDR: usize = 0x400_2000;
 pub const TEST_STATUS_VADDR: usize = 0x400_3000;
 pub const TEST_SCHEDULE_VADDR: usize = 0x400_4000;
 
+// Must match TEST_*_SIZE in test_scheduler.scheduler_config.h and test_scheduler.meta.py.
+pub const TEST_REGION_SIZE: usize = 0x1000;
+
 pub const MAX_SCHEDULE_SLOTS: usize = 128;
 
 pub const CMD_SSTEP: u32 = 2;
@@ -58,6 +61,11 @@ pub struct TestSchedule {
   pub timeslices: [u64; MAX_SCHEDULE_SLOTS],
   pub is_user_partition: [bool; MAX_SCHEDULE_SLOTS],
 }
+
+// Each struct fills a fixed region; one that outgrew it would spill into the next.
+const _: () = assert!(core::mem::size_of::<TestCommand>() <= TEST_REGION_SIZE);
+const _: () = assert!(core::mem::size_of::<TestStatus>() <= TEST_REGION_SIZE);
+const _: () = assert!(core::mem::size_of::<TestSchedule>() <= TEST_REGION_SIZE);
 
 static mut NEXT_SEQ: u32 = 0;
 

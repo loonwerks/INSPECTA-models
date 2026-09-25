@@ -33,6 +33,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_echo_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_echo_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_alert_result(
       &mut self,
       value: &Ghost<Option<bool>>) -> (res : Option<bool>)
@@ -43,6 +49,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_alert_result_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_alert_result_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_healthy(
       &mut self,
       value: &Ghost<bool>) -> (res : bool)
@@ -50,6 +62,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_healthy();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_healthy_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_healthy_num_invalid();
     }
   }
 
@@ -87,6 +105,12 @@ verus! {
         old(self).healthy == final(self).healthy,
     {
       self.api.unverified_get_echo(&Ghost(self.echo))
+    }/// The number of messages received on echo that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_echo_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_echo_num_invalid()
     }
     pub fn get_alert_result(&mut self) -> (res : Option<bool>)
       ensures
@@ -97,6 +121,12 @@ verus! {
         old(self).healthy == final(self).healthy,
     {
       self.api.unverified_get_alert_result(&Ghost(self.alert_result))
+    }/// The number of messages received on alert_result that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_alert_result_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_alert_result_num_invalid()
     }
     pub fn get_healthy(&mut self) -> (res : bool)
       ensures
@@ -107,6 +137,12 @@ verus! {
         res == final(self).healthy,
     {
       self.api.unverified_get_healthy(&Ghost(self.healthy))
+    }/// The number of messages received on healthy that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_healthy_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_healthy_num_invalid()
     }
   }
 

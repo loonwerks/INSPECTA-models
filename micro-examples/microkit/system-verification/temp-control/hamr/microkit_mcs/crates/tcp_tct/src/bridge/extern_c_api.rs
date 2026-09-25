@@ -12,8 +12,11 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_currentTemp(value: *mut TempControl_SysVerif::Temperature) -> bool;
+  fn get_currentTemp_num_invalid() -> u64;
   fn get_fanAck(value: *mut TempControl_SysVerif::FanAck) -> bool;
+  fn get_fanAck_num_invalid() -> u64;
   fn get_setPoint(value: *mut TempControl_SysVerif::SetPoint) -> bool;
+  fn get_setPoint_num_invalid() -> u64;
   fn put_fanCmd(value: *mut TempControl_SysVerif::FanCmd) -> bool;
   fn put_sv_currentSetPoint(value: *mut TempControl_SysVerif::SetPoint) -> bool;
   fn put_sv_currentFanState(value: *mut TempControl_SysVerif::FanCmd) -> bool;
@@ -34,6 +37,13 @@ pub fn unsafe_get_currentTemp() -> Option<TempControl_SysVerif::Temperature>
   }
 }
 
+pub fn unsafe_get_currentTemp_num_invalid() -> u64
+{
+  unsafe {
+    return get_currentTemp_num_invalid();
+  }
+}
+
 pub fn unsafe_get_fanAck() -> Option<TempControl_SysVerif::FanAck>
 {
   unsafe {
@@ -46,6 +56,13 @@ pub fn unsafe_get_fanAck() -> Option<TempControl_SysVerif::FanAck>
   }
 }
 
+pub fn unsafe_get_fanAck_num_invalid() -> u64
+{
+  unsafe {
+    return get_fanAck_num_invalid();
+  }
+}
+
 pub fn unsafe_get_setPoint() -> Option<TempControl_SysVerif::SetPoint>
 {
   unsafe {
@@ -55,6 +72,13 @@ pub fn unsafe_get_setPoint() -> Option<TempControl_SysVerif::SetPoint>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_setPoint_num_invalid() -> u64
+{
+  unsafe {
+    return get_setPoint_num_invalid();
   }
 }
 
@@ -150,6 +174,12 @@ pub fn get_currentTemp(value: *mut TempControl_SysVerif::Temperature) -> bool
 }
 
 #[cfg(test)]
+pub fn get_currentTemp_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_fanAck(value: *mut TempControl_SysVerif::FanAck) -> bool
 {
   unsafe {
@@ -164,6 +194,12 @@ pub fn get_fanAck(value: *mut TempControl_SysVerif::FanAck) -> bool
 }
 
 #[cfg(test)]
+pub fn get_fanAck_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_setPoint(value: *mut TempControl_SysVerif::SetPoint) -> bool
 {
   unsafe {
@@ -175,6 +211,12 @@ pub fn get_setPoint(value: *mut TempControl_SysVerif::SetPoint) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_setPoint_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]

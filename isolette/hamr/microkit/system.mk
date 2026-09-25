@@ -33,6 +33,10 @@ UTIL_OBJS = printf.o util.o
 TYPES_DIR = $(TOP_DIR)/types
 TYPE_OBJS := $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Status_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_On_Off_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Regulator_Mode_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Monitor_Mode_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_PhysicalTemp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Environment_Heat_1.o
 
+# The queue objects as an archive: each protection domain's link pulls in only the
+# queues it uses, not every queue in the system
+TYPES_LIB := libhamr_types.a
+
 # exporting TOP_TYPES_INCLUDE in case other makefiles need it
 export TOP_TYPES_INCLUDE = -I$(TYPES_DIR)/include
 
@@ -47,6 +51,10 @@ ${CHECK_FLAGS_BOARD_MD5}:
 
 %.o: ${TOP_DIR}/util/src/%.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_DIR)/util/include
+
+$(TYPES_LIB): $(TYPE_OBJS)
+	rm -f $@
+	$(AR) rcs $@ $^
 
 $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o: $(TOP_DIR)/types/src/sb_queue_Isolette_Data_Model_Temp_i_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
@@ -222,76 +230,76 @@ pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 thermostat_rt_mri_mri_MON.elf: thermostat_rt_mri_mri_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_rt_mri_mri.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_mri_mri_rust thermostat_rt_mri_mri.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_mri_mri/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_rt_mri_mri -o $@
+thermostat_rt_mri_mri.elf: $(UTIL_OBJS) thermostat_rt_mri_mri_rust thermostat_rt_mri_mri.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_mri_mri/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -lthermostat_rt_mri_mri -o $@
 
 thermostat_rt_mhs_mhs_MON.elf: thermostat_rt_mhs_mhs_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_rt_mhs_mhs.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_mhs_mhs_rust thermostat_rt_mhs_mhs.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_mhs_mhs/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_rt_mhs_mhs -o $@
+thermostat_rt_mhs_mhs.elf: $(UTIL_OBJS) thermostat_rt_mhs_mhs_rust thermostat_rt_mhs_mhs.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_mhs_mhs/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -lthermostat_rt_mhs_mhs -o $@
 
 thermostat_rt_mrm_mrm_MON.elf: thermostat_rt_mrm_mrm_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_rt_mrm_mrm.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_mrm_mrm_rust thermostat_rt_mrm_mrm.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_mrm_mrm/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_rt_mrm_mrm -o $@
+thermostat_rt_mrm_mrm.elf: $(UTIL_OBJS) thermostat_rt_mrm_mrm_rust thermostat_rt_mrm_mrm.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_mrm_mrm/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -lthermostat_rt_mrm_mrm -o $@
 
 thermostat_rt_drf_drf_MON.elf: thermostat_rt_drf_drf_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_rt_drf_drf.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_drf_drf_rust thermostat_rt_drf_drf.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_drf_drf/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_rt_drf_drf -o $@
+thermostat_rt_drf_drf.elf: $(UTIL_OBJS) thermostat_rt_drf_drf_rust thermostat_rt_drf_drf.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_drf_drf/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -lthermostat_rt_drf_drf -o $@
 
 thermostat_mt_mmi_mmi_MON.elf: thermostat_mt_mmi_mmi_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_mt_mmi_mmi.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_mmi_mmi_rust thermostat_mt_mmi_mmi.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_mmi_mmi/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_mt_mmi_mmi -o $@
+thermostat_mt_mmi_mmi.elf: $(UTIL_OBJS) thermostat_mt_mmi_mmi_rust thermostat_mt_mmi_mmi.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_mmi_mmi/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -lthermostat_mt_mmi_mmi -o $@
 
 thermostat_mt_ma_ma_MON.elf: thermostat_mt_ma_ma_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_mt_ma_ma.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_ma_ma_rust thermostat_mt_ma_ma.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_ma_ma/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_mt_ma_ma -o $@
+thermostat_mt_ma_ma.elf: $(UTIL_OBJS) thermostat_mt_ma_ma_rust thermostat_mt_ma_ma.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_ma_ma/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -lthermostat_mt_ma_ma -o $@
 
 thermostat_mt_mmm_mmm_MON.elf: thermostat_mt_mmm_mmm_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_mt_mmm_mmm.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_mmm_mmm_rust thermostat_mt_mmm_mmm.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_mmm_mmm/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_mt_mmm_mmm -o $@
+thermostat_mt_mmm_mmm.elf: $(UTIL_OBJS) thermostat_mt_mmm_mmm_rust thermostat_mt_mmm_mmm.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_mmm_mmm/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -lthermostat_mt_mmm_mmm -o $@
 
 thermostat_mt_dmf_dmf_MON.elf: thermostat_mt_dmf_dmf_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_mt_dmf_dmf.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_dmf_dmf_rust thermostat_mt_dmf_dmf.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_dmf_dmf/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_mt_dmf_dmf -o $@
+thermostat_mt_dmf_dmf.elf: $(UTIL_OBJS) thermostat_mt_dmf_dmf_rust thermostat_mt_dmf_dmf.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_dmf_dmf/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -lthermostat_mt_dmf_dmf -o $@
 
 operator_interface_oip_oit_MON.elf: operator_interface_oip_oit_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-operator_interface_oip_oit.elf: $(UTIL_OBJS) $(TYPE_OBJS) operator_interface_oip_oit_rust operator_interface_oip_oit.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/operator_interface_oip_oit/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -loperator_interface_oip_oit -o $@
+operator_interface_oip_oit.elf: $(UTIL_OBJS) operator_interface_oip_oit_rust operator_interface_oip_oit.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/operator_interface_oip_oit/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -loperator_interface_oip_oit -o $@
 
 temperature_sensor_cpi_thermostat_MON.elf: temperature_sensor_cpi_thermostat_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-temperature_sensor_cpi_thermostat.elf: $(UTIL_OBJS) $(TYPE_OBJS) temperature_sensor_cpi_thermostat_user.o temperature_sensor_cpi_thermostat.o
+temperature_sensor_cpi_thermostat.elf: $(UTIL_OBJS) temperature_sensor_cpi_thermostat_user.o temperature_sensor_cpi_thermostat.o $(TYPES_LIB)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 heat_source_cpi_heat_controller_MON.elf: heat_source_cpi_heat_controller_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-heat_source_cpi_heat_controller.elf: $(UTIL_OBJS) $(TYPE_OBJS) heat_source_cpi_heat_controller_user.o heat_source_cpi_heat_controller.o
+heat_source_cpi_heat_controller.elf: $(UTIL_OBJS) heat_source_cpi_heat_controller_user.o heat_source_cpi_heat_controller.o $(TYPES_LIB)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 domain_monitor_process_domain_monitor_thread_MON.elf: domain_monitor_process_domain_monitor_thread_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -ldomain_monitor -o $@
+domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -ldomain_monitor -o $@
 
-pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
+pacer.elf: $(UTIL_OBJS) pacer.o $(TYPES_LIB)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 $(IMAGE_FILE): $(IMAGES) $(TOP_DIR)/$(MSD)

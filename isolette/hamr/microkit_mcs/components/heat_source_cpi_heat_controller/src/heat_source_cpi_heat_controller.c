@@ -25,6 +25,10 @@ bool get_heat_control(Isolette_Data_Model_On_Off *data) {
   return isFresh;
 }
 
+uintmax_t get_heat_control_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_On_Off_1_numInvalid((sb_queue_Isolette_Data_Model_On_Off_1_Recv_t *) &heat_control_recv_queue);
+}
+
 bool put_heat_out(const Isolette_Environment_Heat *data) {
   sb_queue_Isolette_Environment_Heat_1_enqueue((sb_queue_Isolette_Environment_Heat_1_t *) heat_out_queue_1, (Isolette_Environment_Heat *) data);
 

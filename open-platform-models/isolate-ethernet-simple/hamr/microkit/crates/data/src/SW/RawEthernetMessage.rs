@@ -6,9 +6,12 @@ use super::*;
 
 verus! {
 
-  pub const SW_RawEthernetMessage_BYTE_SIZE: usize = 1600;
   pub const SW_RawEthernetMessage_DIM_0: usize = 1600;
 
   pub type RawEthernetMessage = [u8; SW_RawEthernetMessage_DIM_0];
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<RawEthernetMessage>() == 1600);
+const _: () = assert!(core::mem::align_of::<RawEthernetMessage>() == 1);

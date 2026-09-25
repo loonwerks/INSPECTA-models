@@ -20,3 +20,8 @@ verus! {
   }
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<Temp_i>() == 4);
+const _: () = assert!(core::mem::align_of::<Temp_i>() == 4);
+const _: () = assert!(core::mem::offset_of!(Temp_i, degrees) == 0);

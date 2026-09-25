@@ -34,6 +34,10 @@ bool get_display_temperature(Isolette_Data_Model_Temp_i *data) {
   return isFresh;
 }
 
+uintmax_t get_display_temperature_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Temp_i_1_numInvalid((sb_queue_Isolette_Data_Model_Temp_i_1_Recv_t *) &display_temperature_recv_queue);
+}
+
 Isolette_Data_Model_Status last_regulator_status_payload;
 
 bool get_regulator_status(Isolette_Data_Model_Status *data) {
@@ -45,6 +49,10 @@ bool get_regulator_status(Isolette_Data_Model_Status *data) {
   }
   *data = last_regulator_status_payload;
   return isFresh;
+}
+
+uintmax_t get_regulator_status_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Status_1_numInvalid((sb_queue_Isolette_Data_Model_Status_1_Recv_t *) &regulator_status_recv_queue);
 }
 
 Isolette_Data_Model_Status last_monitor_status_payload;
@@ -60,6 +68,10 @@ bool get_monitor_status(Isolette_Data_Model_Status *data) {
   return isFresh;
 }
 
+uintmax_t get_monitor_status_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Status_1_numInvalid((sb_queue_Isolette_Data_Model_Status_1_Recv_t *) &monitor_status_recv_queue);
+}
+
 Isolette_Data_Model_On_Off last_alarm_control_payload;
 
 bool get_alarm_control(Isolette_Data_Model_On_Off *data) {
@@ -71,6 +83,10 @@ bool get_alarm_control(Isolette_Data_Model_On_Off *data) {
   }
   *data = last_alarm_control_payload;
   return isFresh;
+}
+
+uintmax_t get_alarm_control_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_On_Off_1_numInvalid((sb_queue_Isolette_Data_Model_On_Off_1_Recv_t *) &alarm_control_recv_queue);
 }
 
 bool put_lower_desired_tempWstatus(const Isolette_Data_Model_TempWstatus_i *data) {

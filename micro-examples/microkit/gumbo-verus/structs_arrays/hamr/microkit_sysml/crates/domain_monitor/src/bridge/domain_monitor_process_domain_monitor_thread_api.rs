@@ -23,6 +23,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_producer_producer_p_myArrayInt32_DataPort_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_producer_producer_p_myArrayInt32_DataPort_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_producer_producer_p_myArrayStruct_DataPort(
       &mut self,
       value: &Ghost<Gubmo_Structs_Arrays::MyArrayStruct>) -> (res : Gubmo_Structs_Arrays::MyArrayStruct)
@@ -30,6 +36,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_producer_producer_p_myArrayStruct_DataPort();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_producer_producer_p_myArrayStruct_DataPort_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_producer_producer_p_myArrayStruct_DataPort_num_invalid();
     }
 
     #[verifier::external_body]
@@ -43,6 +55,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_producer_producer_p_myStructArray_DataPort_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_producer_producer_p_myStructArray_DataPort_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_producer_producer_p_myArrayInt32_EventDataPort(
       &mut self,
       value: &Ghost<Option<Gubmo_Structs_Arrays::MyArrayInt32>>) -> (res : Option<Gubmo_Structs_Arrays::MyArrayInt32>)
@@ -50,6 +68,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_producer_producer_p_myArrayInt32_EventDataPort();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_producer_producer_p_myArrayInt32_EventDataPort_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_producer_producer_p_myArrayInt32_EventDataPort_num_invalid();
     }
 
     #[verifier::external_body]
@@ -63,6 +87,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_producer_producer_p_myArrayStruct_EventDataPort_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_producer_producer_p_myArrayStruct_EventDataPort_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_producer_producer_p_myStructArray_EventDataPort(
       &mut self,
       value: &Ghost<Option<Gubmo_Structs_Arrays::MyStructArray_i>>) -> (res : Option<Gubmo_Structs_Arrays::MyStructArray_i>)
@@ -70,6 +100,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_producer_producer_p_myStructArray_EventDataPort();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_producer_producer_p_myStructArray_EventDataPort_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_producer_producer_p_myStructArray_EventDataPort_num_invalid();
     }
   }
 
@@ -101,6 +137,12 @@ verus! {
         old(self).producer_producer_p_myStructArray_EventDataPort == final(self).producer_producer_p_myStructArray_EventDataPort,
     {
       self.api.unverified_get_producer_producer_p_myArrayInt32_DataPort(&Ghost(self.producer_producer_p_myArrayInt32_DataPort))
+    }/// The number of messages received on producer_producer_p_myArrayInt32_DataPort that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_producer_producer_p_myArrayInt32_DataPort_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_producer_producer_p_myArrayInt32_DataPort_num_invalid()
     }
     pub fn get_producer_producer_p_myArrayStruct_DataPort(&mut self) -> (res : Gubmo_Structs_Arrays::MyArrayStruct)
       ensures
@@ -113,6 +155,12 @@ verus! {
         old(self).producer_producer_p_myStructArray_EventDataPort == final(self).producer_producer_p_myStructArray_EventDataPort,
     {
       self.api.unverified_get_producer_producer_p_myArrayStruct_DataPort(&Ghost(self.producer_producer_p_myArrayStruct_DataPort))
+    }/// The number of messages received on producer_producer_p_myArrayStruct_DataPort that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_producer_producer_p_myArrayStruct_DataPort_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_producer_producer_p_myArrayStruct_DataPort_num_invalid()
     }
     pub fn get_producer_producer_p_myStructArray_DataPort(&mut self) -> (res : Gubmo_Structs_Arrays::MyStructArray_i)
       ensures
@@ -125,6 +173,12 @@ verus! {
         old(self).producer_producer_p_myStructArray_EventDataPort == final(self).producer_producer_p_myStructArray_EventDataPort,
     {
       self.api.unverified_get_producer_producer_p_myStructArray_DataPort(&Ghost(self.producer_producer_p_myStructArray_DataPort))
+    }/// The number of messages received on producer_producer_p_myStructArray_DataPort that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_producer_producer_p_myStructArray_DataPort_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_producer_producer_p_myStructArray_DataPort_num_invalid()
     }
     pub fn get_producer_producer_p_myArrayInt32_EventDataPort(&mut self) -> (res : Option<Gubmo_Structs_Arrays::MyArrayInt32>)
       ensures
@@ -137,6 +191,12 @@ verus! {
         old(self).producer_producer_p_myStructArray_EventDataPort == final(self).producer_producer_p_myStructArray_EventDataPort,
     {
       self.api.unverified_get_producer_producer_p_myArrayInt32_EventDataPort(&Ghost(self.producer_producer_p_myArrayInt32_EventDataPort))
+    }/// The number of messages received on producer_producer_p_myArrayInt32_EventDataPort that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_producer_producer_p_myArrayInt32_EventDataPort_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_producer_producer_p_myArrayInt32_EventDataPort_num_invalid()
     }
     pub fn get_producer_producer_p_myArrayStruct_EventDataPort(&mut self) -> (res : Option<Gubmo_Structs_Arrays::MyArrayStruct>)
       ensures
@@ -149,6 +209,12 @@ verus! {
         old(self).producer_producer_p_myStructArray_EventDataPort == final(self).producer_producer_p_myStructArray_EventDataPort,
     {
       self.api.unverified_get_producer_producer_p_myArrayStruct_EventDataPort(&Ghost(self.producer_producer_p_myArrayStruct_EventDataPort))
+    }/// The number of messages received on producer_producer_p_myArrayStruct_EventDataPort that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_producer_producer_p_myArrayStruct_EventDataPort_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_producer_producer_p_myArrayStruct_EventDataPort_num_invalid()
     }
     pub fn get_producer_producer_p_myStructArray_EventDataPort(&mut self) -> (res : Option<Gubmo_Structs_Arrays::MyStructArray_i>)
       ensures
@@ -161,6 +227,12 @@ verus! {
         res == final(self).producer_producer_p_myStructArray_EventDataPort,
     {
       self.api.unverified_get_producer_producer_p_myStructArray_EventDataPort(&Ghost(self.producer_producer_p_myStructArray_EventDataPort))
+    }/// The number of messages received on producer_producer_p_myStructArray_EventDataPort that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_producer_producer_p_myStructArray_EventDataPort_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_producer_producer_p_myStructArray_EventDataPort_num_invalid()
     }
   }
 

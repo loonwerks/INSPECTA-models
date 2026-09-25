@@ -21,3 +21,9 @@ verus! {
   }
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<Temperature>() == 8);
+const _: () = assert!(core::mem::align_of::<Temperature>() == 4);
+const _: () = assert!(core::mem::offset_of!(Temperature, degrees) == 0);
+const _: () = assert!(core::mem::offset_of!(Temperature, unit) == 4);

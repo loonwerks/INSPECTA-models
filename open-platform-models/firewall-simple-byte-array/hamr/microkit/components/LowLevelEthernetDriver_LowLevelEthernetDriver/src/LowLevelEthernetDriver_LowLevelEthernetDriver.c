@@ -25,6 +25,10 @@ bool get_EthernetFramesTx(SW_RawEthernetMessage *data) {
   return get_EthernetFramesTx_poll (&numDropped, data);
 }
 
+uintmax_t get_EthernetFramesTx_num_invalid(void) {
+  return sb_queue_SW_RawEthernetMessage_1_numInvalid((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &EthernetFramesTx_recv_queue);
+}
+
 bool put_EthernetFramesRx(const SW_RawEthernetMessage *data) {
   sb_queue_SW_RawEthernetMessage_1_enqueue((sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesRx_queue_1, (SW_RawEthernetMessage *) data);
 

@@ -59,6 +59,7 @@ void sb_queue_data_1_prod_2_cons_array_ArrayOfStruct_1_Recv_init(
 
   recvQueue->numRecv = 0;
   recvQueue->queue = queue;
+  recvQueue->numInvalid = 0;
 }
 
 bool sb_queue_data_1_prod_2_cons_array_ArrayOfStruct_1_dequeue(

@@ -6,9 +6,12 @@ use super::*;
 
 verus! {
 
-  pub const hamr_ScheduleTimeslices_BYTE_SIZE: usize = 1024;
   pub const hamr_ScheduleTimeslices_DIM_0: usize = 128;
 
   pub type ScheduleTimeslices = [u64; hamr_ScheduleTimeslices_DIM_0];
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<ScheduleTimeslices>() == 1024);
+const _: () = assert!(core::mem::align_of::<ScheduleTimeslices>() == 8);

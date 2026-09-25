@@ -28,6 +28,10 @@ bool get_producer_producer_myStructArray(Gumbo_Structs_Arrays_MyStructArray_i *d
   return get_producer_producer_myStructArray_poll (&numDropped, data);
 }
 
+uintmax_t get_producer_producer_myStructArray_num_invalid(void) {
+  return sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_numInvalid((sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_Recv_t *) &producer_producer_myStructArray_recv_queue);
+}
+
 bool producer_producer_MyArrayStruct_is_empty(void) {
   return sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_is_empty(&producer_producer_MyArrayStruct_recv_queue);
 }
@@ -41,6 +45,10 @@ bool get_producer_producer_MyArrayStruct(Gumbo_Structs_Arrays_MyArrayStruct *dat
   return get_producer_producer_MyArrayStruct_poll (&numDropped, data);
 }
 
+uintmax_t get_producer_producer_MyArrayStruct_num_invalid(void) {
+  return sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_numInvalid((sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_Recv_t *) &producer_producer_MyArrayStruct_recv_queue);
+}
+
 bool consumer_consumer_MyArrayInt32_is_empty(void) {
   return sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_is_empty(&consumer_consumer_MyArrayInt32_recv_queue);
 }
@@ -52,6 +60,10 @@ bool get_consumer_consumer_MyArrayInt32_poll(sb_event_counter_t *numDropped, Gum
 bool get_consumer_consumer_MyArrayInt32(Gumbo_Structs_Arrays_MyArrayInt32 *data) {
   sb_event_counter_t numDropped;
   return get_consumer_consumer_MyArrayInt32_poll (&numDropped, data);
+}
+
+uintmax_t get_consumer_consumer_MyArrayInt32_num_invalid(void) {
+  return sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_numInvalid((sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_Recv_t *) &consumer_consumer_MyArrayInt32_recv_queue);
 }
 
 void init(void) {

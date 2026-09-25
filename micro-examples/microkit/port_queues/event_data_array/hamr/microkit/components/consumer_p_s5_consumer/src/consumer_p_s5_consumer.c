@@ -24,6 +24,10 @@ bool get_read_port(event_data_array_port_queues_ArrayOfStruct *data) {
   return get_read_port_poll (&numDropped, data);
 }
 
+uintmax_t get_read_port_num_invalid(void) {
+  return sb_queue_event_data_array_port_queues_ArrayOfStruct_5_numInvalid((sb_queue_event_data_array_port_queues_ArrayOfStruct_5_Recv_t *) &read_port_recv_queue);
+}
+
 void init(void) {
   sb_queue_event_data_array_port_queues_ArrayOfStruct_5_Recv_init(&read_port_recv_queue, (sb_queue_event_data_array_port_queues_ArrayOfStruct_5_t *) read_port_queue_5);
 

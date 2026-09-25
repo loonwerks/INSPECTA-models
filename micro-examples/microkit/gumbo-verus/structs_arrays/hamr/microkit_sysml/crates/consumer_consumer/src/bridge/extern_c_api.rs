@@ -12,11 +12,17 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_c_myArrayInt32_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayInt32) -> bool;
+  fn get_c_myArrayInt32_DataPort_num_invalid() -> u64;
   fn get_c_myArrayStruct_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayStruct) -> bool;
+  fn get_c_myArrayStruct_DataPort_num_invalid() -> u64;
   fn get_c_myStructArray_DataPort(value: *mut Gubmo_Structs_Arrays::MyStructArray_i) -> bool;
+  fn get_c_myStructArray_DataPort_num_invalid() -> u64;
   fn get_c_myArrayInt32_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyArrayInt32) -> bool;
+  fn get_c_myArrayInt32_EventDataPort_num_invalid() -> u64;
   fn get_c_myArrayStruct_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyArrayStruct) -> bool;
+  fn get_c_myArrayStruct_EventDataPort_num_invalid() -> u64;
   fn get_c_myStructArray_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyStructArray_i) -> bool;
+  fn get_c_myStructArray_EventDataPort_num_invalid() -> u64;
 }
 
 pub fn unsafe_get_c_myArrayInt32_DataPort() -> Gubmo_Structs_Arrays::MyArrayInt32
@@ -25,6 +31,13 @@ pub fn unsafe_get_c_myArrayInt32_DataPort() -> Gubmo_Structs_Arrays::MyArrayInt3
     let value: *mut Gubmo_Structs_Arrays::MyArrayInt32 = &mut [0; Gubmo_Structs_Arrays::Gubmo_Structs_Arrays_MyArrayInt32_DIM_0];
     get_c_myArrayInt32_DataPort(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_c_myArrayInt32_DataPort_num_invalid() -> u64
+{
+  unsafe {
+    return get_c_myArrayInt32_DataPort_num_invalid();
   }
 }
 
@@ -37,12 +50,26 @@ pub fn unsafe_get_c_myArrayStruct_DataPort() -> Gubmo_Structs_Arrays::MyArrayStr
   }
 }
 
+pub fn unsafe_get_c_myArrayStruct_DataPort_num_invalid() -> u64
+{
+  unsafe {
+    return get_c_myArrayStruct_DataPort_num_invalid();
+  }
+}
+
 pub fn unsafe_get_c_myStructArray_DataPort() -> Gubmo_Structs_Arrays::MyStructArray_i
 {
   unsafe {
     let value: *mut Gubmo_Structs_Arrays::MyStructArray_i = &mut Gubmo_Structs_Arrays::MyStructArray_i::default();
     get_c_myStructArray_DataPort(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_c_myStructArray_DataPort_num_invalid() -> u64
+{
+  unsafe {
+    return get_c_myStructArray_DataPort_num_invalid();
   }
 }
 
@@ -58,6 +85,13 @@ pub fn unsafe_get_c_myArrayInt32_EventDataPort() -> Option<Gubmo_Structs_Arrays:
   }
 }
 
+pub fn unsafe_get_c_myArrayInt32_EventDataPort_num_invalid() -> u64
+{
+  unsafe {
+    return get_c_myArrayInt32_EventDataPort_num_invalid();
+  }
+}
+
 pub fn unsafe_get_c_myArrayStruct_EventDataPort() -> Option<Gubmo_Structs_Arrays::MyArrayStruct>
 {
   unsafe {
@@ -70,6 +104,13 @@ pub fn unsafe_get_c_myArrayStruct_EventDataPort() -> Option<Gubmo_Structs_Arrays
   }
 }
 
+pub fn unsafe_get_c_myArrayStruct_EventDataPort_num_invalid() -> u64
+{
+  unsafe {
+    return get_c_myArrayStruct_EventDataPort_num_invalid();
+  }
+}
+
 pub fn unsafe_get_c_myStructArray_EventDataPort() -> Option<Gubmo_Structs_Arrays::MyStructArray_i>
 {
   unsafe {
@@ -79,6 +120,13 @@ pub fn unsafe_get_c_myStructArray_EventDataPort() -> Option<Gubmo_Structs_Arrays
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_c_myStructArray_EventDataPort_num_invalid() -> u64
+{
+  unsafe {
+    return get_c_myStructArray_EventDataPort_num_invalid();
   }
 }
 
@@ -122,6 +170,12 @@ pub fn get_c_myArrayInt32_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayInt3
 }
 
 #[cfg(test)]
+pub fn get_c_myArrayInt32_DataPort_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_c_myArrayStruct_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayStruct) -> bool
 {
   unsafe {
@@ -132,6 +186,12 @@ pub fn get_c_myArrayStruct_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayStr
 }
 
 #[cfg(test)]
+pub fn get_c_myArrayStruct_DataPort_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_c_myStructArray_DataPort(value: *mut Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
   unsafe {
@@ -139,6 +199,12 @@ pub fn get_c_myStructArray_DataPort(value: *mut Gubmo_Structs_Arrays::MyStructAr
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_c_myStructArray_DataPort_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -156,6 +222,12 @@ pub fn get_c_myArrayInt32_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyArra
 }
 
 #[cfg(test)]
+pub fn get_c_myArrayInt32_EventDataPort_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_c_myArrayStruct_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyArrayStruct) -> bool
 {
   unsafe {
@@ -170,6 +242,12 @@ pub fn get_c_myArrayStruct_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyArr
 }
 
 #[cfg(test)]
+pub fn get_c_myArrayStruct_EventDataPort_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_c_myStructArray_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
   unsafe {
@@ -181,4 +259,10 @@ pub fn get_c_myStructArray_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyStr
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_c_myStructArray_EventDataPort_num_invalid() -> u64
+{
+  return 0;
 }

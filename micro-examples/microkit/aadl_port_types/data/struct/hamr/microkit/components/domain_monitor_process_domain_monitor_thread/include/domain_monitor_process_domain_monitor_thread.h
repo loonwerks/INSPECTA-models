@@ -25,3 +25,4 @@ void *memset(void *dest, int c, size_t n);
 
 
 bool get_producer_p_p_producer_write_port(data_1_prod_2_cons_struct_struct_i *data);
+uintmax_t get_producer_p_p_producer_write_port_num_invalid(void);

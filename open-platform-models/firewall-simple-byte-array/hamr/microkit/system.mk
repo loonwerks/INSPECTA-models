@@ -33,6 +33,10 @@ UTIL_OBJS = printf.o util.o
 TYPES_DIR = $(TOP_DIR)/types
 TYPE_OBJS := $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o
 
+# The queue objects as an archive: each protection domain's link pulls in only the
+# queues it uses, not every queue in the system
+TYPES_LIB := libhamr_types.a
+
 # exporting TOP_TYPES_INCLUDE in case other makefiles need it
 export TOP_TYPES_INCLUDE = -I$(TYPES_DIR)/include
 
@@ -47,6 +51,10 @@ ${CHECK_FLAGS_BOARD_MD5}:
 
 %.o: ${TOP_DIR}/util/src/%.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_DIR)/util/include
+
+$(TYPES_LIB): $(TYPE_OBJS)
+	rm -f $@
+	$(AR) rcs $@ $^
 
 $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o: $(TOP_DIR)/types/src/sb_queue_SW_RawEthernetMessage_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
@@ -102,28 +110,28 @@ pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 ArduPilot_ArduPilot_MON.elf: ArduPilot_ArduPilot_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-ArduPilot_ArduPilot.elf: $(UTIL_OBJS) $(TYPE_OBJS) ArduPilot_ArduPilot_rust ArduPilot_ArduPilot.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/ArduPilot_ArduPilot/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lArduPilot_ArduPilot -o $@
+ArduPilot_ArduPilot.elf: $(UTIL_OBJS) ArduPilot_ArduPilot_rust ArduPilot_ArduPilot.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/ArduPilot_ArduPilot/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -lArduPilot_ArduPilot -o $@
 
 Firewall_Firewall_MON.elf: Firewall_Firewall_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-Firewall_Firewall.elf: $(UTIL_OBJS) $(TYPE_OBJS) Firewall_Firewall_rust Firewall_Firewall.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/Firewall_Firewall/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lFirewall_Firewall -o $@
+Firewall_Firewall.elf: $(UTIL_OBJS) Firewall_Firewall_rust Firewall_Firewall.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/Firewall_Firewall/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -lFirewall_Firewall -o $@
 
 LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf: LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-LowLevelEthernetDriver_LowLevelEthernetDriver.elf: $(UTIL_OBJS) $(TYPE_OBJS) LowLevelEthernetDriver_LowLevelEthernetDriver_rust LowLevelEthernetDriver_LowLevelEthernetDriver.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lLowLevelEthernetDriver_LowLevelEthernetDriver -o $@
+LowLevelEthernetDriver_LowLevelEthernetDriver.elf: $(UTIL_OBJS) LowLevelEthernetDriver_LowLevelEthernetDriver_rust LowLevelEthernetDriver_LowLevelEthernetDriver.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -lLowLevelEthernetDriver_LowLevelEthernetDriver -o $@
 
 domain_monitor_process_domain_monitor_thread_MON.elf: domain_monitor_process_domain_monitor_thread_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -ldomain_monitor -o $@
+domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -ldomain_monitor -o $@
 
-pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
+pacer.elf: $(UTIL_OBJS) pacer.o $(TYPES_LIB)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 $(IMAGE_FILE): $(IMAGES) $(TOP_DIR)/$(MSD)

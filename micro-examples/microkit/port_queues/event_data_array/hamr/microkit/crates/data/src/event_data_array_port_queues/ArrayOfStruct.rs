@@ -6,9 +6,12 @@ use super::*;
 
 verus! {
 
-  pub const event_data_array_port_queues_ArrayOfStruct_BYTE_SIZE: usize = 80;
   pub const event_data_array_port_queues_ArrayOfStruct_DIM_0: usize = 10;
 
   pub type ArrayOfStruct = [struct_i; event_data_array_port_queues_ArrayOfStruct_DIM_0];
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<ArrayOfStruct>() == 80);
+const _: () = assert!(core::mem::align_of::<ArrayOfStruct>() == 4);

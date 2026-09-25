@@ -12,17 +12,29 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_level(value: *mut i32) -> bool;
+  fn get_level_num_invalid() -> u64;
   fn get_boolean_value(value: *mut bool) -> bool;
+  fn get_boolean_value_num_invalid() -> u64;
   fn get_character_value(value: *mut u8) -> bool;
+  fn get_character_value_num_invalid() -> u64;
   fn get_signed_8_value(value: *mut i8) -> bool;
+  fn get_signed_8_value_num_invalid() -> u64;
   fn get_signed_16_value(value: *mut i16) -> bool;
+  fn get_signed_16_value_num_invalid() -> u64;
   fn get_unsigned_8_value(value: *mut u8) -> bool;
+  fn get_unsigned_8_value_num_invalid() -> u64;
   fn get_unsigned_16_value(value: *mut u16) -> bool;
+  fn get_unsigned_16_value_num_invalid() -> u64;
   fn get_sample(value: *mut i32) -> bool;
+  fn get_sample_num_invalid() -> u64;
   fn get_flag(value: *mut bool) -> bool;
+  fn get_flag_num_invalid() -> u64;
   fn get_operating_state(value: *mut Exhaustive_Monitor::OperatingState) -> bool;
+  fn get_operating_state_num_invalid() -> u64;
   fn get_samples(value: *mut Exhaustive_Monitor::Samples) -> bool;
+  fn get_samples_num_invalid() -> u64;
   fn get_telemetry(value: *mut Exhaustive_Monitor::Telemetry_i) -> bool;
+  fn get_telemetry_num_invalid() -> u64;
   fn get_pulse() -> bool;
   fn put_healthy(value: *mut bool) -> bool;
   fn put_echo(value: *mut i32) -> bool;
@@ -56,12 +68,26 @@ pub fn unsafe_get_level() -> i32
   }
 }
 
+pub fn unsafe_get_level_num_invalid() -> u64
+{
+  unsafe {
+    return get_level_num_invalid();
+  }
+}
+
 pub fn unsafe_get_boolean_value() -> bool
 {
   unsafe {
     let value: *mut bool = &mut false;
     get_boolean_value(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_boolean_value_num_invalid() -> u64
+{
+  unsafe {
+    return get_boolean_value_num_invalid();
   }
 }
 
@@ -74,12 +100,26 @@ pub fn unsafe_get_character_value() -> u8
   }
 }
 
+pub fn unsafe_get_character_value_num_invalid() -> u64
+{
+  unsafe {
+    return get_character_value_num_invalid();
+  }
+}
+
 pub fn unsafe_get_signed_8_value() -> i8
 {
   unsafe {
     let value: *mut i8 = &mut 0;
     get_signed_8_value(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_signed_8_value_num_invalid() -> u64
+{
+  unsafe {
+    return get_signed_8_value_num_invalid();
   }
 }
 
@@ -92,6 +132,13 @@ pub fn unsafe_get_signed_16_value() -> i16
   }
 }
 
+pub fn unsafe_get_signed_16_value_num_invalid() -> u64
+{
+  unsafe {
+    return get_signed_16_value_num_invalid();
+  }
+}
+
 pub fn unsafe_get_unsigned_8_value() -> u8
 {
   unsafe {
@@ -101,12 +148,26 @@ pub fn unsafe_get_unsigned_8_value() -> u8
   }
 }
 
+pub fn unsafe_get_unsigned_8_value_num_invalid() -> u64
+{
+  unsafe {
+    return get_unsigned_8_value_num_invalid();
+  }
+}
+
 pub fn unsafe_get_unsigned_16_value() -> u16
 {
   unsafe {
     let value: *mut u16 = &mut 0;
     get_unsigned_16_value(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_unsigned_16_value_num_invalid() -> u64
+{
+  unsafe {
+    return get_unsigned_16_value_num_invalid();
   }
 }
 
@@ -122,6 +183,13 @@ pub fn unsafe_get_sample() -> Option<i32>
   }
 }
 
+pub fn unsafe_get_sample_num_invalid() -> u64
+{
+  unsafe {
+    return get_sample_num_invalid();
+  }
+}
+
 pub fn unsafe_get_flag() -> Option<bool>
 {
   unsafe {
@@ -131,6 +199,13 @@ pub fn unsafe_get_flag() -> Option<bool>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_flag_num_invalid() -> u64
+{
+  unsafe {
+    return get_flag_num_invalid();
   }
 }
 
@@ -146,6 +221,13 @@ pub fn unsafe_get_operating_state() -> Option<Exhaustive_Monitor::OperatingState
   }
 }
 
+pub fn unsafe_get_operating_state_num_invalid() -> u64
+{
+  unsafe {
+    return get_operating_state_num_invalid();
+  }
+}
+
 pub fn unsafe_get_samples() -> Option<Exhaustive_Monitor::Samples>
 {
   unsafe {
@@ -158,6 +240,13 @@ pub fn unsafe_get_samples() -> Option<Exhaustive_Monitor::Samples>
   }
 }
 
+pub fn unsafe_get_samples_num_invalid() -> u64
+{
+  unsafe {
+    return get_samples_num_invalid();
+  }
+}
+
 pub fn unsafe_get_telemetry() -> Option<Exhaustive_Monitor::Telemetry_i>
 {
   unsafe {
@@ -167,6 +256,13 @@ pub fn unsafe_get_telemetry() -> Option<Exhaustive_Monitor::Telemetry_i>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_telemetry_num_invalid() -> u64
+{
+  unsafe {
+    return get_telemetry_num_invalid();
   }
 }
 
@@ -437,6 +533,12 @@ pub fn get_level(value: *mut i32) -> bool
 }
 
 #[cfg(test)]
+pub fn get_level_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_boolean_value(value: *mut bool) -> bool
 {
   unsafe {
@@ -444,6 +546,12 @@ pub fn get_boolean_value(value: *mut bool) -> bool
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_boolean_value_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -457,6 +565,12 @@ pub fn get_character_value(value: *mut u8) -> bool
 }
 
 #[cfg(test)]
+pub fn get_character_value_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_signed_8_value(value: *mut i8) -> bool
 {
   unsafe {
@@ -464,6 +578,12 @@ pub fn get_signed_8_value(value: *mut i8) -> bool
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_signed_8_value_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -477,6 +597,12 @@ pub fn get_signed_16_value(value: *mut i16) -> bool
 }
 
 #[cfg(test)]
+pub fn get_signed_16_value_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_unsigned_8_value(value: *mut u8) -> bool
 {
   unsafe {
@@ -487,6 +613,12 @@ pub fn get_unsigned_8_value(value: *mut u8) -> bool
 }
 
 #[cfg(test)]
+pub fn get_unsigned_8_value_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_unsigned_16_value(value: *mut u16) -> bool
 {
   unsafe {
@@ -494,6 +626,12 @@ pub fn get_unsigned_16_value(value: *mut u16) -> bool
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_unsigned_16_value_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -511,6 +649,12 @@ pub fn get_sample(value: *mut i32) -> bool
 }
 
 #[cfg(test)]
+pub fn get_sample_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_flag(value: *mut bool) -> bool
 {
   unsafe {
@@ -522,6 +666,12 @@ pub fn get_flag(value: *mut bool) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_flag_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -539,6 +689,12 @@ pub fn get_operating_state(value: *mut Exhaustive_Monitor::OperatingState) -> bo
 }
 
 #[cfg(test)]
+pub fn get_operating_state_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_samples(value: *mut Exhaustive_Monitor::Samples) -> bool
 {
   unsafe {
@@ -553,6 +709,12 @@ pub fn get_samples(value: *mut Exhaustive_Monitor::Samples) -> bool
 }
 
 #[cfg(test)]
+pub fn get_samples_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_telemetry(value: *mut Exhaustive_Monitor::Telemetry_i) -> bool
 {
   unsafe {
@@ -564,6 +726,12 @@ pub fn get_telemetry(value: *mut Exhaustive_Monitor::Telemetry_i) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_telemetry_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]

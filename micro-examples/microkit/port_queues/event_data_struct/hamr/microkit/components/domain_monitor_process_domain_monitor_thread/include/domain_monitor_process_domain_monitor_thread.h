@@ -27,3 +27,4 @@ void *memset(void *dest, int c, size_t n);
 bool producer_p_p_producer_write_port_is_empty(void);
 bool get_producer_p_p_producer_write_port_poll(sb_event_counter_t *numDropped, event_data_struct_port_queues_struct_i *data);
 bool get_producer_p_p_producer_write_port(event_data_struct_port_queues_struct_i *data);
+uintmax_t get_producer_p_p_producer_write_port_num_invalid(void);

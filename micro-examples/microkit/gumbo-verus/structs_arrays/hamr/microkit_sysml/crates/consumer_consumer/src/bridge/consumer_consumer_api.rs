@@ -26,6 +26,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_c_myArrayInt32_DataPort_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_c_myArrayInt32_DataPort_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_c_myArrayStruct_DataPort(
       &mut self,
       value: &Ghost<Gubmo_Structs_Arrays::MyArrayStruct>) -> (res : Gubmo_Structs_Arrays::MyArrayStruct)
@@ -36,6 +42,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_c_myArrayStruct_DataPort_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_c_myArrayStruct_DataPort_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_c_myStructArray_DataPort(
       &mut self,
       value: &Ghost<Gubmo_Structs_Arrays::MyStructArray_i>) -> (res : Gubmo_Structs_Arrays::MyStructArray_i)
@@ -43,6 +55,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_c_myStructArray_DataPort();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_c_myStructArray_DataPort_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_c_myStructArray_DataPort_num_invalid();
     }
 
     #[verifier::external_body]
@@ -59,6 +77,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_c_myArrayInt32_EventDataPort_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_c_myArrayInt32_EventDataPort_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_c_myArrayStruct_EventDataPort(
       &mut self,
       value: &Ghost<Option<Gubmo_Structs_Arrays::MyArrayStruct>>) -> (res : Option<Gubmo_Structs_Arrays::MyArrayStruct>)
@@ -66,6 +90,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_c_myArrayStruct_EventDataPort();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_c_myArrayStruct_EventDataPort_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_c_myArrayStruct_EventDataPort_num_invalid();
     }
 
     #[verifier::external_body]
@@ -81,6 +111,12 @@ verus! {
           forall|i:int| 0 <= i <= res.unwrap().fieldArray.len() - 2 ==> #[trigger] res.unwrap().fieldArray[i].fieldSInt32 <= res.unwrap().fieldArray[i + 1].fieldSInt32),
     {
       return extern_api::unsafe_get_c_myStructArray_EventDataPort();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_c_myStructArray_EventDataPort_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_c_myStructArray_EventDataPort_num_invalid();
     }
   }
 
@@ -115,6 +151,12 @@ verus! {
           GumboLib::normalLibraryFunction_spec(res),
     {
       self.api.unverified_get_c_myArrayInt32_DataPort(&Ghost(self.c_myArrayInt32_DataPort))
+    }/// The number of messages received on c_myArrayInt32_DataPort that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_c_myArrayInt32_DataPort_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_c_myArrayInt32_DataPort_num_invalid()
     }
     pub fn get_c_myArrayStruct_DataPort(&mut self) -> (res : Gubmo_Structs_Arrays::MyArrayStruct)
       ensures
@@ -127,6 +169,12 @@ verus! {
         old(self).c_myStructArray_EventDataPort == final(self).c_myStructArray_EventDataPort,
     {
       self.api.unverified_get_c_myArrayStruct_DataPort(&Ghost(self.c_myArrayStruct_DataPort))
+    }/// The number of messages received on c_myArrayStruct_DataPort that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_c_myArrayStruct_DataPort_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_c_myArrayStruct_DataPort_num_invalid()
     }
     pub fn get_c_myStructArray_DataPort(&mut self) -> (res : Gubmo_Structs_Arrays::MyStructArray_i)
       ensures
@@ -139,6 +187,12 @@ verus! {
         old(self).c_myStructArray_EventDataPort == final(self).c_myStructArray_EventDataPort,
     {
       self.api.unverified_get_c_myStructArray_DataPort(&Ghost(self.c_myStructArray_DataPort))
+    }/// The number of messages received on c_myStructArray_DataPort that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_c_myStructArray_DataPort_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_c_myStructArray_DataPort_num_invalid()
     }
     pub fn get_c_myArrayInt32_EventDataPort(&mut self) -> (res : Option<Gubmo_Structs_Arrays::MyArrayInt32>)
       ensures
@@ -154,6 +208,12 @@ verus! {
           forall|i:int| 0 <= i <= res.unwrap().len() - 2 ==> #[trigger] res.unwrap()[i] <= res.unwrap()[i + 1]),
     {
       self.api.unverified_get_c_myArrayInt32_EventDataPort(&Ghost(self.c_myArrayInt32_EventDataPort))
+    }/// The number of messages received on c_myArrayInt32_EventDataPort that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_c_myArrayInt32_EventDataPort_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_c_myArrayInt32_EventDataPort_num_invalid()
     }
     pub fn get_c_myArrayStruct_EventDataPort(&mut self) -> (res : Option<Gubmo_Structs_Arrays::MyArrayStruct>)
       ensures
@@ -166,6 +226,12 @@ verus! {
         old(self).c_myStructArray_EventDataPort == final(self).c_myStructArray_EventDataPort,
     {
       self.api.unverified_get_c_myArrayStruct_EventDataPort(&Ghost(self.c_myArrayStruct_EventDataPort))
+    }/// The number of messages received on c_myArrayStruct_EventDataPort that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_c_myArrayStruct_EventDataPort_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_c_myArrayStruct_EventDataPort_num_invalid()
     }
     pub fn get_c_myStructArray_EventDataPort(&mut self) -> (res : Option<Gubmo_Structs_Arrays::MyStructArray_i>)
       ensures
@@ -183,6 +249,12 @@ verus! {
           forall|i:int| 0 <= i <= res.unwrap().fieldArray.len() - 2 ==> #[trigger] res.unwrap().fieldArray[i].fieldSInt32 <= res.unwrap().fieldArray[i + 1].fieldSInt32),
     {
       self.api.unverified_get_c_myStructArray_EventDataPort(&Ghost(self.c_myStructArray_EventDataPort))
+    }/// The number of messages received on c_myStructArray_EventDataPort that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_c_myStructArray_EventDataPort_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_c_myStructArray_EventDataPort_num_invalid()
     }
   }
 

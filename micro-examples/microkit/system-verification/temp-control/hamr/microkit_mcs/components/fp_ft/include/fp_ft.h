@@ -27,4 +27,5 @@ void *memset(void *dest, int c, size_t n);
 bool fanCmd_is_empty(void);
 bool get_fanCmd_poll(sb_event_counter_t *numDropped, TempControl_SysVerif_FanCmd *data);
 bool get_fanCmd(TempControl_SysVerif_FanCmd *data);
+uintmax_t get_fanCmd_num_invalid(void);
 bool put_fanAck(const TempControl_SysVerif_FanAck *data);

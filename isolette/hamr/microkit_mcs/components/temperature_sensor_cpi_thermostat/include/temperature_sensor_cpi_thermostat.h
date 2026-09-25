@@ -26,3 +26,4 @@ void *memset(void *dest, int c, size_t n);
 
 bool put_current_tempWstatus(const Isolette_Data_Model_TempWstatus_i *data);
 bool get_air(Isolette_Data_Model_PhysicalTemp_i *data);
+uintmax_t get_air_num_invalid(void);

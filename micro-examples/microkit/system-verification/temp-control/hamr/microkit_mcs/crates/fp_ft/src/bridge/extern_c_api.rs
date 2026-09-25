@@ -12,6 +12,7 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_fanCmd(value: *mut TempControl_SysVerif::FanCmd) -> bool;
+  fn get_fanCmd_num_invalid() -> u64;
   fn put_fanAck(value: *mut TempControl_SysVerif::FanAck) -> bool;
 }
 
@@ -24,6 +25,13 @@ pub fn unsafe_get_fanCmd() -> Option<TempControl_SysVerif::FanCmd>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_fanCmd_num_invalid() -> u64
+{
+  unsafe {
+    return get_fanCmd_num_invalid();
   }
 }
 
@@ -67,6 +75,12 @@ pub fn get_fanCmd(value: *mut TempControl_SysVerif::FanCmd) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_fanCmd_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]

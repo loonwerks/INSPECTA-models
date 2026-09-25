@@ -12,21 +12,37 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_producer_producer_myBoolean(value: *mut bool) -> bool;
+  fn get_producer_producer_myBoolean_num_invalid() -> u64;
   fn get_producer_producer_myCharacter(value: *mut u8) -> bool;
+  fn get_producer_producer_myCharacter_num_invalid() -> u64;
   fn get_producer_producer_myString(value: *mut Base_Types::String) -> bool;
+  fn get_producer_producer_myString_num_invalid() -> u64;
   fn get_producer_producer_myInt8(value: *mut i8) -> bool;
+  fn get_producer_producer_myInt8_num_invalid() -> u64;
   fn get_producer_producer_myInt16(value: *mut i16) -> bool;
+  fn get_producer_producer_myInt16_num_invalid() -> u64;
   fn get_producer_producer_myInt32(value: *mut i32) -> bool;
+  fn get_producer_producer_myInt32_num_invalid() -> u64;
   fn get_producer_producer_myInt64(value: *mut i64) -> bool;
+  fn get_producer_producer_myInt64_num_invalid() -> u64;
   fn get_producer_producer_myUInt8(value: *mut u8) -> bool;
+  fn get_producer_producer_myUInt8_num_invalid() -> u64;
   fn get_producer_producer_myUInt16(value: *mut u16) -> bool;
+  fn get_producer_producer_myUInt16_num_invalid() -> u64;
   fn get_producer_producer_myUInt32(value: *mut u32) -> bool;
+  fn get_producer_producer_myUInt32_num_invalid() -> u64;
   fn get_producer_producer_myUInt64(value: *mut u64) -> bool;
+  fn get_producer_producer_myUInt64_num_invalid() -> u64;
   fn get_producer_producer_myFloat32(value: *mut f32) -> bool;
+  fn get_producer_producer_myFloat32_num_invalid() -> u64;
   fn get_producer_producer_myFloat64(value: *mut f64) -> bool;
+  fn get_producer_producer_myFloat64_num_invalid() -> u64;
   fn get_producer_producer_myEnum(value: *mut Aadl_Datatypes::MyEnum) -> bool;
+  fn get_producer_producer_myEnum_num_invalid() -> u64;
   fn get_producer_producer_myStruct(value: *mut Aadl_Datatypes::MyStruct_i) -> bool;
+  fn get_producer_producer_myStruct_num_invalid() -> u64;
   fn get_producer_producer_myArray1(value: *mut Aadl_Datatypes::MyArrayOneDim) -> bool;
+  fn get_producer_producer_myArray1_num_invalid() -> u64;
 }
 
 pub fn unsafe_get_producer_producer_myBoolean() -> Option<bool>
@@ -38,6 +54,13 @@ pub fn unsafe_get_producer_producer_myBoolean() -> Option<bool>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_producer_producer_myBoolean_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myBoolean_num_invalid();
   }
 }
 
@@ -53,6 +76,13 @@ pub fn unsafe_get_producer_producer_myCharacter() -> Option<u8>
   }
 }
 
+pub fn unsafe_get_producer_producer_myCharacter_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myCharacter_num_invalid();
+  }
+}
+
 pub fn unsafe_get_producer_producer_myString() -> Option<Base_Types::String>
 {
   unsafe {
@@ -62,6 +92,13 @@ pub fn unsafe_get_producer_producer_myString() -> Option<Base_Types::String>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_producer_producer_myString_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myString_num_invalid();
   }
 }
 
@@ -77,6 +114,13 @@ pub fn unsafe_get_producer_producer_myInt8() -> Option<i8>
   }
 }
 
+pub fn unsafe_get_producer_producer_myInt8_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myInt8_num_invalid();
+  }
+}
+
 pub fn unsafe_get_producer_producer_myInt16() -> Option<i16>
 {
   unsafe {
@@ -86,6 +130,13 @@ pub fn unsafe_get_producer_producer_myInt16() -> Option<i16>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_producer_producer_myInt16_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myInt16_num_invalid();
   }
 }
 
@@ -101,6 +152,13 @@ pub fn unsafe_get_producer_producer_myInt32() -> Option<i32>
   }
 }
 
+pub fn unsafe_get_producer_producer_myInt32_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myInt32_num_invalid();
+  }
+}
+
 pub fn unsafe_get_producer_producer_myInt64() -> Option<i64>
 {
   unsafe {
@@ -110,6 +168,13 @@ pub fn unsafe_get_producer_producer_myInt64() -> Option<i64>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_producer_producer_myInt64_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myInt64_num_invalid();
   }
 }
 
@@ -125,6 +190,13 @@ pub fn unsafe_get_producer_producer_myUInt8() -> Option<u8>
   }
 }
 
+pub fn unsafe_get_producer_producer_myUInt8_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myUInt8_num_invalid();
+  }
+}
+
 pub fn unsafe_get_producer_producer_myUInt16() -> Option<u16>
 {
   unsafe {
@@ -134,6 +206,13 @@ pub fn unsafe_get_producer_producer_myUInt16() -> Option<u16>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_producer_producer_myUInt16_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myUInt16_num_invalid();
   }
 }
 
@@ -149,6 +228,13 @@ pub fn unsafe_get_producer_producer_myUInt32() -> Option<u32>
   }
 }
 
+pub fn unsafe_get_producer_producer_myUInt32_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myUInt32_num_invalid();
+  }
+}
+
 pub fn unsafe_get_producer_producer_myUInt64() -> Option<u64>
 {
   unsafe {
@@ -158,6 +244,13 @@ pub fn unsafe_get_producer_producer_myUInt64() -> Option<u64>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_producer_producer_myUInt64_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myUInt64_num_invalid();
   }
 }
 
@@ -173,6 +266,13 @@ pub fn unsafe_get_producer_producer_myFloat32() -> Option<f32>
   }
 }
 
+pub fn unsafe_get_producer_producer_myFloat32_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myFloat32_num_invalid();
+  }
+}
+
 pub fn unsafe_get_producer_producer_myFloat64() -> Option<f64>
 {
   unsafe {
@@ -182,6 +282,13 @@ pub fn unsafe_get_producer_producer_myFloat64() -> Option<f64>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_producer_producer_myFloat64_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myFloat64_num_invalid();
   }
 }
 
@@ -197,6 +304,13 @@ pub fn unsafe_get_producer_producer_myEnum() -> Option<Aadl_Datatypes::MyEnum>
   }
 }
 
+pub fn unsafe_get_producer_producer_myEnum_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myEnum_num_invalid();
+  }
+}
+
 pub fn unsafe_get_producer_producer_myStruct() -> Option<Aadl_Datatypes::MyStruct_i>
 {
   unsafe {
@@ -209,6 +323,13 @@ pub fn unsafe_get_producer_producer_myStruct() -> Option<Aadl_Datatypes::MyStruc
   }
 }
 
+pub fn unsafe_get_producer_producer_myStruct_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myStruct_num_invalid();
+  }
+}
+
 pub fn unsafe_get_producer_producer_myArray1() -> Option<Aadl_Datatypes::MyArrayOneDim>
 {
   unsafe {
@@ -218,6 +339,13 @@ pub fn unsafe_get_producer_producer_myArray1() -> Option<Aadl_Datatypes::MyArray
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_producer_producer_myArray1_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myArray1_num_invalid();
   }
 }
 
@@ -285,6 +413,12 @@ pub fn get_producer_producer_myBoolean(value: *mut bool) -> bool
 }
 
 #[cfg(test)]
+pub fn get_producer_producer_myBoolean_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_producer_producer_myCharacter(value: *mut u8) -> bool
 {
   unsafe {
@@ -296,6 +430,12 @@ pub fn get_producer_producer_myCharacter(value: *mut u8) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_producer_producer_myCharacter_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -313,6 +453,12 @@ pub fn get_producer_producer_myString(value: *mut Base_Types::String) -> bool
 }
 
 #[cfg(test)]
+pub fn get_producer_producer_myString_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_producer_producer_myInt8(value: *mut i8) -> bool
 {
   unsafe {
@@ -324,6 +470,12 @@ pub fn get_producer_producer_myInt8(value: *mut i8) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_producer_producer_myInt8_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -341,6 +493,12 @@ pub fn get_producer_producer_myInt16(value: *mut i16) -> bool
 }
 
 #[cfg(test)]
+pub fn get_producer_producer_myInt16_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_producer_producer_myInt32(value: *mut i32) -> bool
 {
   unsafe {
@@ -352,6 +510,12 @@ pub fn get_producer_producer_myInt32(value: *mut i32) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_producer_producer_myInt32_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -369,6 +533,12 @@ pub fn get_producer_producer_myInt64(value: *mut i64) -> bool
 }
 
 #[cfg(test)]
+pub fn get_producer_producer_myInt64_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_producer_producer_myUInt8(value: *mut u8) -> bool
 {
   unsafe {
@@ -380,6 +550,12 @@ pub fn get_producer_producer_myUInt8(value: *mut u8) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_producer_producer_myUInt8_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -397,6 +573,12 @@ pub fn get_producer_producer_myUInt16(value: *mut u16) -> bool
 }
 
 #[cfg(test)]
+pub fn get_producer_producer_myUInt16_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_producer_producer_myUInt32(value: *mut u32) -> bool
 {
   unsafe {
@@ -408,6 +590,12 @@ pub fn get_producer_producer_myUInt32(value: *mut u32) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_producer_producer_myUInt32_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -425,6 +613,12 @@ pub fn get_producer_producer_myUInt64(value: *mut u64) -> bool
 }
 
 #[cfg(test)]
+pub fn get_producer_producer_myUInt64_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_producer_producer_myFloat32(value: *mut f32) -> bool
 {
   unsafe {
@@ -436,6 +630,12 @@ pub fn get_producer_producer_myFloat32(value: *mut f32) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_producer_producer_myFloat32_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -453,6 +653,12 @@ pub fn get_producer_producer_myFloat64(value: *mut f64) -> bool
 }
 
 #[cfg(test)]
+pub fn get_producer_producer_myFloat64_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_producer_producer_myEnum(value: *mut Aadl_Datatypes::MyEnum) -> bool
 {
   unsafe {
@@ -464,6 +670,12 @@ pub fn get_producer_producer_myEnum(value: *mut Aadl_Datatypes::MyEnum) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_producer_producer_myEnum_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -481,6 +693,12 @@ pub fn get_producer_producer_myStruct(value: *mut Aadl_Datatypes::MyStruct_i) ->
 }
 
 #[cfg(test)]
+pub fn get_producer_producer_myStruct_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_producer_producer_myArray1(value: *mut Aadl_Datatypes::MyArrayOneDim) -> bool
 {
   unsafe {
@@ -492,4 +710,10 @@ pub fn get_producer_producer_myArray1(value: *mut Aadl_Datatypes::MyArrayOneDim)
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_producer_producer_myArray1_num_invalid() -> u64
+{
+  return 0;
 }

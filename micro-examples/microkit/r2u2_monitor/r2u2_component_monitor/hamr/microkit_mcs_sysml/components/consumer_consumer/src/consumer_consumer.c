@@ -25,6 +25,10 @@ bool get_sample(int32_t *data) {
   return get_sample_poll (&numDropped, data);
 }
 
+uintmax_t get_sample_num_invalid(void) {
+  return sb_queue_int32_t_1_numInvalid((sb_queue_int32_t_1_Recv_t *) &sample_recv_queue);
+}
+
 bool peek_sample(int32_t *data) {
   sb_event_counter_t numDropped;
   return sb_queue_int32_t_1_peek((sb_queue_int32_t_1_Recv_t *) &sample_recv_queue, &numDropped, data);

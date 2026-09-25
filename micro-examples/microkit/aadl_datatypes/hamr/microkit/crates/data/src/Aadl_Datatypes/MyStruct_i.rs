@@ -26,3 +26,12 @@ verus! {
   }
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<MyStruct_i>() == 104);
+const _: () = assert!(core::mem::align_of::<MyStruct_i>() == 8);
+const _: () = assert!(core::mem::offset_of!(MyStruct_i, fieldInt64) == 0);
+const _: () = assert!(core::mem::offset_of!(MyStruct_i, fieldStr) == 8);
+const _: () = assert!(core::mem::offset_of!(MyStruct_i, fieldEnum) == 52);
+const _: () = assert!(core::mem::offset_of!(MyStruct_i, fieldRec) == 56);
+const _: () = assert!(core::mem::offset_of!(MyStruct_i, fieldArray) == 60);

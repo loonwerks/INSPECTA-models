@@ -28,3 +28,4 @@ bool put_EthernetFramesTx(const SW_StructuredEthernetMessage_i *data);
 bool EthernetFramesRx_is_empty(void);
 bool get_EthernetFramesRx_poll(sb_event_counter_t *numDropped, SW_StructuredEthernetMessage_i *data);
 bool get_EthernetFramesRx(SW_StructuredEthernetMessage_i *data);
+uintmax_t get_EthernetFramesRx_num_invalid(void);

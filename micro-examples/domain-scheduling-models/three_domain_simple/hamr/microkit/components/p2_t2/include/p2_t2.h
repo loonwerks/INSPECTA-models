@@ -25,4 +25,5 @@ void *memset(void *dest, int c, size_t n);
 
 
 bool get_read_port(int32_t *data);
+uintmax_t get_read_port_num_invalid(void);
 bool put_write_port(const int32_t *data);

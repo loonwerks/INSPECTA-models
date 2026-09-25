@@ -39,6 +39,19 @@ def run(title: String, verboseArg: B, proc: OsProto.Proc): Z = {
   return r.exitCode
 }
 
+// Boots a built image under QEMU and fails on a fault, panic or violation (see
+// .github/workflows/hamr/simulate.cmd).  Run it right after the image's `make`, with the same
+// environment, and before its build directory is removed.
+def bootUnderQemu(dir: Os.Path, options: ISZ[String]): Z = {
+  var root = homeDir
+  while (!(root / ".github").exists) {
+    root = root.up
+  }
+  val simulate = root / ".github" / "workflows" / "hamr" / "simulate.cmd"
+  return run(s"Booting the image in ${dir.name} under QEMU", T,
+    Os.proc(ISZ[String](sireum.string, "slang", "run", simulate.string, dir.string) ++ options))
+}
+
 val slangDir = homeDir / "hamr" / "slang"
 
 println(
@@ -84,6 +97,10 @@ if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
   // behavior code hasn't been added so verification via 'cargo-verus build' will fail.  Use
   // the RUST_MAKE_TARGET env var to bypass verification so that cargo is used instead
   result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit").env(ISZ(("RUST_MAKE_TARGET", "build-release"))))
+
+  if (result == 0) {
+    result = bootUnderQemu(homeDir / "hamr" / "microkit", ISZ("--env", "RUST_MAKE_TARGET=build-release"))
+  }
   if ((homeDir / "hamr" / "microkit" / "build").exists) {
     (homeDir / "hamr" / "microkit" / "build").removeAll()
   }

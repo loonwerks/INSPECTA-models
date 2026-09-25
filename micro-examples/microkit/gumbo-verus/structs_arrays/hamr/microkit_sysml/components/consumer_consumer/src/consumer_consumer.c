@@ -34,6 +34,10 @@ bool get_c_myArrayInt32_DataPort(Gubmo_Structs_Arrays_MyArrayInt32 *data) {
   return isFresh;
 }
 
+uintmax_t get_c_myArrayInt32_DataPort_num_invalid(void) {
+  return sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_numInvalid((sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_Recv_t *) &c_myArrayInt32_DataPort_recv_queue);
+}
+
 Gubmo_Structs_Arrays_MyArrayStruct last_c_myArrayStruct_DataPort_payload;
 
 bool get_c_myArrayStruct_DataPort(Gubmo_Structs_Arrays_MyArrayStruct *data) {
@@ -45,6 +49,10 @@ bool get_c_myArrayStruct_DataPort(Gubmo_Structs_Arrays_MyArrayStruct *data) {
   }
   memcpy(data, &last_c_myArrayStruct_DataPort_payload, Gubmo_Structs_Arrays_MyArrayStruct_BYTE_SIZE);
   return isFresh;
+}
+
+uintmax_t get_c_myArrayStruct_DataPort_num_invalid(void) {
+  return sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_numInvalid((sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_Recv_t *) &c_myArrayStruct_DataPort_recv_queue);
 }
 
 Gubmo_Structs_Arrays_MyStructArray_i last_c_myStructArray_DataPort_payload;
@@ -60,6 +68,10 @@ bool get_c_myStructArray_DataPort(Gubmo_Structs_Arrays_MyStructArray_i *data) {
   return isFresh;
 }
 
+uintmax_t get_c_myStructArray_DataPort_num_invalid(void) {
+  return sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_numInvalid((sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_Recv_t *) &c_myStructArray_DataPort_recv_queue);
+}
+
 bool c_myArrayInt32_EventDataPort_is_empty(void) {
   return sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_is_empty(&c_myArrayInt32_EventDataPort_recv_queue);
 }
@@ -71,6 +83,10 @@ bool get_c_myArrayInt32_EventDataPort_poll(sb_event_counter_t *numDropped, Gubmo
 bool get_c_myArrayInt32_EventDataPort(Gubmo_Structs_Arrays_MyArrayInt32 *data) {
   sb_event_counter_t numDropped;
   return get_c_myArrayInt32_EventDataPort_poll (&numDropped, data);
+}
+
+uintmax_t get_c_myArrayInt32_EventDataPort_num_invalid(void) {
+  return sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_numInvalid((sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_Recv_t *) &c_myArrayInt32_EventDataPort_recv_queue);
 }
 
 bool c_myArrayStruct_EventDataPort_is_empty(void) {
@@ -86,6 +102,10 @@ bool get_c_myArrayStruct_EventDataPort(Gubmo_Structs_Arrays_MyArrayStruct *data)
   return get_c_myArrayStruct_EventDataPort_poll (&numDropped, data);
 }
 
+uintmax_t get_c_myArrayStruct_EventDataPort_num_invalid(void) {
+  return sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_numInvalid((sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_Recv_t *) &c_myArrayStruct_EventDataPort_recv_queue);
+}
+
 bool c_myStructArray_EventDataPort_is_empty(void) {
   return sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_is_empty(&c_myStructArray_EventDataPort_recv_queue);
 }
@@ -97,6 +117,10 @@ bool get_c_myStructArray_EventDataPort_poll(sb_event_counter_t *numDropped, Gubm
 bool get_c_myStructArray_EventDataPort(Gubmo_Structs_Arrays_MyStructArray_i *data) {
   sb_event_counter_t numDropped;
   return get_c_myStructArray_EventDataPort_poll (&numDropped, data);
+}
+
+uintmax_t get_c_myStructArray_EventDataPort_num_invalid(void) {
+  return sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_numInvalid((sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_Recv_t *) &c_myStructArray_EventDataPort_recv_queue);
 }
 
 void init(void) {

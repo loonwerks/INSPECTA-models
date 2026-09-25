@@ -6,9 +6,12 @@ use super::*;
 
 verus! {
 
-  pub const SW_u16Array_BYTE_SIZE: usize = 8;
   pub const SW_u16Array_DIM_0: usize = 4;
 
   pub type u16Array = [u16; SW_u16Array_DIM_0];
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<u16Array>() == 8);
+const _: () = assert!(core::mem::align_of::<u16Array>() == 2);

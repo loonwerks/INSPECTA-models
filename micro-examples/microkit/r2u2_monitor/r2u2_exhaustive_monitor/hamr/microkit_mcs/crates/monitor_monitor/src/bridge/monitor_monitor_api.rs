@@ -52,6 +52,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_level_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_level_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_boolean_value(
       &mut self,
       value: &Ghost<bool>) -> (res : bool)
@@ -59,6 +65,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_boolean_value();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_boolean_value_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_boolean_value_num_invalid();
     }
 
     #[verifier::external_body]
@@ -72,6 +84,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_character_value_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_character_value_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_signed_8_value(
       &mut self,
       value: &Ghost<i8>) -> (res : i8)
@@ -79,6 +97,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_signed_8_value();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_signed_8_value_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_signed_8_value_num_invalid();
     }
 
     #[verifier::external_body]
@@ -92,6 +116,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_signed_16_value_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_signed_16_value_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_unsigned_8_value(
       &mut self,
       value: &Ghost<u8>) -> (res : u8)
@@ -99,6 +129,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_unsigned_8_value();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_unsigned_8_value_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_unsigned_8_value_num_invalid();
     }
 
     #[verifier::external_body]
@@ -112,6 +148,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_unsigned_16_value_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_unsigned_16_value_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_sample(
       &mut self,
       value: &Ghost<Option<i32>>) -> (res : Option<i32>)
@@ -119,6 +161,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_sample();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_sample_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_sample_num_invalid();
     }
 
     #[verifier::external_body]
@@ -132,6 +180,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_flag_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_flag_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_operating_state(
       &mut self,
       value: &Ghost<Option<Exhaustive_Monitor::OperatingState>>) -> (res : Option<Exhaustive_Monitor::OperatingState>)
@@ -139,6 +193,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_operating_state();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_operating_state_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_operating_state_num_invalid();
     }
 
     #[verifier::external_body]
@@ -152,6 +212,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_samples_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_samples_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_telemetry(
       &mut self,
       value: &Ghost<Option<Exhaustive_Monitor::Telemetry_i>>) -> (res : Option<Exhaustive_Monitor::Telemetry_i>)
@@ -159,6 +225,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_telemetry();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_telemetry_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_telemetry_num_invalid();
     }
 
     #[verifier::external_body]
@@ -490,6 +562,12 @@ verus! {
         old(self).ack == final(self).ack,
     {
       self.api.unverified_get_level(&Ghost(self.level))
+    }/// The number of messages received on level that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_level_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_level_num_invalid()
     }
     pub fn get_boolean_value(&mut self) -> (res : bool)
       ensures
@@ -513,6 +591,12 @@ verus! {
         old(self).ack == final(self).ack,
     {
       self.api.unverified_get_boolean_value(&Ghost(self.boolean_value))
+    }/// The number of messages received on boolean_value that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_boolean_value_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_boolean_value_num_invalid()
     }
     pub fn get_character_value(&mut self) -> (res : u8)
       ensures
@@ -536,6 +620,12 @@ verus! {
         old(self).ack == final(self).ack,
     {
       self.api.unverified_get_character_value(&Ghost(self.character_value))
+    }/// The number of messages received on character_value that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_character_value_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_character_value_num_invalid()
     }
     pub fn get_signed_8_value(&mut self) -> (res : i8)
       ensures
@@ -559,6 +649,12 @@ verus! {
         old(self).ack == final(self).ack,
     {
       self.api.unverified_get_signed_8_value(&Ghost(self.signed_8_value))
+    }/// The number of messages received on signed_8_value that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_signed_8_value_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_signed_8_value_num_invalid()
     }
     pub fn get_signed_16_value(&mut self) -> (res : i16)
       ensures
@@ -582,6 +678,12 @@ verus! {
         old(self).ack == final(self).ack,
     {
       self.api.unverified_get_signed_16_value(&Ghost(self.signed_16_value))
+    }/// The number of messages received on signed_16_value that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_signed_16_value_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_signed_16_value_num_invalid()
     }
     pub fn get_unsigned_8_value(&mut self) -> (res : u8)
       ensures
@@ -605,6 +707,12 @@ verus! {
         old(self).ack == final(self).ack,
     {
       self.api.unverified_get_unsigned_8_value(&Ghost(self.unsigned_8_value))
+    }/// The number of messages received on unsigned_8_value that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_unsigned_8_value_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_unsigned_8_value_num_invalid()
     }
     pub fn get_unsigned_16_value(&mut self) -> (res : u16)
       ensures
@@ -628,6 +736,12 @@ verus! {
         old(self).ack == final(self).ack,
     {
       self.api.unverified_get_unsigned_16_value(&Ghost(self.unsigned_16_value))
+    }/// The number of messages received on unsigned_16_value that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_unsigned_16_value_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_unsigned_16_value_num_invalid()
     }
     pub fn get_sample(&mut self) -> (res : Option<i32>)
       ensures
@@ -651,6 +765,12 @@ verus! {
         old(self).ack == final(self).ack,
     {
       self.api.unverified_get_sample(&Ghost(self.sample))
+    }/// The number of messages received on sample that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_sample_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_sample_num_invalid()
     }
     pub fn get_flag(&mut self) -> (res : Option<bool>)
       ensures
@@ -674,6 +794,12 @@ verus! {
         old(self).ack == final(self).ack,
     {
       self.api.unverified_get_flag(&Ghost(self.flag))
+    }/// The number of messages received on flag that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_flag_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_flag_num_invalid()
     }
     pub fn get_operating_state(&mut self) -> (res : Option<Exhaustive_Monitor::OperatingState>)
       ensures
@@ -697,6 +823,12 @@ verus! {
         old(self).ack == final(self).ack,
     {
       self.api.unverified_get_operating_state(&Ghost(self.operating_state))
+    }/// The number of messages received on operating_state that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_operating_state_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_operating_state_num_invalid()
     }
     pub fn get_samples(&mut self) -> (res : Option<Exhaustive_Monitor::Samples>)
       ensures
@@ -720,6 +852,12 @@ verus! {
         old(self).ack == final(self).ack,
     {
       self.api.unverified_get_samples(&Ghost(self.samples))
+    }/// The number of messages received on samples that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_samples_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_samples_num_invalid()
     }
     pub fn get_telemetry(&mut self) -> (res : Option<Exhaustive_Monitor::Telemetry_i>)
       ensures
@@ -743,6 +881,12 @@ verus! {
         old(self).ack == final(self).ack,
     {
       self.api.unverified_get_telemetry(&Ghost(self.telemetry))
+    }/// The number of messages received on telemetry that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_telemetry_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_telemetry_num_invalid()
     }
     pub fn get_pulse(&mut self) -> (res : bool)
       ensures

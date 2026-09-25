@@ -47,6 +47,10 @@ volatile sb_queue_hamr_Schedule_1_t *sb_queue_sched_schedule = (volatile sb_queu
 
 hamr_Schedule sched_schedule = {0};
 
+// Both queues fill fixed regions; one that outgrew its region would spill into the next.
+_Static_assert(sizeof(sb_queue_hamr_SchedState_1_t) <= SCHED_STATE_SIZE, "sb_queue_hamr_SchedState_1_t outgrows its shared memory region");
+_Static_assert(sizeof(sb_queue_hamr_Schedule_1_t) <= SCHED_SCHEDULE_SIZE, "sb_queue_hamr_Schedule_1_t outgrows its shared memory region");
+
 bool put_sched_schedule() {
   sb_queue_hamr_Schedule_1_enqueue((sb_queue_hamr_Schedule_1_t *) sb_queue_sched_schedule, (hamr_Schedule *) &sched_schedule);
 

@@ -12,8 +12,11 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
+  fn get_current_tempWstatus_num_invalid() -> u64;
   fn get_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
+  fn get_interface_failure_num_invalid() -> u64;
   fn get_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
+  fn get_internal_failure_num_invalid() -> u64;
   fn put_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool;
 }
 
@@ -26,6 +29,13 @@ pub fn unsafe_get_current_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
   }
 }
 
+pub fn unsafe_get_current_tempWstatus_num_invalid() -> u64
+{
+  unsafe {
+    return get_current_tempWstatus_num_invalid();
+  }
+}
+
 pub fn unsafe_get_interface_failure() -> Isolette_Data_Model::Failure_Flag_i
 {
   unsafe {
@@ -35,12 +45,26 @@ pub fn unsafe_get_interface_failure() -> Isolette_Data_Model::Failure_Flag_i
   }
 }
 
+pub fn unsafe_get_interface_failure_num_invalid() -> u64
+{
+  unsafe {
+    return get_interface_failure_num_invalid();
+  }
+}
+
 pub fn unsafe_get_internal_failure() -> Isolette_Data_Model::Failure_Flag_i
 {
   unsafe {
     let value: *mut Isolette_Data_Model::Failure_Flag_i = &mut Isolette_Data_Model::Failure_Flag_i::default();
     get_internal_failure(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_internal_failure_num_invalid() -> u64
+{
+  unsafe {
+    return get_internal_failure_num_invalid();
   }
 }
 
@@ -87,6 +111,12 @@ pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -
 }
 
 #[cfg(test)]
+pub fn get_current_tempWstatus_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool
 {
   unsafe {
@@ -97,6 +127,12 @@ pub fn get_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) ->
 }
 
 #[cfg(test)]
+pub fn get_interface_failure_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool
 {
   unsafe {
@@ -104,6 +140,12 @@ pub fn get_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> 
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_internal_failure_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]

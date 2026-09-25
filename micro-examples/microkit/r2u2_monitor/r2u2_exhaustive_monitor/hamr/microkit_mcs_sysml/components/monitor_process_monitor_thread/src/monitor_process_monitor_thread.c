@@ -74,6 +74,10 @@ bool get_sample(int32_t *data) {
   return get_sample_poll (&numDropped, data);
 }
 
+uintmax_t get_sample_num_invalid(void) {
+  return sb_queue_int32_t_1_numInvalid((sb_queue_int32_t_1_Recv_t *) &sample_recv_queue);
+}
+
 bool peek_sample(int32_t *data) {
   sb_event_counter_t numDropped;
   return sb_queue_int32_t_1_peek((sb_queue_int32_t_1_Recv_t *) &sample_recv_queue, &numDropped, data);
@@ -90,6 +94,10 @@ bool get_level(int32_t *data) {
   }
   *data = last_level_payload;
   return isFresh;
+}
+
+uintmax_t get_level_num_invalid(void) {
+  return sb_queue_int32_t_1_numInvalid((sb_queue_int32_t_1_Recv_t *) &level_recv_queue);
 }
 
 bool peek_level(int32_t *data) {
@@ -113,6 +121,10 @@ bool get_flag(bool *data) {
   return get_flag_poll (&numDropped, data);
 }
 
+uintmax_t get_flag_num_invalid(void) {
+  return sb_queue_bool_1_numInvalid((sb_queue_bool_1_Recv_t *) &flag_recv_queue);
+}
+
 bool peek_flag(bool *data) {
   sb_event_counter_t numDropped;
   return sb_queue_bool_1_peek((sb_queue_bool_1_Recv_t *) &flag_recv_queue, &numDropped, data);
@@ -129,6 +141,10 @@ bool get_boolean_value(bool *data) {
   }
   *data = last_boolean_value_payload;
   return isFresh;
+}
+
+uintmax_t get_boolean_value_num_invalid(void) {
+  return sb_queue_bool_1_numInvalid((sb_queue_bool_1_Recv_t *) &boolean_value_recv_queue);
 }
 
 bool peek_boolean_value(bool *data) {
@@ -152,6 +168,10 @@ bool get_character_value(char *data) {
   return isFresh;
 }
 
+uintmax_t get_character_value_num_invalid(void) {
+  return sb_queue_char_1_numInvalid((sb_queue_char_1_Recv_t *) &character_value_recv_queue);
+}
+
 bool peek_character_value(char *data) {
   sb_event_counter_t numDropped;
   char freshData;
@@ -171,6 +191,10 @@ bool get_signed_8_value(int8_t *data) {
   }
   *data = last_signed_8_value_payload;
   return isFresh;
+}
+
+uintmax_t get_signed_8_value_num_invalid(void) {
+  return sb_queue_int8_t_1_numInvalid((sb_queue_int8_t_1_Recv_t *) &signed_8_value_recv_queue);
 }
 
 bool peek_signed_8_value(int8_t *data) {
@@ -194,6 +218,10 @@ bool get_signed_16_value(int16_t *data) {
   return isFresh;
 }
 
+uintmax_t get_signed_16_value_num_invalid(void) {
+  return sb_queue_int16_t_1_numInvalid((sb_queue_int16_t_1_Recv_t *) &signed_16_value_recv_queue);
+}
+
 bool peek_signed_16_value(int16_t *data) {
   sb_event_counter_t numDropped;
   int16_t freshData;
@@ -213,6 +241,10 @@ bool get_unsigned_8_value(uint8_t *data) {
   }
   *data = last_unsigned_8_value_payload;
   return isFresh;
+}
+
+uintmax_t get_unsigned_8_value_num_invalid(void) {
+  return sb_queue_uint8_t_1_numInvalid((sb_queue_uint8_t_1_Recv_t *) &unsigned_8_value_recv_queue);
 }
 
 bool peek_unsigned_8_value(uint8_t *data) {
@@ -236,6 +268,10 @@ bool get_unsigned_16_value(uint16_t *data) {
   return isFresh;
 }
 
+uintmax_t get_unsigned_16_value_num_invalid(void) {
+  return sb_queue_uint16_t_1_numInvalid((sb_queue_uint16_t_1_Recv_t *) &unsigned_16_value_recv_queue);
+}
+
 bool peek_unsigned_16_value(uint16_t *data) {
   sb_event_counter_t numDropped;
   uint16_t freshData;
@@ -257,6 +293,10 @@ bool get_operating_state(Exhaustive_Monitor_OperatingState *data) {
   return get_operating_state_poll (&numDropped, data);
 }
 
+uintmax_t get_operating_state_num_invalid(void) {
+  return sb_queue_Exhaustive_Monitor_OperatingState_1_numInvalid((sb_queue_Exhaustive_Monitor_OperatingState_1_Recv_t *) &operating_state_recv_queue);
+}
+
 bool peek_operating_state(Exhaustive_Monitor_OperatingState *data) {
   sb_event_counter_t numDropped;
   return sb_queue_Exhaustive_Monitor_OperatingState_1_peek((sb_queue_Exhaustive_Monitor_OperatingState_1_Recv_t *) &operating_state_recv_queue, &numDropped, data);
@@ -275,6 +315,10 @@ bool get_samples(Exhaustive_Monitor_Samples *data) {
   return get_samples_poll (&numDropped, data);
 }
 
+uintmax_t get_samples_num_invalid(void) {
+  return sb_queue_Exhaustive_Monitor_Samples_1_numInvalid((sb_queue_Exhaustive_Monitor_Samples_1_Recv_t *) &samples_recv_queue);
+}
+
 bool peek_samples(Exhaustive_Monitor_Samples *data) {
   sb_event_counter_t numDropped;
   return sb_queue_Exhaustive_Monitor_Samples_1_peek((sb_queue_Exhaustive_Monitor_Samples_1_Recv_t *) &samples_recv_queue, &numDropped, data);
@@ -291,6 +335,10 @@ bool get_telemetry_poll(sb_event_counter_t *numDropped, Exhaustive_Monitor_Telem
 bool get_telemetry(Exhaustive_Monitor_Telemetry_i *data) {
   sb_event_counter_t numDropped;
   return get_telemetry_poll (&numDropped, data);
+}
+
+uintmax_t get_telemetry_num_invalid(void) {
+  return sb_queue_Exhaustive_Monitor_Telemetry_i_1_numInvalid((sb_queue_Exhaustive_Monitor_Telemetry_i_1_Recv_t *) &telemetry_recv_queue);
 }
 
 bool peek_telemetry(Exhaustive_Monitor_Telemetry_i *data) {

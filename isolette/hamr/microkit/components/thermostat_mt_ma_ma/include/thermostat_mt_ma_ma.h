@@ -25,7 +25,11 @@ void *memset(void *dest, int c, size_t n);
 
 
 bool get_upper_alarm_temp(Isolette_Data_Model_Temp_i *data);
+uintmax_t get_upper_alarm_temp_num_invalid(void);
 bool get_lower_alarm_temp(Isolette_Data_Model_Temp_i *data);
+uintmax_t get_lower_alarm_temp_num_invalid(void);
 bool put_alarm_control(const Isolette_Data_Model_On_Off *data);
 bool get_monitor_mode(Isolette_Data_Model_Monitor_Mode *data);
+uintmax_t get_monitor_mode_num_invalid(void);
 bool get_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data);
+uintmax_t get_current_tempWstatus_num_invalid(void);

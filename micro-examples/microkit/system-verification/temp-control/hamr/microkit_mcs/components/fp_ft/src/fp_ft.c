@@ -25,6 +25,10 @@ bool get_fanCmd(TempControl_SysVerif_FanCmd *data) {
   return get_fanCmd_poll (&numDropped, data);
 }
 
+uintmax_t get_fanCmd_num_invalid(void) {
+  return sb_queue_TempControl_SysVerif_FanCmd_1_numInvalid((sb_queue_TempControl_SysVerif_FanCmd_1_Recv_t *) &fanCmd_recv_queue);
+}
+
 bool put_fanAck(const TempControl_SysVerif_FanAck *data) {
   sb_queue_TempControl_SysVerif_FanAck_1_enqueue((sb_queue_TempControl_SysVerif_FanAck_1_t *) fanAck_queue_1, (TempControl_SysVerif_FanAck *) data);
 

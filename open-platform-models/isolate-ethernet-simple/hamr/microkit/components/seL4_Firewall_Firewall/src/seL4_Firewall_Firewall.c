@@ -28,6 +28,10 @@ bool get_EthernetFramesTxIn(SW_StructuredEthernetMessage_i *data) {
   return get_EthernetFramesTxIn_poll (&numDropped, data);
 }
 
+uintmax_t get_EthernetFramesTxIn_num_invalid(void) {
+  return sb_queue_SW_StructuredEthernetMessage_i_1_numInvalid((sb_queue_SW_StructuredEthernetMessage_i_1_Recv_t *) &EthernetFramesTxIn_recv_queue);
+}
+
 bool put_EthernetFramesRxOut(const SW_StructuredEthernetMessage_i *data) {
   sb_queue_SW_StructuredEthernetMessage_i_1_enqueue((sb_queue_SW_StructuredEthernetMessage_i_1_t *) EthernetFramesRxOut_queue_1, (SW_StructuredEthernetMessage_i *) data);
 
@@ -51,6 +55,10 @@ bool get_EthernetFramesRxIn_poll(sb_event_counter_t *numDropped, SW_StructuredEt
 bool get_EthernetFramesRxIn(SW_StructuredEthernetMessage_i *data) {
   sb_event_counter_t numDropped;
   return get_EthernetFramesRxIn_poll (&numDropped, data);
+}
+
+uintmax_t get_EthernetFramesRxIn_num_invalid(void) {
+  return sb_queue_SW_StructuredEthernetMessage_i_1_numInvalid((sb_queue_SW_StructuredEthernetMessage_i_1_Recv_t *) &EthernetFramesRxIn_recv_queue);
 }
 
 void init(void) {

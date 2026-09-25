@@ -59,6 +59,7 @@ void sb_queue_hamr_SchedState_1_Recv_init(
 
   recvQueue->numRecv = 0;
   recvQueue->queue = queue;
+  recvQueue->numInvalid = 0;
 }
 
 bool sb_queue_hamr_SchedState_1_dequeue(

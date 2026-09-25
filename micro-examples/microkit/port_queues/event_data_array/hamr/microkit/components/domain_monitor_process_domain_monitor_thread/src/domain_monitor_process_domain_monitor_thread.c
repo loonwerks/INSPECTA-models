@@ -24,6 +24,10 @@ bool get_producer_p_p_producer_write_port(event_data_array_port_queues_ArrayOfSt
   return get_producer_p_p_producer_write_port_poll (&numDropped, data);
 }
 
+uintmax_t get_producer_p_p_producer_write_port_num_invalid(void) {
+  return sb_queue_event_data_array_port_queues_ArrayOfStruct_1_numInvalid((sb_queue_event_data_array_port_queues_ArrayOfStruct_1_Recv_t *) &producer_p_p_producer_write_port_recv_queue);
+}
+
 void init(void) {
   sb_queue_event_data_array_port_queues_ArrayOfStruct_1_Recv_init(&producer_p_p_producer_write_port_recv_queue, (sb_queue_event_data_array_port_queues_ArrayOfStruct_1_t *) producer_p_p_producer_write_port_queue_1);
 

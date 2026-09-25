@@ -21,3 +21,9 @@ verus! {
   }
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<SetPoint>() == 16);
+const _: () = assert!(core::mem::align_of::<SetPoint>() == 4);
+const _: () = assert!(core::mem::offset_of!(SetPoint, low) == 0);
+const _: () = assert!(core::mem::offset_of!(SetPoint, high) == 8);

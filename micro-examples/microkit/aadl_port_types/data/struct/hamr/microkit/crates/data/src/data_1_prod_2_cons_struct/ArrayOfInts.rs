@@ -6,9 +6,12 @@ use super::*;
 
 verus! {
 
-  pub const data_1_prod_2_cons_struct_ArrayOfInts_BYTE_SIZE: usize = 40;
   pub const data_1_prod_2_cons_struct_ArrayOfInts_DIM_0: usize = 10;
 
   pub type ArrayOfInts = [i32; data_1_prod_2_cons_struct_ArrayOfInts_DIM_0];
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<ArrayOfInts>() == 40);
+const _: () = assert!(core::mem::align_of::<ArrayOfInts>() == 4);

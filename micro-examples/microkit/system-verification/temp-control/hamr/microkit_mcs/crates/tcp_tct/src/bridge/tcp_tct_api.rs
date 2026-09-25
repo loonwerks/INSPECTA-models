@@ -37,6 +37,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_currentTemp_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_currentTemp_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_fanAck(
       &mut self,
       value: &Ghost<Option<TempControl_SysVerif::FanAck>>) -> (res : Option<TempControl_SysVerif::FanAck>)
@@ -47,6 +53,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_fanAck_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_fanAck_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_setPoint(
       &mut self,
       value: &Ghost<Option<TempControl_SysVerif::SetPoint>>) -> (res : Option<TempControl_SysVerif::SetPoint>)
@@ -54,6 +66,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_setPoint();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_setPoint_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_setPoint_num_invalid();
     }
   }
 
@@ -100,6 +118,12 @@ verus! {
           })),
     {
       self.api.unverified_get_currentTemp(&Ghost(self.currentTemp))
+    }/// The number of messages received on currentTemp that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_currentTemp_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_currentTemp_num_invalid()
     }
     pub fn get_fanAck(&mut self) -> (res : Option<TempControl_SysVerif::FanAck>)
       ensures
@@ -110,6 +134,12 @@ verus! {
         old(self).fanCmd == final(self).fanCmd,
     {
       self.api.unverified_get_fanAck(&Ghost(self.fanAck))
+    }/// The number of messages received on fanAck that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_fanAck_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_fanAck_num_invalid()
     }
     pub fn get_setPoint(&mut self) -> (res : Option<TempControl_SysVerif::SetPoint>)
       ensures
@@ -120,6 +150,12 @@ verus! {
         old(self).fanCmd == final(self).fanCmd,
     {
       self.api.unverified_get_setPoint(&Ghost(self.setPoint))
+    }/// The number of messages received on setPoint that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_setPoint_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_setPoint_num_invalid()
     }
   }
 

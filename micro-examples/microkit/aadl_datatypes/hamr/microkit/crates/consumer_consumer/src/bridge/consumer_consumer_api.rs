@@ -23,6 +23,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_myBoolean_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myBoolean_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_myCharacter(
       &mut self,
       value: &Ghost<Option<u8>>) -> (res : Option<u8>)
@@ -30,6 +36,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_myCharacter();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_myCharacter_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myCharacter_num_invalid();
     }
 
     #[verifier::external_body]
@@ -43,6 +55,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_myString_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myString_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_myInt8(
       &mut self,
       value: &Ghost<Option<i8>>) -> (res : Option<i8>)
@@ -50,6 +68,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_myInt8();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_myInt8_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myInt8_num_invalid();
     }
 
     #[verifier::external_body]
@@ -63,6 +87,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_myInt16_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myInt16_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_myInt32(
       &mut self,
       value: &Ghost<Option<i32>>) -> (res : Option<i32>)
@@ -70,6 +100,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_myInt32();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_myInt32_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myInt32_num_invalid();
     }
 
     #[verifier::external_body]
@@ -83,6 +119,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_myInt64_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myInt64_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_myUInt8(
       &mut self,
       value: &Ghost<Option<u8>>) -> (res : Option<u8>)
@@ -90,6 +132,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_myUInt8();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_myUInt8_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myUInt8_num_invalid();
     }
 
     #[verifier::external_body]
@@ -103,6 +151,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_myUInt16_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myUInt16_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_myUInt32(
       &mut self,
       value: &Ghost<Option<u32>>) -> (res : Option<u32>)
@@ -110,6 +164,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_myUInt32();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_myUInt32_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myUInt32_num_invalid();
     }
 
     #[verifier::external_body]
@@ -123,6 +183,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_myUInt64_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myUInt64_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_myFloat32(
       &mut self,
       value: &Ghost<Option<f32>>) -> (res : Option<f32>)
@@ -130,6 +196,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_myFloat32();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_myFloat32_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myFloat32_num_invalid();
     }
 
     #[verifier::external_body]
@@ -143,6 +215,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_myFloat64_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myFloat64_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_myEnum(
       &mut self,
       value: &Ghost<Option<Aadl_Datatypes::MyEnum>>) -> (res : Option<Aadl_Datatypes::MyEnum>)
@@ -150,6 +228,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_myEnum();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_myEnum_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myEnum_num_invalid();
     }
 
     #[verifier::external_body]
@@ -163,6 +247,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_myStruct_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myStruct_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_myArray1(
       &mut self,
       value: &Ghost<Option<Aadl_Datatypes::MyArrayOneDim>>) -> (res : Option<Aadl_Datatypes::MyArrayOneDim>)
@@ -170,6 +260,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_myArray1();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_myArray1_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myArray1_num_invalid();
     }
   }
 
@@ -221,6 +317,12 @@ verus! {
         old(self).myArray1 == final(self).myArray1,
     {
       self.api.unverified_get_myBoolean(&Ghost(self.myBoolean))
+    }/// The number of messages received on myBoolean that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myBoolean_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myBoolean_num_invalid()
     }
     pub fn get_myCharacter(&mut self) -> (res : Option<u8>)
       ensures
@@ -243,6 +345,12 @@ verus! {
         old(self).myArray1 == final(self).myArray1,
     {
       self.api.unverified_get_myCharacter(&Ghost(self.myCharacter))
+    }/// The number of messages received on myCharacter that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myCharacter_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myCharacter_num_invalid()
     }
     pub fn get_myString(&mut self) -> (res : Option<Base_Types::String>)
       ensures
@@ -265,6 +373,12 @@ verus! {
         old(self).myArray1 == final(self).myArray1,
     {
       self.api.unverified_get_myString(&Ghost(self.myString))
+    }/// The number of messages received on myString that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myString_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myString_num_invalid()
     }
     pub fn get_myInt8(&mut self) -> (res : Option<i8>)
       ensures
@@ -287,6 +401,12 @@ verus! {
         old(self).myArray1 == final(self).myArray1,
     {
       self.api.unverified_get_myInt8(&Ghost(self.myInt8))
+    }/// The number of messages received on myInt8 that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myInt8_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myInt8_num_invalid()
     }
     pub fn get_myInt16(&mut self) -> (res : Option<i16>)
       ensures
@@ -309,6 +429,12 @@ verus! {
         old(self).myArray1 == final(self).myArray1,
     {
       self.api.unverified_get_myInt16(&Ghost(self.myInt16))
+    }/// The number of messages received on myInt16 that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myInt16_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myInt16_num_invalid()
     }
     pub fn get_myInt32(&mut self) -> (res : Option<i32>)
       ensures
@@ -331,6 +457,12 @@ verus! {
         old(self).myArray1 == final(self).myArray1,
     {
       self.api.unverified_get_myInt32(&Ghost(self.myInt32))
+    }/// The number of messages received on myInt32 that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myInt32_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myInt32_num_invalid()
     }
     pub fn get_myInt64(&mut self) -> (res : Option<i64>)
       ensures
@@ -353,6 +485,12 @@ verus! {
         old(self).myArray1 == final(self).myArray1,
     {
       self.api.unverified_get_myInt64(&Ghost(self.myInt64))
+    }/// The number of messages received on myInt64 that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myInt64_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myInt64_num_invalid()
     }
     pub fn get_myUInt8(&mut self) -> (res : Option<u8>)
       ensures
@@ -375,6 +513,12 @@ verus! {
         old(self).myArray1 == final(self).myArray1,
     {
       self.api.unverified_get_myUInt8(&Ghost(self.myUInt8))
+    }/// The number of messages received on myUInt8 that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myUInt8_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myUInt8_num_invalid()
     }
     pub fn get_myUInt16(&mut self) -> (res : Option<u16>)
       ensures
@@ -397,6 +541,12 @@ verus! {
         old(self).myArray1 == final(self).myArray1,
     {
       self.api.unverified_get_myUInt16(&Ghost(self.myUInt16))
+    }/// The number of messages received on myUInt16 that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myUInt16_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myUInt16_num_invalid()
     }
     pub fn get_myUInt32(&mut self) -> (res : Option<u32>)
       ensures
@@ -419,6 +569,12 @@ verus! {
         old(self).myArray1 == final(self).myArray1,
     {
       self.api.unverified_get_myUInt32(&Ghost(self.myUInt32))
+    }/// The number of messages received on myUInt32 that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myUInt32_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myUInt32_num_invalid()
     }
     pub fn get_myUInt64(&mut self) -> (res : Option<u64>)
       ensures
@@ -441,6 +597,12 @@ verus! {
         old(self).myArray1 == final(self).myArray1,
     {
       self.api.unverified_get_myUInt64(&Ghost(self.myUInt64))
+    }/// The number of messages received on myUInt64 that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myUInt64_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myUInt64_num_invalid()
     }
     pub fn get_myFloat32(&mut self) -> (res : Option<f32>)
       ensures
@@ -463,6 +625,12 @@ verus! {
         old(self).myArray1 == final(self).myArray1,
     {
       self.api.unverified_get_myFloat32(&Ghost(self.myFloat32))
+    }/// The number of messages received on myFloat32 that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myFloat32_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myFloat32_num_invalid()
     }
     pub fn get_myFloat64(&mut self) -> (res : Option<f64>)
       ensures
@@ -485,6 +653,12 @@ verus! {
         old(self).myArray1 == final(self).myArray1,
     {
       self.api.unverified_get_myFloat64(&Ghost(self.myFloat64))
+    }/// The number of messages received on myFloat64 that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myFloat64_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myFloat64_num_invalid()
     }
     pub fn get_myEnum(&mut self) -> (res : Option<Aadl_Datatypes::MyEnum>)
       ensures
@@ -507,6 +681,12 @@ verus! {
         old(self).myArray1 == final(self).myArray1,
     {
       self.api.unverified_get_myEnum(&Ghost(self.myEnum))
+    }/// The number of messages received on myEnum that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myEnum_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myEnum_num_invalid()
     }
     pub fn get_myStruct(&mut self) -> (res : Option<Aadl_Datatypes::MyStruct_i>)
       ensures
@@ -529,6 +709,12 @@ verus! {
         old(self).myArray1 == final(self).myArray1,
     {
       self.api.unverified_get_myStruct(&Ghost(self.myStruct))
+    }/// The number of messages received on myStruct that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myStruct_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myStruct_num_invalid()
     }
     pub fn get_myArray1(&mut self) -> (res : Option<Aadl_Datatypes::MyArrayOneDim>)
       ensures
@@ -551,6 +737,12 @@ verus! {
         res == final(self).myArray1,
     {
       self.api.unverified_get_myArray1(&Ghost(self.myArray1))
+    }/// The number of messages received on myArray1 that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myArray1_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myArray1_num_invalid()
     }
   }
 

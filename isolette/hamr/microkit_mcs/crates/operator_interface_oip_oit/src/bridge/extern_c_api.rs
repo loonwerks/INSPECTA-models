@@ -12,9 +12,13 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_regulator_status(value: *mut Isolette_Data_Model::Status) -> bool;
+  fn get_regulator_status_num_invalid() -> u64;
   fn get_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool;
+  fn get_monitor_status_num_invalid() -> u64;
   fn get_display_temperature(value: *mut Isolette_Data_Model::Temp_i) -> bool;
+  fn get_display_temperature_num_invalid() -> u64;
   fn get_alarm_control(value: *mut Isolette_Data_Model::On_Off) -> bool;
+  fn get_alarm_control_num_invalid() -> u64;
   fn put_lower_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
   fn put_upper_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
   fn put_lower_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
@@ -30,12 +34,26 @@ pub fn unsafe_get_regulator_status() -> Isolette_Data_Model::Status
   }
 }
 
+pub fn unsafe_get_regulator_status_num_invalid() -> u64
+{
+  unsafe {
+    return get_regulator_status_num_invalid();
+  }
+}
+
 pub fn unsafe_get_monitor_status() -> Isolette_Data_Model::Status
 {
   unsafe {
     let value: *mut Isolette_Data_Model::Status = &mut Isolette_Data_Model::Status::default();
     get_monitor_status(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_monitor_status_num_invalid() -> u64
+{
+  unsafe {
+    return get_monitor_status_num_invalid();
   }
 }
 
@@ -48,12 +66,26 @@ pub fn unsafe_get_display_temperature() -> Isolette_Data_Model::Temp_i
   }
 }
 
+pub fn unsafe_get_display_temperature_num_invalid() -> u64
+{
+  unsafe {
+    return get_display_temperature_num_invalid();
+  }
+}
+
 pub fn unsafe_get_alarm_control() -> Isolette_Data_Model::On_Off
 {
   unsafe {
     let value: *mut Isolette_Data_Model::On_Off = &mut Isolette_Data_Model::On_Off::default();
     get_alarm_control(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_alarm_control_num_invalid() -> u64
+{
+  unsafe {
+    return get_alarm_control_num_invalid();
   }
 }
 
@@ -129,6 +161,12 @@ pub fn get_regulator_status(value: *mut Isolette_Data_Model::Status) -> bool
 }
 
 #[cfg(test)]
+pub fn get_regulator_status_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool
 {
   unsafe {
@@ -136,6 +174,12 @@ pub fn get_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_monitor_status_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -149,6 +193,12 @@ pub fn get_display_temperature(value: *mut Isolette_Data_Model::Temp_i) -> bool
 }
 
 #[cfg(test)]
+pub fn get_display_temperature_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_alarm_control(value: *mut Isolette_Data_Model::On_Off) -> bool
 {
   unsafe {
@@ -156,6 +206,12 @@ pub fn get_alarm_control(value: *mut Isolette_Data_Model::On_Off) -> bool
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_alarm_control_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]

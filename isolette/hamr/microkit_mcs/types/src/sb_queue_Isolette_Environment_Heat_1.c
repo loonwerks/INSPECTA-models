@@ -59,6 +59,7 @@ void sb_queue_Isolette_Environment_Heat_1_Recv_init(
 
   recvQueue->numRecv = 0;
   recvQueue->queue = queue;
+  recvQueue->numInvalid = 0;
 }
 
 bool sb_queue_Isolette_Environment_Heat_1_dequeue(
@@ -96,13 +97,26 @@ bool sb_queue_Isolette_Environment_Heat_1_dequeue(
   //sb_event_counter_t numRemaining = numSent - *numRecv;
 
   size_t index = (*numRecv - 1) % SB_QUEUE_ISOLETTE_ENVIRONMENT_HEAT_1_SIZE;
-  *data = queue->elt[index]; // Copy data
+  // Copy into a staging buffer, never straight into *data: the element came from
+  // another protection domain, and nothing reaches the caller until it is known to
+  // be coherent and valid.  Static rather than on the stack because an element can be
+  // larger than a protection domain's stack; a protection domain is single-threaded,
+  // so one buffer per queue type suffices.
+  static Isolette_Environment_Heat staging;
+  memcpy(&staging, &queue->elt[index], sizeof(staging));
 
   // Acquire memory fence - ensure read of data BEFORE reading queue->numSent again
   __atomic_thread_fence(__ATOMIC_ACQUIRE);
 
   if (queue->numSent - *numRecv + 1 < SB_QUEUE_ISOLETTE_ENVIRONMENT_HEAT_1_SIZE) {
     // Sender did not write element we were reading. Copied data is coherent.
+    // Validate the staged copy -- not shared memory, which the sender could change
+    // between a check and a copy.
+    if (!Isolette_Environment_Heat_is_valid(&staging)) {
+      ++(recvQueue->numInvalid);
+      return false;
+    }
+    *data = staging;
     return true;
   } else {
     // Sender may have written element we were reading. Copied data may be incoherent.

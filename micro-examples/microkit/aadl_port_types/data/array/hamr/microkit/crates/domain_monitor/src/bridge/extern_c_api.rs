@@ -12,6 +12,7 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_producer_p_p_producer_write_port(value: *mut data_1_prod_2_cons_array::ArrayOfStruct) -> bool;
+  fn get_producer_p_p_producer_write_port_num_invalid() -> u64;
 }
 
 pub fn unsafe_get_producer_p_p_producer_write_port() -> data_1_prod_2_cons_array::ArrayOfStruct
@@ -20,6 +21,13 @@ pub fn unsafe_get_producer_p_p_producer_write_port() -> data_1_prod_2_cons_array
     let value: *mut data_1_prod_2_cons_array::ArrayOfStruct = &mut [data_1_prod_2_cons_array::struct_i::default(); data_1_prod_2_cons_array::data_1_prod_2_cons_array_ArrayOfStruct_DIM_0];
     get_producer_p_p_producer_write_port(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_producer_p_p_producer_write_port_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_p_p_producer_write_port_num_invalid();
   }
 }
 
@@ -50,4 +58,10 @@ pub fn get_producer_p_p_producer_write_port(value: *mut data_1_prod_2_cons_array
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_producer_p_p_producer_write_port_num_invalid() -> u64
+{
+  return 0;
 }

@@ -33,6 +33,10 @@ UTIL_OBJS = printf.o util.o
 TYPES_DIR = $(TOP_DIR)/types
 TYPE_OBJS := $(TOP_DIR)/build/sb_queue_event_data_2_prod_2_cons_array_ArrayOfStruct_1.o
 
+# The queue objects as an archive: each protection domain's link pulls in only the
+# queues it uses, not every queue in the system
+TYPES_LIB := libhamr_types.a
+
 # exporting TOP_TYPES_INCLUDE in case other makefiles need it
 export TOP_TYPES_INCLUDE = -I$(TYPES_DIR)/include
 
@@ -47,6 +51,10 @@ ${CHECK_FLAGS_BOARD_MD5}:
 
 %.o: ${TOP_DIR}/util/src/%.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_DIR)/util/include
+
+$(TYPES_LIB): $(TYPE_OBJS)
+	rm -f $@
+	$(AR) rcs $@ $^
 
 $(TOP_DIR)/build/sb_queue_event_data_2_prod_2_cons_array_ArrayOfStruct_1.o: $(TOP_DIR)/types/src/sb_queue_event_data_2_prod_2_cons_array_ArrayOfStruct_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
@@ -113,34 +121,34 @@ pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 producer_p_p1_producer_MON.elf: producer_p_p1_producer_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-producer_p_p1_producer.elf: $(UTIL_OBJS) $(TYPE_OBJS) producer_p_p1_producer_user.o producer_p_p1_producer.o
+producer_p_p1_producer.elf: $(UTIL_OBJS) producer_p_p1_producer_user.o producer_p_p1_producer.o $(TYPES_LIB)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 producer_p_p2_producer_MON.elf: producer_p_p2_producer_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-producer_p_p2_producer.elf: $(UTIL_OBJS) $(TYPE_OBJS) producer_p_p2_producer_user.o producer_p_p2_producer.o
+producer_p_p2_producer.elf: $(UTIL_OBJS) producer_p_p2_producer_user.o producer_p_p2_producer.o $(TYPES_LIB)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 consumer_p_p_consumer_MON.elf: consumer_p_p_consumer_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-consumer_p_p_consumer.elf: $(UTIL_OBJS) $(TYPE_OBJS) consumer_p_p_consumer_user.o consumer_p_p_consumer.o
+consumer_p_p_consumer.elf: $(UTIL_OBJS) consumer_p_p_consumer_user.o consumer_p_p_consumer.o $(TYPES_LIB)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 consumer_p_s_consumer_MON.elf: consumer_p_s_consumer_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-consumer_p_s_consumer.elf: $(UTIL_OBJS) $(TYPE_OBJS) consumer_p_s_consumer_user.o consumer_p_s_consumer.o
+consumer_p_s_consumer.elf: $(UTIL_OBJS) consumer_p_s_consumer_user.o consumer_p_s_consumer.o $(TYPES_LIB)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 domain_monitor_process_domain_monitor_thread_MON.elf: domain_monitor_process_domain_monitor_thread_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -ldomain_monitor -o $@
+domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -ldomain_monitor -o $@
 
-pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
+pacer.elf: $(UTIL_OBJS) pacer.o $(TYPES_LIB)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 $(IMAGE_FILE): $(IMAGES) $(TOP_DIR)/$(MSD)

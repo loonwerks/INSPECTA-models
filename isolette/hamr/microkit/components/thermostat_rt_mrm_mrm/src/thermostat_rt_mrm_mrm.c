@@ -29,6 +29,10 @@ bool get_interface_failure(Isolette_Data_Model_Failure_Flag_i *data) {
   return isFresh;
 }
 
+uintmax_t get_interface_failure_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Failure_Flag_i_1_numInvalid((sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_t *) &interface_failure_recv_queue);
+}
+
 bool put_regulator_mode(const Isolette_Data_Model_Regulator_Mode *data) {
   sb_queue_Isolette_Data_Model_Regulator_Mode_1_enqueue((sb_queue_Isolette_Data_Model_Regulator_Mode_1_t *) regulator_mode_queue_1, (Isolette_Data_Model_Regulator_Mode *) data);
 
@@ -48,6 +52,10 @@ bool get_internal_failure(Isolette_Data_Model_Failure_Flag_i *data) {
   return isFresh;
 }
 
+uintmax_t get_internal_failure_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Failure_Flag_i_1_numInvalid((sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_t *) &internal_failure_recv_queue);
+}
+
 Isolette_Data_Model_TempWstatus_i last_current_tempWstatus_payload;
 
 bool get_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data) {
@@ -59,6 +67,10 @@ bool get_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data) {
   }
   *data = last_current_tempWstatus_payload;
   return isFresh;
+}
+
+uintmax_t get_current_tempWstatus_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_TempWstatus_i_1_numInvalid((sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &current_tempWstatus_recv_queue);
 }
 
 void init(void) {

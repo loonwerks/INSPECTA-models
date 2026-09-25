@@ -12,9 +12,13 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
+  fn get_current_tempWstatus_num_invalid() -> u64;
   fn get_lower_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool;
+  fn get_lower_alarm_temp_num_invalid() -> u64;
   fn get_upper_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool;
+  fn get_upper_alarm_temp_num_invalid() -> u64;
   fn get_monitor_mode(value: *mut Isolette_Data_Model::Monitor_Mode) -> bool;
+  fn get_monitor_mode_num_invalid() -> u64;
   fn put_alarm_control(value: *mut Isolette_Data_Model::On_Off) -> bool;
   fn put_sv_lastCmd(value: *mut Isolette_Data_Model::On_Off) -> bool;
   fn is_injection_enabled() -> bool;
@@ -31,12 +35,26 @@ pub fn unsafe_get_current_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
   }
 }
 
+pub fn unsafe_get_current_tempWstatus_num_invalid() -> u64
+{
+  unsafe {
+    return get_current_tempWstatus_num_invalid();
+  }
+}
+
 pub fn unsafe_get_lower_alarm_temp() -> Isolette_Data_Model::Temp_i
 {
   unsafe {
     let value: *mut Isolette_Data_Model::Temp_i = &mut Isolette_Data_Model::Temp_i::default();
     get_lower_alarm_temp(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_lower_alarm_temp_num_invalid() -> u64
+{
+  unsafe {
+    return get_lower_alarm_temp_num_invalid();
   }
 }
 
@@ -49,12 +67,26 @@ pub fn unsafe_get_upper_alarm_temp() -> Isolette_Data_Model::Temp_i
   }
 }
 
+pub fn unsafe_get_upper_alarm_temp_num_invalid() -> u64
+{
+  unsafe {
+    return get_upper_alarm_temp_num_invalid();
+  }
+}
+
 pub fn unsafe_get_monitor_mode() -> Isolette_Data_Model::Monitor_Mode
 {
   unsafe {
     let value: *mut Isolette_Data_Model::Monitor_Mode = &mut Isolette_Data_Model::Monitor_Mode::default();
     get_monitor_mode(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_monitor_mode_num_invalid() -> u64
+{
+  unsafe {
+    return get_monitor_mode_num_invalid();
   }
 }
 
@@ -144,6 +176,12 @@ pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -
 }
 
 #[cfg(test)]
+pub fn get_current_tempWstatus_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_lower_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 {
   unsafe {
@@ -151,6 +189,12 @@ pub fn get_lower_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_lower_alarm_temp_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -164,6 +208,12 @@ pub fn get_upper_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 }
 
 #[cfg(test)]
+pub fn get_upper_alarm_temp_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_monitor_mode(value: *mut Isolette_Data_Model::Monitor_Mode) -> bool
 {
   unsafe {
@@ -171,6 +221,12 @@ pub fn get_monitor_mode(value: *mut Isolette_Data_Model::Monitor_Mode) -> bool
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_monitor_mode_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]

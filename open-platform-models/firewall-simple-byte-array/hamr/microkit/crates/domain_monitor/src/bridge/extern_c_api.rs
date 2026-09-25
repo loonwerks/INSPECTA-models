@@ -12,9 +12,13 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_ArduPilot_ArduPilot_EthernetFramesTx(value: *mut SW::RawEthernetMessage) -> bool;
+  fn get_ArduPilot_ArduPilot_EthernetFramesTx_num_invalid() -> u64;
   fn get_Firewall_Firewall_EthernetFramesRxOut(value: *mut SW::RawEthernetMessage) -> bool;
+  fn get_Firewall_Firewall_EthernetFramesRxOut_num_invalid() -> u64;
   fn get_Firewall_Firewall_EthernetFramesTxOut(value: *mut SW::RawEthernetMessage) -> bool;
+  fn get_Firewall_Firewall_EthernetFramesTxOut_num_invalid() -> u64;
   fn get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx(value: *mut SW::RawEthernetMessage) -> bool;
+  fn get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_num_invalid() -> u64;
 }
 
 pub fn unsafe_get_ArduPilot_ArduPilot_EthernetFramesTx() -> Option<SW::RawEthernetMessage>
@@ -26,6 +30,13 @@ pub fn unsafe_get_ArduPilot_ArduPilot_EthernetFramesTx() -> Option<SW::RawEthern
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_ArduPilot_ArduPilot_EthernetFramesTx_num_invalid() -> u64
+{
+  unsafe {
+    return get_ArduPilot_ArduPilot_EthernetFramesTx_num_invalid();
   }
 }
 
@@ -41,6 +52,13 @@ pub fn unsafe_get_Firewall_Firewall_EthernetFramesRxOut() -> Option<SW::RawEther
   }
 }
 
+pub fn unsafe_get_Firewall_Firewall_EthernetFramesRxOut_num_invalid() -> u64
+{
+  unsafe {
+    return get_Firewall_Firewall_EthernetFramesRxOut_num_invalid();
+  }
+}
+
 pub fn unsafe_get_Firewall_Firewall_EthernetFramesTxOut() -> Option<SW::RawEthernetMessage>
 {
   unsafe {
@@ -53,6 +71,13 @@ pub fn unsafe_get_Firewall_Firewall_EthernetFramesTxOut() -> Option<SW::RawEther
   }
 }
 
+pub fn unsafe_get_Firewall_Firewall_EthernetFramesTxOut_num_invalid() -> u64
+{
+  unsafe {
+    return get_Firewall_Firewall_EthernetFramesTxOut_num_invalid();
+  }
+}
+
 pub fn unsafe_get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx() -> Option<SW::RawEthernetMessage>
 {
   unsafe {
@@ -62,6 +87,13 @@ pub fn unsafe_get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_num_invalid() -> u64
+{
+  unsafe {
+    return get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_num_invalid();
   }
 }
 
@@ -105,6 +137,12 @@ pub fn get_ArduPilot_ArduPilot_EthernetFramesTx(value: *mut SW::RawEthernetMessa
 }
 
 #[cfg(test)]
+pub fn get_ArduPilot_ArduPilot_EthernetFramesTx_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_Firewall_Firewall_EthernetFramesRxOut(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
@@ -116,6 +154,12 @@ pub fn get_Firewall_Firewall_EthernetFramesRxOut(value: *mut SW::RawEthernetMess
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_Firewall_Firewall_EthernetFramesRxOut_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]
@@ -133,6 +177,12 @@ pub fn get_Firewall_Firewall_EthernetFramesTxOut(value: *mut SW::RawEthernetMess
 }
 
 #[cfg(test)]
+pub fn get_Firewall_Firewall_EthernetFramesTxOut_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
@@ -144,4 +194,10 @@ pub fn get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx(value:
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_num_invalid() -> u64
+{
+  return 0;
 }

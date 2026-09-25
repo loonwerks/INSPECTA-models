@@ -30,6 +30,10 @@ bool get_seL4_ArduPilot_ArduPilot_EthernetFramesTx(SW_StructuredEthernetMessage_
   return get_seL4_ArduPilot_ArduPilot_EthernetFramesTx_poll (&numDropped, data);
 }
 
+uintmax_t get_seL4_ArduPilot_ArduPilot_EthernetFramesTx_num_invalid(void) {
+  return sb_queue_SW_StructuredEthernetMessage_i_1_numInvalid((sb_queue_SW_StructuredEthernetMessage_i_1_Recv_t *) &seL4_ArduPilot_ArduPilot_EthernetFramesTx_recv_queue);
+}
+
 bool seL4_Firewall_Firewall_EthernetFramesRxOut_is_empty(void) {
   return sb_queue_SW_StructuredEthernetMessage_i_1_is_empty(&seL4_Firewall_Firewall_EthernetFramesRxOut_recv_queue);
 }
@@ -41,6 +45,10 @@ bool get_seL4_Firewall_Firewall_EthernetFramesRxOut_poll(sb_event_counter_t *num
 bool get_seL4_Firewall_Firewall_EthernetFramesRxOut(SW_StructuredEthernetMessage_i *data) {
   sb_event_counter_t numDropped;
   return get_seL4_Firewall_Firewall_EthernetFramesRxOut_poll (&numDropped, data);
+}
+
+uintmax_t get_seL4_Firewall_Firewall_EthernetFramesRxOut_num_invalid(void) {
+  return sb_queue_SW_StructuredEthernetMessage_i_1_numInvalid((sb_queue_SW_StructuredEthernetMessage_i_1_Recv_t *) &seL4_Firewall_Firewall_EthernetFramesRxOut_recv_queue);
 }
 
 bool seL4_Firewall_Firewall_EthernetFramesTxOut_is_empty(void) {
@@ -56,6 +64,10 @@ bool get_seL4_Firewall_Firewall_EthernetFramesTxOut(SW_StructuredEthernetMessage
   return get_seL4_Firewall_Firewall_EthernetFramesTxOut_poll (&numDropped, data);
 }
 
+uintmax_t get_seL4_Firewall_Firewall_EthernetFramesTxOut_num_invalid(void) {
+  return sb_queue_SW_StructuredEthernetMessage_i_1_numInvalid((sb_queue_SW_StructuredEthernetMessage_i_1_Recv_t *) &seL4_Firewall_Firewall_EthernetFramesTxOut_recv_queue);
+}
+
 bool seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_is_empty(void) {
   return sb_queue_SW_StructuredEthernetMessage_i_1_is_empty(&seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_recv_queue);
 }
@@ -67,6 +79,10 @@ bool get_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_pol
 bool get_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx(SW_StructuredEthernetMessage_i *data) {
   sb_event_counter_t numDropped;
   return get_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_poll (&numDropped, data);
+}
+
+uintmax_t get_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_num_invalid(void) {
+  return sb_queue_SW_StructuredEthernetMessage_i_1_numInvalid((sb_queue_SW_StructuredEthernetMessage_i_1_Recv_t *) &seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_recv_queue);
 }
 
 void init(void) {

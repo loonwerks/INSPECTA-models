@@ -54,6 +54,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_regulator_status_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_regulator_status_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_monitor_status(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Status>) -> (res : Isolette_Data_Model::Status)
@@ -61,6 +67,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_monitor_status();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_monitor_status_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_monitor_status_num_invalid();
     }
 
     #[verifier::external_body]
@@ -74,6 +86,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_display_temperature_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_display_temperature_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_alarm_control(
       &mut self,
       value: &Ghost<Isolette_Data_Model::On_Off>) -> (res : Isolette_Data_Model::On_Off)
@@ -81,6 +99,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_alarm_control();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_alarm_control_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_alarm_control_num_invalid();
     }
   }
 
@@ -192,6 +216,12 @@ verus! {
         old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
     {
       self.api.unverified_get_regulator_status(&Ghost(self.regulator_status))
+    }/// The number of messages received on regulator_status that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_regulator_status_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_regulator_status_num_invalid()
     }
     pub fn get_monitor_status(&mut self) -> (res : Isolette_Data_Model::Status)
       ensures
@@ -206,6 +236,12 @@ verus! {
         old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
     {
       self.api.unverified_get_monitor_status(&Ghost(self.monitor_status))
+    }/// The number of messages received on monitor_status that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_monitor_status_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_monitor_status_num_invalid()
     }
     pub fn get_display_temperature(&mut self) -> (res : Isolette_Data_Model::Temp_i)
       ensures
@@ -220,6 +256,12 @@ verus! {
         old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
     {
       self.api.unverified_get_display_temperature(&Ghost(self.display_temperature))
+    }/// The number of messages received on display_temperature that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_display_temperature_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_display_temperature_num_invalid()
     }
     pub fn get_alarm_control(&mut self) -> (res : Isolette_Data_Model::On_Off)
       ensures
@@ -234,6 +276,12 @@ verus! {
         old(self).upper_alarm_tempWstatus == final(self).upper_alarm_tempWstatus,
     {
       self.api.unverified_get_alarm_control(&Ghost(self.alarm_control))
+    }/// The number of messages received on alarm_control that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_alarm_control_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_alarm_control_num_invalid()
     }
   }
 

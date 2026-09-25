@@ -24,6 +24,10 @@ bool get_read_port(int8_t *data) {
   return get_read_port_poll (&numDropped, data);
 }
 
+uintmax_t get_read_port_num_invalid(void) {
+  return sb_queue_int8_t_5_numInvalid((sb_queue_int8_t_5_Recv_t *) &read_port_recv_queue);
+}
+
 void init(void) {
   sb_queue_int8_t_5_Recv_init(&read_port_recv_queue, (sb_queue_int8_t_5_t *) read_port_queue_5);
 

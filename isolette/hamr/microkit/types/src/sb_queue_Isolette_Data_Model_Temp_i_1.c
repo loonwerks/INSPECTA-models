@@ -59,6 +59,7 @@ void sb_queue_Isolette_Data_Model_Temp_i_1_Recv_init(
 
   recvQueue->numRecv = 0;
   recvQueue->queue = queue;
+  recvQueue->numInvalid = 0;
 }
 
 bool sb_queue_Isolette_Data_Model_Temp_i_1_dequeue(

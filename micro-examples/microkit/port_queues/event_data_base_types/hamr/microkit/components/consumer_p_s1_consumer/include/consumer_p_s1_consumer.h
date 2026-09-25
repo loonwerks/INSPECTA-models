@@ -27,3 +27,4 @@ void *memset(void *dest, int c, size_t n);
 bool read_port_is_empty(void);
 bool get_read_port_poll(sb_event_counter_t *numDropped, int8_t *data);
 bool get_read_port(int8_t *data);
+uintmax_t get_read_port_num_invalid(void);

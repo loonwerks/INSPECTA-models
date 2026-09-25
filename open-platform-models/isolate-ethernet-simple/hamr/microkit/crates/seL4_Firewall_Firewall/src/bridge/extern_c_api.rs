@@ -12,7 +12,9 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_EthernetFramesRxIn(value: *mut SW::StructuredEthernetMessage_i) -> bool;
+  fn get_EthernetFramesRxIn_num_invalid() -> u64;
   fn get_EthernetFramesTxIn(value: *mut SW::StructuredEthernetMessage_i) -> bool;
+  fn get_EthernetFramesTxIn_num_invalid() -> u64;
   fn put_EthernetFramesRxOut(value: *mut SW::StructuredEthernetMessage_i) -> bool;
   fn put_EthernetFramesTxOut(value: *mut SW::StructuredEthernetMessage_i) -> bool;
 }
@@ -29,6 +31,13 @@ pub fn unsafe_get_EthernetFramesRxIn() -> Option<SW::StructuredEthernetMessage_i
   }
 }
 
+pub fn unsafe_get_EthernetFramesRxIn_num_invalid() -> u64
+{
+  unsafe {
+    return get_EthernetFramesRxIn_num_invalid();
+  }
+}
+
 pub fn unsafe_get_EthernetFramesTxIn() -> Option<SW::StructuredEthernetMessage_i>
 {
   unsafe {
@@ -38,6 +47,13 @@ pub fn unsafe_get_EthernetFramesTxIn() -> Option<SW::StructuredEthernetMessage_i
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_EthernetFramesTxIn_num_invalid() -> u64
+{
+  unsafe {
+    return get_EthernetFramesTxIn_num_invalid();
   }
 }
 
@@ -95,6 +111,12 @@ pub fn get_EthernetFramesRxIn(value: *mut SW::StructuredEthernetMessage_i) -> bo
 }
 
 #[cfg(test)]
+pub fn get_EthernetFramesRxIn_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_EthernetFramesTxIn(value: *mut SW::StructuredEthernetMessage_i) -> bool
 {
   unsafe {
@@ -106,6 +128,12 @@ pub fn get_EthernetFramesTxIn(value: *mut SW::StructuredEthernetMessage_i) -> bo
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_EthernetFramesTxIn_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]

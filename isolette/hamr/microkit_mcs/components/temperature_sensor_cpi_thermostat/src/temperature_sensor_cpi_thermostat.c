@@ -31,6 +31,10 @@ bool get_air(Isolette_Data_Model_PhysicalTemp_i *data) {
   return isFresh;
 }
 
+uintmax_t get_air_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_numInvalid((sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_Recv_t *) &air_recv_queue);
+}
+
 void init(void) {
   printf("%s | INIT!\n", microkit_name);
 

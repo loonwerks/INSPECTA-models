@@ -23,6 +23,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_p1_t1_write_port_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_p1_t1_write_port_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_p2_t2_write_port(
       &mut self,
       value: &Ghost<i32>) -> (res : i32)
@@ -30,6 +36,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_p2_t2_write_port();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_p2_t2_write_port_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_p2_t2_write_port_num_invalid();
     }
   }
 
@@ -53,6 +65,12 @@ verus! {
         old(self).p2_t2_write_port == final(self).p2_t2_write_port,
     {
       self.api.unverified_get_p1_t1_write_port(&Ghost(self.p1_t1_write_port))
+    }/// The number of messages received on p1_t1_write_port that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_p1_t1_write_port_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_p1_t1_write_port_num_invalid()
     }
     pub fn get_p2_t2_write_port(&mut self) -> (res : i32)
       ensures
@@ -61,6 +79,12 @@ verus! {
         res == final(self).p2_t2_write_port,
     {
       self.api.unverified_get_p2_t2_write_port(&Ghost(self.p2_t2_write_port))
+    }/// The number of messages received on p2_t2_write_port that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_p2_t2_write_port_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_p2_t2_write_port_num_invalid()
     }
   }
 

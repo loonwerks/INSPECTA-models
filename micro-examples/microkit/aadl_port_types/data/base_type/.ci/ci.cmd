@@ -39,6 +39,19 @@ def run(title: String, verboseArg: B, proc: OsProto.Proc): Z = {
   return r.exitCode
 }
 
+// Boots a built image under QEMU and fails on a fault, panic or violation (see
+// .github/workflows/hamr/simulate.cmd).  Run it right after the image's `make`, with the same
+// environment, and before its build directory is removed.
+def bootUnderQemu(dir: Os.Path, options: ISZ[String]): Z = {
+  var root = homeDir
+  while (!(root / ".github").exists) {
+    root = root.up
+  }
+  val simulate = root / ".github" / "workflows" / "hamr" / "simulate.cmd"
+  return run(s"Booting the image in ${dir.name} under QEMU", T,
+    Os.proc(ISZ[String](sireum.string, "slang", "run", simulate.string, dir.string) ++ options))
+}
+
 println(
   st"""**************************************************************************
       |*                            DATA PORTS BASE TYPES                       *
@@ -64,6 +77,10 @@ if (result == 0) {
 
 if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
   result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
+
+  if (result == 0) {
+    result = bootUnderQemu(homeDir / "hamr" / "microkit", ISZ())
+  }
   removeBuildArtifacts()
 }
 

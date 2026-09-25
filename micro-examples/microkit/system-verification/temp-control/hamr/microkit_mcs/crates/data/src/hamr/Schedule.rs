@@ -23,3 +23,11 @@ verus! {
   }
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<Schedule>() == 1672);
+const _: () = assert!(core::mem::align_of::<Schedule>() == 8);
+const _: () = assert!(core::mem::offset_of!(Schedule, timeslices) == 0);
+const _: () = assert!(core::mem::offset_of!(Schedule, timeslice_ch) == 1024);
+const _: () = assert!(core::mem::offset_of!(Schedule, is_user_partition) == 1536);
+const _: () = assert!(core::mem::offset_of!(Schedule, num_timeslices) == 1664);

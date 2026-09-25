@@ -6,9 +6,12 @@ use super::*;
 
 verus! {
 
-  pub const Aadl_Datatypes_MyArrayOneDim_BYTE_SIZE: usize = 40;
   pub const Aadl_Datatypes_MyArrayOneDim_DIM_0: usize = 10;
 
   pub type MyArrayOneDim = [i32; Aadl_Datatypes_MyArrayOneDim_DIM_0];
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<MyArrayOneDim>() == 40);
+const _: () = assert!(core::mem::align_of::<MyArrayOneDim>() == 4);

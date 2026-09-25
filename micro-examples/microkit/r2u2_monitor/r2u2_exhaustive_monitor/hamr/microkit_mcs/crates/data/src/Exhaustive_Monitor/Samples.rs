@@ -6,9 +6,12 @@ use super::*;
 
 verus! {
 
-  pub const Exhaustive_Monitor_Samples_BYTE_SIZE: usize = 16;
   pub const Exhaustive_Monitor_Samples_DIM_0: usize = 4;
 
   pub type Samples = [i32; Exhaustive_Monitor_Samples_DIM_0];
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<Samples>() == 16);
+const _: () = assert!(core::mem::align_of::<Samples>() == 4);

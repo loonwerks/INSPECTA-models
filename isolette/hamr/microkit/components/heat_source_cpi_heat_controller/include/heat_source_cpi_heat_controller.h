@@ -25,4 +25,5 @@ void *memset(void *dest, int c, size_t n);
 
 
 bool get_heat_control(Isolette_Data_Model_On_Off *data);
+uintmax_t get_heat_control_num_invalid(void);
 bool put_heat_out(const Isolette_Environment_Heat *data);

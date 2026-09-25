@@ -54,6 +54,10 @@ bool get_producer_producer_myBoolean(bool *data) {
   return get_producer_producer_myBoolean_poll (&numDropped, data);
 }
 
+uintmax_t get_producer_producer_myBoolean_num_invalid(void) {
+  return sb_queue_bool_1_numInvalid((sb_queue_bool_1_Recv_t *) &producer_producer_myBoolean_recv_queue);
+}
+
 bool producer_producer_myCharacter_is_empty(void) {
   return sb_queue_char_1_is_empty(&producer_producer_myCharacter_recv_queue);
 }
@@ -65,6 +69,10 @@ bool get_producer_producer_myCharacter_poll(sb_event_counter_t *numDropped, char
 bool get_producer_producer_myCharacter(char *data) {
   sb_event_counter_t numDropped;
   return get_producer_producer_myCharacter_poll (&numDropped, data);
+}
+
+uintmax_t get_producer_producer_myCharacter_num_invalid(void) {
+  return sb_queue_char_1_numInvalid((sb_queue_char_1_Recv_t *) &producer_producer_myCharacter_recv_queue);
 }
 
 bool producer_producer_myString_is_empty(void) {
@@ -80,6 +88,10 @@ bool get_producer_producer_myString(Base_Types_String *data) {
   return get_producer_producer_myString_poll (&numDropped, data);
 }
 
+uintmax_t get_producer_producer_myString_num_invalid(void) {
+  return sb_queue_Base_Types_String_1_numInvalid((sb_queue_Base_Types_String_1_Recv_t *) &producer_producer_myString_recv_queue);
+}
+
 bool producer_producer_myInt8_is_empty(void) {
   return sb_queue_int8_t_1_is_empty(&producer_producer_myInt8_recv_queue);
 }
@@ -91,6 +103,10 @@ bool get_producer_producer_myInt8_poll(sb_event_counter_t *numDropped, int8_t *d
 bool get_producer_producer_myInt8(int8_t *data) {
   sb_event_counter_t numDropped;
   return get_producer_producer_myInt8_poll (&numDropped, data);
+}
+
+uintmax_t get_producer_producer_myInt8_num_invalid(void) {
+  return sb_queue_int8_t_1_numInvalid((sb_queue_int8_t_1_Recv_t *) &producer_producer_myInt8_recv_queue);
 }
 
 bool producer_producer_myInt16_is_empty(void) {
@@ -106,6 +122,10 @@ bool get_producer_producer_myInt16(int16_t *data) {
   return get_producer_producer_myInt16_poll (&numDropped, data);
 }
 
+uintmax_t get_producer_producer_myInt16_num_invalid(void) {
+  return sb_queue_int16_t_1_numInvalid((sb_queue_int16_t_1_Recv_t *) &producer_producer_myInt16_recv_queue);
+}
+
 bool producer_producer_myInt32_is_empty(void) {
   return sb_queue_int32_t_1_is_empty(&producer_producer_myInt32_recv_queue);
 }
@@ -117,6 +137,10 @@ bool get_producer_producer_myInt32_poll(sb_event_counter_t *numDropped, int32_t 
 bool get_producer_producer_myInt32(int32_t *data) {
   sb_event_counter_t numDropped;
   return get_producer_producer_myInt32_poll (&numDropped, data);
+}
+
+uintmax_t get_producer_producer_myInt32_num_invalid(void) {
+  return sb_queue_int32_t_1_numInvalid((sb_queue_int32_t_1_Recv_t *) &producer_producer_myInt32_recv_queue);
 }
 
 bool producer_producer_myInt64_is_empty(void) {
@@ -132,6 +156,10 @@ bool get_producer_producer_myInt64(int64_t *data) {
   return get_producer_producer_myInt64_poll (&numDropped, data);
 }
 
+uintmax_t get_producer_producer_myInt64_num_invalid(void) {
+  return sb_queue_int64_t_1_numInvalid((sb_queue_int64_t_1_Recv_t *) &producer_producer_myInt64_recv_queue);
+}
+
 bool producer_producer_myUInt8_is_empty(void) {
   return sb_queue_uint8_t_1_is_empty(&producer_producer_myUInt8_recv_queue);
 }
@@ -143,6 +171,10 @@ bool get_producer_producer_myUInt8_poll(sb_event_counter_t *numDropped, uint8_t 
 bool get_producer_producer_myUInt8(uint8_t *data) {
   sb_event_counter_t numDropped;
   return get_producer_producer_myUInt8_poll (&numDropped, data);
+}
+
+uintmax_t get_producer_producer_myUInt8_num_invalid(void) {
+  return sb_queue_uint8_t_1_numInvalid((sb_queue_uint8_t_1_Recv_t *) &producer_producer_myUInt8_recv_queue);
 }
 
 bool producer_producer_myUInt16_is_empty(void) {
@@ -158,6 +190,10 @@ bool get_producer_producer_myUInt16(uint16_t *data) {
   return get_producer_producer_myUInt16_poll (&numDropped, data);
 }
 
+uintmax_t get_producer_producer_myUInt16_num_invalid(void) {
+  return sb_queue_uint16_t_1_numInvalid((sb_queue_uint16_t_1_Recv_t *) &producer_producer_myUInt16_recv_queue);
+}
+
 bool producer_producer_myUInt32_is_empty(void) {
   return sb_queue_uint32_t_1_is_empty(&producer_producer_myUInt32_recv_queue);
 }
@@ -169,6 +205,10 @@ bool get_producer_producer_myUInt32_poll(sb_event_counter_t *numDropped, uint32_
 bool get_producer_producer_myUInt32(uint32_t *data) {
   sb_event_counter_t numDropped;
   return get_producer_producer_myUInt32_poll (&numDropped, data);
+}
+
+uintmax_t get_producer_producer_myUInt32_num_invalid(void) {
+  return sb_queue_uint32_t_1_numInvalid((sb_queue_uint32_t_1_Recv_t *) &producer_producer_myUInt32_recv_queue);
 }
 
 bool producer_producer_myUInt64_is_empty(void) {
@@ -184,6 +224,10 @@ bool get_producer_producer_myUInt64(uint64_t *data) {
   return get_producer_producer_myUInt64_poll (&numDropped, data);
 }
 
+uintmax_t get_producer_producer_myUInt64_num_invalid(void) {
+  return sb_queue_uint64_t_1_numInvalid((sb_queue_uint64_t_1_Recv_t *) &producer_producer_myUInt64_recv_queue);
+}
+
 bool producer_producer_myFloat32_is_empty(void) {
   return sb_queue_float_1_is_empty(&producer_producer_myFloat32_recv_queue);
 }
@@ -195,6 +239,10 @@ bool get_producer_producer_myFloat32_poll(sb_event_counter_t *numDropped, float 
 bool get_producer_producer_myFloat32(float *data) {
   sb_event_counter_t numDropped;
   return get_producer_producer_myFloat32_poll (&numDropped, data);
+}
+
+uintmax_t get_producer_producer_myFloat32_num_invalid(void) {
+  return sb_queue_float_1_numInvalid((sb_queue_float_1_Recv_t *) &producer_producer_myFloat32_recv_queue);
 }
 
 bool producer_producer_myFloat64_is_empty(void) {
@@ -210,6 +258,10 @@ bool get_producer_producer_myFloat64(double *data) {
   return get_producer_producer_myFloat64_poll (&numDropped, data);
 }
 
+uintmax_t get_producer_producer_myFloat64_num_invalid(void) {
+  return sb_queue_double_1_numInvalid((sb_queue_double_1_Recv_t *) &producer_producer_myFloat64_recv_queue);
+}
+
 bool producer_producer_myEnum_is_empty(void) {
   return sb_queue_Aadl_Datatypes_MyEnum_1_is_empty(&producer_producer_myEnum_recv_queue);
 }
@@ -221,6 +273,10 @@ bool get_producer_producer_myEnum_poll(sb_event_counter_t *numDropped, Aadl_Data
 bool get_producer_producer_myEnum(Aadl_Datatypes_MyEnum *data) {
   sb_event_counter_t numDropped;
   return get_producer_producer_myEnum_poll (&numDropped, data);
+}
+
+uintmax_t get_producer_producer_myEnum_num_invalid(void) {
+  return sb_queue_Aadl_Datatypes_MyEnum_1_numInvalid((sb_queue_Aadl_Datatypes_MyEnum_1_Recv_t *) &producer_producer_myEnum_recv_queue);
 }
 
 bool producer_producer_myStruct_is_empty(void) {
@@ -236,6 +292,10 @@ bool get_producer_producer_myStruct(Aadl_Datatypes_MyStruct_i *data) {
   return get_producer_producer_myStruct_poll (&numDropped, data);
 }
 
+uintmax_t get_producer_producer_myStruct_num_invalid(void) {
+  return sb_queue_Aadl_Datatypes_MyStruct_i_1_numInvalid((sb_queue_Aadl_Datatypes_MyStruct_i_1_Recv_t *) &producer_producer_myStruct_recv_queue);
+}
+
 bool producer_producer_myArray1_is_empty(void) {
   return sb_queue_Aadl_Datatypes_MyArrayOneDim_1_is_empty(&producer_producer_myArray1_recv_queue);
 }
@@ -247,6 +307,10 @@ bool get_producer_producer_myArray1_poll(sb_event_counter_t *numDropped, Aadl_Da
 bool get_producer_producer_myArray1(Aadl_Datatypes_MyArrayOneDim *data) {
   sb_event_counter_t numDropped;
   return get_producer_producer_myArray1_poll (&numDropped, data);
+}
+
+uintmax_t get_producer_producer_myArray1_num_invalid(void) {
+  return sb_queue_Aadl_Datatypes_MyArrayOneDim_1_numInvalid((sb_queue_Aadl_Datatypes_MyArrayOneDim_1_Recv_t *) &producer_producer_myArray1_recv_queue);
 }
 
 void init(void) {

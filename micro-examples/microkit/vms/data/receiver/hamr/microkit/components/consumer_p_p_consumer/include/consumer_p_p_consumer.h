@@ -10,3 +10,4 @@
 
 
 bool get_read_port(int8_t *data);
+uintmax_t get_read_port_num_invalid(void);

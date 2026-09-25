@@ -12,8 +12,11 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_myStructArray(value: *mut Gumbo_Structs_Arrays::MyStructArray_i) -> bool;
+  fn get_myStructArray_num_invalid() -> u64;
   fn get_MyArrayStruct(value: *mut Gumbo_Structs_Arrays::MyArrayStruct) -> bool;
+  fn get_MyArrayStruct_num_invalid() -> u64;
   fn get_MyArrayInt32(value: *mut Gumbo_Structs_Arrays::MyArrayInt32) -> bool;
+  fn get_MyArrayInt32_num_invalid() -> u64;
 }
 
 pub fn unsafe_get_myStructArray() -> Option<Gumbo_Structs_Arrays::MyStructArray_i>
@@ -25,6 +28,13 @@ pub fn unsafe_get_myStructArray() -> Option<Gumbo_Structs_Arrays::MyStructArray_
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_myStructArray_num_invalid() -> u64
+{
+  unsafe {
+    return get_myStructArray_num_invalid();
   }
 }
 
@@ -40,6 +50,13 @@ pub fn unsafe_get_MyArrayStruct() -> Option<Gumbo_Structs_Arrays::MyArrayStruct>
   }
 }
 
+pub fn unsafe_get_MyArrayStruct_num_invalid() -> u64
+{
+  unsafe {
+    return get_MyArrayStruct_num_invalid();
+  }
+}
+
 pub fn unsafe_get_MyArrayInt32() -> Option<Gumbo_Structs_Arrays::MyArrayInt32>
 {
   unsafe {
@@ -49,6 +66,13 @@ pub fn unsafe_get_MyArrayInt32() -> Option<Gumbo_Structs_Arrays::MyArrayInt32>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_MyArrayInt32_num_invalid() -> u64
+{
+  unsafe {
+    return get_MyArrayInt32_num_invalid();
   }
 }
 
@@ -90,6 +114,12 @@ pub fn get_myStructArray(value: *mut Gumbo_Structs_Arrays::MyStructArray_i) -> b
 }
 
 #[cfg(test)]
+pub fn get_myStructArray_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_MyArrayStruct(value: *mut Gumbo_Structs_Arrays::MyArrayStruct) -> bool
 {
   unsafe {
@@ -104,6 +134,12 @@ pub fn get_MyArrayStruct(value: *mut Gumbo_Structs_Arrays::MyArrayStruct) -> boo
 }
 
 #[cfg(test)]
+pub fn get_MyArrayStruct_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_MyArrayInt32(value: *mut Gumbo_Structs_Arrays::MyArrayInt32) -> bool
 {
   unsafe {
@@ -115,4 +151,10 @@ pub fn get_MyArrayInt32(value: *mut Gumbo_Structs_Arrays::MyArrayInt32) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_MyArrayInt32_num_invalid() -> u64
+{
+  return 0;
 }

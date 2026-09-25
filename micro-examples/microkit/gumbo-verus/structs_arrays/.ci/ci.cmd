@@ -39,6 +39,19 @@ def run(title: String, verboseArg: B, proc: OsProto.Proc): Z = {
   return r.exitCode
 }
 
+// Boots a built image under QEMU and fails on a fault, panic or violation (see
+// .github/workflows/hamr/simulate.cmd).  Run it right after the image's `make`, with the same
+// environment, and before its build directory is removed.
+def bootUnderQemu(dir: Os.Path, options: ISZ[String]): Z = {
+  var root = homeDir
+  while (!(root / ".github").exists) {
+    root = root.up
+  }
+  val simulate = root / ".github" / "workflows" / "hamr" / "simulate.cmd"
+  return run(s"Booting the image in ${dir.name} under QEMU", T,
+    Os.proc(ISZ[String](sireum.string, "slang", "run", simulate.string, dir.string) ++ options))
+}
+
 println(
   st"""**************************************************************************
       |*                            GUMBO-VERUS Structs_arrays                  *
@@ -99,6 +112,15 @@ if (result == 0) {
 
 if (result == 0) {
   result = run("Building/Verifying with Verus", F, proc"make verus".at(microkitAadlDir))
+
+  if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
+    result = run("Building the image", F, proc"make".at(microkitAadlDir))
+  }
+
+  if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
+    result = bootUnderQemu(microkitAadlDir, ISZ())
+  }
+
   removeBuildArtifacts()
 }
 
@@ -138,6 +160,15 @@ if (result == 0) {
 
 if (result == 0) {
   result = run("Building/Verifying with Verus", F, proc"make verus".at(microkitSysmlDir))
+
+  if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
+    result = run("Building the image", F, proc"make".at(microkitSysmlDir))
+  }
+
+  if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
+    result = bootUnderQemu(microkitSysmlDir, ISZ())
+  }
+
   removeBuildArtifacts()
 }
 

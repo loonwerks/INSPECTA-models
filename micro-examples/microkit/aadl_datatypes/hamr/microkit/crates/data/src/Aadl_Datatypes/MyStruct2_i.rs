@@ -20,3 +20,8 @@ verus! {
   }
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<MyStruct2_i>() == 1);
+const _: () = assert!(core::mem::align_of::<MyStruct2_i>() == 1);
+const _: () = assert!(core::mem::offset_of!(MyStruct2_i, fieldSChar) == 0);

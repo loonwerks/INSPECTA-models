@@ -12,8 +12,11 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_healthy(value: *mut bool) -> bool;
+  fn get_healthy_num_invalid() -> u64;
   fn get_echo(value: *mut i32) -> bool;
+  fn get_echo_num_invalid() -> u64;
   fn get_alert_result(value: *mut bool) -> bool;
+  fn get_alert_result_num_invalid() -> u64;
   fn get_ack() -> bool;
 }
 
@@ -23,6 +26,13 @@ pub fn unsafe_get_healthy() -> bool
     let value: *mut bool = &mut false;
     get_healthy(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_healthy_num_invalid() -> u64
+{
+  unsafe {
+    return get_healthy_num_invalid();
   }
 }
 
@@ -38,6 +48,13 @@ pub fn unsafe_get_echo() -> Option<i32>
   }
 }
 
+pub fn unsafe_get_echo_num_invalid() -> u64
+{
+  unsafe {
+    return get_echo_num_invalid();
+  }
+}
+
 pub fn unsafe_get_alert_result() -> Option<bool>
 {
   unsafe {
@@ -47,6 +64,13 @@ pub fn unsafe_get_alert_result() -> Option<bool>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_alert_result_num_invalid() -> u64
+{
+  unsafe {
+    return get_alert_result_num_invalid();
   }
 }
 
@@ -93,6 +117,12 @@ pub fn get_healthy(value: *mut bool) -> bool
 }
 
 #[cfg(test)]
+pub fn get_healthy_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_echo(value: *mut i32) -> bool
 {
   unsafe {
@@ -107,6 +137,12 @@ pub fn get_echo(value: *mut i32) -> bool
 }
 
 #[cfg(test)]
+pub fn get_echo_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_alert_result(value: *mut bool) -> bool
 {
   unsafe {
@@ -118,6 +154,12 @@ pub fn get_alert_result(value: *mut bool) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_alert_result_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]

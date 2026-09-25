@@ -14,7 +14,8 @@
 
 // Maximum number of timeslice slots in a schedule.  A thread may appear
 // in multiple slots per frame period, so this can exceed MAX_PARTITIONS.
-// Must fit within the 4 KB shared-memory page (struct ≈ 13*N + 4 bytes).
+// Must fit within the 4 KB shared-memory page (struct ≈ 13*N + 4 bytes); the scheduler
+// asserts that its queue does.
 #define MAX_SCHEDULE_SLOTS 128
 
 // Virtual address at which the schedule state shared memory region is mapped.

@@ -28,6 +28,10 @@ bool get_myStructArray(Gumbo_Structs_Arrays_MyStructArray_i *data) {
   return get_myStructArray_poll (&numDropped, data);
 }
 
+uintmax_t get_myStructArray_num_invalid(void) {
+  return sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_numInvalid((sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_Recv_t *) &myStructArray_recv_queue);
+}
+
 bool MyArrayStruct_is_empty(void) {
   return sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_is_empty(&MyArrayStruct_recv_queue);
 }
@@ -41,6 +45,10 @@ bool get_MyArrayStruct(Gumbo_Structs_Arrays_MyArrayStruct *data) {
   return get_MyArrayStruct_poll (&numDropped, data);
 }
 
+uintmax_t get_MyArrayStruct_num_invalid(void) {
+  return sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_numInvalid((sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_Recv_t *) &MyArrayStruct_recv_queue);
+}
+
 bool MyArrayInt32_is_empty(void) {
   return sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_is_empty(&MyArrayInt32_recv_queue);
 }
@@ -52,6 +60,10 @@ bool get_MyArrayInt32_poll(sb_event_counter_t *numDropped, Gumbo_Structs_Arrays_
 bool get_MyArrayInt32(Gumbo_Structs_Arrays_MyArrayInt32 *data) {
   sb_event_counter_t numDropped;
   return get_MyArrayInt32_poll (&numDropped, data);
+}
+
+uintmax_t get_MyArrayInt32_num_invalid(void) {
+  return sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_numInvalid((sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_Recv_t *) &MyArrayInt32_recv_queue);
 }
 
 void init(void) {

@@ -90,6 +90,10 @@ TYPE_OBJS := \
 	sb_queue_Exhaustive_Monitor_Samples_1.o \
 	sb_queue_Exhaustive_Monitor_Telemetry_i_1.o
 
+# The queue objects as an archive: each protection domain's link pulls in only the
+# queues it uses, not every queue in the system
+TYPES_LIB := libhamr_types.a
+
 
 all: cache.o
 
@@ -146,26 +150,30 @@ SCHEDULER_OBJ := $(notdir $(basename $(SCHEDULER_C))).o
 $(SCHEDULER_OBJ): $(SCHEDULER_C) ${SDDF}/include
 	${CC} ${CFLAGS} -c -o $@ $<
 
-scheduler.elf: $(UTIL_OBJS) $(TYPE_OBJS) $(SCHEDULER_OBJ) ${CHECK_FLAGS_BOARD_MD5}
-	$(LD) $(LDFLAGS) $(filter %.o, $^) $(LIBS) -o $@
+$(TYPES_LIB): $(TYPE_OBJS)
+	rm -f $@
+	$(AR) rcs $@ $^
+
+scheduler.elf: $(UTIL_OBJS) $(SCHEDULER_OBJ) $(TYPES_LIB) ${CHECK_FLAGS_BOARD_MD5}
+	$(LD) $(LDFLAGS) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -o $@
 
 producer_producer_MON.elf: producer_producer_MON_user.o producer_producer_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-producer_producer.elf: $(UTIL_OBJS) $(TYPE_OBJS) producer_producer_rust producer_producer.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/producer_producer/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lproducer_producer -o $@
+producer_producer.elf: $(UTIL_OBJS) producer_producer_rust producer_producer.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/producer_producer/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -lproducer_producer -o $@
 
 monitor_process_monitor_thread_MON.elf: monitor_process_monitor_thread_MON_user.o monitor_process_monitor_thread_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-monitor_process_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) monitor_process_monitor_thread_rust monitor_process_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/monitor_process_monitor_thread/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lmonitor_process_monitor_thread -o $@
+monitor_process_monitor_thread.elf: $(UTIL_OBJS) monitor_process_monitor_thread_rust monitor_process_monitor_thread.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/monitor_process_monitor_thread/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -lmonitor_process_monitor_thread -o $@
 
 consumer_consumer_MON.elf: consumer_consumer_MON_user.o consumer_consumer_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-consumer_consumer.elf: $(UTIL_OBJS) $(TYPE_OBJS) consumer_consumer_rust consumer_consumer.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/consumer_consumer/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lconsumer_consumer -o $@
+consumer_consumer.elf: $(UTIL_OBJS) consumer_consumer_rust consumer_consumer.o $(TYPES_LIB)
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/consumer_consumer/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(TYPES_LIB) $(LIBS) -lconsumer_consumer -o $@
 
 
 

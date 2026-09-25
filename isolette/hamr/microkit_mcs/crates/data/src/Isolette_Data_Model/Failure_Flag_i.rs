@@ -20,3 +20,8 @@ verus! {
   }
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<Failure_Flag_i>() == 1);
+const _: () = assert!(core::mem::align_of::<Failure_Flag_i>() == 1);
+const _: () = assert!(core::mem::offset_of!(Failure_Flag_i, flag) == 0);

@@ -23,6 +23,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_producer_p_p1_producer_write_port_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_producer_p_p1_producer_write_port_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_producer_p_p2_producer_write_port(
       &mut self,
       value: &Ghost<Option<i8>>) -> (res : Option<i8>)
@@ -30,6 +36,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_producer_p_p2_producer_write_port();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_producer_p_p2_producer_write_port_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_producer_p_p2_producer_write_port_num_invalid();
     }
   }
 
@@ -53,6 +65,12 @@ verus! {
         old(self).producer_p_p2_producer_write_port == final(self).producer_p_p2_producer_write_port,
     {
       self.api.unverified_get_producer_p_p1_producer_write_port(&Ghost(self.producer_p_p1_producer_write_port))
+    }/// The number of messages received on producer_p_p1_producer_write_port that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_producer_p_p1_producer_write_port_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_producer_p_p1_producer_write_port_num_invalid()
     }
     pub fn get_producer_p_p2_producer_write_port(&mut self) -> (res : Option<i8>)
       ensures
@@ -61,6 +79,12 @@ verus! {
         res == final(self).producer_p_p2_producer_write_port,
     {
       self.api.unverified_get_producer_p_p2_producer_write_port(&Ghost(self.producer_p_p2_producer_write_port))
+    }/// The number of messages received on producer_p_p2_producer_write_port that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_producer_p_p2_producer_write_port_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_producer_p_p2_producer_write_port_num_invalid()
     }
   }
 

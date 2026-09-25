@@ -25,6 +25,9 @@ void *memset(void *dest, int c, size_t n);
 
 
 bool get_interface_failure(Isolette_Data_Model_Failure_Flag_i *data);
+uintmax_t get_interface_failure_num_invalid(void);
 bool put_monitor_mode(const Isolette_Data_Model_Monitor_Mode *data);
 bool get_internal_failure(Isolette_Data_Model_Failure_Flag_i *data);
+uintmax_t get_internal_failure_num_invalid(void);
 bool get_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data);
+uintmax_t get_current_tempWstatus_num_invalid(void);

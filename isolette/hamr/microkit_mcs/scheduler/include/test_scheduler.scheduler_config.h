@@ -86,3 +86,8 @@ typedef struct test_schedule {
     uint64_t timeslices[MAX_SCHEDULE_SLOTS];
     bool is_user_partition[MAX_SCHEDULE_SLOTS];
 } test_schedule_t;
+
+// Each struct fills a fixed region; one that outgrew it would spill into the next.
+_Static_assert(sizeof(test_command_t) <= TEST_CMD_SIZE, "test_command_t outgrows its shared memory region");
+_Static_assert(sizeof(test_status_t) <= TEST_STATUS_SIZE, "test_status_t outgrows its shared memory region");
+_Static_assert(sizeof(test_schedule_t) <= TEST_SCHEDULE_SIZE, "test_schedule_t outgrows its shared memory region");

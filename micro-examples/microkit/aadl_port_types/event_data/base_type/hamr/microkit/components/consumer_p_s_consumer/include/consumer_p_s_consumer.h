@@ -27,6 +27,8 @@ void *memset(void *dest, int c, size_t n);
 bool read_port1_is_empty(void);
 bool get_read_port1_poll(sb_event_counter_t *numDropped, int8_t *data);
 bool get_read_port1(int8_t *data);
+uintmax_t get_read_port1_num_invalid(void);
 bool read_port2_is_empty(void);
 bool get_read_port2_poll(sb_event_counter_t *numDropped, int8_t *data);
 bool get_read_port2(int8_t *data);
+uintmax_t get_read_port2_num_invalid(void);

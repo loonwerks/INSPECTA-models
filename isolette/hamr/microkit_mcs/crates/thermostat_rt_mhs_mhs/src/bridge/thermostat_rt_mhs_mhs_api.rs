@@ -30,6 +30,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_current_tempWstatus_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_current_tempWstatus_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_lower_desired_temp(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Temp_i>) -> (res : Isolette_Data_Model::Temp_i)
@@ -37,6 +43,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_lower_desired_temp();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_lower_desired_temp_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_lower_desired_temp_num_invalid();
     }
 
     #[verifier::external_body]
@@ -50,6 +62,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_upper_desired_temp_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_upper_desired_temp_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_regulator_mode(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Regulator_Mode>) -> (res : Isolette_Data_Model::Regulator_Mode)
@@ -57,6 +75,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_regulator_mode();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_regulator_mode_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_regulator_mode_num_invalid();
     }
   }
 
@@ -99,6 +123,12 @@ verus! {
         old(self).heat_control == final(self).heat_control,
     {
       self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
+    }/// The number of messages received on current_tempWstatus that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_current_tempWstatus_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_current_tempWstatus_num_invalid()
     }
     pub fn get_lower_desired_temp(&mut self) -> (res : Isolette_Data_Model::Temp_i)
       ensures
@@ -110,6 +140,12 @@ verus! {
         old(self).heat_control == final(self).heat_control,
     {
       self.api.unverified_get_lower_desired_temp(&Ghost(self.lower_desired_temp))
+    }/// The number of messages received on lower_desired_temp that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_lower_desired_temp_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_lower_desired_temp_num_invalid()
     }
     pub fn get_upper_desired_temp(&mut self) -> (res : Isolette_Data_Model::Temp_i)
       ensures
@@ -121,6 +157,12 @@ verus! {
         old(self).heat_control == final(self).heat_control,
     {
       self.api.unverified_get_upper_desired_temp(&Ghost(self.upper_desired_temp))
+    }/// The number of messages received on upper_desired_temp that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_upper_desired_temp_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_upper_desired_temp_num_invalid()
     }
     pub fn get_regulator_mode(&mut self) -> (res : Isolette_Data_Model::Regulator_Mode)
       ensures
@@ -132,6 +174,12 @@ verus! {
         old(self).heat_control == final(self).heat_control,
     {
       self.api.unverified_get_regulator_mode(&Ghost(self.regulator_mode))
+    }/// The number of messages received on regulator_mode that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_regulator_mode_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_regulator_mode_num_invalid()
     }
   }
 

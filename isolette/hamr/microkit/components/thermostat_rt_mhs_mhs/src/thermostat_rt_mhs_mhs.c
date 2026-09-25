@@ -31,6 +31,10 @@ bool get_upper_desired_temp(Isolette_Data_Model_Temp_i *data) {
   return isFresh;
 }
 
+uintmax_t get_upper_desired_temp_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Temp_i_1_numInvalid((sb_queue_Isolette_Data_Model_Temp_i_1_Recv_t *) &upper_desired_temp_recv_queue);
+}
+
 Isolette_Data_Model_Temp_i last_lower_desired_temp_payload;
 
 bool get_lower_desired_temp(Isolette_Data_Model_Temp_i *data) {
@@ -42,6 +46,10 @@ bool get_lower_desired_temp(Isolette_Data_Model_Temp_i *data) {
   }
   *data = last_lower_desired_temp_payload;
   return isFresh;
+}
+
+uintmax_t get_lower_desired_temp_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Temp_i_1_numInvalid((sb_queue_Isolette_Data_Model_Temp_i_1_Recv_t *) &lower_desired_temp_recv_queue);
 }
 
 bool put_heat_control(const Isolette_Data_Model_On_Off *data) {
@@ -63,6 +71,10 @@ bool get_regulator_mode(Isolette_Data_Model_Regulator_Mode *data) {
   return isFresh;
 }
 
+uintmax_t get_regulator_mode_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_Regulator_Mode_1_numInvalid((sb_queue_Isolette_Data_Model_Regulator_Mode_1_Recv_t *) &regulator_mode_recv_queue);
+}
+
 Isolette_Data_Model_TempWstatus_i last_current_tempWstatus_payload;
 
 bool get_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data) {
@@ -74,6 +86,10 @@ bool get_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data) {
   }
   *data = last_current_tempWstatus_payload;
   return isFresh;
+}
+
+uintmax_t get_current_tempWstatus_num_invalid(void) {
+  return sb_queue_Isolette_Data_Model_TempWstatus_i_1_numInvalid((sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &current_tempWstatus_recv_queue);
 }
 
 void init(void) {

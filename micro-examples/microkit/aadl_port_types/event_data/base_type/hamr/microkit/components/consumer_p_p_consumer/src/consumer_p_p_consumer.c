@@ -26,6 +26,10 @@ bool get_read_port1(int8_t *data) {
   return get_read_port1_poll (&numDropped, data);
 }
 
+uintmax_t get_read_port1_num_invalid(void) {
+  return sb_queue_int8_t_1_numInvalid((sb_queue_int8_t_1_Recv_t *) &read_port1_recv_queue);
+}
+
 bool read_port2_is_empty(void) {
   return sb_queue_int8_t_1_is_empty(&read_port2_recv_queue);
 }
@@ -37,6 +41,10 @@ bool get_read_port2_poll(sb_event_counter_t *numDropped, int8_t *data) {
 bool get_read_port2(int8_t *data) {
   sb_event_counter_t numDropped;
   return get_read_port2_poll (&numDropped, data);
+}
+
+uintmax_t get_read_port2_num_invalid(void) {
+  return sb_queue_int8_t_1_numInvalid((sb_queue_int8_t_1_Recv_t *) &read_port2_recv_queue);
 }
 
 void init(void) {

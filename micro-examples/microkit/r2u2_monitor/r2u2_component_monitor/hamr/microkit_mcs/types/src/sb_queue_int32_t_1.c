@@ -79,6 +79,7 @@ void sb_queue_int32_t_1_Recv_init(
 
   recvQueue->numRecv = 0;
   recvQueue->queue = queue;
+  recvQueue->numInvalid = 0;
 }
 
 bool sb_queue_int32_t_1_dequeue(

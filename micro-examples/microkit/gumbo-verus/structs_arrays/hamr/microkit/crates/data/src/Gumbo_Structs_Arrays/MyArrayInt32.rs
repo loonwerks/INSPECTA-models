@@ -6,9 +6,12 @@ use super::*;
 
 verus! {
 
-  pub const Gumbo_Structs_Arrays_MyArrayInt32_BYTE_SIZE: usize = 40;
   pub const Gumbo_Structs_Arrays_MyArrayInt32_DIM_0: usize = 10;
 
   pub type MyArrayInt32 = [i32; Gumbo_Structs_Arrays_MyArrayInt32_DIM_0];
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<MyArrayInt32>() == 40);
+const _: () = assert!(core::mem::align_of::<MyArrayInt32>() == 4);

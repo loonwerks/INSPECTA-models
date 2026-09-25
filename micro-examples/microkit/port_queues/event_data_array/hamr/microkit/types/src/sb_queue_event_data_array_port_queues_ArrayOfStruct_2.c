@@ -59,6 +59,7 @@ void sb_queue_event_data_array_port_queues_ArrayOfStruct_2_Recv_init(
 
   recvQueue->numRecv = 0;
   recvQueue->queue = queue;
+  recvQueue->numInvalid = 0;
 }
 
 bool sb_queue_event_data_array_port_queues_ArrayOfStruct_2_dequeue(

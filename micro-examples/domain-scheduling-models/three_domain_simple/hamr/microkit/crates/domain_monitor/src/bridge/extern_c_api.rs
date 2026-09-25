@@ -12,7 +12,9 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_p1_t1_write_port(value: *mut i32) -> bool;
+  fn get_p1_t1_write_port_num_invalid() -> u64;
   fn get_p2_t2_write_port(value: *mut i32) -> bool;
+  fn get_p2_t2_write_port_num_invalid() -> u64;
 }
 
 pub fn unsafe_get_p1_t1_write_port() -> i32
@@ -24,12 +26,26 @@ pub fn unsafe_get_p1_t1_write_port() -> i32
   }
 }
 
+pub fn unsafe_get_p1_t1_write_port_num_invalid() -> u64
+{
+  unsafe {
+    return get_p1_t1_write_port_num_invalid();
+  }
+}
+
 pub fn unsafe_get_p2_t2_write_port() -> i32
 {
   unsafe {
     let value: *mut i32 = &mut 0;
     get_p2_t2_write_port(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_p2_t2_write_port_num_invalid() -> u64
+{
+  unsafe {
+    return get_p2_t2_write_port_num_invalid();
   }
 }
 
@@ -65,6 +81,12 @@ pub fn get_p1_t1_write_port(value: *mut i32) -> bool
 }
 
 #[cfg(test)]
+pub fn get_p1_t1_write_port_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_p2_t2_write_port(value: *mut i32) -> bool
 {
   unsafe {
@@ -72,4 +94,10 @@ pub fn get_p2_t2_write_port(value: *mut i32) -> bool
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_p2_t2_write_port_num_invalid() -> u64
+{
+  return 0;
 }

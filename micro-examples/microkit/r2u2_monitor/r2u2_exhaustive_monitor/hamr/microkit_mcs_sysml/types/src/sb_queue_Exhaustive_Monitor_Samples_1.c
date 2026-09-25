@@ -79,6 +79,7 @@ void sb_queue_Exhaustive_Monitor_Samples_1_Recv_init(
 
   recvQueue->numRecv = 0;
   recvQueue->queue = queue;
+  recvQueue->numInvalid = 0;
 }
 
 bool sb_queue_Exhaustive_Monitor_Samples_1_dequeue(

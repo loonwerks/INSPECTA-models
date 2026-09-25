@@ -24,6 +24,10 @@ bool get_read_port(int32_t *data) {
   return isFresh;
 }
 
+uintmax_t get_read_port_num_invalid(void) {
+  return sb_queue_int32_t_1_numInvalid((sb_queue_int32_t_1_Recv_t *) &read_port_recv_queue);
+}
+
 void init(void) {
   sb_queue_int32_t_1_Recv_init(&read_port_recv_queue, (sb_queue_int32_t_1_t *) read_port_queue_1);
 

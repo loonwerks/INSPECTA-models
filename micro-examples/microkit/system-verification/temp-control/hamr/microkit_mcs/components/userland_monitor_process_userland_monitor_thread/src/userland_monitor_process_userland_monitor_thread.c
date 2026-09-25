@@ -34,6 +34,10 @@ bool get_tsp_tst_currentTemp(TempControl_SysVerif_Temperature *data) {
   return get_tsp_tst_currentTemp_poll (&numDropped, data);
 }
 
+uintmax_t get_tsp_tst_currentTemp_num_invalid(void) {
+  return sb_queue_TempControl_SysVerif_Temperature_1_numInvalid((sb_queue_TempControl_SysVerif_Temperature_1_Recv_t *) &tsp_tst_currentTemp_recv_queue);
+}
+
 bool tcp_tct_fanCmd_is_empty(void) {
   return sb_queue_TempControl_SysVerif_FanCmd_1_is_empty(&tcp_tct_fanCmd_recv_queue);
 }
@@ -45,6 +49,10 @@ bool get_tcp_tct_fanCmd_poll(sb_event_counter_t *numDropped, TempControl_SysVeri
 bool get_tcp_tct_fanCmd(TempControl_SysVerif_FanCmd *data) {
   sb_event_counter_t numDropped;
   return get_tcp_tct_fanCmd_poll (&numDropped, data);
+}
+
+uintmax_t get_tcp_tct_fanCmd_num_invalid(void) {
+  return sb_queue_TempControl_SysVerif_FanCmd_1_numInvalid((sb_queue_TempControl_SysVerif_FanCmd_1_Recv_t *) &tcp_tct_fanCmd_recv_queue);
 }
 
 bool fp_ft_fanAck_is_empty(void) {
@@ -60,6 +68,10 @@ bool get_fp_ft_fanAck(TempControl_SysVerif_FanAck *data) {
   return get_fp_ft_fanAck_poll (&numDropped, data);
 }
 
+uintmax_t get_fp_ft_fanAck_num_invalid(void) {
+  return sb_queue_TempControl_SysVerif_FanAck_1_numInvalid((sb_queue_TempControl_SysVerif_FanAck_1_Recv_t *) &fp_ft_fanAck_recv_queue);
+}
+
 bool tcp_tct_setPoint_is_empty(void) {
   return sb_queue_TempControl_SysVerif_SetPoint_1_is_empty(&tcp_tct_setPoint_recv_queue);
 }
@@ -71,6 +83,10 @@ bool get_tcp_tct_setPoint_poll(sb_event_counter_t *numDropped, TempControl_SysVe
 bool get_tcp_tct_setPoint(TempControl_SysVerif_SetPoint *data) {
   sb_event_counter_t numDropped;
   return get_tcp_tct_setPoint_poll (&numDropped, data);
+}
+
+uintmax_t get_tcp_tct_setPoint_num_invalid(void) {
+  return sb_queue_TempControl_SysVerif_SetPoint_1_numInvalid((sb_queue_TempControl_SysVerif_SetPoint_1_Recv_t *) &tcp_tct_setPoint_recv_queue);
 }
 
 hamr_SchedState last_sched_state_payload;
@@ -86,6 +102,10 @@ bool get_sched_state(hamr_SchedState *data) {
   return isFresh;
 }
 
+uintmax_t get_sched_state_num_invalid(void) {
+  return sb_queue_hamr_SchedState_1_numInvalid((sb_queue_hamr_SchedState_1_Recv_t *) &sched_state_recv_queue);
+}
+
 hamr_Schedule last_sched_schedule_payload;
 
 bool get_sched_schedule(hamr_Schedule *data) {
@@ -97,6 +117,10 @@ bool get_sched_schedule(hamr_Schedule *data) {
   }
   *data = last_sched_schedule_payload;
   return isFresh;
+}
+
+uintmax_t get_sched_schedule_num_invalid(void) {
+  return sb_queue_hamr_Schedule_1_numInvalid((sb_queue_hamr_Schedule_1_Recv_t *) &sched_schedule_recv_queue);
 }
 
 void init(void) {

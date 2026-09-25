@@ -25,4 +25,6 @@ void *memset(void *dest, int c, size_t n);
 
 
 bool get_p1_t1_write_port(int32_t *data);
+uintmax_t get_p1_t1_write_port_num_invalid(void);
 bool get_p2_t2_write_port(int32_t *data);
+uintmax_t get_p2_t2_write_port_num_invalid(void);

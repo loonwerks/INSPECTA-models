@@ -31,6 +31,10 @@ bool get_EthernetFramesRx(SW_StructuredEthernetMessage_i *data) {
   return get_EthernetFramesRx_poll (&numDropped, data);
 }
 
+uintmax_t get_EthernetFramesRx_num_invalid(void) {
+  return sb_queue_SW_StructuredEthernetMessage_i_1_numInvalid((sb_queue_SW_StructuredEthernetMessage_i_1_Recv_t *) &EthernetFramesRx_recv_queue);
+}
+
 void init(void) {
   sb_queue_SW_StructuredEthernetMessage_i_1_init((sb_queue_SW_StructuredEthernetMessage_i_1_t *) EthernetFramesTx_queue_1);
 

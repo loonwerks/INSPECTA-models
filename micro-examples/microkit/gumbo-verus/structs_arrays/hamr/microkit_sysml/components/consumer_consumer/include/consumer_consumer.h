@@ -25,14 +25,20 @@ void *memset(void *dest, int c, size_t n);
 
 
 bool get_c_myArrayInt32_DataPort(Gubmo_Structs_Arrays_MyArrayInt32 *data);
+uintmax_t get_c_myArrayInt32_DataPort_num_invalid(void);
 bool get_c_myArrayStruct_DataPort(Gubmo_Structs_Arrays_MyArrayStruct *data);
+uintmax_t get_c_myArrayStruct_DataPort_num_invalid(void);
 bool get_c_myStructArray_DataPort(Gubmo_Structs_Arrays_MyStructArray_i *data);
+uintmax_t get_c_myStructArray_DataPort_num_invalid(void);
 bool c_myArrayInt32_EventDataPort_is_empty(void);
 bool get_c_myArrayInt32_EventDataPort_poll(sb_event_counter_t *numDropped, Gubmo_Structs_Arrays_MyArrayInt32 *data);
 bool get_c_myArrayInt32_EventDataPort(Gubmo_Structs_Arrays_MyArrayInt32 *data);
+uintmax_t get_c_myArrayInt32_EventDataPort_num_invalid(void);
 bool c_myArrayStruct_EventDataPort_is_empty(void);
 bool get_c_myArrayStruct_EventDataPort_poll(sb_event_counter_t *numDropped, Gubmo_Structs_Arrays_MyArrayStruct *data);
 bool get_c_myArrayStruct_EventDataPort(Gubmo_Structs_Arrays_MyArrayStruct *data);
+uintmax_t get_c_myArrayStruct_EventDataPort_num_invalid(void);
 bool c_myStructArray_EventDataPort_is_empty(void);
 bool get_c_myStructArray_EventDataPort_poll(sb_event_counter_t *numDropped, Gubmo_Structs_Arrays_MyStructArray_i *data);
 bool get_c_myStructArray_EventDataPort(Gubmo_Structs_Arrays_MyStructArray_i *data);
+uintmax_t get_c_myStructArray_EventDataPort_num_invalid(void);

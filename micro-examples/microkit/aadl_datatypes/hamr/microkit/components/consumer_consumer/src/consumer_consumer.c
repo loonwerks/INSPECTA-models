@@ -54,6 +54,10 @@ bool get_myBoolean(bool *data) {
   return get_myBoolean_poll (&numDropped, data);
 }
 
+uintmax_t get_myBoolean_num_invalid(void) {
+  return sb_queue_bool_1_numInvalid((sb_queue_bool_1_Recv_t *) &myBoolean_recv_queue);
+}
+
 bool myCharacter_is_empty(void) {
   return sb_queue_char_1_is_empty(&myCharacter_recv_queue);
 }
@@ -65,6 +69,10 @@ bool get_myCharacter_poll(sb_event_counter_t *numDropped, char *data) {
 bool get_myCharacter(char *data) {
   sb_event_counter_t numDropped;
   return get_myCharacter_poll (&numDropped, data);
+}
+
+uintmax_t get_myCharacter_num_invalid(void) {
+  return sb_queue_char_1_numInvalid((sb_queue_char_1_Recv_t *) &myCharacter_recv_queue);
 }
 
 bool myString_is_empty(void) {
@@ -80,6 +88,10 @@ bool get_myString(Base_Types_String *data) {
   return get_myString_poll (&numDropped, data);
 }
 
+uintmax_t get_myString_num_invalid(void) {
+  return sb_queue_Base_Types_String_1_numInvalid((sb_queue_Base_Types_String_1_Recv_t *) &myString_recv_queue);
+}
+
 bool myInt8_is_empty(void) {
   return sb_queue_int8_t_1_is_empty(&myInt8_recv_queue);
 }
@@ -91,6 +103,10 @@ bool get_myInt8_poll(sb_event_counter_t *numDropped, int8_t *data) {
 bool get_myInt8(int8_t *data) {
   sb_event_counter_t numDropped;
   return get_myInt8_poll (&numDropped, data);
+}
+
+uintmax_t get_myInt8_num_invalid(void) {
+  return sb_queue_int8_t_1_numInvalid((sb_queue_int8_t_1_Recv_t *) &myInt8_recv_queue);
 }
 
 bool myInt16_is_empty(void) {
@@ -106,6 +122,10 @@ bool get_myInt16(int16_t *data) {
   return get_myInt16_poll (&numDropped, data);
 }
 
+uintmax_t get_myInt16_num_invalid(void) {
+  return sb_queue_int16_t_1_numInvalid((sb_queue_int16_t_1_Recv_t *) &myInt16_recv_queue);
+}
+
 bool myInt32_is_empty(void) {
   return sb_queue_int32_t_1_is_empty(&myInt32_recv_queue);
 }
@@ -117,6 +137,10 @@ bool get_myInt32_poll(sb_event_counter_t *numDropped, int32_t *data) {
 bool get_myInt32(int32_t *data) {
   sb_event_counter_t numDropped;
   return get_myInt32_poll (&numDropped, data);
+}
+
+uintmax_t get_myInt32_num_invalid(void) {
+  return sb_queue_int32_t_1_numInvalid((sb_queue_int32_t_1_Recv_t *) &myInt32_recv_queue);
 }
 
 bool myInt64_is_empty(void) {
@@ -132,6 +156,10 @@ bool get_myInt64(int64_t *data) {
   return get_myInt64_poll (&numDropped, data);
 }
 
+uintmax_t get_myInt64_num_invalid(void) {
+  return sb_queue_int64_t_1_numInvalid((sb_queue_int64_t_1_Recv_t *) &myInt64_recv_queue);
+}
+
 bool myUInt8_is_empty(void) {
   return sb_queue_uint8_t_1_is_empty(&myUInt8_recv_queue);
 }
@@ -143,6 +171,10 @@ bool get_myUInt8_poll(sb_event_counter_t *numDropped, uint8_t *data) {
 bool get_myUInt8(uint8_t *data) {
   sb_event_counter_t numDropped;
   return get_myUInt8_poll (&numDropped, data);
+}
+
+uintmax_t get_myUInt8_num_invalid(void) {
+  return sb_queue_uint8_t_1_numInvalid((sb_queue_uint8_t_1_Recv_t *) &myUInt8_recv_queue);
 }
 
 bool myUInt16_is_empty(void) {
@@ -158,6 +190,10 @@ bool get_myUInt16(uint16_t *data) {
   return get_myUInt16_poll (&numDropped, data);
 }
 
+uintmax_t get_myUInt16_num_invalid(void) {
+  return sb_queue_uint16_t_1_numInvalid((sb_queue_uint16_t_1_Recv_t *) &myUInt16_recv_queue);
+}
+
 bool myUInt32_is_empty(void) {
   return sb_queue_uint32_t_1_is_empty(&myUInt32_recv_queue);
 }
@@ -169,6 +205,10 @@ bool get_myUInt32_poll(sb_event_counter_t *numDropped, uint32_t *data) {
 bool get_myUInt32(uint32_t *data) {
   sb_event_counter_t numDropped;
   return get_myUInt32_poll (&numDropped, data);
+}
+
+uintmax_t get_myUInt32_num_invalid(void) {
+  return sb_queue_uint32_t_1_numInvalid((sb_queue_uint32_t_1_Recv_t *) &myUInt32_recv_queue);
 }
 
 bool myUInt64_is_empty(void) {
@@ -184,6 +224,10 @@ bool get_myUInt64(uint64_t *data) {
   return get_myUInt64_poll (&numDropped, data);
 }
 
+uintmax_t get_myUInt64_num_invalid(void) {
+  return sb_queue_uint64_t_1_numInvalid((sb_queue_uint64_t_1_Recv_t *) &myUInt64_recv_queue);
+}
+
 bool myFloat32_is_empty(void) {
   return sb_queue_float_1_is_empty(&myFloat32_recv_queue);
 }
@@ -195,6 +239,10 @@ bool get_myFloat32_poll(sb_event_counter_t *numDropped, float *data) {
 bool get_myFloat32(float *data) {
   sb_event_counter_t numDropped;
   return get_myFloat32_poll (&numDropped, data);
+}
+
+uintmax_t get_myFloat32_num_invalid(void) {
+  return sb_queue_float_1_numInvalid((sb_queue_float_1_Recv_t *) &myFloat32_recv_queue);
 }
 
 bool myFloat64_is_empty(void) {
@@ -210,6 +258,10 @@ bool get_myFloat64(double *data) {
   return get_myFloat64_poll (&numDropped, data);
 }
 
+uintmax_t get_myFloat64_num_invalid(void) {
+  return sb_queue_double_1_numInvalid((sb_queue_double_1_Recv_t *) &myFloat64_recv_queue);
+}
+
 bool myEnum_is_empty(void) {
   return sb_queue_Aadl_Datatypes_MyEnum_1_is_empty(&myEnum_recv_queue);
 }
@@ -221,6 +273,10 @@ bool get_myEnum_poll(sb_event_counter_t *numDropped, Aadl_Datatypes_MyEnum *data
 bool get_myEnum(Aadl_Datatypes_MyEnum *data) {
   sb_event_counter_t numDropped;
   return get_myEnum_poll (&numDropped, data);
+}
+
+uintmax_t get_myEnum_num_invalid(void) {
+  return sb_queue_Aadl_Datatypes_MyEnum_1_numInvalid((sb_queue_Aadl_Datatypes_MyEnum_1_Recv_t *) &myEnum_recv_queue);
 }
 
 bool myStruct_is_empty(void) {
@@ -236,6 +292,10 @@ bool get_myStruct(Aadl_Datatypes_MyStruct_i *data) {
   return get_myStruct_poll (&numDropped, data);
 }
 
+uintmax_t get_myStruct_num_invalid(void) {
+  return sb_queue_Aadl_Datatypes_MyStruct_i_1_numInvalid((sb_queue_Aadl_Datatypes_MyStruct_i_1_Recv_t *) &myStruct_recv_queue);
+}
+
 bool myArray1_is_empty(void) {
   return sb_queue_Aadl_Datatypes_MyArrayOneDim_1_is_empty(&myArray1_recv_queue);
 }
@@ -247,6 +307,10 @@ bool get_myArray1_poll(sb_event_counter_t *numDropped, Aadl_Datatypes_MyArrayOne
 bool get_myArray1(Aadl_Datatypes_MyArrayOneDim *data) {
   sb_event_counter_t numDropped;
   return get_myArray1_poll (&numDropped, data);
+}
+
+uintmax_t get_myArray1_num_invalid(void) {
+  return sb_queue_Aadl_Datatypes_MyArrayOneDim_1_numInvalid((sb_queue_Aadl_Datatypes_MyArrayOneDim_1_Recv_t *) &myArray1_recv_queue);
 }
 
 void init(void) {

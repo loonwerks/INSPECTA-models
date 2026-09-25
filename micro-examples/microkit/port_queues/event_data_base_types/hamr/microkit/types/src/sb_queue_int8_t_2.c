@@ -59,6 +59,7 @@ void sb_queue_int8_t_2_Recv_init(
 
   recvQueue->numRecv = 0;
   recvQueue->queue = queue;
+  recvQueue->numInvalid = 0;
 }
 
 bool sb_queue_int8_t_2_dequeue(

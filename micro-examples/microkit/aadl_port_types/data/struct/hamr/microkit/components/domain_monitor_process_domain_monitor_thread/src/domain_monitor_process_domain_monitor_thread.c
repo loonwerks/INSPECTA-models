@@ -24,6 +24,10 @@ bool get_producer_p_p_producer_write_port(data_1_prod_2_cons_struct_struct_i *da
   return isFresh;
 }
 
+uintmax_t get_producer_p_p_producer_write_port_num_invalid(void) {
+  return sb_queue_data_1_prod_2_cons_struct_struct_i_1_numInvalid((sb_queue_data_1_prod_2_cons_struct_struct_i_1_Recv_t *) &producer_p_p_producer_write_port_recv_queue);
+}
+
 void init(void) {
   sb_queue_data_1_prod_2_cons_struct_struct_i_1_Recv_init(&producer_p_p_producer_write_port_recv_queue, (sb_queue_data_1_prod_2_cons_struct_struct_i_1_t *) producer_p_p_producer_write_port_queue_1);
 

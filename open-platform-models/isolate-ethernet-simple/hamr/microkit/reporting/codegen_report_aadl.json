@@ -646,11 +646,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs"
                                 },
-                                "beginLine" : 56,
+                                "beginLine" : 62,
                                 "beginColumn" : 5,
-                                "endLine" : 63,
+                                "endLine" : 69,
                                 "endColumn" : 5,
-                                "offset" : 1806,
+                                "offset" : 1983,
                                 "length" : 373
                               }
                             },
@@ -682,11 +682,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 18,
+                                "beginLine" : 19,
                                 "beginColumn" : 1,
-                                "endLine" : 28,
+                                "endLine" : 29,
                                 "endColumn" : 1,
-                                "offset" : 476,
+                                "offset" : 524,
                                 "length" : 304
                               }
                             },
@@ -809,11 +809,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs"
                                 },
-                                "beginLine" : 43,
+                                "beginLine" : 49,
                                 "beginColumn" : 5,
-                                "endLine" : 52,
+                                "endLine" : 58,
                                 "endColumn" : 5,
-                                "offset" : 1356,
+                                "offset" : 1533,
                                 "length" : 345
                               }
                             },
@@ -845,11 +845,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 30,
+                                "beginLine" : 38,
                                 "beginColumn" : 1,
-                                "endLine" : 35,
+                                "endLine" : 43,
                                 "endColumn" : 1,
-                                "offset" : 783,
+                                "offset" : 954,
                                 "length" : 223
                               }
                             },
@@ -863,11 +863,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 15,
+                                "beginLine" : 16,
                                 "beginColumn" : 3,
-                                "endLine" : 15,
+                                "endLine" : 16,
                                 "endColumn" : 79,
-                                "offset" : 395,
+                                "offset" : 443,
                                 "length" : 76
                               }
                             },
@@ -1090,11 +1090,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
                                 },
-                                "beginLine" : 90,
+                                "beginLine" : 102,
                                 "beginColumn" : 5,
-                                "endLine" : 99,
+                                "endLine" : 111,
                                 "endColumn" : 5,
-                                "offset" : 3138,
+                                "offset" : 3500,
                                 "length" : 537
                               }
                             },
@@ -1126,11 +1126,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 20,
+                                "beginLine" : 22,
                                 "beginColumn" : 1,
-                                "endLine" : 30,
+                                "endLine" : 32,
                                 "endColumn" : 1,
-                                "offset" : 646,
+                                "offset" : 746,
                                 "length" : 308
                               }
                             },
@@ -1162,11 +1162,11 @@
                                   "type" : "Some",
                                   "value" : "components\/seL4_Firewall_Firewall\/src\/seL4_Firewall_Firewall.c"
                                 },
-                                "beginLine" : 51,
+                                "beginLine" : 55,
                                 "beginColumn" : 1,
-                                "endLine" : 54,
+                                "endLine" : 58,
                                 "endColumn" : 1,
-                                "offset" : 2297,
+                                "offset" : 2501,
                                 "length" : 159
                               }
                             },
@@ -1253,11 +1253,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
                                 },
-                                "beginLine" : 100,
+                                "beginLine" : 118,
                                 "beginColumn" : 5,
-                                "endLine" : 109,
+                                "endLine" : 127,
                                 "endColumn" : 5,
-                                "offset" : 3681,
+                                "offset" : 4402,
                                 "length" : 537
                               }
                             },
@@ -1271,11 +1271,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
                                 },
-                                "beginLine" : 41,
+                                "beginLine" : 47,
                                 "beginColumn" : 5,
-                                "endLine" : 48,
+                                "endLine" : 54,
                                 "endColumn" : 5,
-                                "offset" : 1117,
+                                "offset" : 1298,
                                 "length" : 273
                               }
                             },
@@ -1289,11 +1289,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 32,
+                                "beginLine" : 41,
                                 "beginColumn" : 1,
-                                "endLine" : 42,
+                                "endLine" : 51,
                                 "endColumn" : 1,
-                                "offset" : 957,
+                                "offset" : 1184,
                                 "length" : 308
                               }
                             },
@@ -1307,11 +1307,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 15,
+                                "beginLine" : 16,
                                 "beginColumn" : 3,
-                                "endLine" : 15,
+                                "endLine" : 16,
                                 "endColumn" : 81,
-                                "offset" : 397,
+                                "offset" : 447,
                                 "length" : 78
                               }
                             },
@@ -1416,11 +1416,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
                                 },
-                                "beginLine" : 63,
+                                "beginLine" : 75,
                                 "beginColumn" : 5,
-                                "endLine" : 74,
+                                "endLine" : 86,
                                 "endColumn" : 5,
-                                "offset" : 2017,
+                                "offset" : 2379,
                                 "length" : 507
                               }
                             },
@@ -1452,11 +1452,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 44,
+                                "beginLine" : 60,
                                 "beginColumn" : 1,
-                                "endLine" : 49,
+                                "endLine" : 65,
                                 "endColumn" : 1,
-                                "offset" : 1268,
+                                "offset" : 1622,
                                 "length" : 229
                               }
                             },
@@ -1470,11 +1470,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 16,
+                                "beginLine" : 18,
                                 "beginColumn" : 3,
-                                "endLine" : 16,
+                                "endLine" : 18,
                                 "endColumn" : 82,
-                                "offset" : 479,
+                                "offset" : 579,
                                 "length" : 79
                               }
                             },
@@ -1488,11 +1488,11 @@
                                   "type" : "Some",
                                   "value" : "components\/seL4_Firewall_Firewall\/src\/seL4_Firewall_Firewall.c"
                                 },
-                                "beginLine" : 31,
+                                "beginLine" : 35,
                                 "beginColumn" : 1,
-                                "endLine" : 35,
+                                "endLine" : 39,
                                 "endColumn" : 1,
-                                "offset" : 1359,
+                                "offset" : 1563,
                                 "length" : 262
                               }
                             },
@@ -1579,11 +1579,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
                                 },
-                                "beginLine" : 75,
+                                "beginLine" : 87,
                                 "beginColumn" : 5,
-                                "endLine" : 86,
+                                "endLine" : 98,
                                 "endColumn" : 5,
-                                "offset" : 2530,
+                                "offset" : 2892,
                                 "length" : 507
                               }
                             },
@@ -1615,11 +1615,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 51,
+                                "beginLine" : 67,
                                 "beginColumn" : 1,
-                                "endLine" : 56,
+                                "endLine" : 72,
                                 "endColumn" : 1,
-                                "offset" : 1500,
+                                "offset" : 1854,
                                 "length" : 229
                               }
                             },
@@ -1633,11 +1633,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 17,
+                                "beginLine" : 19,
                                 "beginColumn" : 3,
-                                "endLine" : 17,
+                                "endLine" : 19,
                                 "endColumn" : 82,
-                                "offset" : 562,
+                                "offset" : 662,
                                 "length" : 79
                               }
                             },
@@ -1651,11 +1651,11 @@
                                   "type" : "Some",
                                   "value" : "components\/seL4_Firewall_Firewall\/src\/seL4_Firewall_Firewall.c"
                                 },
-                                "beginLine" : 37,
+                                "beginLine" : 41,
                                 "beginColumn" : 1,
-                                "endLine" : 41,
+                                "endLine" : 45,
                                 "endColumn" : 1,
-                                "offset" : 1624,
+                                "offset" : 1828,
                                 "length" : 262
                               }
                             },
@@ -2528,11 +2528,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
                                 },
-                                "beginLine" : 56,
+                                "beginLine" : 62,
                                 "beginColumn" : 5,
-                                "endLine" : 63,
+                                "endLine" : 69,
                                 "endColumn" : 5,
-                                "offset" : 2170,
+                                "offset" : 2347,
                                 "length" : 373
                               }
                             },
@@ -2564,11 +2564,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 18,
+                                "beginLine" : 19,
                                 "beginColumn" : 1,
-                                "endLine" : 28,
+                                "endLine" : 29,
                                 "endColumn" : 1,
-                                "offset" : 476,
+                                "offset" : 524,
                                 "length" : 304
                               }
                             },
@@ -2691,11 +2691,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
                                 },
-                                "beginLine" : 43,
+                                "beginLine" : 49,
                                 "beginColumn" : 5,
-                                "endLine" : 52,
+                                "endLine" : 58,
                                 "endColumn" : 5,
-                                "offset" : 1668,
+                                "offset" : 1845,
                                 "length" : 345
                               }
                             },
@@ -2727,11 +2727,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 30,
+                                "beginLine" : 38,
                                 "beginColumn" : 1,
-                                "endLine" : 35,
+                                "endLine" : 43,
                                 "endColumn" : 1,
-                                "offset" : 783,
+                                "offset" : 954,
                                 "length" : 223
                               }
                             },
@@ -2745,11 +2745,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 15,
+                                "beginLine" : 16,
                                 "beginColumn" : 3,
-                                "endLine" : 15,
+                                "endLine" : 16,
                                 "endColumn" : 79,
-                                "offset" : 395,
+                                "offset" : 443,
                                 "length" : 76
                               }
                             },
@@ -2763,11 +2763,11 @@
                                   "type" : "Some",
                                   "value" : "components\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.c"
                                 },
-                                "beginLine" : 28,
+                                "beginLine" : 32,
                                 "beginColumn" : 1,
-                                "endLine" : 32,
+                                "endLine" : 36,
                                 "endColumn" : 1,
-                                "offset" : 1207,
+                                "offset" : 1407,
                                 "length" : 256
                               }
                             },

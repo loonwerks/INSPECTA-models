@@ -33,6 +33,10 @@ bool get_currentTemp(TempControl_SysVerif_Temperature *data) {
   return get_currentTemp_poll (&numDropped, data);
 }
 
+uintmax_t get_currentTemp_num_invalid(void) {
+  return sb_queue_TempControl_SysVerif_Temperature_1_numInvalid((sb_queue_TempControl_SysVerif_Temperature_1_Recv_t *) &currentTemp_recv_queue);
+}
+
 bool put_fanCmd(const TempControl_SysVerif_FanCmd *data) {
   sb_queue_TempControl_SysVerif_FanCmd_1_enqueue((sb_queue_TempControl_SysVerif_FanCmd_1_t *) fanCmd_queue_1, (TempControl_SysVerif_FanCmd *) data);
 
@@ -84,6 +88,10 @@ bool get_setPoint(TempControl_SysVerif_SetPoint *data) {
   return get_setPoint_poll (&numDropped, data);
 }
 
+uintmax_t get_setPoint_num_invalid(void) {
+  return sb_queue_TempControl_SysVerif_SetPoint_1_numInvalid((sb_queue_TempControl_SysVerif_SetPoint_1_Recv_t *) &setPoint_recv_queue);
+}
+
 bool fanAck_is_empty(void) {
   return sb_queue_TempControl_SysVerif_FanAck_1_is_empty(&fanAck_recv_queue);
 }
@@ -95,6 +103,10 @@ bool get_fanAck_poll(sb_event_counter_t *numDropped, TempControl_SysVerif_FanAck
 bool get_fanAck(TempControl_SysVerif_FanAck *data) {
   sb_event_counter_t numDropped;
   return get_fanAck_poll (&numDropped, data);
+}
+
+uintmax_t get_fanAck_num_invalid(void) {
+  return sb_queue_TempControl_SysVerif_FanAck_1_numInvalid((sb_queue_TempControl_SysVerif_FanAck_1_Recv_t *) &fanAck_recv_queue);
 }
 
 bool is_monitoring_enabled(void) {

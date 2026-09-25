@@ -26,6 +26,10 @@ bool get_p1_t1_write_port(int32_t *data) {
   return isFresh;
 }
 
+uintmax_t get_p1_t1_write_port_num_invalid(void) {
+  return sb_queue_int32_t_1_numInvalid((sb_queue_int32_t_1_Recv_t *) &p1_t1_write_port_recv_queue);
+}
+
 int32_t last_p2_t2_write_port_payload;
 
 bool get_p2_t2_write_port(int32_t *data) {
@@ -37,6 +41,10 @@ bool get_p2_t2_write_port(int32_t *data) {
   }
   *data = last_p2_t2_write_port_payload;
   return isFresh;
+}
+
+uintmax_t get_p2_t2_write_port_num_invalid(void) {
+  return sb_queue_int32_t_1_numInvalid((sb_queue_int32_t_1_Recv_t *) &p2_t2_write_port_recv_queue);
 }
 
 void init(void) {

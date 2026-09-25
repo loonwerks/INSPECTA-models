@@ -6,9 +6,12 @@ use super::*;
 
 verus! {
 
-  pub const hamr_ScheduleChannels_BYTE_SIZE: usize = 512;
   pub const hamr_ScheduleChannels_DIM_0: usize = 128;
 
   pub type ScheduleChannels = [u32; hamr_ScheduleChannels_DIM_0];
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<ScheduleChannels>() == 512);
+const _: () = assert!(core::mem::align_of::<ScheduleChannels>() == 4);

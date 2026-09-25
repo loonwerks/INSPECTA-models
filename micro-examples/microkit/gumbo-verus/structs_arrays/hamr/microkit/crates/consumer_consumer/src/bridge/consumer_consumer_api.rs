@@ -23,6 +23,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_myStructArray_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_myStructArray_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_MyArrayStruct(
       &mut self,
       value: &Ghost<Option<Gumbo_Structs_Arrays::MyArrayStruct>>) -> (res : Option<Gumbo_Structs_Arrays::MyArrayStruct>)
@@ -33,6 +39,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_MyArrayStruct_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_MyArrayStruct_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_MyArrayInt32(
       &mut self,
       value: &Ghost<Option<Gumbo_Structs_Arrays::MyArrayInt32>>) -> (res : Option<Gumbo_Structs_Arrays::MyArrayInt32>)
@@ -40,6 +52,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_MyArrayInt32();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_MyArrayInt32_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_MyArrayInt32_num_invalid();
     }
   }
 
@@ -65,6 +83,12 @@ verus! {
         old(self).MyArrayInt32 == final(self).MyArrayInt32,
     {
       self.api.unverified_get_myStructArray(&Ghost(self.myStructArray))
+    }/// The number of messages received on myStructArray that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_myStructArray_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_myStructArray_num_invalid()
     }
     pub fn get_MyArrayStruct(&mut self) -> (res : Option<Gumbo_Structs_Arrays::MyArrayStruct>)
       ensures
@@ -74,6 +98,12 @@ verus! {
         old(self).MyArrayInt32 == final(self).MyArrayInt32,
     {
       self.api.unverified_get_MyArrayStruct(&Ghost(self.MyArrayStruct))
+    }/// The number of messages received on MyArrayStruct that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_MyArrayStruct_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_MyArrayStruct_num_invalid()
     }
     pub fn get_MyArrayInt32(&mut self) -> (res : Option<Gumbo_Structs_Arrays::MyArrayInt32>)
       ensures
@@ -83,6 +113,12 @@ verus! {
         res == final(self).MyArrayInt32,
     {
       self.api.unverified_get_MyArrayInt32(&Ghost(self.MyArrayInt32))
+    }/// The number of messages received on MyArrayInt32 that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_MyArrayInt32_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_MyArrayInt32_num_invalid()
     }
   }
 

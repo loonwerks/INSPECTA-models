@@ -992,11 +992,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 60,
+                                "beginLine" : 78,
                                 "beginColumn" : 5,
-                                "endLine" : 68,
+                                "endLine" : 86,
                                 "endColumn" : 5,
-                                "offset" : 1852,
+                                "offset" : 2363,
                                 "length" : 415
                               }
                             },
@@ -1028,11 +1028,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 19,
+                                "beginLine" : 22,
                                 "beginColumn" : 1,
-                                "endLine" : 29,
+                                "endLine" : 32,
                                 "endColumn" : 1,
-                                "offset" : 559,
+                                "offset" : 693,
                                 "length" : 316
                               }
                             },
@@ -1155,11 +1155,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 69,
+                                "beginLine" : 93,
                                 "beginColumn" : 5,
-                                "endLine" : 77,
+                                "endLine" : 101,
                                 "endColumn" : 5,
-                                "offset" : 2273,
+                                "offset" : 3128,
                                 "length" : 413
                               }
                             },
@@ -1173,11 +1173,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 26,
+                                "beginLine" : 32,
                                 "beginColumn" : 5,
-                                "endLine" : 33,
+                                "endLine" : 39,
                                 "endColumn" : 5,
-                                "offset" : 679,
+                                "offset" : 850,
                                 "length" : 271
                               }
                             },
@@ -1191,11 +1191,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 31,
+                                "beginLine" : 41,
                                 "beginColumn" : 1,
-                                "endLine" : 41,
+                                "endLine" : 51,
                                 "endColumn" : 1,
-                                "offset" : 878,
+                                "offset" : 1129,
                                 "length" : 374
                               }
                             },
@@ -1209,11 +1209,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 15,
+                                "beginLine" : 16,
                                 "beginColumn" : 3,
-                                "endLine" : 15,
+                                "endLine" : 16,
                                 "endColumn" : 80,
-                                "offset" : 398,
+                                "offset" : 443,
                                 "length" : 77
                               }
                             },
@@ -1227,11 +1227,11 @@
                                   "type" : "Some",
                                   "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
                                 },
-                                "beginLine" : 39,
+                                "beginLine" : 43,
                                 "beginColumn" : 1,
-                                "endLine" : 42,
+                                "endLine" : 46,
                                 "endColumn" : 1,
-                                "offset" : 1733,
+                                "offset" : 1939,
                                 "length" : 153
                               }
                             },
@@ -1318,11 +1318,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 78,
+                                "beginLine" : 108,
                                 "beginColumn" : 5,
-                                "endLine" : 86,
+                                "endLine" : 116,
                                 "endColumn" : 5,
-                                "offset" : 2692,
+                                "offset" : 3891,
                                 "length" : 408
                               }
                             },
@@ -1336,11 +1336,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 36,
+                                "beginLine" : 48,
                                 "beginColumn" : 5,
-                                "endLine" : 43,
+                                "endLine" : 55,
                                 "endColumn" : 5,
-                                "offset" : 988,
+                                "offset" : 1330,
                                 "length" : 267
                               }
                             },
@@ -1354,11 +1354,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 43,
+                                "beginLine" : 60,
                                 "beginColumn" : 1,
-                                "endLine" : 53,
+                                "endLine" : 70,
                                 "endColumn" : 1,
-                                "offset" : 1255,
+                                "offset" : 1623,
                                 "length" : 326
                               }
                             },
@@ -1372,11 +1372,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 16,
+                                "beginLine" : 18,
                                 "beginColumn" : 3,
-                                "endLine" : 16,
+                                "endLine" : 18,
                                 "endColumn" : 78,
-                                "offset" : 479,
+                                "offset" : 569,
                                 "length" : 75
                               }
                             },
@@ -1390,11 +1390,11 @@
                                   "type" : "Some",
                                   "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
                                 },
-                                "beginLine" : 52,
+                                "beginLine" : 60,
                                 "beginColumn" : 1,
-                                "endLine" : 55,
+                                "endLine" : 63,
                                 "endColumn" : 1,
-                                "offset" : 2285,
+                                "offset" : 2693,
                                 "length" : 150
                               }
                             },

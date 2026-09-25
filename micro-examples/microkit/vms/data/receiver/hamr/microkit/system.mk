@@ -33,6 +33,10 @@ UTIL_OBJS = printf.o util.o
 TYPES_DIR = $(TOP_DIR)/types
 TYPE_OBJS := $(TOP_DIR)/build/sb_queue_int8_t_1.o
 
+# The queue objects as an archive: each protection domain's link pulls in only the
+# queues it uses, not every queue in the system
+TYPES_LIB := libhamr_types.a
+
 # exporting TOP_TYPES_INCLUDE in case other makefiles need it
 export TOP_TYPES_INCLUDE = -I$(TYPES_DIR)/include
 
@@ -47,6 +51,10 @@ ${CHECK_FLAGS_BOARD_MD5}:
 
 %.o: ${TOP_DIR}/util/src/%.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_DIR)/util/include
+
+$(TYPES_LIB): $(TYPE_OBJS)
+	rm -f $@
+	$(AR) rcs $@ $^
 
 $(TOP_DIR)/build/sb_queue_int8_t_1.o: $(TOP_DIR)/types/src/sb_queue_int8_t_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
@@ -84,16 +92,16 @@ pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 producer_p_p_producer_MON.elf: producer_p_p_producer_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-producer_p_p_producer.elf: $(UTIL_OBJS) $(TYPE_OBJS) producer_p_p_producer_user.o producer_p_p_producer.o
+producer_p_p_producer.elf: $(UTIL_OBJS) producer_p_p_producer_user.o producer_p_p_producer.o $(TYPES_LIB)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 consumer_p_p_consumer_MON.elf: consumer_p_p_consumer_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-consumer_p_p_consumer.elf: $(TYPE_OBJS) consumer_p_p_consumer.a
-	$(LD) $(LDFLAGS) $^ --start-group -lmicrokit -Tmicrokit.ld consumer_p_p_consumer.a --end-group -o $@
+consumer_p_p_consumer.elf: $(TYPES_LIB) consumer_p_p_consumer.a
+	$(LD) $(LDFLAGS) $^ --start-group -lmicrokit -Tmicrokit.ld consumer_p_p_consumer.a $(TYPES_LIB) --end-group -o $@
 
-pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
+pacer.elf: $(UTIL_OBJS) pacer.o $(TYPES_LIB)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 $(IMAGE_FILE): $(IMAGES) $(TOP_DIR)/$(MSD)

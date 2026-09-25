@@ -22,3 +22,7 @@ verus! {
   }
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<ARP_Type>() == 4);
+const _: () = assert!(core::mem::align_of::<ARP_Type>() == 4);

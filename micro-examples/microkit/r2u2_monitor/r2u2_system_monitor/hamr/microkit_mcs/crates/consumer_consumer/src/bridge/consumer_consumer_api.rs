@@ -30,6 +30,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_sample_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_sample_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_alert_flag(
       &mut self,
       value: &Ghost<Option<bool>>) -> (res : Option<bool>)
@@ -37,6 +43,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_alert_flag();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_alert_flag_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_alert_flag_num_invalid();
     }
   }
 
@@ -73,6 +85,12 @@ verus! {
         old(self).alert_flag == final(self).alert_flag,
     {
       self.api.unverified_get_sample(&Ghost(self.sample))
+    }/// The number of messages received on sample that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_sample_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_sample_num_invalid()
     }
     pub fn get_alert_flag(&mut self) -> (res : Option<bool>)
       ensures
@@ -82,6 +100,12 @@ verus! {
         res == final(self).alert_flag,
     {
       self.api.unverified_get_alert_flag(&Ghost(self.alert_flag))
+    }/// The number of messages received on alert_flag that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_alert_flag_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_alert_flag_num_invalid()
     }
   }
 

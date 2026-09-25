@@ -12,8 +12,11 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_producer_producer_myStructArray(value: *mut Gumbo_Structs_Arrays::MyStructArray_i) -> bool;
+  fn get_producer_producer_myStructArray_num_invalid() -> u64;
   fn get_producer_producer_MyArrayStruct(value: *mut Gumbo_Structs_Arrays::MyArrayStruct) -> bool;
+  fn get_producer_producer_MyArrayStruct_num_invalid() -> u64;
   fn get_consumer_consumer_MyArrayInt32(value: *mut Gumbo_Structs_Arrays::MyArrayInt32) -> bool;
+  fn get_consumer_consumer_MyArrayInt32_num_invalid() -> u64;
 }
 
 pub fn unsafe_get_producer_producer_myStructArray() -> Option<Gumbo_Structs_Arrays::MyStructArray_i>
@@ -25,6 +28,13 @@ pub fn unsafe_get_producer_producer_myStructArray() -> Option<Gumbo_Structs_Arra
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_producer_producer_myStructArray_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_myStructArray_num_invalid();
   }
 }
 
@@ -40,6 +50,13 @@ pub fn unsafe_get_producer_producer_MyArrayStruct() -> Option<Gumbo_Structs_Arra
   }
 }
 
+pub fn unsafe_get_producer_producer_MyArrayStruct_num_invalid() -> u64
+{
+  unsafe {
+    return get_producer_producer_MyArrayStruct_num_invalid();
+  }
+}
+
 pub fn unsafe_get_consumer_consumer_MyArrayInt32() -> Option<Gumbo_Structs_Arrays::MyArrayInt32>
 {
   unsafe {
@@ -49,6 +66,13 @@ pub fn unsafe_get_consumer_consumer_MyArrayInt32() -> Option<Gumbo_Structs_Array
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_get_consumer_consumer_MyArrayInt32_num_invalid() -> u64
+{
+  unsafe {
+    return get_consumer_consumer_MyArrayInt32_num_invalid();
   }
 }
 
@@ -90,6 +114,12 @@ pub fn get_producer_producer_myStructArray(value: *mut Gumbo_Structs_Arrays::MyS
 }
 
 #[cfg(test)]
+pub fn get_producer_producer_myStructArray_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_producer_producer_MyArrayStruct(value: *mut Gumbo_Structs_Arrays::MyArrayStruct) -> bool
 {
   unsafe {
@@ -104,6 +134,12 @@ pub fn get_producer_producer_MyArrayStruct(value: *mut Gumbo_Structs_Arrays::MyA
 }
 
 #[cfg(test)]
+pub fn get_producer_producer_MyArrayStruct_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_consumer_consumer_MyArrayInt32(value: *mut Gumbo_Structs_Arrays::MyArrayInt32) -> bool
 {
   unsafe {
@@ -115,4 +151,10 @@ pub fn get_consumer_consumer_MyArrayInt32(value: *mut Gumbo_Structs_Arrays::MyAr
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn get_consumer_consumer_MyArrayInt32_num_invalid() -> u64
+{
+  return 0;
 }

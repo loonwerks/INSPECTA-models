@@ -27,4 +27,5 @@ void *memset(void *dest, int c, size_t n);
 bool EthernetFramesTx_is_empty(void);
 bool get_EthernetFramesTx_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data);
 bool get_EthernetFramesTx(SW_RawEthernetMessage *data);
+uintmax_t get_EthernetFramesTx_num_invalid(void);
 bool put_EthernetFramesRx(const SW_RawEthernetMessage *data);

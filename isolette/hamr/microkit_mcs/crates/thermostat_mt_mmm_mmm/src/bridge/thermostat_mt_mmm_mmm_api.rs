@@ -30,6 +30,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_current_tempWstatus_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_current_tempWstatus_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_interface_failure(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Failure_Flag_i>) -> (res : Isolette_Data_Model::Failure_Flag_i)
@@ -40,6 +46,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_interface_failure_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_interface_failure_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_internal_failure(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Failure_Flag_i>) -> (res : Isolette_Data_Model::Failure_Flag_i)
@@ -47,6 +59,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_internal_failure();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_internal_failure_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_internal_failure_num_invalid();
     }
   }
 
@@ -86,6 +104,12 @@ verus! {
         old(self).monitor_mode == final(self).monitor_mode,
     {
       self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
+    }/// The number of messages received on current_tempWstatus that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_current_tempWstatus_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_current_tempWstatus_num_invalid()
     }
     pub fn get_interface_failure(&mut self) -> (res : Isolette_Data_Model::Failure_Flag_i)
       ensures
@@ -96,6 +120,12 @@ verus! {
         old(self).monitor_mode == final(self).monitor_mode,
     {
       self.api.unverified_get_interface_failure(&Ghost(self.interface_failure))
+    }/// The number of messages received on interface_failure that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_interface_failure_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_interface_failure_num_invalid()
     }
     pub fn get_internal_failure(&mut self) -> (res : Isolette_Data_Model::Failure_Flag_i)
       ensures
@@ -106,6 +136,12 @@ verus! {
         old(self).monitor_mode == final(self).monitor_mode,
     {
       self.api.unverified_get_internal_failure(&Ghost(self.internal_failure))
+    }/// The number of messages received on internal_failure that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_internal_failure_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_internal_failure_num_invalid()
     }
   }
 

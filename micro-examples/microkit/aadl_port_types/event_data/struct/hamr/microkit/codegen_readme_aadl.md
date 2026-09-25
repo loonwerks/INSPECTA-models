@@ -77,7 +77,7 @@
         <td>event_data_2_prod_2_cons_struct::struct.i</td><td><a title='Memory Map: Lines 50-54' href='microkit.system#L50'>Memory Map</a> → <a title='C Shared Memory Variable: Line 9' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L9'>C var_addr</a> → <a title='C Interface: Lines 24-27' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L24'>C Interface</a></td></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons_struct.aadl#L87'>read_port2</a></td>
         <td>In</td><td>Event Data</td>
-        <td>event_data_2_prod_2_cons_struct::struct.i</td><td><a title='Memory Map: Lines 55-59' href='microkit.system#L55'>Memory Map</a> → <a title='C Shared Memory Variable: Line 11' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L11'>C var_addr</a> → <a title='C Interface: Lines 37-40' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L37'>C Interface</a></td></tr>
+        <td>event_data_2_prod_2_cons_struct::struct.i</td><td><a title='Memory Map: Lines 55-59' href='microkit.system#L55'>Memory Map</a> → <a title='C Shared Memory Variable: Line 11' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L11'>C var_addr</a> → <a title='C Interface: Lines 41-44' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L41'>C Interface</a></td></tr>
     </table>
 
 
@@ -96,6 +96,6 @@
         <td>event_data_2_prod_2_cons_struct::struct.i</td><td><a title='Memory Map: Lines 73-77' href='microkit.system#L73'>Memory Map</a> → <a title='C Shared Memory Variable: Line 10' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L10'>C var_addr</a> → <a title='C Interface: Lines 25-28' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L25'>C Interface</a></td></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons_struct.aadl#L87'>read_port2</a></td>
         <td>In</td><td>Event Data</td>
-        <td>event_data_2_prod_2_cons_struct::struct.i</td><td><a title='Memory Map: Lines 78-82' href='microkit.system#L78'>Memory Map</a> → <a title='C Shared Memory Variable: Line 12' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L12'>C var_addr</a> → <a title='C Interface: Lines 38-41' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L38'>C Interface</a></td></tr>
+        <td>event_data_2_prod_2_cons_struct::struct.i</td><td><a title='Memory Map: Lines 78-82' href='microkit.system#L78'>Memory Map</a> → <a title='C Shared Memory Variable: Line 12' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L12'>C var_addr</a> → <a title='C Interface: Lines 42-45' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L42'>C Interface</a></td></tr>
     </table>
 

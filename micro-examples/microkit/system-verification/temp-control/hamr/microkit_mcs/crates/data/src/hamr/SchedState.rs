@@ -22,3 +22,10 @@ verus! {
   }
 
 }
+
+// Memory layout as HAMR computes it
+const _: () = assert!(core::mem::size_of::<SchedState>() == 12);
+const _: () = assert!(core::mem::align_of::<SchedState>() == 4);
+const _: () = assert!(core::mem::offset_of!(SchedState, last_yielded_ch) == 0);
+const _: () = assert!(core::mem::offset_of!(SchedState, next_dispatch_ch) == 4);
+const _: () = assert!(core::mem::offset_of!(SchedState, current_timeslice) == 8);

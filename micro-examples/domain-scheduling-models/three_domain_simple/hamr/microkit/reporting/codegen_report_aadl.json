@@ -590,11 +590,11 @@
                                   "type" : "Some",
                                   "value" : "components\/p2_t2\/src\/p2_t2.c"
                                 },
-                                "beginLine" : 28,
+                                "beginLine" : 32,
                                 "beginColumn" : 1,
-                                "endLine" : 32,
+                                "endLine" : 36,
                                 "endColumn" : 1,
-                                "offset" : 745,
+                                "offset" : 885,
                                 "length" : 152
                               }
                             },

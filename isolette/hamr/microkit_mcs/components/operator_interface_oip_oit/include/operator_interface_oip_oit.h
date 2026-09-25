@@ -25,9 +25,13 @@ void *memset(void *dest, int c, size_t n);
 
 
 bool get_display_temperature(Isolette_Data_Model_Temp_i *data);
+uintmax_t get_display_temperature_num_invalid(void);
 bool get_regulator_status(Isolette_Data_Model_Status *data);
+uintmax_t get_regulator_status_num_invalid(void);
 bool get_monitor_status(Isolette_Data_Model_Status *data);
+uintmax_t get_monitor_status_num_invalid(void);
 bool get_alarm_control(Isolette_Data_Model_On_Off *data);
+uintmax_t get_alarm_control_num_invalid(void);
 bool put_lower_desired_tempWstatus(const Isolette_Data_Model_TempWstatus_i *data);
 bool put_upper_desired_tempWstatus(const Isolette_Data_Model_TempWstatus_i *data);
 bool put_lower_alarm_tempWstatus(const Isolette_Data_Model_TempWstatus_i *data);
