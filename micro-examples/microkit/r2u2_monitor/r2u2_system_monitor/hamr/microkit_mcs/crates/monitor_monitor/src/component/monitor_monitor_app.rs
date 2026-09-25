@@ -45,6 +45,7 @@ verus! {
     {
       let sent_sample = api.get_sent_sample();
       let observed_sample = api.get_observed_sample();
+      log_info("compute entrypoint invoked");
     }
 
     pub fn notify(

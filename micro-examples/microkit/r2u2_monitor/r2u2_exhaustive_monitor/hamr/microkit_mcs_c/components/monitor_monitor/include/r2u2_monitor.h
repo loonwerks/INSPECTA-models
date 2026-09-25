@@ -6,6 +6,65 @@
 
 extern int32_t r2u2_state_sprevious_level;
 
+typedef enum {
+  input_event,
+  input_event_data,
+  input_data,
+  base_type_boolean,
+  base_type_character,
+  base_type_integer_8,
+  base_type_integer_16,
+  base_type_integer_32,
+  base_type_unsigned_8,
+  base_type_unsigned_16,
+  bool_signal,
+  output_event_must_send,
+  output_event_data_must_send,
+  output_event_no_send,
+  output_event_data_no_send,
+  output_event_data_must_send_value,
+  output_data,
+  temporal_future,
+  temporal_eventually,
+  temporal_globally,
+  temporal_until,
+  temporal_release,
+  comparison_operators,
+  arithmetic_operators,
+  bitwise_operators,
+  boolean_operators,
+  implication_operator,
+  enum_signal,
+  array_signal,
+  record_signal,
+  conditional_boolean,
+  quantified_all_until,
+  quantified_all_to,
+  quantified_exists_until,
+  quantified_exists_to,
+  quantified_slice,
+  quantified_index_sensitive,
+  quantified_nested,
+  state_variable,
+  state_variable_in,
+  boolean_function,
+  value_function,
+  temporal_once,
+  temporal_historically,
+  temporal_since,
+  temporal_trigger,
+} r2u2_property_t;
+
+typedef enum {
+  R2U2_VERDICT_UNKNOWN,
+  R2U2_VERDICT_FALSE,
+  R2U2_VERDICT_TRUE
+} r2u2_verdict_status_t;
+
+void handle_r2u2_verdict(
+    r2u2_property_t property,
+    r2u2_verdict_status_t verdict);
+
 void r2u2_monitor_initialize(void);
 void r2u2_monitor_pre_timeTriggered(void);
 void r2u2_monitor_post_timeTriggered(void);

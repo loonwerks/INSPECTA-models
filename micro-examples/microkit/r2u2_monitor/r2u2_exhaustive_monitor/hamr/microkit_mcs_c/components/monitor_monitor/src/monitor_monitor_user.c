@@ -42,3 +42,19 @@ void monitor_monitor_notify(microkit_channel channel) {
       printf("%s: Unexpected channel %d\n", microkit_name, channel);
   }
 }
+
+// Default logging policy for monitored properties without an alert mapping.
+static void log_r2u2_verdict(const char *property, r2u2_verdict_status_t verdict) {
+  const char *status = "unknown";
+  switch (verdict) {
+    case R2U2_VERDICT_TRUE:
+      status = "true";
+      break;
+    case R2U2_VERDICT_FALSE:
+      status = "false";
+      break;
+    case R2U2_VERDICT_UNKNOWN:
+      break;
+  }
+  printf("%s is currently %s\n", property, status);
+}

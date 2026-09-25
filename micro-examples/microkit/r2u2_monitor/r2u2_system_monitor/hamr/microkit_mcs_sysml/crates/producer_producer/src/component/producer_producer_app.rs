@@ -3,13 +3,10 @@
 use data::*;
 use crate::bridge::producer_producer_api::*;
 use vstd::prelude::*;
-// PLACEHOLDER MARKER R2U2 MONITOR IMPORT
-
 verus! {
 
   pub struct producer_producer {
     // PLACEHOLDER MARKER STATE VARS
-    // PLACEHOLDER MARKER R2U2 MONITOR STATE VAR
     // Position in the 12-dispatch demonstration cycle and the next payload.
     pub dispatch_count: u8,
     pub next_sample: i32,
@@ -20,7 +17,6 @@ verus! {
     {
       Self {
         // PLACEHOLDER MARKER STATE VAR INIT
-        // PLACEHOLDER MARKER R2U2 MONITOR STATE VAR INIT
         dispatch_count: 0,
         next_sample: 0,
       }
@@ -32,7 +28,6 @@ verus! {
       ensures
         // PLACEHOLDER MARKER INITIALIZATION ENSURES
     {
-      // PLACEHOLDER MARKER R2U2 MONITOR INITIALIZE
 
       log_info("initialize entrypoint invoked");
     }

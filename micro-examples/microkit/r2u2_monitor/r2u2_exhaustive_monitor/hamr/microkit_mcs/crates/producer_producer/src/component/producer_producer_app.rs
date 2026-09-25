@@ -3,13 +3,10 @@
 use data::*;
 use crate::bridge::producer_producer_api::*;
 use vstd::prelude::*;
-// PLACEHOLDER MARKER R2U2 MONITOR IMPORT
-
 verus! {
 
   pub struct producer_producer {
     // PLACEHOLDER MARKER STATE VARS
-    // PLACEHOLDER MARKER R2U2 MONITOR STATE VAR
   }
 
   impl producer_producer {
@@ -17,7 +14,6 @@ verus! {
     {
       Self {
         // PLACEHOLDER MARKER STATE VAR INIT
-        // PLACEHOLDER MARKER R2U2 MONITOR STATE VAR INIT
       }
     }
 
@@ -27,7 +23,6 @@ verus! {
       ensures
         // PLACEHOLDER MARKER INITIALIZATION ENSURES
     {
-      // PLACEHOLDER MARKER R2U2 MONITOR INITIALIZE
 
       log_info("initialize entrypoint invoked");
     }
