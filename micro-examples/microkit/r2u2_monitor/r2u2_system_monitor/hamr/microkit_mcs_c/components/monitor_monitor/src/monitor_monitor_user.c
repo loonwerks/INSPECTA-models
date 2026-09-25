@@ -21,9 +21,3 @@ void monitor_monitor_notify(microkit_channel channel) {
       printf("%s: Unexpected channel %d\n", microkit_name, channel);
   }
 }
-
-// Optional implementation placeholder for the R2U2 verdict of monitored property `samples_match_until_producer_pauses`.
-void handle_samples_match_until_producer_pauses_verdict(r2u2_verdict_status_t verdict) {
-  // This verdict is already mapped to monitor-owned alert port
-  // alert_flag. Do not write this port from this callback.
-}
