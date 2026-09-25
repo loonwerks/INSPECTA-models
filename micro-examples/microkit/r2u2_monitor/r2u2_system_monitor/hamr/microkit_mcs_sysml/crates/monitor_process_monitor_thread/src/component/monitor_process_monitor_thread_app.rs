@@ -59,22 +59,6 @@ verus! {
         }
       }
     }
-
-    /// Optional implementation placeholder for the R2U2 verdict of monitored property `samples_match_until_producer_pauses`.
-    pub fn handle_samples_match_until_producer_pauses_verdict<API: monitor_process_monitor_thread_Full_Api> (
-      &mut self,
-      api: &mut monitor_process_monitor_thread_Application_Api<API>,
-      verdict: Option<bool>)
-      ensures
-        // BEGIN MARKER R2U2 samples_match_until_producer_pauses VERDICT ENSURES
-        // guarantee Monitor_Requirement
-        //   Alert ports are reserved for the monitor
-        old(api).alert_flag == final(api).alert_flag,
-        // END MARKER R2U2 samples_match_until_producer_pauses VERDICT ENSURES
-    {
-      // This verdict is already mapped to monitor-owned alert port
-      // alert_flag. Do not write this port from this callback.
-    }
   }
 
   #[verifier::external_body]
