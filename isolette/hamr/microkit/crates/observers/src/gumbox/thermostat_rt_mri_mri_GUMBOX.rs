@@ -77,7 +77,7 @@ pub fn compute_spec_lower_is_not_higher_than_upper_assume(
   api_lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
 {
-  implies!(
+  impliesL!(
     (api_lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &
       (api_upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
     (api_lower_desired_tempWstatus.degrees <= api_upper_desired_tempWstatus.degrees))

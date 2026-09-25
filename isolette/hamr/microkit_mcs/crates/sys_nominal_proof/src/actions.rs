@@ -212,6 +212,17 @@ pub open spec fn userland_monitor_thread_fire(pre: SystemState, post: SystemStat
   userland_monitor_thread_global_write_frame(pre, post)
 }
 
+// -- Isolette_Single_Sensor_Instance.test_controller_process.test_controller_thread --
+
+
+/** "TEST_CONTROLLER_THREAD fires": every written field is determined by the read scope;
+  * everything else is framed.
+  */
+pub open spec fn test_controller_thread_fire(pre: SystemState, post: SystemState) -> bool
+{
+  test_controller_thread_global_write_frame(pre, post)
+}
+
 // -- Isolette_Single_Sensor_Instance.gumbo_monitor_process.gumbo_monitor_thread --
 
 

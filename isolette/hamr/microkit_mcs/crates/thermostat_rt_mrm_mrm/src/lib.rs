@@ -65,6 +65,12 @@ pub extern "C" fn thermostat_rt_mrm_mrm_initialize() {
 pub extern "C" fn thermostat_rt_mrm_mrm_timeTriggered() {
   unsafe {
     if let Some(_app) = app.as_mut() {
+      // Injected GUMBO state variables, if the test controller set any.
+      if crate::bridge::extern_c_api::unsafe_is_injection_enabled() {
+        if let Some(v) = crate::bridge::extern_c_api::unsafe_get_inj_sv_lastRegulatorMode() {
+          _app.lastRegulatorMode = v;
+        }
+      }
       _app.timeTriggered(&mut compute_api);
       if monitoring_enabled {
         extern_c_api::unsafe_put_sv_lastRegulatorMode(&_app.lastRegulatorMode);

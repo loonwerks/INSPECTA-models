@@ -40,6 +40,62 @@ def run(title: String, verboseArg: B, proc: OsProto.Proc): Z = {
   return r.exitCode
 }
 
+// Boots a monitored image under QEMU and judges what the runtime monitor reported.
+// QEMU never exits on its own -- the schedule runs forever -- so the run is cut off after
+// simSeconds of wall time (enough for dozens of hyperperiods).  Any contract, system
+// assertion or schedule-conformance violation, or a panic, fails it; so does a run in
+// which the monitor never logged at all, since silence is also what a hang looks like.
+val simSeconds: Z = 60
+
+def simulate(title: String, dir: Os.Path, config: String, evidence: ISZ[String]): Z = {
+  if (!proc"which qemu-system-aarch64".run().ok) {
+    println(s"$title ... skipped: qemu-system-aarch64 not found")
+    return 0
+  }
+  println(s"$title ...")
+  val logFile = Os.temp()
+  val driver: String =
+    st"""set -u
+        |"$$@" > "$$LOG" 2>&1 &
+        |mpid=$$!
+        |sleep $$SECS
+        |pkill -P $$mpid 2>/dev/null
+        |kill $$mpid 2>/dev/null
+        |wait $$mpid 2>/dev/null
+        |exit 0""".render
+  Os.proc(ISZ[String]("sh", "-c", driver, "sh", "make", "-C", dir.string, s"CONFIG=$config", "qemu"))
+    .env(ISZ(("LOG", logFile.string), ("SECS", simSeconds.string)))
+    .timeout((simSeconds + 60) * 1000).run()
+  // the QEMU serial console emits CRLF
+  val out: String = if (logFile.exists) ops.StringOps(logFile.read).replaceAllLiterally("\r", "") else ""
+  logFile.removeAll()
+
+  val markers = ops.ISZOps(ISZ[String]("CONTRACT VIOLATION", "SYS ASSERT VIOLATION",
+    "SCHEDULE CONFORMANCE VIOLATION", "Schedule conformance check failed", "panicked"))
+  val lines = ops.StringOps(out).split((c: C) => c == '\n')
+  val bad = lines.filter((l: String) => markers.exists((m: String) => ops.StringOps(l).contains(m)))
+  val missing = evidence.filter((e: String) => !ops.StringOps(out).contains(e))
+  if (bad.isEmpty && missing.isEmpty) {
+    println(s"$title ... ok: no violations in ${simSeconds}s")
+    return 0
+  }
+  println(s"$title failed!")
+  for (e <- missing) {
+    cprintln(F, s"  expected in the log but never seen: $e")
+  }
+  // each distinct offending line once, with how often it occurred
+  var counts: HashSMap[String, Z] = HashSMap.empty
+  for (l <- bad) {
+    counts = counts + l ~> (counts.get(l).getOrElse(0) + 1)
+  }
+  for (e <- counts.entries) {
+    cprintln(F, s"  ${e._2}x ${e._1}")
+  }
+  cprintln(F, "---- captured QEMU output ----")
+  cprintln(F, out)
+  return 1
+}
+
 println(
   st"""**************************************************************************
       |*                            ISOLETTE                                    *
@@ -156,7 +212,9 @@ val microkitMcsDir = homeDir / "hamr" / "microkit_mcs"
 clean(microkitMcsDir)
 
 if (result == 0) {
-  val args = s"--platform Microkit --runtime-monitoring --scheduling UserLand --verus-attribute-syntax --sel4-output-dir $microkitMcsDir"
+  // ENABLE_TEST_SCHEDULER adds the test_scheduler.mk variant that the system tests in
+  // crates/test_controller run under (bin/run-tests.cmd); the default image is unaffected
+  val args = s"--platform Microkit --runtime-monitoring --scheduling UserLand --verus-attribute-syntax --experimental-options ENABLE_TEST_SCHEDULER --sel4-output-dir $microkitMcsDir"
 
   result = run("Running codegen from SysMLv2 model targeting Microkit with user-land scheduler", F,
     proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args")
@@ -170,7 +228,17 @@ if (result == 0 && hasMicrokit) {
   }
 
   if (result == 0) {
+    result = simulate("Simulating with GUMBO runtime monitoring under QEMU", microkitMcsDir, "gumbo_monitor.mk",
+      ISZ("[gumbo_monitor::"))
+  }
+
+  if (result == 0) {
     result = run("Building with System Verification runtime monitoring", F, proc"make CONFIG=sys_nominal_monitor.mk".at(microkitMcsDir))
+  }
+
+  if (result == 0) {
+    result = simulate("Simulating with System Verification runtime monitoring under QEMU", microkitMcsDir, "sys_nominal_monitor.mk",
+      ISZ("[sys_nominal_monitor::", "Schedule conformance check passed"))
   }
 
   if (result == 0) {
@@ -179,6 +247,21 @@ if (result == 0 && hasMicrokit) {
 
   if (result == 0) {
     result = run("Running the microkit unit tests", F, proc"make test".at(microkitMcsDir))
+  }
+
+  // The system tests ported from the JVM ones (crates/test_controller/src/system_tests),
+  // run on seL4 under QEMU with the test scheduler.  run-tests.cmd builds the
+  // test_scheduler.mk image itself and fails unless every selected test passes.
+  if (result == 0) {
+    if (proc"which qemu-system-aarch64".run().ok) {
+      println(st"""╔═════════════════════════════════════════════════════════════╗
+                  |║  SysMLv2 + Microkit + user-land scheduler + system testing  ║
+                  |╚═════════════════════════════════════════════════════════════╝""".render)      
+      result = run("Running the system tests under QEMU", F,
+        proc"$sireum slang run ${microkitMcsDir / "bin" / "run-tests.cmd"}")
+    } else {
+      println("Running the system tests under QEMU ... skipped: qemu-system-aarch64 not found")
+    }
   }
 
   removeBuildArtifacts()

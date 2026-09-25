@@ -2,6 +2,13 @@
 
 MICROKIT_TOOL ?= $(MICROKIT_SDK)/bin/microkit
 
+# Which cargo profile directory the Rust staticlibs land in.  The crate Makefiles'
+# default target is build-verus-release, and the *-release targets pass --release, so
+# those produce target/<triple>/release; the plain build / build-verus targets do not
+# and produce target/<triple>/debug.  The link rules below have to look in whichever
+# one RUST_MAKE_TARGET actually populated.
+RUST_PROFILE_DIR := $(if $(RUST_MAKE_TARGET),$(if $(filter %-release,$(RUST_MAKE_TARGET)),release,debug),release)
+
 CFLAGS := -mcpu=$(CPU) \
 	-mstrict-align \
 	-ffreestanding \
@@ -96,25 +103,25 @@ ArduPilot_ArduPilot_MON.elf: ArduPilot_ArduPilot_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 ArduPilot_ArduPilot.elf: $(UTIL_OBJS) $(TYPE_OBJS) ArduPilot_ArduPilot_rust ArduPilot_ArduPilot.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/ArduPilot_ArduPilot/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lArduPilot_ArduPilot -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/ArduPilot_ArduPilot/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lArduPilot_ArduPilot -o $@
 
 Firewall_Firewall_MON.elf: Firewall_Firewall_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 Firewall_Firewall.elf: $(UTIL_OBJS) $(TYPE_OBJS) Firewall_Firewall_rust Firewall_Firewall.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/Firewall_Firewall/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lFirewall_Firewall -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/Firewall_Firewall/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lFirewall_Firewall -o $@
 
 LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf: LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 LowLevelEthernetDriver_LowLevelEthernetDriver.elf: $(UTIL_OBJS) $(TYPE_OBJS) LowLevelEthernetDriver_LowLevelEthernetDriver_rust LowLevelEthernetDriver_LowLevelEthernetDriver.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lLowLevelEthernetDriver_LowLevelEthernetDriver -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lLowLevelEthernetDriver_LowLevelEthernetDriver -o $@
 
 domain_monitor_process_domain_monitor_thread_MON.elf: domain_monitor_process_domain_monitor_thread_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ldomain_monitor -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -ldomain_monitor -o $@
 
 pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@

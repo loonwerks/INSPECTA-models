@@ -3,8 +3,6 @@
 use data::*;
 use crate::bridge::gumbo_monitor_process_gumbo_monitor_thread_api::*;
 use vstd::prelude::*;
-use crate::gumbox::tcp_tct_containers::*;
-use crate::gumbox::fp_ft_containers::*;
 
 pub struct gumbo_monitor_process_gumbo_monitor_thread {
   // PLACEHOLDER MARKER STATE VARS
@@ -12,7 +10,7 @@ pub struct gumbo_monitor_process_gumbo_monitor_thread {
   last_index: u32,
   prev_user_ch: hamr::ScheduleChannels,
   next_user_ch: hamr::ScheduleChannels,
-  pre_tcp_tct: Option<PreState_tcp_tct>,
+  components: observers::components::ComponentContracts,
 }
 
 impl gumbo_monitor_process_gumbo_monitor_thread {
@@ -23,7 +21,7 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
       last_index: u32::MAX,
       prev_user_ch: [0; hamr::hamr_ScheduleChannels_DIM_0],
       next_user_ch: [0; hamr::hamr_ScheduleChannels_DIM_0],
-      pre_tcp_tct: None,
+      components: observers::components::ComponentContracts::new(),
     }
   }
 
@@ -72,69 +70,19 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
     }
 
     let idx = state.current_timeslice as usize;
+    let mut view = MonitorView { api: api };
 
     if self.last_index == u32::MAX {
       // First compute phase, check initialization guarantees
-      {
-        let post_tcp_tct = PostState_tcp_tct {
-          currentFanState: api.get_tcp_tct_sv_currentFanState(),
-          currentSetPoint: api.get_tcp_tct_sv_currentSetPoint(),
-          fanError: api.get_tcp_tct_sv_fanError(),
-          latestTemp: api.get_tcp_tct_sv_latestTemp(),
-          api_fanCmd: api.get_tcp_tct_fanCmd(),
-        };
-        if !crate::gumbox::tcp_tct_GUMBOX::initialize_IEP_Post(
-          post_tcp_tct.currentFanState, post_tcp_tct.currentSetPoint, post_tcp_tct.fanError, post_tcp_tct.latestTemp, post_tcp_tct.api_fanCmd) {
-          log::warn!("*** CONTRACT VIOLATION: tcp_tct IEP_Post not satisfied ***");
-          log::warn!("tcp_tct post: {:?}", post_tcp_tct);
-        }
-      }
-    } else {
-      let prev_ch = self.prev_user_ch[idx];
-      match prev_ch {
-        tcp_tct_MON => {
-          let post = PostState_tcp_tct {
-            currentFanState: api.get_tcp_tct_sv_currentFanState(),
-            currentSetPoint: api.get_tcp_tct_sv_currentSetPoint(),
-            fanError: api.get_tcp_tct_sv_fanError(),
-            latestTemp: api.get_tcp_tct_sv_latestTemp(),
-            api_fanCmd: api.get_tcp_tct_fanCmd(),
-          };
-          if let Some(pre) = &self.pre_tcp_tct {
-            if !crate::gumbox::tcp_tct_GUMBOX::compute_CEP_Post(
-              pre.In_currentFanState, pre.In_currentSetPoint, pre.In_fanError, pre.In_latestTemp, post.currentFanState, post.currentSetPoint, post.fanError, post.latestTemp, pre.api_currentTemp, pre.api_fanAck, pre.api_setPoint, post.api_fanCmd) {
-              log::warn!("*** CONTRACT VIOLATION: tcp_tct CEP_Post not satisfied ***");
-              log::warn!("tcp_tct pre: {:?}", pre);
-              log::warn!("tcp_tct post: {:?}", post);
-            }
-          } else {
-            log::warn!("tcp_tct post check skipped: no saved pre-state");
-          }
-        }
-        _ => {}
-      }
+      self.components.on_init(&mut view, &mut LogSink);
+    } else if let Some(prev) = thread_of(self.prev_user_ch[idx]) {
+      // the thread that just yielded: check its post-condition
+      self.components.on_complete(prev, &mut view, &mut LogSink);
     }
 
-    let next_ch = self.next_user_ch[idx];
-    match next_ch {
-      tcp_tct_MON => {
-        let pre = PreState_tcp_tct {
-          In_currentFanState: api.get_tcp_tct_sv_currentFanState(),
-          In_currentSetPoint: api.get_tcp_tct_sv_currentSetPoint(),
-          In_fanError: api.get_tcp_tct_sv_fanError(),
-          In_latestTemp: api.get_tcp_tct_sv_latestTemp(),
-          api_currentTemp: api.get_tsp_tst_currentTemp(),
-          api_fanAck: api.get_fp_ft_fanAck(),
-          api_setPoint: api.get_tcp_tct_setPoint(),
-        };
-        if !crate::gumbox::tcp_tct_GUMBOX::compute_CEP_Pre(
-          pre.In_currentFanState, pre.In_currentSetPoint, pre.In_fanError, pre.In_latestTemp, pre.api_currentTemp, pre.api_fanAck, pre.api_setPoint) {
-          log::warn!("*** CONTRACT VIOLATION: tcp_tct CEP_Pre not satisfied ***");
-          log::warn!("tcp_tct pre: {:?}", pre);
-        }
-        self.pre_tcp_tct = Some(pre);
-      }
-      _ => {}
+    // the thread that runs next: save its pre-state, check its pre-condition
+    if let Some(next) = thread_of(self.next_user_ch[idx]) {
+      self.components.on_dispatch(next, &mut view, &mut LogSink);
     }
 
     self.last_index = state.current_timeslice;
@@ -196,6 +144,79 @@ pub fn buildUserChannelTables(
       }
       if found_prev && found_next {
         break;
+      }
+    }
+  }
+}
+
+// Maps a schedule channel to the thread it dispatches.  Channel ids belong to this
+// variant's system description; the checks in crates/observers identify threads
+// by Thread instead.
+pub fn thread_of(ch: u32) -> Option<observers::Thread> {
+  match ch {
+    tsp_tst_MON => Some(observers::Thread::tsp_tst),
+    tcp_tct_MON => Some(observers::Thread::tcp_tct),
+    fp_ft_MON => Some(observers::Thread::fp_ft),
+    _ => None,
+  }
+}
+
+// The contract checks read ports and state variables through this monitor's API.
+pub struct MonitorView<'a, API: gumbo_monitor_process_gumbo_monitor_thread_Full_Api> {
+  pub api: &'a mut gumbo_monitor_process_gumbo_monitor_thread_Application_Api<API>,
+}
+
+impl<'a, API: gumbo_monitor_process_gumbo_monitor_thread_Full_Api> observers::SystemView for MonitorView<'a, API> {
+  fn get_tcp_tct_sv_currentFanState(&mut self) -> TempControl_SysVerif::FanCmd { self.api.get_tcp_tct_sv_currentFanState() }
+  fn get_tcp_tct_sv_currentSetPoint(&mut self) -> TempControl_SysVerif::SetPoint { self.api.get_tcp_tct_sv_currentSetPoint() }
+  fn get_tcp_tct_sv_fanError(&mut self) -> bool { self.api.get_tcp_tct_sv_fanError() }
+  fn get_tcp_tct_sv_latestTemp(&mut self) -> TempControl_SysVerif::Temperature { self.api.get_tcp_tct_sv_latestTemp() }
+  fn get_tcp_tct_fanCmd(&mut self) -> Option<TempControl_SysVerif::FanCmd> { self.api.get_tcp_tct_fanCmd() }
+  fn get_tsp_tst_currentTemp(&mut self) -> Option<TempControl_SysVerif::Temperature> { self.api.get_tsp_tst_currentTemp() }
+  fn get_fp_ft_fanAck(&mut self) -> Option<TempControl_SysVerif::FanAck> { self.api.get_fp_ft_fanAck() }
+  fn get_tcp_tct_setPoint(&mut self) -> Option<TempControl_SysVerif::SetPoint> { self.api.get_tcp_tct_setPoint() }
+}
+
+// Reports a violation the way the monitors always have: as log lines.
+pub struct LogSink;
+
+impl observers::ViolationSink for LogSink {
+  fn report(&mut self, e: observers::Event) {
+    match e {
+      observers::Event::IepPostViolation { thread, post } => {
+        log::warn!("*** CONTRACT VIOLATION: {} IEP_Post not satisfied ***", thread);
+        log::warn!("{} post: {:?}", thread, post);
+      }
+      observers::Event::CepPreViolation { thread, pre } => {
+        log::warn!("*** CONTRACT VIOLATION: {} CEP_Pre not satisfied ***", thread);
+        log::warn!("{} pre: {:?}", thread, pre);
+      }
+      observers::Event::CepPostViolation { thread, pre, post } => {
+        log::warn!("*** CONTRACT VIOLATION: {} CEP_Post not satisfied ***", thread);
+        log::warn!("{} pre: {:?}", thread, pre);
+        log::warn!("{} post: {:?}", thread, post);
+      }
+      observers::Event::CepPostSkipped { thread } => {
+        log::warn!("{} post check skipped: no saved pre-state", thread);
+      }
+      observers::Event::CepPostExcused { thread } => {
+        log::warn!("{} post check skipped: assumption not met", thread);
+      }
+      observers::Event::SysAssertViolation { property, point } => {
+        log::warn!("*** SYS ASSERT VIOLATION: property {}, {} ***", property, point);
+      }
+      observers::Event::ScheduleNoTransition { ch, timeslice } => {
+        log::error!("*** SCHEDULE CONFORMANCE VIOLATION: no enabled transition for channel {} at timeslice {} ***", ch, timeslice);
+      }
+      observers::Event::ScheduleNoEnd { ready } => {
+        log::error!("*** SCHEDULE CONFORMANCE VIOLATION: walk did not reach END (ready = 0x{:x}) ***", ready);
+      }
+      observers::Event::ScheduleConformance { violations } => {
+        if violations == 0 {
+          log::info!("Schedule conformance check passed");
+        } else {
+          log::error!("Schedule conformance check failed with {} violation(s)", violations);
+        }
       }
     }
   }

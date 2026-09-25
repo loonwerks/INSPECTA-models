@@ -2,6 +2,13 @@
 
 MICROKIT_TOOL ?= $(MICROKIT_SDK)/bin/microkit
 
+# Which cargo profile directory the Rust staticlibs land in.  The crate Makefiles'
+# default target is build-verus-release, and the *-release targets pass --release, so
+# those produce target/<triple>/release; the plain build / build-verus targets do not
+# and produce target/<triple>/debug.  The link rules below have to look in whichever
+# one RUST_MAKE_TARGET actually populated.
+RUST_PROFILE_DIR := $(if $(RUST_MAKE_TARGET),$(if $(filter %-release,$(RUST_MAKE_TARGET)),release,debug),release)
+
 CFLAGS := -mcpu=$(CPU) \
 	-mstrict-align \
 	-ffreestanding \
@@ -216,55 +223,55 @@ thermostat_rt_mri_mri_MON.elf: thermostat_rt_mri_mri_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 thermostat_rt_mri_mri.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_mri_mri_rust thermostat_rt_mri_mri.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_mri_mri/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_rt_mri_mri -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_mri_mri/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_rt_mri_mri -o $@
 
 thermostat_rt_mhs_mhs_MON.elf: thermostat_rt_mhs_mhs_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 thermostat_rt_mhs_mhs.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_mhs_mhs_rust thermostat_rt_mhs_mhs.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_mhs_mhs/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_rt_mhs_mhs -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_mhs_mhs/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_rt_mhs_mhs -o $@
 
 thermostat_rt_mrm_mrm_MON.elf: thermostat_rt_mrm_mrm_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 thermostat_rt_mrm_mrm.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_mrm_mrm_rust thermostat_rt_mrm_mrm.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_mrm_mrm/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_rt_mrm_mrm -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_mrm_mrm/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_rt_mrm_mrm -o $@
 
 thermostat_rt_drf_drf_MON.elf: thermostat_rt_drf_drf_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 thermostat_rt_drf_drf.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_drf_drf_rust thermostat_rt_drf_drf.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_drf_drf/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_rt_drf_drf -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_drf_drf/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_rt_drf_drf -o $@
 
 thermostat_mt_mmi_mmi_MON.elf: thermostat_mt_mmi_mmi_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 thermostat_mt_mmi_mmi.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_mmi_mmi_rust thermostat_mt_mmi_mmi.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_mmi_mmi/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_mt_mmi_mmi -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_mmi_mmi/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_mt_mmi_mmi -o $@
 
 thermostat_mt_ma_ma_MON.elf: thermostat_mt_ma_ma_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 thermostat_mt_ma_ma.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_ma_ma_rust thermostat_mt_ma_ma.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_ma_ma/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_mt_ma_ma -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_ma_ma/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_mt_ma_ma -o $@
 
 thermostat_mt_mmm_mmm_MON.elf: thermostat_mt_mmm_mmm_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 thermostat_mt_mmm_mmm.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_mmm_mmm_rust thermostat_mt_mmm_mmm.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_mmm_mmm/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_mt_mmm_mmm -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_mmm_mmm/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_mt_mmm_mmm -o $@
 
 thermostat_mt_dmf_dmf_MON.elf: thermostat_mt_dmf_dmf_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 thermostat_mt_dmf_dmf.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_dmf_dmf_rust thermostat_mt_dmf_dmf.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_dmf_dmf/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_mt_dmf_dmf -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_dmf_dmf/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -lthermostat_mt_dmf_dmf -o $@
 
 operator_interface_oip_oit_MON.elf: operator_interface_oip_oit_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 operator_interface_oip_oit.elf: $(UTIL_OBJS) $(TYPE_OBJS) operator_interface_oip_oit_rust operator_interface_oip_oit.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/operator_interface_oip_oit/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -loperator_interface_oip_oit -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/operator_interface_oip_oit/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -loperator_interface_oip_oit -o $@
 
 temperature_sensor_cpi_thermostat_MON.elf: temperature_sensor_cpi_thermostat_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
@@ -282,7 +289,7 @@ domain_monitor_process_domain_monitor_thread_MON.elf: domain_monitor_process_dom
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ldomain_monitor -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor/target/aarch64-unknown-none/$(RUST_PROFILE_DIR) $(filter %.o, $^) $(LIBS) -ldomain_monitor -o $@
 
 pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
