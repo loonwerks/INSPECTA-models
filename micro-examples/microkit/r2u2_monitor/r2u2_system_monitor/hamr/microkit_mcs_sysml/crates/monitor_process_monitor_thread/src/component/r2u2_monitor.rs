@@ -9,12 +9,12 @@ use vstd::prelude::*;
 // Instance of the R2U2 monitor.
 static mut R2U2_MONITOR: Option<R2U2Monitor> = None;
 
-#[allow(non_camel_case_types)]
-pub enum R2U2Property {
-  samples_match_until_producer_pauses,
-}
-
 verus! {
+  #[allow(non_camel_case_types)]
+  pub enum R2U2Property {
+    samples_match_until_producer_pauses,
+  }
+
   impl monitor_process_monitor_thread {
     pub fn handle_r2u2_verdict<API: monitor_process_monitor_thread_Full_Api> (
       &mut self,
