@@ -65,10 +65,7 @@ manifest, the same file the VM and the OVA carry.
 
 Everything in [../bin](../bin) except the IDEs: Verus (with its Z3), the
 Microkit SDK, LionsOS, the sdfgen venv, Rust, and a Sireum install big enough
-to run Slang scripts and HAMR codegen.  The SDK is the released one with its
-`microkit` tool rebuilt to carry the
-[seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain
-fix; `$MICROKIT_SDK/VCPU-DOMAIN-PATCH` records what was changed.  See
+to run Slang scripts and HAMR codegen.  The SDK is the released one, unmodified.  See
 [../vagrant/readme.md](../vagrant/readme.md#what-gets-installed) for the full
 table and the environment variables, which are the same here.
 
@@ -121,7 +118,7 @@ PROVERS_BUILD_VER=$(date +%Y.%m.%d) bash docker.sh
 Requires `docker buildx` with a builder that can produce both platforms --
 Docker Desktop's default builder does, via QEMU emulation for the foreign one.
 Note that the emulated half is *much* slower, and on aarch64 the build compiles
-Z3, Verus and sdfgen from source.
+Z3 and Verus from source.
 
 Two knobs on the build itself:
 
@@ -166,7 +163,7 @@ The build context is `provers-env/`, the parent of this directory, so that
 
 The builder stage runs one `RUN` per script rather than one big layer.  That is
 deliberate: with a single layer, editing any script or bumping any version
-re-runs everything, which on aarch64 means recompiling Z3, Verus and sdfgen.
+re-runs everything, which on aarch64 means recompiling Z3 and Verus.
 Each step also `COPY`s only the scripts it needs, so touching `verus.sh` does
 not invalidate the Rust layer.  `env.sh` and `versions.sh` are inputs to
 every step, so a version bump correctly rebuilds everything after it.

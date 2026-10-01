@@ -67,7 +67,7 @@ Everything lands under `$PROVERS_DIR` (default `~/provers`):
 | | |
 | --- | --- |
 | `$VERUS_DIR` | Verus (`VERUS_VER`); `$VERUS_Z3_PATH` points at the Z3 it runs with |
-| `$MICROKIT_SDK` | the released Microkit SDK (`MICROKIT_SDK_VER`), with its `microkit` tool rebuilt to carry the [seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain fix -- without it a domain-scheduled virtual machine never receives its guest's virtual timer interrupt.  `$MICROKIT_SDK/VCPU-DOMAIN-PATCH` records what was changed |
+| `$MICROKIT_SDK` | the released Microkit SDK (`MICROKIT_SDK_VER`), unmodified -- 2.3.1 carries the [seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain fix, without which a domain-scheduled virtual machine never receives its guest's virtual timer interrupt |
 | `$LIONSOS` | LionsOS at the pinned commit (`LIONSOS_VER`).  Only the `dep/sddf` and `dep/libvmm` submodules are checked out -- the generated Microkit makefiles use sDDF and the VM examples use libvmm; the rest is LionsOS the operating system, which nothing here builds |
 | `$SIREUM_HOME` | a full Sireum (kekinian) install, built from `SIREUM_V` |
 | `$SIREUM_PLATFORM_BIN/idea` | Sireum IVE, the IntelliJ-based IDE (optional) |
@@ -197,14 +197,10 @@ others, which is most of why the setups differ so much in how long they take:
 | packages | apt | apt | Homebrew |
 | Z3 | bundled in the Verus release | built by `bin/z3.sh` | bundled in the Verus release |
 | Verus | published release asset | built with `vargo` against that Z3 | published release asset |
-| sdfgen | PyPI wheel | built from source, which needs zig (`ZIG_VER`) | PyPI wheel |
+| sdfgen | PyPI wheel | PyPI wheel | PyPI wheel |
 
 So aarch64 Linux is the slow one and Apple Silicon the quick one: upstream
 publishes an arm64 macOS asset for all three, so a Mac builds none of them.
-
-The `microkit` tool is rebuilt from source on all three, but that is a small
-cargo build rather than a full SDK build -- see
-[microkit-vcpu-domain.sh](../bin/microkit-vcpu-domain.sh).
 
 ## Using The Prebuilt OVA
 
@@ -227,11 +223,9 @@ It is the released SDK with one difference: its `microkit` tool is rebuilt from
 the 2.3.0 tag with the
 [seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain fix,
 without which a domain-scheduled virtual machine hangs in the guest's
-`arch_timer` probe.  The fix changes only the capDL spec the host tool emits --
-the kernel, loader, monitor, libmicrokit and headers are exactly as released --
-and the SDK records it in a `VCPU-DOMAIN-PATCH` note beside the tool.  See
-[bin/microkit-vcpu-domain.sh](../bin/microkit-vcpu-domain.sh); it goes away with
-the first release after 2.3.0, which will carry #586 itself.
+`arch_timer` probe, and the SDK records it in a `VCPU-DOMAIN-PATCH` note beside
+the tool.  Builds from 2026.10.01 on use Microkit 2.3.1, which carries #586
+itself, unmodified.
 
 Both are named for `PROVERS_BUILD_VER` rather than for the day they were
 written: a rebuild that *replaces* a published build keeps that build's version
@@ -312,7 +306,7 @@ one only to reproduce something against the environment it was built for.
 
 The [Vagrantfile](Vagrantfile) selects the box architecture from the host, so
 no configuration is needed either way; `PROVERS_ARCH` overrides it if you have
-reason to.  Note that an aarch64 build compiles Z3, Verus and sdfgen from
+reason to.  Note that an aarch64 build compiles Z3 and Verus from
 source, so it takes considerably longer -- see [Hosts](#hosts).
 
 ### Notes
@@ -660,7 +654,7 @@ same `provers-setup.sh`, on a machine you already have, with no VM in between.
 * Ubuntu 24.04, x86_64 or aarch64, with `sudo` available to the invoking user
 
 * ~60 GB free disk.  Allow a few hours on x86_64, and considerably longer on
-  aarch64, where Z3, Verus and sdfgen are all built from source -- see
+  aarch64, where Z3 and Verus are both built from source -- see
   [Hosts](#hosts)
 
 ### Steps
@@ -693,7 +687,6 @@ machine or a Mac:
 | `z3.sh` | Z3 (`Z3_VER`), built from source; a no-op wherever the Verus release bundles one, i.e. everywhere but aarch64 Linux (see [Hosts](#hosts)) |
 | `verus.sh` | Verus |
 | `microkit-lionsos.sh` | sdfgen venv, released Microkit SDK, LionsOS |
-| `microkit-vcpu-domain.sh` | rebuilds the SDK's `microkit` tool with the vCPU domain fix |
 | `sireum.sh` | Sireum itself (no IDEs), or adopts the one `SIREUM_HOME` points at |
 | `slim.sh` | deletes build leftovers and caches; not run by this setup (see [What Gets Installed](#what-gets-installed)), and refuses to run on macOS |
 | `ive.sh` | Sireum IVE |

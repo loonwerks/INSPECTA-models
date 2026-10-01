@@ -31,9 +31,8 @@ rustup toolchain install "${RUST_TOOLCHAIN_VER}-${RUST_HOST_TRIPLE}" \
 # PROVERS_RUST_DEFAULT=false skips it, for a machine that is not dedicated to
 # this environment and has its own reason for the default it already has.  It is
 # safe to skip: nothing installed here relies on the default.  Verus comes from a
-# release, bin/microkit-vcpu-domain.sh builds with an explicit
-# 'cargo +${RUST_TOOLCHAIN_VER}-${RUST_HOST_TRIPLE}', and the crates HAMR
-# generates select the channel themselves through rust-toolchain.toml.  What you
+# release, and the crates HAMR generates select the channel themselves through
+# rust-toolchain.toml.  What you
 # give up is a bare 'cargo build' in a hand-written crate using the pin.
 if [ "${PROVERS_RUST_DEFAULT:-true}" = "true" ]; then
   rustup default "${RUST_TOOLCHAIN_VER}-${RUST_HOST_TRIPLE}"

@@ -3,9 +3,9 @@
 The DARPA PROVERS development environment: Verus, the seL4 Microkit SDK,
 LionsOS, sdfgen, Rust and Sireum/HAMR, at one pinned set of versions.
 
-The Microkit SDK is the released 2.3.0 one with a single fix applied to
-its `microkit` tool, without which a domain-scheduled virtual machine hangs; see
-[bin/microkit-vcpu-domain.sh](bin/microkit-vcpu-domain.sh).
+The Microkit SDK is the released one, unmodified: 2.3.1 carries the
+[seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain fix
+that 2.3.0 needed its `microkit` tool rebuilt for.
 
 It is defined once, as the install scripts in [bin](bin), and delivered four
 ways.  A container and a VM built a week apart install the same tools at the same
@@ -38,7 +38,7 @@ is common.
 On Apple Silicon the native install is worth preferring over the arm64 OVA where
 it will do: it is much the quickest of the four to set up, because every
 upstream publishes an arm64 macOS asset and so nothing is built from source --
-which is the opposite of aarch64 Linux, where Z3, Verus and sdfgen all are.
+which is the opposite of aarch64 Linux, where Z3 and Verus both are.
 
 ## How It Stays Consistent
 
@@ -89,12 +89,8 @@ built from source.  Nothing above `bin/` branches on the host -- the same
 | packages | apt | apt | Homebrew |
 | Z3 | in the Verus release | built by `z3.sh` | in the Verus release |
 | Verus | released asset | built with `vargo` | released asset |
-| sdfgen | PyPI wheel | built from source (zig) | PyPI wheel |
+| sdfgen | PyPI wheel | PyPI wheel | PyPI wheel |
 | IDEs | `bin/linux` | `bin/linux/arm` | `bin/mac`, as `.app` bundles |
-
-The `microkit` tool is rebuilt from source on all three, but that is a small
-cargo build rather than a full SDK build -- see
-[microkit-vcpu-domain.sh](bin/microkit-vcpu-domain.sh).
 
 ## What Is In bin/
 
@@ -115,7 +111,6 @@ Install steps, in the order `provers-setup.sh` runs them:
 | [z3.sh](bin/z3.sh) | Z3 from source, where Verus has no release for the host |
 | [verus.sh](bin/verus.sh) | Verus, from its release or from source |
 | [microkit-lionsos.sh](bin/microkit-lionsos.sh) | sdfgen, the released Microkit SDK, LionsOS at the pinned commit (`dep/sddf` and `dep/libvmm` only) |
-| [microkit-vcpu-domain.sh](bin/microkit-vcpu-domain.sh) | rebuilds the SDK's `microkit` tool with the [seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain fix |
 | [sireum.sh](bin/sireum.sh) | Sireum, per `PROVERS_SIREUM_PROFILE`: unpacks the `cli` distribution where `SIREUM_V` names a release, builds from source where it names a commit -- or adopts the one `SIREUM_HOME` already points at |
 | [ive.sh](bin/ive.sh) | Sireum IVE (opt-in; the VM turns it on) |
 | [codeive.sh](bin/codeive.sh) | CodeIVE (opt-in; the VM turns it on) |

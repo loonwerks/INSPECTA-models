@@ -37,8 +37,7 @@ source "${_PROVERS_BIN_DIR}/versions.sh"
 
 LIONSOS=${PROVERS_DIR}/lionsos
 MICROKIT_BOARD=${MICROKIT_BOARD:-qemu_virt_aarch64}
-# One SDK: the released Microkit ${MICROKIT_SDK_VER}, with its `microkit` tool
-# rebuilt to carry the vCPU domain fix (see microkit-vcpu-domain.sh).
+# One SDK: the released Microkit ${MICROKIT_SDK_VER}, as released.
 MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk-${MICROKIT_SDK_VER}
 # An existing Sireum is adopted rather than replaced: export SIREUM_HOME before
 # running the setup and bin/sireum.sh leaves that install alone (it reports the

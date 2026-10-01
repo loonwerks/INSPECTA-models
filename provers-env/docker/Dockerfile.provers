@@ -110,10 +110,6 @@ RUN --mount=type=cache,id=provers-dl-${TARGETARCH},target=/home/microkit/dl-cach
     --mount=type=cache,id=provers-zig-${TARGETARCH},target=/home/microkit/.cache/zig,uid=1001,gid=100,sharing=locked \
     bash bin/microkit-lionsos.sh
 
-COPY --chown=microkit bin/microkit-vcpu-domain.sh bin/
-RUN --mount=type=cache,id=provers-cargo-${TARGETARCH},target=/home/microkit/.cargo/registry,uid=1001,gid=100,sharing=locked \
-    bash bin/microkit-vcpu-domain.sh
-
 COPY --chown=microkit bin/sireum.sh bin/
 RUN --mount=type=cache,id=provers-dl-${TARGETARCH},target=/home/microkit/dl-cache,uid=1001,gid=100,sharing=locked \
     --mount=type=cache,id=provers-sireum-${TARGETARCH},target=/home/microkit/Downloads/sireum,uid=1001,gid=100,sharing=locked \
@@ -157,7 +153,7 @@ FROM ubuntu:${UBUNTU_VER}
 # itself, so it cannot come from versions.sh at container run time the way the
 # rest do.  It is checked against it after the copy, so a bump to versions.sh
 # that is not passed here fails the build rather than shipping a wrong path.
-ARG MICROKIT_SDK_VER=2.3.0
+ARG MICROKIT_SDK_VER=2.3.1
 
 ENV USER=microkit
 
@@ -201,7 +197,6 @@ LABEL org.opencontainers.image.title="PROVERS development environment" \
       org.opencontainers.image.documentation="https://github.com/loonwerks/INSPECTA-models/tree/main/provers-env/docker" \
       org.sireum.provers.verus="${VERUS_VER}" \
       org.sireum.provers.microkit-sdk="${MICROKIT_SDK_VER}" \
-      org.sireum.provers.microkit-sdk-vcpu-domain-patch="true" \
       org.sireum.provers.lionsos="${LIONSOS_VER}" \
       org.sireum.provers.sireum="${SIREUM_V}"
 

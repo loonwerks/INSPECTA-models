@@ -2,9 +2,9 @@
 # Install the Microkit SDK ${MICROKIT_SDK_VER}, the sdfgen ${SDFGEN_VER} python
 # package (into its own venv) and LionsOS ${LIONSOS_VER}.
 #
-# sdfgen comes from PyPI wherever a wheel exists for the host (x86_64 Linux and
-# arm64 macOS); aarch64 Linux has none, so there it is built from source, which
-# needs zig ${ZIG_VER}.
+# sdfgen comes from PyPI wherever a wheel exists for the host -- since 0.35.0 that
+# is every supported host, aarch64 Linux included.  SDFGEN_FROM_SOURCE=true still
+# builds it from source, which needs zig ${ZIG_VER}.
 #
 # LionsOS is a full clone at the pinned commit, examples and history included;
 # bin/slim.sh strips those from a shipped image purely to keep it small, and they
@@ -45,9 +45,8 @@ else
   rm -rf "${PROVERS_DIR}/${ZIG_DIR}" "${SDFGEN_BUILD_DIR}"
 fi
 
-# The released SDK, unmodified.  bin/microkit-vcpu-domain.sh then rebuilds its
-# `microkit` tool in place with the seL4/microkit#586 fix; everything else stays
-# as released.
+# The released SDK, unmodified.  2.3.1 carries the vCPU domain fix
+# (seL4/microkit#586) that 2.3.0 needed its `microkit` tool rebuilt for.
 echo "Installing the Microkit SDK ${MICROKIT_SDK_VER}"
 rm -rf "${MICROKIT_SDK}"
 MICROKIT_SDK_TAR=microkit-sdk-${MICROKIT_SDK_VER}-${MICROKIT_SDK_OS}-${MICROKIT_SDK_ARCH}.tar.gz

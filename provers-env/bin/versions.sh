@@ -22,22 +22,20 @@
 #
 #   PROVERS_BUILD_VER=$(date +%Y.%m.%d) bash docker/docker.sh
 #
-: "${PROVERS_BUILD_VER:=2026.08.18}"
+: "${PROVERS_BUILD_VER:=2026.10.01}"
 
-: "${MICROKIT_SDK_VER:=2.3.0}"
+: "${MICROKIT_SDK_VER:=2.3.1}"
 # The toolchain Verus ${VERUS_VER} was built against, which is also the channel
 # the Rust crates HAMR generates pin (see the rust-toolchain.toml codegen emits).
-# It must also satisfy tool/microkit/Cargo.toml's rust-version = 1.94.0, which
-# bin/microkit-vcpu-domain.sh builds against; cargo refuses outright if not.
-: "${RUST_TOOLCHAIN_VER:=1.97.1}"
-: "${SDFGEN_VER:=0.33.0}"
+: "${RUST_TOOLCHAIN_VER:=1.98.1}"
+: "${SDFGEN_VER:=0.35.0}"
 # Verus.  x86_64 unpacks the published release asset; aarch64 has none and
 # builds from source.  bin/verus.sh checks out the commit named in the last
 # field of this version rather than the release/<ver> tag, because that tag has
 # been moved after its assets were published -- following it shipped a different
 # Verus on each architecture.  Both paths assert the installed version matches
 # this pin, so a re-cut release fails the build rather than passing silently.
-: "${VERUS_VER:=0.2026.08.09.92f466f}"
+: "${VERUS_VER:=0.2026.09.27.3cf1832}"
 
 # LionsOS, pinned to a commit rather than tracking main.  What is installed here
 # is what the models build their VM examples against, and LionsOS carries sDDF
@@ -49,7 +47,7 @@
 # hamr/codegen/jvm/src/main/resources/microkit_versions.properties, and it is
 # coupled to MICROKIT_SDK_VER: its libvmm uses seL4_VCPUReg_PAR, which exists
 # only from Microkit 2.3.0 on.  The two move together.
-: "${LIONSOS_VER:=3945dc5}"
+: "${LIONSOS_VER:=7554a0f}"
 
 # Sireum (kekinian), pinned for the same reason everything else here is: two
 # setups run weeks apart should install the same Sireum.  Bump deliberately,
@@ -81,7 +79,7 @@
 # requires pinning both, and pinning SIREUM_INIT_V to a release rather than
 # leaving it at the moving `dev` tag is what makes the bootstrap reproducible
 # too.  Set SIREUM_V to a `4.*` tag and SIREUM_INIT_V can be left unset.
-: "${SIREUM_V:=e8f69b3dadd477d83f7339be07038463819e9f27}"
+: "${SIREUM_V:=18c4abb230ca14d3b8a1ed2d8db93e26304dc03b}"
 : "${SIREUM_INIT_V:=4.20260810.80aad0c2}"
 : "${SIREUM_REPO:=https://github.com/sireum/kekinian}"
 
@@ -141,12 +139,13 @@ case "${PROVERS_OS}:${PROVERS_ARCH}" in
     : "${RUST_MUSL_TRIPLE:=aarch64-unknown-linux-musl}"
     : "${MICROKIT_SDK_OS:=linux}"
     : "${MICROKIT_SDK_ARCH:=aarch64}"
-    # Verus publishes no aarch64 Linux release asset, and PyPI carries no
-    # aarch64 Linux sdfgen wheel, so both are built from source here -- and Z3
-    # with them, since a Verus release is where the matching Z3 comes from.
+    # Verus publishes no aarch64 Linux release asset, so it is built from source
+    # here -- and Z3 with it, since a Verus release is where the matching Z3
+    # comes from.  PyPI has carried a manylinux aarch64 sdfgen wheel since 0.35.0,
+    # so sdfgen is installed from it as on the other hosts.
     : "${VERUS_RELEASE_ID:=}"
     : "${VERUS_FROM_SOURCE:=true}"
-    : "${SDFGEN_FROM_SOURCE:=true}"
+    : "${SDFGEN_FROM_SOURCE:=false}"
     ;;
   darwin:aarch64)
     : "${RUST_HOST_TRIPLE:=aarch64-apple-darwin}"
@@ -187,6 +186,7 @@ esac
 # before bumping one without the other.
 : "${Z3_VER:=z3-4.16.0}"
 : "${Z3_REPO:=https://github.com/Z3Prover/z3}"
+# zig builds sdfgen only when SDFGEN_FROM_SOURCE=true, which no host defaults to now
 : "${ZIG_VER:=0.15.2}"
 # zig's tarball is zig-<arch>-<os>-<ver>.tar.xz
 if [ "${PROVERS_OS}" = "darwin" ]; then
@@ -197,11 +197,6 @@ fi
 : "${VERUS_REPO:=https://github.com/verus-lang/verus}"
 : "${SDFGEN_REPO:=https://github.com/au-ts/microkit_sdf_gen}"
 : "${LIONSOS_REPO:=https://github.com/au-ts/lionsos}"
-
-# Upstream Microkit, used to rebuild the SDK's `microkit` tool with the vCPU
-# domain fix (see microkit-vcpu-domain.sh).  The tag is MICROKIT_SDK_VER, so the
-# rebuilt tool is exactly the released one plus that fix.
-: "${MICROKIT_REPO:=https://github.com/seL4/microkit}"
 
 # Nothing here is exported.  These are the install scripts' own values, and each
 # script sources this file (through env.sh) rather than inheriting them, so they

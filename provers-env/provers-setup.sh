@@ -57,7 +57,6 @@ bash "${BIN_DIR}/rust.sh"
 bash "${BIN_DIR}/z3.sh"
 bash "${BIN_DIR}/verus.sh"
 bash "${BIN_DIR}/microkit-lionsos.sh"
-bash "${BIN_DIR}/microkit-vcpu-domain.sh"
 bash "${BIN_DIR}/sireum.sh"
 
 # The IDEs are independent of each other and of the command-line tools, and each
