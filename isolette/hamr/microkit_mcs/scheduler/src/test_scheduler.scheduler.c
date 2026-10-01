@@ -58,13 +58,31 @@ static uint32_t target_slot;
 // Without it a target that never occurs -- a channel absent from the schedule, a
 // hyperperiod already passed -- would dispatch forever.
 static uint32_t runto_budget;
+// A run-to command ended UNREACHABLE while advancing, so it still owes its acknowledgement.
+static bool ended_unreachable;
 
-// Generation of the slot currently in flight.  sddf_timer_set_timeout cannot be
-// cancelled, so a timeout armed for a slot that has already ended may still fire;
-// expiries whose generation does not match the slot in flight are stale and dropped.
-// armed_generation == 0 means nothing is armed.
-static uint32_t slot_generation;
-static uint32_t armed_generation;
+// Whether a dispatched slot is in flight, with its watchdog armed.
+// sddf_timer_set_timeout cannot be cancelled: arming the next slot replaces the
+// timeout, but an expiry already signalled for the previous slot is still delivered --
+// possibly after that next slot was armed.  The deadline tells the two apart: an
+// expiry before the slot in flight's deadline is not its own.
+static bool armed;
+static uint64_t armed_deadline;
+
+// Observation (stage 7): whether the active command parks before each user dispatch,
+// the completions so far, and the park in progress, if any.
+static bool cmd_observe;
+static uint32_t completed_seq;
+static uint32_t obs_seq;
+static bool obs_pending;
+
+// A thread that overran its watchdog is still running that dispatch.  Its completion,
+// when it comes, belongs to the aborted dispatch, not to any later one; until it
+// arrives the thread cannot be dispatched again.  One at most: the position stays at
+// the overran slot, and every command reports the overrun again from there without
+// dispatching anything, until the late completion arrives.
+static bool overrun_pending;
+static microkit_channel overrun_ch;
 
 static bool is_runto(uint32_t cmd) {
     return cmd == TEST_CMD_RUN_TO_SLOT || cmd == TEST_CMD_RUN_TO_HP ||
@@ -80,10 +98,16 @@ static bool scheduled_channel(uint32_t ch) {
     return false;
 }
 
-static void publish_status(void) {
+static void publish_position(void) {
     test_status->current_timeslice  = current_timeslice;
     test_status->hyperperiod_num    = hyperperiod_num;
     test_status->last_dispatched_ch = last_dispatched_ch;
+    test_status->next_ch            = user_schedule.timeslice_ch[current_timeslice];
+    test_status->completed_seq      = completed_seq;
+}
+
+static void publish_status(void) {
+    publish_position();
     test_status->flags              = status_flags;
     // ack_seq is stored last, and only after everything it describes is visible.
     __atomic_thread_fence(__ATOMIC_RELEASE);
@@ -115,6 +139,13 @@ static bool at_stop_point(void) {
     }
 }
 
+// The slots a run-to that ends in hyperperiod `t_hp` may take, plus one; saturated, as a
+// far target's product would wrap to a small budget and end the command UNREACHABLE.
+static uint32_t runto_budget_to(uint32_t t_hp, uint32_t n_slots) {
+    uint64_t b = ((uint64_t) (t_hp - hyperperiod_num) + 1) * n_slots + 1;
+    return b > UINT32_MAX ? UINT32_MAX : (uint32_t) b;
+}
+
 static void accept_command(uint32_t seq) {
     uint32_t type    = test_cmd->type;
     uint32_t count   = test_cmd->count;
@@ -124,6 +155,8 @@ static void accept_command(uint32_t seq) {
     uint32_t n_slots = user_schedule.num_timeslices;
 
     accepted_seq = seq;
+    cmd_observe = test_cmd->observe != 0;
+    obs_pending = false;
     // STOPPED is sticky for the rest of the session; the rest are per-command.
     status_flags &= TEST_FLAG_STOPPED;
 
@@ -149,8 +182,13 @@ static void accept_command(uint32_t seq) {
 
         case TEST_CMD_HSTEP:
             // Finish the hyperperiod in progress, then count - 1 whole ones.
-            slots_remaining = (count == 0) ? 0
-                : (n_slots - current_timeslice) + (count - 1) * n_slots;
+            if (count == 0) {
+                slots_remaining = 0;
+            } else {
+                // saturated: a huge count would wrap to a small one and stop early
+                uint64_t n = (uint64_t) (n_slots - current_timeslice) + (uint64_t) (count - 1) * n_slots;
+                slots_remaining = n > UINT32_MAX ? UINT32_MAX : (uint32_t) n;
+            }
             active_cmd = type;
             break;
 
@@ -165,7 +203,8 @@ static void accept_command(uint32_t seq) {
             break;
 
         case TEST_CMD_RUN_TO_THREAD:
-            if (!scheduled_channel(t_ch)) {
+            // channel 0 is padding, which is never dispatched
+            if (t_ch == 0 || !scheduled_channel(t_ch)) {
                 status_flags |= TEST_FLAG_BAD_COMMAND;
             } else {
                 target_ch = t_ch;
@@ -179,7 +218,7 @@ static void accept_command(uint32_t seq) {
                 status_flags |= TEST_FLAG_BAD_COMMAND;
             } else {
                 target_hp = t_hp;
-                runto_budget = (t_hp - hyperperiod_num + 1) * n_slots + 1;
+                runto_budget = runto_budget_to(t_hp, n_slots);
                 active_cmd = type;
             }
             break;
@@ -191,7 +230,7 @@ static void accept_command(uint32_t seq) {
             } else {
                 target_hp = t_hp;
                 target_slot = t_slot;
-                runto_budget = (t_hp - hyperperiod_num + 1) * n_slots + 1;
+                runto_budget = runto_budget_to(t_hp, n_slots);
                 active_cmd = type;
             }
             break;
@@ -213,15 +252,17 @@ static void accept_command(uint32_t seq) {
     }
 }
 
-static void poll_command(void) {
+// Returns whether a new command was accepted.
+static bool poll_command(void) {
     uint32_t seq = test_cmd->seq;
     if (seq == accepted_seq) {
-        return;
+        return false;
     }
     // Pairs with the controller's release store of seq: everything it wrote before
     // publishing seq is visible here.
     __atomic_thread_fence(__ATOMIC_ACQUIRE);
     accept_command(seq);
+    return true;
 }
 
 // Move to the next slot and charge the active command for the one just finished.
@@ -242,20 +283,37 @@ static void advance_position(void) {
     if (is_runto(active_cmd) && runto_budget == 0 && !at_stop_point()) {
         status_flags |= TEST_FLAG_UNREACHABLE;
         active_cmd = TEST_CMD_NONE;
+        ended_unreachable = true;
     }
 }
 
 static void try_advance(void) {
-    poll_command();
+    bool accepted = poll_command();
 
     // Padding slots are skipped in this loop rather than dispatched.  Iteratively,
     // not by recursing through on_slot_complete: a schedule can be mostly padding,
     // and this runs on a 4 KB protection domain stack.
     while (true) {
         if (active_cmd == TEST_CMD_NONE || at_stop_point()) {
+            // Acknowledge only a command that is completing now: one just accepted,
+            // one that was running, or one that just ended UNREACHABLE.  Every
+            // controller dispatch ends by signalling this channel; answering a signal
+            // that carried no command would notify the controller back, and the two
+            // would signal each other forever -- after the suite's Stop, with nothing
+            // left to do.
+            bool completing = accepted || active_cmd != TEST_CMD_NONE || ended_unreachable;
             active_cmd = TEST_CMD_NONE;
-            publish_status();
-            microkit_notify(TEST_CONTROLLER_CH);
+            ended_unreachable = false;
+            if (completing) {
+                // A command that stops on the slot whose dispatch overran -- e.g. the
+                // runner's run_to_slot(0) when slot 0 overran -- reports it again, as
+                // one that would dispatch it does: that thread may still be running.
+                if (overrun_pending && user_schedule.timeslice_ch[current_timeslice] == overrun_ch) {
+                    status_flags |= TEST_FLAG_OVERRUN;
+                }
+                publish_status();
+                microkit_notify(TEST_CONTROLLER_CH);
+            }
             return; // parked: nothing dispatched, no watchdog armed
         }
 
@@ -270,9 +328,40 @@ static void try_advance(void) {
             continue;
         }
 
-        slot_generation++;
+        if (overrun_pending && ch == overrun_ch) {
+            // Still running the dispatch that overran: it cannot be dispatched again,
+            // and its late completion would be taken for this dispatch's.  The command
+            // ends here, reporting the overrun again.
+            status_flags |= TEST_FLAG_OVERRUN;
+            active_cmd = TEST_CMD_NONE;
+            publish_status();
+            microkit_notify(TEST_CONTROLLER_CH);
+            return;
+        }
+
+        // Observation park: before the dispatch -- so what the controller saves as the
+        // pre-state includes anything a test injected while parked -- and before the
+        // watchdog is armed, so time spent checking is never charged to the thread.
+        if (cmd_observe && user_schedule.is_user_partition[current_timeslice]) {
+            if (!obs_pending) {
+                obs_pending = true;
+                obs_seq++;
+                publish_position();
+                // obs_seq is stored last, and only after everything it describes.
+                __atomic_thread_fence(__ATOMIC_RELEASE);
+                test_status->obs_seq = obs_seq;
+                microkit_notify(TEST_CONTROLLER_CH);
+                return; // parked: dispatched once the controller acknowledges
+            }
+            if (test_cmd->obs_ack != obs_seq) {
+                return; // still parked
+            }
+            __atomic_thread_fence(__ATOMIC_ACQUIRE);
+            obs_pending = false;
+        }
+
         last_dispatched_ch = ch;
-        armed_generation = slot_generation;
+        armed = true;
 
         // Arm the watchdog before dispatching, so a thread that never reports back
         // cannot leave the scheduler waiting forever.
@@ -280,6 +369,7 @@ static void try_advance(void) {
         if (bound < TEST_WATCHDOG_MIN_NS) {
             bound = TEST_WATCHDOG_MIN_NS;
         }
+        armed_deadline = sddf_timer_time_now(config.driver_id) + bound;
         sddf_timer_set_timeout(config.driver_id, bound);
 
         microkit_notify(ch);
@@ -288,7 +378,12 @@ static void try_advance(void) {
 }
 
 static void on_slot_complete(void) {
-    armed_generation = 0;
+    armed = false;
+    // User slots only: those are the dispatches the controller parks before, and so
+    // the ones it accounts for.
+    if (user_schedule.is_user_partition[current_timeslice]) {
+        completed_seq++;
+    }
     advance_position();
     try_advance();
 }
@@ -296,25 +391,29 @@ static void on_slot_complete(void) {
 void notified(microkit_channel ch)
 {
     if (ch == config.driver_id) {
-        if (armed_generation != 0 && armed_generation == slot_generation) {
+        if (armed && sddf_timer_time_now(config.driver_id) >= armed_deadline) {
             // The slot in flight never reported completion.  Fail the command rather
             // than wait forever; the controller sees OVERRUN and the run fails.
             sddf_dprintf("TEST SCHEDULER | slot %u (channel %u) did not complete within its watchdog bound\n",
                          current_timeslice, last_dispatched_ch);
-            armed_generation = 0;
+            armed = false;
+            overrun_pending = true;
+            overrun_ch = last_dispatched_ch;
             status_flags |= TEST_FLAG_OVERRUN;
             active_cmd = TEST_CMD_NONE;
             publish_status();
             microkit_notify(TEST_CONTROLLER_CH);
         }
-        // Otherwise a stale expiry: sddf_timer_set_timeout cannot be cancelled, so a
-        // slot that completed normally leaves its bound armed to fire later.  The
-        // generation check is what tells the two apart.
+        // Otherwise a stale expiry: signalled for a slot that has since completed --
+        // nothing is armed, or the slot in flight's deadline is still ahead.
     } else if (ch == TEST_CONTROLLER_CH) {
         // A command arrived.  If the scheduler is parked this is what restarts it.
-        // Ignored before the schedule is live: the controller signals this same
-        // channel from its own init(), by way of its _MON, and that is not a command.
-        if (scheduler_running) {
+        // It may instead acknowledge an observation park, which try_advance tells
+        // apart by obs_ack.  Ignored before the schedule is live: the controller
+        // signals this same channel from its own init(), by way of its _MON, and that
+        // is not a command.  Ignored while a slot is in flight too: nothing the
+        // controller sends then can change what happens before that slot completes.
+        if (scheduler_running && !armed) {
             try_advance();
         }
     } else if ((part_ready_check & (1ULL << ch)) != 0) {
@@ -332,7 +431,13 @@ void notified(microkit_channel ch)
                 microkit_notify(TEST_CONTROLLER_CH);
             }
         }
-        else if (scheduler_running && armed_generation != 0 && ch == last_dispatched_ch) {
+        else if (overrun_pending && ch == overrun_ch) {
+            // The late completion of the dispatch that overran: absorbed, and the
+            // thread can be dispatched again.  It counts toward nothing -- that
+            // dispatch was aborted, and completed_seq never included it.
+            overrun_pending = false;
+        }
+        else if (scheduler_running && armed && ch == last_dispatched_ch) {
             // The dispatched thread has finished its slot.  This is the event that
             // paces the schedule; the clock no longer does.
             on_slot_complete();
@@ -353,8 +458,15 @@ void init(void)
     status_flags = 0;
     slots_remaining = 0;
     runto_budget = 0;
-    slot_generation = 0;
-    armed_generation = 0;
+    ended_unreachable = false;
+    armed = false;
+    armed_deadline = 0;
+    cmd_observe = false;
+    completed_seq = 0;
+    obs_seq = 0;
+    obs_pending = false;
+    overrun_pending = false;
+    overrun_ch = 0;
 
     // Park until the controller issues a command.  RUN_FOREVER remains the behaviour
     // for a command that asks for it, and is what the interactive CLI will use for

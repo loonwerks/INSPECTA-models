@@ -33,30 +33,22 @@ pub open spec fn sensor_fire(pre: SystemState, post: SystemState) -> bool
 
 // -- TempControlSystem_Instance.tcp.tct --
 
-pub uninterp spec fn control_action_fanCmd(currentSetPoint: TempControl_SysVerif::SetPoint, currentFanState: TempControl_SysVerif::FanCmd, latestTemp: TempControl_SysVerif::Temperature, fanError: bool, currentTemp: Option<TempControl_SysVerif::Temperature>, fanAck: Option<TempControl_SysVerif::FanAck>, setPoint: Option<TempControl_SysVerif::SetPoint>, fanCmd: Option<TempControl_SysVerif::FanCmd>, sv_currentSetPoint: TempControl_SysVerif::SetPoint, sv_currentFanState: TempControl_SysVerif::FanCmd, sv_latestTemp: TempControl_SysVerif::Temperature, sv_fanError: bool) -> Option<TempControl_SysVerif::FanCmd>;
-pub uninterp spec fn control_action_sv_currentSetPoint(currentSetPoint: TempControl_SysVerif::SetPoint, currentFanState: TempControl_SysVerif::FanCmd, latestTemp: TempControl_SysVerif::Temperature, fanError: bool, currentTemp: Option<TempControl_SysVerif::Temperature>, fanAck: Option<TempControl_SysVerif::FanAck>, setPoint: Option<TempControl_SysVerif::SetPoint>, fanCmd: Option<TempControl_SysVerif::FanCmd>, sv_currentSetPoint: TempControl_SysVerif::SetPoint, sv_currentFanState: TempControl_SysVerif::FanCmd, sv_latestTemp: TempControl_SysVerif::Temperature, sv_fanError: bool) -> TempControl_SysVerif::SetPoint;
-pub uninterp spec fn control_action_sv_currentFanState(currentSetPoint: TempControl_SysVerif::SetPoint, currentFanState: TempControl_SysVerif::FanCmd, latestTemp: TempControl_SysVerif::Temperature, fanError: bool, currentTemp: Option<TempControl_SysVerif::Temperature>, fanAck: Option<TempControl_SysVerif::FanAck>, setPoint: Option<TempControl_SysVerif::SetPoint>, fanCmd: Option<TempControl_SysVerif::FanCmd>, sv_currentSetPoint: TempControl_SysVerif::SetPoint, sv_currentFanState: TempControl_SysVerif::FanCmd, sv_latestTemp: TempControl_SysVerif::Temperature, sv_fanError: bool) -> TempControl_SysVerif::FanCmd;
-pub uninterp spec fn control_action_sv_latestTemp(currentSetPoint: TempControl_SysVerif::SetPoint, currentFanState: TempControl_SysVerif::FanCmd, latestTemp: TempControl_SysVerif::Temperature, fanError: bool, currentTemp: Option<TempControl_SysVerif::Temperature>, fanAck: Option<TempControl_SysVerif::FanAck>, setPoint: Option<TempControl_SysVerif::SetPoint>, fanCmd: Option<TempControl_SysVerif::FanCmd>, sv_currentSetPoint: TempControl_SysVerif::SetPoint, sv_currentFanState: TempControl_SysVerif::FanCmd, sv_latestTemp: TempControl_SysVerif::Temperature, sv_fanError: bool) -> TempControl_SysVerif::Temperature;
-pub uninterp spec fn control_action_sv_fanError(currentSetPoint: TempControl_SysVerif::SetPoint, currentFanState: TempControl_SysVerif::FanCmd, latestTemp: TempControl_SysVerif::Temperature, fanError: bool, currentTemp: Option<TempControl_SysVerif::Temperature>, fanAck: Option<TempControl_SysVerif::FanAck>, setPoint: Option<TempControl_SysVerif::SetPoint>, fanCmd: Option<TempControl_SysVerif::FanCmd>, sv_currentSetPoint: TempControl_SysVerif::SetPoint, sv_currentFanState: TempControl_SysVerif::FanCmd, sv_latestTemp: TempControl_SysVerif::Temperature, sv_fanError: bool) -> bool;
-pub uninterp spec fn control_action_currentSetPoint(currentSetPoint: TempControl_SysVerif::SetPoint, currentFanState: TempControl_SysVerif::FanCmd, latestTemp: TempControl_SysVerif::Temperature, fanError: bool, currentTemp: Option<TempControl_SysVerif::Temperature>, fanAck: Option<TempControl_SysVerif::FanAck>, setPoint: Option<TempControl_SysVerif::SetPoint>, fanCmd: Option<TempControl_SysVerif::FanCmd>, sv_currentSetPoint: TempControl_SysVerif::SetPoint, sv_currentFanState: TempControl_SysVerif::FanCmd, sv_latestTemp: TempControl_SysVerif::Temperature, sv_fanError: bool) -> TempControl_SysVerif::SetPoint;
-pub uninterp spec fn control_action_currentFanState(currentSetPoint: TempControl_SysVerif::SetPoint, currentFanState: TempControl_SysVerif::FanCmd, latestTemp: TempControl_SysVerif::Temperature, fanError: bool, currentTemp: Option<TempControl_SysVerif::Temperature>, fanAck: Option<TempControl_SysVerif::FanAck>, setPoint: Option<TempControl_SysVerif::SetPoint>, fanCmd: Option<TempControl_SysVerif::FanCmd>, sv_currentSetPoint: TempControl_SysVerif::SetPoint, sv_currentFanState: TempControl_SysVerif::FanCmd, sv_latestTemp: TempControl_SysVerif::Temperature, sv_fanError: bool) -> TempControl_SysVerif::FanCmd;
-pub uninterp spec fn control_action_latestTemp(currentSetPoint: TempControl_SysVerif::SetPoint, currentFanState: TempControl_SysVerif::FanCmd, latestTemp: TempControl_SysVerif::Temperature, fanError: bool, currentTemp: Option<TempControl_SysVerif::Temperature>, fanAck: Option<TempControl_SysVerif::FanAck>, setPoint: Option<TempControl_SysVerif::SetPoint>, fanCmd: Option<TempControl_SysVerif::FanCmd>, sv_currentSetPoint: TempControl_SysVerif::SetPoint, sv_currentFanState: TempControl_SysVerif::FanCmd, sv_latestTemp: TempControl_SysVerif::Temperature, sv_fanError: bool) -> TempControl_SysVerif::Temperature;
-pub uninterp spec fn control_action_fanError(currentSetPoint: TempControl_SysVerif::SetPoint, currentFanState: TempControl_SysVerif::FanCmd, latestTemp: TempControl_SysVerif::Temperature, fanError: bool, currentTemp: Option<TempControl_SysVerif::Temperature>, fanAck: Option<TempControl_SysVerif::FanAck>, setPoint: Option<TempControl_SysVerif::SetPoint>, fanCmd: Option<TempControl_SysVerif::FanCmd>, sv_currentSetPoint: TempControl_SysVerif::SetPoint, sv_currentFanState: TempControl_SysVerif::FanCmd, sv_latestTemp: TempControl_SysVerif::Temperature, sv_fanError: bool) -> bool;
+pub uninterp spec fn control_action_fanCmd(currentSetPoint: TempControl_SysVerif::SetPoint, currentFanState: TempControl_SysVerif::FanCmd, latestTemp: TempControl_SysVerif::Temperature, fanError: bool, currentTemp: Option<TempControl_SysVerif::Temperature>, fanAck: Option<TempControl_SysVerif::FanAck>, setPoint: Option<TempControl_SysVerif::SetPoint>, fanCmd: Option<TempControl_SysVerif::FanCmd>) -> Option<TempControl_SysVerif::FanCmd>;
+pub uninterp spec fn control_action_currentSetPoint(currentSetPoint: TempControl_SysVerif::SetPoint, currentFanState: TempControl_SysVerif::FanCmd, latestTemp: TempControl_SysVerif::Temperature, fanError: bool, currentTemp: Option<TempControl_SysVerif::Temperature>, fanAck: Option<TempControl_SysVerif::FanAck>, setPoint: Option<TempControl_SysVerif::SetPoint>, fanCmd: Option<TempControl_SysVerif::FanCmd>) -> TempControl_SysVerif::SetPoint;
+pub uninterp spec fn control_action_currentFanState(currentSetPoint: TempControl_SysVerif::SetPoint, currentFanState: TempControl_SysVerif::FanCmd, latestTemp: TempControl_SysVerif::Temperature, fanError: bool, currentTemp: Option<TempControl_SysVerif::Temperature>, fanAck: Option<TempControl_SysVerif::FanAck>, setPoint: Option<TempControl_SysVerif::SetPoint>, fanCmd: Option<TempControl_SysVerif::FanCmd>) -> TempControl_SysVerif::FanCmd;
+pub uninterp spec fn control_action_latestTemp(currentSetPoint: TempControl_SysVerif::SetPoint, currentFanState: TempControl_SysVerif::FanCmd, latestTemp: TempControl_SysVerif::Temperature, fanError: bool, currentTemp: Option<TempControl_SysVerif::Temperature>, fanAck: Option<TempControl_SysVerif::FanAck>, setPoint: Option<TempControl_SysVerif::SetPoint>, fanCmd: Option<TempControl_SysVerif::FanCmd>) -> TempControl_SysVerif::Temperature;
+pub uninterp spec fn control_action_fanError(currentSetPoint: TempControl_SysVerif::SetPoint, currentFanState: TempControl_SysVerif::FanCmd, latestTemp: TempControl_SysVerif::Temperature, fanError: bool, currentTemp: Option<TempControl_SysVerif::Temperature>, fanAck: Option<TempControl_SysVerif::FanAck>, setPoint: Option<TempControl_SysVerif::SetPoint>, fanCmd: Option<TempControl_SysVerif::FanCmd>) -> bool;
 
 /** "CONTROL fires": every written field is determined by the read scope;
   * everything else is framed.
   */
 pub open spec fn control_fire(pre: SystemState, post: SystemState) -> bool
 {
-  post.fanCmd == control_action_fanCmd(pre.sv_currentSetPoint, pre.sv_currentFanState, pre.sv_latestTemp, pre.sv_fanError, pre.sensedTemp, pre.fanAck, pre.setPoint, pre.fanCmd, pre.control_sv_currentSetPoint, pre.control_sv_currentFanState, pre.control_sv_latestTemp, pre.control_sv_fanError)
-  && post.control_sv_currentSetPoint == control_action_sv_currentSetPoint(pre.sv_currentSetPoint, pre.sv_currentFanState, pre.sv_latestTemp, pre.sv_fanError, pre.sensedTemp, pre.fanAck, pre.setPoint, pre.fanCmd, pre.control_sv_currentSetPoint, pre.control_sv_currentFanState, pre.control_sv_latestTemp, pre.control_sv_fanError)
-  && post.control_sv_currentFanState == control_action_sv_currentFanState(pre.sv_currentSetPoint, pre.sv_currentFanState, pre.sv_latestTemp, pre.sv_fanError, pre.sensedTemp, pre.fanAck, pre.setPoint, pre.fanCmd, pre.control_sv_currentSetPoint, pre.control_sv_currentFanState, pre.control_sv_latestTemp, pre.control_sv_fanError)
-  && post.control_sv_latestTemp == control_action_sv_latestTemp(pre.sv_currentSetPoint, pre.sv_currentFanState, pre.sv_latestTemp, pre.sv_fanError, pre.sensedTemp, pre.fanAck, pre.setPoint, pre.fanCmd, pre.control_sv_currentSetPoint, pre.control_sv_currentFanState, pre.control_sv_latestTemp, pre.control_sv_fanError)
-  && post.control_sv_fanError == control_action_sv_fanError(pre.sv_currentSetPoint, pre.sv_currentFanState, pre.sv_latestTemp, pre.sv_fanError, pre.sensedTemp, pre.fanAck, pre.setPoint, pre.fanCmd, pre.control_sv_currentSetPoint, pre.control_sv_currentFanState, pre.control_sv_latestTemp, pre.control_sv_fanError)
-  && post.sv_currentSetPoint == control_action_currentSetPoint(pre.sv_currentSetPoint, pre.sv_currentFanState, pre.sv_latestTemp, pre.sv_fanError, pre.sensedTemp, pre.fanAck, pre.setPoint, pre.fanCmd, pre.control_sv_currentSetPoint, pre.control_sv_currentFanState, pre.control_sv_latestTemp, pre.control_sv_fanError)
-  && post.sv_currentFanState == control_action_currentFanState(pre.sv_currentSetPoint, pre.sv_currentFanState, pre.sv_latestTemp, pre.sv_fanError, pre.sensedTemp, pre.fanAck, pre.setPoint, pre.fanCmd, pre.control_sv_currentSetPoint, pre.control_sv_currentFanState, pre.control_sv_latestTemp, pre.control_sv_fanError)
-  && post.sv_latestTemp == control_action_latestTemp(pre.sv_currentSetPoint, pre.sv_currentFanState, pre.sv_latestTemp, pre.sv_fanError, pre.sensedTemp, pre.fanAck, pre.setPoint, pre.fanCmd, pre.control_sv_currentSetPoint, pre.control_sv_currentFanState, pre.control_sv_latestTemp, pre.control_sv_fanError)
-  && post.sv_fanError == control_action_fanError(pre.sv_currentSetPoint, pre.sv_currentFanState, pre.sv_latestTemp, pre.sv_fanError, pre.sensedTemp, pre.fanAck, pre.setPoint, pre.fanCmd, pre.control_sv_currentSetPoint, pre.control_sv_currentFanState, pre.control_sv_latestTemp, pre.control_sv_fanError)
+  post.fanCmd == control_action_fanCmd(pre.sv_currentSetPoint, pre.sv_currentFanState, pre.sv_latestTemp, pre.sv_fanError, pre.sensedTemp, pre.fanAck, pre.setPoint, pre.fanCmd)
+  && post.sv_currentSetPoint == control_action_currentSetPoint(pre.sv_currentSetPoint, pre.sv_currentFanState, pre.sv_latestTemp, pre.sv_fanError, pre.sensedTemp, pre.fanAck, pre.setPoint, pre.fanCmd)
+  && post.sv_currentFanState == control_action_currentFanState(pre.sv_currentSetPoint, pre.sv_currentFanState, pre.sv_latestTemp, pre.sv_fanError, pre.sensedTemp, pre.fanAck, pre.setPoint, pre.fanCmd)
+  && post.sv_latestTemp == control_action_latestTemp(pre.sv_currentSetPoint, pre.sv_currentFanState, pre.sv_latestTemp, pre.sv_fanError, pre.sensedTemp, pre.fanAck, pre.setPoint, pre.fanCmd)
+  && post.sv_fanError == control_action_fanError(pre.sv_currentSetPoint, pre.sv_currentFanState, pre.sv_latestTemp, pre.sv_fanError, pre.sensedTemp, pre.fanAck, pre.setPoint, pre.fanCmd)
   && control_global_write_frame(pre, post)
 }
 
@@ -71,39 +63,6 @@ pub open spec fn fan_fire(pre: SystemState, post: SystemState) -> bool
 {
   post.fanAck == fan_action_fanAck(pre.fanCmd, pre.fanAck)
   && fan_global_write_frame(pre, post)
-}
-
-// -- TempControlSystem_Instance.userland_monitor_process.userland_monitor_thread --
-
-
-/** "USERLAND_MONITOR_THREAD fires": every written field is determined by the read scope;
-  * everything else is framed.
-  */
-pub open spec fn userland_monitor_thread_fire(pre: SystemState, post: SystemState) -> bool
-{
-  userland_monitor_thread_global_write_frame(pre, post)
-}
-
-// -- TempControlSystem_Instance.gumbo_monitor_process.gumbo_monitor_thread --
-
-
-/** "GUMBO_MONITOR_THREAD fires": every written field is determined by the read scope;
-  * everything else is framed.
-  */
-pub open spec fn gumbo_monitor_thread_fire(pre: SystemState, post: SystemState) -> bool
-{
-  gumbo_monitor_thread_global_write_frame(pre, post)
-}
-
-// -- TempControlSystem_Instance.sys_nominal_monitor_process.sys_nominal_monitor_thread --
-
-
-/** "SYS_NOMINAL_MONITOR_THREAD fires": every written field is determined by the read scope;
-  * everything else is framed.
-  */
-pub open spec fn sys_nominal_monitor_thread_fire(pre: SystemState, post: SystemState) -> bool
-{
-  sys_nominal_monitor_thread_global_write_frame(pre, post)
 }
 
 } // verus!

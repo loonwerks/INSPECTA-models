@@ -117,12 +117,6 @@ pub fn get_interface_failure() -> Isolette_Data_Model::Failure_Flag_i
   return extern_api::OUT_interface_failure.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
-/// getter for OUT DataPort
-pub fn get_sv_lastCmd() -> Isolette_Data_Model::On_Off
-{
-  return extern_api::OUT_sv_lastCmd.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
-}
-
 /// getter for GUMBO State Variable
 pub fn get_lastCmd() -> Isolette_Data_Model::On_Off
 {

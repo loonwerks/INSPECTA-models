@@ -429,6 +429,22 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_heat_source_cpi_heat_controller_heat_out(
+      &mut self,
+      value: &Ghost<Isolette_Environment::Heat>) -> (res : Isolette_Environment::Heat)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_get_heat_source_cpi_heat_controller_heat_out();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_heat_source_cpi_heat_controller_heat_out_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_heat_source_cpi_heat_controller_heat_out_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_sched_state(
       &mut self,
       value: &Ghost<hamr::SchedState>) -> (res : hamr::SchedState)
@@ -492,6 +508,7 @@ verus! {
     pub ghost thermostat_mt_ma_ma_sv_lastCmd: Isolette_Data_Model::On_Off,
     pub ghost thermostat_mt_mmm_mmm_sv_lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
     pub ghost temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i,
+    pub ghost heat_source_cpi_heat_controller_heat_out: Isolette_Environment::Heat,
     pub ghost sched_state: hamr::SchedState,
     pub ghost sched_schedule: hamr::Schedule,
   }
@@ -529,6 +546,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -569,6 +587,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -609,6 +628,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -649,6 +669,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -689,6 +710,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -729,6 +751,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -769,6 +792,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -809,6 +833,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -849,6 +874,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -889,6 +915,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -929,6 +956,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -969,6 +997,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -1009,6 +1038,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -1049,6 +1079,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -1089,6 +1120,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -1129,6 +1161,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -1169,6 +1202,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -1209,6 +1243,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -1249,6 +1284,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -1289,6 +1325,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -1329,6 +1366,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -1369,6 +1407,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -1409,6 +1448,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -1449,6 +1489,7 @@ verus! {
         res == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -1489,6 +1530,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         res == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -1529,6 +1571,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
         res == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
     {
@@ -1539,6 +1582,47 @@ verus! {
     pub fn get_temperature_sensor_cpi_thermostat_air_num_invalid(&self) -> u64
     {
       self.api.unverified_get_temperature_sensor_cpi_thermostat_air_num_invalid()
+    }
+    pub fn get_heat_source_cpi_heat_controller_heat_out(&mut self) -> (res : Isolette_Environment::Heat)
+      ensures
+        old(self).thermostat_rt_mri_mri_displayed_temp == final(self).thermostat_rt_mri_mri_displayed_temp,
+        old(self).thermostat_rt_mri_mri_regulator_status == final(self).thermostat_rt_mri_mri_regulator_status,
+        old(self).thermostat_rt_mhs_mhs_heat_control == final(self).thermostat_rt_mhs_mhs_heat_control,
+        old(self).thermostat_mt_mmi_mmi_monitor_status == final(self).thermostat_mt_mmi_mmi_monitor_status,
+        old(self).thermostat_mt_ma_ma_alarm_control == final(self).thermostat_mt_ma_ma_alarm_control,
+        old(self).operator_interface_oip_oit_lower_desired_tempWstatus == final(self).operator_interface_oip_oit_lower_desired_tempWstatus,
+        old(self).operator_interface_oip_oit_upper_desired_tempWstatus == final(self).operator_interface_oip_oit_upper_desired_tempWstatus,
+        old(self).operator_interface_oip_oit_lower_alarm_tempWstatus == final(self).operator_interface_oip_oit_lower_alarm_tempWstatus,
+        old(self).operator_interface_oip_oit_upper_alarm_tempWstatus == final(self).operator_interface_oip_oit_upper_alarm_tempWstatus,
+        old(self).temperature_sensor_cpi_thermostat_current_tempWstatus == final(self).temperature_sensor_cpi_thermostat_current_tempWstatus,
+        old(self).thermostat_rt_mri_mri_upper_desired_temp == final(self).thermostat_rt_mri_mri_upper_desired_temp,
+        old(self).thermostat_rt_mri_mri_lower_desired_temp == final(self).thermostat_rt_mri_mri_lower_desired_temp,
+        old(self).thermostat_rt_mri_mri_interface_failure == final(self).thermostat_rt_mri_mri_interface_failure,
+        old(self).thermostat_rt_mrm_mrm_regulator_mode == final(self).thermostat_rt_mrm_mrm_regulator_mode,
+        old(self).thermostat_rt_drf_drf_internal_failure == final(self).thermostat_rt_drf_drf_internal_failure,
+        old(self).thermostat_mt_mmi_mmi_upper_alarm_temp == final(self).thermostat_mt_mmi_mmi_upper_alarm_temp,
+        old(self).thermostat_mt_mmi_mmi_lower_alarm_temp == final(self).thermostat_mt_mmi_mmi_lower_alarm_temp,
+        old(self).thermostat_mt_mmi_mmi_interface_failure == final(self).thermostat_mt_mmi_mmi_interface_failure,
+        old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
+        old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
+        old(self).thermostat_rt_mhs_mhs_sv_lastCmd == final(self).thermostat_rt_mhs_mhs_sv_lastCmd,
+        old(self).thermostat_rt_mrm_mrm_sv_lastRegulatorMode == final(self).thermostat_rt_mrm_mrm_sv_lastRegulatorMode,
+        old(self).thermostat_mt_mmi_mmi_sv_lastCmd == final(self).thermostat_mt_mmi_mmi_sv_lastCmd,
+        old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
+        old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
+        old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
+        res == final(self).heat_source_cpi_heat_controller_heat_out,
+        old(self).sched_state == final(self).sched_state,
+        old(self).sched_schedule == final(self).sched_schedule,
+    {
+      self.api.unverified_get_heat_source_cpi_heat_controller_heat_out(&Ghost(self.heat_source_cpi_heat_controller_heat_out))
+    }/// The number of messages received on heat_source_cpi_heat_controller_heat_out that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_heat_source_cpi_heat_controller_heat_out_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_heat_source_cpi_heat_controller_heat_out_num_invalid()
     }
     pub fn get_sched_state(&mut self) -> (res : hamr::SchedState)
       ensures
@@ -1568,6 +1652,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         res == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
@@ -1608,6 +1693,7 @@ verus! {
         old(self).thermostat_mt_ma_ma_sv_lastCmd == final(self).thermostat_mt_ma_ma_sv_lastCmd,
         old(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode == final(self).thermostat_mt_mmm_mmm_sv_lastMonitorMode,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
         old(self).sched_state == final(self).sched_state,
         old(self).sched_schedule == final(self).sched_schedule,
         res == final(self).sched_schedule,
@@ -1656,6 +1742,7 @@ verus! {
       thermostat_mt_ma_ma_sv_lastCmd: Isolette_Data_Model::On_Off::Onn,
       thermostat_mt_mmm_mmm_sv_lastMonitorMode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
       temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i { degrees: 0 },
+      heat_source_cpi_heat_controller_heat_out: Isolette_Environment::Heat::Dummy_Head_Enum,
       sched_state: hamr::SchedState { last_yielded_ch: 0, next_dispatch_ch: 0, current_timeslice: 0 },
       sched_schedule: hamr::Schedule { timeslices: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], timeslice_ch: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], is_user_partition: [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], num_timeslices: 0 }
     }
@@ -1697,6 +1784,7 @@ verus! {
       thermostat_mt_ma_ma_sv_lastCmd: Isolette_Data_Model::On_Off::Onn,
       thermostat_mt_mmm_mmm_sv_lastMonitorMode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
       temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i { degrees: 0 },
+      heat_source_cpi_heat_controller_heat_out: Isolette_Environment::Heat::Dummy_Head_Enum,
       sched_state: hamr::SchedState { last_yielded_ch: 0, next_dispatch_ch: 0, current_timeslice: 0 },
       sched_schedule: hamr::Schedule { timeslices: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], timeslice_ch: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], is_user_partition: [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], num_timeslices: 0 }
     }

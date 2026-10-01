@@ -60,6 +60,7 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
 
     scheduler = ProtectionDomain("scheduler", "scheduler.elf", priority=200)
 
+    # BEGIN META TEMPLATE MARKER
     #######################################
     # SCHEDULE STATE
     # Broadcast region written by the scheduler before every dispatch.
@@ -85,6 +86,7 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     sched_schedule = MemoryRegion(sdf, "sched_schedule", SCHED_SCHEDULE_SIZE)
     sdf.add_mr(sched_schedule)
     scheduler.add_map(Map(sched_schedule, SCHED_SCHEDULE_VADDR, perms="rw"))
+    # END META TEMPLATE MARKER
 
     # BEGIN META MARKER
 
@@ -399,8 +401,9 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     temperature_sensor_cpi_thermostat.add_map(Map(Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_air_1_Memory_Region, 0x10_002_000, perms="r", setvar_vaddr="air_queue_1"))
     gumbo_monitor_process_gumbo_monitor_thread.add_map(Map(Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_air_1_Memory_Region, 0x10_032_000, perms="r", setvar_vaddr="temperature_sensor_cpi_thermostat_air_queue_1"))
     heat_source_cpi_heat_controller.add_map(Map(Isolette_Single_Sensor_Instance_heat_source_cpi_heat_controller_heat_out_1_Memory_Region, 0x10_002_000, perms="rw", setvar_vaddr="heat_out_queue_1"))
-    gumbo_monitor_process_gumbo_monitor_thread.add_map(Map(sched_state, 0x10_034_000, perms="r", setvar_vaddr="sched_state_queue_1"))
-    gumbo_monitor_process_gumbo_monitor_thread.add_map(Map(sched_schedule, 0x10_036_000, perms="r", setvar_vaddr="sched_schedule_queue_1"))
+    gumbo_monitor_process_gumbo_monitor_thread.add_map(Map(Isolette_Single_Sensor_Instance_heat_source_cpi_heat_controller_heat_out_1_Memory_Region, 0x10_034_000, perms="r", setvar_vaddr="heat_source_cpi_heat_controller_heat_out_queue_1"))
+    gumbo_monitor_process_gumbo_monitor_thread.add_map(Map(sched_state, 0x10_036_000, perms="r", setvar_vaddr="sched_state_queue_1"))
+    gumbo_monitor_process_gumbo_monitor_thread.add_map(Map(sched_schedule, 0x10_038_000, perms="r", setvar_vaddr="sched_schedule_queue_1"))
 
 
 

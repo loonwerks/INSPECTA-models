@@ -99,12 +99,6 @@ pub fn get_alarm_control() -> Isolette_Data_Model::On_Off
   return extern_api::OUT_alarm_control.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
-/// getter for OUT DataPort
-pub fn get_sv_lastCmd() -> Isolette_Data_Model::On_Off
-{
-  return extern_api::OUT_sv_lastCmd.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
-}
-
 /// getter for GUMBO State Variable
 pub fn get_lastCmd() -> Isolette_Data_Model::On_Off
 {

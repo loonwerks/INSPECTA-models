@@ -60,6 +60,7 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
 
     scheduler = ProtectionDomain("scheduler", "scheduler.elf", priority=200)
 
+    # BEGIN META TEMPLATE MARKER
     #######################################
     # SCHEDULE STATE
     # Broadcast region written by the scheduler before every dispatch.
@@ -85,6 +86,7 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     sched_schedule = MemoryRegion(sdf, "sched_schedule", SCHED_SCHEDULE_SIZE)
     sdf.add_mr(sched_schedule)
     scheduler.add_map(Map(sched_schedule, SCHED_SCHEDULE_VADDR, perms="rw"))
+    # END META TEMPLATE MARKER
 
     # BEGIN META MARKER
 

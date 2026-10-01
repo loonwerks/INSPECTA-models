@@ -63,6 +63,7 @@ impl ComponentContracts {
   /// before any has computed.
   pub fn on_init<V: SystemView, S: ViolationSink>(&mut self, s: &mut V, out: &mut S) {
     {
+      s.focus(Some(crate::Thread::thermostat_rt_mri_mri));
       let post_thermostat_rt_mri_mri = PostState_thermostat_rt_mri_mri {
         api_displayed_temp: s.get_thermostat_rt_mri_mri_displayed_temp(),
         api_interface_failure: s.get_thermostat_rt_mri_mri_interface_failure(),
@@ -70,32 +71,41 @@ impl ComponentContracts {
         api_regulator_status: s.get_thermostat_rt_mri_mri_regulator_status(),
         api_upper_desired_temp: s.get_thermostat_rt_mri_mri_upper_desired_temp(),
       };
-      if !crate::gumbox::thermostat_rt_mri_mri_GUMBOX::initialize_IEP_Post(
+      if s.missing() {
+        out.report(crate::Event::CheckSkipped { thread: "thermostat_rt_mri_mri", check: "IEP_Post" });
+      } else if !crate::gumbox::thermostat_rt_mri_mri_GUMBOX::initialize_IEP_Post(
         post_thermostat_rt_mri_mri.api_displayed_temp, post_thermostat_rt_mri_mri.api_interface_failure, post_thermostat_rt_mri_mri.api_lower_desired_temp, post_thermostat_rt_mri_mri.api_regulator_status, post_thermostat_rt_mri_mri.api_upper_desired_temp) {
         out.report(crate::Event::IepPostViolation { thread: "thermostat_rt_mri_mri", post: &post_thermostat_rt_mri_mri });
       }
     }
     {
+      s.focus(Some(crate::Thread::thermostat_rt_mhs_mhs));
       let post_thermostat_rt_mhs_mhs = PostState_thermostat_rt_mhs_mhs {
         lastCmd: s.get_thermostat_rt_mhs_mhs_sv_lastCmd(),
         api_heat_control: s.get_thermostat_rt_mhs_mhs_heat_control(),
       };
-      if !crate::gumbox::thermostat_rt_mhs_mhs_GUMBOX::initialize_IEP_Post(
+      if s.missing() {
+        out.report(crate::Event::CheckSkipped { thread: "thermostat_rt_mhs_mhs", check: "IEP_Post" });
+      } else if !crate::gumbox::thermostat_rt_mhs_mhs_GUMBOX::initialize_IEP_Post(
         post_thermostat_rt_mhs_mhs.lastCmd, post_thermostat_rt_mhs_mhs.api_heat_control) {
         out.report(crate::Event::IepPostViolation { thread: "thermostat_rt_mhs_mhs", post: &post_thermostat_rt_mhs_mhs });
       }
     }
     {
+      s.focus(Some(crate::Thread::thermostat_rt_mrm_mrm));
       let post_thermostat_rt_mrm_mrm = PostState_thermostat_rt_mrm_mrm {
         lastRegulatorMode: s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(),
         api_regulator_mode: s.get_thermostat_rt_mrm_mrm_regulator_mode(),
       };
-      if !crate::gumbox::thermostat_rt_mrm_mrm_GUMBOX::initialize_IEP_Post(
+      if s.missing() {
+        out.report(crate::Event::CheckSkipped { thread: "thermostat_rt_mrm_mrm", check: "IEP_Post" });
+      } else if !crate::gumbox::thermostat_rt_mrm_mrm_GUMBOX::initialize_IEP_Post(
         post_thermostat_rt_mrm_mrm.lastRegulatorMode, post_thermostat_rt_mrm_mrm.api_regulator_mode) {
         out.report(crate::Event::IepPostViolation { thread: "thermostat_rt_mrm_mrm", post: &post_thermostat_rt_mrm_mrm });
       }
     }
     {
+      s.focus(Some(crate::Thread::thermostat_mt_mmi_mmi));
       let post_thermostat_mt_mmi_mmi = PostState_thermostat_mt_mmi_mmi {
         lastCmd: s.get_thermostat_mt_mmi_mmi_sv_lastCmd(),
         api_interface_failure: s.get_thermostat_mt_mmi_mmi_interface_failure(),
@@ -103,39 +113,50 @@ impl ComponentContracts {
         api_monitor_status: s.get_thermostat_mt_mmi_mmi_monitor_status(),
         api_upper_alarm_temp: s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(),
       };
-      if !crate::gumbox::thermostat_mt_mmi_mmi_GUMBOX::initialize_IEP_Post(
+      if s.missing() {
+        out.report(crate::Event::CheckSkipped { thread: "thermostat_mt_mmi_mmi", check: "IEP_Post" });
+      } else if !crate::gumbox::thermostat_mt_mmi_mmi_GUMBOX::initialize_IEP_Post(
         post_thermostat_mt_mmi_mmi.lastCmd, post_thermostat_mt_mmi_mmi.api_interface_failure, post_thermostat_mt_mmi_mmi.api_lower_alarm_temp, post_thermostat_mt_mmi_mmi.api_monitor_status, post_thermostat_mt_mmi_mmi.api_upper_alarm_temp) {
         out.report(crate::Event::IepPostViolation { thread: "thermostat_mt_mmi_mmi", post: &post_thermostat_mt_mmi_mmi });
       }
     }
     {
+      s.focus(Some(crate::Thread::thermostat_mt_ma_ma));
       let post_thermostat_mt_ma_ma = PostState_thermostat_mt_ma_ma {
         lastCmd: s.get_thermostat_mt_ma_ma_sv_lastCmd(),
         api_alarm_control: s.get_thermostat_mt_ma_ma_alarm_control(),
       };
-      if !crate::gumbox::thermostat_mt_ma_ma_GUMBOX::initialize_IEP_Post(
+      if s.missing() {
+        out.report(crate::Event::CheckSkipped { thread: "thermostat_mt_ma_ma", check: "IEP_Post" });
+      } else if !crate::gumbox::thermostat_mt_ma_ma_GUMBOX::initialize_IEP_Post(
         post_thermostat_mt_ma_ma.lastCmd, post_thermostat_mt_ma_ma.api_alarm_control) {
         out.report(crate::Event::IepPostViolation { thread: "thermostat_mt_ma_ma", post: &post_thermostat_mt_ma_ma });
       }
     }
     {
+      s.focus(Some(crate::Thread::thermostat_mt_mmm_mmm));
       let post_thermostat_mt_mmm_mmm = PostState_thermostat_mt_mmm_mmm {
         lastMonitorMode: s.get_thermostat_mt_mmm_mmm_sv_lastMonitorMode(),
         api_monitor_mode: s.get_thermostat_mt_mmm_mmm_monitor_mode(),
       };
-      if !crate::gumbox::thermostat_mt_mmm_mmm_GUMBOX::initialize_IEP_Post(
+      if s.missing() {
+        out.report(crate::Event::CheckSkipped { thread: "thermostat_mt_mmm_mmm", check: "IEP_Post" });
+      } else if !crate::gumbox::thermostat_mt_mmm_mmm_GUMBOX::initialize_IEP_Post(
         post_thermostat_mt_mmm_mmm.lastMonitorMode, post_thermostat_mt_mmm_mmm.api_monitor_mode) {
         out.report(crate::Event::IepPostViolation { thread: "thermostat_mt_mmm_mmm", post: &post_thermostat_mt_mmm_mmm });
       }
     }
     {
+      s.focus(Some(crate::Thread::operator_interface_oip_oit));
       let post_operator_interface_oip_oit = PostState_operator_interface_oip_oit {
         api_lower_alarm_tempWstatus: s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(),
         api_lower_desired_tempWstatus: s.get_operator_interface_oip_oit_lower_desired_tempWstatus(),
         api_upper_alarm_tempWstatus: s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(),
         api_upper_desired_tempWstatus: s.get_operator_interface_oip_oit_upper_desired_tempWstatus(),
       };
-      if !crate::gumbox::operator_interface_oip_oit_GUMBOX::initialize_IEP_Post(
+      if s.missing() {
+        out.report(crate::Event::CheckSkipped { thread: "operator_interface_oip_oit", check: "IEP_Post" });
+      } else if !crate::gumbox::operator_interface_oip_oit_GUMBOX::initialize_IEP_Post(
         post_operator_interface_oip_oit.api_lower_alarm_tempWstatus, post_operator_interface_oip_oit.api_lower_desired_tempWstatus, post_operator_interface_oip_oit.api_upper_alarm_tempWstatus, post_operator_interface_oip_oit.api_upper_desired_tempWstatus) {
         out.report(crate::Event::IepPostViolation { thread: "operator_interface_oip_oit", post: &post_operator_interface_oip_oit });
       }
@@ -147,6 +168,7 @@ impl ComponentContracts {
   pub fn on_complete<V: SystemView, S: ViolationSink>(&mut self, prev: crate::Thread, s: &mut V, out: &mut S) {
     match prev {
       crate::Thread::thermostat_rt_mri_mri => {
+        s.focus(Some(crate::Thread::thermostat_rt_mri_mri));
         let post = PostState_thermostat_rt_mri_mri {
           api_displayed_temp: s.get_thermostat_rt_mri_mri_displayed_temp(),
           api_interface_failure: s.get_thermostat_rt_mri_mri_interface_failure(),
@@ -154,7 +176,9 @@ impl ComponentContracts {
           api_regulator_status: s.get_thermostat_rt_mri_mri_regulator_status(),
           api_upper_desired_temp: s.get_thermostat_rt_mri_mri_upper_desired_temp(),
         };
-        if let Some(pre) = &self.pre_thermostat_rt_mri_mri {
+        if s.missing() {
+          out.report(crate::Event::CheckSkipped { thread: "thermostat_rt_mri_mri", check: "CEP_Post" });
+        } else if let Some(pre) = &self.pre_thermostat_rt_mri_mri {
           if self.excuse_post_on_failed_pre && !self.pre_ok_thermostat_rt_mri_mri {
             out.report(crate::Event::CepPostExcused { thread: "thermostat_rt_mri_mri" });
           } else if !crate::gumbox::thermostat_rt_mri_mri_GUMBOX::compute_CEP_Post(
@@ -166,11 +190,14 @@ impl ComponentContracts {
         }
       }
       crate::Thread::thermostat_rt_mhs_mhs => {
+        s.focus(Some(crate::Thread::thermostat_rt_mhs_mhs));
         let post = PostState_thermostat_rt_mhs_mhs {
           lastCmd: s.get_thermostat_rt_mhs_mhs_sv_lastCmd(),
           api_heat_control: s.get_thermostat_rt_mhs_mhs_heat_control(),
         };
-        if let Some(pre) = &self.pre_thermostat_rt_mhs_mhs {
+        if s.missing() {
+          out.report(crate::Event::CheckSkipped { thread: "thermostat_rt_mhs_mhs", check: "CEP_Post" });
+        } else if let Some(pre) = &self.pre_thermostat_rt_mhs_mhs {
           if self.excuse_post_on_failed_pre && !self.pre_ok_thermostat_rt_mhs_mhs {
             out.report(crate::Event::CepPostExcused { thread: "thermostat_rt_mhs_mhs" });
           } else if !crate::gumbox::thermostat_rt_mhs_mhs_GUMBOX::compute_CEP_Post(
@@ -182,11 +209,14 @@ impl ComponentContracts {
         }
       }
       crate::Thread::thermostat_rt_mrm_mrm => {
+        s.focus(Some(crate::Thread::thermostat_rt_mrm_mrm));
         let post = PostState_thermostat_rt_mrm_mrm {
           lastRegulatorMode: s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(),
           api_regulator_mode: s.get_thermostat_rt_mrm_mrm_regulator_mode(),
         };
-        if let Some(pre) = &self.pre_thermostat_rt_mrm_mrm {
+        if s.missing() {
+          out.report(crate::Event::CheckSkipped { thread: "thermostat_rt_mrm_mrm", check: "CEP_Post" });
+        } else if let Some(pre) = &self.pre_thermostat_rt_mrm_mrm {
           if self.excuse_post_on_failed_pre && !self.pre_ok_thermostat_rt_mrm_mrm {
             out.report(crate::Event::CepPostExcused { thread: "thermostat_rt_mrm_mrm" });
           } else if !crate::gumbox::thermostat_rt_mrm_mrm_GUMBOX::compute_CEP_Post(
@@ -198,6 +228,7 @@ impl ComponentContracts {
         }
       }
       crate::Thread::thermostat_mt_mmi_mmi => {
+        s.focus(Some(crate::Thread::thermostat_mt_mmi_mmi));
         let post = PostState_thermostat_mt_mmi_mmi {
           lastCmd: s.get_thermostat_mt_mmi_mmi_sv_lastCmd(),
           api_interface_failure: s.get_thermostat_mt_mmi_mmi_interface_failure(),
@@ -205,7 +236,9 @@ impl ComponentContracts {
           api_monitor_status: s.get_thermostat_mt_mmi_mmi_monitor_status(),
           api_upper_alarm_temp: s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(),
         };
-        if let Some(pre) = &self.pre_thermostat_mt_mmi_mmi {
+        if s.missing() {
+          out.report(crate::Event::CheckSkipped { thread: "thermostat_mt_mmi_mmi", check: "CEP_Post" });
+        } else if let Some(pre) = &self.pre_thermostat_mt_mmi_mmi {
           if self.excuse_post_on_failed_pre && !self.pre_ok_thermostat_mt_mmi_mmi {
             out.report(crate::Event::CepPostExcused { thread: "thermostat_mt_mmi_mmi" });
           } else if !crate::gumbox::thermostat_mt_mmi_mmi_GUMBOX::compute_CEP_Post(
@@ -217,11 +250,14 @@ impl ComponentContracts {
         }
       }
       crate::Thread::thermostat_mt_ma_ma => {
+        s.focus(Some(crate::Thread::thermostat_mt_ma_ma));
         let post = PostState_thermostat_mt_ma_ma {
           lastCmd: s.get_thermostat_mt_ma_ma_sv_lastCmd(),
           api_alarm_control: s.get_thermostat_mt_ma_ma_alarm_control(),
         };
-        if let Some(pre) = &self.pre_thermostat_mt_ma_ma {
+        if s.missing() {
+          out.report(crate::Event::CheckSkipped { thread: "thermostat_mt_ma_ma", check: "CEP_Post" });
+        } else if let Some(pre) = &self.pre_thermostat_mt_ma_ma {
           if self.excuse_post_on_failed_pre && !self.pre_ok_thermostat_mt_ma_ma {
             out.report(crate::Event::CepPostExcused { thread: "thermostat_mt_ma_ma" });
           } else if !crate::gumbox::thermostat_mt_ma_ma_GUMBOX::compute_CEP_Post(
@@ -233,11 +269,14 @@ impl ComponentContracts {
         }
       }
       crate::Thread::thermostat_mt_mmm_mmm => {
+        s.focus(Some(crate::Thread::thermostat_mt_mmm_mmm));
         let post = PostState_thermostat_mt_mmm_mmm {
           lastMonitorMode: s.get_thermostat_mt_mmm_mmm_sv_lastMonitorMode(),
           api_monitor_mode: s.get_thermostat_mt_mmm_mmm_monitor_mode(),
         };
-        if let Some(pre) = &self.pre_thermostat_mt_mmm_mmm {
+        if s.missing() {
+          out.report(crate::Event::CheckSkipped { thread: "thermostat_mt_mmm_mmm", check: "CEP_Post" });
+        } else if let Some(pre) = &self.pre_thermostat_mt_mmm_mmm {
           if self.excuse_post_on_failed_pre && !self.pre_ok_thermostat_mt_mmm_mmm {
             out.report(crate::Event::CepPostExcused { thread: "thermostat_mt_mmm_mmm" });
           } else if !crate::gumbox::thermostat_mt_mmm_mmm_GUMBOX::compute_CEP_Post(
@@ -249,13 +288,16 @@ impl ComponentContracts {
         }
       }
       crate::Thread::operator_interface_oip_oit => {
+        s.focus(Some(crate::Thread::operator_interface_oip_oit));
         let post = PostState_operator_interface_oip_oit {
           api_lower_alarm_tempWstatus: s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(),
           api_lower_desired_tempWstatus: s.get_operator_interface_oip_oit_lower_desired_tempWstatus(),
           api_upper_alarm_tempWstatus: s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(),
           api_upper_desired_tempWstatus: s.get_operator_interface_oip_oit_upper_desired_tempWstatus(),
         };
-        if let Some(pre) = &self.pre_operator_interface_oip_oit {
+        if s.missing() {
+          out.report(crate::Event::CheckSkipped { thread: "operator_interface_oip_oit", check: "CEP_Post" });
+        } else if let Some(pre) = &self.pre_operator_interface_oip_oit {
           if self.excuse_post_on_failed_pre && !self.pre_ok_operator_interface_oip_oit {
             out.report(crate::Event::CepPostExcused { thread: "operator_interface_oip_oit" });
           } else if !crate::gumbox::operator_interface_oip_oit_GUMBOX::compute_CEP_Post(
@@ -270,26 +312,47 @@ impl ComponentContracts {
     }
   }
 
+  /// Drops every saved pre-state, so each thread's next completion is skipped rather
+  /// than checked against a dispatch it no longer describes -- after a dispatch went
+  /// unobserved, or a thread overran its slot.
+  pub fn forget(&mut self) {
+    self.pre_thermostat_rt_mri_mri = None;
+    self.pre_thermostat_rt_mhs_mhs = None;
+    self.pre_thermostat_rt_mrm_mrm = None;
+    self.pre_thermostat_mt_mmi_mmi = None;
+    self.pre_thermostat_mt_ma_ma = None;
+    self.pre_thermostat_mt_mmm_mmm = None;
+    self.pre_operator_interface_oip_oit = None;
+  }
+
   /// `next` is about to be dispatched: save its pre-state and check its CEP_Pre.
   pub fn on_dispatch<V: SystemView, S: ViolationSink>(&mut self, next: crate::Thread, s: &mut V, out: &mut S) {
     match next {
       crate::Thread::thermostat_rt_mri_mri => {
+        s.focus(Some(crate::Thread::thermostat_rt_mri_mri));
         let pre = PreState_thermostat_rt_mri_mri {
           api_current_tempWstatus: s.get_temperature_sensor_cpi_thermostat_current_tempWstatus(),
           api_lower_desired_tempWstatus: s.get_operator_interface_oip_oit_lower_desired_tempWstatus(),
           api_regulator_mode: s.get_thermostat_rt_mrm_mrm_regulator_mode(),
           api_upper_desired_tempWstatus: s.get_operator_interface_oip_oit_upper_desired_tempWstatus(),
         };
-        if !crate::gumbox::thermostat_rt_mri_mri_GUMBOX::compute_CEP_Pre(
-          pre.api_current_tempWstatus, pre.api_lower_desired_tempWstatus, pre.api_regulator_mode, pre.api_upper_desired_tempWstatus) {
-          out.report(crate::Event::CepPreViolation { thread: "thermostat_rt_mri_mri", pre: &pre });
-          self.pre_ok_thermostat_rt_mri_mri = false;
+        if s.missing() {
+          // no pre-state to hold the completion to
+          out.report(crate::Event::CheckSkipped { thread: "thermostat_rt_mri_mri", check: "CEP_Pre" });
+          self.pre_thermostat_rt_mri_mri = None;
         } else {
-          self.pre_ok_thermostat_rt_mri_mri = true;
+          if !crate::gumbox::thermostat_rt_mri_mri_GUMBOX::compute_CEP_Pre(
+            pre.api_current_tempWstatus, pre.api_lower_desired_tempWstatus, pre.api_regulator_mode, pre.api_upper_desired_tempWstatus) {
+            out.report(crate::Event::CepPreViolation { thread: "thermostat_rt_mri_mri", pre: &pre });
+            self.pre_ok_thermostat_rt_mri_mri = false;
+          } else {
+            self.pre_ok_thermostat_rt_mri_mri = true;
+          }
+          self.pre_thermostat_rt_mri_mri = Some(pre);
         }
-        self.pre_thermostat_rt_mri_mri = Some(pre);
       }
       crate::Thread::thermostat_rt_mhs_mhs => {
+        s.focus(Some(crate::Thread::thermostat_rt_mhs_mhs));
         let pre = PreState_thermostat_rt_mhs_mhs {
           In_lastCmd: s.get_thermostat_rt_mhs_mhs_sv_lastCmd(),
           api_current_tempWstatus: s.get_temperature_sensor_cpi_thermostat_current_tempWstatus(),
@@ -297,26 +360,40 @@ impl ComponentContracts {
           api_regulator_mode: s.get_thermostat_rt_mrm_mrm_regulator_mode(),
           api_upper_desired_temp: s.get_thermostat_rt_mri_mri_upper_desired_temp(),
         };
-        if !crate::gumbox::thermostat_rt_mhs_mhs_GUMBOX::compute_CEP_Pre(
-          pre.In_lastCmd, pre.api_current_tempWstatus, pre.api_lower_desired_temp, pre.api_regulator_mode, pre.api_upper_desired_temp) {
-          out.report(crate::Event::CepPreViolation { thread: "thermostat_rt_mhs_mhs", pre: &pre });
-          self.pre_ok_thermostat_rt_mhs_mhs = false;
+        if s.missing() {
+          // no pre-state to hold the completion to
+          out.report(crate::Event::CheckSkipped { thread: "thermostat_rt_mhs_mhs", check: "CEP_Pre" });
+          self.pre_thermostat_rt_mhs_mhs = None;
         } else {
-          self.pre_ok_thermostat_rt_mhs_mhs = true;
+          if !crate::gumbox::thermostat_rt_mhs_mhs_GUMBOX::compute_CEP_Pre(
+            pre.In_lastCmd, pre.api_current_tempWstatus, pre.api_lower_desired_temp, pre.api_regulator_mode, pre.api_upper_desired_temp) {
+            out.report(crate::Event::CepPreViolation { thread: "thermostat_rt_mhs_mhs", pre: &pre });
+            self.pre_ok_thermostat_rt_mhs_mhs = false;
+          } else {
+            self.pre_ok_thermostat_rt_mhs_mhs = true;
+          }
+          self.pre_thermostat_rt_mhs_mhs = Some(pre);
         }
-        self.pre_thermostat_rt_mhs_mhs = Some(pre);
       }
       crate::Thread::thermostat_rt_mrm_mrm => {
+        s.focus(Some(crate::Thread::thermostat_rt_mrm_mrm));
         let pre = PreState_thermostat_rt_mrm_mrm {
           In_lastRegulatorMode: s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(),
           api_current_tempWstatus: s.get_temperature_sensor_cpi_thermostat_current_tempWstatus(),
           api_interface_failure: s.get_thermostat_rt_mri_mri_interface_failure(),
           api_internal_failure: s.get_thermostat_rt_drf_drf_internal_failure(),
         };
-        self.pre_ok_thermostat_rt_mrm_mrm = true;
-        self.pre_thermostat_rt_mrm_mrm = Some(pre);
+        if s.missing() {
+          // no pre-state to hold the completion to
+          out.report(crate::Event::CheckSkipped { thread: "thermostat_rt_mrm_mrm", check: "CEP_Pre" });
+          self.pre_thermostat_rt_mrm_mrm = None;
+        } else {
+          self.pre_ok_thermostat_rt_mrm_mrm = true;
+          self.pre_thermostat_rt_mrm_mrm = Some(pre);
+        }
       }
       crate::Thread::thermostat_mt_mmi_mmi => {
+        s.focus(Some(crate::Thread::thermostat_mt_mmi_mmi));
         let pre = PreState_thermostat_mt_mmi_mmi {
           In_lastCmd: s.get_thermostat_mt_mmi_mmi_sv_lastCmd(),
           api_current_tempWstatus: s.get_temperature_sensor_cpi_thermostat_current_tempWstatus(),
@@ -324,16 +401,23 @@ impl ComponentContracts {
           api_monitor_mode: s.get_thermostat_mt_mmm_mmm_monitor_mode(),
           api_upper_alarm_tempWstatus: s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(),
         };
-        if !crate::gumbox::thermostat_mt_mmi_mmi_GUMBOX::compute_CEP_Pre(
-          pre.In_lastCmd, pre.api_current_tempWstatus, pre.api_lower_alarm_tempWstatus, pre.api_monitor_mode, pre.api_upper_alarm_tempWstatus) {
-          out.report(crate::Event::CepPreViolation { thread: "thermostat_mt_mmi_mmi", pre: &pre });
-          self.pre_ok_thermostat_mt_mmi_mmi = false;
+        if s.missing() {
+          // no pre-state to hold the completion to
+          out.report(crate::Event::CheckSkipped { thread: "thermostat_mt_mmi_mmi", check: "CEP_Pre" });
+          self.pre_thermostat_mt_mmi_mmi = None;
         } else {
-          self.pre_ok_thermostat_mt_mmi_mmi = true;
+          if !crate::gumbox::thermostat_mt_mmi_mmi_GUMBOX::compute_CEP_Pre(
+            pre.In_lastCmd, pre.api_current_tempWstatus, pre.api_lower_alarm_tempWstatus, pre.api_monitor_mode, pre.api_upper_alarm_tempWstatus) {
+            out.report(crate::Event::CepPreViolation { thread: "thermostat_mt_mmi_mmi", pre: &pre });
+            self.pre_ok_thermostat_mt_mmi_mmi = false;
+          } else {
+            self.pre_ok_thermostat_mt_mmi_mmi = true;
+          }
+          self.pre_thermostat_mt_mmi_mmi = Some(pre);
         }
-        self.pre_thermostat_mt_mmi_mmi = Some(pre);
       }
       crate::Thread::thermostat_mt_ma_ma => {
+        s.focus(Some(crate::Thread::thermostat_mt_ma_ma));
         let pre = PreState_thermostat_mt_ma_ma {
           In_lastCmd: s.get_thermostat_mt_ma_ma_sv_lastCmd(),
           api_current_tempWstatus: s.get_temperature_sensor_cpi_thermostat_current_tempWstatus(),
@@ -341,34 +425,54 @@ impl ComponentContracts {
           api_monitor_mode: s.get_thermostat_mt_mmm_mmm_monitor_mode(),
           api_upper_alarm_temp: s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(),
         };
-        if !crate::gumbox::thermostat_mt_ma_ma_GUMBOX::compute_CEP_Pre(
-          pre.In_lastCmd, pre.api_current_tempWstatus, pre.api_lower_alarm_temp, pre.api_monitor_mode, pre.api_upper_alarm_temp) {
-          out.report(crate::Event::CepPreViolation { thread: "thermostat_mt_ma_ma", pre: &pre });
-          self.pre_ok_thermostat_mt_ma_ma = false;
+        if s.missing() {
+          // no pre-state to hold the completion to
+          out.report(crate::Event::CheckSkipped { thread: "thermostat_mt_ma_ma", check: "CEP_Pre" });
+          self.pre_thermostat_mt_ma_ma = None;
         } else {
-          self.pre_ok_thermostat_mt_ma_ma = true;
+          if !crate::gumbox::thermostat_mt_ma_ma_GUMBOX::compute_CEP_Pre(
+            pre.In_lastCmd, pre.api_current_tempWstatus, pre.api_lower_alarm_temp, pre.api_monitor_mode, pre.api_upper_alarm_temp) {
+            out.report(crate::Event::CepPreViolation { thread: "thermostat_mt_ma_ma", pre: &pre });
+            self.pre_ok_thermostat_mt_ma_ma = false;
+          } else {
+            self.pre_ok_thermostat_mt_ma_ma = true;
+          }
+          self.pre_thermostat_mt_ma_ma = Some(pre);
         }
-        self.pre_thermostat_mt_ma_ma = Some(pre);
       }
       crate::Thread::thermostat_mt_mmm_mmm => {
+        s.focus(Some(crate::Thread::thermostat_mt_mmm_mmm));
         let pre = PreState_thermostat_mt_mmm_mmm {
           In_lastMonitorMode: s.get_thermostat_mt_mmm_mmm_sv_lastMonitorMode(),
           api_current_tempWstatus: s.get_temperature_sensor_cpi_thermostat_current_tempWstatus(),
           api_interface_failure: s.get_thermostat_mt_mmi_mmi_interface_failure(),
           api_internal_failure: s.get_thermostat_mt_dmf_dmf_internal_failure(),
         };
-        self.pre_ok_thermostat_mt_mmm_mmm = true;
-        self.pre_thermostat_mt_mmm_mmm = Some(pre);
+        if s.missing() {
+          // no pre-state to hold the completion to
+          out.report(crate::Event::CheckSkipped { thread: "thermostat_mt_mmm_mmm", check: "CEP_Pre" });
+          self.pre_thermostat_mt_mmm_mmm = None;
+        } else {
+          self.pre_ok_thermostat_mt_mmm_mmm = true;
+          self.pre_thermostat_mt_mmm_mmm = Some(pre);
+        }
       }
       crate::Thread::operator_interface_oip_oit => {
+        s.focus(Some(crate::Thread::operator_interface_oip_oit));
         let pre = PreState_operator_interface_oip_oit {
           api_alarm_control: s.get_thermostat_mt_ma_ma_alarm_control(),
           api_display_temperature: s.get_thermostat_rt_mri_mri_displayed_temp(),
           api_monitor_status: s.get_thermostat_mt_mmi_mmi_monitor_status(),
           api_regulator_status: s.get_thermostat_rt_mri_mri_regulator_status(),
         };
-        self.pre_ok_operator_interface_oip_oit = true;
-        self.pre_operator_interface_oip_oit = Some(pre);
+        if s.missing() {
+          // no pre-state to hold the completion to
+          out.report(crate::Event::CheckSkipped { thread: "operator_interface_oip_oit", check: "CEP_Pre" });
+          self.pre_operator_interface_oip_oit = None;
+        } else {
+          self.pre_ok_operator_interface_oip_oit = true;
+          self.pre_operator_interface_oip_oit = Some(pre);
+        }
       }
       _ => {}
     }

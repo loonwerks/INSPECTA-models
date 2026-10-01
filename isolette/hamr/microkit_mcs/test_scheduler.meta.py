@@ -60,6 +60,7 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
 
     scheduler = ProtectionDomain("scheduler", "scheduler.elf", priority=200)
 
+    # BEGIN META TEMPLATE MARKER
     #######################################
     # TEST SCHEDULER REGIONS
     # Command input, status output, and the published schedule.  The virtual addresses
@@ -105,6 +106,7 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
 
     inj_thermostat_mt_mmm_mmm_sv_lastMonitorMode = MemoryRegion(sdf, "inj_thermostat_mt_mmm_mmm_sv_lastMonitorMode", 0x1000)
     sdf.add_mr(inj_thermostat_mt_mmm_mmm_sv_lastMonitorMode)
+    # END META TEMPLATE MARKER
 
     # BEGIN META MARKER
 
@@ -524,20 +526,52 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
                        user_schedule.section_name,
                        data_path)
 
+    # BEGIN META TAIL MARKER
     #######################################
     # TEST SELECTION
     # Which system tests to run, from the TESTS make variable.  Substring match
     # against the qualified suite::test name; empty selects all of them.
+    #
+    # And which contract checks are live for the whole run (TestScheduler-design.md,
+    # D23), from GUMBO_CHECKS and SYSVERIF_CHECKS: empty or "on" leaves a layer on,
+    # "off" turns it off -- not tracked, and no scheduler park taken for it.  They
+    # go into the flags word after the filter: bit 0 GUMBO off, bit 1 SYSVERIF off.
+    # LIST_TESTS=1 sets bit 2: list the selected tests without running them (D17).
     #######################################
     test_selection = bytearray(260)
-    _filter = tests_filter.encode()[:255]
+    try:
+        _filter = tests_filter.encode()
+    except UnicodeEncodeError:
+        raise SystemExit("TESTS must be valid text (UTF-8)")
+    # truncating would change which tests run, or split a character, silently
+    if len(_filter) > 255:
+        raise SystemExit(f"TESTS must be at most 255 bytes (UTF-8), not {len(_filter)}")
     test_selection[0:len(_filter)] = _filter
+    import os
+    _flags = 0
+    for _name, _bit, _generated in [("GUMBO_CHECKS", 0x1, True),
+                                    ("SYSVERIF_CHECKS", 0x2, True)]:
+        _value = os.environ.get(_name, "")
+        if _value not in ("", "on", "off"):
+            raise SystemExit(f"{_name} must be 'on' or 'off', not '{_value}'")
+        if _value != "" and not _generated:
+            print(f"warning: {_name}={_value} has no effect: this model has no such checks")
+        if _value == "off":
+            _flags |= _bit
+    # LIST_TESTS=1: print the test table and run nothing (bit 2).
+    _list = os.environ.get("LIST_TESTS", "")
+    if _list not in ("", "0", "1"):
+        raise SystemExit(f"LIST_TESTS must be '0' or '1', not '{_list}'")
+    if _list == "1":
+        _flags |= 0x4
+    test_selection[256:260] = _flags.to_bytes(4, "little")
     test_selection_path = output_dir + "/test_selection.data"
     with open(test_selection_path, "wb+") as f:
         f.write(bytes(test_selection))
     update_elf_section(obj_copy, test_controller_process_test_controller_thread.program_image,
                        "test_selection",
                        test_selection_path)
+    # END META TAIL MARKER
 
     with open(f"{output_dir}/{sdf_path}", "w+") as f:
         f.write(sdf.render())

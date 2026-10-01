@@ -41,35 +41,31 @@ pub open spec fn mri_fire(pre: SystemState, post: SystemState) -> bool
 
 // -- Isolette_Single_Sensor_Instance.thermostat.rt.mhs.mhs --
 
-pub uninterp spec fn mhs_action_heat_control(lastCmd: Isolette_Data_Model::On_Off, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_desired_temp: Isolette_Data_Model::Temp_i, upper_desired_temp: Isolette_Data_Model::Temp_i, regulator_mode: Isolette_Data_Model::Regulator_Mode, heat_control: Isolette_Data_Model::On_Off, sv_lastCmd: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::On_Off;
-pub uninterp spec fn mhs_action_sv_lastCmd(lastCmd: Isolette_Data_Model::On_Off, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_desired_temp: Isolette_Data_Model::Temp_i, upper_desired_temp: Isolette_Data_Model::Temp_i, regulator_mode: Isolette_Data_Model::Regulator_Mode, heat_control: Isolette_Data_Model::On_Off, sv_lastCmd: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::On_Off;
-pub uninterp spec fn mhs_action_lastCmd(lastCmd: Isolette_Data_Model::On_Off, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_desired_temp: Isolette_Data_Model::Temp_i, upper_desired_temp: Isolette_Data_Model::Temp_i, regulator_mode: Isolette_Data_Model::Regulator_Mode, heat_control: Isolette_Data_Model::On_Off, sv_lastCmd: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::On_Off;
+pub uninterp spec fn mhs_action_heat_control(lastCmd: Isolette_Data_Model::On_Off, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_desired_temp: Isolette_Data_Model::Temp_i, upper_desired_temp: Isolette_Data_Model::Temp_i, regulator_mode: Isolette_Data_Model::Regulator_Mode, heat_control: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::On_Off;
+pub uninterp spec fn mhs_action_lastCmd(lastCmd: Isolette_Data_Model::On_Off, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_desired_temp: Isolette_Data_Model::Temp_i, upper_desired_temp: Isolette_Data_Model::Temp_i, regulator_mode: Isolette_Data_Model::Regulator_Mode, heat_control: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::On_Off;
 
 /** "MHS fires": every written field is determined by the read scope;
   * everything else is framed.
   */
 pub open spec fn mhs_fire(pre: SystemState, post: SystemState) -> bool
 {
-  post.heat_control == mhs_action_heat_control(pre.lastCmd, pre.current_tempWstatus, pre.lower_desired_temp, pre.upper_desired_temp, pre.regulator_mode, pre.heat_control, pre.mhs_sv_lastCmd)
-  && post.mhs_sv_lastCmd == mhs_action_sv_lastCmd(pre.lastCmd, pre.current_tempWstatus, pre.lower_desired_temp, pre.upper_desired_temp, pre.regulator_mode, pre.heat_control, pre.mhs_sv_lastCmd)
-  && post.lastCmd == mhs_action_lastCmd(pre.lastCmd, pre.current_tempWstatus, pre.lower_desired_temp, pre.upper_desired_temp, pre.regulator_mode, pre.heat_control, pre.mhs_sv_lastCmd)
+  post.heat_control == mhs_action_heat_control(pre.lastCmd, pre.current_tempWstatus, pre.lower_desired_temp, pre.upper_desired_temp, pre.regulator_mode, pre.heat_control)
+  && post.lastCmd == mhs_action_lastCmd(pre.lastCmd, pre.current_tempWstatus, pre.lower_desired_temp, pre.upper_desired_temp, pre.regulator_mode, pre.heat_control)
   && mhs_global_write_frame(pre, post)
 }
 
 // -- Isolette_Single_Sensor_Instance.thermostat.rt.mrm.mrm --
 
-pub uninterp spec fn mrm_action_regulator_mode(lastRegulatorMode: Isolette_Data_Model::Regulator_Mode, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, interface_failure: Isolette_Data_Model::Failure_Flag_i, internal_failure: Isolette_Data_Model::Failure_Flag_i, regulator_mode: Isolette_Data_Model::Regulator_Mode, sv_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode) -> Isolette_Data_Model::Regulator_Mode;
-pub uninterp spec fn mrm_action_sv_lastRegulatorMode(lastRegulatorMode: Isolette_Data_Model::Regulator_Mode, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, interface_failure: Isolette_Data_Model::Failure_Flag_i, internal_failure: Isolette_Data_Model::Failure_Flag_i, regulator_mode: Isolette_Data_Model::Regulator_Mode, sv_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode) -> Isolette_Data_Model::Regulator_Mode;
-pub uninterp spec fn mrm_action_lastRegulatorMode(lastRegulatorMode: Isolette_Data_Model::Regulator_Mode, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, interface_failure: Isolette_Data_Model::Failure_Flag_i, internal_failure: Isolette_Data_Model::Failure_Flag_i, regulator_mode: Isolette_Data_Model::Regulator_Mode, sv_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode) -> Isolette_Data_Model::Regulator_Mode;
+pub uninterp spec fn mrm_action_regulator_mode(lastRegulatorMode: Isolette_Data_Model::Regulator_Mode, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, interface_failure: Isolette_Data_Model::Failure_Flag_i, internal_failure: Isolette_Data_Model::Failure_Flag_i, regulator_mode: Isolette_Data_Model::Regulator_Mode) -> Isolette_Data_Model::Regulator_Mode;
+pub uninterp spec fn mrm_action_lastRegulatorMode(lastRegulatorMode: Isolette_Data_Model::Regulator_Mode, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, interface_failure: Isolette_Data_Model::Failure_Flag_i, internal_failure: Isolette_Data_Model::Failure_Flag_i, regulator_mode: Isolette_Data_Model::Regulator_Mode) -> Isolette_Data_Model::Regulator_Mode;
 
 /** "MRM fires": every written field is determined by the read scope;
   * everything else is framed.
   */
 pub open spec fn mrm_fire(pre: SystemState, post: SystemState) -> bool
 {
-  post.regulator_mode == mrm_action_regulator_mode(pre.reg_last_mode, pre.current_tempWstatus, pre.reg_interface_failure, pre.internal_failure, pre.regulator_mode, pre.sv_lastRegulatorMode)
-  && post.sv_lastRegulatorMode == mrm_action_sv_lastRegulatorMode(pre.reg_last_mode, pre.current_tempWstatus, pre.reg_interface_failure, pre.internal_failure, pre.regulator_mode, pre.sv_lastRegulatorMode)
-  && post.reg_last_mode == mrm_action_lastRegulatorMode(pre.reg_last_mode, pre.current_tempWstatus, pre.reg_interface_failure, pre.internal_failure, pre.regulator_mode, pre.sv_lastRegulatorMode)
+  post.regulator_mode == mrm_action_regulator_mode(pre.reg_last_mode, pre.current_tempWstatus, pre.reg_interface_failure, pre.internal_failure, pre.regulator_mode)
+  && post.reg_last_mode == mrm_action_lastRegulatorMode(pre.reg_last_mode, pre.current_tempWstatus, pre.reg_interface_failure, pre.internal_failure, pre.regulator_mode)
   && mrm_global_write_frame(pre, post)
 }
 
@@ -88,58 +84,52 @@ pub open spec fn drf_fire(pre: SystemState, post: SystemState) -> bool
 
 // -- Isolette_Single_Sensor_Instance.thermostat.mt.mmi.mmi --
 
-pub uninterp spec fn mmi_action_upper_alarm_temp(lastCmd: Isolette_Data_Model::On_Off, upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, upper_alarm_temp: Isolette_Data_Model::Temp_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, monitor_status: Isolette_Data_Model::Status, interface_failure: Isolette_Data_Model::Failure_Flag_i, sv_lastCmd: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::Temp_i;
-pub uninterp spec fn mmi_action_lower_alarm_temp(lastCmd: Isolette_Data_Model::On_Off, upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, upper_alarm_temp: Isolette_Data_Model::Temp_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, monitor_status: Isolette_Data_Model::Status, interface_failure: Isolette_Data_Model::Failure_Flag_i, sv_lastCmd: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::Temp_i;
-pub uninterp spec fn mmi_action_monitor_status(lastCmd: Isolette_Data_Model::On_Off, upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, upper_alarm_temp: Isolette_Data_Model::Temp_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, monitor_status: Isolette_Data_Model::Status, interface_failure: Isolette_Data_Model::Failure_Flag_i, sv_lastCmd: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::Status;
-pub uninterp spec fn mmi_action_interface_failure(lastCmd: Isolette_Data_Model::On_Off, upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, upper_alarm_temp: Isolette_Data_Model::Temp_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, monitor_status: Isolette_Data_Model::Status, interface_failure: Isolette_Data_Model::Failure_Flag_i, sv_lastCmd: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::Failure_Flag_i;
-pub uninterp spec fn mmi_action_sv_lastCmd(lastCmd: Isolette_Data_Model::On_Off, upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, upper_alarm_temp: Isolette_Data_Model::Temp_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, monitor_status: Isolette_Data_Model::Status, interface_failure: Isolette_Data_Model::Failure_Flag_i, sv_lastCmd: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::On_Off;
-pub uninterp spec fn mmi_action_lastCmd(lastCmd: Isolette_Data_Model::On_Off, upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, upper_alarm_temp: Isolette_Data_Model::Temp_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, monitor_status: Isolette_Data_Model::Status, interface_failure: Isolette_Data_Model::Failure_Flag_i, sv_lastCmd: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::On_Off;
+pub uninterp spec fn mmi_action_upper_alarm_temp(lastCmd: Isolette_Data_Model::On_Off, upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, upper_alarm_temp: Isolette_Data_Model::Temp_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, monitor_status: Isolette_Data_Model::Status, interface_failure: Isolette_Data_Model::Failure_Flag_i) -> Isolette_Data_Model::Temp_i;
+pub uninterp spec fn mmi_action_lower_alarm_temp(lastCmd: Isolette_Data_Model::On_Off, upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, upper_alarm_temp: Isolette_Data_Model::Temp_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, monitor_status: Isolette_Data_Model::Status, interface_failure: Isolette_Data_Model::Failure_Flag_i) -> Isolette_Data_Model::Temp_i;
+pub uninterp spec fn mmi_action_monitor_status(lastCmd: Isolette_Data_Model::On_Off, upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, upper_alarm_temp: Isolette_Data_Model::Temp_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, monitor_status: Isolette_Data_Model::Status, interface_failure: Isolette_Data_Model::Failure_Flag_i) -> Isolette_Data_Model::Status;
+pub uninterp spec fn mmi_action_interface_failure(lastCmd: Isolette_Data_Model::On_Off, upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, upper_alarm_temp: Isolette_Data_Model::Temp_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, monitor_status: Isolette_Data_Model::Status, interface_failure: Isolette_Data_Model::Failure_Flag_i) -> Isolette_Data_Model::Failure_Flag_i;
+pub uninterp spec fn mmi_action_lastCmd(lastCmd: Isolette_Data_Model::On_Off, upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, upper_alarm_temp: Isolette_Data_Model::Temp_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, monitor_status: Isolette_Data_Model::Status, interface_failure: Isolette_Data_Model::Failure_Flag_i) -> Isolette_Data_Model::On_Off;
 
 /** "MMI fires": every written field is determined by the read scope;
   * everything else is framed.
   */
 pub open spec fn mmi_fire(pre: SystemState, post: SystemState) -> bool
 {
-  post.upper_alarm_temp == mmi_action_upper_alarm_temp(pre.mmi_lastCmd, pre.upper_alarm_tempWstatus, pre.lower_alarm_tempWstatus, pre.current_tempWstatus, pre.monitor_mode, pre.upper_alarm_temp, pre.lower_alarm_temp, pre.monitor_status, pre.mon_interface_failure, pre.mmi_sv_lastCmd)
-  && post.lower_alarm_temp == mmi_action_lower_alarm_temp(pre.mmi_lastCmd, pre.upper_alarm_tempWstatus, pre.lower_alarm_tempWstatus, pre.current_tempWstatus, pre.monitor_mode, pre.upper_alarm_temp, pre.lower_alarm_temp, pre.monitor_status, pre.mon_interface_failure, pre.mmi_sv_lastCmd)
-  && post.monitor_status == mmi_action_monitor_status(pre.mmi_lastCmd, pre.upper_alarm_tempWstatus, pre.lower_alarm_tempWstatus, pre.current_tempWstatus, pre.monitor_mode, pre.upper_alarm_temp, pre.lower_alarm_temp, pre.monitor_status, pre.mon_interface_failure, pre.mmi_sv_lastCmd)
-  && post.mon_interface_failure == mmi_action_interface_failure(pre.mmi_lastCmd, pre.upper_alarm_tempWstatus, pre.lower_alarm_tempWstatus, pre.current_tempWstatus, pre.monitor_mode, pre.upper_alarm_temp, pre.lower_alarm_temp, pre.monitor_status, pre.mon_interface_failure, pre.mmi_sv_lastCmd)
-  && post.mmi_sv_lastCmd == mmi_action_sv_lastCmd(pre.mmi_lastCmd, pre.upper_alarm_tempWstatus, pre.lower_alarm_tempWstatus, pre.current_tempWstatus, pre.monitor_mode, pre.upper_alarm_temp, pre.lower_alarm_temp, pre.monitor_status, pre.mon_interface_failure, pre.mmi_sv_lastCmd)
-  && post.mmi_lastCmd == mmi_action_lastCmd(pre.mmi_lastCmd, pre.upper_alarm_tempWstatus, pre.lower_alarm_tempWstatus, pre.current_tempWstatus, pre.monitor_mode, pre.upper_alarm_temp, pre.lower_alarm_temp, pre.monitor_status, pre.mon_interface_failure, pre.mmi_sv_lastCmd)
+  post.upper_alarm_temp == mmi_action_upper_alarm_temp(pre.mmi_lastCmd, pre.upper_alarm_tempWstatus, pre.lower_alarm_tempWstatus, pre.current_tempWstatus, pre.monitor_mode, pre.upper_alarm_temp, pre.lower_alarm_temp, pre.monitor_status, pre.mon_interface_failure)
+  && post.lower_alarm_temp == mmi_action_lower_alarm_temp(pre.mmi_lastCmd, pre.upper_alarm_tempWstatus, pre.lower_alarm_tempWstatus, pre.current_tempWstatus, pre.monitor_mode, pre.upper_alarm_temp, pre.lower_alarm_temp, pre.monitor_status, pre.mon_interface_failure)
+  && post.monitor_status == mmi_action_monitor_status(pre.mmi_lastCmd, pre.upper_alarm_tempWstatus, pre.lower_alarm_tempWstatus, pre.current_tempWstatus, pre.monitor_mode, pre.upper_alarm_temp, pre.lower_alarm_temp, pre.monitor_status, pre.mon_interface_failure)
+  && post.mon_interface_failure == mmi_action_interface_failure(pre.mmi_lastCmd, pre.upper_alarm_tempWstatus, pre.lower_alarm_tempWstatus, pre.current_tempWstatus, pre.monitor_mode, pre.upper_alarm_temp, pre.lower_alarm_temp, pre.monitor_status, pre.mon_interface_failure)
+  && post.mmi_lastCmd == mmi_action_lastCmd(pre.mmi_lastCmd, pre.upper_alarm_tempWstatus, pre.lower_alarm_tempWstatus, pre.current_tempWstatus, pre.monitor_mode, pre.upper_alarm_temp, pre.lower_alarm_temp, pre.monitor_status, pre.mon_interface_failure)
   && mmi_global_write_frame(pre, post)
 }
 
 // -- Isolette_Single_Sensor_Instance.thermostat.mt.ma.ma --
 
-pub uninterp spec fn ma_action_alarm_control(lastCmd: Isolette_Data_Model::On_Off, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, upper_alarm_temp: Isolette_Data_Model::Temp_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, alarm_control: Isolette_Data_Model::On_Off, sv_lastCmd: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::On_Off;
-pub uninterp spec fn ma_action_sv_lastCmd(lastCmd: Isolette_Data_Model::On_Off, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, upper_alarm_temp: Isolette_Data_Model::Temp_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, alarm_control: Isolette_Data_Model::On_Off, sv_lastCmd: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::On_Off;
-pub uninterp spec fn ma_action_lastCmd(lastCmd: Isolette_Data_Model::On_Off, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, upper_alarm_temp: Isolette_Data_Model::Temp_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, alarm_control: Isolette_Data_Model::On_Off, sv_lastCmd: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::On_Off;
+pub uninterp spec fn ma_action_alarm_control(lastCmd: Isolette_Data_Model::On_Off, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, upper_alarm_temp: Isolette_Data_Model::Temp_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, alarm_control: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::On_Off;
+pub uninterp spec fn ma_action_lastCmd(lastCmd: Isolette_Data_Model::On_Off, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, lower_alarm_temp: Isolette_Data_Model::Temp_i, upper_alarm_temp: Isolette_Data_Model::Temp_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, alarm_control: Isolette_Data_Model::On_Off) -> Isolette_Data_Model::On_Off;
 
 /** "MA fires": every written field is determined by the read scope;
   * everything else is framed.
   */
 pub open spec fn ma_fire(pre: SystemState, post: SystemState) -> bool
 {
-  post.alarm_control == ma_action_alarm_control(pre.ma_lastCmd, pre.current_tempWstatus, pre.lower_alarm_temp, pre.upper_alarm_temp, pre.monitor_mode, pre.alarm_control, pre.ma_sv_lastCmd)
-  && post.ma_sv_lastCmd == ma_action_sv_lastCmd(pre.ma_lastCmd, pre.current_tempWstatus, pre.lower_alarm_temp, pre.upper_alarm_temp, pre.monitor_mode, pre.alarm_control, pre.ma_sv_lastCmd)
-  && post.ma_lastCmd == ma_action_lastCmd(pre.ma_lastCmd, pre.current_tempWstatus, pre.lower_alarm_temp, pre.upper_alarm_temp, pre.monitor_mode, pre.alarm_control, pre.ma_sv_lastCmd)
+  post.alarm_control == ma_action_alarm_control(pre.ma_lastCmd, pre.current_tempWstatus, pre.lower_alarm_temp, pre.upper_alarm_temp, pre.monitor_mode, pre.alarm_control)
+  && post.ma_lastCmd == ma_action_lastCmd(pre.ma_lastCmd, pre.current_tempWstatus, pre.lower_alarm_temp, pre.upper_alarm_temp, pre.monitor_mode, pre.alarm_control)
   && ma_global_write_frame(pre, post)
 }
 
 // -- Isolette_Single_Sensor_Instance.thermostat.mt.mmm.mmm --
 
-pub uninterp spec fn mmm_action_monitor_mode(lastMonitorMode: Isolette_Data_Model::Monitor_Mode, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, interface_failure: Isolette_Data_Model::Failure_Flag_i, internal_failure: Isolette_Data_Model::Failure_Flag_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, sv_lastMonitorMode: Isolette_Data_Model::Monitor_Mode) -> Isolette_Data_Model::Monitor_Mode;
-pub uninterp spec fn mmm_action_sv_lastMonitorMode(lastMonitorMode: Isolette_Data_Model::Monitor_Mode, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, interface_failure: Isolette_Data_Model::Failure_Flag_i, internal_failure: Isolette_Data_Model::Failure_Flag_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, sv_lastMonitorMode: Isolette_Data_Model::Monitor_Mode) -> Isolette_Data_Model::Monitor_Mode;
-pub uninterp spec fn mmm_action_lastMonitorMode(lastMonitorMode: Isolette_Data_Model::Monitor_Mode, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, interface_failure: Isolette_Data_Model::Failure_Flag_i, internal_failure: Isolette_Data_Model::Failure_Flag_i, monitor_mode: Isolette_Data_Model::Monitor_Mode, sv_lastMonitorMode: Isolette_Data_Model::Monitor_Mode) -> Isolette_Data_Model::Monitor_Mode;
+pub uninterp spec fn mmm_action_monitor_mode(lastMonitorMode: Isolette_Data_Model::Monitor_Mode, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, interface_failure: Isolette_Data_Model::Failure_Flag_i, internal_failure: Isolette_Data_Model::Failure_Flag_i, monitor_mode: Isolette_Data_Model::Monitor_Mode) -> Isolette_Data_Model::Monitor_Mode;
+pub uninterp spec fn mmm_action_lastMonitorMode(lastMonitorMode: Isolette_Data_Model::Monitor_Mode, current_tempWstatus: Isolette_Data_Model::TempWstatus_i, interface_failure: Isolette_Data_Model::Failure_Flag_i, internal_failure: Isolette_Data_Model::Failure_Flag_i, monitor_mode: Isolette_Data_Model::Monitor_Mode) -> Isolette_Data_Model::Monitor_Mode;
 
 /** "MMM fires": every written field is determined by the read scope;
   * everything else is framed.
   */
 pub open spec fn mmm_fire(pre: SystemState, post: SystemState) -> bool
 {
-  post.monitor_mode == mmm_action_monitor_mode(pre.lastMonitorMode, pre.current_tempWstatus, pre.mon_interface_failure, pre.mon_internal_failure, pre.monitor_mode, pre.sv_lastMonitorMode)
-  && post.sv_lastMonitorMode == mmm_action_sv_lastMonitorMode(pre.lastMonitorMode, pre.current_tempWstatus, pre.mon_interface_failure, pre.mon_internal_failure, pre.monitor_mode, pre.sv_lastMonitorMode)
-  && post.lastMonitorMode == mmm_action_lastMonitorMode(pre.lastMonitorMode, pre.current_tempWstatus, pre.mon_interface_failure, pre.mon_internal_failure, pre.monitor_mode, pre.sv_lastMonitorMode)
+  post.monitor_mode == mmm_action_monitor_mode(pre.lastMonitorMode, pre.current_tempWstatus, pre.mon_interface_failure, pre.mon_internal_failure, pre.monitor_mode)
+  && post.lastMonitorMode == mmm_action_lastMonitorMode(pre.lastMonitorMode, pre.current_tempWstatus, pre.mon_interface_failure, pre.mon_internal_failure, pre.monitor_mode)
   && mmm_global_write_frame(pre, post)
 }
 
@@ -199,50 +189,6 @@ pub open spec fn hs_fire(pre: SystemState, post: SystemState) -> bool
 {
   post.heat_out == hs_action_heat_out(pre.heat_control, pre.heat_out)
   && hs_global_write_frame(pre, post)
-}
-
-// -- Isolette_Single_Sensor_Instance.userland_monitor_process.userland_monitor_thread --
-
-
-/** "USERLAND_MONITOR_THREAD fires": every written field is determined by the read scope;
-  * everything else is framed.
-  */
-pub open spec fn userland_monitor_thread_fire(pre: SystemState, post: SystemState) -> bool
-{
-  userland_monitor_thread_global_write_frame(pre, post)
-}
-
-// -- Isolette_Single_Sensor_Instance.test_controller_process.test_controller_thread --
-
-
-/** "TEST_CONTROLLER_THREAD fires": every written field is determined by the read scope;
-  * everything else is framed.
-  */
-pub open spec fn test_controller_thread_fire(pre: SystemState, post: SystemState) -> bool
-{
-  test_controller_thread_global_write_frame(pre, post)
-}
-
-// -- Isolette_Single_Sensor_Instance.gumbo_monitor_process.gumbo_monitor_thread --
-
-
-/** "GUMBO_MONITOR_THREAD fires": every written field is determined by the read scope;
-  * everything else is framed.
-  */
-pub open spec fn gumbo_monitor_thread_fire(pre: SystemState, post: SystemState) -> bool
-{
-  gumbo_monitor_thread_global_write_frame(pre, post)
-}
-
-// -- Isolette_Single_Sensor_Instance.sys_nominal_monitor_process.sys_nominal_monitor_thread --
-
-
-/** "SYS_NOMINAL_MONITOR_THREAD fires": every written field is determined by the read scope;
-  * everything else is framed.
-  */
-pub open spec fn sys_nominal_monitor_thread_fire(pre: SystemState, post: SystemState) -> bool
-{
-  sys_nominal_monitor_thread_global_write_frame(pre, post)
 }
 
 } // verus!

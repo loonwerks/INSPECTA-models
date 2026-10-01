@@ -191,15 +191,4 @@ pub open spec fn hs_fire(pre: SystemState, post: SystemState) -> bool
   && hs_global_write_frame(pre, post)
 }
 
-// -- Isolette_Single_Sensor_Instance.domain_monitor_process.domain_monitor_thread --
-
-
-/** "DOMAIN_MONITOR_THREAD fires": every written field is determined by the read scope;
-  * everything else is framed.
-  */
-pub open spec fn domain_monitor_thread_fire(pre: SystemState, post: SystemState) -> bool
-{
-  domain_monitor_thread_global_write_frame(pre, post)
-}
-
 } // verus!

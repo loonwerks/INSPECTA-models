@@ -52,7 +52,9 @@ pub enum Thread {
 }
 
 /// How the checks read ports and state variables.  Each getter returns what the
-/// monitors' API getter of the same name returns.
+/// monitors' API getter of the same name returns (a `get_recv_` alias: what the getter it
+/// latches returns), except for a pure event port: its getter is `Option` of the empty
+/// payload, as GUMBOX reads it, where the API's is `bool`.
 pub trait SystemView {
   fn get_thermostat_rt_mri_mri_displayed_temp(&mut self) -> Isolette_Data_Model::Temp_i;
   fn get_thermostat_rt_mri_mri_interface_failure(&mut self) -> Isolette_Data_Model::Failure_Flag_i;
@@ -79,6 +81,25 @@ pub trait SystemView {
   fn get_thermostat_mt_ma_ma_alarm_control(&mut self) -> Isolette_Data_Model::On_Off;
   fn get_thermostat_mt_mmm_mmm_sv_lastMonitorMode(&mut self) -> Isolette_Data_Model::Monitor_Mode;
   fn get_thermostat_mt_dmf_dmf_internal_failure(&mut self) -> Isolette_Data_Model::Failure_Flag_i;
+
+  /// Called before the reads of one check: `Some(t)` for a check of thread `t`'s
+  /// contract, `None` for a system assertion.  A view whose reads depend on who is
+  /// reading (the test controller's event-port cursors) switches on it, and it
+  /// clears `missing`.
+  fn focus(&mut self, _t: Option<Thread>) {}
+
+  /// Whether a read since the last `focus` found a region that was never written, so
+  /// the value it returned describes nothing and the check is skipped.
+  fn missing(&self) -> bool { false }
+
+  /// Called after `focus(None)` before a system assertion: the index of the composition
+  /// it belongs to.  Each composition has its own frame (they need not end at the same
+  /// completion), and a view that keeps per-frame values answers for that one.
+  fn focus_system(&mut self, _composition: usize) {}
+
+  /// Composition `composition`'s frame is over, and its next one starts: from here its
+  /// assertions see only events that arrive in the new frame.
+  fn frame_ended(&mut self, _composition: usize) {}
 }
 
 /// A check's outcome worth reporting.
@@ -90,6 +111,8 @@ pub enum Event<'a> {
   CepPostSkipped { thread: &'static str },
   /// The dispatch's CEP_Pre failed and excuse_post_on_failed_pre is set.
   CepPostExcused { thread: &'static str },
+  /// A value the check reads was never written (`SystemView::missing`).
+  CheckSkipped { thread: &'static str, check: &'static str },
   SysAssertViolation { property: &'static str, point: &'static str },
   ScheduleNoTransition { ch: u32, timeslice: usize },
   ScheduleNoEnd { ready: u64 },

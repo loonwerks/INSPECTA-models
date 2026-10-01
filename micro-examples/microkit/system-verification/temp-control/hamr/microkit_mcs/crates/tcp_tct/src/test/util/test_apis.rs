@@ -97,30 +97,6 @@ pub fn get_fanCmd() -> Option<TempControl_SysVerif::FanCmd>
   return extern_api::OUT_fanCmd.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
-/// getter for OUT DataPort
-pub fn get_sv_currentSetPoint() -> TempControl_SysVerif::SetPoint
-{
-  return extern_api::OUT_sv_currentSetPoint.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
-}
-
-/// getter for OUT DataPort
-pub fn get_sv_currentFanState() -> TempControl_SysVerif::FanCmd
-{
-  return extern_api::OUT_sv_currentFanState.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
-}
-
-/// getter for OUT DataPort
-pub fn get_sv_latestTemp() -> TempControl_SysVerif::Temperature
-{
-  return extern_api::OUT_sv_latestTemp.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
-}
-
-/// getter for OUT DataPort
-pub fn get_sv_fanError() -> bool
-{
-  return extern_api::OUT_sv_fanError.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
-}
-
 /// getter for GUMBO State Variable
 pub fn get_currentSetPoint() -> TempControl_SysVerif::SetPoint
 {

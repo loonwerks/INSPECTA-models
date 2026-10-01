@@ -62,13 +62,61 @@ pub fn line(args: core::fmt::Arguments) {
 }
 
 static mut CURRENT_FAILED: bool = false;
+static mut FAIL_PRINTED: bool = false;
+/// Whether a test body is running, so a failure has a test to be charged to.
+static mut IN_TEST: bool = false;
 static mut SUITE_DONE: bool = false;
 
 /// Record a failed assertion.  Called by the sys_assert macros, which return from
 /// the test body immediately afterwards.
 pub fn fail(file: &str, line_no: u32, what: &str) {
-  unsafe { CURRENT_FAILED = true; }
-  line(format_args!("TEST | FAIL  {}:{} {}", file, line_no, what));
+  fail_with(format_args!("{}:{} {}", file, line_no, what));
+}
+
+/// A command that did not do what it was asked fails the running test
+/// (TestScheduler-design.md, D10): a thread that overran its slot's watchdog, a
+/// `run_to_*` target never reached, or a command the scheduler rejected.  A test that
+/// carried on would be testing something other than what it says.  Between tests --
+/// the runner's own normalization -- there is no test to fail, so it is reported as
+/// INFO; a FAIL line there would break the host driver's count.
+pub fn command_outcome(command: &str, flags: u32) {
+  // Stop dispatches nothing, so nothing about it can fail: an overrun still outstanding
+  // when it is issued was already charged to the command that met it
+  if command == "stop" {
+    return;
+  }
+  let why = if flags & api::FLAG_OVERRUN != 0 {
+    "a thread overran its slot's watchdog, or is still running after one"
+  } else if flags & api::FLAG_UNREACHABLE != 0 {
+    "its target was not reached"
+  } else if flags & api::FLAG_BAD_COMMAND != 0 {
+    "the scheduler rejected it"
+  } else if flags & api::FLAG_STOPPED != 0 {
+    // STOPPED is sticky: after a test calls api::stop() nothing is dispatched again, and
+    // every later test would run against a frozen system without noticing
+    "the session was stopped (api::stop), so nothing runs"
+  } else {
+    return;
+  };
+  if unsafe { IN_TEST } {
+    fail_with(format_args!("{} failed: {} (flags 0x{:x})", command, why, flags));
+  } else {
+    line(format_args!("TEST | INFO  between tests, {} failed: {} (flags 0x{:x})", command, why, flags));
+  }
+}
+
+/// Fail the running test.  Only its first failure prints a `TEST | FAIL` line -- the
+/// host driver counts those against DONE's failed= -- and later ones print as INFO.
+pub fn fail_with(args: core::fmt::Arguments) {
+  unsafe {
+    CURRENT_FAILED = true;
+    if FAIL_PRINTED {
+      line(format_args!("TEST | INFO  also failed: {}", args));
+    } else {
+      FAIL_PRINTED = true;
+      line(format_args!("TEST | FAIL  {}", args));
+    }
+  }
 }
 
 pub fn run_all() {
@@ -81,25 +129,78 @@ pub fn run_all() {
     SUITE_DONE = true;
   }
 
+  // Every thread has initialized and none has computed: check the initialization
+  // guarantees.  Not part of any test; a violation shows as DONE init=failed.  Not
+  // when only listing: nothing runs.
+  if selection::flags() & selection::FLAG_LIST_ONLY == 0 {
+    crate::system_tests::observe::on_init();
+  }
+
   let filter = selection::filter();
+  let list_only = selection::flags() & selection::FLAG_LIST_ONLY != 0;
   let mut matched: u32 = 0;
   let mut passed: u32 = 0;
   let mut failed: u32 = 0;
+
+  // The test table (D17): every registered test, and whether this run selects it, so
+  // the host can discover what is runnable.
+  for (name, _) in crate::system_tests::tests::SYSTEM_TESTS {
+    if selection::selects(filter, name) {
+      line(format_args!("TEST | LIST  {}", name));
+    } else {
+      line(format_args!("TEST | LIST  {} (not selected)", name));
+    }
+  }
 
   for (name, body) in crate::system_tests::tests::SYSTEM_TESTS {
     if !selection::selects(filter, name) {
       continue;
     }
     matched += 1;
+    if list_only {
+      continue;
+    }
 
     // Normalize the schedule position so a step means the same thing in every
     // test.  Component state is NOT reset: tests are order-independent and
-    // establish their own preconditions.
-    let _ = api::run_to_slot(0);
+    // establish their own preconditions.  A thread that overruns meanwhile leaves the
+    // position on its slot; the command is repeated (the scheduler takes the late
+    // completion first), and a test that still would not start at the frame's start
+    // is failed rather than left to count its steps from somewhere else.
+    let mut st = api::run_to_slot(0);
+    let mut tries = 1;
+    while st.flags & api::FLAG_OVERRUN != 0 && tries < 4 {
+      st = api::run_to_slot(0);
+      tries += 1;
+    }
+    let stopped = st.flags & api::FLAG_STOPPED != 0;
+    // still overrun: at another slot, or on slot 0 itself -- which the position does
+    // not show, as it stays on the overran slot
+    let not_at_start = (st.current_timeslice != 0 || st.flags & api::FLAG_OVERRUN != 0) && !stopped;
 
-    unsafe { CURRENT_FAILED = false; }
+    unsafe {
+      CURRENT_FAILED = false;
+      FAIL_PRINTED = false;
+    }
     line(format_args!("TEST | BEGIN {}", name));
-    body();
+    unsafe { IN_TEST = true; }
+    // A test that cannot run as written is failed without running it: after api::stop()
+    // nothing is dispatched, so one that only injects and inspects would pass against a
+    // frozen system; one not at the frame's start would count its steps, and leave its
+    // injections, from somewhere else.
+    if stopped {
+      fail_with(format_args!("not run: the session was stopped (api::stop) by an earlier test, so nothing runs (flags 0x{:x})", st.flags));
+    } else if not_at_start {
+      fail_with(format_args!("not run: the test could not start at the frame's start: the schedule is at slot {}{} (flags 0x{:x})",
+        st.current_timeslice,
+        if st.flags & api::FLAG_OVERRUN != 0 { ", whose thread overran and has not completed" } else { "" },
+        st.flags));
+    } else {
+      crate::system_tests::observe::begin_test();
+      body();
+      crate::system_tests::observe::end_test();
+    }
+    unsafe { IN_TEST = false; }
 
     if unsafe { CURRENT_FAILED } {
       failed += 1;
@@ -111,21 +212,53 @@ pub fn run_all() {
 
   // The host driver treats a run without this line as a failure, whatever preceded
   // it -- that is what catches a hang, a panic, or a controller that never started.
-  // matched is what catches a filter that selected nothing.
-  line(format_args!("TEST | DONE  matched={} passed={} failed={}", matched, passed, failed));
+  // matched is what catches a filter that selected nothing, init= a violation of an
+  // initialization guarantee, which belongs to no test, and list=1 a run that only
+  // listed the tests.
+  line(format_args!("TEST | DONE  matched={} passed={} failed={} init={}{}", matched, passed, failed,
+    if crate::system_tests::observe::init_ok() { "ok" } else { "failed" }, if list_only { " list=1" } else { "" }));
 
   let _ = api::stop();
 }
 
 /// Declare the system tests.  Generates the bodies plus the registration table the
 /// runner walks; suites qualify the registered names, which is what gives the
-/// TESTS= filter its granularity.
+/// TESTS= filter its granularity.  Each suite is a module of its own (so a suite must
+/// not share its name with anything the file declares or imports).
+///
+/// A suite may switch contract checking for each of its tests, e.g.
+/// `suite fault_injection(gumbo = off) { .. }` (TestScheduler-design.md, D23); the
+/// keys are the model's layers, `gumbo` and `sysverif`, and the values `on` and `off`,
+/// so a typo -- or a layer the model does not have -- is a compile error.
 #[macro_export]
 macro_rules! system_tests {
-  ( $( suite $suite:ident { $( fn $name:ident () $body:block )* } )+ ) => {
-    $( $( fn $name() $body )* )+
+  // Suites are first normalized to `suite name [settings] { .. }`, so each suite's
+  // settings are a single token tree the per-test expansion below can repeat.
+  ( suite $( $t:tt )* ) => {
+    $crate::system_tests!(@norm [] suite $( $t )*);
+  };
+  (@norm [ $( $done:tt )* ]) => {
+    $crate::system_tests!(@emit $( $done )*);
+  };
+  (@norm [ $( $done:tt )* ] suite $s:ident ( $( $set:tt )* ) { $( $b:tt )* } $( $rest:tt )*) => {
+    $crate::system_tests!(@norm [ $( $done )* suite $s [ $( $set )* ] { $( $b )* } ] $( $rest )*);
+  };
+  (@norm [ $( $done:tt )* ] suite $s:ident { $( $b:tt )* } $( $rest:tt )*) => {
+    $crate::system_tests!(@norm [ $( $done )* suite $s [] { $( $b )* } ] $( $rest )*);
+  };
+  // Each suite is a module, so two suites may each have a test of the same name; it sees
+  // everything the enclosing file declares or imports.
+  (@emit $( suite $suite:ident $settings:tt { $( fn $name:ident () $body:block )* } )+ ) => {
+    $(
+      #[allow(non_snake_case)]
+      mod $suite {
+        #[allow(unused_imports)]
+        use super::*;
+        $( pub(super) fn $name() { $crate::suite_settings!($settings); $body } )*
+      }
+    )+
     pub static SYSTEM_TESTS: &[(&str, fn())] = &[
-      $( $( (concat!(stringify!($suite), "::", stringify!($name)), $name as fn()), )* )+
+      $( $( (concat!(stringify!($suite), "::", stringify!($name)), $suite::$name as fn()), )* )+
     ];
   };
   ( $( fn $name:ident () $body:block )+ ) => {
@@ -133,6 +266,16 @@ macro_rules! system_tests {
     pub static SYSTEM_TESTS: &[(&str, fn())] = &[
       $( (stringify!($name), $name as fn()), )+
     ];
+  };
+}
+
+/// Applies a suite's settings at the start of each of its tests; see `system_tests!`.
+#[doc(hidden)]
+#[macro_export]
+macro_rules! suite_settings {
+  ( [] ) => {};
+  ( [ $( $k:ident = $v:ident ),* $(,)? ] ) => {
+    $( $crate::system_tests::observe::suite_setting::$k($crate::system_tests::observe::suite_setting::$v); )*
   };
 }
 

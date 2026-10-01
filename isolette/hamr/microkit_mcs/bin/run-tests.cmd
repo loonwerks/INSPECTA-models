@@ -22,13 +22,26 @@ import org.sireum._
 
 // Runs the system tests under QEMU and turns the serial output into an exit code.
 //
-// Usage:  run-tests.cmd [<test filter>]
+// Usage:  run-tests.cmd [--list] [<test filter>]
+//
+// --list builds an image that prints the test table and runs nothing (LIST_TESTS=1).
 //
 // The filter is a substring match against the qualified suite::test name, so
 // "nominal::" selects a suite and "fan_turns" selects a single test.
 
 val microkitDir: Os.Path = Os.slashDir.up
-val filter: String = if (Os.cliArgs.nonEmpty) Os.cliArgs(0) else ""
+val listOnly: B = Os.cliArgs.nonEmpty && Os.cliArgs(0) == "--list"
+val filterArgs: ISZ[String] = if (listOnly) ops.ISZOps(Os.cliArgs).drop(1) else Os.cliArgs
+val filter: String = if (filterArgs.nonEmpty) filterArgs(0) else ""
+val listArg: String = if (listOnly) "LIST_TESTS=1" else "LIST_TESTS=0"
+
+// make expands a `$` in a variable's value, in the rebuild hash and in what it hands the
+// build, and the hash is echoed, which reads `\`: a filter holding either would select
+// something other than what was typed.  No test name can contain them.
+if (ops.StringOps(filter).contains("$") || ops.StringOps(filter).contains("\\")) {
+  eprintln(s"FAILED: a test filter cannot contain '$$' or '\\' (got '$filter')")
+  Os.exit(1)
+}
 
 // sddf_dprintf is compiled out unless CONFIG_DEBUG_BUILD is set, which would remove
 // every TEST line and make a perfectly good run look like a failure.  Force it.
@@ -37,9 +50,10 @@ val commonArgs: ISZ[String] = ISZ(
   "CONFIG=test_scheduler.mk",
   "MICROKIT_CONFIG=debug",
   "RUST_MAKE_TARGET=build-release",
-  s"TESTS=$filter")
+  s"TESTS=$filter",
+  listArg)
 
-println(s"Building $microkitDir (TESTS='$filter') ...")
+println(s"Building $microkitDir (TESTS='$filter', $listArg) ...")
 val build = Os.proc(commonArgs).console.run()
 if (!build.ok) {
   eprintln("Build failed")
@@ -52,7 +66,9 @@ println("Running under QEMU ...")
 // guest goes quiet.  Waiting for the timeout would make every successful run cost
 // the full bound, so watch the log and stop QEMU as soon as DONE appears.  Piping
 // into `sed /DONE/q` does not work here -- with the guest idle there is no further
-// write to raise SIGPIPE -- so the process group has to be killed explicitly.
+// write to raise SIGPIPE -- so the process group has to be killed explicitly.  The
+// console writes a line a character at a time, so DONE can be seen before the rest of
+// its line is out: QEMU is given another second before it is stopped.
 val logFile: Os.Path = Os.temp()
 
 val driver: String =
@@ -61,7 +77,7 @@ val driver: String =
       |mpid=$$!
       |waited=0
       |while kill -0 $$mpid 2>/dev/null; do
-      |  grep -q 'TEST | DONE' "$$LOG" && break
+      |  grep -q 'TEST | DONE' "$$LOG" && { sleep 1; break; }
       |  [ $$waited -ge $$TIMEOUT ] && break
       |  sleep 1
       |  waited=$$((waited + 1))
@@ -81,6 +97,10 @@ logFile.removeAll()
 var matched: Z = -1
 var passed: Z = -1
 var failed: Z = -1
+// an initialization guarantee is taken as met only on DONE's own word (init=ok): a
+// DONE line cut short must not pass a run whose initialization failed
+var initOk: B = F
+var listed: B = F
 var sawDone: B = F
 var seenPass: Z = 0
 var seenFail: Z = 0
@@ -93,11 +113,11 @@ for (line <- ops.StringOps(normalized).split((c: C) => c == '\n')) {
   val l = ops.StringOps(line)
   if (l.startsWith("TEST | ")) {
     println(line)
-    if (l.contains("TEST | PASS")) {
+    if (l.startsWith("TEST | PASS")) {
       seenPass = seenPass + 1
-    } else if (l.contains("TEST | FAIL")) {
+    } else if (l.startsWith("TEST | FAIL")) {
       seenFail = seenFail + 1
-    } else if (l.contains("TEST | DONE")) {
+    } else if (l.startsWith("TEST | DONE")) {
       sawDone = T
       for (tok <- ops.StringOps(line).split((c: C) => c == ' ')) {
         val t = ops.StringOps(tok)
@@ -107,6 +127,10 @@ for (line <- ops.StringOps(normalized).split((c: C) => c == '\n')) {
           passed = Z(t.substring(7, tok.size)).getOrElse(-1)
         } else if (t.startsWith("failed=")) {
           failed = Z(t.substring(7, tok.size)).getOrElse(-1)
+        } else if (t.startsWith("init=")) {
+          initOk = t.substring(5, tok.size) == "ok"
+        } else if (t.startsWith("list=")) {
+          listed = t.substring(5, tok.size) == "1"
         }
       }
     }
@@ -122,20 +146,40 @@ if (!sawDone) {
   Os.exit(1)
 }
 
+// A DONE line cut short before its counts: output was lost, whatever the filter was.
+if (matched < 0 || passed < 0 || failed < 0) {
+  eprintln("FAILED: the 'TEST | DONE' line is incomplete (matched=, passed= or failed= missing); output was lost")
+  Os.exit(1)
+}
+
 // A filter that selects nothing must not pass: that is how a typo turns a job green.
-if (matched <= 0) {
+if (matched == 0) {
   eprintln(s"FAILED: the filter '$filter' matched no tests")
   Os.exit(1)
 }
 
-// The counts and the per-test lines have to agree, or output was lost.
-if (passed != seenPass || failed != seenFail) {
-  eprintln(s"FAILED: DONE reports passed=$passed failed=$failed but $seenPass PASS and $seenFail FAIL lines were seen; output was lost")
+// A listing runs nothing; the table above is its output.
+if (listed) {
+  println(s"OK: listed $matched test(s) matching '$filter'; none were run")
+  Os.exit(0)
+}
+
+// The counts and the per-test lines have to agree, or output was lost -- and every
+// matched test was run, or DONE was cut short (a listing's list=1 among what was lost).
+if (passed != seenPass || failed != seenFail || passed + failed != matched) {
+  eprintln(s"FAILED: DONE reports matched=$matched passed=$passed failed=$failed but $seenPass PASS and $seenFail FAIL lines were seen; output was lost")
   Os.exit(1)
 }
 
 if (failed != 0) {
   eprintln(s"FAILED: $failed of $matched tests failed")
+  Os.exit(1)
+}
+
+// An initialization guarantee was violated before any test ran (see the VIOLATION
+// lines above).  No test is charged with it, so it has to fail the run here.
+if (!initOk) {
+  eprintln("FAILED: an initialization guarantee was violated, or DONE's init= was lost (DONE init=failed or missing)")
   Os.exit(1)
 }
 

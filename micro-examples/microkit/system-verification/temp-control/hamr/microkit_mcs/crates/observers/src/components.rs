@@ -8,6 +8,7 @@ use data::*;
 use crate::{Event, SystemView, ViolationSink};
 use crate::gumbox::tcp_tct_containers::*;
 use crate::gumbox::fp_ft_containers::*;
+use crate::gumbox::tsp_tst_containers::*;
 
 pub struct ComponentContracts {
   /// When set, a dispatch whose CEP_Pre failed is excused from its CEP_Post
@@ -17,6 +18,8 @@ pub struct ComponentContracts {
   pub excuse_post_on_failed_pre: bool,
   pre_tcp_tct: Option<PreState_tcp_tct>,
   pre_ok_tcp_tct: bool,
+  pre_tsp_tst: Option<PreState_tsp_tst>,
+  pre_ok_tsp_tst: bool,
 }
 
 impl ComponentContracts {
@@ -25,6 +28,8 @@ impl ComponentContracts {
       excuse_post_on_failed_pre: false,
       pre_tcp_tct: None,
       pre_ok_tcp_tct: true,
+      pre_tsp_tst: None,
+      pre_ok_tsp_tst: true,
     }
   }
 
@@ -32,6 +37,7 @@ impl ComponentContracts {
   /// before any has computed.
   pub fn on_init<V: SystemView, S: ViolationSink>(&mut self, s: &mut V, out: &mut S) {
     {
+      s.focus(Some(crate::Thread::tcp_tct));
       let post_tcp_tct = PostState_tcp_tct {
         currentFanState: s.get_tcp_tct_sv_currentFanState(),
         currentSetPoint: s.get_tcp_tct_sv_currentSetPoint(),
@@ -39,9 +45,23 @@ impl ComponentContracts {
         latestTemp: s.get_tcp_tct_sv_latestTemp(),
         api_fanCmd: s.get_tcp_tct_fanCmd(),
       };
-      if !crate::gumbox::tcp_tct_GUMBOX::initialize_IEP_Post(
+      if s.missing() {
+        out.report(crate::Event::CheckSkipped { thread: "tcp_tct", check: "IEP_Post" });
+      } else if !crate::gumbox::tcp_tct_GUMBOX::initialize_IEP_Post(
         post_tcp_tct.currentFanState, post_tcp_tct.currentSetPoint, post_tcp_tct.fanError, post_tcp_tct.latestTemp, post_tcp_tct.api_fanCmd) {
         out.report(crate::Event::IepPostViolation { thread: "tcp_tct", post: &post_tcp_tct });
+      }
+    }
+    {
+      s.focus(Some(crate::Thread::tsp_tst));
+      let post_tsp_tst = PostState_tsp_tst {
+        api_currentTemp: s.get_tsp_tst_currentTemp(),
+      };
+      if s.missing() {
+        out.report(crate::Event::CheckSkipped { thread: "tsp_tst", check: "IEP_Post" });
+      } else if !crate::gumbox::tsp_tst_GUMBOX::initialize_IEP_Post(
+        post_tsp_tst.api_currentTemp) {
+        out.report(crate::Event::IepPostViolation { thread: "tsp_tst", post: &post_tsp_tst });
       }
     }
   }
@@ -51,6 +71,7 @@ impl ComponentContracts {
   pub fn on_complete<V: SystemView, S: ViolationSink>(&mut self, prev: crate::Thread, s: &mut V, out: &mut S) {
     match prev {
       crate::Thread::tcp_tct => {
+        s.focus(Some(crate::Thread::tcp_tct));
         let post = PostState_tcp_tct {
           currentFanState: s.get_tcp_tct_sv_currentFanState(),
           currentSetPoint: s.get_tcp_tct_sv_currentSetPoint(),
@@ -58,7 +79,9 @@ impl ComponentContracts {
           latestTemp: s.get_tcp_tct_sv_latestTemp(),
           api_fanCmd: s.get_tcp_tct_fanCmd(),
         };
-        if let Some(pre) = &self.pre_tcp_tct {
+        if s.missing() {
+          out.report(crate::Event::CheckSkipped { thread: "tcp_tct", check: "CEP_Post" });
+        } else if let Some(pre) = &self.pre_tcp_tct {
           if self.excuse_post_on_failed_pre && !self.pre_ok_tcp_tct {
             out.report(crate::Event::CepPostExcused { thread: "tcp_tct" });
           } else if !crate::gumbox::tcp_tct_GUMBOX::compute_CEP_Post(
@@ -69,14 +92,41 @@ impl ComponentContracts {
           out.report(crate::Event::CepPostSkipped { thread: "tcp_tct" });
         }
       }
+      crate::Thread::tsp_tst => {
+        s.focus(Some(crate::Thread::tsp_tst));
+        let post = PostState_tsp_tst {
+          api_currentTemp: s.get_tsp_tst_currentTemp(),
+        };
+        if s.missing() {
+          out.report(crate::Event::CheckSkipped { thread: "tsp_tst", check: "CEP_Post" });
+        } else if let Some(pre) = &self.pre_tsp_tst {
+          if self.excuse_post_on_failed_pre && !self.pre_ok_tsp_tst {
+            out.report(crate::Event::CepPostExcused { thread: "tsp_tst" });
+          } else if !crate::gumbox::tsp_tst_GUMBOX::compute_CEP_Post(
+            post.api_currentTemp) {
+            out.report(crate::Event::CepPostViolation { thread: "tsp_tst", pre: pre, post: &post });
+          }
+        } else {
+          out.report(crate::Event::CepPostSkipped { thread: "tsp_tst" });
+        }
+      }
       _ => {}
     }
+  }
+
+  /// Drops every saved pre-state, so each thread's next completion is skipped rather
+  /// than checked against a dispatch it no longer describes -- after a dispatch went
+  /// unobserved, or a thread overran its slot.
+  pub fn forget(&mut self) {
+    self.pre_tcp_tct = None;
+    self.pre_tsp_tst = None;
   }
 
   /// `next` is about to be dispatched: save its pre-state and check its CEP_Pre.
   pub fn on_dispatch<V: SystemView, S: ViolationSink>(&mut self, next: crate::Thread, s: &mut V, out: &mut S) {
     match next {
       crate::Thread::tcp_tct => {
+        s.focus(Some(crate::Thread::tcp_tct));
         let pre = PreState_tcp_tct {
           In_currentFanState: s.get_tcp_tct_sv_currentFanState(),
           In_currentSetPoint: s.get_tcp_tct_sv_currentSetPoint(),
@@ -86,14 +136,33 @@ impl ComponentContracts {
           api_fanAck: s.get_fp_ft_fanAck(),
           api_setPoint: s.get_tcp_tct_setPoint(),
         };
-        if !crate::gumbox::tcp_tct_GUMBOX::compute_CEP_Pre(
-          pre.In_currentFanState, pre.In_currentSetPoint, pre.In_fanError, pre.In_latestTemp, pre.api_currentTemp, pre.api_fanAck, pre.api_setPoint) {
-          out.report(crate::Event::CepPreViolation { thread: "tcp_tct", pre: &pre });
-          self.pre_ok_tcp_tct = false;
+        if s.missing() {
+          // no pre-state to hold the completion to
+          out.report(crate::Event::CheckSkipped { thread: "tcp_tct", check: "CEP_Pre" });
+          self.pre_tcp_tct = None;
         } else {
-          self.pre_ok_tcp_tct = true;
+          if !crate::gumbox::tcp_tct_GUMBOX::compute_CEP_Pre(
+            pre.In_currentFanState, pre.In_currentSetPoint, pre.In_fanError, pre.In_latestTemp, pre.api_currentTemp, pre.api_fanAck, pre.api_setPoint) {
+            out.report(crate::Event::CepPreViolation { thread: "tcp_tct", pre: &pre });
+            self.pre_ok_tcp_tct = false;
+          } else {
+            self.pre_ok_tcp_tct = true;
+          }
+          self.pre_tcp_tct = Some(pre);
         }
-        self.pre_tcp_tct = Some(pre);
+      }
+      crate::Thread::tsp_tst => {
+        s.focus(Some(crate::Thread::tsp_tst));
+        let pre = PreState_tsp_tst {
+        };
+        if s.missing() {
+          // no pre-state to hold the completion to
+          out.report(crate::Event::CheckSkipped { thread: "tsp_tst", check: "CEP_Pre" });
+          self.pre_tsp_tst = None;
+        } else {
+          self.pre_ok_tsp_tst = true;
+          self.pre_tsp_tst = Some(pre);
+        }
       }
       _ => {}
     }

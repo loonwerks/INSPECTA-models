@@ -42,6 +42,8 @@ struct TestCommand {
   target_ch: u32,
   target_hp: u32,
   target_slot: u32,
+  observe: u32,
+  obs_ack: u32,
 }
 
 #[repr(C)]
@@ -52,6 +54,18 @@ pub struct TestStatus {
   pub hyperperiod_num: u32,
   pub last_dispatched_ch: u32,
   pub flags: u32,
+  /// The channel of the slot at current_timeslice.
+  pub next_ch: u32,
+  /// User-slot completions so far, observed or not.
+  pub completed_seq: u32,
+  /// Incremented at each observation park.
+  pub obs_seq: u32,
+}
+
+/// Whether commands park before each user dispatch for the contract checks: while any
+/// of them is tracked.
+fn observe_flag() -> u32 {
+  if crate::system_tests::observe::any_live() { 1 } else { 0 }
 }
 
 #[repr(C)]
@@ -68,8 +82,32 @@ const _: () = assert!(core::mem::size_of::<TestStatus>() <= TEST_REGION_SIZE);
 const _: () = assert!(core::mem::size_of::<TestSchedule>() <= TEST_REGION_SIZE);
 
 static mut NEXT_SEQ: u32 = 0;
+static mut LAST_OBS_SEQ: u32 = 0;
 
+/// Issues a command and waits for it; a command that did not do what it was asked fails
+/// the running test (see `harness::command_outcome`).
 fn issue(typ: u32, count: u32, target_ch: u32, target_hp: u32, target_slot: u32) -> TestStatus {
+  let st = exchange(typ, count, target_ch, target_hp, target_slot);
+  crate::system_tests::harness::command_outcome(command_name(typ), st.flags);
+  st
+}
+
+fn command_name(typ: u32) -> &'static str {
+  match typ {
+    CMD_SSTEP => "sstep",
+    CMD_HSTEP => "hstep",
+    CMD_RUN_TO_SLOT => "run_to_slot",
+    CMD_RUN_TO_HP => "run_to_hp",
+    CMD_RUN_TO_STATE => "run_to_state",
+    CMD_RUN_TO_THREAD => "run_to_thread",
+    CMD_INFO_STATE => "info_state",
+    CMD_INFO_SCHEDULE => "info_schedule",
+    CMD_STOP => "stop",
+    _ => "command",
+  }
+}
+
+fn exchange(typ: u32, count: u32, target_ch: u32, target_hp: u32, target_slot: u32) -> TestStatus {
   unsafe {
     let cmd = TEST_CMD_VADDR as *mut TestCommand;
     NEXT_SEQ = NEXT_SEQ.wrapping_add(1);
@@ -80,6 +118,7 @@ fn issue(typ: u32, count: u32, target_ch: u32, target_hp: u32, target_slot: u32)
     write_volatile(addr_of_mut!((*cmd).target_ch), target_ch);
     write_volatile(addr_of_mut!((*cmd).target_hp), target_hp);
     write_volatile(addr_of_mut!((*cmd).target_slot), target_slot);
+    write_volatile(addr_of_mut!((*cmd).observe), observe_flag());
 
     // Publish the body before the sequence number that advertises it.
     fence(Ordering::Release);
@@ -92,9 +131,27 @@ fn issue(typ: u32, count: u32, target_ch: u32, target_hp: u32, target_slot: u32)
     // schedule advances while it spins.  The load must be volatile: a plain read
     // is hoisted out of the loop and never observes the update.
     let status = TEST_STATUS_VADDR as *const TestStatus;
-    while read_volatile(addr_of!((*status).ack_seq)) != seq {}
+    loop {
+      if read_volatile(addr_of!((*status).ack_seq)) == seq {
+        break;
+      }
+      let obs = read_volatile(addr_of!((*status).obs_seq));
+      if obs != LAST_OBS_SEQ {
+        // The scheduler is parked before a dispatch: check, then let it go ahead.
+        fence(Ordering::Acquire);
+        LAST_OBS_SEQ = obs;
+        crate::system_tests::observe::at_park(&read_volatile(status));
+        fence(Ordering::Release);
+        write_volatile(addr_of_mut!((*cmd).obs_ack), obs);
+        test_controller_notify_scheduler();
+      }
+    }
     fence(Ordering::Acquire);
-    read_volatile(status)
+    let st = read_volatile(status);
+    // The command's last dispatch has completed, and no park follows it until the next
+    // command -- which may be after the test has ended.
+    crate::system_tests::observe::at_command_end(&st);
+    st
   }
 }
 

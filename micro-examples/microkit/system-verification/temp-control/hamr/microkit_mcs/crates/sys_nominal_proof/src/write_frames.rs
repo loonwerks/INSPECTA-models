@@ -19,24 +19,11 @@ pub open spec fn sensor_global_write_frame(pre: SystemState, post: SystemState) 
 {
   pre.setPoint == post.setPoint
   && pre.fanCmd == post.fanCmd
-  && pre.control_sv_currentSetPoint == post.control_sv_currentSetPoint
-  && pre.control_sv_currentFanState == post.control_sv_currentFanState
-  && pre.control_sv_latestTemp == post.control_sv_latestTemp
-  && pre.control_sv_fanError == post.control_sv_fanError
   && pre.sv_currentSetPoint == post.sv_currentSetPoint
   && pre.sv_currentFanState == post.sv_currentFanState
   && pre.sv_latestTemp == post.sv_latestTemp
   && pre.sv_fanError == post.sv_fanError
   && pre.fanAck == post.fanAck
-  && pre.userland_monitor_thread_tcp_tct_setPoint == post.userland_monitor_thread_tcp_tct_setPoint
-  && pre.userland_monitor_thread_sched_state == post.userland_monitor_thread_sched_state
-  && pre.userland_monitor_thread_sched_schedule == post.userland_monitor_thread_sched_schedule
-  && pre.gumbo_monitor_thread_tcp_tct_setPoint == post.gumbo_monitor_thread_tcp_tct_setPoint
-  && pre.gumbo_monitor_thread_sched_state == post.gumbo_monitor_thread_sched_state
-  && pre.gumbo_monitor_thread_sched_schedule == post.gumbo_monitor_thread_sched_schedule
-  && pre.sys_nominal_monitor_thread_tcp_tct_setPoint == post.sys_nominal_monitor_thread_tcp_tct_setPoint
-  && pre.sys_nominal_monitor_thread_sched_state == post.sys_nominal_monitor_thread_sched_state
-  && pre.sys_nominal_monitor_thread_sched_schedule == post.sys_nominal_monitor_thread_sched_schedule
 }
 
 /** SENSOR local write frame: the component may modify anything in its
@@ -47,7 +34,7 @@ pub open spec fn sensor_local_write_frame(pre: SystemState, post: SystemState) -
   true
 }
 
-/** CONTROL writes: fanCmd, control_sv_currentSetPoint, control_sv_currentFanState, control_sv_latestTemp, control_sv_fanError, sv_currentSetPoint, sv_currentFanState, sv_latestTemp, sv_fanError.
+/** CONTROL writes: fanCmd, sv_currentSetPoint, sv_currentFanState, sv_latestTemp, sv_fanError.
   * Everything else must be unchanged.
   */
 pub open spec fn control_global_write_frame(pre: SystemState, post: SystemState) -> bool
@@ -55,15 +42,6 @@ pub open spec fn control_global_write_frame(pre: SystemState, post: SystemState)
   pre.sensedTemp == post.sensedTemp
   && pre.setPoint == post.setPoint
   && pre.fanAck == post.fanAck
-  && pre.userland_monitor_thread_tcp_tct_setPoint == post.userland_monitor_thread_tcp_tct_setPoint
-  && pre.userland_monitor_thread_sched_state == post.userland_monitor_thread_sched_state
-  && pre.userland_monitor_thread_sched_schedule == post.userland_monitor_thread_sched_schedule
-  && pre.gumbo_monitor_thread_tcp_tct_setPoint == post.gumbo_monitor_thread_tcp_tct_setPoint
-  && pre.gumbo_monitor_thread_sched_state == post.gumbo_monitor_thread_sched_state
-  && pre.gumbo_monitor_thread_sched_schedule == post.gumbo_monitor_thread_sched_schedule
-  && pre.sys_nominal_monitor_thread_tcp_tct_setPoint == post.sys_nominal_monitor_thread_tcp_tct_setPoint
-  && pre.sys_nominal_monitor_thread_sched_state == post.sys_nominal_monitor_thread_sched_state
-  && pre.sys_nominal_monitor_thread_sched_schedule == post.sys_nominal_monitor_thread_sched_schedule
 }
 
 /** CONTROL local write frame: the component may modify anything in its
@@ -82,137 +60,16 @@ pub open spec fn fan_global_write_frame(pre: SystemState, post: SystemState) -> 
   pre.sensedTemp == post.sensedTemp
   && pre.setPoint == post.setPoint
   && pre.fanCmd == post.fanCmd
-  && pre.control_sv_currentSetPoint == post.control_sv_currentSetPoint
-  && pre.control_sv_currentFanState == post.control_sv_currentFanState
-  && pre.control_sv_latestTemp == post.control_sv_latestTemp
-  && pre.control_sv_fanError == post.control_sv_fanError
   && pre.sv_currentSetPoint == post.sv_currentSetPoint
   && pre.sv_currentFanState == post.sv_currentFanState
   && pre.sv_latestTemp == post.sv_latestTemp
   && pre.sv_fanError == post.sv_fanError
-  && pre.userland_monitor_thread_tcp_tct_setPoint == post.userland_monitor_thread_tcp_tct_setPoint
-  && pre.userland_monitor_thread_sched_state == post.userland_monitor_thread_sched_state
-  && pre.userland_monitor_thread_sched_schedule == post.userland_monitor_thread_sched_schedule
-  && pre.gumbo_monitor_thread_tcp_tct_setPoint == post.gumbo_monitor_thread_tcp_tct_setPoint
-  && pre.gumbo_monitor_thread_sched_state == post.gumbo_monitor_thread_sched_state
-  && pre.gumbo_monitor_thread_sched_schedule == post.gumbo_monitor_thread_sched_schedule
-  && pre.sys_nominal_monitor_thread_tcp_tct_setPoint == post.sys_nominal_monitor_thread_tcp_tct_setPoint
-  && pre.sys_nominal_monitor_thread_sched_state == post.sys_nominal_monitor_thread_sched_state
-  && pre.sys_nominal_monitor_thread_sched_schedule == post.sys_nominal_monitor_thread_sched_schedule
 }
 
 /** FAN local write frame: the component may modify anything in its
   * own scope (Isabelle `lFrame := (λ_ _. True)`).
   */
 pub open spec fn fan_local_write_frame(pre: SystemState, post: SystemState) -> bool
-{
-  true
-}
-
-/** USERLAND_MONITOR_THREAD writes: nothing.
-  * Everything else must be unchanged.
-  */
-pub open spec fn userland_monitor_thread_global_write_frame(pre: SystemState, post: SystemState) -> bool
-{
-  pre.sensedTemp == post.sensedTemp
-  && pre.setPoint == post.setPoint
-  && pre.fanCmd == post.fanCmd
-  && pre.control_sv_currentSetPoint == post.control_sv_currentSetPoint
-  && pre.control_sv_currentFanState == post.control_sv_currentFanState
-  && pre.control_sv_latestTemp == post.control_sv_latestTemp
-  && pre.control_sv_fanError == post.control_sv_fanError
-  && pre.sv_currentSetPoint == post.sv_currentSetPoint
-  && pre.sv_currentFanState == post.sv_currentFanState
-  && pre.sv_latestTemp == post.sv_latestTemp
-  && pre.sv_fanError == post.sv_fanError
-  && pre.fanAck == post.fanAck
-  && pre.userland_monitor_thread_tcp_tct_setPoint == post.userland_monitor_thread_tcp_tct_setPoint
-  && pre.userland_monitor_thread_sched_state == post.userland_monitor_thread_sched_state
-  && pre.userland_monitor_thread_sched_schedule == post.userland_monitor_thread_sched_schedule
-  && pre.gumbo_monitor_thread_tcp_tct_setPoint == post.gumbo_monitor_thread_tcp_tct_setPoint
-  && pre.gumbo_monitor_thread_sched_state == post.gumbo_monitor_thread_sched_state
-  && pre.gumbo_monitor_thread_sched_schedule == post.gumbo_monitor_thread_sched_schedule
-  && pre.sys_nominal_monitor_thread_tcp_tct_setPoint == post.sys_nominal_monitor_thread_tcp_tct_setPoint
-  && pre.sys_nominal_monitor_thread_sched_state == post.sys_nominal_monitor_thread_sched_state
-  && pre.sys_nominal_monitor_thread_sched_schedule == post.sys_nominal_monitor_thread_sched_schedule
-}
-
-/** USERLAND_MONITOR_THREAD local write frame: the component may modify anything in its
-  * own scope (Isabelle `lFrame := (λ_ _. True)`).
-  */
-pub open spec fn userland_monitor_thread_local_write_frame(pre: SystemState, post: SystemState) -> bool
-{
-  true
-}
-
-/** GUMBO_MONITOR_THREAD writes: nothing.
-  * Everything else must be unchanged.
-  */
-pub open spec fn gumbo_monitor_thread_global_write_frame(pre: SystemState, post: SystemState) -> bool
-{
-  pre.sensedTemp == post.sensedTemp
-  && pre.setPoint == post.setPoint
-  && pre.fanCmd == post.fanCmd
-  && pre.control_sv_currentSetPoint == post.control_sv_currentSetPoint
-  && pre.control_sv_currentFanState == post.control_sv_currentFanState
-  && pre.control_sv_latestTemp == post.control_sv_latestTemp
-  && pre.control_sv_fanError == post.control_sv_fanError
-  && pre.sv_currentSetPoint == post.sv_currentSetPoint
-  && pre.sv_currentFanState == post.sv_currentFanState
-  && pre.sv_latestTemp == post.sv_latestTemp
-  && pre.sv_fanError == post.sv_fanError
-  && pre.fanAck == post.fanAck
-  && pre.userland_monitor_thread_tcp_tct_setPoint == post.userland_monitor_thread_tcp_tct_setPoint
-  && pre.userland_monitor_thread_sched_state == post.userland_monitor_thread_sched_state
-  && pre.userland_monitor_thread_sched_schedule == post.userland_monitor_thread_sched_schedule
-  && pre.gumbo_monitor_thread_tcp_tct_setPoint == post.gumbo_monitor_thread_tcp_tct_setPoint
-  && pre.gumbo_monitor_thread_sched_state == post.gumbo_monitor_thread_sched_state
-  && pre.gumbo_monitor_thread_sched_schedule == post.gumbo_monitor_thread_sched_schedule
-  && pre.sys_nominal_monitor_thread_tcp_tct_setPoint == post.sys_nominal_monitor_thread_tcp_tct_setPoint
-  && pre.sys_nominal_monitor_thread_sched_state == post.sys_nominal_monitor_thread_sched_state
-  && pre.sys_nominal_monitor_thread_sched_schedule == post.sys_nominal_monitor_thread_sched_schedule
-}
-
-/** GUMBO_MONITOR_THREAD local write frame: the component may modify anything in its
-  * own scope (Isabelle `lFrame := (λ_ _. True)`).
-  */
-pub open spec fn gumbo_monitor_thread_local_write_frame(pre: SystemState, post: SystemState) -> bool
-{
-  true
-}
-
-/** SYS_NOMINAL_MONITOR_THREAD writes: nothing.
-  * Everything else must be unchanged.
-  */
-pub open spec fn sys_nominal_monitor_thread_global_write_frame(pre: SystemState, post: SystemState) -> bool
-{
-  pre.sensedTemp == post.sensedTemp
-  && pre.setPoint == post.setPoint
-  && pre.fanCmd == post.fanCmd
-  && pre.control_sv_currentSetPoint == post.control_sv_currentSetPoint
-  && pre.control_sv_currentFanState == post.control_sv_currentFanState
-  && pre.control_sv_latestTemp == post.control_sv_latestTemp
-  && pre.control_sv_fanError == post.control_sv_fanError
-  && pre.sv_currentSetPoint == post.sv_currentSetPoint
-  && pre.sv_currentFanState == post.sv_currentFanState
-  && pre.sv_latestTemp == post.sv_latestTemp
-  && pre.sv_fanError == post.sv_fanError
-  && pre.fanAck == post.fanAck
-  && pre.userland_monitor_thread_tcp_tct_setPoint == post.userland_monitor_thread_tcp_tct_setPoint
-  && pre.userland_monitor_thread_sched_state == post.userland_monitor_thread_sched_state
-  && pre.userland_monitor_thread_sched_schedule == post.userland_monitor_thread_sched_schedule
-  && pre.gumbo_monitor_thread_tcp_tct_setPoint == post.gumbo_monitor_thread_tcp_tct_setPoint
-  && pre.gumbo_monitor_thread_sched_state == post.gumbo_monitor_thread_sched_state
-  && pre.gumbo_monitor_thread_sched_schedule == post.gumbo_monitor_thread_sched_schedule
-  && pre.sys_nominal_monitor_thread_tcp_tct_setPoint == post.sys_nominal_monitor_thread_tcp_tct_setPoint
-  && pre.sys_nominal_monitor_thread_sched_state == post.sys_nominal_monitor_thread_sched_state
-  && pre.sys_nominal_monitor_thread_sched_schedule == post.sys_nominal_monitor_thread_sched_schedule
-}
-
-/** SYS_NOMINAL_MONITOR_THREAD local write frame: the component may modify anything in its
-  * own scope (Isabelle `lFrame := (λ_ _. True)`).
-  */
-pub open spec fn sys_nominal_monitor_thread_local_write_frame(pre: SystemState, post: SystemState) -> bool
 {
   true
 }

@@ -19,12 +19,10 @@ pub struct SystemState {
 
   // -- Isolette_Single_Sensor_Instance.thermostat.rt.mhs.mhs --
   pub heat_control: Isolette_Data_Model::On_Off, // channel
-  pub mhs_sv_lastCmd: Isolette_Data_Model::On_Off, // channel
   pub lastCmd: Isolette_Data_Model::On_Off, // state variable
 
   // -- Isolette_Single_Sensor_Instance.thermostat.rt.mrm.mrm --
   pub regulator_mode: Isolette_Data_Model::Regulator_Mode, // channel
-  pub sv_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode, // channel
   pub reg_last_mode: Isolette_Data_Model::Regulator_Mode, // state variable
 
   // -- Isolette_Single_Sensor_Instance.thermostat.rt.drf.drf --
@@ -35,17 +33,14 @@ pub struct SystemState {
   pub lower_alarm_temp: Isolette_Data_Model::Temp_i, // channel
   pub monitor_status: Isolette_Data_Model::Status, // channel
   pub mon_interface_failure: Isolette_Data_Model::Failure_Flag_i, // channel
-  pub mmi_sv_lastCmd: Isolette_Data_Model::On_Off, // channel
   pub mmi_lastCmd: Isolette_Data_Model::On_Off, // state variable
 
   // -- Isolette_Single_Sensor_Instance.thermostat.mt.ma.ma --
   pub alarm_control: Isolette_Data_Model::On_Off, // channel
-  pub ma_sv_lastCmd: Isolette_Data_Model::On_Off, // channel
   pub ma_lastCmd: Isolette_Data_Model::On_Off, // state variable
 
   // -- Isolette_Single_Sensor_Instance.thermostat.mt.mmm.mmm --
   pub monitor_mode: Isolette_Data_Model::Monitor_Mode, // channel
-  pub sv_lastMonitorMode: Isolette_Data_Model::Monitor_Mode, // channel
   pub lastMonitorMode: Isolette_Data_Model::Monitor_Mode, // state variable
 
   // -- Isolette_Single_Sensor_Instance.thermostat.mt.dmf.dmf --
@@ -63,21 +58,6 @@ pub struct SystemState {
 
   // -- Isolette_Single_Sensor_Instance.heat_source.cpi.heat_controller --
   pub heat_out: Isolette_Environment::Heat, // channel
-
-  // -- Isolette_Single_Sensor_Instance.userland_monitor_process.userland_monitor_thread --
-  pub userland_monitor_thread_temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i, // channel
-  pub userland_monitor_thread_sched_state: hamr::SchedState, // channel
-  pub userland_monitor_thread_sched_schedule: hamr::Schedule, // channel
-
-  // -- Isolette_Single_Sensor_Instance.gumbo_monitor_process.gumbo_monitor_thread --
-  pub gumbo_monitor_thread_temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i, // channel
-  pub gumbo_monitor_thread_sched_state: hamr::SchedState, // channel
-  pub gumbo_monitor_thread_sched_schedule: hamr::Schedule, // channel
-
-  // -- Isolette_Single_Sensor_Instance.sys_nominal_monitor_process.sys_nominal_monitor_thread --
-  pub sys_nominal_monitor_thread_temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i, // channel
-  pub sys_nominal_monitor_thread_sched_state: hamr::SchedState, // channel
-  pub sys_nominal_monitor_thread_sched_schedule: hamr::Schedule, // channel
 }
 
 } // verus!

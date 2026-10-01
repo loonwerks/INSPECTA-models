@@ -66,6 +66,8 @@ bool get_temperature_sensor_cpi_thermostat_current_tempWstatus(Isolette_Data_Mod
 uintmax_t get_temperature_sensor_cpi_thermostat_current_tempWstatus_num_invalid(void);
 bool get_temperature_sensor_cpi_thermostat_air(Isolette_Data_Model_PhysicalTemp_i *data);
 uintmax_t get_temperature_sensor_cpi_thermostat_air_num_invalid(void);
+bool get_heat_source_cpi_heat_controller_heat_out(Isolette_Environment_Heat *data);
+uintmax_t get_heat_source_cpi_heat_controller_heat_out_num_invalid(void);
 bool get_sched_state(hamr_SchedState *data);
 uintmax_t get_sched_state_num_invalid(void);
 bool get_sched_schedule(hamr_Schedule *data);

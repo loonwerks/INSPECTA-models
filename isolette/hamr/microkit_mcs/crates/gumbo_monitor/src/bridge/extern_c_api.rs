@@ -53,6 +53,8 @@ extern "C" {
   fn get_thermostat_mt_dmf_dmf_internal_failure_num_invalid() -> u64;
   fn get_temperature_sensor_cpi_thermostat_air(value: *mut Isolette_Data_Model::PhysicalTemp_i) -> bool;
   fn get_temperature_sensor_cpi_thermostat_air_num_invalid() -> u64;
+  fn get_heat_source_cpi_heat_controller_heat_out(value: *mut Isolette_Environment::Heat) -> bool;
+  fn get_heat_source_cpi_heat_controller_heat_out_num_invalid() -> u64;
   fn get_sched_state(value: *mut hamr::SchedState) -> bool;
   fn get_sched_state_num_invalid() -> u64;
   fn get_sched_schedule(value: *mut hamr::Schedule) -> bool;
@@ -405,6 +407,22 @@ pub fn unsafe_get_temperature_sensor_cpi_thermostat_air_num_invalid() -> u64
   }
 }
 
+pub fn unsafe_get_heat_source_cpi_heat_controller_heat_out() -> Isolette_Environment::Heat
+{
+  unsafe {
+    let value: *mut Isolette_Environment::Heat = &mut Isolette_Environment::Heat::default();
+    get_heat_source_cpi_heat_controller_heat_out(value);
+    return *value;
+  }
+}
+
+pub fn unsafe_get_heat_source_cpi_heat_controller_heat_out_num_invalid() -> u64
+{
+  unsafe {
+    return get_heat_source_cpi_heat_controller_heat_out_num_invalid();
+  }
+}
+
 pub fn unsafe_get_sched_state() -> hamr::SchedState
 {
   unsafe {
@@ -547,6 +565,7 @@ lazy_static::lazy_static! {
   pub static ref IN_thermostat_mt_mmm_mmm_monitor_mode: Mutex<Option<Isolette_Data_Model::Monitor_Mode>> = Mutex::new(None);
   pub static ref IN_thermostat_mt_dmf_dmf_internal_failure: Mutex<Option<Isolette_Data_Model::Failure_Flag_i>> = Mutex::new(None);
   pub static ref IN_temperature_sensor_cpi_thermostat_air: Mutex<Option<Isolette_Data_Model::PhysicalTemp_i>> = Mutex::new(None);
+  pub static ref IN_heat_source_cpi_heat_controller_heat_out: Mutex<Option<Isolette_Environment::Heat>> = Mutex::new(None);
   pub static ref IN_sched_state: Mutex<Option<hamr::SchedState>> = Mutex::new(None);
   pub static ref IN_sched_schedule: Mutex<Option<hamr::Schedule>> = Mutex::new(None);
   pub static ref IN_thermostat_rt_mhs_mhs_sv_lastCmd: Mutex<Option<Isolette_Data_Model::On_Off>> = Mutex::new(None);
@@ -580,6 +599,7 @@ pub fn initialize_test_globals() {
     *IN_thermostat_mt_mmm_mmm_monitor_mode.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_thermostat_mt_dmf_dmf_internal_failure.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_temperature_sensor_cpi_thermostat_air.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_heat_source_cpi_heat_controller_heat_out.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_sched_state.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_sched_schedule.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_thermostat_rt_mhs_mhs_sv_lastCmd.lock().unwrap_or_else(|e| e.into_inner()) = None;
@@ -922,6 +942,22 @@ pub fn get_temperature_sensor_cpi_thermostat_air(value: *mut Isolette_Data_Model
 
 #[cfg(test)]
 pub fn get_temperature_sensor_cpi_thermostat_air_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
+pub fn get_heat_source_cpi_heat_controller_heat_out(value: *mut Isolette_Environment::Heat) -> bool
+{
+  unsafe {
+    let guard = IN_heat_source_cpi_heat_controller_heat_out.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
+  }
+}
+
+#[cfg(test)]
+pub fn get_heat_source_cpi_heat_controller_heat_out_num_invalid() -> u64
 {
   return 0;
 }

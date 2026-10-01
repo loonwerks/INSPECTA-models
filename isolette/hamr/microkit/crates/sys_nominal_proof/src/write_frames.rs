@@ -39,7 +39,6 @@ pub open spec fn mri_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.air == post.air
   && pre.current_tempWstatus == post.current_tempWstatus
   && pre.heat_out == post.heat_out
-  && pre.temperature_sensor_cpi_thermostat_air == post.temperature_sensor_cpi_thermostat_air
 }
 
 /** MRI local write frame: the component may modify anything in its
@@ -80,7 +79,6 @@ pub open spec fn mhs_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.air == post.air
   && pre.current_tempWstatus == post.current_tempWstatus
   && pre.heat_out == post.heat_out
-  && pre.temperature_sensor_cpi_thermostat_air == post.temperature_sensor_cpi_thermostat_air
 }
 
 /** MHS local write frame: the component may modify anything in its
@@ -121,7 +119,6 @@ pub open spec fn mrm_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.air == post.air
   && pre.current_tempWstatus == post.current_tempWstatus
   && pre.heat_out == post.heat_out
-  && pre.temperature_sensor_cpi_thermostat_air == post.temperature_sensor_cpi_thermostat_air
 }
 
 /** MRM local write frame: the component may modify anything in its
@@ -163,7 +160,6 @@ pub open spec fn drf_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.air == post.air
   && pre.current_tempWstatus == post.current_tempWstatus
   && pre.heat_out == post.heat_out
-  && pre.temperature_sensor_cpi_thermostat_air == post.temperature_sensor_cpi_thermostat_air
 }
 
 /** DRF local write frame: the component may modify anything in its
@@ -201,7 +197,6 @@ pub open spec fn mmi_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.air == post.air
   && pre.current_tempWstatus == post.current_tempWstatus
   && pre.heat_out == post.heat_out
-  && pre.temperature_sensor_cpi_thermostat_air == post.temperature_sensor_cpi_thermostat_air
 }
 
 /** MMI local write frame: the component may modify anything in its
@@ -242,7 +237,6 @@ pub open spec fn ma_global_write_frame(pre: SystemState, post: SystemState) -> b
   && pre.air == post.air
   && pre.current_tempWstatus == post.current_tempWstatus
   && pre.heat_out == post.heat_out
-  && pre.temperature_sensor_cpi_thermostat_air == post.temperature_sensor_cpi_thermostat_air
 }
 
 /** MA local write frame: the component may modify anything in its
@@ -283,7 +277,6 @@ pub open spec fn mmm_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.air == post.air
   && pre.current_tempWstatus == post.current_tempWstatus
   && pre.heat_out == post.heat_out
-  && pre.temperature_sensor_cpi_thermostat_air == post.temperature_sensor_cpi_thermostat_air
 }
 
 /** MMM local write frame: the component may modify anything in its
@@ -325,7 +318,6 @@ pub open spec fn dmf_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.air == post.air
   && pre.current_tempWstatus == post.current_tempWstatus
   && pre.heat_out == post.heat_out
-  && pre.temperature_sensor_cpi_thermostat_air == post.temperature_sensor_cpi_thermostat_air
 }
 
 /** DMF local write frame: the component may modify anything in its
@@ -364,7 +356,6 @@ pub open spec fn oi_global_write_frame(pre: SystemState, post: SystemState) -> b
   && pre.air == post.air
   && pre.current_tempWstatus == post.current_tempWstatus
   && pre.heat_out == post.heat_out
-  && pre.temperature_sensor_cpi_thermostat_air == post.temperature_sensor_cpi_thermostat_air
 }
 
 /** OI local write frame: the component may modify anything in its
@@ -406,7 +397,6 @@ pub open spec fn ts_global_write_frame(pre: SystemState, post: SystemState) -> b
   && pre.upper_alarm_tempWstatus == post.upper_alarm_tempWstatus
   && pre.air == post.air
   && pre.heat_out == post.heat_out
-  && pre.temperature_sensor_cpi_thermostat_air == post.temperature_sensor_cpi_thermostat_air
 }
 
 /** TS local write frame: the component may modify anything in its
@@ -448,56 +438,12 @@ pub open spec fn hs_global_write_frame(pre: SystemState, post: SystemState) -> b
   && pre.upper_alarm_tempWstatus == post.upper_alarm_tempWstatus
   && pre.air == post.air
   && pre.current_tempWstatus == post.current_tempWstatus
-  && pre.temperature_sensor_cpi_thermostat_air == post.temperature_sensor_cpi_thermostat_air
 }
 
 /** HS local write frame: the component may modify anything in its
   * own scope (Isabelle `lFrame := (λ_ _. True)`).
   */
 pub open spec fn hs_local_write_frame(pre: SystemState, post: SystemState) -> bool
-{
-  true
-}
-
-/** DOMAIN_MONITOR_THREAD writes: nothing.
-  * Everything else must be unchanged.
-  */
-pub open spec fn domain_monitor_thread_global_write_frame(pre: SystemState, post: SystemState) -> bool
-{
-  pre.upper_desired_temp == post.upper_desired_temp
-  && pre.lower_desired_temp == post.lower_desired_temp
-  && pre.displayed_temp == post.displayed_temp
-  && pre.regulator_status == post.regulator_status
-  && pre.reg_interface_failure == post.reg_interface_failure
-  && pre.heat_control == post.heat_control
-  && pre.lastCmd == post.lastCmd
-  && pre.regulator_mode == post.regulator_mode
-  && pre.reg_last_mode == post.reg_last_mode
-  && pre.internal_failure == post.internal_failure
-  && pre.upper_alarm_temp == post.upper_alarm_temp
-  && pre.lower_alarm_temp == post.lower_alarm_temp
-  && pre.monitor_status == post.monitor_status
-  && pre.mon_interface_failure == post.mon_interface_failure
-  && pre.mmi_lastCmd == post.mmi_lastCmd
-  && pre.alarm_control == post.alarm_control
-  && pre.ma_lastCmd == post.ma_lastCmd
-  && pre.monitor_mode == post.monitor_mode
-  && pre.lastMonitorMode == post.lastMonitorMode
-  && pre.mon_internal_failure == post.mon_internal_failure
-  && pre.lower_desired_tempWstatus == post.lower_desired_tempWstatus
-  && pre.upper_desired_tempWstatus == post.upper_desired_tempWstatus
-  && pre.lower_alarm_tempWstatus == post.lower_alarm_tempWstatus
-  && pre.upper_alarm_tempWstatus == post.upper_alarm_tempWstatus
-  && pre.air == post.air
-  && pre.current_tempWstatus == post.current_tempWstatus
-  && pre.heat_out == post.heat_out
-  && pre.temperature_sensor_cpi_thermostat_air == post.temperature_sensor_cpi_thermostat_air
-}
-
-/** DOMAIN_MONITOR_THREAD local write frame: the component may modify anything in its
-  * own scope (Isabelle `lFrame := (λ_ _. True)`).
-  */
-pub open spec fn domain_monitor_thread_local_write_frame(pre: SystemState, post: SystemState) -> bool
 {
   true
 }

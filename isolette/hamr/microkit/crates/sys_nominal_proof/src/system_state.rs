@@ -58,9 +58,6 @@ pub struct SystemState {
 
   // -- Isolette_Single_Sensor_Instance.heat_source.cpi.heat_controller --
   pub heat_out: Isolette_Environment::Heat, // channel
-
-  // -- Isolette_Single_Sensor_Instance.domain_monitor_process.domain_monitor_thread --
-  pub temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i, // channel
 }
 
 } // verus!

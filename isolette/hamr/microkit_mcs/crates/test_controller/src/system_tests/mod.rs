@@ -4,10 +4,14 @@
 //!
 //! `api` drives the test scheduler, `harness` runs the suite and records results,
 //! and `tests` holds the hand-written test script (preserved across regeneration).
+//!
+//! `observe` checks the model's contracts at every dispatch and turns a
+//! violation into a failure of the running test.
 
 pub mod api;
 pub mod harness;
 pub mod inspect;
+pub mod observe;
 pub mod selection;
 pub mod tests;
 

@@ -68,22 +68,23 @@ fn cascade(mut ready: u64) -> u64 {
   ready
 }
 
-/// As [`cascade`], also returning the union of every intermediate marking --
-/// each assertion place the cascade passed through.
+/// As [`cascade`], also returning every place it entered -- the out-places of
+/// each transition it fired.  A place that was already marked and stays marked
+/// (waiting at a join, say) is not among them.
 fn cascade_acc(mut ready: u64) -> (u64, u64) {
-  let mut accumulated = ready;
+  let mut entered = 0u64;
   let mut changed = true;
   while changed {
     changed = false;
     for &(in_mask, out_mask) in CP_TRANSITIONS.iter() {
       if (ready & in_mask) == in_mask {
         ready = (ready & !in_mask) | out_mask;
-        accumulated |= ready;
+        entered |= out_mask;
         changed = true;
       }
     }
   }
-  (ready, accumulated)
+  (ready, entered)
 }
 
 pub struct SysAssert_nominal {
@@ -95,22 +96,34 @@ impl SysAssert_nominal {
     SysAssert_nominal { ready: 0 }
   }
 
-  /// Walks the whole net over one hyperperiod of `sched`, checking that every
-  /// user slot's thread has an enabled transition and that the walk reaches END.
-  pub fn validate_schedule<S: ViolationSink>(sched: &hamr::Schedule,
+  /// Walks the whole net over one hyperperiod of the schedule -- its first
+  /// `num_timeslices` slots' channels and user-partition bits -- checking that every
+  /// user slot of a thread in the composition has an enabled transition and that the
+  /// walk reaches END.  Threads the composition leaves out are passed over.
+  /// Takes plain slices rather than a `hamr::Schedule`: the test controller has its
+  /// own copy of the schedule, and without runtime monitoring the data crate has no
+  /// `hamr` module at all.
+  pub fn validate_schedule<S: ViolationSink>(num_timeslices: usize,
+                                            timeslice_ch: &[u32],
+                                            is_user_partition: &[bool],
                                             thread_of: fn(u32) -> Option<crate::Thread>,
                                             out: &mut S) {
-    let n = sched.num_timeslices as usize;
+    let n = core::cmp::min(num_timeslices, core::cmp::min(timeslice_ch.len(), is_user_partition.len()));
     let mut ready: u64 = PLACE_START;
     ready = cascade(ready);
     let mut violations = 0u32;
 
     for i in 0..n {
-      if !sched.is_user_partition[i] {
+      if !is_user_partition[i] {
         continue;
       }
-      let ch = sched.timeslice_ch[i];
+      let ch = timeslice_ch[i];
       let th = thread_of(ch);
+      // A thread the composition leaves out is not part of what it claims, so its
+      // slots are passed over: the composition may describe part of the system.
+      if !COMPONENT_TRANSITIONS.iter().any(|&(t_th, _, _)| th == Some(t_th)) {
+        continue;
+      }
 
       let mut fired = false;
       for &(t_th, in_mask, out_mask) in COMPONENT_TRANSITIONS.iter() {
@@ -136,338 +149,482 @@ impl SysAssert_nominal {
     out.report(Event::ScheduleConformance { violations: violations });
   }
 
-  /// Puts the marking at START and fires the initial cascade.
-  pub fn on_init(&mut self) {
-    self.ready = PLACE_START;
-    self.ready = cascade(self.ready);
+  /// Puts the marking at START, fires the initial cascade, and checks the
+  /// assertions at the places it entered.
+  pub fn on_init<V: SystemView, S: ViolationSink>(&mut self, s: &mut V, out: &mut S) {
+    let entered = self.restart();
+    Self::check(entered, s, out);
+  }
+
+  /// Marks START and cascades; returns the places entered.
+  fn restart(&mut self) -> u64 {
+    let (ready, entered) = cascade_acc(PLACE_START);
+    self.ready = ready;
+    PLACE_START | entered
   }
 
   /// `prev` has completed a dispatch: fire its transition, cascade, and check
-  /// the assertions at every place the cascade visited.
+  /// the assertions at every place entered on the way -- the places this completion
+  /// reached, not every place still marked.  An assertion "after X" is about the
+  /// moment X completes; checking it again at later, unrelated completions while its
+  /// place waits at a join would compare X's outputs with inputs that have moved on.
+  ///
+  /// When this completion ends the frame, the next one starts here.  Events belong to
+  /// the frame they arrived in, so what START sees is only what arrives from here on.
   pub fn on_complete<V: SystemView, S: ViolationSink>(&mut self, prev: crate::Thread, s: &mut V, out: &mut S) {
-    match prev {
+    if self.complete(prev, s, out) {
+      s.frame_ended(0);
+      self.restart_frame(s, out);
+    }
+  }
+
+  /// The first half of `on_complete`: fire, cascade and check; returns whether the
+  /// marking reached END.  Each composition keeps its own frame: its end is reported
+  /// to the view as `frame_ended` for this composition alone, before `restart_frame`.
+  pub fn complete<V: SystemView, S: ViolationSink>(&mut self, prev: crate::Thread, s: &mut V, out: &mut S) -> bool {
+    // the out-places of the transition this completion fired
+    let entered: u64 = match prev {
       crate::Thread::operator_interface_oip_oit => {
         self.ready = (self.ready & !PLACE_BEFORE_OI) | PLACE_AFTER_OI;
+        PLACE_AFTER_OI
       }
       crate::Thread::temperature_sensor_cpi_thermostat => {
         self.ready = (self.ready & !PLACE_BEFORE_TS) | PLACE_AFTER_TS;
+        PLACE_AFTER_TS
       }
       crate::Thread::thermostat_rt_drf_drf => {
         self.ready = (self.ready & !PLACE_BEFORE_DRF) | PLACE_AFTER_DRF;
+        PLACE_AFTER_DRF
       }
       crate::Thread::thermostat_rt_mri_mri => {
         self.ready = (self.ready & !PLACE_AFTER_DRF) | PLACE_AFTER_MRI;
+        PLACE_AFTER_MRI
       }
       crate::Thread::thermostat_rt_mrm_mrm => {
         self.ready = (self.ready & !PLACE_AFTER_MRI) | PLACE_AFTER_MRM;
+        PLACE_AFTER_MRM
       }
       crate::Thread::thermostat_rt_mhs_mhs => {
         self.ready = (self.ready & !PLACE_AFTER_MRM) | PLACE_AFTER_MHS;
+        PLACE_AFTER_MHS
       }
       crate::Thread::thermostat_mt_dmf_dmf => {
         self.ready = (self.ready & !PLACE_BEFORE_DMF) | PLACE_AFTER_DMF;
+        PLACE_AFTER_DMF
       }
       crate::Thread::thermostat_mt_mmi_mmi => {
         self.ready = (self.ready & !PLACE_AFTER_DMF) | PLACE_AFTER_MMI;
+        PLACE_AFTER_MMI
       }
       crate::Thread::thermostat_mt_mmm_mmm => {
         self.ready = (self.ready & !PLACE_AFTER_MMI) | PLACE_AFTER_MMM;
+        PLACE_AFTER_MMM
       }
       crate::Thread::thermostat_mt_ma_ma => {
         self.ready = (self.ready & !PLACE_AFTER_MMM) | PLACE_AFTER_MA;
+        PLACE_AFTER_MA
       }
       crate::Thread::heat_source_cpi_heat_controller => {
         self.ready = (self.ready & !PLACE_POST_JOIN_2) | PLACE_AFTER_HS;
+        PLACE_AFTER_HS
       }
       _ => {
-        return;
+        return false;
       }
-    }
+    };
 
-    let (final_ready, visited) = cascade_acc(self.ready);
+    let (final_ready, cascaded) = cascade_acc(self.ready);
     self.ready = final_ready;
+    Self::check(entered | cascaded, s, out);
+    self.ready == PLACE_END
+  }
 
+  /// The second half of `on_complete`, once the frame has ended: mark START, cascade,
+  /// and check the assertions at the places entered.
+  pub fn restart_frame<V: SystemView, S: ViolationSink>(&mut self, s: &mut V, out: &mut S) {
+    let started = self.restart();
+    Self::check(started, s, out);
+  }
+
+  /// Checks the assertions at the places in `visited`.
+  fn check<V: SystemView, S: ViolationSink>(visited: u64, s: &mut V, out: &mut S) {
     if visited & PLACE_AFTER_OI != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Heat", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Heat", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Heat", point: "before drf" });
       }
     }
     if visited & PLACE_AFTER_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Heat", point: "after drf" });
       }
     }
     if visited & PLACE_AFTER_MRI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) {
+             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Heat", point: "after mri" });
       }
     }
     if visited & PLACE_AFTER_MRM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) {
+             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Heat", point: "after mrm" });
       }
     }
     if visited & PLACE_AFTER_MHS != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              (s.get_operator_interface_oip_oit_lower_desired_tempWstatus().status == Isolette_Data_Model::ValueStatus::Valid) &
                (s.get_operator_interface_oip_oit_upper_desired_tempWstatus().status == Isolette_Data_Model::ValueStatus::Valid) &
                (s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().status == Isolette_Data_Model::ValueStatus::Valid) &
                (s.get_thermostat_rt_mrm_mrm_regulator_mode() == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &
                (s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().degrees < s.get_operator_interface_oip_oit_lower_desired_tempWstatus().degrees),
-             (s.get_thermostat_rt_mhs_mhs_heat_control() == Isolette_Data_Model::On_Off::Onn))) {
+             (s.get_thermostat_rt_mhs_mhs_heat_control() == Isolette_Data_Model::On_Off::Onn))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Heat", point: "after mhs" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Heat_Off", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Heat_Off", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Heat_Off", point: "before drf" });
       }
     }
     if visited & PLACE_AFTER_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Heat_Off", point: "after drf" });
       }
     }
     if visited & PLACE_AFTER_MRI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) {
+             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Heat_Off", point: "after mri" });
       }
     }
     if visited & PLACE_AFTER_MRM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) {
+             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Heat_Off", point: "after mrm" });
       }
     }
     if visited & PLACE_AFTER_MHS != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              (s.get_operator_interface_oip_oit_lower_desired_tempWstatus().status == Isolette_Data_Model::ValueStatus::Valid) &
                (s.get_operator_interface_oip_oit_upper_desired_tempWstatus().status == Isolette_Data_Model::ValueStatus::Valid) &
                (s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().status == Isolette_Data_Model::ValueStatus::Valid) &
                (s.get_thermostat_rt_mrm_mrm_regulator_mode() == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &
                (s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().degrees > s.get_operator_interface_oip_oit_upper_desired_tempWstatus().degrees),
-             (s.get_thermostat_rt_mhs_mhs_heat_control() == Isolette_Data_Model::On_Off::Off))) {
+             (s.get_thermostat_rt_mhs_mhs_heat_control() == Isolette_Data_Model::On_Off::Off))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Heat_Off", point: "after mhs" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_CT_Heat_Off", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_CT_Heat_Off", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_CT_Heat_Off", point: "before drf" });
       }
     }
     if visited & PLACE_AFTER_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_CT_Heat_Off", point: "after drf" });
       }
     }
     if visited & PLACE_AFTER_MRI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) {
+             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_CT_Heat_Off", point: "after mri" });
       }
     }
     if visited & PLACE_AFTER_MRM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
              sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp()) &
              (impliesL!(
                (s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid),
-               (s.get_thermostat_rt_mrm_mrm_regulator_mode() != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))) {
+               (s.get_thermostat_rt_mrm_mrm_regulator_mode() != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_CT_Heat_Off", point: "after mrm" });
       }
     }
     if visited & PLACE_AFTER_MHS != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              (s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid),
-             (s.get_thermostat_rt_mhs_mhs_heat_control() == Isolette_Data_Model::On_Off::Off))) {
+             (s.get_thermostat_rt_mhs_mhs_heat_control() == Isolette_Data_Model::On_Off::Off))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_CT_Heat_Off", point: "after mhs" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_UDT_Heat_Off", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_UDT_Heat_Off", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_UDT_Heat_Off", point: "before drf" });
       }
     }
     if visited & PLACE_AFTER_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_UDT_Heat_Off", point: "after drf" });
       }
     }
     if visited & PLACE_AFTER_MRI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) {
+             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_UDT_Heat_Off", point: "after mri" });
       }
     }
     if visited & PLACE_AFTER_MRM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
              sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp()) &
              (impliesL!(
                (s.get_operator_interface_oip_oit_upper_desired_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid),
-               (s.get_thermostat_rt_mrm_mrm_regulator_mode() != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))) {
+               (s.get_thermostat_rt_mrm_mrm_regulator_mode() != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_UDT_Heat_Off", point: "after mrm" });
       }
     }
     if visited & PLACE_AFTER_MHS != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              (s.get_operator_interface_oip_oit_upper_desired_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid),
-             (s.get_thermostat_rt_mhs_mhs_heat_control() == Isolette_Data_Model::On_Off::Off))) {
+             (s.get_thermostat_rt_mhs_mhs_heat_control() == Isolette_Data_Model::On_Off::Off))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_UDT_Heat_Off", point: "after mhs" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_LDT_Heat_Off", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_LDT_Heat_Off", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_LDT_Heat_Off", point: "before drf" });
       }
     }
     if visited & PLACE_AFTER_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_LDT_Heat_Off", point: "after drf" });
       }
     }
     if visited & PLACE_AFTER_MRI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) {
+             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_LDT_Heat_Off", point: "after mri" });
       }
     }
     if visited & PLACE_AFTER_MRM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
              sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp()) &
              (impliesL!(
                (s.get_operator_interface_oip_oit_lower_desired_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid),
-               (s.get_thermostat_rt_mrm_mrm_regulator_mode() != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))) {
+               (s.get_thermostat_rt_mrm_mrm_regulator_mode() != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_LDT_Heat_Off", point: "after mrm" });
       }
     }
     if visited & PLACE_AFTER_MHS != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              (s.get_operator_interface_oip_oit_lower_desired_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid),
-             (s.get_thermostat_rt_mhs_mhs_heat_control() == Isolette_Data_Model::On_Off::Off))) {
+             (s.get_thermostat_rt_mhs_mhs_heat_control() == Isolette_Data_Model::On_Off::Off))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_LDT_Heat_Off", point: "after mhs" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Internal_Failure_Heat_Off", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Internal_Failure_Heat_Off", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Internal_Failure_Heat_Off", point: "before drf" });
       }
     }
     if visited & PLACE_AFTER_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Internal_Failure_Heat_Off", point: "after drf" });
       }
     }
     if visited & PLACE_AFTER_MRI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) {
+             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Internal_Failure_Heat_Off", point: "after mri" });
       }
     }
     if visited & PLACE_AFTER_MRM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
              sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp()) &
              (impliesL!(
                s.get_thermostat_rt_drf_drf_internal_failure().flag,
-               (s.get_thermostat_rt_mrm_mrm_regulator_mode() != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))) {
+               (s.get_thermostat_rt_mrm_mrm_regulator_mode() != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Internal_Failure_Heat_Off", point: "after mrm" });
       }
     }
     if visited & PLACE_AFTER_MHS != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              s.get_thermostat_rt_drf_drf_internal_failure().flag,
-             (s.get_thermostat_rt_mhs_mhs_heat_control() == Isolette_Data_Model::On_Off::Off))) {
+             (s.get_thermostat_rt_mhs_mhs_heat_control() == Isolette_Data_Model::On_Off::Off))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Internal_Failure_Heat_Off", point: "after mhs" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Error_Condition_Heat_Off", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Error_Condition_Heat_Off", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Error_Condition_Heat_Off", point: "before drf" });
       }
     }
     if visited & PLACE_AFTER_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Error_Condition_Heat_Off", point: "after drf" });
       }
     }
     if visited & PLACE_AFTER_MRI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) {
+             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Error_Condition_Heat_Off", point: "after mri" });
       }
     }
     if visited & PLACE_AFTER_MRM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
              sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp()) &
              (impliesL!(
@@ -475,145 +632,195 @@ impl SysAssert_nominal {
                  (s.get_operator_interface_oip_oit_upper_desired_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid) |
                  (s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid) |
                  s.get_thermostat_rt_drf_drf_internal_failure().flag,
-               (s.get_thermostat_rt_mrm_mrm_regulator_mode() != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))) {
+               (s.get_thermostat_rt_mrm_mrm_regulator_mode() != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Error_Condition_Heat_Off", point: "after mrm" });
       }
     }
     if visited & PLACE_AFTER_MHS != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              (s.get_operator_interface_oip_oit_lower_desired_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid) |
                (s.get_operator_interface_oip_oit_upper_desired_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid) |
                (s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid) |
                s.get_thermostat_rt_drf_drf_internal_failure().flag,
-             (s.get_thermostat_rt_mhs_mhs_heat_control() == Isolette_Data_Model::On_Off::Off))) {
+             (s.get_thermostat_rt_mhs_mhs_heat_control() == Isolette_Data_Model::On_Off::Off))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Error_Condition_Heat_Off", point: "after mhs" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Failed_Mode_Heat_Off", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Failed_Mode_Heat_Off", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Failed_Mode_Heat_Off", point: "before drf" });
       }
     }
     if visited & PLACE_AFTER_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Failed_Mode_Heat_Off", point: "after drf" });
       }
     }
     if visited & PLACE_AFTER_MRI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) {
+             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Failed_Mode_Heat_Off", point: "after mri" });
       }
     }
     if visited & PLACE_AFTER_MRM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) {
+             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Failed_Mode_Heat_Off", point: "after mrm" });
       }
     }
     if visited & PLACE_AFTER_MHS != 0 {
-      if !(sysProp_FailedModeImpliesHeatOff(s.get_thermostat_rt_mrm_mrm_regulator_mode(), s.get_thermostat_rt_mhs_mhs_heat_control())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_FailedModeImpliesHeatOff(s.get_thermostat_rt_mrm_mrm_regulator_mode(), s.get_thermostat_rt_mhs_mhs_heat_control())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Failed_Mode_Heat_Off", point: "after mhs" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Regulator_Failsafe_Latching", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Regulator_Failsafe_Latching", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Regulator_Failsafe_Latching", point: "before drf" });
       }
     }
     if visited & PLACE_AFTER_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Regulator_Failsafe_Latching", point: "after drf" });
       }
     }
     if visited & PLACE_AFTER_MRI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) {
+             sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Regulator_Failsafe_Latching", point: "after mri" });
       }
     }
     if visited & PLACE_AFTER_MRM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MRI_7(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus(), s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp(), s.get_thermostat_rt_mri_mri_interface_failure()) &
              sysProp_lower_is_lower_temp(s.get_thermostat_rt_mri_mri_lower_desired_temp(), s.get_thermostat_rt_mri_mri_upper_desired_temp()) &
-             (s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode() == s.get_thermostat_rt_mrm_mrm_regulator_mode())) {
+             (s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode() == s.get_thermostat_rt_mrm_mrm_regulator_mode())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Regulator_Failsafe_Latching", point: "after mrm" });
       }
     }
     if visited & PLACE_START != 0 {
-      if !(sysProp_FailedModeImpliesHeatOff(s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), s.get_thermostat_rt_mhs_mhs_heat_control())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_FailedModeImpliesHeatOff(s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), s.get_thermostat_rt_mhs_mhs_heat_control())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Regulator_Failsafe_Latching", point: "at START" });
       }
     }
     if visited & PLACE_AFTER_MHS != 0 {
-      if !(sysProp_FailedModeImpliesHeatOff(s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), s.get_thermostat_rt_mhs_mhs_heat_control())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_FailedModeImpliesHeatOff(s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), s.get_thermostat_rt_mhs_mhs_heat_control())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Regulator_Failsafe_Latching", point: "after mhs" });
       }
     }
     if visited & PLACE_POST_JOIN_2 != 0 {
-      if !(sysProp_FailedModeImpliesHeatOff(s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), s.get_thermostat_rt_mhs_mhs_heat_control())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_FailedModeImpliesHeatOff(s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), s.get_thermostat_rt_mhs_mhs_heat_control())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Regulator_Failsafe_Latching", point: "before hs" });
       }
     }
     if visited & PLACE_AFTER_HS != 0 {
-      if !(sysProp_FailedModeImpliesHeatOff(s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), s.get_thermostat_rt_mhs_mhs_heat_control())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_FailedModeImpliesHeatOff(s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), s.get_thermostat_rt_mhs_mhs_heat_control())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Regulator_Failsafe_Latching", point: "after hs" });
       }
     }
     if visited & PLACE_END != 0 {
-      if !(sysProp_FailedModeImpliesHeatOff(s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), s.get_thermostat_rt_mhs_mhs_heat_control())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_FailedModeImpliesHeatOff(s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), s.get_thermostat_rt_mhs_mhs_heat_control())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Regulator_Failsafe_Latching", point: "at END" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Alarm", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Alarm", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Alarm", point: "before dmf" });
       }
     }
     if visited & PLACE_AFTER_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Alarm", point: "after dmf" });
       }
     }
     if visited & PLACE_AFTER_MMI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
                sysProp_Figure_A_7(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp()) & GUMBO_Library::Allowed_LowerAlarmTemp(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp().degrees) &
-                 GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees)))) {
+                 GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees)))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Alarm", point: "after mmi" });
       }
     }
     if visited & PLACE_AFTER_MMM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
@@ -621,11 +828,13 @@ impl SysAssert_nominal {
                  GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees))) &
              (impliesL!(
                (s.get_thermostat_mt_mmm_mmm_monitor_mode() == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
-               !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag)))) {
+               !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag)))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Alarm", point: "after mmm" });
       }
     }
     if visited & PLACE_AFTER_MA != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              (s.get_operator_interface_oip_oit_lower_alarm_tempWstatus().status == Isolette_Data_Model::ValueStatus::Valid) &
                (s.get_operator_interface_oip_oit_upper_alarm_tempWstatus().status == Isolette_Data_Model::ValueStatus::Valid) &
@@ -633,40 +842,52 @@ impl SysAssert_nominal {
                (s.get_thermostat_mt_mmm_mmm_monitor_mode() == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &
                ((s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().degrees < s.get_operator_interface_oip_oit_lower_alarm_tempWstatus().degrees) |
                  (s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().degrees > s.get_operator_interface_oip_oit_upper_alarm_tempWstatus().degrees)),
-             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Onn))) {
+             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Onn))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Alarm", point: "after ma" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Alarm_Off", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Alarm_Off", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Alarm_Off", point: "before dmf" });
       }
     }
     if visited & PLACE_AFTER_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Alarm_Off", point: "after dmf" });
       }
     }
     if visited & PLACE_AFTER_MMI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
                sysProp_Figure_A_7(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp()) & GUMBO_Library::Allowed_LowerAlarmTemp(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp().degrees) &
-                 GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees)))) {
+                 GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees)))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Alarm_Off", point: "after mmi" });
       }
     }
     if visited & PLACE_AFTER_MMM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
@@ -674,11 +895,13 @@ impl SysAssert_nominal {
                  GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees))) &
              (impliesL!(
                (s.get_thermostat_mt_mmm_mmm_monitor_mode() == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
-               !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag)))) {
+               !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag)))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Alarm_Off", point: "after mmm" });
       }
     }
     if visited & PLACE_AFTER_MA != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              (s.get_operator_interface_oip_oit_lower_alarm_tempWstatus().status == Isolette_Data_Model::ValueStatus::Valid) &
                (s.get_operator_interface_oip_oit_upper_alarm_tempWstatus().status == Isolette_Data_Model::ValueStatus::Valid) &
@@ -686,40 +909,52 @@ impl SysAssert_nominal {
                (s.get_thermostat_mt_mmm_mmm_monitor_mode() == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &
                (s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().degrees >= s.get_operator_interface_oip_oit_lower_alarm_tempWstatus().degrees + 1i32) &
                (s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().degrees <= s.get_operator_interface_oip_oit_upper_alarm_tempWstatus().degrees - 1i32),
-             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Off))) {
+             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Off))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Mode_Alarm_Off", point: "after ma" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_CT_Alarm_On", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_CT_Alarm_On", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_CT_Alarm_On", point: "before dmf" });
       }
     }
     if visited & PLACE_AFTER_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_CT_Alarm_On", point: "after dmf" });
       }
     }
     if visited & PLACE_AFTER_MMI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
                sysProp_Figure_A_7(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp()) & GUMBO_Library::Allowed_LowerAlarmTemp(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp().degrees) &
-                 GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees)))) {
+                 GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees)))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_CT_Alarm_On", point: "after mmi" });
       }
     }
     if visited & PLACE_AFTER_MMM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
@@ -730,49 +965,63 @@ impl SysAssert_nominal {
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag))) &
              (impliesL!(
                (s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid),
-               (s.get_thermostat_mt_mmm_mmm_monitor_mode() != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)))) {
+               (s.get_thermostat_mt_mmm_mmm_monitor_mode() != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_CT_Alarm_On", point: "after mmm" });
       }
     }
     if visited & PLACE_AFTER_MA != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              (s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid) &
                (s.get_thermostat_mt_mmm_mmm_monitor_mode() != Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode),
-             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Onn))) {
+             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Onn))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_CT_Alarm_On", point: "after ma" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_LAT_Alarm_On", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_LAT_Alarm_On", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_LAT_Alarm_On", point: "before dmf" });
       }
     }
     if visited & PLACE_AFTER_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_LAT_Alarm_On", point: "after dmf" });
       }
     }
     if visited & PLACE_AFTER_MMI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
                sysProp_Figure_A_7(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp()) & GUMBO_Library::Allowed_LowerAlarmTemp(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp().degrees) &
                  GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees))) &
-             sysProp_REQ_MMI_4(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure())) {
+             sysProp_REQ_MMI_4(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_LAT_Alarm_On", point: "after mmi" });
       }
     }
     if visited & PLACE_AFTER_MMM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
@@ -784,49 +1033,63 @@ impl SysAssert_nominal {
              (sysProp_REQ_MMI_4(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
                (impliesL!(
                  (s.get_operator_interface_oip_oit_lower_alarm_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid),
-                 (s.get_thermostat_mt_mmm_mmm_monitor_mode() != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode))))) {
+                 (s.get_thermostat_mt_mmm_mmm_monitor_mode() != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode))))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_LAT_Alarm_On", point: "after mmm" });
       }
     }
     if visited & PLACE_AFTER_MA != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              (s.get_operator_interface_oip_oit_lower_alarm_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid) &
                (s.get_thermostat_mt_mmm_mmm_monitor_mode() != Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode),
-             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Onn))) {
+             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Onn))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_LAT_Alarm_On", point: "after ma" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_UAT_Alarm_On", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_UAT_Alarm_On", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_UAT_Alarm_On", point: "before dmf" });
       }
     }
     if visited & PLACE_AFTER_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_UAT_Alarm_On", point: "after dmf" });
       }
     }
     if visited & PLACE_AFTER_MMI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
                sysProp_Figure_A_7(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp()) & GUMBO_Library::Allowed_LowerAlarmTemp(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp().degrees) &
                  GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees))) &
-             sysProp_REQ_MMI_4(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure())) {
+             sysProp_REQ_MMI_4(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_UAT_Alarm_On", point: "after mmi" });
       }
     }
     if visited & PLACE_AFTER_MMM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
@@ -838,48 +1101,62 @@ impl SysAssert_nominal {
              (sysProp_REQ_MMI_4(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
                (impliesL!(
                  (s.get_operator_interface_oip_oit_upper_alarm_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid),
-                 (s.get_thermostat_mt_mmm_mmm_monitor_mode() != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode))))) {
+                 (s.get_thermostat_mt_mmm_mmm_monitor_mode() != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode))))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_UAT_Alarm_On", point: "after mmm" });
       }
     }
     if visited & PLACE_AFTER_MA != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              (s.get_operator_interface_oip_oit_upper_alarm_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid) &
                (s.get_thermostat_mt_mmm_mmm_monitor_mode() != Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode),
-             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Onn))) {
+             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Onn))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Invalid_UAT_Alarm_On", point: "after ma" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Internal_Failure_Alarm_On", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Internal_Failure_Alarm_On", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Internal_Failure_Alarm_On", point: "before dmf" });
       }
     }
     if visited & PLACE_AFTER_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Internal_Failure_Alarm_On", point: "after dmf" });
       }
     }
     if visited & PLACE_AFTER_MMI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
                sysProp_Figure_A_7(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp()) & GUMBO_Library::Allowed_LowerAlarmTemp(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp().degrees) &
-                 GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees)))) {
+                 GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees)))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Internal_Failure_Alarm_On", point: "after mmi" });
       }
     }
     if visited & PLACE_AFTER_MMM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
@@ -890,49 +1167,63 @@ impl SysAssert_nominal {
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag))) &
              (impliesL!(
                s.get_thermostat_mt_dmf_dmf_internal_failure().flag,
-               (s.get_thermostat_mt_mmm_mmm_monitor_mode() != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)))) {
+               (s.get_thermostat_mt_mmm_mmm_monitor_mode() != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Internal_Failure_Alarm_On", point: "after mmm" });
       }
     }
     if visited & PLACE_AFTER_MA != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              s.get_thermostat_mt_dmf_dmf_internal_failure().flag &
                (s.get_thermostat_mt_mmm_mmm_monitor_mode() != Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode),
-             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Onn))) {
+             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Onn))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Internal_Failure_Alarm_On", point: "after ma" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Error_Condition_Alarm_On", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Error_Condition_Alarm_On", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Error_Condition_Alarm_On", point: "before dmf" });
       }
     }
     if visited & PLACE_AFTER_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Error_Condition_Alarm_On", point: "after dmf" });
       }
     }
     if visited & PLACE_AFTER_MMI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
                sysProp_Figure_A_7(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp()) & GUMBO_Library::Allowed_LowerAlarmTemp(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp().degrees) &
                  GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees))) &
-             sysProp_REQ_MMI_4(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure())) {
+             sysProp_REQ_MMI_4(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Error_Condition_Alarm_On", point: "after mmi" });
       }
     }
     if visited & PLACE_AFTER_MMM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
@@ -947,51 +1238,65 @@ impl SysAssert_nominal {
                    (s.get_operator_interface_oip_oit_upper_alarm_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid) |
                    (s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid) |
                    s.get_thermostat_mt_dmf_dmf_internal_failure().flag,
-                 (s.get_thermostat_mt_mmm_mmm_monitor_mode() != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode))))) {
+                 (s.get_thermostat_mt_mmm_mmm_monitor_mode() != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode))))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Error_Condition_Alarm_On", point: "after mmm" });
       }
     }
     if visited & PLACE_AFTER_MA != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              ((s.get_operator_interface_oip_oit_lower_alarm_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid) |
                (s.get_operator_interface_oip_oit_upper_alarm_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid) |
                (s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().status != Isolette_Data_Model::ValueStatus::Valid) |
                s.get_thermostat_mt_dmf_dmf_internal_failure().flag) &
                (s.get_thermostat_mt_mmm_mmm_monitor_mode() != Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode),
-             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Onn))) {
+             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Onn))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Error_Condition_Alarm_On", point: "after ma" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Failed_Mode_Alarm_On", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Failed_Mode_Alarm_On", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Failed_Mode_Alarm_On", point: "before dmf" });
       }
     }
     if visited & PLACE_AFTER_DMF != 0 {
-      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Failed_Mode_Alarm_On", point: "after dmf" });
       }
     }
     if visited & PLACE_AFTER_MMI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
                sysProp_Figure_A_7(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp()) & GUMBO_Library::Allowed_LowerAlarmTemp(s.get_thermostat_mt_mmi_mmi_lower_alarm_temp().degrees) &
-                 GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees)))) {
+                 GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees)))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Failed_Mode_Alarm_On", point: "after mmi" });
       }
     }
     if visited & PLACE_AFTER_MMM != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(sysProp_REQ_MMI_5(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(s.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), s.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), s.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), s.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), s.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag),
@@ -999,55 +1304,64 @@ impl SysAssert_nominal {
                  GUMBO_Library::Allowed_UpperAlarmTemp(s.get_thermostat_mt_mmi_mmi_upper_alarm_temp().degrees))) &
              (impliesL!(
                (s.get_thermostat_mt_mmm_mmm_monitor_mode() == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
-               !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag)))) {
+               !(s.get_thermostat_mt_mmi_mmi_interface_failure().flag)))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Failed_Mode_Alarm_On", point: "after mmm" });
       }
     }
     if visited & PLACE_AFTER_MA != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              (s.get_thermostat_mt_mmm_mmm_monitor_mode() == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode),
-             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Onn))) {
+             (s.get_thermostat_mt_ma_ma_alarm_control() == Isolette_Data_Model::On_Off::Onn))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Failed_Mode_Alarm_On", point: "after ma" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Display_Temp", point: "after oi" });
       }
     }
     if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Display_Temp", point: "at ts_oi_done" });
       }
     }
     if visited & PLACE_BEFORE_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Display_Temp", point: "before drf" });
       }
     }
     if visited & PLACE_AFTER_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+      s.focus(None);
+      s.focus_system(0);
+      if !(sysProp_lower_is_not_higher_than_upper(s.get_operator_interface_oip_oit_lower_desired_tempWstatus(), s.get_operator_interface_oip_oit_upper_desired_tempWstatus())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Display_Temp", point: "after drf" });
       }
     }
     if visited & PLACE_AFTER_MRI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !(impliesL!(
              (s.get_thermostat_rt_mrm_mrm_regulator_mode() == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode),
-             (s.get_thermostat_rt_mri_mri_displayed_temp().degrees == s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().degrees))) {
+             (s.get_thermostat_rt_mri_mri_displayed_temp().degrees == s.get_temperature_sensor_cpi_thermostat_current_tempWstatus().degrees))) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "Normal_Display_Temp", point: "after mri" });
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
+      s.focus(None);
+      s.focus_system(0);
       if !((s.get_thermostat_mt_ma_ma_sv_lastCmd() == s.get_thermostat_mt_ma_ma_sv_lastCmd()) &
              (s.get_thermostat_mt_mmi_mmi_sv_lastCmd() == s.get_thermostat_mt_mmi_mmi_sv_lastCmd()) &
-             (s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode() == s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode())) {
+             (s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode() == s.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode())) && !s.missing() {
         out.report(crate::Event::SysAssertViolation { property: "State_Var_and_Specialization_Exercise_3", point: "after oi" });
       }
-    }
-
-    if self.ready == PLACE_END {
-      self.ready = PLACE_START;
-      self.ready = cascade(self.ready);
     }
   }
 }

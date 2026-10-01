@@ -504,6 +504,11 @@
            perms="r"
            setvar_vaddr="temperature_sensor_cpi_thermostat_air_queue_1"
       />
+      <map mr="Isolette_Single_Sensor_Instance_heat_source_cpi_heat_controller_heat_out_1_Memory_Region"
+           vaddr="0x10_02A_000"
+           perms="r"
+           setvar_vaddr="heat_source_cpi_heat_controller_heat_out_queue_1"
+      />
 
       <!-- BEGIN CONTENT MARKER domain_monitor_process_domain_monitor_thread -->
       <!-- END CONTENT MARKER domain_monitor_process_domain_monitor_thread -->

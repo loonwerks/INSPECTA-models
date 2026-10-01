@@ -40,6 +40,7 @@ impl sys_nominal_monitor_process_sys_nominal_monitor_thread {
     &mut self,
     api: &mut sys_nominal_monitor_process_sys_nominal_monitor_thread_Application_Api<API>)
   {
+    begin_monitor_run(api);
     self.gumbo_monitor(api);
     self.sys_assert_monitor(api);
   }
@@ -75,11 +76,12 @@ impl sys_nominal_monitor_process_sys_nominal_monitor_thread {
     }
 
     let idx = state.current_timeslice as usize;
-    let mut view = MonitorView { api: api };
+    let mut view = MonitorView { api: api, focus: None };
 
     if self.last_index == u32::MAX {
       // First compute phase, check initialization guarantees
       self.components.on_init(&mut view, &mut LogSink);
+      init_checked();
     } else if let Some(prev) = thread_of(self.prev_user_ch[idx]) {
       // the thread that just yielded: check its post-condition
       self.components.on_complete(prev, &mut view, &mut LogSink);
@@ -103,22 +105,38 @@ impl sys_nominal_monitor_process_sys_nominal_monitor_thread {
       let schedule = api.get_sched_schedule();
       buildUserChannelTables(
         &schedule, &mut self.prev_user_ch, &mut self.next_user_ch);
-      observers::sys_nominal::SysAssert_nominal::validate_schedule(&schedule, thread_of, &mut LogSink);
+      observers::sys_nominal::SysAssert_nominal::validate_schedule(schedule.num_timeslices as usize, &schedule.timeslice_ch,
+        &schedule.is_user_partition, thread_of, &mut LogSink);
     }
 
     let idx = state.current_timeslice as usize;
 
     if self.sys_assert_last_index == u32::MAX {
       // First compute phase — initialize ready set and cascade
-      self.sys_assert.on_init();
+      let mut view = MonitorView { api: api, focus: None };
+      self.sys_assert.on_init(&mut view, &mut LogSink);
+      if let Some(next) = thread_of(self.next_user_ch[idx]) {
+        note_dispatch(next);
+        latch_received(next, &mut view);
+      }
       self.sys_assert_last_index = state.current_timeslice;
       return;
     }
 
     // the thread that just yielded: fire its transition and check the assertions
-    let mut view = MonitorView { api: api };
+    let mut view = MonitorView { api: api, focus: None };
     if let Some(prev) = thread_of(self.prev_user_ch[idx]) {
+      producer_completed(prev);
       self.sys_assert.on_complete(prev, &mut view, &mut LogSink);
+    }
+
+    // the thread that runs next: what it receives on an input a composition aliases is
+    // latched now, once the completion above has ended the frame if it was the last --
+    // so it belongs to the frame the thread runs in (the GUMBO layer read it earlier in
+    // this run; the per-run cache gives the same value)
+    if let Some(next) = thread_of(self.next_user_ch[idx]) {
+      note_dispatch(next);
+      latch_received(next, &mut view);
     }
 
     self.sys_assert_last_index = state.current_timeslice;
@@ -197,20 +215,317 @@ pub fn thread_of(ch: u32) -> Option<observers::Thread> {
   }
 }
 
+
+/// One reader per thread, plus the system layer.
+const READERS: usize = 4;
+
+fn reader_index(focus: Option<observers::Thread>) -> usize {
+  match focus {
+    Some(t) => t as usize,
+    None => READERS - 1,
+  }
+}
+
+/// An event port's events so far and the latest, the count each reader last saw, and,
+/// for the system layer, what the producer's latest dispatch sent and in which frame.
+struct EventTrack<T> {
+  seq: u32,
+  /// seq when the producer was last dispatched
+  dispatch_seq: u32,
+  value: Option<T>,
+  sys_frame: Option<u32>,
+  sys_value: Option<T>,
+  seen: [u32; READERS],
+}
+
+/// The system layer's frame, counted from the first.
+static mut FRAME: u32 = 0;
+
+static mut EV_get_tcp_tct_fanCmd: EventTrack<TempControl_SysVerif::FanCmd> = EventTrack { seq: 0, dispatch_seq: 0, value: None, sys_frame: None, sys_value: None, seen: [0; READERS] };
+static mut EV_get_tsp_tst_currentTemp: EventTrack<TempControl_SysVerif::Temperature> = EventTrack { seq: 0, dispatch_seq: 0, value: None, sys_frame: None, sys_value: None, seen: [0; READERS] };
+static mut EV_get_fp_ft_fanAck: EventTrack<TempControl_SysVerif::FanAck> = EventTrack { seq: 0, dispatch_seq: 0, value: None, sys_frame: None, sys_value: None, seen: [0; READERS] };
+static mut EV_get_tcp_tct_setPoint: EventTrack<TempControl_SysVerif::SetPoint> = EventTrack { seq: 0, dispatch_seq: 0, value: None, sys_frame: None, sys_value: None, seen: [0; READERS] };
+
+// What this monitor run has read: one value per getter, and per reader for an event
+// port.  Cleared by begin_monitor_run at the start of every run.
+struct ViewCache {
+  get_tcp_tct_sv_currentFanState: Option<TempControl_SysVerif::FanCmd>,
+  get_tcp_tct_sv_currentSetPoint: Option<TempControl_SysVerif::SetPoint>,
+  get_tcp_tct_sv_fanError: Option<bool>,
+  get_tcp_tct_sv_latestTemp: Option<TempControl_SysVerif::Temperature>,
+  get_tcp_tct_fanCmd: [Option<Option<TempControl_SysVerif::FanCmd>>; READERS],
+  get_tsp_tst_currentTemp: [Option<Option<TempControl_SysVerif::Temperature>>; READERS],
+  get_fp_ft_fanAck: [Option<Option<TempControl_SysVerif::FanAck>>; READERS],
+  get_tcp_tct_setPoint: [Option<Option<TempControl_SysVerif::SetPoint>>; READERS],
+}
+
+static mut VIEW_CACHE: ViewCache = ViewCache {
+  get_tcp_tct_sv_currentFanState: None,
+  get_tcp_tct_sv_currentSetPoint: None,
+  get_tcp_tct_sv_fanError: None,
+  get_tcp_tct_sv_latestTemp: None,
+  get_tcp_tct_fanCmd: [None; READERS],
+  get_tsp_tst_currentTemp: [None; READERS],
+  get_fp_ft_fanAck: [None; READERS],
+  get_tcp_tct_setPoint: [None; READERS],
+};
+
+pub fn begin_monitor_run<API: sys_nominal_monitor_process_sys_nominal_monitor_thread_Full_Api>(api: &mut sys_nominal_monitor_process_sys_nominal_monitor_thread_Application_Api<API>) {
+  unsafe {
+    while let Some(v) = api.get_tcp_tct_fanCmd() {
+      EV_get_tcp_tct_fanCmd.seq += 1;
+      EV_get_tcp_tct_fanCmd.value = Some(v.clone());
+      EV_get_tcp_tct_fanCmd.sys_frame = Some(FRAME);
+      EV_get_tcp_tct_fanCmd.sys_value = Some(v);
+    }
+    while let Some(v) = api.get_tsp_tst_currentTemp() {
+      EV_get_tsp_tst_currentTemp.seq += 1;
+      EV_get_tsp_tst_currentTemp.value = Some(v.clone());
+      EV_get_tsp_tst_currentTemp.sys_frame = Some(FRAME);
+      EV_get_tsp_tst_currentTemp.sys_value = Some(v);
+    }
+    while let Some(v) = api.get_fp_ft_fanAck() {
+      EV_get_fp_ft_fanAck.seq += 1;
+      EV_get_fp_ft_fanAck.value = Some(v.clone());
+      EV_get_fp_ft_fanAck.sys_frame = Some(FRAME);
+      EV_get_fp_ft_fanAck.sys_value = Some(v);
+    }
+    while let Some(v) = api.get_tcp_tct_setPoint() {
+      EV_get_tcp_tct_setPoint.seq += 1;
+      EV_get_tcp_tct_setPoint.value = Some(v.clone());
+      EV_get_tcp_tct_setPoint.sys_frame = Some(FRAME);
+      EV_get_tcp_tct_setPoint.sys_value = Some(v);
+    }
+    VIEW_CACHE = ViewCache {
+      get_tcp_tct_sv_currentFanState: None,
+      get_tcp_tct_sv_currentSetPoint: None,
+      get_tcp_tct_sv_fanError: None,
+      get_tcp_tct_sv_latestTemp: None,
+      get_tcp_tct_fanCmd: [None; READERS],
+      get_tsp_tst_currentTemp: [None; READERS],
+      get_fp_ft_fanAck: [None; READERS],
+      get_tcp_tct_setPoint: [None; READERS],
+    };
+  }
+}
+
 // The contract checks read ports and state variables through this monitor's API.
 pub struct MonitorView<'a, API: sys_nominal_monitor_process_sys_nominal_monitor_thread_Full_Api> {
   pub api: &'a mut sys_nominal_monitor_process_sys_nominal_monitor_thread_Application_Api<API>,
+  /// the thread whose check is reading, or None for the system layer
+  pub focus: Option<observers::Thread>,
+}
+
+
+/// `t` is about to be dispatched: latch what it receives on each connected input a
+/// composition aliases, for the system assertions (see ReceivedGetter).
+pub fn latch_received<'a, API: sys_nominal_monitor_process_sys_nominal_monitor_thread_Full_Api>(t: observers::Thread, view: &mut MonitorView<'a, API>) {
+  let _ = (t, view); // no alias of a connected input
+}
+
+/// `t` is about to be dispatched: what its outputs carry from here on is its next dispatch's.
+pub fn note_dispatch(t: observers::Thread) {
+  unsafe {
+    match t {
+      observers::Thread::tcp_tct => {
+        EV_get_tcp_tct_fanCmd.dispatch_seq = EV_get_tcp_tct_fanCmd.seq;
+        EV_get_tcp_tct_setPoint.dispatch_seq = EV_get_tcp_tct_setPoint.seq;
+      }
+      observers::Thread::tsp_tst => {
+        EV_get_tsp_tst_currentTemp.dispatch_seq = EV_get_tsp_tst_currentTemp.seq;
+      }
+      observers::Thread::fp_ft => {
+        EV_get_fp_ft_fanAck.dispatch_seq = EV_get_fp_ft_fanAck.seq;
+      }
+      _ => {}
+    }
+  }
+}
+
+/// `t` has completed: an output it sent nothing on since its dispatch carries nothing this frame.
+pub fn producer_completed(t: observers::Thread) {
+  unsafe {
+    match t {
+      observers::Thread::tcp_tct => {
+        if EV_get_tcp_tct_fanCmd.seq == EV_get_tcp_tct_fanCmd.dispatch_seq {
+          EV_get_tcp_tct_fanCmd.sys_frame = Some(FRAME);
+          EV_get_tcp_tct_fanCmd.sys_value = None;
+        }
+        if EV_get_tcp_tct_setPoint.seq == EV_get_tcp_tct_setPoint.dispatch_seq {
+          EV_get_tcp_tct_setPoint.sys_frame = Some(FRAME);
+          EV_get_tcp_tct_setPoint.sys_value = None;
+        }
+      }
+      observers::Thread::tsp_tst => {
+        if EV_get_tsp_tst_currentTemp.seq == EV_get_tsp_tst_currentTemp.dispatch_seq {
+          EV_get_tsp_tst_currentTemp.sys_frame = Some(FRAME);
+          EV_get_tsp_tst_currentTemp.sys_value = None;
+        }
+      }
+      observers::Thread::fp_ft => {
+        if EV_get_fp_ft_fanAck.seq == EV_get_fp_ft_fanAck.dispatch_seq {
+          EV_get_fp_ft_fanAck.sys_frame = Some(FRAME);
+          EV_get_fp_ft_fanAck.sys_value = None;
+        }
+      }
+      _ => {}
+    }
+  }
+}
+
+/// The initialization checks are done: what a thread sent while initializing that they
+/// did not read is not its first dispatch's output.
+pub fn init_checked() {
+  unsafe {
+    EV_get_tcp_tct_fanCmd.seen[observers::Thread::tcp_tct as usize] = EV_get_tcp_tct_fanCmd.seq;
+    EV_get_tsp_tst_currentTemp.seen[observers::Thread::tsp_tst as usize] = EV_get_tsp_tst_currentTemp.seq;
+    EV_get_fp_ft_fanAck.seen[observers::Thread::fp_ft as usize] = EV_get_fp_ft_fanAck.seq;
+    EV_get_tcp_tct_setPoint.seen[observers::Thread::tcp_tct as usize] = EV_get_tcp_tct_setPoint.seq;
+  }
 }
 
 impl<'a, API: sys_nominal_monitor_process_sys_nominal_monitor_thread_Full_Api> observers::SystemView for MonitorView<'a, API> {
-  fn get_tcp_tct_sv_currentFanState(&mut self) -> TempControl_SysVerif::FanCmd { self.api.get_tcp_tct_sv_currentFanState() }
-  fn get_tcp_tct_sv_currentSetPoint(&mut self) -> TempControl_SysVerif::SetPoint { self.api.get_tcp_tct_sv_currentSetPoint() }
-  fn get_tcp_tct_sv_fanError(&mut self) -> bool { self.api.get_tcp_tct_sv_fanError() }
-  fn get_tcp_tct_sv_latestTemp(&mut self) -> TempControl_SysVerif::Temperature { self.api.get_tcp_tct_sv_latestTemp() }
-  fn get_tcp_tct_fanCmd(&mut self) -> Option<TempControl_SysVerif::FanCmd> { self.api.get_tcp_tct_fanCmd() }
-  fn get_tsp_tst_currentTemp(&mut self) -> Option<TempControl_SysVerif::Temperature> { self.api.get_tsp_tst_currentTemp() }
-  fn get_fp_ft_fanAck(&mut self) -> Option<TempControl_SysVerif::FanAck> { self.api.get_fp_ft_fanAck() }
-  fn get_tcp_tct_setPoint(&mut self) -> Option<TempControl_SysVerif::SetPoint> { self.api.get_tcp_tct_setPoint() }
+  fn focus(&mut self, t: Option<observers::Thread>) {
+    self.focus = t;
+  }
+
+  fn frame_ended(&mut self, _composition: usize) {
+    unsafe {
+      FRAME = FRAME.wrapping_add(1);
+      VIEW_CACHE.get_tcp_tct_fanCmd[READERS - 1] = None;
+      VIEW_CACHE.get_tsp_tst_currentTemp[READERS - 1] = None;
+      VIEW_CACHE.get_fp_ft_fanAck[READERS - 1] = None;
+      VIEW_CACHE.get_tcp_tct_setPoint[READERS - 1] = None;
+    }
+  }
+
+  fn get_tcp_tct_sv_currentFanState(&mut self) -> TempControl_SysVerif::FanCmd {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_tcp_tct_sv_currentFanState {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_tcp_tct_sv_currentFanState();
+    unsafe { VIEW_CACHE.get_tcp_tct_sv_currentFanState = Some(v.clone()); }
+    v
+  }
+
+  fn get_tcp_tct_sv_currentSetPoint(&mut self) -> TempControl_SysVerif::SetPoint {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_tcp_tct_sv_currentSetPoint {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_tcp_tct_sv_currentSetPoint();
+    unsafe { VIEW_CACHE.get_tcp_tct_sv_currentSetPoint = Some(v.clone()); }
+    v
+  }
+
+  fn get_tcp_tct_sv_fanError(&mut self) -> bool {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_tcp_tct_sv_fanError {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_tcp_tct_sv_fanError();
+    unsafe { VIEW_CACHE.get_tcp_tct_sv_fanError = Some(v.clone()); }
+    v
+  }
+
+  fn get_tcp_tct_sv_latestTemp(&mut self) -> TempControl_SysVerif::Temperature {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_tcp_tct_sv_latestTemp {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_tcp_tct_sv_latestTemp();
+    unsafe { VIEW_CACHE.get_tcp_tct_sv_latestTemp = Some(v.clone()); }
+    v
+  }
+
+  fn get_tcp_tct_fanCmd(&mut self) -> Option<TempControl_SysVerif::FanCmd> {
+    let r = reader_index(self.focus);
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_tcp_tct_fanCmd[r] {
+        return v.clone();
+      }
+      let (present, value) = if r == READERS - 1 {
+        let p = EV_get_tcp_tct_fanCmd.sys_frame == Some(FRAME) && EV_get_tcp_tct_fanCmd.sys_value.is_some();
+        (p, if p { EV_get_tcp_tct_fanCmd.sys_value.clone() } else { None })
+      } else {
+        let p = EV_get_tcp_tct_fanCmd.seen[r] < EV_get_tcp_tct_fanCmd.seq;
+        (p, if p { EV_get_tcp_tct_fanCmd.value.clone() } else { None })
+      };
+      let _ = (&present, &value);
+      EV_get_tcp_tct_fanCmd.seen[r] = EV_get_tcp_tct_fanCmd.seq;
+      let v: Option<TempControl_SysVerif::FanCmd> = value;
+      VIEW_CACHE.get_tcp_tct_fanCmd[r] = Some(v.clone());
+      v
+    }
+  }
+
+  fn get_tsp_tst_currentTemp(&mut self) -> Option<TempControl_SysVerif::Temperature> {
+    let r = reader_index(self.focus);
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_tsp_tst_currentTemp[r] {
+        return v.clone();
+      }
+      let (present, value) = if r == READERS - 1 {
+        let p = EV_get_tsp_tst_currentTemp.sys_frame == Some(FRAME) && EV_get_tsp_tst_currentTemp.sys_value.is_some();
+        (p, if p { EV_get_tsp_tst_currentTemp.sys_value.clone() } else { None })
+      } else {
+        let p = EV_get_tsp_tst_currentTemp.seen[r] < EV_get_tsp_tst_currentTemp.seq;
+        (p, if p { EV_get_tsp_tst_currentTemp.value.clone() } else { None })
+      };
+      let _ = (&present, &value);
+      EV_get_tsp_tst_currentTemp.seen[r] = EV_get_tsp_tst_currentTemp.seq;
+      let v: Option<TempControl_SysVerif::Temperature> = value;
+      VIEW_CACHE.get_tsp_tst_currentTemp[r] = Some(v.clone());
+      v
+    }
+  }
+
+  fn get_fp_ft_fanAck(&mut self) -> Option<TempControl_SysVerif::FanAck> {
+    let r = reader_index(self.focus);
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_fp_ft_fanAck[r] {
+        return v.clone();
+      }
+      let (present, value) = if r == READERS - 1 {
+        let p = EV_get_fp_ft_fanAck.sys_frame == Some(FRAME) && EV_get_fp_ft_fanAck.sys_value.is_some();
+        (p, if p { EV_get_fp_ft_fanAck.sys_value.clone() } else { None })
+      } else {
+        let p = EV_get_fp_ft_fanAck.seen[r] < EV_get_fp_ft_fanAck.seq;
+        (p, if p { EV_get_fp_ft_fanAck.value.clone() } else { None })
+      };
+      let _ = (&present, &value);
+      EV_get_fp_ft_fanAck.seen[r] = EV_get_fp_ft_fanAck.seq;
+      let v: Option<TempControl_SysVerif::FanAck> = value;
+      VIEW_CACHE.get_fp_ft_fanAck[r] = Some(v.clone());
+      v
+    }
+  }
+
+  fn get_tcp_tct_setPoint(&mut self) -> Option<TempControl_SysVerif::SetPoint> {
+    let r = reader_index(self.focus);
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_tcp_tct_setPoint[r] {
+        return v.clone();
+      }
+      let (present, value) = if r == READERS - 1 {
+        let p = EV_get_tcp_tct_setPoint.sys_frame == Some(FRAME) && EV_get_tcp_tct_setPoint.sys_value.is_some();
+        (p, if p { EV_get_tcp_tct_setPoint.sys_value.clone() } else { None })
+      } else {
+        let p = EV_get_tcp_tct_setPoint.seen[r] < EV_get_tcp_tct_setPoint.seq;
+        (p, if p { EV_get_tcp_tct_setPoint.value.clone() } else { None })
+      };
+      let _ = (&present, &value);
+      EV_get_tcp_tct_setPoint.seen[r] = EV_get_tcp_tct_setPoint.seq;
+      let v: Option<TempControl_SysVerif::SetPoint> = value;
+      VIEW_CACHE.get_tcp_tct_setPoint[r] = Some(v.clone());
+      v
+    }
+  }
 }
 
 // Reports a violation the way the monitors always have: as log lines.
@@ -238,6 +553,8 @@ impl observers::ViolationSink for LogSink {
       observers::Event::CepPostExcused { thread } => {
         log::warn!("{} post check skipped: assumption not met", thread);
       }
+      // never raised here: the monitor's reads are never "missing"
+      observers::Event::CheckSkipped { .. } => {}
       observers::Event::SysAssertViolation { property, point } => {
         log::warn!("*** SYS ASSERT VIOLATION: property {}, {} ***", property, point);
       }

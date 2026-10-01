@@ -7,13 +7,13 @@ verus! {
 
   #[repr(C)]
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-  pub struct PreState_thermostat_rt_drf_drf {
+  pub struct PreState_tsp_tst {
   }
 
   #[repr(C)]
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-  pub struct PostState_thermostat_rt_drf_drf {
-    pub api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
+  pub struct PostState_tsp_tst {
+    pub api_currentTemp: Option<TempControl_SysVerif::Temperature>,
   }
 
 }

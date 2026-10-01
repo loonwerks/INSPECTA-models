@@ -40,6 +40,7 @@ impl sys_nominal_monitor_process_sys_nominal_monitor_thread {
     &mut self,
     api: &mut sys_nominal_monitor_process_sys_nominal_monitor_thread_Application_Api<API>)
   {
+    begin_monitor_run(api);
     self.gumbo_monitor(api);
     self.sys_assert_monitor(api);
   }
@@ -75,11 +76,12 @@ impl sys_nominal_monitor_process_sys_nominal_monitor_thread {
     }
 
     let idx = state.current_timeslice as usize;
-    let mut view = MonitorView { api: api };
+    let mut view = MonitorView { api: api, focus: None };
 
     if self.last_index == u32::MAX {
       // First compute phase, check initialization guarantees
       self.components.on_init(&mut view, &mut LogSink);
+      init_checked();
     } else if let Some(prev) = thread_of(self.prev_user_ch[idx]) {
       // the thread that just yielded: check its post-condition
       self.components.on_complete(prev, &mut view, &mut LogSink);
@@ -103,22 +105,38 @@ impl sys_nominal_monitor_process_sys_nominal_monitor_thread {
       let schedule = api.get_sched_schedule();
       buildUserChannelTables(
         &schedule, &mut self.prev_user_ch, &mut self.next_user_ch);
-      observers::sys_nominal::SysAssert_nominal::validate_schedule(&schedule, thread_of, &mut LogSink);
+      observers::sys_nominal::SysAssert_nominal::validate_schedule(schedule.num_timeslices as usize, &schedule.timeslice_ch,
+        &schedule.is_user_partition, thread_of, &mut LogSink);
     }
 
     let idx = state.current_timeslice as usize;
 
     if self.sys_assert_last_index == u32::MAX {
       // First compute phase — initialize ready set and cascade
-      self.sys_assert.on_init();
+      let mut view = MonitorView { api: api, focus: None };
+      self.sys_assert.on_init(&mut view, &mut LogSink);
+      if let Some(next) = thread_of(self.next_user_ch[idx]) {
+        note_dispatch(next);
+        latch_received(next, &mut view);
+      }
       self.sys_assert_last_index = state.current_timeslice;
       return;
     }
 
     // the thread that just yielded: fire its transition and check the assertions
-    let mut view = MonitorView { api: api };
+    let mut view = MonitorView { api: api, focus: None };
     if let Some(prev) = thread_of(self.prev_user_ch[idx]) {
+      producer_completed(prev);
       self.sys_assert.on_complete(prev, &mut view, &mut LogSink);
+    }
+
+    // the thread that runs next: what it receives on an input a composition aliases is
+    // latched now, once the completion above has ended the frame if it was the last --
+    // so it belongs to the frame the thread runs in (the GUMBO layer read it earlier in
+    // this run; the per-run cache gives the same value)
+    if let Some(next) = thread_of(self.next_user_ch[idx]) {
+      note_dispatch(next);
+      latch_received(next, &mut view);
     }
 
     self.sys_assert_last_index = state.current_timeslice;
@@ -221,37 +239,407 @@ pub fn thread_of(ch: u32) -> Option<observers::Thread> {
   }
 }
 
+
+// What this monitor run has read: one value per getter, and per reader for an event
+// port.  Cleared by begin_monitor_run at the start of every run.
+struct ViewCache {
+  get_thermostat_rt_mri_mri_displayed_temp: Option<Isolette_Data_Model::Temp_i>,
+  get_thermostat_rt_mri_mri_interface_failure: Option<Isolette_Data_Model::Failure_Flag_i>,
+  get_thermostat_rt_mri_mri_lower_desired_temp: Option<Isolette_Data_Model::Temp_i>,
+  get_thermostat_rt_mri_mri_regulator_status: Option<Isolette_Data_Model::Status>,
+  get_thermostat_rt_mri_mri_upper_desired_temp: Option<Isolette_Data_Model::Temp_i>,
+  get_temperature_sensor_cpi_thermostat_current_tempWstatus: Option<Isolette_Data_Model::TempWstatus_i>,
+  get_operator_interface_oip_oit_lower_desired_tempWstatus: Option<Isolette_Data_Model::TempWstatus_i>,
+  get_thermostat_rt_mrm_mrm_regulator_mode: Option<Isolette_Data_Model::Regulator_Mode>,
+  get_operator_interface_oip_oit_upper_desired_tempWstatus: Option<Isolette_Data_Model::TempWstatus_i>,
+  get_thermostat_rt_mhs_mhs_sv_lastCmd: Option<Isolette_Data_Model::On_Off>,
+  get_thermostat_rt_mhs_mhs_heat_control: Option<Isolette_Data_Model::On_Off>,
+  get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode: Option<Isolette_Data_Model::Regulator_Mode>,
+  get_thermostat_rt_drf_drf_internal_failure: Option<Isolette_Data_Model::Failure_Flag_i>,
+  get_thermostat_mt_mmi_mmi_sv_lastCmd: Option<Isolette_Data_Model::On_Off>,
+  get_thermostat_mt_mmi_mmi_interface_failure: Option<Isolette_Data_Model::Failure_Flag_i>,
+  get_thermostat_mt_mmi_mmi_lower_alarm_temp: Option<Isolette_Data_Model::Temp_i>,
+  get_thermostat_mt_mmi_mmi_monitor_status: Option<Isolette_Data_Model::Status>,
+  get_thermostat_mt_mmi_mmi_upper_alarm_temp: Option<Isolette_Data_Model::Temp_i>,
+  get_operator_interface_oip_oit_lower_alarm_tempWstatus: Option<Isolette_Data_Model::TempWstatus_i>,
+  get_thermostat_mt_mmm_mmm_monitor_mode: Option<Isolette_Data_Model::Monitor_Mode>,
+  get_operator_interface_oip_oit_upper_alarm_tempWstatus: Option<Isolette_Data_Model::TempWstatus_i>,
+  get_thermostat_mt_ma_ma_sv_lastCmd: Option<Isolette_Data_Model::On_Off>,
+  get_thermostat_mt_ma_ma_alarm_control: Option<Isolette_Data_Model::On_Off>,
+  get_thermostat_mt_mmm_mmm_sv_lastMonitorMode: Option<Isolette_Data_Model::Monitor_Mode>,
+  get_thermostat_mt_dmf_dmf_internal_failure: Option<Isolette_Data_Model::Failure_Flag_i>,
+}
+
+static mut VIEW_CACHE: ViewCache = ViewCache {
+  get_thermostat_rt_mri_mri_displayed_temp: None,
+  get_thermostat_rt_mri_mri_interface_failure: None,
+  get_thermostat_rt_mri_mri_lower_desired_temp: None,
+  get_thermostat_rt_mri_mri_regulator_status: None,
+  get_thermostat_rt_mri_mri_upper_desired_temp: None,
+  get_temperature_sensor_cpi_thermostat_current_tempWstatus: None,
+  get_operator_interface_oip_oit_lower_desired_tempWstatus: None,
+  get_thermostat_rt_mrm_mrm_regulator_mode: None,
+  get_operator_interface_oip_oit_upper_desired_tempWstatus: None,
+  get_thermostat_rt_mhs_mhs_sv_lastCmd: None,
+  get_thermostat_rt_mhs_mhs_heat_control: None,
+  get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode: None,
+  get_thermostat_rt_drf_drf_internal_failure: None,
+  get_thermostat_mt_mmi_mmi_sv_lastCmd: None,
+  get_thermostat_mt_mmi_mmi_interface_failure: None,
+  get_thermostat_mt_mmi_mmi_lower_alarm_temp: None,
+  get_thermostat_mt_mmi_mmi_monitor_status: None,
+  get_thermostat_mt_mmi_mmi_upper_alarm_temp: None,
+  get_operator_interface_oip_oit_lower_alarm_tempWstatus: None,
+  get_thermostat_mt_mmm_mmm_monitor_mode: None,
+  get_operator_interface_oip_oit_upper_alarm_tempWstatus: None,
+  get_thermostat_mt_ma_ma_sv_lastCmd: None,
+  get_thermostat_mt_ma_ma_alarm_control: None,
+  get_thermostat_mt_mmm_mmm_sv_lastMonitorMode: None,
+  get_thermostat_mt_dmf_dmf_internal_failure: None,
+};
+
+pub fn begin_monitor_run<API: sys_nominal_monitor_process_sys_nominal_monitor_thread_Full_Api>(api: &mut sys_nominal_monitor_process_sys_nominal_monitor_thread_Application_Api<API>) {
+  unsafe {
+    let _ = api; // no event port is read
+    VIEW_CACHE = ViewCache {
+      get_thermostat_rt_mri_mri_displayed_temp: None,
+      get_thermostat_rt_mri_mri_interface_failure: None,
+      get_thermostat_rt_mri_mri_lower_desired_temp: None,
+      get_thermostat_rt_mri_mri_regulator_status: None,
+      get_thermostat_rt_mri_mri_upper_desired_temp: None,
+      get_temperature_sensor_cpi_thermostat_current_tempWstatus: None,
+      get_operator_interface_oip_oit_lower_desired_tempWstatus: None,
+      get_thermostat_rt_mrm_mrm_regulator_mode: None,
+      get_operator_interface_oip_oit_upper_desired_tempWstatus: None,
+      get_thermostat_rt_mhs_mhs_sv_lastCmd: None,
+      get_thermostat_rt_mhs_mhs_heat_control: None,
+      get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode: None,
+      get_thermostat_rt_drf_drf_internal_failure: None,
+      get_thermostat_mt_mmi_mmi_sv_lastCmd: None,
+      get_thermostat_mt_mmi_mmi_interface_failure: None,
+      get_thermostat_mt_mmi_mmi_lower_alarm_temp: None,
+      get_thermostat_mt_mmi_mmi_monitor_status: None,
+      get_thermostat_mt_mmi_mmi_upper_alarm_temp: None,
+      get_operator_interface_oip_oit_lower_alarm_tempWstatus: None,
+      get_thermostat_mt_mmm_mmm_monitor_mode: None,
+      get_operator_interface_oip_oit_upper_alarm_tempWstatus: None,
+      get_thermostat_mt_ma_ma_sv_lastCmd: None,
+      get_thermostat_mt_ma_ma_alarm_control: None,
+      get_thermostat_mt_mmm_mmm_sv_lastMonitorMode: None,
+      get_thermostat_mt_dmf_dmf_internal_failure: None,
+    };
+  }
+}
+
 // The contract checks read ports and state variables through this monitor's API.
 pub struct MonitorView<'a, API: sys_nominal_monitor_process_sys_nominal_monitor_thread_Full_Api> {
   pub api: &'a mut sys_nominal_monitor_process_sys_nominal_monitor_thread_Application_Api<API>,
+  /// the thread whose check is reading, or None for the system layer
+  pub focus: Option<observers::Thread>,
+}
+
+
+/// `t` is about to be dispatched: latch what it receives on each connected input a
+/// composition aliases, for the system assertions (see ReceivedGetter).
+pub fn latch_received<'a, API: sys_nominal_monitor_process_sys_nominal_monitor_thread_Full_Api>(t: observers::Thread, view: &mut MonitorView<'a, API>) {
+  let _ = (t, view); // no alias of a connected input
+}
+
+/// `t` is about to be dispatched: what its outputs carry from here on is its next dispatch's.
+pub fn note_dispatch(t: observers::Thread) {
+  let _ = t;
+}
+
+/// `t` has completed: an output it sent nothing on since its dispatch carries nothing this frame.
+pub fn producer_completed(t: observers::Thread) {
+  let _ = t;
+}
+
+/// The initialization checks are done: what a thread sent while initializing that they
+/// did not read is not its first dispatch's output.
+pub fn init_checked() {
+  // no thread's own event output is read
 }
 
 impl<'a, API: sys_nominal_monitor_process_sys_nominal_monitor_thread_Full_Api> observers::SystemView for MonitorView<'a, API> {
-  fn get_thermostat_rt_mri_mri_displayed_temp(&mut self) -> Isolette_Data_Model::Temp_i { self.api.get_thermostat_rt_mri_mri_displayed_temp() }
-  fn get_thermostat_rt_mri_mri_interface_failure(&mut self) -> Isolette_Data_Model::Failure_Flag_i { self.api.get_thermostat_rt_mri_mri_interface_failure() }
-  fn get_thermostat_rt_mri_mri_lower_desired_temp(&mut self) -> Isolette_Data_Model::Temp_i { self.api.get_thermostat_rt_mri_mri_lower_desired_temp() }
-  fn get_thermostat_rt_mri_mri_regulator_status(&mut self) -> Isolette_Data_Model::Status { self.api.get_thermostat_rt_mri_mri_regulator_status() }
-  fn get_thermostat_rt_mri_mri_upper_desired_temp(&mut self) -> Isolette_Data_Model::Temp_i { self.api.get_thermostat_rt_mri_mri_upper_desired_temp() }
-  fn get_temperature_sensor_cpi_thermostat_current_tempWstatus(&mut self) -> Isolette_Data_Model::TempWstatus_i { self.api.get_temperature_sensor_cpi_thermostat_current_tempWstatus() }
-  fn get_operator_interface_oip_oit_lower_desired_tempWstatus(&mut self) -> Isolette_Data_Model::TempWstatus_i { self.api.get_operator_interface_oip_oit_lower_desired_tempWstatus() }
-  fn get_thermostat_rt_mrm_mrm_regulator_mode(&mut self) -> Isolette_Data_Model::Regulator_Mode { self.api.get_thermostat_rt_mrm_mrm_regulator_mode() }
-  fn get_operator_interface_oip_oit_upper_desired_tempWstatus(&mut self) -> Isolette_Data_Model::TempWstatus_i { self.api.get_operator_interface_oip_oit_upper_desired_tempWstatus() }
-  fn get_thermostat_rt_mhs_mhs_sv_lastCmd(&mut self) -> Isolette_Data_Model::On_Off { self.api.get_thermostat_rt_mhs_mhs_sv_lastCmd() }
-  fn get_thermostat_rt_mhs_mhs_heat_control(&mut self) -> Isolette_Data_Model::On_Off { self.api.get_thermostat_rt_mhs_mhs_heat_control() }
-  fn get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(&mut self) -> Isolette_Data_Model::Regulator_Mode { self.api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode() }
-  fn get_thermostat_rt_drf_drf_internal_failure(&mut self) -> Isolette_Data_Model::Failure_Flag_i { self.api.get_thermostat_rt_drf_drf_internal_failure() }
-  fn get_thermostat_mt_mmi_mmi_sv_lastCmd(&mut self) -> Isolette_Data_Model::On_Off { self.api.get_thermostat_mt_mmi_mmi_sv_lastCmd() }
-  fn get_thermostat_mt_mmi_mmi_interface_failure(&mut self) -> Isolette_Data_Model::Failure_Flag_i { self.api.get_thermostat_mt_mmi_mmi_interface_failure() }
-  fn get_thermostat_mt_mmi_mmi_lower_alarm_temp(&mut self) -> Isolette_Data_Model::Temp_i { self.api.get_thermostat_mt_mmi_mmi_lower_alarm_temp() }
-  fn get_thermostat_mt_mmi_mmi_monitor_status(&mut self) -> Isolette_Data_Model::Status { self.api.get_thermostat_mt_mmi_mmi_monitor_status() }
-  fn get_thermostat_mt_mmi_mmi_upper_alarm_temp(&mut self) -> Isolette_Data_Model::Temp_i { self.api.get_thermostat_mt_mmi_mmi_upper_alarm_temp() }
-  fn get_operator_interface_oip_oit_lower_alarm_tempWstatus(&mut self) -> Isolette_Data_Model::TempWstatus_i { self.api.get_operator_interface_oip_oit_lower_alarm_tempWstatus() }
-  fn get_thermostat_mt_mmm_mmm_monitor_mode(&mut self) -> Isolette_Data_Model::Monitor_Mode { self.api.get_thermostat_mt_mmm_mmm_monitor_mode() }
-  fn get_operator_interface_oip_oit_upper_alarm_tempWstatus(&mut self) -> Isolette_Data_Model::TempWstatus_i { self.api.get_operator_interface_oip_oit_upper_alarm_tempWstatus() }
-  fn get_thermostat_mt_ma_ma_sv_lastCmd(&mut self) -> Isolette_Data_Model::On_Off { self.api.get_thermostat_mt_ma_ma_sv_lastCmd() }
-  fn get_thermostat_mt_ma_ma_alarm_control(&mut self) -> Isolette_Data_Model::On_Off { self.api.get_thermostat_mt_ma_ma_alarm_control() }
-  fn get_thermostat_mt_mmm_mmm_sv_lastMonitorMode(&mut self) -> Isolette_Data_Model::Monitor_Mode { self.api.get_thermostat_mt_mmm_mmm_sv_lastMonitorMode() }
-  fn get_thermostat_mt_dmf_dmf_internal_failure(&mut self) -> Isolette_Data_Model::Failure_Flag_i { self.api.get_thermostat_mt_dmf_dmf_internal_failure() }
+  fn focus(&mut self, t: Option<observers::Thread>) {
+    self.focus = t;
+  }
+
+  fn get_thermostat_rt_mri_mri_displayed_temp(&mut self) -> Isolette_Data_Model::Temp_i {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_rt_mri_mri_displayed_temp {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_rt_mri_mri_displayed_temp();
+    unsafe { VIEW_CACHE.get_thermostat_rt_mri_mri_displayed_temp = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_rt_mri_mri_interface_failure(&mut self) -> Isolette_Data_Model::Failure_Flag_i {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_rt_mri_mri_interface_failure {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_rt_mri_mri_interface_failure();
+    unsafe { VIEW_CACHE.get_thermostat_rt_mri_mri_interface_failure = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_rt_mri_mri_lower_desired_temp(&mut self) -> Isolette_Data_Model::Temp_i {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_rt_mri_mri_lower_desired_temp {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_rt_mri_mri_lower_desired_temp();
+    unsafe { VIEW_CACHE.get_thermostat_rt_mri_mri_lower_desired_temp = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_rt_mri_mri_regulator_status(&mut self) -> Isolette_Data_Model::Status {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_rt_mri_mri_regulator_status {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_rt_mri_mri_regulator_status();
+    unsafe { VIEW_CACHE.get_thermostat_rt_mri_mri_regulator_status = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_rt_mri_mri_upper_desired_temp(&mut self) -> Isolette_Data_Model::Temp_i {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_rt_mri_mri_upper_desired_temp {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_rt_mri_mri_upper_desired_temp();
+    unsafe { VIEW_CACHE.get_thermostat_rt_mri_mri_upper_desired_temp = Some(v.clone()); }
+    v
+  }
+
+  fn get_temperature_sensor_cpi_thermostat_current_tempWstatus(&mut self) -> Isolette_Data_Model::TempWstatus_i {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_temperature_sensor_cpi_thermostat_current_tempWstatus {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_temperature_sensor_cpi_thermostat_current_tempWstatus();
+    unsafe { VIEW_CACHE.get_temperature_sensor_cpi_thermostat_current_tempWstatus = Some(v.clone()); }
+    v
+  }
+
+  fn get_operator_interface_oip_oit_lower_desired_tempWstatus(&mut self) -> Isolette_Data_Model::TempWstatus_i {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_operator_interface_oip_oit_lower_desired_tempWstatus {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_operator_interface_oip_oit_lower_desired_tempWstatus();
+    unsafe { VIEW_CACHE.get_operator_interface_oip_oit_lower_desired_tempWstatus = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_rt_mrm_mrm_regulator_mode(&mut self) -> Isolette_Data_Model::Regulator_Mode {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_rt_mrm_mrm_regulator_mode {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_rt_mrm_mrm_regulator_mode();
+    unsafe { VIEW_CACHE.get_thermostat_rt_mrm_mrm_regulator_mode = Some(v.clone()); }
+    v
+  }
+
+  fn get_operator_interface_oip_oit_upper_desired_tempWstatus(&mut self) -> Isolette_Data_Model::TempWstatus_i {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_operator_interface_oip_oit_upper_desired_tempWstatus {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_operator_interface_oip_oit_upper_desired_tempWstatus();
+    unsafe { VIEW_CACHE.get_operator_interface_oip_oit_upper_desired_tempWstatus = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_rt_mhs_mhs_sv_lastCmd(&mut self) -> Isolette_Data_Model::On_Off {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_rt_mhs_mhs_sv_lastCmd {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_rt_mhs_mhs_sv_lastCmd();
+    unsafe { VIEW_CACHE.get_thermostat_rt_mhs_mhs_sv_lastCmd = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_rt_mhs_mhs_heat_control(&mut self) -> Isolette_Data_Model::On_Off {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_rt_mhs_mhs_heat_control {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_rt_mhs_mhs_heat_control();
+    unsafe { VIEW_CACHE.get_thermostat_rt_mhs_mhs_heat_control = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(&mut self) -> Isolette_Data_Model::Regulator_Mode {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode();
+    unsafe { VIEW_CACHE.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_rt_drf_drf_internal_failure(&mut self) -> Isolette_Data_Model::Failure_Flag_i {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_rt_drf_drf_internal_failure {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_rt_drf_drf_internal_failure();
+    unsafe { VIEW_CACHE.get_thermostat_rt_drf_drf_internal_failure = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_mt_mmi_mmi_sv_lastCmd(&mut self) -> Isolette_Data_Model::On_Off {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_mt_mmi_mmi_sv_lastCmd {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_mt_mmi_mmi_sv_lastCmd();
+    unsafe { VIEW_CACHE.get_thermostat_mt_mmi_mmi_sv_lastCmd = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_mt_mmi_mmi_interface_failure(&mut self) -> Isolette_Data_Model::Failure_Flag_i {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_mt_mmi_mmi_interface_failure {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_mt_mmi_mmi_interface_failure();
+    unsafe { VIEW_CACHE.get_thermostat_mt_mmi_mmi_interface_failure = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_mt_mmi_mmi_lower_alarm_temp(&mut self) -> Isolette_Data_Model::Temp_i {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_mt_mmi_mmi_lower_alarm_temp {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_mt_mmi_mmi_lower_alarm_temp();
+    unsafe { VIEW_CACHE.get_thermostat_mt_mmi_mmi_lower_alarm_temp = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_mt_mmi_mmi_monitor_status(&mut self) -> Isolette_Data_Model::Status {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_mt_mmi_mmi_monitor_status {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_mt_mmi_mmi_monitor_status();
+    unsafe { VIEW_CACHE.get_thermostat_mt_mmi_mmi_monitor_status = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_mt_mmi_mmi_upper_alarm_temp(&mut self) -> Isolette_Data_Model::Temp_i {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_mt_mmi_mmi_upper_alarm_temp {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_mt_mmi_mmi_upper_alarm_temp();
+    unsafe { VIEW_CACHE.get_thermostat_mt_mmi_mmi_upper_alarm_temp = Some(v.clone()); }
+    v
+  }
+
+  fn get_operator_interface_oip_oit_lower_alarm_tempWstatus(&mut self) -> Isolette_Data_Model::TempWstatus_i {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_operator_interface_oip_oit_lower_alarm_tempWstatus {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_operator_interface_oip_oit_lower_alarm_tempWstatus();
+    unsafe { VIEW_CACHE.get_operator_interface_oip_oit_lower_alarm_tempWstatus = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_mt_mmm_mmm_monitor_mode(&mut self) -> Isolette_Data_Model::Monitor_Mode {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_mt_mmm_mmm_monitor_mode {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_mt_mmm_mmm_monitor_mode();
+    unsafe { VIEW_CACHE.get_thermostat_mt_mmm_mmm_monitor_mode = Some(v.clone()); }
+    v
+  }
+
+  fn get_operator_interface_oip_oit_upper_alarm_tempWstatus(&mut self) -> Isolette_Data_Model::TempWstatus_i {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_operator_interface_oip_oit_upper_alarm_tempWstatus {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_operator_interface_oip_oit_upper_alarm_tempWstatus();
+    unsafe { VIEW_CACHE.get_operator_interface_oip_oit_upper_alarm_tempWstatus = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_mt_ma_ma_sv_lastCmd(&mut self) -> Isolette_Data_Model::On_Off {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_mt_ma_ma_sv_lastCmd {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_mt_ma_ma_sv_lastCmd();
+    unsafe { VIEW_CACHE.get_thermostat_mt_ma_ma_sv_lastCmd = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_mt_ma_ma_alarm_control(&mut self) -> Isolette_Data_Model::On_Off {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_mt_ma_ma_alarm_control {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_mt_ma_ma_alarm_control();
+    unsafe { VIEW_CACHE.get_thermostat_mt_ma_ma_alarm_control = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_mt_mmm_mmm_sv_lastMonitorMode(&mut self) -> Isolette_Data_Model::Monitor_Mode {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_mt_mmm_mmm_sv_lastMonitorMode {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_mt_mmm_mmm_sv_lastMonitorMode();
+    unsafe { VIEW_CACHE.get_thermostat_mt_mmm_mmm_sv_lastMonitorMode = Some(v.clone()); }
+    v
+  }
+
+  fn get_thermostat_mt_dmf_dmf_internal_failure(&mut self) -> Isolette_Data_Model::Failure_Flag_i {
+    unsafe {
+      if let Some(v) = &VIEW_CACHE.get_thermostat_mt_dmf_dmf_internal_failure {
+        return v.clone();
+      }
+    }
+    let v = self.api.get_thermostat_mt_dmf_dmf_internal_failure();
+    unsafe { VIEW_CACHE.get_thermostat_mt_dmf_dmf_internal_failure = Some(v.clone()); }
+    v
+  }
 }
 
 // Reports a violation the way the monitors always have: as log lines.
@@ -279,6 +667,8 @@ impl observers::ViolationSink for LogSink {
       observers::Event::CepPostExcused { thread } => {
         log::warn!("{} post check skipped: assumption not met", thread);
       }
+      // never raised here: the monitor's reads are never "missing"
+      observers::Event::CheckSkipped { .. } => {}
       observers::Event::SysAssertViolation { property, point } => {
         log::warn!("*** SYS ASSERT VIOLATION: property {}, {} ***", property, point);
       }

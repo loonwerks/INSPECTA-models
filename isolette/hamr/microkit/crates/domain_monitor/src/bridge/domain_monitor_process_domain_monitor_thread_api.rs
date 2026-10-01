@@ -347,6 +347,22 @@ verus! {
     {
       return extern_api::unsafe_get_temperature_sensor_cpi_thermostat_air_num_invalid();
     }
+
+    #[verifier::external_body]
+    fn unverified_get_heat_source_cpi_heat_controller_heat_out(
+      &mut self,
+      value: &Ghost<Isolette_Environment::Heat>) -> (res : Isolette_Environment::Heat)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_get_heat_source_cpi_heat_controller_heat_out();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_heat_source_cpi_heat_controller_heat_out_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_heat_source_cpi_heat_controller_heat_out_num_invalid();
+    }
   }
 
   pub trait domain_monitor_process_domain_monitor_thread_Full_Api: domain_monitor_process_domain_monitor_thread_Put_Api + domain_monitor_process_domain_monitor_thread_Get_Api {}
@@ -375,6 +391,7 @@ verus! {
     pub ghost thermostat_mt_mmm_mmm_monitor_mode: Isolette_Data_Model::Monitor_Mode,
     pub ghost thermostat_mt_dmf_dmf_internal_failure: Isolette_Data_Model::Failure_Flag_i,
     pub ghost temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i,
+    pub ghost heat_source_cpi_heat_controller_heat_out: Isolette_Environment::Heat,
   }
 
   impl<API: domain_monitor_process_domain_monitor_thread_Put_Api> domain_monitor_process_domain_monitor_thread_Application_Api<API> {
@@ -405,6 +422,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_thermostat_rt_mri_mri_displayed_temp(&Ghost(self.thermostat_rt_mri_mri_displayed_temp))
     }/// The number of messages received on thermostat_rt_mri_mri_displayed_temp that were dropped because they held
@@ -438,6 +456,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_thermostat_rt_mri_mri_regulator_status(&Ghost(self.thermostat_rt_mri_mri_regulator_status))
     }/// The number of messages received on thermostat_rt_mri_mri_regulator_status that were dropped because they held
@@ -471,6 +490,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_thermostat_rt_mhs_mhs_heat_control(&Ghost(self.thermostat_rt_mhs_mhs_heat_control))
     }/// The number of messages received on thermostat_rt_mhs_mhs_heat_control that were dropped because they held
@@ -504,6 +524,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_thermostat_mt_mmi_mmi_monitor_status(&Ghost(self.thermostat_mt_mmi_mmi_monitor_status))
     }/// The number of messages received on thermostat_mt_mmi_mmi_monitor_status that were dropped because they held
@@ -537,6 +558,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_thermostat_mt_ma_ma_alarm_control(&Ghost(self.thermostat_mt_ma_ma_alarm_control))
     }/// The number of messages received on thermostat_mt_ma_ma_alarm_control that were dropped because they held
@@ -570,6 +592,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_operator_interface_oip_oit_lower_desired_tempWstatus(&Ghost(self.operator_interface_oip_oit_lower_desired_tempWstatus))
     }/// The number of messages received on operator_interface_oip_oit_lower_desired_tempWstatus that were dropped because they held
@@ -603,6 +626,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_operator_interface_oip_oit_upper_desired_tempWstatus(&Ghost(self.operator_interface_oip_oit_upper_desired_tempWstatus))
     }/// The number of messages received on operator_interface_oip_oit_upper_desired_tempWstatus that were dropped because they held
@@ -636,6 +660,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_operator_interface_oip_oit_lower_alarm_tempWstatus(&Ghost(self.operator_interface_oip_oit_lower_alarm_tempWstatus))
     }/// The number of messages received on operator_interface_oip_oit_lower_alarm_tempWstatus that were dropped because they held
@@ -669,6 +694,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_operator_interface_oip_oit_upper_alarm_tempWstatus(&Ghost(self.operator_interface_oip_oit_upper_alarm_tempWstatus))
     }/// The number of messages received on operator_interface_oip_oit_upper_alarm_tempWstatus that were dropped because they held
@@ -702,6 +728,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_temperature_sensor_cpi_thermostat_current_tempWstatus(&Ghost(self.temperature_sensor_cpi_thermostat_current_tempWstatus))
     }/// The number of messages received on temperature_sensor_cpi_thermostat_current_tempWstatus that were dropped because they held
@@ -735,6 +762,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_thermostat_rt_mri_mri_upper_desired_temp(&Ghost(self.thermostat_rt_mri_mri_upper_desired_temp))
     }/// The number of messages received on thermostat_rt_mri_mri_upper_desired_temp that were dropped because they held
@@ -768,6 +796,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_thermostat_rt_mri_mri_lower_desired_temp(&Ghost(self.thermostat_rt_mri_mri_lower_desired_temp))
     }/// The number of messages received on thermostat_rt_mri_mri_lower_desired_temp that were dropped because they held
@@ -801,6 +830,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_thermostat_rt_mri_mri_interface_failure(&Ghost(self.thermostat_rt_mri_mri_interface_failure))
     }/// The number of messages received on thermostat_rt_mri_mri_interface_failure that were dropped because they held
@@ -834,6 +864,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_thermostat_rt_mrm_mrm_regulator_mode(&Ghost(self.thermostat_rt_mrm_mrm_regulator_mode))
     }/// The number of messages received on thermostat_rt_mrm_mrm_regulator_mode that were dropped because they held
@@ -867,6 +898,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_thermostat_rt_drf_drf_internal_failure(&Ghost(self.thermostat_rt_drf_drf_internal_failure))
     }/// The number of messages received on thermostat_rt_drf_drf_internal_failure that were dropped because they held
@@ -900,6 +932,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_thermostat_mt_mmi_mmi_upper_alarm_temp(&Ghost(self.thermostat_mt_mmi_mmi_upper_alarm_temp))
     }/// The number of messages received on thermostat_mt_mmi_mmi_upper_alarm_temp that were dropped because they held
@@ -933,6 +966,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_thermostat_mt_mmi_mmi_lower_alarm_temp(&Ghost(self.thermostat_mt_mmi_mmi_lower_alarm_temp))
     }/// The number of messages received on thermostat_mt_mmi_mmi_lower_alarm_temp that were dropped because they held
@@ -966,6 +1000,7 @@ verus! {
         old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_thermostat_mt_mmi_mmi_interface_failure(&Ghost(self.thermostat_mt_mmi_mmi_interface_failure))
     }/// The number of messages received on thermostat_mt_mmi_mmi_interface_failure that were dropped because they held
@@ -999,6 +1034,7 @@ verus! {
         res == final(self).thermostat_mt_mmm_mmm_monitor_mode,
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_thermostat_mt_mmm_mmm_monitor_mode(&Ghost(self.thermostat_mt_mmm_mmm_monitor_mode))
     }/// The number of messages received on thermostat_mt_mmm_mmm_monitor_mode that were dropped because they held
@@ -1032,6 +1068,7 @@ verus! {
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         res == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_thermostat_mt_dmf_dmf_internal_failure(&Ghost(self.thermostat_mt_dmf_dmf_internal_failure))
     }/// The number of messages received on thermostat_mt_dmf_dmf_internal_failure that were dropped because they held
@@ -1065,6 +1102,7 @@ verus! {
         old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
         old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
         res == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
     {
       self.api.unverified_get_temperature_sensor_cpi_thermostat_air(&Ghost(self.temperature_sensor_cpi_thermostat_air))
     }/// The number of messages received on temperature_sensor_cpi_thermostat_air that were dropped because they held
@@ -1073,6 +1111,40 @@ verus! {
     pub fn get_temperature_sensor_cpi_thermostat_air_num_invalid(&self) -> u64
     {
       self.api.unverified_get_temperature_sensor_cpi_thermostat_air_num_invalid()
+    }
+    pub fn get_heat_source_cpi_heat_controller_heat_out(&mut self) -> (res : Isolette_Environment::Heat)
+      ensures
+        old(self).thermostat_rt_mri_mri_displayed_temp == final(self).thermostat_rt_mri_mri_displayed_temp,
+        old(self).thermostat_rt_mri_mri_regulator_status == final(self).thermostat_rt_mri_mri_regulator_status,
+        old(self).thermostat_rt_mhs_mhs_heat_control == final(self).thermostat_rt_mhs_mhs_heat_control,
+        old(self).thermostat_mt_mmi_mmi_monitor_status == final(self).thermostat_mt_mmi_mmi_monitor_status,
+        old(self).thermostat_mt_ma_ma_alarm_control == final(self).thermostat_mt_ma_ma_alarm_control,
+        old(self).operator_interface_oip_oit_lower_desired_tempWstatus == final(self).operator_interface_oip_oit_lower_desired_tempWstatus,
+        old(self).operator_interface_oip_oit_upper_desired_tempWstatus == final(self).operator_interface_oip_oit_upper_desired_tempWstatus,
+        old(self).operator_interface_oip_oit_lower_alarm_tempWstatus == final(self).operator_interface_oip_oit_lower_alarm_tempWstatus,
+        old(self).operator_interface_oip_oit_upper_alarm_tempWstatus == final(self).operator_interface_oip_oit_upper_alarm_tempWstatus,
+        old(self).temperature_sensor_cpi_thermostat_current_tempWstatus == final(self).temperature_sensor_cpi_thermostat_current_tempWstatus,
+        old(self).thermostat_rt_mri_mri_upper_desired_temp == final(self).thermostat_rt_mri_mri_upper_desired_temp,
+        old(self).thermostat_rt_mri_mri_lower_desired_temp == final(self).thermostat_rt_mri_mri_lower_desired_temp,
+        old(self).thermostat_rt_mri_mri_interface_failure == final(self).thermostat_rt_mri_mri_interface_failure,
+        old(self).thermostat_rt_mrm_mrm_regulator_mode == final(self).thermostat_rt_mrm_mrm_regulator_mode,
+        old(self).thermostat_rt_drf_drf_internal_failure == final(self).thermostat_rt_drf_drf_internal_failure,
+        old(self).thermostat_mt_mmi_mmi_upper_alarm_temp == final(self).thermostat_mt_mmi_mmi_upper_alarm_temp,
+        old(self).thermostat_mt_mmi_mmi_lower_alarm_temp == final(self).thermostat_mt_mmi_mmi_lower_alarm_temp,
+        old(self).thermostat_mt_mmi_mmi_interface_failure == final(self).thermostat_mt_mmi_mmi_interface_failure,
+        old(self).thermostat_mt_mmm_mmm_monitor_mode == final(self).thermostat_mt_mmm_mmm_monitor_mode,
+        old(self).thermostat_mt_dmf_dmf_internal_failure == final(self).thermostat_mt_dmf_dmf_internal_failure,
+        old(self).temperature_sensor_cpi_thermostat_air == final(self).temperature_sensor_cpi_thermostat_air,
+        old(self).heat_source_cpi_heat_controller_heat_out == final(self).heat_source_cpi_heat_controller_heat_out,
+        res == final(self).heat_source_cpi_heat_controller_heat_out,
+    {
+      self.api.unverified_get_heat_source_cpi_heat_controller_heat_out(&Ghost(self.heat_source_cpi_heat_controller_heat_out))
+    }/// The number of messages received on heat_source_cpi_heat_controller_heat_out that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_heat_source_cpi_heat_controller_heat_out_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_heat_source_cpi_heat_controller_heat_out_num_invalid()
     }
   }
 
@@ -1104,7 +1176,8 @@ verus! {
       thermostat_mt_mmi_mmi_interface_failure: Isolette_Data_Model::Failure_Flag_i { flag: false },
       thermostat_mt_mmm_mmm_monitor_mode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
       thermostat_mt_dmf_dmf_internal_failure: Isolette_Data_Model::Failure_Flag_i { flag: false },
-      temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i { degrees: 0 }
+      temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i { degrees: 0 },
+      heat_source_cpi_heat_controller_heat_out: Isolette_Environment::Heat::Dummy_Head_Enum
     }
   }
 
@@ -1138,7 +1211,8 @@ verus! {
       thermostat_mt_mmi_mmi_interface_failure: Isolette_Data_Model::Failure_Flag_i { flag: false },
       thermostat_mt_mmm_mmm_monitor_mode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
       thermostat_mt_dmf_dmf_internal_failure: Isolette_Data_Model::Failure_Flag_i { flag: false },
-      temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i { degrees: 0 }
+      temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i { degrees: 0 },
+      heat_source_cpi_heat_controller_heat_out: Isolette_Environment::Heat::Dummy_Head_Enum
     }
   }
 

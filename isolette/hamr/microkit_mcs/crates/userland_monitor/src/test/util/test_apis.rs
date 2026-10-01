@@ -28,6 +28,7 @@ pub struct PreStateContainer {
   pub api_thermostat_mt_mmm_mmm_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   pub api_thermostat_mt_dmf_dmf_internal_failure: Isolette_Data_Model::Failure_Flag_i,
   pub api_temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i,
+  pub api_heat_source_cpi_heat_controller_heat_out: Isolette_Environment::Heat,
   pub api_sched_state: hamr::SchedState,
   pub api_sched_schedule: hamr::Schedule,
 }
@@ -56,6 +57,7 @@ pub fn put_concrete_inputs_container(container: PreStateContainer)
   put_thermostat_mt_mmm_mmm_monitor_mode(container.api_thermostat_mt_mmm_mmm_monitor_mode);
   put_thermostat_mt_dmf_dmf_internal_failure(container.api_thermostat_mt_dmf_dmf_internal_failure);
   put_temperature_sensor_cpi_thermostat_air(container.api_temperature_sensor_cpi_thermostat_air);
+  put_heat_source_cpi_heat_controller_heat_out(container.api_heat_source_cpi_heat_controller_heat_out);
   put_sched_state(container.api_sched_state);
   put_sched_schedule(container.api_sched_schedule);
 }
@@ -83,6 +85,7 @@ pub fn put_concrete_inputs(
   thermostat_mt_mmm_mmm_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   thermostat_mt_dmf_dmf_internal_failure: Isolette_Data_Model::Failure_Flag_i,
   temperature_sensor_cpi_thermostat_air: Isolette_Data_Model::PhysicalTemp_i,
+  heat_source_cpi_heat_controller_heat_out: Isolette_Environment::Heat,
   sched_state: hamr::SchedState,
   sched_schedule: hamr::Schedule)
 {
@@ -107,6 +110,7 @@ pub fn put_concrete_inputs(
   put_thermostat_mt_mmm_mmm_monitor_mode(thermostat_mt_mmm_mmm_monitor_mode);
   put_thermostat_mt_dmf_dmf_internal_failure(thermostat_mt_dmf_dmf_internal_failure);
   put_temperature_sensor_cpi_thermostat_air(temperature_sensor_cpi_thermostat_air);
+  put_heat_source_cpi_heat_controller_heat_out(heat_source_cpi_heat_controller_heat_out);
   put_sched_state(sched_state);
   put_sched_schedule(sched_schedule);
 }
@@ -235,6 +239,12 @@ pub fn put_thermostat_mt_dmf_dmf_internal_failure(value: Isolette_Data_Model::Fa
 pub fn put_temperature_sensor_cpi_thermostat_air(value: Isolette_Data_Model::PhysicalTemp_i)
 {
   *extern_api::IN_temperature_sensor_cpi_thermostat_air.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
+}
+
+/// setter for IN DataPort
+pub fn put_heat_source_cpi_heat_controller_heat_out(value: Isolette_Environment::Heat)
+{
+  *extern_api::IN_heat_source_cpi_heat_controller_heat_out.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort

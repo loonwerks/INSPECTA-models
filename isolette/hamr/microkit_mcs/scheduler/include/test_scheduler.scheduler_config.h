@@ -64,16 +64,30 @@ typedef struct test_command {
     uint32_t target_ch;   // RunToThread
     uint32_t target_hp;   // RunToHP / RunToState
     uint32_t target_slot; // RunToSlot / RunToState
+    // Non-zero: park before every user dispatch this command makes, so the controller
+    // can check contracts at the boundary (TestScheduler-design.md, stage 7).
+    uint32_t observe;
+    // Echoes test_status.obs_seq once the controller has checked a park; that is
+    // what lets the parked dispatch go ahead.
+    uint32_t obs_ack;
 } test_command_t;
 
 // Written by the scheduler, read by the controller.  ack_seq is stored last and
-// echoes test_command.seq once the command has completed.
+// echoes test_command.seq once the command has completed; obs_seq is stored last
+// when the scheduler parks for observation.
 typedef struct test_status {
     uint32_t ack_seq;
     uint32_t current_timeslice;
     uint32_t hyperperiod_num;
     uint32_t last_dispatched_ch;
     uint32_t flags;
+    // The channel of the slot at current_timeslice: at a park, the dispatch waiting.
+    uint32_t next_ch;
+    // User-slot completions so far, observed or not.  Identifies a dispatch, which a
+    // channel cannot: the same channel completes once per frame.
+    uint32_t completed_seq;
+    // Incremented at each observation park.
+    uint32_t obs_seq;
 } test_status_t;
 
 // Published once at init so a controller can map slot indices to channels.  A plain

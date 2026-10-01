@@ -58,6 +58,8 @@
           "%%codegen_dir%%/crates/observers/src/gumbox/tcp_tct_containers.rs",
           "%%codegen_dir%%/crates/observers/src/gumbox/fp_ft_GUMBOX.rs",
           "%%codegen_dir%%/crates/observers/src/gumbox/fp_ft_containers.rs",
+          "%%codegen_dir%%/crates/observers/src/gumbox/tsp_tst_GUMBOX.rs",
+          "%%codegen_dir%%/crates/observers/src/gumbox/tsp_tst_containers.rs",
           "%%codegen_dir%%/crates/observers/src/components.rs",
           "%%codegen_dir%%/crates/observers/src/gumbox/mod.rs",
           "%%codegen_dir%%/crates/observers/src/sys_nominal.rs",

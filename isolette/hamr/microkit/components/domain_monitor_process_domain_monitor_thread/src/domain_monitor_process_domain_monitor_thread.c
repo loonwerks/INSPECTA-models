@@ -48,6 +48,8 @@ volatile sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *temperature_sensor_cpi_
 sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t temperature_sensor_cpi_thermostat_current_tempWstatus_recv_queue;
 volatile sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_t *temperature_sensor_cpi_thermostat_air_queue_1;
 sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_Recv_t temperature_sensor_cpi_thermostat_air_recv_queue;
+volatile sb_queue_Isolette_Environment_Heat_1_t *heat_source_cpi_heat_controller_heat_out_queue_1;
+sb_queue_Isolette_Environment_Heat_1_Recv_t heat_source_cpi_heat_controller_heat_out_recv_queue;
 
 #define PORT_FROM_MON 38
 
@@ -408,6 +410,23 @@ uintmax_t get_temperature_sensor_cpi_thermostat_air_num_invalid(void) {
   return sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_numInvalid((sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_Recv_t *) &temperature_sensor_cpi_thermostat_air_recv_queue);
 }
 
+Isolette_Environment_Heat last_heat_source_cpi_heat_controller_heat_out_payload;
+
+bool get_heat_source_cpi_heat_controller_heat_out(Isolette_Environment_Heat *data) {
+  sb_event_counter_t numDropped;
+  Isolette_Environment_Heat fresh_data;
+  bool isFresh = sb_queue_Isolette_Environment_Heat_1_dequeue((sb_queue_Isolette_Environment_Heat_1_Recv_t *) &heat_source_cpi_heat_controller_heat_out_recv_queue, &numDropped, &fresh_data);
+  if (isFresh) {
+    last_heat_source_cpi_heat_controller_heat_out_payload = fresh_data;
+  }
+  *data = last_heat_source_cpi_heat_controller_heat_out_payload;
+  return isFresh;
+}
+
+uintmax_t get_heat_source_cpi_heat_controller_heat_out_num_invalid(void) {
+  return sb_queue_Isolette_Environment_Heat_1_numInvalid((sb_queue_Isolette_Environment_Heat_1_Recv_t *) &heat_source_cpi_heat_controller_heat_out_recv_queue);
+}
+
 void init(void) {
   sb_queue_Isolette_Data_Model_Temp_i_1_Recv_init(&thermostat_rt_mri_mri_upper_desired_temp_recv_queue, (sb_queue_Isolette_Data_Model_Temp_i_1_t *) thermostat_rt_mri_mri_upper_desired_temp_queue_1);
 
@@ -450,6 +469,8 @@ void init(void) {
   sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_init(&temperature_sensor_cpi_thermostat_current_tempWstatus_recv_queue, (sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) temperature_sensor_cpi_thermostat_current_tempWstatus_queue_1);
 
   sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_Recv_init(&temperature_sensor_cpi_thermostat_air_recv_queue, (sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_t *) temperature_sensor_cpi_thermostat_air_queue_1);
+
+  sb_queue_Isolette_Environment_Heat_1_Recv_init(&heat_source_cpi_heat_controller_heat_out_recv_queue, (sb_queue_Isolette_Environment_Heat_1_t *) heat_source_cpi_heat_controller_heat_out_queue_1);
 
   domain_monitor_process_domain_monitor_thread_initialize();
 }

@@ -474,6 +474,7 @@ pub fn put_heat_source_cpi_heat_controller_heat_out(value: Isolette_Environment:
 /// it at the start of its next dispatch, before computing; if nothing is set it keeps
 /// the value it already had.
 pub fn put_thermostat_rt_mhs_mhs_sv_lastCmd(value: Isolette_Data_Model::On_Off) {
+  crate::system_tests::observe::injected_thermostat_rt_mhs_mhs_sv_lastCmd(value.clone());
   unsafe {
     let mut v = value;
     test_put_thermostat_rt_mhs_mhs_sv_lastCmd(&mut v);
@@ -484,6 +485,7 @@ pub fn put_thermostat_rt_mhs_mhs_sv_lastCmd(value: Isolette_Data_Model::On_Off) 
 /// it at the start of its next dispatch, before computing; if nothing is set it keeps
 /// the value it already had.
 pub fn put_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(value: Isolette_Data_Model::Regulator_Mode) {
+  crate::system_tests::observe::injected_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(value.clone());
   unsafe {
     let mut v = value;
     test_put_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(&mut v);
@@ -494,6 +496,7 @@ pub fn put_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(value: Isolette_Data_Model
 /// it at the start of its next dispatch, before computing; if nothing is set it keeps
 /// the value it already had.
 pub fn put_thermostat_mt_mmi_mmi_sv_lastCmd(value: Isolette_Data_Model::On_Off) {
+  crate::system_tests::observe::injected_thermostat_mt_mmi_mmi_sv_lastCmd(value.clone());
   unsafe {
     let mut v = value;
     test_put_thermostat_mt_mmi_mmi_sv_lastCmd(&mut v);
@@ -504,6 +507,7 @@ pub fn put_thermostat_mt_mmi_mmi_sv_lastCmd(value: Isolette_Data_Model::On_Off) 
 /// it at the start of its next dispatch, before computing; if nothing is set it keeps
 /// the value it already had.
 pub fn put_thermostat_mt_ma_ma_sv_lastCmd(value: Isolette_Data_Model::On_Off) {
+  crate::system_tests::observe::injected_thermostat_mt_ma_ma_sv_lastCmd(value.clone());
   unsafe {
     let mut v = value;
     test_put_thermostat_mt_ma_ma_sv_lastCmd(&mut v);
@@ -514,6 +518,7 @@ pub fn put_thermostat_mt_ma_ma_sv_lastCmd(value: Isolette_Data_Model::On_Off) {
 /// it at the start of its next dispatch, before computing; if nothing is set it keeps
 /// the value it already had.
 pub fn put_thermostat_mt_mmm_mmm_sv_lastMonitorMode(value: Isolette_Data_Model::Monitor_Mode) {
+  crate::system_tests::observe::injected_thermostat_mt_mmm_mmm_sv_lastMonitorMode(value.clone());
   unsafe {
     let mut v = value;
     test_put_thermostat_mt_mmm_mmm_sv_lastMonitorMode(&mut v);

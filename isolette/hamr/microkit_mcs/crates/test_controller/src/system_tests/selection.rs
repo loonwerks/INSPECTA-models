@@ -20,7 +20,21 @@ pub static mut TEST_SELECTION: TestSelection = TestSelection {
   flags: 0,
 };
 
-/// The filter as a string slice, empty when unset.
+/// Bits of `flags`, set at image build time: a contract-checking layer turned off for
+/// the whole run (GUMBO_CHECKS=off, SYSVERIF_CHECKS=off), and list-only mode.
+pub const FLAG_GUMBO_OFF: u32 = 0x1;
+pub const FLAG_SYSVERIF_OFF: u32 = 0x2;
+/// LIST_TESTS=1: print the test table and run nothing.
+pub const FLAG_LIST_ONLY: u32 = 0x4;
+
+/// The flags patched in at image build time.  Read volatile: the value is patched into
+/// the ELF after compilation, so the compiler must not assume the initializer.
+pub fn flags() -> u32 {
+  unsafe { core::ptr::read_volatile(core::ptr::addr_of!(TEST_SELECTION.flags)) }
+}
+
+/// The filter as a string slice, empty when unset.  A filter that is not UTF-8 --
+/// which the build does not produce -- selects nothing rather than everything.
 pub fn filter() -> &'static str {
   unsafe {
     let bytes = &*core::ptr::addr_of!(TEST_SELECTION.filter);
@@ -30,7 +44,7 @@ pub fn filter() -> &'static str {
     }
     match core::str::from_utf8(&bytes[..n]) {
       Ok(s) => s,
-      Err(_) => "",
+      Err(_) => "\0", // no test name contains NUL
     }
   }
 }

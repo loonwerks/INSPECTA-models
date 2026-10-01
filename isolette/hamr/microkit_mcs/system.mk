@@ -113,11 +113,18 @@ all: cache.o
 # Sentinel file whose name encodes a hash of build-affecting variables.
 # When any of these change the old sentinel is removed and a new one is created,
 # forcing dependent targets to rebuild.
-# TESTS is part of the hash because it is patched into an ELF section by the MSD step
-# below.  Without it, changing TESTS leaves this stamp -- and therefore $(SYSTEM_FILE)
-# -- up to date, the metaprogram never re-runs, and the image silently keeps running
-# the previous selection.
-CHECK_FLAGS_BOARD_MD5:=.board_cflags-$(shell echo -- ${CFLAGS} ${BOARD} ${MICROKIT_CONFIG} ${MICROKIT_SDK} ${MSD} ${SCHEDULER_C} ${SCHEDULER_CONFIG_HEADERS} ${TESTS}| shasum | sed 's/ *-//')
+# TESTS, LIST_TESTS, GUMBO_CHECKS and SYSVERIF_CHECKS are part of the hash because they
+# are patched into an ELF section by the MSD step below (all but TESTS through its
+# environment, so a meta.py written before they existed still runs).  Without them,
+# changing one leaves this stamp -- and therefore $(SYSTEM_FILE) -- up to date, the
+# metaprogram never re-runs, and the image silently keeps running the previous
+# selection.  Each is hashed with its name: unlabelled, GUMBO_CHECKS=off and
+# SYSVERIF_CHECKS=off hash alike, since an empty variable leaves no trace.
+# TESTS reaches the MSD step through its environment ("$$TESTS"), so no character in it is
+# re-parsed by the shell; in the hash, a quote is replaced (after %, so no two filters hash
+# alike) so it cannot end the quoting.
+export TESTS
+CHECK_FLAGS_BOARD_MD5:=.board_cflags-$(shell echo -- ${CFLAGS} ${BOARD} ${MICROKIT_CONFIG} ${MICROKIT_SDK} ${MSD} ${SCHEDULER_C} ${SCHEDULER_CONFIG_HEADERS} 'TESTS=$(subst ',%27,$(subst %,%25,$(TESTS)))' LIST_TESTS=${LIST_TESTS} GUMBO_CHECKS=${GUMBO_CHECKS} SYSVERIF_CHECKS=${SYSVERIF_CHECKS}| shasum | sed 's/ *-//')
 
 ${CHECK_FLAGS_BOARD_MD5}:
 	-rm -f .board_cflags-*
@@ -144,6 +151,8 @@ vpath %.c $(SDDF) \
 	$(TOP_DIR)/components/sys_nominal_monitor_process_sys_nominal_monitor_thread/src
 
 
+# EXTRA_IMAGES: protection domains only a variant has (the test controller, set by
+# test_scheduler.mk); empty for the shipped image
 IMAGES := timer_driver.elf scheduler.elf \
 	thermostat_rt_mri_mri.elf \
 	thermostat_rt_mri_mri_MON.elf \
@@ -169,12 +178,11 @@ IMAGES := timer_driver.elf scheduler.elf \
 	heat_source_cpi_heat_controller_MON.elf \
 	userland_monitor_process_userland_monitor_thread.elf \
 	userland_monitor_process_userland_monitor_thread_MON.elf \
-	test_controller_process_test_controller_thread.elf \
-	test_controller_process_test_controller_thread_MON.elf \
 	gumbo_monitor_process_gumbo_monitor_thread.elf \
 	gumbo_monitor_process_gumbo_monitor_thread_MON.elf \
 	sys_nominal_monitor_process_sys_nominal_monitor_thread.elf \
-	sys_nominal_monitor_process_sys_nominal_monitor_thread_MON.elf
+	sys_nominal_monitor_process_sys_nominal_monitor_thread_MON.elf \
+	$(EXTRA_IMAGES)
 
 ${IMAGES}: libsddf_util_debug.a ${CHECK_FLAGS_BOARD_MD5}
 
@@ -340,7 +348,7 @@ sys_nominal_monitor_process_sys_nominal_monitor_thread.elf: $(UTIL_OBJS) sys_nom
 
 $(SYSTEM_FILE): $(IMAGES) $(DTB) ${CHECK_FLAGS_BOARD_MD5}
 	$(PYTHON) $(SDFGEN_HELPER) --macros "$(SDFGEN_UNKOWN_MACROS)" --configs "$(SCHEDULER_CONFIG_HEADERS)" --output $(TOP_BUILD_DIR)/config_structs.py
-	$(PYTHON) $(MSD) --sddf $(SDDF) --board $(MICROKIT_BOARD) --dtb $(DTB) --output . --sdf $(SYSTEM_FILE) --objcopy $(OBJCOPY) --tests "$(TESTS)"
+	LIST_TESTS="$(LIST_TESTS)" GUMBO_CHECKS="$(GUMBO_CHECKS)" SYSVERIF_CHECKS="$(SYSVERIF_CHECKS)" $(PYTHON) $(MSD) --sddf $(SDDF) --board $(MICROKIT_BOARD) --dtb $(DTB) --output . --sdf $(SYSTEM_FILE) --objcopy $(OBJCOPY) --tests="$$TESTS"
 	$(OBJCOPY) --update-section .device_resources=timer_driver_device_resources.data timer_driver.elf
 	$(OBJCOPY) --update-section .timer_client_config=timer_client_scheduler.data scheduler.elf
 
@@ -399,7 +407,6 @@ verus:
 	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf verus
 	make -C ${CRATES_DIR}/operator_interface_oip_oit verus
 	make -C ${CRATES_DIR}/userland_monitor verus
-	make -C ${CRATES_DIR}/test_controller verus
 	make -C ${CRATES_DIR}/gumbo_monitor verus
 	make -C ${CRATES_DIR}/sys_nominal_monitor verus
 
