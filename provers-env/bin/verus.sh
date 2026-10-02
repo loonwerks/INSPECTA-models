@@ -8,6 +8,9 @@
 #
 # VERUS_RELEASE_ID names the asset and the directory it unpacks to
 # (verus-<ver>-<id>.zip -> verus-<id>); bin/versions.sh derives it per host.
+#
+# Either way, everything in ${VERUS_DIR} that Verus does not run with is then
+# deleted (see verus_prune); VERUS_PRUNE=false keeps it all.
 set -Eeuo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
@@ -27,6 +30,42 @@ verus_assert_version() {
     echo "verus.sh: in bin/versions.sh." >&2
     exit 1
   fi
+}
+
+# From 0.2026.09.27 the published assets are vargo's whole target-verus/release
+# directory -- cargo's deps/, build/, .fingerprint/ and incremental/, the
+# compiler crates Verus was linked from, and build tools -- and the source build
+# copies that same directory.  That took ${VERUS_DIR} from ~120MB to ~1.6GB on
+# x86_64 and ~960MB on aarch64, and the image's compressed size up by ~350MB.
+# None of it is read at run time: rust_verify gets the compiler from the rustup
+# toolchain, verus verifies against libvstd.rlib and vstd.vir, and cargo verus
+# builds vstd from crates.io.  So keep what the 0.2026.08.09 releases shipped,
+# whichever of it the install has (the newer assets lack the source directories,
+# verus-root, version.txt and .vstd-fingerprint), and delete the rest.  The
+# proc-macro libraries are .so on Linux and .dylib on macOS.  Each layout
+# verified, built crates against the pinned vstd and failed a false
+# postcondition the same with and without the deleted files.  A keep-list rather
+# than a delete-list, so a release that adds other build output is pruned too.
+verus_prune() {
+  if [ "${VERUS_PRUNE:-true}" != "true" ]; then
+    return 0
+  fi
+  local keep=" verus rust_verify cargo-verus z3 vstd.vir libvstd.rlib libverus_builtin.rlib
+    libverus_builtin_macros.so libverus_state_machines_macros.so
+    libverus_builtin_macros.dylib libverus_state_machines_macros.dylib
+    builtin builtin_macros state_machines_macros vstd
+    version.txt version.json verus-root .vstd-fingerprint "
+  keep=" $(echo ${keep}) "
+  local before p
+  before="$(du -sm "${VERUS_DIR}" | cut -f1)"
+  for p in "${VERUS_DIR}"/* "${VERUS_DIR}"/.[!.]*; do
+    [ -e "${p}" ] || [ -L "${p}" ] || continue
+    case "${keep}" in
+      *" $(basename "${p}") "*) ;;
+      *) rm -rf "${p}" ;;
+    esac
+  done
+  echo "verus.sh: pruned ${VERUS_DIR} from ${before}MB to $(du -sm "${VERUS_DIR}" | cut -f1)MB"
 }
 
 mkdir -p "${PROVERS_DIR}"
@@ -51,6 +90,7 @@ if [ "${VERUS_FROM_SOURCE}" != "true" ]; then
   if [ "${PROVERS_OS}" = "darwin" ]; then
     xattr -dr com.apple.quarantine "${VERUS_DIR}" 2>/dev/null || true
   fi
+  verus_prune
   "${VERUS_Z3_PATH}" --version
   verus_assert_version "${VERUS_DIR}/verus"
   exit 0
@@ -113,6 +153,7 @@ fi
 cd "${PROVERS_DIR}"
 rm -rf "${VERUS_BUILD_DIR}"
 
+verus_prune
 "${VERUS_DIR}/verus" --version
 "${VERUS_DIR}/z3" --version
 verus_assert_version "${VERUS_DIR}/verus"
