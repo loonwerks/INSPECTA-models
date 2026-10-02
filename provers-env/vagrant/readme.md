@@ -481,11 +481,15 @@ appliance exported from a VM built before that pin existed, where the name falls
 back to the build date `build-info` records in UTC -- a build finishing in the
 evening is already the next day there, and would be named a day late.
 
-Take the machine to export from `VBoxManage list vms` rather than assuming it:
-Vagrant re-applies the configured name on every `vagrant up`, so a VM whose name
-predates a change to `PROVERS_BUILD_VER` is renamed by its next boot.  The
-printed command looks it up for you.  `--vmname` is what keeps the appliance
-correct regardless.
+Run the printed commands in this directory.  They take the machine to export
+from Vagrant's own record of it (`.vagrant/machines/default/virtualbox/id`, a
+VirtualBox UUID) rather than by name: Vagrant re-applies the configured name on
+every `vagrant up`, so a VM whose name predates a change to `PROVERS_BUILD_VER`
+is renamed by its next boot, and a host that keeps more than one provers-env VM
+-- an older build, or one per architecture -- would otherwise export whichever
+one VirtualBox listed first.  The commands print the machine's name and state
+before exporting, so check that it is the VM you mean and that it is powered
+off.  `--vmname` is what keeps the appliance's own name correct regardless.
 
 The Sireum build output (`$SIREUM_HOME/out`) goes with it -- the next build
 recreates it, and nothing has to be re-downloaded.  The *dependency* caches are
@@ -501,10 +505,12 @@ VirtualBox -- everything stops correctly, including the unmount of `/vagrant`,
 and then the guest spins instead of powering off.  `vagrant halt` forces the
 power off after `graceful_halt_timeout` (60s), so it rides through this; a
 shutdown started inside the guest just hangs.  If it does hang, the VM has
-already finished its filesystem work, so powering it off is safe:
+already finished its filesystem work, so powering it off is safe.  From this
+directory, which names the VM by the UUID Vagrant recorded for it, so that no
+other running VM is touched:
 
 ```bash
-VBoxManage controlvm "$(VBoxManage list runningvms | grep -o '"provers-env[^"]*"' | tr -d '"')" poweroff
+VBoxManage controlvm "$(cat .vagrant/machines/default/virtualbox/id)" poweroff
 ```
 
 Note this is a manual step, deliberately kept out of provisioning -- the caches

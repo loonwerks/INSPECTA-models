@@ -221,13 +221,20 @@ OVA_NAME="${PROVERS_OVA_NAME:-provers-env-${OVA_ARCH}-${OVA_DATE}}"
 OVA_VERSION="${OVA_DATE//./-}"
 
 echo
-echo "Now halt the VM and export it from the host.  \$SRC is the VirtualBox machine"
-echo "to export -- its name is dated from whenever 'vagrant up' last ran, so take it"
-echo "from 'VBoxManage list vms' rather than assuming.  What the OVA is called, and"
-echo "what an importer's VirtualBox names the VM, come from --vmname below instead:"
+# $SRC is taken from Vagrant's own record of the machine it manages, not by
+# matching names in 'VBoxManage list vms': a host with more than one provers-env
+# VM (one per build version, or per architecture) would otherwise export
+# whichever VirtualBox happened to list first -- under this build's --vmname,
+# so nothing about the appliance would show it was the wrong VM.
+echo "Now halt the VM and export it from the host, running these in the vagrant/"
+echo "directory the VM was built from.  \$SRC is the VirtualBox machine that"
+echo "directory's Vagrant state manages, by UUID, so the export cannot pick up"
+echo "another provers-env VM on the host.  What the OVA is called, and what an"
+echo "importer's VirtualBox names the VM, come from --vmname below instead:"
 echo
 echo "  vagrant halt"
-echo "  SRC=\$(VBoxManage list vms | grep -o '\"provers-env[^\"]*\"' | tr -d '\"' | head -1)"
+echo "  SRC=\$(cat .vagrant/machines/default/virtualbox/id)"
+echo "  VBoxManage showvminfo \"\${SRC}\" --machinereadable | grep -E '^(name|VMState)='"
 echo "  VBoxManage export \"\${SRC}\" -o ${OVA_NAME}.ova \\"
 echo "      --vsys 0 \\"
 echo "      --vmname      '${OVA_NAME}' \\"
