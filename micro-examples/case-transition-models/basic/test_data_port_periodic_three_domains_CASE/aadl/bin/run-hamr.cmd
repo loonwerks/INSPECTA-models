@@ -30,6 +30,7 @@ val osate: Os.Path = Os.env("OSATE_HOME") match {
     else "Contents/MacOS/osate")
   case _ if (Os.isWin) => sireumBin / "win" / "fmide" / "fmide.exe"
   case _ if (Os.isMac) => sireumBin / "mac" / "fmide.app" / "Contents" / "MacOS" / "osate"
+  case _ if (Os.isLinuxArm) => sireumBin / "linux" / "arm" / "fmide" / "fmide"
   case _ if (Os.isLinux) => sireumBin / "linux" / "fmide" / "fmide"
   case _ =>
     println("Unsupported operating system")
