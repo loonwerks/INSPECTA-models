@@ -153,6 +153,14 @@ PKGS=(
   libxml2-utils
   curl wget git
   python3.12 python3.12-venv
+  # The generated R2U2 monitors' makefiles build the r2u2_cli tool from
+  # crates.io, and it links against libpython3.12.so, which only the -dev
+  # package installs.  It used to arrive as a recommendation of python3-pip;
+  # once pip was dropped, every R2U2 model failed to build in the container
+  # with 'unable to find library -lpython3.12'.  GitHub's runners and most
+  # developer machines already have it, which is why only the container showed
+  # it.
+  libpython3.12-dev
   # qemu-system-arm is what supplies qemu-system-aarch64, which the generated
   # makefiles name; the other architectures are not built for.
   qemu-system-arm
