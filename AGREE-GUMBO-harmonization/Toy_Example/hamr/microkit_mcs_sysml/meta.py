@@ -141,11 +141,11 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     top_sub_A_sub_a.add_map(Map('above_top.Impl'_Instance_top_sub_A_sub_a_Output_1_Memory_Region, 0x10_000_000, perms="rw", setvar_vaddr="Output_queue_1"))
     top_sub_B_sub_b.add_map(Map('above_top.Impl'_Instance_top_sub_A_sub_a_Output_1_Memory_Region, 0x10_000_000, perms="r", setvar_vaddr="Input_queue_1"))
     top_sub_C_sub_c.add_map(Map('above_top.Impl'_Instance_top_sub_A_sub_a_Output_1_Memory_Region, 0x10_000_000, perms="r", setvar_vaddr="Input1_queue_1"))
-    top_sub_A_sub_a.add_map(Map('above_top.Impl'_Instance_top_sub_A_sub_a_Input_1_Memory_Region, 0x10_001_000, perms="r", setvar_vaddr="Input_queue_1"))
-    top_sub_B_sub_b.add_map(Map('above_top.Impl'_Instance_top_sub_B_sub_b_Output_1_Memory_Region, 0x10_001_000, perms="rw", setvar_vaddr="Output_queue_1"))
-    top_sub_C_sub_c.add_map(Map('above_top.Impl'_Instance_top_sub_B_sub_b_Output_1_Memory_Region, 0x10_001_000, perms="r", setvar_vaddr="Input2_queue_1"))
-    A_sub_a.add_map(Map('above_top.Impl'_Instance_top_sub_C_sub_c_Output_1_Memory_Region, 0x10_001_000, perms="r", setvar_vaddr="Input_queue_1"))
-    top_sub_C_sub_c.add_map(Map('above_top.Impl'_Instance_top_sub_C_sub_c_Output_1_Memory_Region, 0x10_002_000, perms="rw", setvar_vaddr="Output_queue_1"))
+    top_sub_A_sub_a.add_map(Map('above_top.Impl'_Instance_top_sub_A_sub_a_Input_1_Memory_Region, 0x10_002_000, perms="r", setvar_vaddr="Input_queue_1"))
+    top_sub_B_sub_b.add_map(Map('above_top.Impl'_Instance_top_sub_B_sub_b_Output_1_Memory_Region, 0x10_002_000, perms="rw", setvar_vaddr="Output_queue_1"))
+    top_sub_C_sub_c.add_map(Map('above_top.Impl'_Instance_top_sub_B_sub_b_Output_1_Memory_Region, 0x10_002_000, perms="r", setvar_vaddr="Input2_queue_1"))
+    A_sub_a.add_map(Map('above_top.Impl'_Instance_top_sub_C_sub_c_Output_1_Memory_Region, 0x10_002_000, perms="r", setvar_vaddr="Input_queue_1"))
+    top_sub_C_sub_c.add_map(Map('above_top.Impl'_Instance_top_sub_C_sub_c_Output_1_Memory_Region, 0x10_004_000, perms="rw", setvar_vaddr="Output_queue_1"))
 
 
 

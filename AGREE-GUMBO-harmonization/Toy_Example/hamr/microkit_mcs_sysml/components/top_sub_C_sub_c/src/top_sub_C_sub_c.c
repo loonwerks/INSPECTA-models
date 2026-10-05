@@ -27,6 +27,10 @@ bool get_Input1(int32_t *data) {
   return isFresh;
 }
 
+uintmax_t get_Input1_num_invalid(void) {
+  return sb_queue_int32_t_1_numInvalid((sb_queue_int32_t_1_Recv_t *) &Input1_recv_queue);
+}
+
 int32_t last_Input2_payload;
 
 bool get_Input2(int32_t *data) {
@@ -38,6 +42,10 @@ bool get_Input2(int32_t *data) {
   }
   *data = last_Input2_payload;
   return isFresh;
+}
+
+uintmax_t get_Input2_num_invalid(void) {
+  return sb_queue_int32_t_1_numInvalid((sb_queue_int32_t_1_Recv_t *) &Input2_recv_queue);
 }
 
 bool put_Output(const int32_t *data) {
@@ -64,6 +72,13 @@ void notified(microkit_channel channel) {
   switch (channel) {
     case PORT_FROM_MON:
       top_sub_C_sub_c_timeTriggered();
+      // Report that this dispatch has finished.  The _MON wrapper forwards it to
+      // the scheduler.  The default scheduler ignores runtime signals from
+      // partitions -- the schedule is static and each partition runs for its full
+      // allotted time -- so this is inert there; the test scheduler uses it as the
+      // slot-complete event, which is what lets it step as fast as threads run
+      // rather than waiting out each slot's wall-clock budget.
+      microkit_notify(PORT_FROM_MON);
       break;
     default:
       top_sub_C_sub_c_notify(channel);

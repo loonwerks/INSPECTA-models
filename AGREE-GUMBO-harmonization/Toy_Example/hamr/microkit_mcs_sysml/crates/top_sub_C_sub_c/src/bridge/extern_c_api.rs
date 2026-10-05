@@ -12,7 +12,9 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_Input1(value: *mut i32) -> bool;
+  fn get_Input1_num_invalid() -> u64;
   fn get_Input2(value: *mut i32) -> bool;
+  fn get_Input2_num_invalid() -> u64;
   fn put_Output(value: *mut i32) -> bool;
 }
 
@@ -25,12 +27,26 @@ pub fn unsafe_get_Input1() -> i32
   }
 }
 
+pub fn unsafe_get_Input1_num_invalid() -> u64
+{
+  unsafe {
+    return get_Input1_num_invalid();
+  }
+}
+
 pub fn unsafe_get_Input2() -> i32
 {
   unsafe {
     let value: *mut i32 = &mut 0;
     get_Input2(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_Input2_num_invalid() -> u64
+{
+  unsafe {
+    return get_Input2_num_invalid();
   }
 }
 
@@ -75,6 +91,12 @@ pub fn get_Input1(value: *mut i32) -> bool
 }
 
 #[cfg(test)]
+pub fn get_Input1_num_invalid() -> u64
+{
+  return 0;
+}
+
+#[cfg(test)]
 pub fn get_Input2(value: *mut i32) -> bool
 {
   unsafe {
@@ -82,6 +104,12 @@ pub fn get_Input2(value: *mut i32) -> bool
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_Input2_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]

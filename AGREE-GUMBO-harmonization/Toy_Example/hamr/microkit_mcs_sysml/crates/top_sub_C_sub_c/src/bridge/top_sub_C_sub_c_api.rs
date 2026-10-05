@@ -30,6 +30,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_Input1_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_Input1_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_Input2(
       &mut self,
       value: &Ghost<i32>) -> (res : i32)
@@ -37,6 +43,12 @@ verus! {
         res == value@,
     {
       return extern_api::unsafe_get_Input2();
+    }
+
+    #[verifier::external_body]
+    fn unverified_get_Input2_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_Input2_num_invalid();
     }
   }
 
@@ -73,6 +85,12 @@ verus! {
         old(self).Output == final(self).Output,
     {
       self.api.unverified_get_Input1(&Ghost(self.Input1))
+    }/// The number of messages received on Input1 that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_Input1_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_Input1_num_invalid()
     }
     pub fn get_Input2(&mut self) -> (res : i32)
       ensures
@@ -82,6 +100,12 @@ verus! {
         old(self).Output == final(self).Output,
     {
       self.api.unverified_get_Input2(&Ghost(self.Input2))
+    }/// The number of messages received on Input2 that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_Input2_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_Input2_num_invalid()
     }
   }
 

@@ -26,3 +26,4 @@ void *memset(void *dest, int c, size_t n);
 
 bool put_Output(const int32_t *data);
 bool get_Input(int32_t *data);
+uintmax_t get_Input_num_invalid(void);

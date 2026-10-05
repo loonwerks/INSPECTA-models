@@ -23,6 +23,7 @@ system B
 	annex agree {** 
 		assume "B input range" : Input < 20;
 		guarantee "B output range" : Output < Input + 15;
+		guarantee "B output contradict": (Input = 1) -> Output >= Input + 15; 
 	**};	
 end B ; 
 
