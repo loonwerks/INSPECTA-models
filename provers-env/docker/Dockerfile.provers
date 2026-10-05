@@ -1,8 +1,8 @@
 # DARPA PROVERS development environment, command-line tools only.
 #
 # One Dockerfile for both architectures: everything that differs between x86_64
-# and aarch64 -- building Z3 and Verus from source, building sdfgen with zig,
-# SDK tarball names, bin/linux vs bin/linux/arm -- is
+# and aarch64 -- building Z3 and Verus from source on aarch64, SDK tarball
+# names, bin/linux vs bin/linux/arm -- is
 # resolved inside bin/*.sh from `uname -m`.  Select one with
 # buildx's --platform; docker.sh builds both.
 #

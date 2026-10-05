@@ -73,14 +73,14 @@ Everything lands under `$PROVERS_DIR` (default `~/provers`):
 | `$SIREUM_PLATFORM_BIN/idea` | Sireum IVE, the IntelliJ-based IDE (optional) |
 | `$SIREUM_PLATFORM_BIN/vscodium` | CodeIVE, the VSCodium-based IDE (optional) |
 | `$SIREUM_PLATFORM_BIN/fmide` | FMIDE, the OSATE-based AADL IDE (optional) |
+| `$SDFGEN_VENV` | a python venv holding `sdfgen` (`SDFGEN_VER`) |
+| `~/.cargo` | Rust (`RUST_TOOLCHAIN_VER`), required by Verus and the generated crates |
 
 `$SIREUM_PLATFORM_BIN` is where Sireum puts this host's binaries: `bin/linux` on
 x86_64 Linux, `bin/linux/arm` on aarch64 Linux, and `bin/mac` on macOS -- where
 each IDE is an `.app` bundle (`idea/IVE.app`, `vscodium/CodeIVE.app`, and
 `fmide.app` directly under `bin/mac`).  `bin/env.sh` works it out; the launchers
 below use it, so you should not have to.
-| `$SDFGEN_VENV` | a python venv holding `sdfgen` (`SDFGEN_VER`) |
-| `~/.cargo` | Rust (`RUST_TOOLCHAIN_VER`), required by Verus, the generated crates and the Microkit tool rebuild |
 
 Those paths are defined in [bin/env.sh](../bin/env.sh), which the setup sources
 from the shell startup file -- `~/.bashrc` under bash on Linux,
@@ -189,8 +189,8 @@ Rust host triple, Microkit SDK tarball, Verus release asset, `$VERUS_Z3_PATH` --
 from `uname -s` and `uname -m`, so one set of pins drives all three and
 `provers-setup.sh` is the same command everywhere.
 
-Three things are prebuilt on some hosts and have to be built from source on
-others, which is most of why the setups differ so much in how long they take:
+Two things are prebuilt on some hosts and have to be built from source on
+others, which is most of why the setups differ in how long they take:
 
 | | Ubuntu x86_64 | Ubuntu aarch64 | macOS arm64 |
 | --- | --- | --- | --- |
@@ -200,7 +200,8 @@ others, which is most of why the setups differ so much in how long they take:
 | sdfgen | PyPI wheel | PyPI wheel | PyPI wheel |
 
 So aarch64 Linux is the slow one and Apple Silicon the quick one: upstream
-publishes an arm64 macOS asset for all three, so a Mac builds none of them.
+publishes an arm64 macOS Verus, so a Mac builds neither.  sdfgen is a PyPI wheel
+on every host; `SDFGEN_FROM_SOURCE=true` builds it with zig instead.
 
 ## Using The Prebuilt OVA
 
@@ -210,26 +211,32 @@ architectures:
 
 | host | appliance | size | exported | versions pinned as of |
 | --- | --- | --- | --- | --- |
-| Apple Silicon / aarch64 | [provers-env-arm64-2026.08.18.ova](https://drive.google.com/file/d/1UG0GYIzaaPI4s79HCOz1eL6-qckicYDO/view?usp=sharing) | 11.91 GB | 2026-08-18 | [b21508df](https://github.com/loonwerks/INSPECTA-models/commit/b21508df) |
-| x86_64 | [provers-env-amd64-2026.08.18.ova](https://drive.google.com/file/d/1XWEYQeakpsD7811wUgdWrtQrN8qqH4Yv/view?usp=sharing) | 11.95 GB | 2026-08-18 | [b21508df](https://github.com/loonwerks/INSPECTA-models/commit/b21508df) |
+| Apple Silicon / aarch64 | [provers-env-arm64-2026.10.01.ova](https://drive.google.com/file/d/1NQfyY8QvdV_BaeDhwJe4cYNzLg7qZvUE/view?usp=sharing) | 9.20 GiB | 2026-10-05 | [4142dbc0](https://github.com/loonwerks/INSPECTA-models/commit/4142dbc0) |
+| x86_64 | [provers-env-amd64-2026.10.01.ova](https://drive.google.com/file/d/1B7vKkPkVAz_HCYFhZyQsDrob3K68tf7O/view?usp=sharing) | 9.42 GiB | 2026-10-05 | [4142dbc0](https://github.com/loonwerks/INSPECTA-models/commit/4142dbc0) |
 
-Both carry **Microkit SDK 2.3.0**, and only that one -- `MICROKIT_SDK` points at
-`~/provers/microkit-sdk-2.3.0` and everything, domain-scheduled or not, builds
-against it, so nothing has to pass `MICROKIT_SDK=` to pick a side.  2.3.0 is the
-first release to ship domain scheduling itself, which is what made the second
-SDK the older appliances carry unnecessary.
+Both carry **Microkit SDK 2.3.1**, the released SDK unmodified -- it includes
+the [seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain
+fix that the 2.3.0 appliances had to patch in -- with LionsOS `7554a0f`,
+sdfgen 0.35.0, and **Verus 0.2026.09.27** on Rust 1.98.1.  `MICROKIT_SDK` points
+at `~/provers/microkit-sdk-2.3.1`, and everything, domain-scheduled or not,
+builds against it.
 
-It is the released SDK with one difference: its `microkit` tool is rebuilt from
-the 2.3.0 tag with the
-[seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain fix,
-without which a domain-scheduled virtual machine hangs in the guest's
-`arch_timer` probe, and the SDK records it in a `VCPU-DOMAIN-PATCH` note beside
-the tool.  Builds from 2026.10.01 on use Microkit 2.3.1, which carries #586
-itself, unmodified.
+Two things set them apart from the 2.3.0 appliances besides the versions:
+
+* Verus is pruned to the files it runs with (~130MB).  From 0.2026.09.27 the
+  upstream release ships cargo's whole build directory, ~1.5GB of it, and
+  `bin/verus.sh` now deletes what Verus never reads.
+* `libpython3.12-dev` is installed.  The R2U2 example models build the
+  `r2u2_cli` tool, which links against it.
+
+The R2U2 models' generated makefiles currently build `r2u2_cli` with
+`cargo +stable`, and the appliances install only the pinned Rust toolchain, so
+the first R2U2 build downloads a stable toolchain and needs network access.
+Everything else builds offline.
 
 Both are named for `PROVERS_BUILD_VER` rather than for the day they were
 written: a rebuild that *replaces* a published build keeps that build's version
-rather than taking the day it was made, which is why the 2026.08.13 pair below
+rather than taking the day it was made, which is why the 2026.10.01 pair above
 carry a version four days older than their export.  See
 [Exporting An OVA](#exporting-an-ova).
 
@@ -244,7 +251,7 @@ Silicon and vice versa.  Import into VirtualBox 7.1 or above --
 `File > Import Appliance...`, or:
 
 ```bash
-VBoxManage import provers-env-arm64-2026.08.18.ova
+VBoxManage import provers-env-arm64-2026.10.01.ova
 ```
 
 Then start it and log in as `vagrant` / `vagrant`.  The virtual disk comes from
@@ -261,23 +268,41 @@ without guessing from the name -- `cat ~/provers/build-info` in the running VM,
 or before importing:
 
 ```bash
-VBoxManage import provers-env-arm64-2026.08.18.ova -n
+VBoxManage import provers-env-arm64-2026.10.01.ova -n
 ```
 
 which prints the tool versions and build date as the appliance's description.
 
 ### Earlier Appliances
 
-The appliances published before the move to 2.3.0 remain available:
+The earlier appliances remain available, to reproduce something against the
+environment it was built for.  Current models expect the 2026.10.01 appliances
+above.
+
+The 2026.08.18 pair carry **Microkit SDK 2.3.0** and Verus 0.2026.08.09:
 
 | host | appliance | size | exported | versions pinned as of |
 | --- | --- | --- | --- | --- |
-| Apple Silicon / aarch64 | [provers-env-arm64-2026.08.13.ova](https://drive.google.com/file/d/1Ts_zRfmRGkWSU2jz1-j_AthrZ1doUD0K/view?usp=sharing) | 12.61 GB | 2026-08-17 | [52a1822](https://github.com/loonwerks/INSPECTA-models/commit/52a18225) |
-| x86_64 | [provers-env-amd64-2026.08.13.ova](https://drive.google.com/file/d/16-7AmlTBj9AsrHB80anUvI8fV7Qdt1YE/view?usp=sharing) | 12.32 GB | 2026-08-17 | [52a1822](https://github.com/loonwerks/INSPECTA-models/commit/52a18225) |
-| x86_64 | [provers-env-2026.08.04.ova](https://drive.google.com/file/d/1GFuthWnaLRnPwMoOwR_hU7_4tFs5UXyg/view?usp=drive_link) | 13.31 GB | 2026-08-04 | [5edff3d](https://github.com/loonwerks/INSPECTA-models/commit/5edff3d306b7527f12141ef578eb230a3ec30d7d) |
+| Apple Silicon / aarch64 | [provers-env-arm64-2026.08.18.ova](https://drive.google.com/file/d/1UG0GYIzaaPI4s79HCOz1eL6-qckicYDO/view?usp=sharing) | 11.09 GiB | 2026-08-18 | [b21508df](https://github.com/loonwerks/INSPECTA-models/commit/b21508df) |
+| x86_64 | [provers-env-amd64-2026.08.18.ova](https://drive.google.com/file/d/1XWEYQeakpsD7811wUgdWrtQrN8qqH4Yv/view?usp=sharing) | 11.13 GiB | 2026-08-18 | [b21508df](https://github.com/loonwerks/INSPECTA-models/commit/b21508df) |
 
-All three predate Microkit 2.3.0 and so install **two** SDKs, because no release
-then carried domain scheduling:
+2.3.0 is the first release to ship domain scheduling itself, so these carry one
+SDK, at `~/provers/microkit-sdk-2.3.0`.  It is the released SDK with one
+difference: its `microkit` tool is rebuilt from the 2.3.0 tag with the
+[seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain fix,
+without which a domain-scheduled virtual machine hangs in the guest's
+`arch_timer` probe, and the SDK records it in a `VCPU-DOMAIN-PATCH` note beside
+the tool.  Microkit 2.3.1 carries #586 itself.
+
+The three before them predate Microkit 2.3.0:
+
+| host | appliance | size | exported | versions pinned as of |
+| --- | --- | --- | --- | --- |
+| Apple Silicon / aarch64 | [provers-env-arm64-2026.08.13.ova](https://drive.google.com/file/d/1Ts_zRfmRGkWSU2jz1-j_AthrZ1doUD0K/view?usp=sharing) | 11.74 GiB | 2026-08-17 | [52a1822](https://github.com/loonwerks/INSPECTA-models/commit/52a18225) |
+| x86_64 | [provers-env-amd64-2026.08.13.ova](https://drive.google.com/file/d/16-7AmlTBj9AsrHB80anUvI8fV7Qdt1YE/view?usp=sharing) | 11.47 GiB | 2026-08-17 | [52a1822](https://github.com/loonwerks/INSPECTA-models/commit/52a18225) |
+| x86_64 | [provers-env-2026.08.04.ova](https://drive.google.com/file/d/1GFuthWnaLRnPwMoOwR_hU7_4tFs5UXyg/view?usp=drive_link) | 12.39 GiB | 2026-08-04 | [5edff3d](https://github.com/loonwerks/INSPECTA-models/commit/5edff3d306b7527f12141ef578eb230a3ec30d7d) |
+
+and so install **two** SDKs, because no release then carried domain scheduling:
 
 | | | |
 | --- | --- | --- |
@@ -286,8 +311,6 @@ then carried domain scheduling:
 
 Which meant a model had to name the SDK it wanted -- the readmes and `.ci/`
 scripts of that era pass `MICROKIT_SDK=` per command for exactly that reason.
-Current models do not, so they expect the 2.3.0 appliances above; take an older
-one only to reproduce something against the environment it was built for.
 
 ## Setting Up A VirtualBox VM Using Vagrant
 
@@ -301,8 +324,12 @@ one only to reproduce something against the environment it was built for.
 
 * [Vagrant](https://www.vagrantup.com/) 2.4 or above
 
-* ~60 GB free disk and a few hours (the Sireum/IVE build and Rust dominate,
-  plus Z3 and Verus on aarch64)
+* ~60 GB free disk and about an hour on recent hardware -- 37 minutes for an
+  x86_64 build and 51 for an aarch64 one, which also compiles Z3 and Verus, at
+  2026.10.01 -- more on a slower machine or network.  Keep the host from sleeping
+  for the duration: a host that suspends pauses the VM and drops Vagrant's SSH
+  session, and the build fails part-way (`caffeinate -is bash setup.sh` on a
+  Mac, `systemd-inhibit bash setup.sh` on Linux)
 
 The [Vagrantfile](Vagrantfile) selects the box architecture from the host, so
 no configuration is needed either way; `PROVERS_ARCH` overrides it if you have
@@ -465,7 +492,7 @@ which IDEs are installed -- so the appliance answers "what is in this?" without
 being started.
 
 The name it chooses is `provers-env-<arch>-<build version>`, e.g.
-`provers-env-arm64-2026.08.18`, and it is passed as `--vmname` so that it is both
+`provers-env-arm64-2026.10.01`, and it is passed as `--vmname` so that it is both
 the OVA's filename and what VirtualBox calls the VM on import.
 
 The build version is `PROVERS_BUILD_VER`, pinned in
@@ -607,14 +634,13 @@ deleting that directory.  Outside it, the setup:
   `python@3.12`, `qemu`, and -- unless `PROVERS_DEPS_PROFILE=runtime` -- `cmake`,
   `autoconf`, `automake`.  TeX Live is *not* installed, on either host: it was
   needed when the Microkit SDK was built from source, which built its manual,
-  and only the `microkit` tool is built now
+  and the released SDK is used as it ships now
 
 * installs `rustup` and the pinned toolchain into `~/.cargo`, and makes that
   toolchain the rustup default.  On a machine with its own Rust work, skip that
   last part with `PROVERS_RUST_DEFAULT=false bash provers-setup.sh` -- nothing
-  installed here depends on the default, since Verus comes from a release, the
-  `microkit` tool build names its toolchain explicitly, and generated crates
-  select their own through `rust-toolchain.toml`
+  installed here depends on the default, since Verus comes from a release and
+  generated crates select their own toolchain through `rust-toolchain.toml`
 
 * appends a `# provers-env` block to `~/.zshrc` (or `~/.bash_profile` under
   bash), which is what puts `verus`, `sireum` and the rest on `PATH`.  It is
@@ -639,6 +665,11 @@ deleting `$SIREUM_HOME/bin/mac`, which is the install in use here.
 
 ### Smoke Test
 
+Run it in a new terminal, so the shell picks up the `# provers-env` block.  If
+`verus --version` reports anything but `VERUS_VER`, another Verus is ahead of
+this one on `PATH` -- typically one your own dotfiles add after that block runs.
+`which -a verus` lists them in order; the first is the one generated builds use.
+
 ```bash
 verus --version                 # ... Platform: macos_aarch64
 sireum --version
@@ -659,9 +690,8 @@ same `provers-setup.sh`, on a machine you already have, with no VM in between.
 
 * Ubuntu 24.04, x86_64 or aarch64, with `sudo` available to the invoking user
 
-* ~60 GB free disk.  Allow a few hours on x86_64, and considerably longer on
-  aarch64, where Z3 and Verus are both built from source -- see
-  [Hosts](#hosts)
+* ~60 GB free disk.  Allow under an hour on x86_64, and longer on aarch64,
+  where Z3 and Verus are both built from source -- see [Hosts](#hosts)
 
 ### Steps
 

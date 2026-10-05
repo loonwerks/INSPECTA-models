@@ -80,8 +80,8 @@ trace.
 **One set of host rules.** The scripts run on Ubuntu (x86_64 and aarch64) and on
 macOS (Apple Silicon), and work out the differences themselves from `uname -s`
 and `uname -m`: package manager, Rust host triple, Microkit SDK tarball, Verus
-release asset, and whether Z3, Verus and sdfgen come from a release or have to be
-built from source.  Nothing above `bin/` branches on the host -- the same
+release asset, and whether Z3 and Verus come from a release or have to be built
+from source (sdfgen is a PyPI wheel everywhere).  Nothing above `bin/` branches on the host -- the same
 `provers-setup.sh` is what you run on all three.
 
 | | Ubuntu x86_64 | Ubuntu aarch64 | macOS arm64 |

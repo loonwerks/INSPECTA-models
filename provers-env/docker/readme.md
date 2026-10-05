@@ -104,7 +104,26 @@ bash docker.sh
 That builds both architectures in parallel, tags them `<image>:amd64_<version>`
 and `<image>:arm64_<version>`, and then offers to push and to publish a
 multi-arch `:latest` manifest.  It answers `n` by default, so it is safe to run
-just to check the build.
+just to check the build.  Run without a terminal (from CI, `nohup`, or with stdin
+redirected) it stops at that prompt instead: `read` meets end-of-input and
+`set -e` ends the script with status 1, after `Both architecture-specific builds
+completed successfully.` and before anything is pushed.  Both images are left
+built locally.  To publish them afterwards, run the steps it would have run --
+push both architecture tags, then point the version and `:latest` at a manifest
+of the two:
+
+```bash
+IMAGE=jasonbelt/microkit_provers VERSION=2026.10.01   # PROVERS_IMAGE, PROVERS_BUILD_VER
+docker push "${IMAGE}:arm64_${VERSION}"
+docker push "${IMAGE}:amd64_${VERSION}"
+docker buildx imagetools create -t "${IMAGE}:${VERSION}" \
+  "${IMAGE}:arm64_${VERSION}" "${IMAGE}:amd64_${VERSION}"
+docker buildx imagetools create -t "${IMAGE}:latest" "${IMAGE}:${VERSION}"
+```
+
+The same steps publish two images built on different machines -- say amd64
+natively on an x86_64 host rather than emulated -- once each has pushed its own
+architecture tag: the manifest only names the two tags, wherever they were built.
 
 The version comes from `PROVERS_BUILD_VER` in
 [../bin/versions.sh](../bin/versions.sh) rather than from today's date, so a
@@ -151,8 +170,8 @@ VERUS_VER=<other> bash docker.sh
 ## How The Build Is Put Together
 
 One Dockerfile covers both architectures.  Everything that differs between them
--- building Z3 and Verus from source, building sdfgen with zig, the SDK tarball
-names, `bin/linux` vs `bin/linux/arm` -- is decided inside the scripts from
+-- building Z3 and Verus from source on aarch64, the SDK tarball names,
+`bin/linux` vs `bin/linux/arm` -- is decided inside the scripts from
 `uname -m`, so the Dockerfile never branches on architecture.  `docker.sh`
 selects one with buildx's `--platform`.
 
