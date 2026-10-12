@@ -253,8 +253,11 @@ if (result == 0 && hasMicrokit) {
   }
 
   if (result == 0) {
+    // Expect the Microkit monitor's line rather than the gumbo monitor's own init log: the
+    // monitor runs at top priority so its lines are never interleaved with other PDs' output,
+    // whereas the gumbo monitor's init line can be split by concurrent PD init output
     result = simulate("Simulating with GUMBO runtime monitoring under QEMU", microkitMcsDir, "gumbo_monitor.mk",
-      ISZ("[gumbo_monitor::"))
+      ISZ("MON|INFO: PD 'gumbo_monitor_process_gumbo_monitor_thread' is now passive!"))
   }
 
   if (result == 0) {
@@ -263,7 +266,8 @@ if (result == 0 && hasMicrokit) {
 
   if (result == 0) {
     result = simulate("Simulating with System Verification runtime monitoring under QEMU", microkitMcsDir, "sys_nominal_monitor.mk",
-      ISZ("[sys_nominal_monitor::", "Schedule conformance check passed"))
+      ISZ("MON|INFO: PD 'sys_nominal_monitor_process_sys_nominal_monitor_thread' is now passive!",
+        "Schedule conformance check passed"))
   }
 
   if (result == 0) {
