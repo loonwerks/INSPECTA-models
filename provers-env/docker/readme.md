@@ -113,7 +113,7 @@ push both architecture tags, then point the version and `:latest` at a manifest
 of the two:
 
 ```bash
-IMAGE=jasonbelt/microkit_provers VERSION=2026.10.01   # PROVERS_IMAGE, PROVERS_BUILD_VER
+IMAGE=jasonbelt/microkit_provers VERSION=2026.10.13   # PROVERS_IMAGE, PROVERS_BUILD_VER
 docker push "${IMAGE}:arm64_${VERSION}"
 docker push "${IMAGE}:amd64_${VERSION}"
 docker buildx imagetools create -t "${IMAGE}:${VERSION}" \

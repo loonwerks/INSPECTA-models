@@ -22,7 +22,7 @@
 #
 #   PROVERS_BUILD_VER=$(date +%Y.%m.%d) bash docker/docker.sh
 #
-: "${PROVERS_BUILD_VER:=2026.10.01}"
+: "${PROVERS_BUILD_VER:=2026.10.13}"
 
 : "${MICROKIT_SDK_VER:=2.3.1}"
 # The toolchain Verus ${VERUS_VER} was built against, which is also the channel
@@ -79,7 +79,7 @@
 # requires pinning both, and pinning SIREUM_INIT_V to a release rather than
 # leaving it at the moving `dev` tag is what makes the bootstrap reproducible
 # too.  Set SIREUM_V to a `4.*` tag and SIREUM_INIT_V can be left unset.
-: "${SIREUM_V:=217a3c49cc83a16b6f03ffaf0b740e16a8c351b9}"
+: "${SIREUM_V:=e693c03c0b50904b3f18e5d75abbb81d07be827e}"
 : "${SIREUM_INIT_V:=4.20260810.80aad0c2}"
 : "${SIREUM_REPO:=https://github.com/sireum/kekinian}"
 
