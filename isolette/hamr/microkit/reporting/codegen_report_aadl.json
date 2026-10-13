@@ -43,7 +43,7 @@
             {
               "type" : "Message",
               "level" : 2,
-              "message" : "The inclusion of the runtime monitor extends the frame schedule by 870 ms beyond the configured 1000 ms frame period. Consider increasing the frame period to accommodate monitor execution.",
+              "message" : "The inclusion of the runtime monitor extends the frame schedule by 870 ms beyond the configured 1 s frame period. Consider increasing the frame period to accommodate monitor execution.",
               "posOpt" : {
                 "type" : "None"
               },
