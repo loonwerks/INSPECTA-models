@@ -27,7 +27,7 @@
 : "${MICROKIT_SDK_VER:=2.3.1}"
 # The toolchain Verus ${VERUS_VER} was built against, which is also the channel
 # the Rust crates HAMR generates pin (see the rust-toolchain.toml codegen emits).
-: "${RUST_TOOLCHAIN_VER:=1.98.1}"
+: "${RUST_TOOLCHAIN_VER:=1.98.0}"
 : "${SDFGEN_VER:=0.35.0}"
 # Verus.  x86_64 unpacks the published release asset; aarch64 has none and
 # builds from source.  bin/verus.sh checks out the commit named in the last
@@ -35,7 +35,7 @@
 # been moved after its assets were published -- following it shipped a different
 # Verus on each architecture.  Both paths assert the installed version matches
 # this pin, so a re-cut release fails the build rather than passing silently.
-: "${VERUS_VER:=0.2026.09.27.3cf1832}"
+: "${VERUS_VER:=0.2026.09.06.8dea4a2}"
 
 # LionsOS, pinned to a commit rather than tracking main.  What is installed here
 # is what the models build their VM examples against, and LionsOS carries sDDF
