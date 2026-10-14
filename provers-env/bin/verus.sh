@@ -46,11 +46,13 @@ verus_assert_version() {
 # verified, built crates against the pinned vstd and failed a false
 # postcondition the same with and without the deleted files.  A keep-list rather
 # than a delete-list, so a release that adds other build output is pruned too.
+# line_count, Verus' spec/proof/exec line classifier, is kept too: Verus does not
+# run it, but it is how Verus code size is reported (and it is a few MB).
 verus_prune() {
   if [ "${VERUS_PRUNE:-true}" != "true" ]; then
     return 0
   fi
-  local keep=" verus rust_verify cargo-verus z3 vstd.vir libvstd.rlib libverus_builtin.rlib
+  local keep=" verus rust_verify cargo-verus line_count z3 vstd.vir libvstd.rlib libverus_builtin.rlib
     libverus_builtin_macros.so libverus_state_machines_macros.so
     libverus_builtin_macros.dylib libverus_state_machines_macros.dylib
     builtin builtin_macros state_machines_macros vstd
