@@ -172,6 +172,12 @@ set +u
 source ../tools/activate
 vargo build --release
 set -u
+# vargo builds only what Verus runs.  The published assets come from a plain
+# `cargo build --release` of the whole workspace, which also builds line_count
+# (kept by verus_prune); build it the same way, into the same target-verus.
+# tools/activate shadows cargo with a function that refuses to run, so call the
+# binary itself.
+command cargo build --release -p line_count
 
 cp -r ./target-verus/release "${VERUS_DIR}"
 # Match the layout of the published releases, where z3 sits next to the verus
