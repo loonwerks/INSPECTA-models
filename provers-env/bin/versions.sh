@@ -79,7 +79,7 @@
 # requires pinning both, and pinning SIREUM_INIT_V to a release rather than
 # leaving it at the moving `dev` tag is what makes the bootstrap reproducible
 # too.  Set SIREUM_V to a `4.*` tag and SIREUM_INIT_V can be left unset.
-: "${SIREUM_V:=e693c03c0b50904b3f18e5d75abbb81d07be827e}"
+: "${SIREUM_V:=af04af714462fbddb1db154d6604169e650d3ab7}"
 : "${SIREUM_INIT_V:=4.20260810.80aad0c2}"
 : "${SIREUM_REPO:=https://github.com/sireum/kekinian}"
 
