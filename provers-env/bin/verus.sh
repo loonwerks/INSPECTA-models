@@ -95,23 +95,16 @@ if [ "${VERUS_FROM_SOURCE}" != "true" ]; then
   verus_prune
   # Not every release asset bundles Z3 -- the arm64-macos asset of
   # 0.2026.09.06.8dea4a2 does not -- so fall back to the official Z3 release
-  # build of Z3_VER, the Z3 Verus checks for at startup.  Its asset names carry
-  # the OS version they were built on (z3-4.16.0-arm64-osx-15.7.3.zip), so the
-  # asset is looked up by arch and OS rather than spelled out.
+  # build of Z3_VER, the Z3 Verus checks for at startup.  The asset is named by
+  # Z3_RELEASE_ID from bin/versions.sh rather than looked up through the GitHub
+  # API: that lookup is unauthenticated, CI runners share its 60-requests-an-hour
+  # limit, and a refused request failed this script with no message.
   if [ ! -e "${VERUS_DIR}/z3" ]; then
-    case "${PROVERS_OS}-${PROVERS_ARCH}" in
-      darwin-aarch64) z3_asset_tag=arm64-osx ;;
-      darwin-x86_64)  z3_asset_tag=x64-osx ;;
-      linux-aarch64)  z3_asset_tag=arm64-glibc ;;
-      linux-x86_64)   z3_asset_tag=x64-glibc ;;
-    esac
-    z3_url="$(wget -qO- "https://api.github.com/repos/Z3Prover/z3/releases/tags/${Z3_VER}" \
-      | grep -o "\"browser_download_url\": *\"[^\"]*/${Z3_VER}-${z3_asset_tag}[^\"]*\.zip\"" \
-      | head -1 | sed 's/.*"\(https[^"]*\)"/\1/')"
-    if [ -z "${z3_url}" ]; then
-      echo "verus.sh: the Verus release has no z3 and no ${Z3_VER} ${z3_asset_tag} asset was found" >&2
+    if [ -z "${Z3_RELEASE_ID:-}" ]; then
+      echo "verus.sh: the Verus release has no z3 and Z3_RELEASE_ID is not set for ${PROVERS_OS}/${PROVERS_ARCH}" >&2
       exit 1
     fi
+    z3_url="${Z3_REPO}/releases/download/${Z3_VER}/${Z3_VER}-${Z3_RELEASE_ID}.zip"
     z3_zip=${z3_url##*/}
     provers_fetch "${z3_url}" "${PROVERS_DIR}/${z3_zip}"
     rm -rf "${PROVERS_DIR}/${z3_zip%.zip}"

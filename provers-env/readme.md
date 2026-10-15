@@ -87,7 +87,7 @@ from source (sdfgen is a PyPI wheel everywhere).  Nothing above `bin/` branches 
 | | Ubuntu x86_64 | Ubuntu aarch64 | macOS arm64 |
 | --- | --- | --- | --- |
 | packages | apt | apt | Homebrew |
-| Z3 | in the Verus release | built by `z3.sh` | in the Verus release |
+| Z3 | in the Verus release | built by `z3.sh` | Z3 release asset (`Z3_RELEASE_ID`), fetched by `verus.sh` |
 | Verus | released asset | built with `vargo` | released asset |
 | sdfgen | PyPI wheel | PyPI wheel | PyPI wheel |
 | IDEs | `bin/linux` | `bin/linux/arm` | `bin/mac`, as `.app` bundles |

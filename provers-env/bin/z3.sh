@@ -2,19 +2,21 @@
 # Build Z3 ${Z3_VER} from source into ${PROVERS_DIR}/z3, for the architectures
 # where Verus has to be built from source too.
 #
-# Verus is tied to one exact Z3 version, and every published Verus release ships
-# that Z3 alongside the binary -- so wherever a release is used (x86_64 Linux and
-# macOS) there is nothing to do here and this script is a no-op.  aarch64 Linux
-# has no Verus release at all, and Z3 publishes no aarch64 Linux release either,
-# so it is built here; verus.sh then links it in as ${VERUS_Z3_PATH} so every
-# host ends up with the same layout.
+# Verus is tied to one exact Z3 version.  Wherever a Verus release is used
+# (x86_64 Linux and macOS) verus.sh installs that Z3 itself -- the one bundled in
+# the release, or, for an asset that bundles none (arm64-macos of
+# 0.2026.09.06.8dea4a2), the official Z3 release build named by Z3_RELEASE_ID --
+# so there is nothing to do here and this script is a no-op.  aarch64 Linux has
+# no Verus release at all, so Verus and its Z3 are built from source there;
+# verus.sh then links this Z3 in as ${VERUS_Z3_PATH} so every host ends up with
+# the same layout.
 set -Eeuo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
 
 if [ "${VERUS_FROM_SOURCE}" != "true" ]; then
   set +x
-  echo "z3.sh: ${PROVERS_OS}/${PROVERS_ARCH} uses the Z3 bundled with the Verus release; nothing to build"
+  echo "z3.sh: ${PROVERS_OS}/${PROVERS_ARCH} installs Verus from a release, and verus.sh installs its Z3; nothing to build"
   exit 0
 fi
 

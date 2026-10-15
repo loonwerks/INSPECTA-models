@@ -130,6 +130,9 @@ case "${PROVERS_OS}:${PROVERS_ARCH}" in
     : "${MICROKIT_SDK_ARCH:=x86-64}"
     # names the Verus release asset: verus-<ver>-<id>.zip, unpacking to verus-<id>
     : "${VERUS_RELEASE_ID:=x86-linux}"
+    # names the Z3 release asset verus.sh falls back to when the Verus asset has
+    # no z3: <Z3_VER>-<id>.zip, unpacking to <Z3_VER>-<id>
+    : "${Z3_RELEASE_ID:=x64-glibc-2.39}"
     # The x86 Verus release ships a matching Z3, and sdfgen has an x86 wheel.
     : "${VERUS_FROM_SOURCE:=false}"
     : "${SDFGEN_FROM_SOURCE:=false}"
@@ -144,6 +147,7 @@ case "${PROVERS_OS}:${PROVERS_ARCH}" in
     # comes from.  PyPI has carried a manylinux aarch64 sdfgen wheel since 0.35.0,
     # so sdfgen is installed from it as on the other hosts.
     : "${VERUS_RELEASE_ID:=}"
+    : "${Z3_RELEASE_ID:=arm64-glibc-2.38}"
     : "${VERUS_FROM_SOURCE:=true}"
     : "${SDFGEN_FROM_SOURCE:=false}"
     ;;
@@ -153,10 +157,11 @@ case "${PROVERS_OS}:${PROVERS_ARCH}" in
     : "${RUST_MUSL_TRIPLE:=}"
     : "${MICROKIT_SDK_OS:=macos}"
     : "${MICROKIT_SDK_ARCH:=aarch64}"
-    # verus-<ver>-arm64-macos.zip, which bundles a matching Z3 next to the
-    # binary exactly as the x86 Linux release does; and PyPI carries an arm64
-    # macOS sdfgen wheel.  So nothing is built from source here.
+    # verus-<ver>-arm64-macos.zip -- whose 0.2026.09.06.8dea4a2 asset does not
+    # bundle Z3, so verus.sh fetches the official Z3 release build -- and PyPI
+    # carries an arm64 macOS sdfgen wheel.  So nothing is built from source here.
     : "${VERUS_RELEASE_ID:=arm64-macos}"
+    : "${Z3_RELEASE_ID:=arm64-osx-15.7.3}"
     : "${VERUS_FROM_SOURCE:=false}"
     : "${SDFGEN_FROM_SOURCE:=false}"
     ;;
@@ -168,6 +173,7 @@ case "${PROVERS_OS}:${PROVERS_ARCH}" in
     : "${MICROKIT_SDK_OS:=macos}"
     : "${MICROKIT_SDK_ARCH:=x86-64}"
     : "${VERUS_RELEASE_ID:=x86-macos}"
+    : "${Z3_RELEASE_ID:=x64-osx-15.7.3}"
     : "${VERUS_FROM_SOURCE:=false}"
     : "${SDFGEN_FROM_SOURCE:=false}"
     ;;
@@ -183,7 +189,9 @@ esac
 # exist, but pinned here so every host stays on one set of versions.  Verus
 # requires this exact Z3; it is the version bundled in its releases, so it moves
 # with VERUS_VER -- check `z3 --version` next to the verus binary in the release
-# before bumping one without the other.
+# before bumping one without the other.  Z3_RELEASE_ID (per host, above) carries
+# the OS version the Z3 asset was built on, so it moves with Z3_VER too: the
+# asset names are listed on the ${Z3_REPO}/releases/tag/${Z3_VER} page.
 : "${Z3_VER:=z3-4.16.0}"
 : "${Z3_REPO:=https://github.com/Z3Prover/z3}"
 # zig builds sdfgen only when SDFGEN_FROM_SOURCE=true, which no host defaults to now
