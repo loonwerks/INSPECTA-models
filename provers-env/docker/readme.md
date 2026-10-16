@@ -8,7 +8,7 @@ It is built from the install scripts in [../bin](../bin) -- the same ones the
 Vagrant VM and the bare-metal setup run -- so the image and the VM install the
 same tools at the same versions.  What differs is only which flags those scripts
 are given.  For the VM, see [../vagrant/readme.md](../vagrant/readme.md); for an
-overview of all three delivery paths, [../readme.md](../readme.md).
+overview of every delivery path, [../readme.md](../readme.md).
 
 ## Contents
 

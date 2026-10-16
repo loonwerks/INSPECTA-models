@@ -7,7 +7,7 @@ The Microkit SDK is the released one, unmodified: 2.3.1 carries the
 [seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain fix
 that 2.3.0 needed its `microkit` tool rebuilt for.
 
-It is defined once, as the install scripts in [bin](bin), and delivered four
+It is defined once, as the install scripts in [bin](bin), and delivered five
 ways.  A container and a VM built a week apart install the same tools at the same
 versions, because they run the same scripts.
 
@@ -36,7 +36,7 @@ container has no use for.  A Mac gets those as `.app` bundles.  Everything else
 is common.
 
 On Apple Silicon the native install is worth preferring over the arm64 OVA where
-it will do: it is much the quickest of the four to set up, because every
+it will do: it is much the quickest of the five to set up, because every
 upstream publishes an arm64 macOS asset and so nothing is built from source --
 which is the opposite of aarch64 Linux, where Z3 and Verus both are.
 
@@ -81,8 +81,10 @@ trace.
 macOS (Apple Silicon), and work out the differences themselves from `uname -s`
 and `uname -m`: package manager, Rust host triple, Microkit SDK tarball, Verus
 release asset, and whether Z3 and Verus come from a release or have to be built
-from source (sdfgen is a PyPI wheel everywhere).  Nothing above `bin/` branches on the host -- the same
-`provers-setup.sh` is what you run on all three.
+from source (sdfgen is a PyPI wheel everywhere).  Above `bin/`, only the
+[Vagrantfile](vagrant/Vagrantfile) looks at the host -- to pick the box
+architecture and, on aarch64, to install the guest additions itself -- and the
+same `provers-setup.sh` is what you run on all three hosts.
 
 | | Ubuntu x86_64 | Ubuntu aarch64 | macOS arm64 |
 | --- | --- | --- | --- |
@@ -120,7 +122,7 @@ Housekeeping:
 
 | | |
 | --- | --- |
-| [build-info.sh](bin/build-info.sh) | records what got installed, as a manifest and as container labels |
+| [build-info.sh](bin/build-info.sh) | records what got installed, as `$PROVERS_DIR/build-info` and (Linux) `/etc/provers-env-release`; the container's labels carry the same versions, from the Dockerfile's `LABEL` |
 | [slim.sh](bin/slim.sh) | drops build leftovers and caches; run at the end of an image build.  The VM does not run it -- `prep-export.sh` does its own, gentler cleanup before an OVA export, keeping the dependency caches.  Refuses to run on macOS, where the binaries it deletes are the ones in use |
 | [check-env.sh](bin/check-env.sh) | fails a build whose declared environment disagrees with `versions.sh` |
 | [apt-mirror.sh](bin/apt-mirror.sh) | points apt at `PROVERS_APT_MIRROR` (Linux only) |

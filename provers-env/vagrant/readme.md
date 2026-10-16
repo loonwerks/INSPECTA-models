@@ -28,7 +28,7 @@ provers-env/
 
 `bin/` is the substance; this directory and `docker/` are two ways of running
 it, which is what keeps the VM and the image on the same tools and versions.
-[../readme.md](../readme.md) is the overview of all three.
+[../readme.md](../readme.md) is the overview of every delivery path.
 
 ## Contents
 
@@ -101,8 +101,7 @@ That is the contract: what a *build* needs, and what you may rely on.  Everythin
 else in `bin/versions.sh` and `bin/env.sh` -- the pinned versions, the repo URLs,
 `$VERUS_DIR`, `$Z3_DIR`, `$SDFGEN_VENV`, the per-host derivations -- is internal
 to the install scripts, which each source `bin/env.sh` and so see those values
-without them having to be exported into every command you subsequently run.  It
-used to export all forty.
+without them having to be exported into every command you subsequently run.
 
 The tools themselves are reached through `PATH` rather than through variables:
 `$VERUS_DIR`, `$SIREUM_HOME/bin`, the sdfgen venv, `~/.cargo/bin`, and on macOS
@@ -122,8 +121,9 @@ full JDK including JavaFX, and the build caches.
 
 ### Launching the IDEs
 
-[bin/functions.sh](../bin/functions.sh) is sourced from `~/.bashrc` and defines a
-shell function per IDE.  Each takes an optional directory and defaults to the
+[bin/functions.sh](../bin/functions.sh) is sourced from the shell startup file
+named under [What Gets Installed](#what-gets-installed) and defines a shell
+function per IDE.  Each takes an optional directory and defaults to the
 current one:
 
 ```bash
@@ -173,8 +173,8 @@ PROVERS_IVE=true PROVERS_FMIDE=true bash provers-setup.sh
 tools work with all three declined.  One wrinkle: `sireum setup ive` and
 `sireum setup vscode` both run Sireum's `Init.deps()`, which is what installs
 Logika's solvers (Z3, CVC) among other extras -- so with either IDE selected
-the solvers arrive with it.  With both declined -- which is now the default off
-a VM -- `bin/sireum.sh` installs the two solvers directly instead, so Logika
+the solvers arrive with it.  With both declined -- the default off a VM --
+`bin/sireum.sh` installs the two solvers directly instead, so Logika
 still works either way.
 
 FMIDE is installed with `-v`.  It is the longest single step of a setup and
@@ -195,7 +195,7 @@ others, which is most of why the setups differ in how long they take:
 | | Ubuntu x86_64 | Ubuntu aarch64 | macOS arm64 |
 | --- | --- | --- | --- |
 | packages | apt | apt | Homebrew |
-| Z3 | bundled in the Verus release | built by `bin/z3.sh` | bundled in the Verus release |
+| Z3 | bundled in the Verus release | built by `bin/z3.sh` | Z3's own release asset (`Z3_RELEASE_ID`), fetched by `bin/verus.sh` -- the arm64 macOS Verus asset bundles none |
 | Verus | published release asset | built with `vargo` against that Z3 | published release asset |
 | sdfgen | PyPI wheel | PyPI wheel | PyPI wheel |
 
@@ -211,21 +211,22 @@ architectures:
 
 | host | appliance | size | exported | versions pinned as of |
 | --- | --- | --- | --- | --- |
-| Apple Silicon / aarch64 | [provers-env-arm64-2026.10.01.ova](https://drive.google.com/file/d/1NQfyY8QvdV_BaeDhwJe4cYNzLg7qZvUE/view?usp=sharing) | 9.20 GiB | 2026-10-05 | [4142dbc0](https://github.com/loonwerks/INSPECTA-models/commit/4142dbc0) |
-| x86_64 | [provers-env-amd64-2026.10.01.ova](https://drive.google.com/file/d/1B7vKkPkVAz_HCYFhZyQsDrob3K68tf7O/view?usp=sharing) | 9.42 GiB | 2026-10-05 | [4142dbc0](https://github.com/loonwerks/INSPECTA-models/commit/4142dbc0) |
+| Apple Silicon / aarch64 | [provers-env-arm64-2026.10.13.ova](https://drive.google.com/file/d/1PT45RLV0QtYDIxuKJ3sLLZX4aXw8kjlT/view?usp=sharing) | 9.35 GiB | 2026-10-16 | [2a04011e](https://github.com/loonwerks/INSPECTA-models/commit/2a04011e) |
+| x86_64 | [provers-env-amd64-2026.10.13.ova](https://drive.google.com/file/d/1EKU1tpZor8gKUSIaiUfZrgq-AAWa6g5a/view?usp=drive_link) | 9.83 GiB | 2026-10-16 | [2a04011e](https://github.com/loonwerks/INSPECTA-models/commit/2a04011e) |
 
 Both carry **Microkit SDK 2.3.1**, the released SDK unmodified -- it includes
 the [seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain
 fix that the 2.3.0 appliances had to patch in -- with LionsOS `7554a0f`,
-sdfgen 0.35.0, and **Verus 0.2026.09.27** on Rust 1.98.1.  `MICROKIT_SDK` points
-at `~/provers/microkit-sdk-2.3.1`, and everything, domain-scheduled or not,
-builds against it.
+sdfgen 0.35.0, **Verus 0.2026.09.06** on Rust 1.98.0 -- the Verus release Vest
+is built against, which HAMR codegen matches -- and Sireum `af04af71`.
+`MICROKIT_SDK` points at `~/provers/microkit-sdk-2.3.1`, and everything,
+domain-scheduled or not, builds against it.
 
 Two things set them apart from the 2.3.0 appliances besides the versions:
 
-* Verus is pruned to the files it runs with (~130MB).  From 0.2026.09.27 the
-  upstream release ships cargo's whole build directory, ~1.5GB of it, and
-  `bin/verus.sh` now deletes what Verus never reads.
+* Verus is pruned to the files it runs with (~130MB): `bin/verus.sh` deletes
+  the build output the source build (and the 0.2026.09.27 and later release
+  assets) leave behind, ~1.5GB of it, which Verus never reads.
 * `libpython3.12-dev` is installed.  The R2U2 example models build the
   `r2u2_cli` tool, which links against it.
 
@@ -236,8 +237,8 @@ Everything else builds offline.
 
 Both are named for `PROVERS_BUILD_VER` rather than for the day they were
 written: a rebuild that *replaces* a published build keeps that build's version
-rather than taking the day it was made, which is why the 2026.10.01 pair above
-carry a version four days older than their export.  See
+rather than taking the day it was made, which is why the 2026.10.13 pair above
+carry a version three days older than their export.  See
 [Exporting An OVA](#exporting-an-ova).
 
 The `versions pinned as of` column is the commit whose `bin/versions.sh` each
@@ -251,7 +252,7 @@ Silicon and vice versa.  Import into VirtualBox 7.1 or above --
 `File > Import Appliance...`, or:
 
 ```bash
-VBoxManage import provers-env-arm64-2026.10.01.ova
+VBoxManage import provers-env-arm64-2026.10.13.ova
 ```
 
 Then start it and log in as `vagrant` / `vagrant`.  The virtual disk comes from
@@ -268,7 +269,7 @@ without guessing from the name -- `cat ~/provers/build-info` in the running VM,
 or before importing:
 
 ```bash
-VBoxManage import provers-env-arm64-2026.10.01.ova -n
+VBoxManage import provers-env-arm64-2026.10.13.ova -n
 ```
 
 which prints the tool versions and build date as the appliance's description.
@@ -276,8 +277,16 @@ which prints the tool versions and build date as the appliance's description.
 ### Earlier Appliances
 
 The earlier appliances remain available, to reproduce something against the
-environment it was built for.  Current models expect the 2026.10.01 appliances
+environment it was built for.  Current models expect the 2026.10.13 appliances
 above.
+
+The 2026.10.01 pair carry the same Microkit SDK 2.3.1, LionsOS and sdfgen, with
+Verus 0.2026.09.27 on Rust 1.98.1:
+
+| host | appliance | size | exported | versions pinned as of |
+| --- | --- | --- | --- | --- |
+| Apple Silicon / aarch64 | [provers-env-arm64-2026.10.01.ova](https://drive.google.com/file/d/1NQfyY8QvdV_BaeDhwJe4cYNzLg7qZvUE/view?usp=sharing) | 9.20 GiB | 2026-10-05 | [4142dbc0](https://github.com/loonwerks/INSPECTA-models/commit/4142dbc0) |
+| x86_64 | [provers-env-amd64-2026.10.01.ova](https://drive.google.com/file/d/1B7vKkPkVAz_HCYFhZyQsDrob3K68tf7O/view?usp=sharing) | 9.42 GiB | 2026-10-05 | [4142dbc0](https://github.com/loonwerks/INSPECTA-models/commit/4142dbc0) |
 
 The 2026.08.18 pair carry **Microkit SDK 2.3.0** and Verus 0.2026.08.09:
 
@@ -324,12 +333,13 @@ scripts of that era pass `MICROKIT_SDK=` per command for exactly that reason.
 
 * [Vagrant](https://www.vagrantup.com/) 2.4 or above
 
-* ~60 GB free disk and about an hour on recent hardware -- 37 minutes for an
-  x86_64 build and 51 for an aarch64 one, which also compiles Z3 and Verus, at
-  2026.10.01 -- more on a slower machine or network.  Keep the host from sleeping
-  for the duration: a host that suspends pauses the VM and drops Vagrant's SSH
-  session, and the build fails part-way (`caffeinate -is bash setup.sh` on a
-  Mac, `systemd-inhibit bash setup.sh` on Linux)
+* ~60 GB free disk and an hour or so on recent hardware -- 37 minutes for an
+  x86_64 build at 2026.10.01, and 70 for an aarch64 one, which also compiles Z3
+  and Verus, at 2026.10.13 -- more on a slower machine or network.  Keep the
+  host from sleeping for the duration: a host that suspends pauses the VM and
+  drops Vagrant's SSH session, and the build fails part-way
+  (`caffeinate -is bash setup.sh` on a Mac, `systemd-inhibit bash setup.sh` on
+  Linux)
 
 The [Vagrantfile](Vagrantfile) selects the box architecture from the host, so
 no configuration is needed either way; `PROVERS_ARCH` overrides it if you have
@@ -356,10 +366,8 @@ an exported appliance inherits.
 
 The build version is `PROVERS_BUILD_VER` from
 [bin/versions.sh](../bin/versions.sh) -- the same one the container tags and the
-OVA carry.  It used to be the day of the last `vagrant up` rather than of the
-build, since Vagrant re-applies the configured name every time, so a VM built
-one evening was renamed by the next morning's boot; a pin does not drift.  It
-does still change if you change the pin, so look a registered VM up with
+OVA carry.  Vagrant re-applies the configured name on every `vagrant up`, so
+a VM is renamed when the pin changes; look a registered VM up with
 `VBoxManage list vms` rather than assuming.  Appliances are unaffected either
 way; see [Exporting An OVA](#exporting-an-ova).
 
@@ -396,7 +404,7 @@ need more than the box's physical 64 GB do you have to install the
 They provide clipboard sharing, drag-and-drop, guest display resizing and the
 `/vagrant` shared folder.  How they arrive depends on the architecture:
 
-* **x86_64** -- the `vagrant-vbguest` plugin installs them, as it always has.
+* **x86_64** -- the `vagrant-vbguest` plugin installs them.
 
 * **aarch64** -- the plugin cannot: it invokes `VBoxLinuxAdditions.run` by name
   and the ISO's ARM installer is `VBoxLinuxAdditions-arm64.run`, so it would run
@@ -547,8 +555,8 @@ it removes are worth keeping in a VM you are still working in.
 
 The same `provers-setup.sh` runs natively on macOS -- no VM, no container.  It is
 the quickest of the setups here, because every upstream publishes an arm64 macOS
-build: Verus and its Z3 are unpacked from a release and sdfgen from a PyPI
-wheel, where an aarch64 Linux host has to compile all three.
+build: Verus and Z3 are each unpacked from their own release and sdfgen from a
+PyPI wheel, where an aarch64 Linux host has to compile Z3 and Verus.
 
 Prefer this over the arm64 OVA unless you need the VM itself (a Linux
 filesystem, a fixed appliance to hand out, or isolation from your own machine).
@@ -720,7 +728,7 @@ machine or a Mac:
 | `apt-mirror.sh` | points apt at `PROVERS_APT_MIRROR` (Linux only; no-op when unset) |
 | `deps.sh` | apt build/runtime/GUI dependencies, or the Homebrew formulae on macOS |
 | `rust.sh` | rustup and the pinned toolchain (`PROVERS_RUST_DEFAULT=false` to leave the rustup default alone) |
-| `z3.sh` | Z3 (`Z3_VER`), built from source; a no-op wherever the Verus release bundles one, i.e. everywhere but aarch64 Linux (see [Hosts](#hosts)) |
+| `z3.sh` | Z3 (`Z3_VER`), built from source on aarch64 Linux; a no-op elsewhere, where `verus.sh` installs Z3 from a release -- the one bundled with Verus, or Z3's own (see [Hosts](#hosts)) |
 | `verus.sh` | Verus |
 | `microkit-lionsos.sh` | sdfgen venv, released Microkit SDK, LionsOS |
 | `sireum.sh` | Sireum itself (no IDEs), or adopts the one `SIREUM_HOME` points at |
@@ -789,10 +797,10 @@ pulls the rest of the dependency set with them.  `PROVERS_SIREUM_SOLVERS=false`
 skips it.
 
 `SIREUM_INIT_V` matters only on the source path: it selects the release whose
-prebuilt `sireum.jar` bootstraps that build.  `bin/init.sh`
-derives the second from the first, but only when `SIREUM_V` is a `4.*` release
-tag -- given a bare commit SHA it derives the release `4.<sha>`, which does not
-exist.  So pass both when pinning to a SHA:
+prebuilt `sireum.jar` bootstraps that build.  Without one, kekinian's own
+`bin/init.sh` derives it from `SIREUM_V`, but only correctly when `SIREUM_V` is
+a `4.*` release tag -- given a bare commit SHA it derives the release
+`4.<sha>`, which does not exist.  So pass both when pinning to a SHA:
 
 ```bash
 SIREUM_V=<sha> SIREUM_INIT_V=<4.x release tag> bash ~/bin/sireum.sh
@@ -805,8 +813,9 @@ To pin the FMIDE component versions (see `$SIREUM_HOME/bin/install/fmide.cmd
 FMIDE_ARGS="--osate 2.14.0" bash ~/bin/fmide.sh
 ```
 
-`SIREUM_V` and `FMIDE_ARGS` are also forwarded from the host into the VM during
-provisioning.
+`SIREUM_V`, `SIREUM_INIT_V` and `FMIDE_ARGS` are also forwarded from the host
+into the VM during provisioning, along with `PROVERS_BUILD_VER`, the tool
+version pins from `bin/versions.sh` and the `PROVERS_APT_MIRROR` settings.
 
 ### Optionals
 
