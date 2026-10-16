@@ -9,7 +9,7 @@ edition = "2021"
 data = { path = "../data" }
 linux-raw-sys = { version = "=0.12.1", default-features = false }
 log = "0.4.34"
-proptest = { version = "1.11.0", default-features = false, features = ["alloc", "no_std"] }
+proptest = { version = "1.12.0", default-features = false, features = ["alloc", "no_std"] }
 linked_list_allocator = "0.10.6"
 GUMBO_Library = { path = "../GUMBO_Library" }
 observers = { path = "../observers" }
@@ -36,7 +36,7 @@ verus_builtin_macros = { version = "=0.0.0-2026-09-06-0133" }
 lazy_static = "1.5.1"
 once_cell = "1.21.4"
 serial_test = "4.0.1"
-proptest = "1.11.0"
+proptest = "1.12.0"
 env_logger = "0.11.11"
 
 [lib]
