@@ -5,5 +5,8 @@
 export MSD := $(TOP_DIR)/test_scheduler.meta.py
 export SCHEDULER_C := $(TOP_DIR)/scheduler/src/test_scheduler.scheduler.c
 export SCHEDULER_CONFIG_HEADERS := $(TOP_DIR)/scheduler/include/test_scheduler.user_config.h
+# not the monitor variants' fault answer: here a faulted thread's dispatch must trip the
+# watchdog and fail the test
+export MON_CFLAGS :=
 # the test controller is built only for this variant
 export EXTRA_IMAGES := test_controller_process_test_controller_thread.elf test_controller_process_test_controller_thread_MON.elf

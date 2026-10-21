@@ -199,19 +199,19 @@ static inline bool hamr_ScheduleUserPartitions_is_valid(const hamr_ScheduleUserP
 
 typedef struct hamr_SchedState {
   uint32_t last_yielded_ch;
-  uint32_t next_dispatch_ch;
+  uint32_t outstanding;
   uint32_t current_timeslice;
 } hamr_SchedState;
 
 _Static_assert(sizeof(hamr_SchedState) == 12, "hamr_SchedState: memory layout differs from HAMR's");
 _Static_assert(_Alignof(hamr_SchedState) == 4, "hamr_SchedState: memory layout differs from HAMR's");
 _Static_assert(offsetof(hamr_SchedState, last_yielded_ch) == 0, "hamr_SchedState: memory layout differs from HAMR's");
-_Static_assert(offsetof(hamr_SchedState, next_dispatch_ch) == 4, "hamr_SchedState: memory layout differs from HAMR's");
+_Static_assert(offsetof(hamr_SchedState, outstanding) == 4, "hamr_SchedState: memory layout differs from HAMR's");
 _Static_assert(offsetof(hamr_SchedState, current_timeslice) == 8, "hamr_SchedState: memory layout differs from HAMR's");
 
 static inline bool hamr_SchedState_is_valid(const hamr_SchedState *v) {
   return uint32_t_is_valid(&v->last_yielded_ch) &&
-                  uint32_t_is_valid(&v->next_dispatch_ch) &&
+                  uint32_t_is_valid(&v->outstanding) &&
                   uint32_t_is_valid(&v->current_timeslice);
 }
 

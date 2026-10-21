@@ -70,6 +70,10 @@ typedef struct test_command {
     // Echoes test_status.obs_seq once the controller has checked a park; that is
     // what lets the parked dispatch go ahead.
     uint32_t obs_ack;
+    // Equal to obs_ack when the controller rejects the parked dispatch: the thread's
+    // inputs failed its CEP_Pre, so it is not dispatched and the slot passes (D36).
+    // Stored before obs_ack.
+    uint32_t obs_skip;
 } test_command_t;
 
 // Written by the scheduler, read by the controller.  ack_seq is stored last and

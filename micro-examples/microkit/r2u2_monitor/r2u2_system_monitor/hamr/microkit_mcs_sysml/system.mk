@@ -71,6 +71,7 @@ CFLAGS += \
 	-I$(SDDF)/include/microkit \
 	-I$(TOP_DIR)/scheduler/include \
 	$(TOP_TYPES_INCLUDE) \
+	$(MON_CFLAGS) \
 	-I$(TOP_DIR)/components/producer_producer/include \
 	-I$(TOP_DIR)/components/consumer_consumer/include \
 	-I$(TOP_DIR)/components/monitor_process_monitor_thread/include
@@ -92,7 +93,7 @@ all: cache.o
 # Sentinel file whose name encodes a hash of build-affecting variables.
 # When any of these change the old sentinel is removed and a new one is created,
 # forcing dependent targets to rebuild.
-# TESTS, LIST_TESTS, GUMBO_CHECKS and SYSVERIF_CHECKS are part of the hash because they
+# TESTS, LIST_TESTS, GUMBO_CHECKS, SYSVERIF_CHECKS and PROPTEST_SEED are part of the hash because they
 # are patched into an ELF section by the MSD step below (all but TESTS through its
 # environment, so a meta.py written before they existed still runs).  Without them,
 # changing one leaves this stamp -- and therefore $(SYSTEM_FILE) -- up to date, the
@@ -103,11 +104,26 @@ all: cache.o
 # re-parsed by the shell; in the hash, a quote is replaced (after %, so no two filters hash
 # alike) so it cannot end the quoting.
 export TESTS
-CHECK_FLAGS_BOARD_MD5:=.board_cflags-$(shell echo -- ${CFLAGS} ${BOARD} ${MICROKIT_CONFIG} ${MICROKIT_SDK} ${MSD} ${SCHEDULER_C} ${SCHEDULER_CONFIG_HEADERS} 'TESTS=$(subst ',%27,$(subst %,%25,$(TESTS)))' LIST_TESTS=${LIST_TESTS} GUMBO_CHECKS=${GUMBO_CHECKS} SYSVERIF_CHECKS=${SYSVERIF_CHECKS}| shasum | sed 's/ *-//')
+CHECK_FLAGS_BOARD_MD5:=.hamr_flags-$(shell echo -- ${CFLAGS} ${BOARD} ${MICROKIT_CONFIG} ${MICROKIT_SDK} ${MSD} ${SCHEDULER_C} ${SCHEDULER_CONFIG_HEADERS} 'TESTS=$(subst ',%27,$(subst %,%25,$(TESTS)))' LIST_TESTS=${LIST_TESTS} GUMBO_CHECKS=${GUMBO_CHECKS} SYSVERIF_CHECKS=${SYSVERIF_CHECKS} PROPTEST_SEED=${PROPTEST_SEED}| shasum | sed 's/ *-//')
 
 ${CHECK_FLAGS_BOARD_MD5}:
-	-rm -f .board_cflags-*
+	-rm -f .hamr_flags-*
 	touch $@
+
+# The stamp above relinks the images.  It is named .hamr_flags-*, not .board_cflags-*:
+# sDDF's own stamp (board/common.mk), which every C object depends on, has that name, and
+# each rule deletes its name's stamps, so sharing it made each delete the other and every
+# make rebuild everything.  sDDF's hash is taken before CFLAGS is extended above, so it
+# does not see a variant's MON_CFLAGS, and every variant builds here: an object compiled
+# for one could be linked into another.  So when the final CFLAGS changes, every object
+# and archive compiled here is removed before anything is built -- only in the build
+# directory, where the top Makefile runs this one (make -C), never in a tree it is run
+# from by hand.  sDDF's stamp is created with it: made only once objects exist, it would
+# otherwise be newer than all of them on the build after a clean one, and recompile them.
+CHECK_CFLAGS_MD5:=.cflags-$(shell echo -- ${CFLAGS} | shasum | sed 's/ *-//')
+ifeq ($(CURDIR)$(wildcard $(CHECK_CFLAGS_MD5)),$(abspath $(TOP_BUILD_DIR)))
+$(shell find . \( -name '*.o' -o -name '*.a' -o -name '.cflags-*' \) -delete; touch $(CHECK_CFLAGS_MD5) $(CHECK_FLAGS_BOARD_HASH))
+endif
 
 
 vpath %.c $(SDDF) \
@@ -181,7 +197,7 @@ monitor_process_monitor_thread.elf: $(UTIL_OBJS) monitor_process_monitor_thread_
 
 $(SYSTEM_FILE): $(IMAGES) $(DTB) ${CHECK_FLAGS_BOARD_MD5}
 	$(PYTHON) $(SDFGEN_HELPER) --macros "$(SDFGEN_UNKOWN_MACROS)" --configs "$(SCHEDULER_CONFIG_HEADERS)" --output $(TOP_BUILD_DIR)/config_structs.py
-	LIST_TESTS="$(LIST_TESTS)" GUMBO_CHECKS="$(GUMBO_CHECKS)" SYSVERIF_CHECKS="$(SYSVERIF_CHECKS)" $(PYTHON) $(MSD) --sddf $(SDDF) --board $(MICROKIT_BOARD) --dtb $(DTB) --output . --sdf $(SYSTEM_FILE) --objcopy $(OBJCOPY) --tests="$$TESTS"
+	LIST_TESTS="$(LIST_TESTS)" GUMBO_CHECKS="$(GUMBO_CHECKS)" SYSVERIF_CHECKS="$(SYSVERIF_CHECKS)" PROPTEST_SEED="$(PROPTEST_SEED)" $(PYTHON) $(MSD) --sddf $(SDDF) --board $(MICROKIT_BOARD) --dtb $(DTB) --output . --sdf $(SYSTEM_FILE) --objcopy $(OBJCOPY) --tests="$$TESTS"
 	$(OBJCOPY) --update-section .device_resources=timer_driver_device_resources.data timer_driver.elf
 	$(OBJCOPY) --update-section .timer_client_config=timer_client_scheduler.data scheduler.elf
 

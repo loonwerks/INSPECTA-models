@@ -12,6 +12,7 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_in_val(value: *mut i32) -> bool;
+  fn get_in_val_num_invalid() -> u64;
   fn get_evt() -> bool;
 }
 
@@ -21,6 +22,13 @@ pub fn unsafe_get_in_val() -> i32
     let value: *mut i32 = &mut 0;
     get_in_val(value);
     return *value;
+  }
+}
+
+pub fn unsafe_get_in_val_num_invalid() -> u64
+{
+  unsafe {
+    return get_in_val_num_invalid();
   }
 }
 
@@ -60,6 +68,12 @@ pub fn get_in_val(value: *mut i32) -> bool
     *value = guard.expect("Not expecting None");
     true
   }
+}
+
+#[cfg(test)]
+pub fn get_in_val_num_invalid() -> u64
+{
+  return 0;
 }
 
 #[cfg(test)]

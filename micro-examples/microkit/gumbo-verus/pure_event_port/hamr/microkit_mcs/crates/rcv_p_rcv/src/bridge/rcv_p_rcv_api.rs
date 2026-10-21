@@ -25,6 +25,12 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_in_val_num_invalid(&self) -> u64
+    {
+      return extern_api::unsafe_get_in_val_num_invalid();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_evt(
       &mut self,
       value: &Ghost<Option<u8>>) -> (res : bool)
@@ -41,7 +47,7 @@ verus! {
     pub api: API,
 
     pub ghost in_val: i32,
-    pub ghost evt: Option<u8>
+    pub ghost evt: Option<u8>,
   }
 
   impl<API: rcv_p_rcv_Put_Api> rcv_p_rcv_Application_Api<API> {
@@ -57,6 +63,12 @@ verus! {
         res >= 0i32,
     {
       self.api.unverified_get_in_val(&Ghost(self.in_val))
+    }/// The number of messages received on in_val that were dropped because they held
+    /// an invalid bit pattern (an out-of-range enum, a bool that is neither 0 nor 1, or a
+    /// string with no terminating NUL)
+    pub fn get_in_val_num_invalid(&self) -> u64
+    {
+      self.api.unverified_get_in_val_num_invalid()
     }
     pub fn get_evt(&mut self) -> (res : bool)
       ensures

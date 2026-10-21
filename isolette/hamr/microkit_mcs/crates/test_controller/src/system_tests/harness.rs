@@ -348,7 +348,9 @@ macro_rules! sys_assert_eq {
 //
 // proptest needs only alloc, so the controller gets a heap, set up on the first
 // property test.  There is no OS entropy on target, so the generator is seeded from
-// PROPTEST_SEED: every run explores the same cases, and a failure is reproducible.
+// the seed patched in at image build time (PROPTEST_SEED; run-tests.cmd picks a new
+// one each run), or DEFAULT_PROPTEST_SEED without one.  Every line a property test
+// prints names the seed, so passing it back as PROPTEST_SEED reproduces the run.
 // ---------------------------------------------------------------------------------
 
 const HEAP_SIZE: usize = 256 * 1024;
@@ -371,7 +373,19 @@ fn ensure_heap() {
   }
 }
 
-pub const PROPTEST_SEED: [u8; 32] = *b"hamr-microkit-system-test-seed!!";
+pub const DEFAULT_PROPTEST_SEED: [u8; 32] = *b"hamr-microkit-system-test-seed!!";
+
+/// A seed as the 64 hex digits PROPTEST_SEED takes.
+struct SeedHex([u8; 32]);
+
+impl core::fmt::Display for SeedHex {
+  fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+    for b in self.0.iter() {
+      write!(f, "{:02x}", b)?;
+    }
+    Ok(())
+  }
+}
 
 /// Runs `cases` generated cases of `test` over the strategy `make_strategy` builds,
 /// shrinking on failure.  Returns whether every case passed; a failure's message and
@@ -389,11 +403,12 @@ pub fn run_property<S: proptest::strategy::Strategy>(
   use proptest::test_runner::{Config, RngAlgorithm, TestError, TestRng, TestRunner};
   ensure_heap();
   let strategy = make_strategy();
-  let rng = TestRng::from_seed(RngAlgorithm::ChaCha, &PROPTEST_SEED);
+  let seed = selection::proptest_seed(DEFAULT_PROPTEST_SEED);
+  let rng = TestRng::from_seed(RngAlgorithm::ChaCha, &seed);
   let mut runner = TestRunner::new_with_rng(Config::with_cases(cases), rng);
   match runner.run(&strategy, test) {
     Ok(()) => {
-      line(format_args!("TEST | INFO  {} generated cases passed", cases));
+      line(format_args!("TEST | INFO  {} generated cases passed (PROPTEST_SEED={})", cases, SeedHex(seed)));
       true
     }
     Err(TestError::Fail(reason, minimal)) => {
@@ -404,6 +419,7 @@ pub fn run_property<S: proptest::strategy::Strategy>(
         line(format_args!("TEST | INFO  {}", l));
       }
       line(format_args!("TEST | INFO  minimal failing input: {:?}", minimal));
+      line(format_args!("TEST | INFO  reproduce with PROPTEST_SEED={}", SeedHex(seed)));
       false
     }
     Err(TestError::Abort(reason)) => {

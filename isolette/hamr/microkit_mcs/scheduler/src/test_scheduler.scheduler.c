@@ -358,6 +358,12 @@ static void try_advance(void) {
             }
             __atomic_thread_fence(__ATOMIC_ACQUIRE);
             obs_pending = false;
+            if (test_cmd->obs_skip == obs_seq) {
+                // rejected: the slot passes without dispatching its thread, so nothing
+                // completes and completed_seq stays where it is
+                advance_position();
+                continue;
+            }
         }
 
         last_dispatched_ch = ch;

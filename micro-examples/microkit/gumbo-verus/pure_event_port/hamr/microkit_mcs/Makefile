@@ -22,7 +22,7 @@ export MICROKIT_CONFIG ?= debug
 export CPU = cortex-a53
 export QEMU = qemu-system-aarch64
 
-export AR := ar
+export AR := llvm-ar
 export CC := clang
 export DTC := dtc
 export LD := ld.lld

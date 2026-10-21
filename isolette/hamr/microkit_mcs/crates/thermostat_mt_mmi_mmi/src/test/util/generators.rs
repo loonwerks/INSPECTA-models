@@ -244,14 +244,14 @@ pub fn hamr_SchedState_strategy_default() -> impl Strategy<Value = hamr::SchedSt
 
 pub fn hamr_SchedState_strategy_cust
   <last_yielded_ch_u32_strategy: Strategy<Value = u32>, 
-   next_dispatch_ch_u32_strategy: Strategy<Value = u32>, 
+   outstanding_u32_strategy: Strategy<Value = u32>, 
    current_timeslice_u32_strategy: Strategy<Value = u32>> (
   last_yielded_ch_strategy: last_yielded_ch_u32_strategy,
-  next_dispatch_ch_strategy: next_dispatch_ch_u32_strategy,
+  outstanding_strategy: outstanding_u32_strategy,
   current_timeslice_strategy: current_timeslice_u32_strategy) -> impl Strategy<Value = hamr::SchedState>
 {
-  (last_yielded_ch_strategy, next_dispatch_ch_strategy, current_timeslice_strategy).prop_map(|(last_yielded_ch, next_dispatch_ch, current_timeslice)| {
-    hamr::SchedState { last_yielded_ch, next_dispatch_ch, current_timeslice }
+  (last_yielded_ch_strategy, outstanding_strategy, current_timeslice_strategy).prop_map(|(last_yielded_ch, outstanding, current_timeslice)| {
+    hamr::SchedState { last_yielded_ch, outstanding, current_timeslice }
   })
 }
 

@@ -73,18 +73,40 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
     let idx = state.current_timeslice as usize;
     let mut view = MonitorView { api: api, focus: None };
 
+    // Whether every thread dispatched before this slot completed: the scheduler
+    // publishes the previous one's channel once it has, 0 while it is still running,
+    // and how many dispatches of any thread are still running.  A thread that overran
+    // its slot -- the previous one, or an earlier one still running past later slots --
+    // is still writing what this run would read.
+    let prev_ch = self.prev_user_ch[idx];
+    let prev_running = state.last_yielded_ch != prev_ch;
+    let overran = self.last_index != u32::MAX && prev_ch != 0 && (prev_running || state.outstanding != 0);
+
     if self.last_index == u32::MAX {
       // First compute phase, check initialization guarantees
       self.components.on_init(&mut view, &mut LogSink);
       init_checked();
-    } else if let Some(prev) = thread_of(self.prev_user_ch[idx]) {
+    } else if overran {
+      // Its completion is not checked, and no saved pre-state describes what runs from
+      // here: every one is dropped, so each thread's next completion is skipped
+      match thread_of(prev_ch) {
+        Some(prev) if prev_running =>
+          log::warn!("*** OVERRUN: {:?} did not complete within its slot: its completion is not checked ***", prev),
+        _ =>
+          log::warn!("*** OVERRUN: an earlier thread is still running past its slot: completions are not checked until it finishes ***"),
+      }
+      self.components.forget();
+    } else if let Some(prev) = thread_of(prev_ch) {
       // the thread that just yielded: check its post-condition
       self.components.on_complete(prev, &mut view, &mut LogSink);
     }
 
-    // the thread that runs next: save its pre-state, check its pre-condition
-    if let Some(next) = thread_of(self.next_user_ch[idx]) {
-      self.components.on_dispatch(next, &mut view, &mut LogSink);
+    // the thread that runs next: save its pre-state, check its pre-condition -- unless
+    // the overran thread may still be writing what it reads
+    if !overran {
+      if let Some(next) = thread_of(self.next_user_ch[idx]) {
+        self.components.on_dispatch(next, &mut view, &mut LogSink);
+      }
     }
 
     self.last_index = state.current_timeslice;
@@ -611,9 +633,6 @@ impl observers::ViolationSink for LogSink {
       }
       observers::Event::CepPostSkipped { thread } => {
         log::warn!("{} post check skipped: no saved pre-state", thread);
-      }
-      observers::Event::CepPostExcused { thread } => {
-        log::warn!("{} post check skipped: assumption not met", thread);
       }
       // never raised here: the monitor's reads are never "missing"
       observers::Event::CheckSkipped { .. } => {}

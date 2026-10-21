@@ -25,6 +25,7 @@ void *memset(void *dest, int c, size_t n);
 
 
 bool get_in_val(int32_t *data);
+uintmax_t get_in_val_num_invalid(void);
 bool evt_is_empty(void);
 bool get_evt_poll(sb_event_counter_t *numDropped);
 bool get_evt();

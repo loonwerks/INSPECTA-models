@@ -35,6 +35,15 @@ val filterArgs: ISZ[String] = if (listOnly) ops.ISZOps(Os.cliArgs).drop(1) else 
 val filter: String = if (filterArgs.nonEmpty) filterArgs(0) else ""
 val listArg: String = if (listOnly) "LIST_TESTS=1" else "LIST_TESTS=0"
 
+// The property tests' seed: PROPTEST_SEED if set, else a fresh one each run, so every
+// run explores new cases.  It is printed below and in the property tests' own lines;
+// passing it back as PROPTEST_SEED reproduces the run.
+val seed: String = Os.env("PROPTEST_SEED") match {
+  case Some(s) => s
+  case _ =>
+    ops.StringOps(Os.proc(ISZ[String]("sh", "-c", "od -An -N32 -tx1 /dev/urandom | tr -dc 0-9a-f")).run().out).trim
+}
+
 // make expands a `$` in a variable's value, in the rebuild hash and in what it hands the
 // build, and the hash is echoed, which reads `\`: a filter holding either would select
 // something other than what was typed.  No test name can contain them.
@@ -51,9 +60,10 @@ val commonArgs: ISZ[String] = ISZ(
   "MICROKIT_CONFIG=debug",
   "RUST_MAKE_TARGET=build-release",
   s"TESTS=$filter",
-  listArg)
+  listArg,
+  s"PROPTEST_SEED=$seed")
 
-println(s"Building $microkitDir (TESTS='$filter', $listArg) ...")
+println(s"Building $microkitDir (TESTS='$filter', $listArg, PROPTEST_SEED=$seed) ...")
 val build = Os.proc(commonArgs).console.run()
 if (!build.ok) {
   eprintln("Build failed")
@@ -68,7 +78,12 @@ println("Running under QEMU ...")
 // into `sed /DONE/q` does not work here -- with the guest idle there is no further
 // write to raise SIGPIPE -- so the process group has to be killed explicitly.  The
 // console writes a line a character at a time, so DONE can be seen before the rest of
-// its line is out: QEMU is given another second before it is stopped.
+// its line is out: QEMU is given another second before it is stopped.  Two failures
+// end the run early too, since nothing after them can reach DONE: a protection domain
+// that faults or panics before the schedule starts (it never reports ready, so the
+// test scheduler never hands over), and a panic in the test controller itself.  A
+// thread that faults or panics once the schedule runs is not one of them: its dispatch
+// trips the watchdog, which fails the test, and the run goes on to DONE.
 val logFile: Os.Path = Os.temp()
 
 val driver: String =
@@ -78,6 +93,8 @@ val driver: String =
       |waited=0
       |while kill -0 $$mpid 2>/dev/null; do
       |  grep -q 'TEST | DONE' "$$LOG" && { sleep 1; break; }
+      |  if ! grep -q 'All partitions ready' "$$LOG" && grep -q -e 'FAULT in user PD' -e 'PANIC' "$$LOG"; then sleep 1; break; fi
+      |  grep -q 'test_controller.*PANIC' "$$LOG" && { sleep 1; break; }
       |  [ $$waited -ge $$TIMEOUT ] && break
       |  sleep 1
       |  waited=$$((waited + 1))
@@ -140,6 +157,14 @@ for (line <- ops.StringOps(normalized).split((c: C) => c == '\n')) {
 // Absence of evidence is failure.  A hang, a panicking protection domain, or a
 // controller that never ran all produce a well-formed-looking log with no DONE.
 if (!sawDone) {
+  val stops = ops.StringOps(normalized).split((c: C) => c == '\n').filter((l: String) =>
+    ops.StringOps(l).contains("FAULT in user PD") || ops.StringOps(l).contains("PANIC"))
+  if (stops.nonEmpty) {
+    eprintln("FAILED: a protection domain faulted or panicked, and the run produced no 'TEST | DONE' line:")
+    for (l <- stops) {
+      eprintln(s"  $l")
+    }
+  }
   eprintln("FAILED: the run produced no 'TEST | DONE' line (hang, panic, or the test controller never ran)")
   eprintln("---- captured output ----")
   eprintln(out)

@@ -15,6 +15,11 @@
 //! observe::expect(observe::Expect::CepPost(observe::Thread::some_thread));
 //! ```
 //!
+//! A failed CEP_Pre is a violation too -- the sender did not meet the thread's contract --
+//! and the dispatch is rejected: the thread does not run, and its input is not pushed
+//! through (D36).  A robustness test that injects such an input on purpose declares it
+//! with `Expect::CepPre(thread)`; the dispatch is still rejected.
+//!
 //! `observe::take()` hands the test the violations recorded so far instead, for it to
 //! assert on; taken violations do not fail the test.
 //!
@@ -228,6 +233,23 @@ impl ControllerView {
 
   /// `t` overran: skip every event its unobserved dispatch consumed or sent.
   fn drain_cursors(&mut self, t: Thread) {
+    match t {
+      _ => {}
+    }
+  }
+
+  /// `t` is about to be checked for dispatch: remember where the cursors read on its
+  /// behalf stand, and what it last received on each aliased input, so a rejected
+  /// dispatch can put them back (`rewind_cursors`).
+  fn mark_cursors(&mut self, t: Thread) {
+    match t {
+      _ => {}
+    }
+  }
+
+  /// `t`'s dispatch was rejected (D36): it consumed nothing, so neither have its checks,
+  /// and it received nothing a composition could see.
+  fn rewind_cursors(&mut self, t: Thread) {
     match t {
       _ => {}
     }
@@ -642,6 +664,7 @@ pub(crate) fn injected_thermostat_mt_mmm_mmm_sv_lastMonitorMode(value: Isolette_
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub enum Kind {
   IepPost,
+  CepPre,
   CepPost,
   SysAssert,
   Schedule,
@@ -651,7 +674,7 @@ pub enum Kind {
 #[derive(Clone, Copy, Debug)]
 pub struct Violation {
   pub kind: Kind,
-  /// The thread whose guarantee was broken (IepPost, CepPost).
+  /// The thread whose contract was broken (IepPost, CepPre, CepPost).
   pub thread: Option<Thread>,
   /// The composition, property and point of a broken system assertion (SysAssert).
   pub composition: &'static str,
@@ -667,6 +690,9 @@ pub struct Violation {
 /// through DONE's init=.)
 #[derive(Clone, Copy, Debug)]
 pub enum Expect {
+  /// A thread's CEP_Pre: a test that injects an input outside the thread's contract on
+  /// purpose (a robustness test).  The dispatch is still rejected.
+  CepPre(Thread),
   CepPost(Thread),
   /// (composition, property), named by the constants in [`sys`].
   SysAssert(&'static str, &'static str),
@@ -678,7 +704,7 @@ impl Expect {
   fn layer_on(&self) -> bool {
     unsafe {
       match *self {
-        Expect::CepPost(_) => GUMBO_ON,
+        Expect::CepPre(_) | Expect::CepPost(_) => GUMBO_ON,
         Expect::SysAssert(_, _) => SYSVERIF_ON,
       }
     }
@@ -686,13 +712,14 @@ impl Expect {
 
   fn layer(&self) -> &'static str {
     match *self {
-      Expect::CepPost(_) => "GUMBO",
+      Expect::CepPre(_) | Expect::CepPost(_) => "GUMBO",
       Expect::SysAssert(_, _) => "system-verification",
     }
   }
 
   fn matches(&self, v: &Violation) -> bool {
     match *self {
+      Expect::CepPre(t) => v.kind == Kind::CepPre && v.thread == Some(t),
       Expect::CepPost(t) => v.kind == Kind::CepPost && v.thread == Some(t),
       Expect::SysAssert(c, p) => v.kind == Kind::SysAssert && v.composition == c && v.property == p,
     }
@@ -908,9 +935,10 @@ fn new_violation(kind: Kind, thread: Option<Thread>, property: &'static str, poi
   }
 }
 
-/// Reports what the checks find as test output.  IEP_Post, CEP_Post and system
-/// assertions are violations; a failed CEP_Pre is information -- the dispatch's
-/// assumption did not hold, so it owes no guarantee (D24).
+/// Reports what the checks find as test output.  IEP_Post, CEP_Pre, CEP_Post and system
+/// assertions are violations.  A failed CEP_Pre means the sender did not meet the
+/// thread's contract; that dispatch is rejected (on_dispatch), so it owes no guarantee
+/// either (D36).
 pub struct TestSink;
 
 impl ViolationSink for TestSink {
@@ -926,8 +954,10 @@ impl ViolationSink for TestSink {
         }
       }
       Event::CepPreViolation { thread, pre } => {
-        harness::line(format_args!("TEST | INFO  {} assumption not met (CEP_Pre) {}", thread, Position));
-        harness::line(format_args!("TEST | INFO  {} pre: {:?}", thread, pre));
+        let v = new_violation(Kind::CepPre, thread_named(thread), "", "");
+        if violation(v, format_args!("CEP_Pre {} {}", thread, Position)) {
+          harness::line(format_args!("TEST | INFO  {} pre: {:?}", thread, pre));
+        }
       }
       Event::CepPostViolation { thread, pre, post } => {
         let v = new_violation(Kind::CepPost, thread_named(thread), "", "");
@@ -938,9 +968,6 @@ impl ViolationSink for TestSink {
       }
       // no saved pre-state: the thread's first completion observed, or after a resync
       Event::CepPostSkipped { .. } => {}
-      Event::CepPostExcused { thread } => {
-        harness::line(format_args!("TEST | INFO  {} CEP_Post not checked: its assumption was not met", thread));
-      }
       Event::CheckSkipped { thread, check } => {
         harness::line(format_args!("TEST | INFO  {} {} not checked: a value it reads was never written", thread, check));
       }
@@ -975,10 +1002,7 @@ pub(crate) fn on_init() {
     REC.at_init = true;
     if GUMBO_LIVE {
       REC.layer = Layer::Gumbo;
-      let c = &mut *addr_of_mut!(COMPONENTS);
-      // GUMBO is assume-guarantee: a dispatch whose assumption failed owes no guarantee (D24)
-      c.excuse_post_on_failed_pre = true;
-      c.on_init(&mut *addr_of_mut!(VIEW), &mut TestSink);
+      (&mut *addr_of_mut!(COMPONENTS)).on_init(&mut *addr_of_mut!(VIEW), &mut TestSink);
     }
     if SYSVERIF_LIVE {
       REC.layer = Layer::Sysverif;
@@ -1068,20 +1092,29 @@ fn thread_index(t: Thread) -> usize {
   }
 }
 
-/// The thread over channel `ch` is about to be dispatched at (`hp`, `slot`).
-pub(crate) fn on_dispatch(ch: u32, hp: u32, slot: u32) {
+/// The thread over channel `ch` is about to be dispatched at (`hp`, `slot`).  Returns
+/// whether the dispatch is rejected: its CEP_Pre failed while the GUMBO checks are on,
+/// so the sender did not meet the thread's contract and the input is not pushed through
+/// (D36).  A rejected dispatch consumes nothing, its checks included.
+pub(crate) fn on_dispatch(ch: u32, hp: u32, slot: u32) -> bool {
   if let Some(t) = thread_of(ch) {
     unsafe {
-      DISPATCHED_HP[thread_index(t)] = Some(hp);
       REC.hp = hp;
       REC.slot = slot;
+      (&mut *addr_of_mut!(VIEW)).mark_cursors(t);
       (&mut *addr_of_mut!(VIEW)).latch_received(t);
       if GUMBO_LIVE {
         REC.layer = Layer::Gumbo;
         (&mut *addr_of_mut!(COMPONENTS)).on_dispatch(t, &mut *addr_of_mut!(VIEW), &mut TestSink);
       }
+      if GUMBO_LIVE && GUMBO_ON && (&*addr_of_mut!(COMPONENTS)).pre_failed(t) {
+        (&mut *addr_of_mut!(VIEW)).rewind_cursors(t);
+        return true;
+      }
+      DISPATCHED_HP[thread_index(t)] = Some(hp);
     }
   }
+  false
 }
 
 /// The hyperperiod in which the system layers lost their place in the workflow net --
@@ -1228,8 +1261,9 @@ fn roll_frame(st: &api::TestStatus) {
 }
 
 /// The scheduler is parked before dispatching `st.next_ch` at (hyperperiod, slot): the
-/// dispatch before it, if any, has completed.
-pub(crate) fn at_park(st: &api::TestStatus) {
+/// dispatch before it, if any, has completed.  Returns whether the parked dispatch is
+/// rejected (see on_dispatch), which the scheduler then passes over.
+pub(crate) fn at_park(st: &api::TestStatus) -> bool {
   account_completion(st);
   roll_frame(st);
   unsafe {
@@ -1252,8 +1286,22 @@ pub(crate) fn at_park(st: &api::TestStatus) {
       }
     }
   }
-  on_dispatch(st.next_ch, st.hyperperiod_num, st.current_timeslice);
+  if on_dispatch(st.next_ch, st.hyperperiod_num, st.current_timeslice) {
+    unsafe {
+      // The thread does not run, so the workflow net's transition for it never fires:
+      // the system layers resume with the next hyperperiod, as after an overrun.
+      let suspend = SYSVERIF_LIVE && SYS_SUSPENDED.is_none();
+      if suspend {
+        SYS_SUSPENDED = Some((st.hyperperiod_num, false));
+      }
+      harness::line(format_args!("TEST | INFO  channel {} not dispatched at hp={} slot={}: its inputs did not meet its CEP_Pre{}",
+        st.next_ch, st.hyperperiod_num, st.current_timeslice,
+        if suspend { "; system assertions suspended until the next frame" } else { "" }));
+    }
+    return true;
+  }
   unsafe { IN_FLIGHT = Some((st.next_ch, st.hyperperiod_num, st.current_timeslice)); }
+  false
 }
 
 /// A command has completed, so its last dispatch has too -- unless it overran, in which
@@ -1304,8 +1352,8 @@ pub(crate) fn begin_test() {
   }
 }
 
-/// Closes the test's recording window, and fails the test for violations it did not
-/// expect or take, and for expectations never met.
+/// Closes the test's recording window, fails the test for violations it did not expect
+/// or take and for expectations never met, and restores the build's switches.
 pub(crate) fn end_test() {
   unsafe {
     REC.phase = Phase::Between;
@@ -1321,6 +1369,10 @@ pub(crate) fn end_test() {
     if REC.unhandled > 0 {
       harness::fail_with(format_args!("contract violation ({} in this test)", REC.unhandled));
     }
+    // the runner's normalization before the next test checks, and so rejects, as the
+    // build says, not as this test left the switches
+    GUMBO_ON = GUMBO_LIVE;
+    SYSVERIF_ON = SYSVERIF_LIVE;
   }
 }
 

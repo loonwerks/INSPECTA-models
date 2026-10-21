@@ -196,6 +196,14 @@ if (result == 0 && hasMicrokit) {
     result = run("Building with user-land schedule runtime monitoring", F, proc"make CONFIG=userland_monitor.mk".at(microkitMcsDir))
   }
 
+  if (result == 0) {
+    // The user-land monitor checks nothing of the contracts; booting it shows the image runs,
+    // and the monitor with it, under the monitor variants' scheduler
+    result = simulate("Simulating with user-land schedule runtime monitoring under QEMU", microkitMcsDir, "userland_monitor.mk",
+      ISZ("MON|INFO: PD 'userland_monitor_process_userland_monitor_thread_MON' is now passive!",
+        "userland_monitor_process_userland_monitor_thread_app] compute entrypoint invoked"))
+  }
+
   if (result == 0 && !disable_verus) {
     result = run("Building/Verifying component and system contracts", F, proc"make verus".at(microkitMcsDir))
   }

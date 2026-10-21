@@ -13,6 +13,7 @@ pub struct sys_nominal_monitor_process_sys_nominal_monitor_thread {
   components: observers::components::ComponentContracts,
   sys_assert_last_index: u32,
   sys_assert: observers::sys_nominal::SysAssert_nominal,
+  sys_assert_suspended: bool,
 }
 
 impl sys_nominal_monitor_process_sys_nominal_monitor_thread {
@@ -26,6 +27,7 @@ impl sys_nominal_monitor_process_sys_nominal_monitor_thread {
       components: observers::components::ComponentContracts::new(),
       sys_assert_last_index: u32::MAX,
       sys_assert: observers::sys_nominal::SysAssert_nominal::new(),
+      sys_assert_suspended: false,
     }
   }
 
@@ -78,18 +80,40 @@ impl sys_nominal_monitor_process_sys_nominal_monitor_thread {
     let idx = state.current_timeslice as usize;
     let mut view = MonitorView { api: api, focus: None };
 
+    // Whether every thread dispatched before this slot completed: the scheduler
+    // publishes the previous one's channel once it has, 0 while it is still running,
+    // and how many dispatches of any thread are still running.  A thread that overran
+    // its slot -- the previous one, or an earlier one still running past later slots --
+    // is still writing what this run would read.
+    let prev_ch = self.prev_user_ch[idx];
+    let prev_running = state.last_yielded_ch != prev_ch;
+    let overran = self.last_index != u32::MAX && prev_ch != 0 && (prev_running || state.outstanding != 0);
+
     if self.last_index == u32::MAX {
       // First compute phase, check initialization guarantees
       self.components.on_init(&mut view, &mut LogSink);
       init_checked();
-    } else if let Some(prev) = thread_of(self.prev_user_ch[idx]) {
+    } else if overran {
+      // Its completion is not checked, and no saved pre-state describes what runs from
+      // here: every one is dropped, so each thread's next completion is skipped
+      match thread_of(prev_ch) {
+        Some(prev) if prev_running =>
+          log::warn!("*** OVERRUN: {:?} did not complete within its slot: its completion is not checked ***", prev),
+        _ =>
+          log::warn!("*** OVERRUN: an earlier thread is still running past its slot: completions are not checked until it finishes ***"),
+      }
+      self.components.forget();
+    } else if let Some(prev) = thread_of(prev_ch) {
       // the thread that just yielded: check its post-condition
       self.components.on_complete(prev, &mut view, &mut LogSink);
     }
 
-    // the thread that runs next: save its pre-state, check its pre-condition
-    if let Some(next) = thread_of(self.next_user_ch[idx]) {
-      self.components.on_dispatch(next, &mut view, &mut LogSink);
+    // the thread that runs next: save its pre-state, check its pre-condition -- unless
+    // the overran thread may still be writing what it reads
+    if !overran {
+      if let Some(next) = thread_of(self.next_user_ch[idx]) {
+        self.components.on_dispatch(next, &mut view, &mut LogSink);
+      }
     }
 
     self.last_index = state.current_timeslice;
@@ -123,9 +147,36 @@ impl sys_nominal_monitor_process_sys_nominal_monitor_thread {
       return;
     }
 
-    // the thread that just yielded: fire its transition and check the assertions
+    // A new hyperperiod: the current timeslice index is not past the last one seen
+    let wrapped = state.current_timeslice <= self.sys_assert_last_index;
+    // Whether every thread dispatched before this slot completed: the scheduler
+    // publishes the previous one's channel once it has, 0 while it is still running,
+    // and how many dispatches of any thread are still running
+    let prev_ch = self.prev_user_ch[idx];
+    let prev_running = state.last_yielded_ch != prev_ch;
+    let overran = prev_ch != 0 && (prev_running || state.outstanding != 0);
+
     let mut view = MonitorView { api: api, focus: None };
-    if let Some(prev) = thread_of(self.prev_user_ch[idx]) {
+    if self.sys_assert_suspended {
+      // An overrun's late output reaches its consumers in the frame it ran in, which then
+      // mixes two dispatches of the thread; checking resumes with the next hyperperiod,
+      // whose frame starts here
+      if wrapped && !overran {
+        self.sys_assert_suspended = false;
+        observers::SystemView::frame_ended(&mut view, 0);
+        self.sys_assert.restart_frame(&mut view, &mut LogSink);
+        log::warn!("system assertions of composition nominal resumed");
+      }
+    } else if overran {
+      self.sys_assert_suspended = true;
+      match thread_of(prev_ch) {
+        Some(prev) if prev_running =>
+          log::warn!("*** OVERRUN: {:?} did not complete within its slot: the system assertions of composition nominal are suspended until a hyperperiod with nothing outstanding ***", prev),
+        _ =>
+          log::warn!("*** OVERRUN: an earlier thread is still running past its slot: the system assertions of composition nominal are suspended until a hyperperiod with nothing outstanding ***"),
+      }
+    } else if let Some(prev) = thread_of(prev_ch) {
+      // the thread that just yielded: fire its transition and check the assertions
       producer_completed(prev);
       self.sys_assert.on_complete(prev, &mut view, &mut LogSink);
     }
@@ -337,7 +388,6 @@ pub fn note_dispatch(t: observers::Thread) {
       observers::Thread::fp_ft => {
         EV_get_fp_ft_fanAck.dispatch_seq = EV_get_fp_ft_fanAck.seq;
       }
-      _ => {}
     }
   }
 }
@@ -368,7 +418,6 @@ pub fn producer_completed(t: observers::Thread) {
           EV_get_fp_ft_fanAck.sys_value = None;
         }
       }
-      _ => {}
     }
   }
 }
@@ -549,9 +598,6 @@ impl observers::ViolationSink for LogSink {
       }
       observers::Event::CepPostSkipped { thread } => {
         log::warn!("{} post check skipped: no saved pre-state", thread);
-      }
-      observers::Event::CepPostExcused { thread } => {
-        log::warn!("{} post check skipped: assumption not met", thread);
       }
       // never raised here: the monitor's reads are never "missing"
       observers::Event::CheckSkipped { .. } => {}

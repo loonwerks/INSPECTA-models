@@ -10,14 +10,14 @@ verus! {
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct SchedState {
     pub last_yielded_ch: u32,
-    pub next_dispatch_ch: u32,
+    pub outstanding: u32,
     pub current_timeslice: u32,
   }
 
   impl Default for SchedState {
     fn default() -> Self
     {
-      Self { last_yielded_ch: 0, next_dispatch_ch: 0, current_timeslice: 0 }
+      Self { last_yielded_ch: 0, outstanding: 0, current_timeslice: 0 }
     }
   }
 
@@ -27,5 +27,5 @@ verus! {
 const _: () = assert!(core::mem::size_of::<SchedState>() == 12);
 const _: () = assert!(core::mem::align_of::<SchedState>() == 4);
 const _: () = assert!(core::mem::offset_of!(SchedState, last_yielded_ch) == 0);
-const _: () = assert!(core::mem::offset_of!(SchedState, next_dispatch_ch) == 4);
+const _: () = assert!(core::mem::offset_of!(SchedState, outstanding) == 4);
 const _: () = assert!(core::mem::offset_of!(SchedState, current_timeslice) == 8);

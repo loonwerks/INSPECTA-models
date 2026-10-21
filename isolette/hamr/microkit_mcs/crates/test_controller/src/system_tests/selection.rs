@@ -3,14 +3,17 @@
 //! Which tests to run, patched into the controller ELF at image build time.
 //!
 //! An all-zero filter -- the default when nothing has been patched in -- means run
-//! everything.  The build populates it from the TESTS make variable.
+//! everything.  The build populates it from the TESTS make variable, and the property
+//! tests' seed from PROPTEST_SEED (all zero: the built-in default).
 
 pub const FILTER_LEN: usize = 256;
+pub const SEED_LEN: usize = 32;
 
 #[repr(C)]
 pub struct TestSelection {
   pub filter: [u8; FILTER_LEN],
   pub flags: u32,
+  pub seed: [u8; SEED_LEN],
 }
 
 #[no_mangle]
@@ -18,6 +21,7 @@ pub struct TestSelection {
 pub static mut TEST_SELECTION: TestSelection = TestSelection {
   filter: [0u8; FILTER_LEN],
   flags: 0,
+  seed: [0u8; SEED_LEN],
 };
 
 /// Bits of `flags`, set at image build time: a contract-checking layer turned off for
@@ -31,6 +35,13 @@ pub const FLAG_LIST_ONLY: u32 = 0x4;
 /// the ELF after compilation, so the compiler must not assume the initializer.
 pub fn flags() -> u32 {
   unsafe { core::ptr::read_volatile(core::ptr::addr_of!(TEST_SELECTION.flags)) }
+}
+
+/// The property tests' seed patched in at image build time (PROPTEST_SEED), or
+/// `default` when none was -- all zero.  Read volatile, like the flags.
+pub fn proptest_seed(default: [u8; SEED_LEN]) -> [u8; SEED_LEN] {
+  let seed = unsafe { core::ptr::read_volatile(core::ptr::addr_of!(TEST_SELECTION.seed)) };
+  if seed.iter().all(|b| *b == 0) { default } else { seed }
 }
 
 /// The filter as a string slice, empty when unset.  A filter that is not UTF-8 --

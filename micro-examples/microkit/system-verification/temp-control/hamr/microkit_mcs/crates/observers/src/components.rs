@@ -11,11 +11,6 @@ use crate::gumbox::fp_ft_containers::*;
 use crate::gumbox::tsp_tst_containers::*;
 
 pub struct ComponentContracts {
-  /// When set, a dispatch whose CEP_Pre failed is excused from its CEP_Post
-  /// (reported as CepPostExcused instead of being checked).  GUMBO is
-  /// assume-guarantee: a component owes nothing when its assumptions fail.
-  /// The monitor PDs leave it off.
-  pub excuse_post_on_failed_pre: bool,
   pre_tcp_tct: Option<PreState_tcp_tct>,
   pre_ok_tcp_tct: bool,
   pre_tsp_tst: Option<PreState_tsp_tst>,
@@ -25,7 +20,6 @@ pub struct ComponentContracts {
 impl ComponentContracts {
   pub const fn new() -> Self {
     ComponentContracts {
-      excuse_post_on_failed_pre: false,
       pre_tcp_tct: None,
       pre_ok_tcp_tct: true,
       pre_tsp_tst: None,
@@ -82,9 +76,7 @@ impl ComponentContracts {
         if s.missing() {
           out.report(crate::Event::CheckSkipped { thread: "tcp_tct", check: "CEP_Post" });
         } else if let Some(pre) = &self.pre_tcp_tct {
-          if self.excuse_post_on_failed_pre && !self.pre_ok_tcp_tct {
-            out.report(crate::Event::CepPostExcused { thread: "tcp_tct" });
-          } else if !crate::gumbox::tcp_tct_GUMBOX::compute_CEP_Post(
+          if !crate::gumbox::tcp_tct_GUMBOX::compute_CEP_Post(
             pre.In_currentFanState, pre.In_currentSetPoint, pre.In_fanError, pre.In_latestTemp, post.currentFanState, post.currentSetPoint, post.fanError, post.latestTemp, pre.api_currentTemp, pre.api_fanAck, pre.api_setPoint, post.api_fanCmd) {
             out.report(crate::Event::CepPostViolation { thread: "tcp_tct", pre: pre, post: &post });
           }
@@ -100,9 +92,7 @@ impl ComponentContracts {
         if s.missing() {
           out.report(crate::Event::CheckSkipped { thread: "tsp_tst", check: "CEP_Post" });
         } else if let Some(pre) = &self.pre_tsp_tst {
-          if self.excuse_post_on_failed_pre && !self.pre_ok_tsp_tst {
-            out.report(crate::Event::CepPostExcused { thread: "tsp_tst" });
-          } else if !crate::gumbox::tsp_tst_GUMBOX::compute_CEP_Post(
+          if !crate::gumbox::tsp_tst_GUMBOX::compute_CEP_Post(
             post.api_currentTemp) {
             out.report(crate::Event::CepPostViolation { thread: "tsp_tst", pre: pre, post: &post });
           }
@@ -137,9 +127,10 @@ impl ComponentContracts {
           api_setPoint: s.get_tcp_tct_setPoint(),
         };
         if s.missing() {
-          // no pre-state to hold the completion to
+          // no pre-state to hold the completion to, and no CEP_Pre that failed
           out.report(crate::Event::CheckSkipped { thread: "tcp_tct", check: "CEP_Pre" });
           self.pre_tcp_tct = None;
+          self.pre_ok_tcp_tct = true;
         } else {
           if !crate::gumbox::tcp_tct_GUMBOX::compute_CEP_Pre(
             pre.In_currentFanState, pre.In_currentSetPoint, pre.In_fanError, pre.In_latestTemp, pre.api_currentTemp, pre.api_fanAck, pre.api_setPoint) {
@@ -156,15 +147,27 @@ impl ComponentContracts {
         let pre = PreState_tsp_tst {
         };
         if s.missing() {
-          // no pre-state to hold the completion to
+          // no pre-state to hold the completion to, and no CEP_Pre that failed
           out.report(crate::Event::CheckSkipped { thread: "tsp_tst", check: "CEP_Pre" });
           self.pre_tsp_tst = None;
+          self.pre_ok_tsp_tst = true;
         } else {
           self.pre_ok_tsp_tst = true;
           self.pre_tsp_tst = Some(pre);
         }
       }
       _ => {}
+    }
+  }
+
+  /// Whether `t`'s CEP_Pre failed at its latest dispatch check -- the sender did not
+  /// meet `t`'s contract.  A host that rejects such a dispatch (the test controller)
+  /// asks this after `on_dispatch`.
+  pub fn pre_failed(&self, t: crate::Thread) -> bool {
+    match t {
+      crate::Thread::tcp_tct => !self.pre_ok_tcp_tct,
+      crate::Thread::tsp_tst => !self.pre_ok_tsp_tst,
+      _ => false,
     }
   }
 }

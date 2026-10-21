@@ -30,8 +30,11 @@
 
 // Schedule state broadcast: written by the scheduler before every dispatch.
 // Monitors that map this region (read-only) can inspect it to determine
-// the current timeslice index.
+// the current timeslice index, and whether the threads dispatched before it completed.
+// The layout of hamr_SchedState, which the scheduler publishes (sb_types.h).
 typedef struct sched_state {
+    uint32_t last_yielded_ch;   // the previous user slot's channel once its thread completed, else 0
+    uint32_t outstanding;       // the dispatches, of every thread, not yet completed
     uint32_t current_timeslice; // index into the schedule of the current timeslice
 } sched_state_t;
 

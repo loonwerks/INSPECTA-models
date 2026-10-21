@@ -5,6 +5,8 @@ microkit_sdk_config_dir := $(MICROKIT_SDK)/board/$(MICROKIT_BOARD)/$(MICROKIT_CO
 sel4_include_dirs := $(firstword $(wildcard $(microkit_sdk_config_dir)/include \
                                             $(microkit_sdk_config_dir)/debug/include))
 
+# PLACEHOLDER MARKER FOR R2U2_BUILD_DEPS RULE
+
 # The toolchain is pinned to a stable release channel (see rust-toolchain.toml),
 # which rejects the #![feature(..)] attributes the generated crates declare, so
 # every cargo invocation -- building, verifying and testing alike -- needs this.
@@ -17,17 +19,29 @@ CARGO_FLAGS = -Z build-std=core,alloc,compiler_builtins \
               -Z build-std-features=compiler-builtins-mem \
               --target aarch64-unknown-none
 
-# Extra arguments forwarded to Verus (placed after `--`). Verus proofs can be
-# sensitive to the SMT solver's search order, which is not identical across
-# platforms, so a proof that verifies elsewhere may fail here. Such a proof
-# usually discharges under a different random seed:
-#   make SMT_OPTS="--smt-option smt.random_seed=7"
-# `?=` so an exported SMT_OPTS is honored too (a plain `=` would override the
-# environment):
-#   export SMT_OPTS="--smt-option smt.random_seed=7"
-# This applies to dependency crates too (e.g. vstd), which are verified from
-# source on a clean build.
-SMT_OPTS ?=
+# Extra options for cargo-verus itself, for every cargo-verus target below.
+# Empty by default. For example
+#   CARGO_VERUS_OPTS="--fwd-verus-args-to roots"
+# forwards SMT_OPTS to this crate only, so its dependencies (notably vstd) are
+# verified with Verus' defaults rather than with options meant for this crate.
+CARGO_VERUS_OPTS ?=
+
+# Extra arguments forwarded to Verus (placed after `--`), for every
+# cargo-verus target below. These apply to dependency crates too -- notably
+# vstd, which is verified from source on a clean build, so its proofs must
+# discharge under these settings as well as our own.
+#
+# --rlimit 100
+#   Verus' SMT resource limit for a function body check. Its default of 10
+#   is not enough here. 100 is an order-of-magnitude bump that stays inside
+#   the range Verus itself uses on its heavier projects.
+#
+# --smt-option smt.random_seed=7
+#   7 is arbitrary. Z3's default seed is 0, and 0 is the one value at which
+#   vstd's GhostSubseq::agree_map (resource/impls/seq.rs) fails its
+#   postcondition; seeds 1, 2, 3, 7 and 42 all discharge it. The point is to
+#   be off the default and identical on every machine, not this number.
+SMT_OPTS ?= --rlimit 100 --smt-option smt.random_seed=7
 
 all: build-verus-release
 
@@ -36,23 +50,23 @@ all: build-verus-release
 #       ones (e.g. --target, -Z ...), otherwise it errors out.  CARGO_FLAGS
 #       holds the Verus-irrelevant options, so it must come last.
 
-build-verus-release:
-	$(BUILD_ENV_VARS) cargo-verus build --features sel4 --release $(CARGO_FLAGS) -- $(SMT_OPTS)
+build-verus-release: $(R2U2_BUILD_DEPS)
+	$(BUILD_ENV_VARS) cargo-verus build $(CARGO_VERUS_OPTS) --features sel4 --release $(CARGO_FLAGS) -- $(SMT_OPTS)
 
-build-verus:
-	$(BUILD_ENV_VARS) cargo-verus build --features sel4 $(CARGO_FLAGS) -- $(SMT_OPTS)
+build-verus: $(R2U2_BUILD_DEPS)
+	$(BUILD_ENV_VARS) cargo-verus build $(CARGO_VERUS_OPTS) --features sel4 $(CARGO_FLAGS) -- $(SMT_OPTS)
 
-build-release:
+build-release: $(R2U2_BUILD_DEPS)
 	$(BUILD_ENV_VARS) cargo build --features sel4 $(CARGO_FLAGS) --release
 
-build:
+build: $(R2U2_BUILD_DEPS)
 	$(BUILD_ENV_VARS) cargo build --features sel4 $(CARGO_FLAGS)
 
-verus:
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- $(SMT_OPTS)
+verus: $(R2U2_BUILD_DEPS)
+	$(ENV_VARS) cargo-verus verify $(CARGO_VERUS_OPTS) $(CARGO_FLAGS) -- $(SMT_OPTS)
 
-verus-json:
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- $(SMT_OPTS) --output-json --time > verus_results.json
+verus-json: $(R2U2_BUILD_DEPS)
+	$(ENV_VARS) cargo-verus verify $(CARGO_VERUS_OPTS) $(CARGO_FLAGS) -- $(SMT_OPTS) --output-json --time > verus_results.json
 
 # Test Example:
 #   Run all unit tests
@@ -61,10 +75,10 @@ verus-json:
 #   Run only unit tests whose name contains 'proptest'
 #   Usage: make test args=proptest
 
-test-release:
+test-release: $(R2U2_BUILD_DEPS)
 	$(ENV_VARS) cargo test $(args) --release
 
-test:
+test: $(R2U2_BUILD_DEPS)
 	$(ENV_VARS) cargo test $(args)
 
 # Coverage Example:
@@ -74,7 +88,7 @@ test:
 #   Generate a test coverage report for unit tests whose name contains 'proptest'
 #   Usage: make coverage args=proptest
 
-coverage:
+coverage: $(R2U2_BUILD_DEPS)
 	cargo install grcov
 	@exists=0; if [ -f target/coverage/report/index.html ]; then exists=1; fi; \
 	rm -rf target/coverage; \
@@ -85,3 +99,4 @@ coverage:
 
 clean:
 	cargo clean
+	rm -f src/component/spec.bin

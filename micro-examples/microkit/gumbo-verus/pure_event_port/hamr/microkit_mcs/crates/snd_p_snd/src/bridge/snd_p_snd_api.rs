@@ -33,7 +33,7 @@ verus! {
     pub api: API,
 
     pub ghost out_val: i32,
-    pub ghost evt: Option<u8>
+    pub ghost evt: Option<u8>,
   }
 
   impl<API: snd_p_snd_Put_Api> snd_p_snd_Application_Api<API> {

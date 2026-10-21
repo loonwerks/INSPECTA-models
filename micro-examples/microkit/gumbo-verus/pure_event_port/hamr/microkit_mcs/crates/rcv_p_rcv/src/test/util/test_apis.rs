@@ -8,14 +8,14 @@ use proptest::prelude::*;
 /// container for component's incoming port values
 pub struct PreStateContainer {
   pub api_in_val: i32,
-  pub api_evt: Option<u8>
+  pub api_evt: Option<u8>,
 }
 
 /// container for component's incoming port values and GUMBO state variables
 pub struct PreStateContainer_wGSV {
   pub In_lastVal: i32,
   pub api_in_val: i32,
-  pub api_evt: Option<u8>
+  pub api_evt: Option<u8>,
 }
 
 /// setter for component's incoming port values

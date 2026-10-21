@@ -44,6 +44,7 @@ struct TestCommand {
   target_slot: u32,
   observe: u32,
   obs_ack: u32,
+  obs_skip: u32,
 }
 
 #[repr(C)]
@@ -140,7 +141,10 @@ fn exchange(typ: u32, count: u32, target_ch: u32, target_hp: u32, target_slot: u
         // The scheduler is parked before a dispatch: check, then let it go ahead.
         fence(Ordering::Acquire);
         LAST_OBS_SEQ = obs;
-        crate::system_tests::observe::at_park(&read_volatile(status));
+        if crate::system_tests::observe::at_park(&read_volatile(status)) {
+          // rejected (D36): the scheduler passes the slot without dispatching it
+          write_volatile(addr_of_mut!((*cmd).obs_skip), obs);
+        }
         fence(Ordering::Release);
         write_volatile(addr_of_mut!((*cmd).obs_ack), obs);
         test_controller_notify_scheduler();

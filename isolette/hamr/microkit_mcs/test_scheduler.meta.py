@@ -537,8 +537,10 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     # "off" turns it off -- not tracked, and no scheduler park taken for it.  They
     # go into the flags word after the filter: bit 0 GUMBO off, bit 1 SYSVERIF off.
     # LIST_TESTS=1 sets bit 2: list the selected tests without running them (D17).
+    # PROPTEST_SEED, 64 hex digits, seeds the property tests; empty keeps the
+    # built-in default.
     #######################################
-    test_selection = bytearray(260)
+    test_selection = bytearray(292)
     try:
         _filter = tests_filter.encode()
     except UnicodeEncodeError:
@@ -565,6 +567,16 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     if _list == "1":
         _flags |= 0x4
     test_selection[256:260] = _flags.to_bytes(4, "little")
+    # PROPTEST_SEED: the property tests' seed (bytes 260-291; all zero keeps the default).
+    _seed = os.environ.get("PROPTEST_SEED", "")
+    if _seed != "":
+        try:
+            _seed_bytes = bytes.fromhex(_seed)
+        except ValueError:
+            _seed_bytes = b""
+        if len(_seed_bytes) != 32:
+            raise SystemExit(f"PROPTEST_SEED must be 64 hex digits, not '{_seed}'")
+        test_selection[260:292] = _seed_bytes
     test_selection_path = output_dir + "/test_selection.data"
     with open(test_selection_path, "wb+") as f:
         f.write(bytes(test_selection))

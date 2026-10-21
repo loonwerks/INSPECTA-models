@@ -84,8 +84,6 @@ pub enum Event<'a> {
   CepPostViolation { thread: &'static str, pre: &'a dyn core::fmt::Debug, post: &'a dyn core::fmt::Debug },
   /// No pre-state was saved for the completing dispatch.
   CepPostSkipped { thread: &'static str },
-  /// The dispatch's CEP_Pre failed and excuse_post_on_failed_pre is set.
-  CepPostExcused { thread: &'static str },
   /// A value the check reads was never written (`SystemView::missing`).
   CheckSkipped { thread: &'static str, check: &'static str },
   SysAssertViolation { property: &'static str, point: &'static str },

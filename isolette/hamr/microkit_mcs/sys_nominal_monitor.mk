@@ -5,3 +5,6 @@
 export MSD := $(TOP_DIR)/sys_nominal_monitor.meta.py
 export SCHEDULER_C := $(TOP_DIR)/scheduler/src/sys_nominal_monitor.scheduler.c
 export SCHEDULER_CONFIG_HEADERS := $(TOP_DIR)/scheduler/include/sys_nominal_monitor.user_config.h
+# a faulted thread's _MON answers its dispatches, so this scheduler's count of them
+# stays balanced and the monitor keeps checking the other threads
+export MON_CFLAGS := -DHAMR_MON_FAULTED_COMPLETES

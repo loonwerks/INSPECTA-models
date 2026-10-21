@@ -43,10 +43,10 @@ export TOP_TYPES_INCLUDE = -I$(TYPES_DIR)/include
 TOP_INCLUDE = $(TOP_TYPES_INCLUDE) -I$(TOP_DIR)/util/include
 
 all: $(IMAGE_FILE)
-	CHECK_FLAGS_BOARD_MD5:=.board_cflags-$(shell echo -- ${CFLAGS} ${MICROKIT_BOARD} ${MICROKIT_CONFIG}| shasum | sed 's/ *-//')
+	CHECK_FLAGS_BOARD_MD5:=.hamr_flags-$(shell echo -- ${CFLAGS} ${MICROKIT_BOARD} ${MICROKIT_CONFIG}| shasum | sed 's/ *-//')
 
 ${CHECK_FLAGS_BOARD_MD5}:
-	-rm -f .board_cflags-*
+	-rm -f .hamr_flags-*
 	touch $@
 
 %.o: ${TOP_DIR}/util/src/%.c Makefile
