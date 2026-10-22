@@ -113,7 +113,7 @@ Install steps, in the order `provers-setup.sh` runs them:
 | [z3.sh](bin/z3.sh) | Z3 from source, where Verus has no release for the host |
 | [verus.sh](bin/verus.sh) | Verus, from its release or from source |
 | [microkit-lionsos.sh](bin/microkit-lionsos.sh) | sdfgen, the released Microkit SDK, LionsOS at the pinned commit (`dep/sddf` and `dep/libvmm` only) |
-| [sireum.sh](bin/sireum.sh) | Sireum, per `PROVERS_SIREUM_PROFILE`: unpacks the `cli` distribution where `SIREUM_V` names a release, builds from source where it names a commit -- or adopts the one `SIREUM_HOME` already points at |
+| [sireum.sh](bin/sireum.sh) | Sireum, per `PROVERS_SIREUM_PROFILE`: unpacks the `cli` distribution where `SIREUM_V` names a release, builds from source where it names a commit -- or adopts the one `SIREUM_HOME` already points at, reporting how many commits and days it is ahead of or behind `SIREUM_V` |
 | [ive.sh](bin/ive.sh) | Sireum IVE (opt-in; the VM turns it on) |
 | [codeive.sh](bin/codeive.sh) | CodeIVE (opt-in; the VM turns it on) |
 | [fmide.sh](bin/fmide.sh) | FMIDE (opt-in; the VM turns it on), installed with `-v` |

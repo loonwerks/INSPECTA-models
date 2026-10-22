@@ -88,9 +88,11 @@ if [ "${PROVERS_OS}" = "darwin" ]; then
 
   # Not --force-bottle or --overwrite: a formula already installed at another
   # version is left as it is rather than being moved under the user's feet.
-  # 'brew install' on an installed formula is a no-op, which is what makes this
-  # script re-runnable.
-  brew install "${BREW_PKGS[@]}"
+  # HOMEBREW_NO_INSTALL_UPGRADE is what makes that true: without it 'brew install'
+  # upgrades an installed formula that is outdated, dependencies and all -- rerunning
+  # setup once moved llvm to a new release and z3 along with it.  With it, an
+  # installed formula is a no-op, which is what makes this script re-runnable.
+  HOMEBREW_NO_INSTALL_UPGRADE=1 brew install "${BREW_PKGS[@]}"
 
   # TeX Live is not installed, and neither host installs it any more: it was
   # needed to build the Microkit SDK from source, which built the SDK manual,
