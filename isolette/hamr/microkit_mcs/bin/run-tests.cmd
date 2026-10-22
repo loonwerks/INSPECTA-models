@@ -26,6 +26,11 @@ import org.sireum._
 //
 // --list builds an image that prints the test table and runs nothing (LIST_TESTS=1).
 //
+// RUN_TESTS_TARGET_CMD is for HAMR's own tests of this script: a shell command run in
+// place of building the image and booting it under QEMU, whose output stands in for
+// the serial console.  It lets those tests drive the stop condition and the verdict
+// below with crafted output, without an SDK or QEMU.
+//
 // The filter is a substring match against the qualified suite::test name, so
 // "nominal::" selects a suite and "fan_turns" selects a single test.
 
@@ -63,14 +68,18 @@ val commonArgs: ISZ[String] = ISZ(
   listArg,
   s"PROPTEST_SEED=$seed")
 
-println(s"Building $microkitDir (TESTS='$filter', $listArg, PROPTEST_SEED=$seed) ...")
-val build = Os.proc(commonArgs).console.run()
-if (!build.ok) {
-  eprintln("Build failed")
-  Os.exit(1)
+val targetCmd: Option[String] = Os.env("RUN_TESTS_TARGET_CMD")
+if (targetCmd.isEmpty) {
+  println(s"Building $microkitDir (TESTS='$filter', $listArg, PROPTEST_SEED=$seed) ...")
+  val build = Os.proc(commonArgs).console.run()
+  if (!build.ok) {
+    eprintln("Build failed")
+    Os.exit(1)
+  }
+  println("Running under QEMU ...")
+} else {
+  println(s"Running RUN_TESTS_TARGET_CMD in place of the build and QEMU: ${targetCmd.get}")
 }
-
-println("Running under QEMU ...")
 
 // QEMU never exits on its own: once the suite is done the scheduler idles and the
 // guest goes quiet.  Waiting for the timeout would make every successful run cost
@@ -78,7 +87,9 @@ println("Running under QEMU ...")
 // into `sed /DONE/q` does not work here -- with the guest idle there is no further
 // write to raise SIGPIPE -- so the process group has to be killed explicitly.  The
 // console writes a line a character at a time, so DONE can be seen before the rest of
-// its line is out: QEMU is given another second before it is stopped.  Two failures
+// its line is out: QEMU is given another second before it is stopped.  DONE counts only
+// at the start of a line, as it does for the verdict below: a test's own message that
+// mentions it must not stop the run before the real one.  Two failures
 // end the run early too, since nothing after them can reach DONE: a protection domain
 // that faults or panics before the schedule starts (it never reports ready, so the
 // test scheduler never hands over), and a panic in the test controller itself.  A
@@ -92,7 +103,7 @@ val driver: String =
       |mpid=$$!
       |waited=0
       |while kill -0 $$mpid 2>/dev/null; do
-      |  grep -q 'TEST | DONE' "$$LOG" && { sleep 1; break; }
+      |  grep -q '^TEST | DONE' "$$LOG" && { sleep 1; break; }
       |  if ! grep -q 'All partitions ready' "$$LOG" && grep -q -e 'FAULT in user PD' -e 'PANIC' "$$LOG"; then sleep 1; break; fi
       |  grep -q 'test_controller.*PANIC' "$$LOG" && { sleep 1; break; }
       |  [ $$waited -ge $$TIMEOUT ] && break
@@ -104,7 +115,11 @@ val driver: String =
       |wait $$mpid 2>/dev/null
       |exit 0""".render
 
-Os.proc(ISZ[String]("sh", "-c", driver, "sh") ++ (commonArgs :+ "qemu"))
+val target: ISZ[String] = targetCmd match {
+  case Some(c) => ISZ[String]("sh", "-c", c)
+  case _ => commonArgs :+ "qemu"
+}
+Os.proc(ISZ[String]("sh", "-c", driver, "sh") ++ target)
   .env(ISZ(("LOG", logFile.string), ("TIMEOUT", "300")))
   .timeout((300 + 30) * 1000).run()
 
@@ -121,6 +136,7 @@ var listed: B = F
 var sawDone: B = F
 var seenPass: Z = 0
 var seenFail: Z = 0
+var seenListed: Z = 0
 
 // The QEMU serial console emits CRLF, so every line arrives with a trailing \r.
 // Left in place it makes Z("0\r") a None and the parse below blows up.
@@ -134,6 +150,8 @@ for (line <- ops.StringOps(normalized).split((c: C) => c == '\n')) {
       seenPass = seenPass + 1
     } else if (l.startsWith("TEST | FAIL")) {
       seenFail = seenFail + 1
+    } else if (l.startsWith("TEST | LIST") && !l.endsWith("(not selected)")) {
+      seenListed = seenListed + 1
     } else if (l.startsWith("TEST | DONE")) {
       sawDone = T
       for (tok <- ops.StringOps(line).split((c: C) => c == ' ')) {
@@ -183,8 +201,34 @@ if (matched == 0) {
   Os.exit(1)
 }
 
-// A listing runs nothing; the table above is its output.
+// What was asked for and what the image did have to agree.  LIST_TESTS is part of the
+// build's rebuild hash, so a listing image should never be reused for a run -- but if
+// one were, its list=1 verdict would pass having run nothing, so it is checked.
+if (listed != listOnly) {
+  if (listed) {
+    eprintln("FAILED: the image only listed the tests (DONE list=1), but a run was requested; nothing was run")
+  } else {
+    eprintln("FAILED: --list was requested, but the image ran the tests (DONE has no list=1)")
+  }
+  Os.exit(1)
+}
+
+// A listing runs nothing; the table above is its output.  It still has to be a listing:
+// nothing run, every selected test in the table, and initialization intact -- a broken
+// initialization guarantee is a fault in the system whether or not tests then run.
 if (listed) {
+  if (passed != 0 || failed != 0 || seenPass != 0 || seenFail != 0) {
+    eprintln(s"FAILED: a listing reports tests as run (passed=$passed failed=$failed, $seenPass PASS and $seenFail FAIL lines)")
+    Os.exit(1)
+  }
+  if (seenListed != matched) {
+    eprintln(s"FAILED: DONE reports matched=$matched but the table lists $seenListed selected test(s); output was lost")
+    Os.exit(1)
+  }
+  if (!initOk) {
+    eprintln("FAILED: an initialization guarantee was violated, or DONE's init= was lost (DONE init=failed or missing)")
+    Os.exit(1)
+  }
   println(s"OK: listed $matched test(s) matching '$filter'; none were run")
   Os.exit(0)
 }
