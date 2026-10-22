@@ -20,11 +20,11 @@ sel4-logging = { git = "https://github.com/seL4/rust-sel4", optional = true, tag
 # Verus crate dependencies
 #
 # It is recommended to use the Verus release:
-# https://github.com/verus-lang/verus/releases/tag/release/0.2026.09.06.8dea4a2
+# https://github.com/verus-lang/verus/releases/tag/release/0.2026.10.04.426d8b0
 # -----------------------------------------------------------------------------
-vstd = { version = "=0.0.0-2026-09-06-0133", default-features=false }
-verus_builtin = { version = "=0.0.0-2026-09-06-0133" }
-verus_builtin_macros = { version = "=0.0.0-2026-09-06-0133" }
+vstd = { version = "=0.0.0-2026-10-04-0306", default-features=false }
+verus_builtin = { version = "=0.0.0-2026-09-16-0054" }
+verus_builtin_macros = { version = "=0.0.0-2026-09-20-0158" }
 
 # BEGIN MARKER R2U2 CARGO DEPENDENCIES
 # -----------------------------------------------------------------------------
