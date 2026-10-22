@@ -27,7 +27,7 @@
 : "${MICROKIT_SDK_VER:=2.3.1}"
 # The toolchain Verus ${VERUS_VER} was built against, which is also the channel
 # the Rust crates HAMR generates pin (see the rust-toolchain.toml codegen emits).
-: "${RUST_TOOLCHAIN_VER:=1.98.0}"
+: "${RUST_TOOLCHAIN_VER:=1.98.1}"
 : "${SDFGEN_VER:=0.35.0}"
 # Verus.  x86_64 unpacks the published release asset; aarch64 has none and
 # builds from source.  bin/verus.sh checks out the commit named in the last
@@ -35,7 +35,7 @@
 # been moved after its assets were published -- following it shipped a different
 # Verus on each architecture.  Both paths assert the installed version matches
 # this pin, so a re-cut release fails the build rather than passing silently.
-: "${VERUS_VER:=0.2026.09.06.8dea4a2}"
+: "${VERUS_VER:=0.2026.10.04.426d8b0}"
 
 # LionsOS, pinned to a commit rather than tracking main.  What is installed here
 # is what the models build their VM examples against, and LionsOS carries sDDF
@@ -157,9 +157,10 @@ case "${PROVERS_OS}:${PROVERS_ARCH}" in
     : "${RUST_MUSL_TRIPLE:=}"
     : "${MICROKIT_SDK_OS:=macos}"
     : "${MICROKIT_SDK_ARCH:=aarch64}"
-    # verus-<ver>-arm64-macos.zip -- whose 0.2026.09.06.8dea4a2 asset does not
-    # bundle Z3, so verus.sh fetches the official Z3 release build -- and PyPI
-    # carries an arm64 macOS sdfgen wheel.  So nothing is built from source here.
+    # verus-<ver>-arm64-macos.zip -- which bundles Z3 from 0.2026.10.04.426d8b0 on;
+    # for one that does not (0.2026.09.06.8dea4a2's did not), verus.sh fetches the
+    # official Z3 release build named by Z3_RELEASE_ID -- and PyPI carries an arm64
+    # macOS sdfgen wheel.  So nothing is built from source here.
     : "${VERUS_RELEASE_ID:=arm64-macos}"
     : "${Z3_RELEASE_ID:=arm64-osx-15.7.3}"
     : "${VERUS_FROM_SOURCE:=false}"

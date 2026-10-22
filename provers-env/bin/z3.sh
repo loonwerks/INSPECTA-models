@@ -4,8 +4,8 @@
 #
 # Verus is tied to one exact Z3 version.  Wherever a Verus release is used
 # (x86_64 Linux and macOS) verus.sh installs that Z3 itself -- the one bundled in
-# the release, or, for an asset that bundles none (arm64-macos of
-# 0.2026.09.06.8dea4a2), the official Z3 release build named by Z3_RELEASE_ID --
+# the release, or, for an asset that bundles none (as arm64-macos of
+# 0.2026.09.06.8dea4a2 did), the official Z3 release build named by Z3_RELEASE_ID --
 # so there is nothing to do here and this script is a no-op.  aarch64 Linux has
 # no Verus release at all, so Verus and its Z3 are built from source there;
 # verus.sh then links this Z3 in as ${VERUS_Z3_PATH} so every host ends up with

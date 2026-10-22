@@ -94,7 +94,7 @@ if [ "${VERUS_FROM_SOURCE}" != "true" ]; then
   fi
   verus_prune
   # Not every release asset bundles Z3 -- the arm64-macos asset of
-  # 0.2026.09.06.8dea4a2 does not -- so fall back to the official Z3 release
+  # 0.2026.09.06.8dea4a2 did not -- so fall back to the official Z3 release
   # build of Z3_VER, the Z3 Verus checks for at startup.  The asset is named by
   # Z3_RELEASE_ID from bin/versions.sh rather than looked up through the GitHub
   # API: that lookup is unauthenticated, CI runners share its 60-requests-an-hour
