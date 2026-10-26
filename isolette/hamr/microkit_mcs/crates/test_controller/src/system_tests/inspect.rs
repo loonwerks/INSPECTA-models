@@ -526,7 +526,8 @@ pub fn put_thermostat_mt_mmm_mmm_sv_lastMonitorMode(value: Isolette_Data_Model::
 }
 
 /// Complete pre-state for `thermostat_rt_mri_mri`: every input port and GUMBO state
-/// variable it has.  There is deliberately no `Default` -- name every field.
+/// variable it has.  There is deliberately no `Default` -- name every field.  An
+/// event input is an `Option`: `Some(v)` for exactly `v` pending, `None` for nothing.
 pub struct thermostat_rt_mri_mri_PreState {
   pub regulator_mode: Isolette_Data_Model::Regulator_Mode,
   pub lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
@@ -545,7 +546,8 @@ pub fn set_thermostat_rt_mri_mri(s: thermostat_rt_mri_mri_PreState) {
 }
 
 /// Complete pre-state for `thermostat_rt_mhs_mhs`: every input port and GUMBO state
-/// variable it has.  There is deliberately no `Default` -- name every field.
+/// variable it has.  There is deliberately no `Default` -- name every field.  An
+/// event input is an `Option`: `Some(v)` for exactly `v` pending, `None` for nothing.
 pub struct thermostat_rt_mhs_mhs_PreState {
   pub upper_desired_temp: Isolette_Data_Model::Temp_i,
   pub lower_desired_temp: Isolette_Data_Model::Temp_i,
@@ -566,7 +568,8 @@ pub fn set_thermostat_rt_mhs_mhs(s: thermostat_rt_mhs_mhs_PreState) {
 }
 
 /// Complete pre-state for `thermostat_rt_mrm_mrm`: every input port and GUMBO state
-/// variable it has.  There is deliberately no `Default` -- name every field.
+/// variable it has.  There is deliberately no `Default` -- name every field.  An
+/// event input is an `Option`: `Some(v)` for exactly `v` pending, `None` for nothing.
 pub struct thermostat_rt_mrm_mrm_PreState {
   pub interface_failure: Isolette_Data_Model::Failure_Flag_i,
   pub internal_failure: Isolette_Data_Model::Failure_Flag_i,
@@ -585,7 +588,8 @@ pub fn set_thermostat_rt_mrm_mrm(s: thermostat_rt_mrm_mrm_PreState) {
 }
 
 /// Complete pre-state for `thermostat_mt_mmi_mmi`: every input port and GUMBO state
-/// variable it has.  There is deliberately no `Default` -- name every field.
+/// variable it has.  There is deliberately no `Default` -- name every field.  An
+/// event input is an `Option`: `Some(v)` for exactly `v` pending, `None` for nothing.
 pub struct thermostat_mt_mmi_mmi_PreState {
   pub monitor_mode: Isolette_Data_Model::Monitor_Mode,
   pub lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
@@ -606,7 +610,8 @@ pub fn set_thermostat_mt_mmi_mmi(s: thermostat_mt_mmi_mmi_PreState) {
 }
 
 /// Complete pre-state for `thermostat_mt_ma_ma`: every input port and GUMBO state
-/// variable it has.  There is deliberately no `Default` -- name every field.
+/// variable it has.  There is deliberately no `Default` -- name every field.  An
+/// event input is an `Option`: `Some(v)` for exactly `v` pending, `None` for nothing.
 pub struct thermostat_mt_ma_ma_PreState {
   pub upper_alarm_temp: Isolette_Data_Model::Temp_i,
   pub lower_alarm_temp: Isolette_Data_Model::Temp_i,
@@ -627,7 +632,8 @@ pub fn set_thermostat_mt_ma_ma(s: thermostat_mt_ma_ma_PreState) {
 }
 
 /// Complete pre-state for `thermostat_mt_mmm_mmm`: every input port and GUMBO state
-/// variable it has.  There is deliberately no `Default` -- name every field.
+/// variable it has.  There is deliberately no `Default` -- name every field.  An
+/// event input is an `Option`: `Some(v)` for exactly `v` pending, `None` for nothing.
 pub struct thermostat_mt_mmm_mmm_PreState {
   pub interface_failure: Isolette_Data_Model::Failure_Flag_i,
   pub internal_failure: Isolette_Data_Model::Failure_Flag_i,
@@ -646,7 +652,8 @@ pub fn set_thermostat_mt_mmm_mmm(s: thermostat_mt_mmm_mmm_PreState) {
 }
 
 /// Complete pre-state for `operator_interface_oip_oit`: every input port and GUMBO state
-/// variable it has.  There is deliberately no `Default` -- name every field.
+/// variable it has.  There is deliberately no `Default` -- name every field.  An
+/// event input is an `Option`: `Some(v)` for exactly `v` pending, `None` for nothing.
 pub struct operator_interface_oip_oit_PreState {
   pub display_temperature: Isolette_Data_Model::Temp_i,
   pub regulator_status: Isolette_Data_Model::Status,
@@ -665,7 +672,8 @@ pub fn set_operator_interface_oip_oit(s: operator_interface_oip_oit_PreState) {
 }
 
 /// Complete pre-state for `temperature_sensor_cpi_thermostat`: every input port and GUMBO state
-/// variable it has.  There is deliberately no `Default` -- name every field.
+/// variable it has.  There is deliberately no `Default` -- name every field.  An
+/// event input is an `Option`: `Some(v)` for exactly `v` pending, `None` for nothing.
 pub struct temperature_sensor_cpi_thermostat_PreState {
   pub air: Isolette_Data_Model::PhysicalTemp_i,
 }
@@ -678,7 +686,8 @@ pub fn set_temperature_sensor_cpi_thermostat(s: temperature_sensor_cpi_thermosta
 }
 
 /// Complete pre-state for `heat_source_cpi_heat_controller`: every input port and GUMBO state
-/// variable it has.  There is deliberately no `Default` -- name every field.
+/// variable it has.  There is deliberately no `Default` -- name every field.  An
+/// event input is an `Option`: `Some(v)` for exactly `v` pending, `None` for nothing.
 pub struct heat_source_cpi_heat_controller_PreState {
   pub heat_control: Isolette_Data_Model::On_Off,
 }
