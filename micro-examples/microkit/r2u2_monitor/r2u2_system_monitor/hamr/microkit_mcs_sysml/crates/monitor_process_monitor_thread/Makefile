@@ -33,6 +33,13 @@ CARGO_FLAGS = -Z build-std=core,alloc,compiler_builtins \
               -Z build-std-features=compiler-builtins-mem \
               --target aarch64-unknown-none
 
+# Extra options for cargo-verus itself, for every cargo-verus target below.
+# Empty by default. For example
+#   CARGO_VERUS_OPTS="--fwd-verus-args-to roots"
+# forwards SMT_OPTS to this crate only, so its dependencies (notably vstd) are
+# verified with Verus' defaults rather than with options meant for this crate.
+CARGO_VERUS_OPTS ?=
+
 # Extra arguments forwarded to Verus (placed after `--`), for every
 # cargo-verus target below. These apply to dependency crates too -- notably
 # vstd, which is verified from source on a clean build, so its proofs must
@@ -58,10 +65,10 @@ all: build-verus-release
 #       holds the Verus-irrelevant options, so it must come last.
 
 build-verus-release: $(R2U2_BUILD_DEPS)
-	$(BUILD_ENV_VARS) cargo-verus build --features sel4 --release $(CARGO_FLAGS) -- $(SMT_OPTS)
+	$(BUILD_ENV_VARS) cargo-verus build $(CARGO_VERUS_OPTS) --features sel4 --release $(CARGO_FLAGS) -- $(SMT_OPTS)
 
 build-verus: $(R2U2_BUILD_DEPS)
-	$(BUILD_ENV_VARS) cargo-verus build --features sel4 $(CARGO_FLAGS) -- $(SMT_OPTS)
+	$(BUILD_ENV_VARS) cargo-verus build $(CARGO_VERUS_OPTS) --features sel4 $(CARGO_FLAGS) -- $(SMT_OPTS)
 
 build-release: $(R2U2_BUILD_DEPS)
 	$(BUILD_ENV_VARS) cargo build --features sel4 $(CARGO_FLAGS) --release
@@ -70,10 +77,10 @@ build: $(R2U2_BUILD_DEPS)
 	$(BUILD_ENV_VARS) cargo build --features sel4 $(CARGO_FLAGS)
 
 verus: $(R2U2_BUILD_DEPS)
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- $(SMT_OPTS)
+	$(ENV_VARS) cargo-verus verify $(CARGO_VERUS_OPTS) $(CARGO_FLAGS) -- $(SMT_OPTS)
 
 verus-json: $(R2U2_BUILD_DEPS)
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- $(SMT_OPTS) --output-json --time > verus_results.json
+	$(ENV_VARS) cargo-verus verify $(CARGO_VERUS_OPTS) $(CARGO_FLAGS) -- $(SMT_OPTS) --output-json --time > verus_results.json
 
 # Test Example:
 #   Run all unit tests

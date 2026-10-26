@@ -85,6 +85,7 @@ void r2u2_monitor_post_timeTriggered(void) {
     r2u2_monitor.verdict_updated[i] = false;
     r2u2_monitor.false_verdict_seen[i] = false;
   }
+  r2u2_time r2u2_time_stamp = r2u2_monitor.monitor.time_stamp; 
   r2u2_status_t status = r2u2_step(&r2u2_monitor.monitor);
   if (status != R2U2_OK) {
     printf("R2U2 monitor step failed: %d\n", (int) status);
@@ -95,7 +96,7 @@ void r2u2_monitor_post_timeTriggered(void) {
   // against the new timestamp without discarding this step's outputs.
   for (size_t i = 0; i < R2U2_SPEC_COUNT; ++i) {
     if (r2u2_monitor.verdict_valid[i] && !r2u2_monitor.verdict_updated[i] &&
-        r2u2_monitor.monitor.time_stamp > get_verdict_time(r2u2_monitor.verdict_cache[i])) {
+        r2u2_time_stamp > get_verdict_time(r2u2_monitor.verdict_cache[i])) {
       r2u2_monitor.verdict_valid[i] = false;
     }
   }

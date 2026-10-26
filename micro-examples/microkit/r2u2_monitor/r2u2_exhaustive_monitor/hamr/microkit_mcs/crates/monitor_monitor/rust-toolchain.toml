@@ -10,5 +10,5 @@
 # rust-analyzer provides IDE support (code completion, type hints, etc.).
 
 [toolchain]
-channel = "1.97.1"
+channel = "1.98.1"
 components = [ "rustfmt", "rust-src", "rustc-dev", "llvm-tools-preview", "rust-analyzer" ]

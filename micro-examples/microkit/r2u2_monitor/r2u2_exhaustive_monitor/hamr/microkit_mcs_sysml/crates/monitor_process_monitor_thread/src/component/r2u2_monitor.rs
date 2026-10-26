@@ -482,8 +482,8 @@ impl monitor_process_monitor_thread {
     r2u2_core::load_bool_signal(&mut r2u2_monitor.monitor, 17, healthy); // Loading signal api_healthy into index 17
     r2u2_core::load_int_signal(&mut r2u2_monitor.monitor, 34, (self.sprevious_level) as i32); // Loading signal sprevious_level into index 34
 
-    r2u2_core::monitor_step(&mut r2u2_monitor.monitor);
     let r2u2_time_stamp = r2u2_monitor.monitor.time_stamp;
+    r2u2_core::monitor_step(&mut r2u2_monitor.monitor);
     // Expire cached verdicts before applying this step's new outputs.
     for verdict in r2u2_monitor.verdict_cache.iter_mut() {
         if verdict.is_some() && r2u2_time_stamp > verdict.unwrap().time {
