@@ -211,14 +211,14 @@ architectures:
 
 | host | appliance | size | exported | versions pinned as of |
 | --- | --- | --- | --- | --- |
-| Apple Silicon / aarch64 | [provers-env-arm64-2026.10.13.ova](https://drive.google.com/file/d/1PT45RLV0QtYDIxuKJ3sLLZX4aXw8kjlT/view?usp=sharing) | 9.35 GiB | 2026-10-16 | [2a04011e](https://github.com/loonwerks/INSPECTA-models/commit/2a04011e) |
-| x86_64 | [provers-env-amd64-2026.10.13.ova](https://drive.google.com/file/d/1EKU1tpZor8gKUSIaiUfZrgq-AAWa6g5a/view?usp=drive_link) | 9.83 GiB | 2026-10-16 | [2a04011e](https://github.com/loonwerks/INSPECTA-models/commit/2a04011e) |
+| Apple Silicon / aarch64 | [provers-env-arm64-2026.10.22.ova](https://drive.google.com/file/d/12us-iWTDsywRhHbOmwNDXFGbGIIR2VsO/view?usp=sharing) | 9.44 GiB | 2026-10-26 | [9591bdd1](https://github.com/loonwerks/INSPECTA-models/commit/9591bdd1) |
+| x86_64 | [provers-env-amd64-2026.10.22.ova](https://drive.google.com/file/d/16ynfwJ2SstN9sbJPMXGGXwjogd-mNoBa/view?usp=sharing) | 9.42 GiB | 2026-10-26 | [9591bdd1](https://github.com/loonwerks/INSPECTA-models/commit/9591bdd1) |
 
 Both carry **Microkit SDK 2.3.1**, the released SDK unmodified -- it includes
 the [seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain
 fix that the 2.3.0 appliances had to patch in -- with LionsOS `7554a0f`,
-sdfgen 0.35.0, **Verus 0.2026.09.06** on Rust 1.98.0 -- the Verus release Vest
-is built against, which HAMR codegen matches -- and Sireum `af04af71`.
+sdfgen 0.35.0, **Verus 0.2026.10.04** on Rust 1.98.1 -- the Verus release Vest
+0.2.2 is built against, which HAMR codegen matches -- and Sireum `eccf00c5`.
 `MICROKIT_SDK` points at `~/provers/microkit-sdk-2.3.1`, and everything,
 domain-scheduled or not, builds against it.
 
@@ -237,8 +237,8 @@ Everything else builds offline.
 
 Both are named for `PROVERS_BUILD_VER` rather than for the day they were
 written: a rebuild that *replaces* a published build keeps that build's version
-rather than taking the day it was made, which is why the 2026.10.13 pair above
-carry a version three days older than their export.  See
+rather than taking the day it was made, which is why the 2026.10.22 pair above
+carry a version four days older than their export.  See
 [Exporting An OVA](#exporting-an-ova).
 
 The `versions pinned as of` column is the commit whose `bin/versions.sh` each
@@ -252,7 +252,7 @@ Silicon and vice versa.  Import into VirtualBox 7.1 or above --
 `File > Import Appliance...`, or:
 
 ```bash
-VBoxManage import provers-env-arm64-2026.10.13.ova
+VBoxManage import provers-env-arm64-2026.10.22.ova
 ```
 
 Then start it and log in as `vagrant` / `vagrant`.  The virtual disk comes from
@@ -269,7 +269,7 @@ without guessing from the name -- `cat ~/provers/build-info` in the running VM,
 or before importing:
 
 ```bash
-VBoxManage import provers-env-arm64-2026.10.13.ova -n
+VBoxManage import provers-env-arm64-2026.10.22.ova -n
 ```
 
 which prints the tool versions and build date as the appliance's description.
@@ -277,8 +277,16 @@ which prints the tool versions and build date as the appliance's description.
 ### Earlier Appliances
 
 The earlier appliances remain available, to reproduce something against the
-environment it was built for.  Current models expect the 2026.10.13 appliances
+environment it was built for.  Current models expect the 2026.10.22 appliances
 above.
+
+The 2026.10.13 pair carry the same Microkit SDK 2.3.1, LionsOS and sdfgen, with
+Verus 0.2026.09.06 on Rust 1.98.0 and Sireum `af04af71`:
+
+| host | appliance | size | exported | versions pinned as of |
+| --- | --- | --- | --- | --- |
+| Apple Silicon / aarch64 | [provers-env-arm64-2026.10.13.ova](https://drive.google.com/file/d/1PT45RLV0QtYDIxuKJ3sLLZX4aXw8kjlT/view?usp=sharing) | 9.35 GiB | 2026-10-16 | [2a04011e](https://github.com/loonwerks/INSPECTA-models/commit/2a04011e) |
+| x86_64 | [provers-env-amd64-2026.10.13.ova](https://drive.google.com/file/d/1EKU1tpZor8gKUSIaiUfZrgq-AAWa6g5a/view?usp=drive_link) | 9.83 GiB | 2026-10-16 | [2a04011e](https://github.com/loonwerks/INSPECTA-models/commit/2a04011e) |
 
 The 2026.10.01 pair carry the same Microkit SDK 2.3.1, LionsOS and sdfgen, with
 Verus 0.2026.09.27 on Rust 1.98.1:
@@ -333,9 +341,9 @@ scripts of that era pass `MICROKIT_SDK=` per command for exactly that reason.
 
 * [Vagrant](https://www.vagrantup.com/) 2.4 or above
 
-* ~60 GB free disk and an hour or so on recent hardware -- 37 minutes for an
-  x86_64 build at 2026.10.01, and 70 for an aarch64 one, which also compiles Z3
-  and Verus, at 2026.10.13 -- more on a slower machine or network.  Keep the
+* ~60 GB free disk and under an hour on recent hardware -- 37 minutes for an
+  x86_64 build at 2026.10.01, and 38 for an aarch64 one, which also compiles Z3
+  and Verus, at 2026.10.22 -- more on a slower machine or network.  Keep the
   host from sleeping for the duration: a host that suspends pauses the VM and
   drops Vagrant's SSH session, and the build fails part-way
   (`caffeinate -is bash setup.sh` on a Mac, `systemd-inhibit bash setup.sh` on
