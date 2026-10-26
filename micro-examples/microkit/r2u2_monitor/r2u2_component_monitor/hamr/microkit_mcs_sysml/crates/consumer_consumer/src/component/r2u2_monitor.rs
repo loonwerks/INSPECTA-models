@@ -81,8 +81,8 @@ impl consumer_consumer {
     };
 
 
-    r2u2_core::monitor_step(&mut r2u2_monitor.monitor);
     let r2u2_time_stamp = r2u2_monitor.monitor.time_stamp;
+    r2u2_core::monitor_step(&mut r2u2_monitor.monitor);
     // Expire cached verdicts before applying this step's new outputs.
     for verdict in r2u2_monitor.verdict_cache.iter_mut() {
         if verdict.is_some() && r2u2_time_stamp > verdict.unwrap().time {
