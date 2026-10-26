@@ -182,6 +182,8 @@ pub fn run_all() {
       CURRENT_FAILED = false;
       FAIL_PRINTED = false;
     }
+    // a batch never spans two tests, even with no command between them (D39)
+    crate::system_tests::inspect::end_setup_batches();
     line(format_args!("TEST | BEGIN {}", name));
     unsafe { IN_TEST = true; }
     // A test that cannot run as written is failed without running it: after api::stop()

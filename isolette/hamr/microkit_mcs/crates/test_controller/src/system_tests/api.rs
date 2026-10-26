@@ -88,6 +88,9 @@ static mut LAST_OBS_SEQ: u32 = 0;
 /// Issues a command and waits for it; a command that did not do what it was asked fails
 /// the running test (see `harness::command_outcome`).
 fn issue(typ: u32, count: u32, target_ch: u32, target_hp: u32, target_slot: u32) -> TestStatus {
+  // Every command ends the setup batches (D39), including one that dispatches nothing,
+  // so where a batch ends does not depend on what a command happened to do.
+  crate::system_tests::inspect::end_setup_batches();
   let st = exchange(typ, count, target_ch, target_hp, target_slot);
   crate::system_tests::harness::command_outcome(command_name(typ), st.flags);
   st

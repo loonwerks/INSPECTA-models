@@ -525,6 +525,11 @@ pub fn put_thermostat_mt_mmm_mmm_sv_lastMonitorMode(value: Isolette_Data_Model::
   }
 }
 
+/// End every connection's setup batch: at every scheduler command and at each test's
+/// start.  What was already requested of the consumers stays requested.
+pub(crate) fn end_setup_batches() {
+}
+
 /// Complete pre-state for `thermostat_rt_mri_mri`: every input port and GUMBO state
 /// variable it has.  There is deliberately no `Default` -- name every field.  An
 /// event input is an `Option`: `Some(v)` for exactly `v` pending, `None` for nothing.
