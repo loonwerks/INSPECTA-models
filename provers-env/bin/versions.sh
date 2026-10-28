@@ -22,12 +22,12 @@
 #
 #   PROVERS_BUILD_VER=$(date +%Y.%m.%d) bash docker/docker.sh
 #
-: "${PROVERS_BUILD_VER:=2026.10.22}"
+: "${PROVERS_BUILD_VER:=2026.10.28}"
 
 : "${MICROKIT_SDK_VER:=2.3.1}"
 # The toolchain Verus ${VERUS_VER} was built against, which is also the channel
 # the Rust crates HAMR generates pin (see the rust-toolchain.toml codegen emits).
-: "${RUST_TOOLCHAIN_VER:=1.98.1}"
+: "${RUST_TOOLCHAIN_VER:=1.99.1}"
 : "${SDFGEN_VER:=0.35.0}"
 # Verus.  x86_64 unpacks the published release asset; aarch64 has none and
 # builds from source.  bin/verus.sh checks out the commit named in the last
@@ -35,7 +35,7 @@
 # been moved after its assets were published -- following it shipped a different
 # Verus on each architecture.  Both paths assert the installed version matches
 # this pin, so a re-cut release fails the build rather than passing silently.
-: "${VERUS_VER:=0.2026.10.04.426d8b0}"
+: "${VERUS_VER:=0.2026.10.26.d17fbd0}"
 
 # LionsOS, pinned to a commit rather than tracking main.  What is installed here
 # is what the models build their VM examples against, and LionsOS carries sDDF
@@ -79,7 +79,7 @@
 # requires pinning both, and pinning SIREUM_INIT_V to a release rather than
 # leaving it at the moving `dev` tag is what makes the bootstrap reproducible
 # too.  Set SIREUM_V to a `4.*` tag and SIREUM_INIT_V can be left unset.
-: "${SIREUM_V:=eccf00c5a933d8d39bea62978bcd324dc0788378}"
+: "${SIREUM_V:=5214ba0fc37723705f326395d18cbfbbf85deb52}"
 : "${SIREUM_INIT_V:=4.20261021.b1efad5d}"
 : "${SIREUM_REPO:=https://github.com/sireum/kekinian}"
 
