@@ -228,6 +228,13 @@ clean::
 	make -C ${CRATES_DIR}/consumer_consumer clean
 	make -C ${CRATES_DIR}/monitor_process_monitor_thread clean
 
+coverage: 
+	@open=; if [ ! -f $(TOP_DIR)/target/coverage/report/index.html ]; then open=open; fi; \
+	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/producer_producer ${CRATES_DIR}/consumer_consumer ${CRATES_DIR}/monitor_process_monitor_thread out=$(TOP_DIR)/target/coverage $$open $(args)
+
+coverage-report: 
+	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/producer_producer ${CRATES_DIR}/consumer_consumer ${CRATES_DIR}/monitor_process_monitor_thread out=$(TOP_DIR)/target/coverage no-run
+
 verus: 
 	make -C ${CRATES_DIR}/producer_producer verus
 	make -C ${CRATES_DIR}/consumer_consumer verus

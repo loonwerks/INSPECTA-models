@@ -229,6 +229,26 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "bin\/coverage-report.cmd",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "bin\/coverage-report\/index.html",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "bin\/coverage-report\/report.css",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "bin\/coverage-report\/report.js",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "microkit.system",
               "overwrittenIfExists" : true
             },

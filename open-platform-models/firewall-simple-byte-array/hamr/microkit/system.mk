@@ -161,6 +161,13 @@ clean::
 	make -C ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver clean
 	make -C ${CRATES_DIR}/domain_monitor clean
 
+coverage: 
+	@open=; if [ ! -f $(TOP_DIR)/target/coverage/report/index.html ]; then open=open; fi; \
+	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/ArduPilot_ArduPilot ${CRATES_DIR}/Firewall_Firewall ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver out=$(TOP_DIR)/target/coverage $$open $(args)
+
+coverage-report: 
+	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/ArduPilot_ArduPilot ${CRATES_DIR}/Firewall_Firewall ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver out=$(TOP_DIR)/target/coverage no-run
+
 verus: 
 	make -C ${CRATES_DIR}/ArduPilot_ArduPilot verus
 	make -C ${CRATES_DIR}/Firewall_Firewall verus

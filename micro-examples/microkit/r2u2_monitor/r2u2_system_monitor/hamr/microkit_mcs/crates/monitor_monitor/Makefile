@@ -96,20 +96,28 @@ test: $(R2U2_BUILD_DEPS)
 	$(ENV_VARS) cargo test $(args)
 
 # Coverage Example:
-#   Generate a test coverage report combining the results of all unit tests
+#   Run the unit tests with coverage instrumentation and build the HTML report
 #   Usage: make coverage
 #
-#   Generate a test coverage report for unit tests whose name contains 'proptest'
+#   Only unit tests whose name contains 'proptest'
 #   Usage: make coverage args=proptest
+#
+#   Rebuild the report from the last run's data, without re-running the tests
+#   Usage: make coverage-report
+#
+# The report is target/coverage/report/index.html (lines, regions, functions and
+# branches, measured by llvm-cov), with target/coverage/lcov.info beside it.  It is
+# written by bin/coverage-report.cmd, which needs SIREUM_HOME and the toolchain's
+# llvm-tools-preview component, and opens in the browser the first time.
+
+COVERAGE_REPORT = ../../bin/coverage-report.cmd
 
 coverage: $(R2U2_BUILD_DEPS)
-	cargo install grcov
-	@exists=0; if [ -f target/coverage/report/index.html ]; then exists=1; fi; \
-	rm -rf target/coverage; \
-	$(ENV_VARS) CARGO_INCREMENTAL=0 RUSTFLAGS='-Cinstrument-coverage' LLVM_PROFILE_FILE='target/coverage/cargo-test-%p-%m.profraw' \
-	cargo test $(args); \
-	grcov . --binary-path ./target/debug/deps/ -s . -t html --branch --ignore-not-existing -o target/coverage/report; \
-	if [ $$exists -eq 0 ]; then open target/coverage/report/index.html; fi
+	@open=; if [ ! -f target/coverage/report/index.html ]; then open=open; fi; \
+	$(COVERAGE_REPORT) . $$open $(args)
+
+coverage-report:
+	$(COVERAGE_REPORT) . no-run
 
 clean:
 	cargo clean

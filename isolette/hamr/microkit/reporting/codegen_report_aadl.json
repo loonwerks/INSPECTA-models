@@ -1640,6 +1640,26 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "bin\/coverage-report.cmd",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "bin\/coverage-report\/index.html",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "bin\/coverage-report\/report.css",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "bin\/coverage-report\/report.js",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mri_mri\/src\/test\/mod.rs",
               "overwrittenIfExists" : false
             },

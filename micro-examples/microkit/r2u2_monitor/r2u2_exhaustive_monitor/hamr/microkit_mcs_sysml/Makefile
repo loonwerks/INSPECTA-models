@@ -77,6 +77,15 @@ ${TOP_BUILD_DIR}/Makefile: $(SYSTEM_MAKEFILE)
 test:: ${TOP_BUILD_DIR}/Makefile
 	${MAKE} -C ${TOP_BUILD_DIR} test
 
+coverage: ${TOP_BUILD_DIR}/Makefile
+	${MAKE} -C ${TOP_BUILD_DIR} coverage
+
+coverage-report: ${TOP_BUILD_DIR}/Makefile
+	${MAKE} -C ${TOP_BUILD_DIR} coverage-report
+
+clobber:: 
+	rm -rf $(TOP_DIR)/target/coverage
+
 verus: ${TOP_BUILD_DIR}/Makefile
 	${MAKE} -C ${TOP_BUILD_DIR} verus
 

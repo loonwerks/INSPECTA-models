@@ -342,6 +342,13 @@ clean::
 	make -C ${CRATES_DIR}/gumbo_monitor clean
 	make -C ${CRATES_DIR}/sys_nominal_monitor clean
 
+coverage: 
+	@open=; if [ ! -f $(TOP_DIR)/target/coverage/report/index.html ]; then open=open; fi; \
+	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/tcp_tct ${CRATES_DIR}/fp_ft out=$(TOP_DIR)/target/coverage $$open $(args)
+
+coverage-report: 
+	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/tcp_tct ${CRATES_DIR}/fp_ft out=$(TOP_DIR)/target/coverage no-run
+
 verus: 
 	make -C ${CRATES_DIR}/tcp_tct verus
 	make -C ${CRATES_DIR}/fp_ft verus

@@ -212,6 +212,13 @@ clean::
 	make -C ${CRATES_DIR}/snd_p_snd clean
 	make -C ${CRATES_DIR}/rcv_p_rcv clean
 
+coverage: 
+	@open=; if [ ! -f $(TOP_DIR)/target/coverage/report/index.html ]; then open=open; fi; \
+	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/snd_p_snd ${CRATES_DIR}/rcv_p_rcv out=$(TOP_DIR)/target/coverage $$open $(args)
+
+coverage-report: 
+	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/snd_p_snd ${CRATES_DIR}/rcv_p_rcv out=$(TOP_DIR)/target/coverage no-run
+
 verus: 
 	make -C ${CRATES_DIR}/snd_p_snd verus
 	make -C ${CRATES_DIR}/rcv_p_rcv verus
