@@ -233,9 +233,9 @@ val microkitMcsDir = homeDir / "hamr" / "microkit_mcs"
 clean(microkitMcsDir)
 
 if (result == 0) {
-  // ENABLE_TEST_SCHEDULER adds the test_scheduler.mk variant that the system tests in
+  // --system-testing adds the test_scheduler.mk variant that the system tests in
   // crates/test_controller run under (bin/run-tests.cmd); the default image is unaffected
-  val args = s"--platform Microkit --runtime-monitoring --scheduling UserLand --verus-attribute-syntax --experimental-options ENABLE_TEST_SCHEDULER --sel4-output-dir $microkitMcsDir"
+  val args = s"--platform Microkit --runtime-monitoring --scheduling UserLand --verus-attribute-syntax --system-testing --sel4-output-dir $microkitMcsDir"
 
   result = run("Running codegen from SysMLv2 model targeting Microkit with user-land scheduler", F,
     proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args")
