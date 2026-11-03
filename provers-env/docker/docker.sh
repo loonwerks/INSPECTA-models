@@ -25,7 +25,7 @@ VERSION=${PROVERS_BUILD_VER}
 # sourced again and derives them from the target's uname instead.
 BUILD_ARGS=()
 for v in MICROKIT_SDK_VER RUST_TOOLCHAIN_VER \
-         SDFGEN_VER VERUS_VER Z3_VER LIONSOS_VER \
+         SDFGEN_VER VERUS_VER Z3_VER LIONSOS_VER SYSML_AADL_LIBRARIES_VER \
          SIREUM_V SIREUM_INIT_V PROVERS_BUILD_VER; do
   BUILD_ARGS+=(--build-arg "${v}=${!v}")
 done

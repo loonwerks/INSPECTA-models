@@ -49,6 +49,19 @@
 # only from Microkit 2.3.0 on.  The two move together.
 : "${LIONSOS_VER:=7554a0f}"
 
+# The SysML v2 AADL libraries (santoslab/sysml-aadl-libraries): the AADL
+# property sets and base packages every SysML model is checked against, handed
+# to `sireum hamr sysml ...` on its --sourcepath via $SYSML_AADL_LIBRARIES.
+# Pinned to a commit because they move with Sireum's SysML front end -- a newer
+# library can use what an older Sireum does not understand, and the other way
+# round -- so this moves together with SIREUM_V.  Bump deliberately, after
+# confirming the SysML models still build.
+#
+# This commit is the one kekinian pins as sysml-aadl-libraries in
+# hamr/codegen/jvm/src/main/resources/microkit_versions.properties, and
+# hamr/codegen/bin/scripts/checkVersions.sc reports when the two disagree.
+: "${SYSML_AADL_LIBRARIES_VER:=6e26f80e68d16addceb21c614a1ecd6cb4b85fe1}"
+
 # Sireum (kekinian), pinned for the same reason everything else here is: two
 # setups run weeks apart should install the same Sireum.  Bump deliberately,
 # after confirming the build still passes.
@@ -206,6 +219,7 @@ fi
 : "${VERUS_REPO:=https://github.com/verus-lang/verus}"
 : "${SDFGEN_REPO:=https://github.com/au-ts/microkit_sdf_gen}"
 : "${LIONSOS_REPO:=https://github.com/au-ts/lionsos}"
+: "${SYSML_AADL_LIBRARIES_REPO:=https://github.com/santoslab/sysml-aadl-libraries}"
 
 # Nothing here is exported.  These are the install scripts' own values, and each
 # script sources this file (through env.sh) rather than inheriting them, so they

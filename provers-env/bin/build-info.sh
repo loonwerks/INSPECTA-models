@@ -26,6 +26,18 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
 # they are COPYed, so this is usually empty -- it is recorded when it is not.
 _src_rev="$(git -C "$(dirname "${BASH_SOURCE[0]}")" rev-parse --short HEAD 2>/dev/null || true)"
 
+# The SysML AADL libraries' commit as installed, not the SYSML_AADL_LIBRARIES_VER
+# that asked for it: an override may name a branch or tag (`main` says nothing a
+# year later), and an adopted clone (SYSML_AADL_LIBRARIES set beforehand) is at
+# whatever commit it is at.  "-dirty" marks a tree with local changes, which no
+# commit reproduces; "unknown" a tree that is missing or not a git checkout.
+_sysml_libs_rev="$(git -C "${SYSML_AADL_LIBRARIES}" rev-parse HEAD 2>/dev/null || true)"
+if [ -z "${_sysml_libs_rev}" ]; then
+  _sysml_libs_rev=unknown
+elif [ -n "$(git -C "${SYSML_AADL_LIBRARIES}" status --porcelain 2>/dev/null)" ]; then
+  _sysml_libs_rev="${_sysml_libs_rev}-dirty"
+fi
+
 _ide_list=""
 for ide in IVE:PROVERS_IVE CodeIVE:PROVERS_CODEIVE FMIDE:PROVERS_FMIDE; do
   name=${ide%%:*}; var=${ide##*:}
@@ -52,6 +64,7 @@ VERUS_FROM_SOURCE="${VERUS_FROM_SOURCE}"
 Z3_VER="${Z3_VER}"
 MICROKIT_SDK_VER="${MICROKIT_SDK_VER}"
 LIONSOS_VER="${LIONSOS_VER}"
+SYSML_AADL_LIBRARIES_VER="${_sysml_libs_rev}"
 SDFGEN_VER="${SDFGEN_VER}"
 SDFGEN_FROM_SOURCE="${SDFGEN_FROM_SOURCE}"
 RUST_TOOLCHAIN_VER="${RUST_TOOLCHAIN_VER}"

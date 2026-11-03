@@ -156,7 +156,11 @@ jobs:
           
           ${SIREUM_HOME}/bin/install/fmide.cmd -v
 
-          git clone --depth 1 https://github.com/santoslab/sysml-aadl-libraries.git sysml-aadl-libraries
-          export SYSML_AADL_LIBRARIES=$(pwd)/sysml-aadl-libraries
+          # The libraries at the commit this checkout's provers-env/bin/versions.sh
+          # pins, rather than whatever the image carries: images published before
+          # the pin have none.  SYSML_AADL_LIBRARIES is cleared so that the script
+          # installs rather than adopting an image's copy.
+          SYSML_AADL_LIBRARIES= bash INSPECTA-models/provers-env/bin/sysml-aadl-libraries.sh
+          export SYSML_AADL_LIBRARIES=${PROVERS_DIR}/sysml-aadl-libraries
 
           INSPECTA-models/.github/workflows/hamr/hamr-ci.cmd

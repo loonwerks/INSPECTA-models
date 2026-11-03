@@ -57,6 +57,7 @@ bash "${BIN_DIR}/rust.sh"
 bash "${BIN_DIR}/z3.sh"
 bash "${BIN_DIR}/verus.sh"
 bash "${BIN_DIR}/microkit-lionsos.sh"
+bash "${BIN_DIR}/sysml-aadl-libraries.sh"
 bash "${BIN_DIR}/sireum.sh"
 
 # The IDEs are independent of each other and of the command-line tools, and each
@@ -243,6 +244,7 @@ echo "Installed under ${PROVERS_DIR}:"
 echo "  Verus                      ${VERUS_DIR}"
 echo "  Microkit SDK ${MICROKIT_SDK_VER}         ${MICROKIT_SDK}"
 echo "  LionsOS ${LIONSOS_VER}            ${LIONSOS}"
+echo "  SysML AADL libraries       ${SYSML_AADL_LIBRARIES}"
 echo "  Sireum                     ${SIREUM_HOME}"
 if [ "${PROVERS_IVE}" = "true" ]; then
   echo "  Sireum IVE                 installed"

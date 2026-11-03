@@ -69,6 +69,7 @@ Everything lands under `$PROVERS_DIR` (default `~/provers`):
 | `$VERUS_DIR` | Verus (`VERUS_VER`); `$VERUS_Z3_PATH` points at the Z3 it runs with |
 | `$MICROKIT_SDK` | the released Microkit SDK (`MICROKIT_SDK_VER`), unmodified -- 2.3.1 carries the [seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain fix, without which a domain-scheduled virtual machine never receives its guest's virtual timer interrupt |
 | `$LIONSOS` | LionsOS at the pinned commit (`LIONSOS_VER`).  Only the `dep/sddf` and `dep/libvmm` submodules are checked out -- the generated Microkit makefiles use sDDF and the VM examples use libvmm; the rest is LionsOS the operating system, which nothing here builds |
+| `$SYSML_AADL_LIBRARIES` | the SysML v2 AADL libraries at the pinned commit (`SYSML_AADL_LIBRARIES_VER`), which the SysML models put on `sireum hamr sysml`'s `--sourcepath` |
 | `$SIREUM_HOME` | a full Sireum (kekinian) install, built from `SIREUM_V` |
 | `$SIREUM_PLATFORM_BIN/idea` | Sireum IVE, the IntelliJ-based IDE (optional) |
 | `$SIREUM_PLATFORM_BIN/vscodium` | CodeIVE, the VSCodium-based IDE (optional) |
@@ -90,7 +91,7 @@ environment as well), `~/.zshrc` under zsh.  Paths under your home directory are
 
 ### What Ends Up In Your Environment
 
-Four variables and the `PATH` additions, and nothing else:
+Five variables and the `PATH` additions, and nothing else:
 
 | | |
 | --- | --- |
@@ -98,6 +99,7 @@ Four variables and the `PATH` additions, and nothing else:
 | `MICROKIT_SDK` | generated Makefiles stop with an explicit error without it |
 | `MICROKIT_BOARD` | likewise; defaults to `qemu_virt_aarch64` |
 | `LIONSOS` | the models' `system.mk` stops without it, and derives `SDDF` and `LIBVMM` from it |
+| `SYSML_AADL_LIBRARIES` | the SysML models' `run-hamr.cmd` and `ci.cmd` add it to the `--sourcepath`; without it they cannot resolve the AADL library packages |
 
 That is the contract: what a *build* needs, and what you may rely on.  Everything
 else in `bin/versions.sh` and `bin/env.sh` -- the pinned versions, the repo URLs,
@@ -756,6 +758,7 @@ machine or a Mac:
 | `z3.sh` | Z3 (`Z3_VER`), built from source on aarch64 Linux; a no-op elsewhere, where `verus.sh` installs Z3 from a release -- the one bundled with Verus, or Z3's own (see [Hosts](#hosts)) |
 | `verus.sh` | Verus |
 | `microkit-lionsos.sh` | sdfgen venv, released Microkit SDK, LionsOS |
+| `sysml-aadl-libraries.sh` | SysML v2 AADL libraries |
 | `sireum.sh` | Sireum itself (no IDEs), or adopts the one `SIREUM_HOME` points at |
 | `slim.sh` | deletes build leftovers and caches; not run by this setup (see [What Gets Installed](#what-gets-installed)), and refuses to run on macOS |
 | `ive.sh` | Sireum IVE |

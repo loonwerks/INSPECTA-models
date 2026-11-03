@@ -178,7 +178,15 @@ if [ -r "${INFO}" ]; then
   # shellcheck disable=SC1090
   . "${INFO}"
   BUILD_DATE="${PROVERS_BUILD_DATE}"
-  OVA_DESC="Verus ${VERUS_VER}, Microkit SDK ${MICROKIT_SDK_VER}, LionsOS ${LIONSOS_VER:-}, sdfgen ${SDFGEN_VER}, Rust ${RUST_TOOLCHAIN_VER}, Sireum ${SIREUM_V}. IDEs: ${PROVERS_IDES}. Built ${PROVERS_BUILD_DATE} for ${PROVERS_ARCH}."
+  # build-info records the installed commit in full, possibly with "-dirty"
+  # (or "unknown"); shorten the SHA but keep that marker.
+  _sysml_libs="${SYSML_AADL_LIBRARIES_VER:-}"
+  case "${_sysml_libs}" in
+    *-dirty) _sysml_libs="${_sysml_libs:0:8}-dirty" ;;
+    unknown) ;;
+    *)       _sysml_libs="${_sysml_libs:0:8}" ;;
+  esac
+  OVA_DESC="Verus ${VERUS_VER}, Microkit SDK ${MICROKIT_SDK_VER}, LionsOS ${LIONSOS_VER:-}${SYSML_AADL_LIBRARIES_VER:+, SysML AADL libraries ${_sysml_libs}}, sdfgen ${SDFGEN_VER}, Rust ${RUST_TOOLCHAIN_VER}, Sireum ${SIREUM_V}. IDEs: ${PROVERS_IDES}. Built ${PROVERS_BUILD_DATE} for ${PROVERS_ARCH}."
 else
   BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
   OVA_DESC="DARPA PROVERS development environment"

@@ -173,11 +173,7 @@ jobs:
 
           ${SIREUM_HOME}/bin/install/fmide.cmd -v
 
-          git clone --depth 1 https://github.com/santoslab/sysml-aadl-libraries.git sysml-aadl-libraries
-          # Remove .git to save space and to prevent actions/checkout post-job
-          # cleanup from mistaking this for a submodule (which causes a fatal
-          # error since there is no .gitmodules entry for it)
-          rm -rf sysml-aadl-libraries/.git
-          export SYSML_AADL_LIBRARIES=$(pwd)/sysml-aadl-libraries
+          # SYSML_AADL_LIBRARIES comes from env.sh above: provers-setup.sh installed the
+          # libraries at the commit provers-env/bin/versions.sh pins.
 
           INSPECTA-models/.github/workflows/hamr/hamr-ci.cmd

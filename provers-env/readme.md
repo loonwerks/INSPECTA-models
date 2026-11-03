@@ -101,7 +101,7 @@ Sourced for configuration:
 | | |
 | --- | --- |
 | [versions.sh](bin/versions.sh) | every pinned version, the image name, and the per-host values derived from them |
-| [env.sh](bin/env.sh) | `$PROVERS_DIR` and the tool paths, plus which IDEs to install.  Exports only the four a build needs -- `SIREUM_HOME`, `MICROKIT_SDK`, `MICROKIT_BOARD`, `LIONSOS` -- and `PATH`; everything else stays internal to the scripts |
+| [env.sh](bin/env.sh) | `$PROVERS_DIR` and the tool paths, plus which IDEs to install.  Exports only the five a build needs -- `SIREUM_HOME`, `MICROKIT_SDK`, `MICROKIT_BOARD`, `LIONSOS`, `SYSML_AADL_LIBRARIES` -- and `PATH`; everything else stays internal to the scripts |
 
 Install steps, in the order `provers-setup.sh` runs them:
 
@@ -113,6 +113,7 @@ Install steps, in the order `provers-setup.sh` runs them:
 | [z3.sh](bin/z3.sh) | Z3 from source, where Verus has no release for the host |
 | [verus.sh](bin/verus.sh) | Verus, from its release or from source |
 | [microkit-lionsos.sh](bin/microkit-lionsos.sh) | sdfgen, the released Microkit SDK, LionsOS at the pinned commit (`dep/sddf` and `dep/libvmm` only) |
+| [sysml-aadl-libraries.sh](bin/sysml-aadl-libraries.sh) | the SysML v2 AADL libraries at the pinned commit (`SYSML_AADL_LIBRARIES_VER`); adopts an existing `$SYSML_AADL_LIBRARIES` instead |
 | [sireum.sh](bin/sireum.sh) | Sireum, per `PROVERS_SIREUM_PROFILE`: unpacks the `cli` distribution where `SIREUM_V` names a release, builds from source where it names a commit -- or adopts the one `SIREUM_HOME` already points at, reporting how many commits and days it is ahead of or behind `SIREUM_V` |
 | [ive.sh](bin/ive.sh) | Sireum IVE (opt-in; the VM turns it on) |
 | [codeive.sh](bin/codeive.sh) | CodeIVE (opt-in; the VM turns it on) |

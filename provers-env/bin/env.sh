@@ -36,6 +36,10 @@ source "${_PROVERS_BIN_DIR}/versions.sh"
 : "${PROVERS_FMIDE:=false}"
 
 LIONSOS=${PROVERS_DIR}/lionsos
+# An existing checkout is adopted, as SIREUM_HOME is: export SYSML_AADL_LIBRARIES
+# beforehand (a development machine with its own clone) and
+# bin/sysml-aadl-libraries.sh reports that tree's commit and leaves it alone.
+SYSML_AADL_LIBRARIES=${SYSML_AADL_LIBRARIES:-${PROVERS_DIR}/sysml-aadl-libraries}
 MICROKIT_BOARD=${MICROKIT_BOARD:-qemu_virt_aarch64}
 # One SDK: the released Microkit ${MICROKIT_SDK_VER}, as released.
 MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk-${MICROKIT_SDK_VER}
@@ -181,7 +185,7 @@ fi
 # Everything above is internal: the install scripts each source this file, so
 # they see those values as ordinary shell variables and nothing has to be pushed
 # into the environment of every command run afterwards.  What is exported here is
-# the contract a *build* relies on, and only that -- four variables and PATH,
+# the contract a *build* relies on, and only that -- five variables and PATH,
 # rather than the forty this file used to leave behind:
 #
 #   SIREUM_HOME     the Sireum install; its launcher and HAMR codegen read it
@@ -189,11 +193,15 @@ fi
 #   MICROKIT_BOARD  likewise
 #   LIONSOS         the models' system.mk errors out without it, and derives
 #                   SDDF and LIBVMM from it
+#   SYSML_AADL_LIBRARIES
+#                   the SysML models' run-hamr.cmd and ci.cmd add it to the
+#                   --sourcepath; without it they cannot resolve the AADL
+#                   library packages
 #
 # Adding to this list means adding to what every user of this environment is
 # entitled to depend on, so add deliberately.
 # ---------------------------------------------------------------------------
-export SIREUM_HOME MICROKIT_SDK MICROKIT_BOARD LIONSOS
+export SIREUM_HOME MICROKIT_SDK MICROKIT_BOARD LIONSOS SYSML_AADL_LIBRARIES
 
 # Put the tool directories at the front of PATH, in this order, moving each one
 # there from wherever PATH already has it -- so that repeated sourcing (nested
