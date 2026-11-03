@@ -195,8 +195,15 @@ fi
 # ---------------------------------------------------------------------------
 export SIREUM_HOME MICROKIT_SDK MICROKIT_BOARD LIONSOS
 
-# Prepend the tool directories only once so that repeated sourcing (e.g. nested
-# shells) does not keep growing PATH.
+# Put the tool directories at the front of PATH, in this order, moving each one
+# there from wherever PATH already has it -- so that repeated sourcing (nested
+# shells) neither grows PATH nor leaves an inherited order in place.  Skipping
+# the step when the directories were already on PATH was not enough: something
+# that ran since can have put other directories in front of them.  macOS's
+# /etc/profile (path_helper) does exactly that in a login shell that inherits
+# this environment -- the shell a coding agent runs its commands in -- moving
+# /usr/bin ahead, so `python3` was the system's (no sdfgen) and `make` was
+# macOS's 3.81; and a startup file that prepends Homebrew again did the same.
 #
 # The sdfgen venv goes first, ahead of ${_PROVERS_OS_PATH}.  A user-land system's
 # meta.py is run as `python3` -- system.mk defaults PYTHON to it -- and imports
@@ -208,9 +215,22 @@ export SIREUM_HOME MICROKIT_SDK MICROKIT_BOARD LIONSOS
 #
 # Going first costs nothing else: the venv holds python and pip and no other
 # tool, so nothing Homebrew provides is shadowed by it.
-case ":${PATH}:" in
-  *":${VERUS_DIR}:"*) ;;
-  *) export PATH="${SDFGEN_VENV}/bin:${_PROVERS_OS_PATH}${VERUS_DIR}:${SIREUM_HOME}/bin:${HOME}/.cargo/bin:${PATH}" ;;
-esac
+#
+# Written for both bash and zsh, which both source this file.
+_PROVERS_FRONT="${SDFGEN_VENV}/bin:${_PROVERS_OS_PATH}${VERUS_DIR}:${SIREUM_HOME}/bin:${HOME}/.cargo/bin"
+_PROVERS_REST=":${PATH}:"
+_PROVERS_LIST="${_PROVERS_FRONT}:"
+while [ -n "${_PROVERS_LIST}" ]; do
+  _PROVERS_D="${_PROVERS_LIST%%:*}"
+  _PROVERS_LIST="${_PROVERS_LIST#*:}"
+  [ -n "${_PROVERS_D}" ] || continue
+  while case "${_PROVERS_REST}" in *":${_PROVERS_D}:"*) true ;; *) false ;; esac; do
+    _PROVERS_REST="${_PROVERS_REST%%":${_PROVERS_D}:"*}:${_PROVERS_REST#*":${_PROVERS_D}:"}"
+  done
+done
+_PROVERS_REST="${_PROVERS_REST#:}"
+_PROVERS_REST="${_PROVERS_REST%:}"
+export PATH="${_PROVERS_FRONT}${_PROVERS_REST:+:${_PROVERS_REST}}"
+unset _PROVERS_FRONT _PROVERS_REST _PROVERS_LIST _PROVERS_D
 
 unset _PROVERS_BIN_DIR _PROVERS_OS_PATH

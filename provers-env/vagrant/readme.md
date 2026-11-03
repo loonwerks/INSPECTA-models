@@ -83,8 +83,10 @@ each IDE is an `.app` bundle (`idea/IVE.app`, `vscodium/CodeIVE.app`, and
 below use it, so you should not have to.
 
 Those paths are defined in [bin/env.sh](../bin/env.sh), which the setup sources
-from the shell startup file -- `~/.bashrc` under bash on Linux,
-`~/.bash_profile` under bash on macOS, `~/.zshrc` under zsh.
+from the shell startup file -- `~/.bashrc` under bash (on macOS too, with the login
+file made to read it, so non-login shells such as IDE terminals and coding agents get the
+environment as well), `~/.zshrc` under zsh.  Paths under your home directory are written as
+`$HOME/...`, so the block also works where the dotfiles are shared between machines.
 
 ### What Ends Up In Your Environment
 
