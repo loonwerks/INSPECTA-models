@@ -52,14 +52,15 @@
 # The SysML v2 AADL libraries (santoslab/sysml-aadl-libraries): the AADL
 # property sets and base packages every SysML model is checked against, handed
 # to `sireum hamr sysml ...` on its --sourcepath via $SYSML_AADL_LIBRARIES.
-# Pinned to a commit because they move with Sireum's SysML front end -- a newer
-# library can use what an older Sireum does not understand, and the other way
-# round -- so this moves together with SIREUM_V.  Bump deliberately, after
+# For now this is only a commit pin, not tied to SIREUM_V, and nothing checks the
+# two against each other.  A newer library can still use what an older Sireum
+# does not understand, and the other way round, so bump deliberately, after
 # confirming the SysML models still build.
 #
 # This commit is the one kekinian pins as sysml-aadl-libraries in
 # hamr/codegen/jvm/src/main/resources/microkit_versions.properties, and
-# hamr/codegen/bin/scripts/checkVersions.sc reports when the two disagree.
+# hamr/codegen/bin/scripts/checkVersions.sc reports when the two disagree.  That
+# is its only check.
 : "${SYSML_AADL_LIBRARIES_VER:=6e26f80e68d16addceb21c614a1ecd6cb4b85fe1}"
 
 # Sireum (kekinian), pinned for the same reason everything else here is: two
