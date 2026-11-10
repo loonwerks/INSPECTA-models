@@ -12,7 +12,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+              "value" : "\/Component_Monitor.sysml"
             },
             "beginLine" : 69,
             "beginColumn" : 4,
@@ -48,7 +48,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                  "value" : "\/Component_Monitor.sysml"
                 },
                 "beginLine" : 70,
                 "beginColumn" : 8,
@@ -82,7 +82,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 20,
                     "beginColumn" : 8,
@@ -120,7 +120,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 20,
                         "beginColumn" : 8,
@@ -157,7 +157,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 21,
                     "beginColumn" : 8,
@@ -191,7 +191,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 21,
                         "beginColumn" : 8,
@@ -230,7 +230,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 23,
                     "beginColumn" : 8,
@@ -264,7 +264,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 15,
                         "beginColumn" : 8,
@@ -302,7 +302,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                              "value" : "\/Component_Monitor.sysml"
                             },
                             "beginLine" : 15,
                             "beginColumn" : 8,
@@ -339,7 +339,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 16,
                         "beginColumn" : 8,
@@ -373,7 +373,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                              "value" : "\/Component_Monitor.sysml"
                             },
                             "beginLine" : 16,
                             "beginColumn" : 8,
@@ -418,7 +418,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 11,
                         "beginColumn" : 8,
@@ -449,7 +449,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 10,
                         "beginColumn" : 8,
@@ -495,7 +495,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 8,
                         "beginColumn" : 8,
@@ -526,7 +526,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 9,
                         "beginColumn" : 8,
@@ -561,7 +561,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 80,
                         "beginColumn" : 8,
@@ -584,7 +584,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                              "value" : "\/Component_Monitor.sysml"
                             },
                             "beginLine" : 80,
                             "beginColumn" : 8,
@@ -622,7 +622,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 25,
                     "beginColumn" : 8,
@@ -645,7 +645,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 26,
                         "beginColumn" : 20,
@@ -667,7 +667,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                            "value" : "\/Component_Monitor.sysml"
                           },
                           "beginLine" : 26,
                           "beginColumn" : 20,
@@ -700,7 +700,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 26,
                         "beginColumn" : 39,
@@ -722,7 +722,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                            "value" : "\/Component_Monitor.sysml"
                           },
                           "beginLine" : 26,
                           "beginColumn" : 39,
@@ -765,7 +765,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 28,
                     "beginColumn" : 8,
@@ -788,7 +788,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 29,
                         "beginColumn" : 20,
@@ -810,7 +810,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                            "value" : "\/Component_Monitor.sysml"
                           },
                           "beginLine" : 29,
                           "beginColumn" : 20,
@@ -843,7 +843,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 29,
                         "beginColumn" : 36,
@@ -865,7 +865,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                            "value" : "\/Component_Monitor.sysml"
                           },
                           "beginLine" : 29,
                           "beginColumn" : 36,
@@ -912,7 +912,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 31,
                     "beginColumn" : 8,
@@ -946,7 +946,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 80,
                     "beginColumn" : 8,
@@ -969,7 +969,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 80,
                         "beginColumn" : 8,
@@ -1005,7 +1005,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                  "value" : "\/Component_Monitor.sysml"
                 },
                 "beginLine" : 71,
                 "beginColumn" : 8,
@@ -1039,7 +1039,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 50,
                     "beginColumn" : 8,
@@ -1077,7 +1077,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 50,
                         "beginColumn" : 8,
@@ -1114,7 +1114,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 51,
                     "beginColumn" : 8,
@@ -1148,7 +1148,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 51,
                         "beginColumn" : 8,
@@ -1187,7 +1187,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 53,
                     "beginColumn" : 8,
@@ -1221,7 +1221,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 35,
                         "beginColumn" : 8,
@@ -1259,7 +1259,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                              "value" : "\/Component_Monitor.sysml"
                             },
                             "beginLine" : 35,
                             "beginColumn" : 8,
@@ -1296,7 +1296,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 36,
                         "beginColumn" : 8,
@@ -1330,7 +1330,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                              "value" : "\/Component_Monitor.sysml"
                             },
                             "beginLine" : 36,
                             "beginColumn" : 8,
@@ -1375,7 +1375,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 11,
                         "beginColumn" : 8,
@@ -1406,7 +1406,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 10,
                         "beginColumn" : 8,
@@ -1452,7 +1452,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 8,
                         "beginColumn" : 8,
@@ -1483,7 +1483,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 9,
                         "beginColumn" : 8,
@@ -1518,7 +1518,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 83,
                         "beginColumn" : 8,
@@ -1541,7 +1541,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                              "value" : "\/Component_Monitor.sysml"
                             },
                             "beginLine" : 83,
                             "beginColumn" : 8,
@@ -1619,7 +1619,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                                            "value" : "\/Component_Monitor.sysml"
                                           },
                                           "beginLine" : 43,
                                           "beginColumn" : 37,
@@ -1639,7 +1639,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                                          "value" : "\/Component_Monitor.sysml"
                                         },
                                         "beginLine" : 43,
                                         "beginColumn" : 37,
@@ -1675,7 +1675,7 @@
                                             "type" : "Position",
                                             "uriOpt" : {
                                               "type" : "Some",
-                                              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                                              "value" : "\/Component_Monitor.sysml"
                                             },
                                             "beginLine" : 43,
                                             "beginColumn" : 46,
@@ -1695,7 +1695,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                                            "value" : "\/Component_Monitor.sysml"
                                           },
                                           "beginLine" : 43,
                                           "beginColumn" : 46,
@@ -1722,7 +1722,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                                        "value" : "\/Component_Monitor.sysml"
                                       },
                                       "beginLine" : 43,
                                       "beginColumn" : 37,
@@ -1749,7 +1749,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                                      "value" : "\/Component_Monitor.sysml"
                                     },
                                     "beginLine" : 43,
                                     "beginColumn" : 20,
@@ -1772,7 +1772,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
                                   },
                                   "beginLine" : 43,
                                   "beginColumn" : 20,
@@ -1791,7 +1791,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                                    "value" : "\/Component_Monitor.sysml"
                                   },
                                   "beginLine" : 42,
                                   "beginColumn" : 16,
@@ -1817,7 +1817,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                                    "value" : "\/Component_Monitor.sysml"
                                   },
                                   "beginLine" : 45,
                                   "beginColumn" : 16,
@@ -1838,7 +1838,7 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                                "value" : "\/Component_Monitor.sysml"
                               },
                               "beginLine" : 41,
                               "beginColumn" : 12,
@@ -1861,7 +1861,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                            "value" : "\/Component_Monitor.sysml"
                           },
                           "beginLine" : 41,
                           "beginColumn" : 12,
@@ -1890,7 +1890,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 55,
                     "beginColumn" : 8,
@@ -1913,7 +1913,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 56,
                         "beginColumn" : 20,
@@ -1935,7 +1935,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                            "value" : "\/Component_Monitor.sysml"
                           },
                           "beginLine" : 56,
                           "beginColumn" : 20,
@@ -1968,7 +1968,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 56,
                         "beginColumn" : 30,
@@ -1990,7 +1990,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                            "value" : "\/Component_Monitor.sysml"
                           },
                           "beginLine" : 56,
                           "beginColumn" : 30,
@@ -2033,7 +2033,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 58,
                     "beginColumn" : 8,
@@ -2056,7 +2056,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 59,
                         "beginColumn" : 20,
@@ -2078,7 +2078,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                            "value" : "\/Component_Monitor.sysml"
                           },
                           "beginLine" : 59,
                           "beginColumn" : 20,
@@ -2111,7 +2111,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 59,
                         "beginColumn" : 45,
@@ -2133,7 +2133,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                            "value" : "\/Component_Monitor.sysml"
                           },
                           "beginLine" : 59,
                           "beginColumn" : 45,
@@ -2180,7 +2180,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 61,
                     "beginColumn" : 8,
@@ -2214,7 +2214,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 83,
                     "beginColumn" : 8,
@@ -2237,7 +2237,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                          "value" : "\/Component_Monitor.sysml"
                         },
                         "beginLine" : 83,
                         "beginColumn" : 8,
@@ -2273,7 +2273,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                  "value" : "\/Component_Monitor.sysml"
                 },
                 "beginLine" : 72,
                 "beginColumn" : 8,
@@ -2315,7 +2315,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 65,
                     "beginColumn" : 8,
@@ -2350,7 +2350,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 66,
                     "beginColumn" : 8,
@@ -2396,7 +2396,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                  "value" : "\/Component_Monitor.sysml"
                 },
                 "beginLine" : 74,
                 "beginColumn" : 8,
@@ -2419,7 +2419,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 75,
                     "beginColumn" : 20,
@@ -2441,7 +2441,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                        "value" : "\/Component_Monitor.sysml"
                       },
                       "beginLine" : 75,
                       "beginColumn" : 20,
@@ -2474,7 +2474,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 75,
                     "beginColumn" : 39,
@@ -2496,7 +2496,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                        "value" : "\/Component_Monitor.sysml"
                       },
                       "beginLine" : 75,
                       "beginColumn" : 39,
@@ -2539,7 +2539,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                  "value" : "\/Component_Monitor.sysml"
                 },
                 "beginLine" : 77,
                 "beginColumn" : 8,
@@ -2562,7 +2562,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 78,
                     "beginColumn" : 20,
@@ -2584,7 +2584,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                        "value" : "\/Component_Monitor.sysml"
                       },
                       "beginLine" : 78,
                       "beginColumn" : 20,
@@ -2617,7 +2617,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 78,
                     "beginColumn" : 45,
@@ -2639,7 +2639,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                        "value" : "\/Component_Monitor.sysml"
                       },
                       "beginLine" : 78,
                       "beginColumn" : 45,
@@ -2693,7 +2693,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                    "value" : "\/Component_Monitor.sysml"
                   },
                   "beginLine" : 26,
                   "beginColumn" : 20,
@@ -2715,7 +2715,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 26,
                     "beginColumn" : 20,
@@ -2746,7 +2746,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                    "value" : "\/Component_Monitor.sysml"
                   },
                   "beginLine" : 56,
                   "beginColumn" : 30,
@@ -2768,7 +2768,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 56,
                     "beginColumn" : 30,
@@ -2804,7 +2804,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 25,
                     "beginColumn" : 8,
@@ -2824,7 +2824,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 70,
                     "beginColumn" : 8,
@@ -2848,7 +2848,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 74,
                     "beginColumn" : 8,
@@ -2868,7 +2868,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 69,
                     "beginColumn" : 4,
@@ -2892,7 +2892,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 55,
                     "beginColumn" : 8,
@@ -2912,7 +2912,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 71,
                     "beginColumn" : 8,
@@ -2949,7 +2949,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                    "value" : "\/Component_Monitor.sysml"
                   },
                   "beginLine" : 59,
                   "beginColumn" : 20,
@@ -2971,7 +2971,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 59,
                     "beginColumn" : 20,
@@ -3002,7 +3002,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                    "value" : "\/Component_Monitor.sysml"
                   },
                   "beginLine" : 29,
                   "beginColumn" : 36,
@@ -3024,7 +3024,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 29,
                     "beginColumn" : 36,
@@ -3060,7 +3060,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 58,
                     "beginColumn" : 8,
@@ -3080,7 +3080,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 71,
                     "beginColumn" : 8,
@@ -3104,7 +3104,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 77,
                     "beginColumn" : 8,
@@ -3124,7 +3124,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 69,
                     "beginColumn" : 4,
@@ -3148,7 +3148,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 28,
                     "beginColumn" : 8,
@@ -3168,7 +3168,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                      "value" : "\/Component_Monitor.sysml"
                     },
                     "beginLine" : 70,
                     "beginColumn" : 8,
@@ -3198,7 +3198,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/INSPECTA-models\/micro-examples\/microkit\/r2u2_monitor\/r2u2_component_monitor\/sysml\/Component_Monitor.sysml"
+                  "value" : "\/Component_Monitor.sysml"
                 },
                 "beginLine" : 86,
                 "beginColumn" : 8,
@@ -3320,7 +3320,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 54,
             "beginColumn" : 2,
@@ -3449,7 +3449,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 20,
             "beginColumn" : 2,
@@ -3500,7 +3500,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 41,
             "beginColumn" : 2,
@@ -3629,7 +3629,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 46,
             "beginColumn" : 2,
@@ -3758,7 +3758,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 50,
             "beginColumn" : 2,
@@ -3887,7 +3887,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 58,
             "beginColumn" : 2,
@@ -4016,7 +4016,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 82,
             "beginColumn" : 2,
@@ -4145,7 +4145,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 87,
             "beginColumn" : 2,
@@ -4274,7 +4274,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 92,
             "beginColumn" : 2,
@@ -4403,7 +4403,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 97,
             "beginColumn" : 2,
@@ -4532,7 +4532,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 115,
             "beginColumn" : 2,
@@ -4661,7 +4661,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 119,
             "beginColumn" : 2,
@@ -4790,7 +4790,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 124,
             "beginColumn" : 2,
@@ -4919,7 +4919,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 141,
             "beginColumn" : 2,
@@ -4970,7 +4970,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/e40002720\/Documents\/INSPECTA\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 145,
             "beginColumn" : 2,
