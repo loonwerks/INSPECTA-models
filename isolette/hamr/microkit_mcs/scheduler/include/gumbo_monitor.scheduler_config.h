@@ -21,12 +21,12 @@
 // Virtual address at which the schedule state shared memory region is mapped.
 // Must match SCHED_STATE_VADDR in meta.py. Change both if there is a conflict.
 #define SCHED_STATE_VADDR 0x4000000UL
-#define SCHED_STATE_SIZE  0x1000UL  // 4 KB
+#define SCHED_STATE_SIZE  (4UL * 1024UL)  // 4 KB
 
 // Virtual address at which the schedule shared memory region is mapped.
 // Must match SCHED_SCHEDULE_VADDR in meta.py. Change both if there is a conflict.
 #define SCHED_SCHEDULE_VADDR 0x4001000UL
-#define SCHED_SCHEDULE_SIZE  0x1000UL  // 4 KB
+#define SCHED_SCHEDULE_SIZE  (4UL * 1024UL)  // 4 KB
 
 // Schedule state broadcast: written by the scheduler before every dispatch.
 // Monitors that map this region (read-only) can inspect it to determine

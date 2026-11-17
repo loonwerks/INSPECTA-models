@@ -98,21 +98,21 @@ pub fn compute_CEP_T_Guar(
   *     if NOT (Regulator Interface Failure OR Regulator Internal Failure)
   *        AND Current Temperature.Status = Valid
   *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
-  * @param lastRegulatorMode post-state state variable
+  * @param In_lastRegulatorMode pre-state state variable
   * @param api_current_tempWstatus incoming data port
   * @param api_interface_failure incoming data port
   * @param api_internal_failure incoming data port
   * @param api_regulator_mode outgoing data port
   */
 pub fn compute_case_REQ_MRM_2(
-  lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
+  In_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
 {
   implies!(
-    lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
+    In_lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
     regulator_status(api_interface_failure, api_internal_failure, api_current_tempWstatus) & !(timeout_condition_satisfied()) == (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode))
 }
 
@@ -126,21 +126,21 @@ pub fn compute_case_REQ_MRM_2(
   *              OR NOT(Current Temperature.Status = Valid)
   *          )
   *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
-  * @param lastRegulatorMode post-state state variable
+  * @param In_lastRegulatorMode pre-state state variable
   * @param api_current_tempWstatus incoming data port
   * @param api_interface_failure incoming data port
   * @param api_internal_failure incoming data port
   * @param api_regulator_mode outgoing data port
   */
 pub fn compute_case_REQ_MRM_Maintain_Normal(
-  lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
+  In_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
 {
   implies!(
-    (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &
+    (In_lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &
       regulator_status(api_interface_failure, api_internal_failure, api_current_tempWstatus),
     api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)
 }
@@ -153,21 +153,21 @@ pub fn compute_case_REQ_MRM_Maintain_Normal(
   *      if  (Regulator Interface Failure OR Regulator Internal Failure)
   *          OR NOT(Current Temperature.Status = Valid)
   *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
-  * @param lastRegulatorMode post-state state variable
+  * @param In_lastRegulatorMode pre-state state variable
   * @param api_current_tempWstatus incoming data port
   * @param api_interface_failure incoming data port
   * @param api_internal_failure incoming data port
   * @param api_regulator_mode outgoing data port
   */
 pub fn compute_case_REQ_MRM_3(
-  lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
+  In_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
 {
   implies!(
-    lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode,
+    In_lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode,
     !(regulator_status(api_interface_failure, api_internal_failure, api_current_tempWstatus)) == (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode))
 }
 
@@ -177,15 +177,15 @@ pub fn compute_case_REQ_MRM_3(
   *   Failed iff the time during which the thread has been in Init mode exceeds the
   *   Regulator Init Timeout value (parallel to REQ-MMM-4, the monitor's Init timeout).
   *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109
-  * @param lastRegulatorMode post-state state variable
+  * @param In_lastRegulatorMode pre-state state variable
   * @param api_regulator_mode outgoing data port
   */
 pub fn compute_case_REQ_MRM_4(
-  lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
+  In_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
 {
   implies!(
-    lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
+    In_lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
     timeout_condition_satisfied() == (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode))
 }
 
@@ -194,38 +194,38 @@ pub fn compute_case_REQ_MRM_4(
   *   If the current regulator mode is Failed, then
   *   the regulator mode remains in the Failed state and the LastRegulator mode remains Failed.REQ-MRM-Maintain-Failed
   *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109
-  * @param lastRegulatorMode post-state state variable
+  * @param In_lastRegulatorMode pre-state state variable
   * @param api_regulator_mode outgoing data port
   */
 pub fn compute_case_REQ_MRM_MaintainFailed(
-  lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
+  In_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
 {
   implies!(
-    lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode,
+    In_lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode,
     api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)
 }
 
 /** CEP-T-Case: Top-Level case contracts for mrm's compute entrypoint
   *
-  * @param lastRegulatorMode post-state state variable
+  * @param In_lastRegulatorMode pre-state state variable
   * @param api_current_tempWstatus incoming data port
   * @param api_interface_failure incoming data port
   * @param api_internal_failure incoming data port
   * @param api_regulator_mode outgoing data port
   */
 pub fn compute_CEP_T_Case(
-  lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
+  In_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
 {
-  let r0: bool = compute_case_REQ_MRM_2(lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
-  let r1: bool = compute_case_REQ_MRM_Maintain_Normal(lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
-  let r2: bool = compute_case_REQ_MRM_3(lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
-  let r3: bool = compute_case_REQ_MRM_4(lastRegulatorMode, api_regulator_mode);
-  let r4: bool = compute_case_REQ_MRM_MaintainFailed(lastRegulatorMode, api_regulator_mode);
+  let r0: bool = compute_case_REQ_MRM_2(In_lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
+  let r1: bool = compute_case_REQ_MRM_Maintain_Normal(In_lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
+  let r2: bool = compute_case_REQ_MRM_3(In_lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
+  let r3: bool = compute_case_REQ_MRM_4(In_lastRegulatorMode, api_regulator_mode);
+  let r4: bool = compute_case_REQ_MRM_MaintainFailed(In_lastRegulatorMode, api_regulator_mode);
 
   return r0 && r1 && r2 && r3 && r4;
 }
@@ -251,7 +251,7 @@ pub fn compute_CEP_Post(
   let r0: bool = compute_CEP_T_Guar(lastRegulatorMode, api_regulator_mode);
 
   // CEP-T-Case: case clauses of mrm's compute entrypoint
-  let r1: bool = compute_CEP_T_Case(lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
+  let r1: bool = compute_CEP_T_Case(In_lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
 
   return r0 && r1;
 }

@@ -211,11 +211,11 @@ pub proof fn vc_next_assert_task_mmm(pre: SystemState, post: SystemState)
     sys_assert_internal_failure_alarm_on_after_mmi(pre),
     mmm_local_write_frame(pre, post),
     mmm_global_write_frame(pre, post),
-    mmm::compute_case_REQ_MMM_2(post.lastMonitorMode, pre.current_tempWstatus, pre.mon_interface_failure, pre.mon_internal_failure, post.monitor_mode),
-    mmm::compute_case_REQ_MMM_Maintain_Normal(post.lastMonitorMode, pre.current_tempWstatus, pre.mon_interface_failure, pre.mon_internal_failure, post.monitor_mode),
-    mmm::compute_case_REQ_MMM_3(post.lastMonitorMode, pre.current_tempWstatus, pre.mon_interface_failure, pre.mon_internal_failure, post.monitor_mode),
-    mmm::compute_case_REQ_MMM_4(post.lastMonitorMode, post.monitor_mode),
-    mmm::compute_case_Failed_Mode_Absorbing(post.lastMonitorMode, post.monitor_mode),
+    mmm::compute_case_REQ_MMM_2(pre.lastMonitorMode, pre.current_tempWstatus, pre.mon_interface_failure, pre.mon_internal_failure, post.monitor_mode),
+    mmm::compute_case_REQ_MMM_Maintain_Normal(pre.lastMonitorMode, pre.current_tempWstatus, pre.mon_interface_failure, pre.mon_internal_failure, post.monitor_mode),
+    mmm::compute_case_REQ_MMM_3(pre.lastMonitorMode, pre.current_tempWstatus, pre.mon_interface_failure, pre.mon_internal_failure, post.monitor_mode),
+    mmm::compute_case_REQ_MMM_4(pre.lastMonitorMode, post.monitor_mode),
+    mmm::compute_case_Failed_Mode_Absorbing(pre.lastMonitorMode, post.monitor_mode),
   ensures
     sys_assert_internal_failure_alarm_on_after_mmm(post),
 {}

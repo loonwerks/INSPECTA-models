@@ -138,11 +138,11 @@ pub proof fn vc_next_assert_task_mrm(pre: SystemState, post: SystemState)
     mrm_local_write_frame(pre, post),
     mrm_global_write_frame(pre, post),
     mrm::compute_spec_update_lastRegulatorMode_guarantee(post.reg_last_mode, post.regulator_mode),
-    mrm::compute_case_REQ_MRM_2(post.reg_last_mode, pre.current_tempWstatus, pre.reg_interface_failure, pre.internal_failure, post.regulator_mode),
-    mrm::compute_case_REQ_MRM_Maintain_Normal(post.reg_last_mode, pre.current_tempWstatus, pre.reg_interface_failure, pre.internal_failure, post.regulator_mode),
-    mrm::compute_case_REQ_MRM_3(post.reg_last_mode, pre.current_tempWstatus, pre.reg_interface_failure, pre.internal_failure, post.regulator_mode),
-    mrm::compute_case_REQ_MRM_4(post.reg_last_mode, post.regulator_mode),
-    mrm::compute_case_REQ_MRM_MaintainFailed(post.reg_last_mode, post.regulator_mode),
+    mrm::compute_case_REQ_MRM_2(pre.reg_last_mode, pre.current_tempWstatus, pre.reg_interface_failure, pre.internal_failure, post.regulator_mode),
+    mrm::compute_case_REQ_MRM_Maintain_Normal(pre.reg_last_mode, pre.current_tempWstatus, pre.reg_interface_failure, pre.internal_failure, post.regulator_mode),
+    mrm::compute_case_REQ_MRM_3(pre.reg_last_mode, pre.current_tempWstatus, pre.reg_interface_failure, pre.internal_failure, post.regulator_mode),
+    mrm::compute_case_REQ_MRM_4(pre.reg_last_mode, post.regulator_mode),
+    mrm::compute_case_REQ_MRM_MaintainFailed(pre.reg_last_mode, post.regulator_mode),
   ensures
     sys_assert_invalid_udt_heat_off_after_mrm(post),
 {}

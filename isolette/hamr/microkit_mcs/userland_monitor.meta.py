@@ -68,8 +68,8 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     # protection domain last yielded and which will be dispatched next.
     # Must match SCHED_STATE_VADDR / SCHED_STATE_SIZE in scheduler_config.h.
     #######################################
-    SCHED_STATE_VADDR = 0x4_000_000
-    SCHED_STATE_SIZE  = 0x1000  # 4 KB
+    SCHED_STATE_VADDR = 0x4000000
+    SCHED_STATE_SIZE  = 4096  # 4 KB
     sched_state = MemoryRegion(sdf, "sched_state", SCHED_STATE_SIZE)
     sdf.add_mr(sched_state)
     scheduler.add_map(Map(sched_state, SCHED_STATE_VADDR, perms="rw"))
@@ -81,8 +81,8 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     # current_timeslice indices with channel IDs and durations.
     # Must match SCHED_SCHEDULE_VADDR / SCHED_SCHEDULE_SIZE in scheduler_config.h.
     #######################################
-    SCHED_SCHEDULE_VADDR = 0x4_001_000
-    SCHED_SCHEDULE_SIZE  = 0x1000  # 4 KB
+    SCHED_SCHEDULE_VADDR = 0x4001000
+    SCHED_SCHEDULE_SIZE  = 4096  # 4 KB
     sched_schedule = MemoryRegion(sdf, "sched_schedule", SCHED_SCHEDULE_SIZE)
     sdf.add_mr(sched_schedule)
     scheduler.add_map(Map(sched_schedule, SCHED_SCHEDULE_VADDR, perms="rw"))

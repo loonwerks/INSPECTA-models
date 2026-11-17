@@ -348,13 +348,13 @@ pub mod mrm {
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
     */
   pub open spec fn compute_case_REQ_MRM_2(
-    lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
+    In_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
     api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
     api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
     api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
     api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
   {
-    (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode)
+    (In_lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode)
     ==> ((regulator_status(api_interface_failure, api_internal_failure, api_current_tempWstatus) && !(timeout_condition_satisfied())) == (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode))
   }
 
@@ -370,13 +370,13 @@ pub mod mrm {
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
     */
   pub open spec fn compute_case_REQ_MRM_Maintain_Normal(
-    lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
+    In_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
     api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
     api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
     api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
     api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
   {
-    ((lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
+    ((In_lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
       regulator_status(api_interface_failure, api_internal_failure, api_current_tempWstatus))
     ==> (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)
   }
@@ -391,13 +391,13 @@ pub mod mrm {
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
     */
   pub open spec fn compute_case_REQ_MRM_3(
-    lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
+    In_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
     api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
     api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
     api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
     api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
   {
-    (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)
+    (In_lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)
     ==> (!(regulator_status(api_interface_failure, api_internal_failure, api_current_tempWstatus)) == (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode))
   }
 
@@ -409,10 +409,10 @@ pub mod mrm {
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109
     */
   pub open spec fn compute_case_REQ_MRM_4(
-    lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
+    In_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
     api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
   {
-    (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode)
+    (In_lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode)
     ==> (timeout_condition_satisfied() == (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode))
   }
 
@@ -423,10 +423,10 @@ pub mod mrm {
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109
     */
   pub open spec fn compute_case_REQ_MRM_MaintainFailed(
-    lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
+    In_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
     api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
   {
-    (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)
+    (In_lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)
     ==> (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)
   }
 }
@@ -792,13 +792,13 @@ pub mod mmm {
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
     */
   pub open spec fn compute_case_REQ_MMM_2(
-    lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
+    In_lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
     api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
     api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
     api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
     api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
   {
-    (lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode)
+    (In_lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode)
     ==> ((monitor_status(api_interface_failure, api_internal_failure, api_current_tempWstatus) && !(timeout_condition_satisfied())) == (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode))
   }
 
@@ -810,13 +810,13 @@ pub mod mmm {
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
     */
   pub open spec fn compute_case_REQ_MMM_Maintain_Normal(
-    lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
+    In_lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
     api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
     api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
     api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
     api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
   {
-    ((lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &&
+    ((In_lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &&
       monitor_status(api_interface_failure, api_internal_failure, api_current_tempWstatus))
     ==> (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)
   }
@@ -830,13 +830,13 @@ pub mod mmm {
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
     */
   pub open spec fn compute_case_REQ_MMM_3(
-    lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
+    In_lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
     api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
     api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
     api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
     api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
   {
-    (lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)
+    (In_lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)
     ==> (!(monitor_status(api_interface_failure, api_internal_failure, api_current_tempWstatus)) == (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode))
   }
 
@@ -848,10 +848,10 @@ pub mod mmm {
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
     */
   pub open spec fn compute_case_REQ_MMM_4(
-    lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
+    In_lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
     api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
   {
-    (lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode)
+    (In_lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode)
     ==> (timeout_condition_satisfied() == (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode))
   }
 
@@ -868,10 +868,10 @@ pub mod mmm {
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
     */
   pub open spec fn compute_case_Failed_Mode_Absorbing(
-    lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
+    In_lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
     api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
   {
-    (lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)
+    (In_lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)
     ==> (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)
   }
 }
