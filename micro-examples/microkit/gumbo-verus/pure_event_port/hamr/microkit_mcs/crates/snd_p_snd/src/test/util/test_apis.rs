@@ -24,7 +24,7 @@ pub fn put_concrete_inputs()
 /// getter for OUT DataPort
 pub fn get_out_val() -> i32
 {
-  return extern_api::OUT_out_val.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_out_val.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'out_val' has no value: the component did not put one")
 }
 
 /// getter for OUT EventPort

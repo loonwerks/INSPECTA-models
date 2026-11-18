@@ -120,5 +120,5 @@ qemu:
 clean::
 	rm -f *.o
 
-clean:: 
+clean::
 	rm -rf ${TOP_DIR}/components/consumer_p_p_consumer/build

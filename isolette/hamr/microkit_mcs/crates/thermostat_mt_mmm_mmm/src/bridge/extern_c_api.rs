@@ -150,7 +150,7 @@ pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -
 {
   unsafe {
     let guard = IN_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'current_tempWstatus' has no value: set it before calling the entry point (in a component test, with test_apis::put_current_tempWstatus(..))");
     true
   }
 }
@@ -166,7 +166,7 @@ pub fn get_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) ->
 {
   unsafe {
     let guard = IN_interface_failure.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'interface_failure' has no value: set it before calling the entry point (in a component test, with test_apis::put_interface_failure(..))");
     true
   }
 }
@@ -182,7 +182,7 @@ pub fn get_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> 
 {
   unsafe {
     let guard = IN_internal_failure.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'internal_failure' has no value: set it before calling the entry point (in a component test, with test_apis::put_internal_failure(..))");
     true
   }
 }

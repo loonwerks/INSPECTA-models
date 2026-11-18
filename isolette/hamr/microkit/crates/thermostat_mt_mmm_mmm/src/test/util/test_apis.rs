@@ -82,7 +82,7 @@ pub fn put_internal_failure(value: Isolette_Data_Model::Failure_Flag_i)
 /// getter for OUT DataPort
 pub fn get_monitor_mode() -> Isolette_Data_Model::Monitor_Mode
 {
-  return extern_api::OUT_monitor_mode.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_monitor_mode.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'monitor_mode' has no value: the component did not put one")
 }
 
 /// getter for GUMBO State Variable

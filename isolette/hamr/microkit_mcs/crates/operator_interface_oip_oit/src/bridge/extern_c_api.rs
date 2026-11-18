@@ -155,7 +155,7 @@ pub fn get_regulator_status(value: *mut Isolette_Data_Model::Status) -> bool
 {
   unsafe {
     let guard = IN_regulator_status.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'regulator_status' has no value: set it before calling the entry point (in a component test, with test_apis::put_regulator_status(..))");
     true
   }
 }
@@ -171,7 +171,7 @@ pub fn get_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool
 {
   unsafe {
     let guard = IN_monitor_status.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'monitor_status' has no value: set it before calling the entry point (in a component test, with test_apis::put_monitor_status(..))");
     true
   }
 }
@@ -187,7 +187,7 @@ pub fn get_display_temperature(value: *mut Isolette_Data_Model::Temp_i) -> bool
 {
   unsafe {
     let guard = IN_display_temperature.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'display_temperature' has no value: set it before calling the entry point (in a component test, with test_apis::put_display_temperature(..))");
     true
   }
 }
@@ -203,7 +203,7 @@ pub fn get_alarm_control(value: *mut Isolette_Data_Model::On_Off) -> bool
 {
   unsafe {
     let guard = IN_alarm_control.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'alarm_control' has no value: set it before calling the entry point (in a component test, with test_apis::put_alarm_control(..))");
     true
   }
 }

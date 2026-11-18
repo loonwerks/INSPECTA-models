@@ -83,7 +83,7 @@ coverage: ${TOP_BUILD_DIR}/Makefile
 coverage-report: ${TOP_BUILD_DIR}/Makefile
 	${MAKE} -C ${TOP_BUILD_DIR} coverage-report
 
-clobber:: 
+clobber::
 	rm -rf $(TOP_DIR)/target/coverage
 
 verus: ${TOP_BUILD_DIR}/Makefile

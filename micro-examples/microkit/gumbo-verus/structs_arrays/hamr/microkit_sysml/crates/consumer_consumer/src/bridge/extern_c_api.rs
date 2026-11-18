@@ -164,7 +164,7 @@ pub fn get_c_myArrayInt32_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayInt3
 {
   unsafe {
     let guard = IN_c_myArrayInt32_DataPort.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'c_myArrayInt32_DataPort' has no value: set it before calling the entry point (in a component test, with test_apis::put_c_myArrayInt32_DataPort(..))");
     true
   }
 }
@@ -180,7 +180,7 @@ pub fn get_c_myArrayStruct_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayStr
 {
   unsafe {
     let guard = IN_c_myArrayStruct_DataPort.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'c_myArrayStruct_DataPort' has no value: set it before calling the entry point (in a component test, with test_apis::put_c_myArrayStruct_DataPort(..))");
     true
   }
 }
@@ -196,7 +196,7 @@ pub fn get_c_myStructArray_DataPort(value: *mut Gubmo_Structs_Arrays::MyStructAr
 {
   unsafe {
     let guard = IN_c_myStructArray_DataPort.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'c_myStructArray_DataPort' has no value: set it before calling the entry point (in a component test, with test_apis::put_c_myStructArray_DataPort(..))");
     true
   }
 }

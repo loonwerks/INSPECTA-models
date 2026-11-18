@@ -226,24 +226,24 @@ clobber:: clean
 	rm -f *.a
 	rm -f ${IMAGE_FILE} ${REPORT_FILE}
 
-test:: 
+test::
 	make -C ${CRATES_DIR}/producer_producer test
 	make -C ${CRATES_DIR}/monitor_monitor test
 	make -C ${CRATES_DIR}/consumer_consumer test
 
-clean:: 
+clean::
 	make -C ${CRATES_DIR}/producer_producer clean
 	make -C ${CRATES_DIR}/monitor_monitor clean
 	make -C ${CRATES_DIR}/consumer_consumer clean
 
-coverage: 
+coverage:
 	@open=; if [ ! -f $(TOP_DIR)/target/coverage/report/index.html ]; then open=open; fi; \
 	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/producer_producer ${CRATES_DIR}/monitor_monitor ${CRATES_DIR}/consumer_consumer out=$(TOP_DIR)/target/coverage $$open $(args)
 
-coverage-report: 
+coverage-report:
 	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/producer_producer ${CRATES_DIR}/monitor_monitor ${CRATES_DIR}/consumer_consumer out=$(TOP_DIR)/target/coverage no-run
 
-verus: 
+verus:
 	make -C ${CRATES_DIR}/producer_producer verus
 	make -C ${CRATES_DIR}/monitor_monitor verus
 	make -C ${CRATES_DIR}/consumer_consumer verus

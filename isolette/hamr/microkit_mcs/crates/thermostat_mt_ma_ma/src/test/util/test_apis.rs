@@ -96,7 +96,7 @@ pub fn put_monitor_mode(value: Isolette_Data_Model::Monitor_Mode)
 /// getter for OUT DataPort
 pub fn get_alarm_control() -> Isolette_Data_Model::On_Off
 {
-  return extern_api::OUT_alarm_control.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_alarm_control.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'alarm_control' has no value: the component did not put one")
 }
 
 /// getter for GUMBO State Variable

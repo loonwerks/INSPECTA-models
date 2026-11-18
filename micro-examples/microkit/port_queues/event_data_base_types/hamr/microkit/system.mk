@@ -175,11 +175,11 @@ qemu:
 clean::
 	rm -f *.o
 
-test:: 
+test::
 
 
-clean:: 
+clean::
 	make -C ${CRATES_DIR}/domain_monitor clean
 
-verus: 
+verus:
 	make -C ${CRATES_DIR}/domain_monitor verus

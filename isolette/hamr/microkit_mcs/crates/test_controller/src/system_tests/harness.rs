@@ -323,6 +323,8 @@ pub const fn concat_tables<const N: usize>(
 }
 
 /// Assert a condition, recording a failure and returning instead of panicking.
+/// The bare `return` leaves the enclosing function, so it must return `()`; in a
+/// helper that returns a value, use `sys_check!`.
 #[macro_export]
 macro_rules! sys_assert {
   ($cond:expr) => {
@@ -334,6 +336,8 @@ macro_rules! sys_assert {
 }
 
 /// Assert equality, recording a failure and returning instead of panicking.
+/// Like `sys_assert!`, it returns from a function returning `()`; elsewhere use
+/// `sys_check_eq!`.
 #[macro_export]
 macro_rules! sys_assert_eq {
   ($l:expr, $r:expr) => {
@@ -343,6 +347,34 @@ macro_rules! sys_assert_eq {
       return;
     }
   };
+}
+
+/// Check a condition, recording a failure as `sys_assert!` does, but without
+/// returning: evaluates to whether the condition held, so it can be used in a
+/// helper that returns a value (`if !sys_check!(c) { return fallback; }`).
+#[macro_export]
+macro_rules! sys_check {
+  ($cond:expr) => {{
+    let ok: bool = $cond;
+    if !ok {
+      $crate::system_tests::harness::fail(file!(), line!(), stringify!($cond));
+    }
+    ok
+  }};
+}
+
+/// Check equality, recording a failure as `sys_assert_eq!` does, but without
+/// returning: evaluates to whether the two were equal.
+#[macro_export]
+macro_rules! sys_check_eq {
+  ($l:expr, $r:expr) => {{
+    let ok: bool = $l == $r;
+    if !ok {
+      $crate::system_tests::harness::fail(
+        file!(), line!(), concat!(stringify!($l), " == ", stringify!($r)));
+    }
+    ok
+  }};
 }
 
 // ---------------------------------------------------------------------------------

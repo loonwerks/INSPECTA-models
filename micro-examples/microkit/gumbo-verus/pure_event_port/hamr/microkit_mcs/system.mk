@@ -204,21 +204,21 @@ clobber:: clean
 	rm -f *.a
 	rm -f ${IMAGE_FILE} ${REPORT_FILE}
 
-test:: 
+test::
 	make -C ${CRATES_DIR}/snd_p_snd test
 	make -C ${CRATES_DIR}/rcv_p_rcv test
 
-clean:: 
+clean::
 	make -C ${CRATES_DIR}/snd_p_snd clean
 	make -C ${CRATES_DIR}/rcv_p_rcv clean
 
-coverage: 
+coverage:
 	@open=; if [ ! -f $(TOP_DIR)/target/coverage/report/index.html ]; then open=open; fi; \
 	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/snd_p_snd ${CRATES_DIR}/rcv_p_rcv out=$(TOP_DIR)/target/coverage $$open $(args)
 
-coverage-report: 
+coverage-report:
 	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/snd_p_snd ${CRATES_DIR}/rcv_p_rcv out=$(TOP_DIR)/target/coverage no-run
 
-verus: 
+verus:
 	make -C ${CRATES_DIR}/snd_p_snd verus
 	make -C ${CRATES_DIR}/rcv_p_rcv verus

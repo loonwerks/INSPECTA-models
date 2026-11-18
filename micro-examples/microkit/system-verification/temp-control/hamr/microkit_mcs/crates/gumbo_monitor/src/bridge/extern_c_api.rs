@@ -327,7 +327,7 @@ pub fn get_sched_state(value: *mut hamr::SchedState) -> bool
 {
   unsafe {
     let guard = IN_sched_state.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'sched_state' has no value: set it before calling the entry point (in a component test, with test_apis::put_sched_state(..))");
     true
   }
 }
@@ -343,7 +343,7 @@ pub fn get_sched_schedule(value: *mut hamr::Schedule) -> bool
 {
   unsafe {
     let guard = IN_sched_schedule.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'sched_schedule' has no value: set it before calling the entry point (in a component test, with test_apis::put_sched_schedule(..))");
     true
   }
 }
@@ -359,7 +359,7 @@ pub fn get_tcp_tct_sv_currentSetPoint(value: *mut TempControl_SysVerif::SetPoint
 {
   unsafe {
     let guard = IN_tcp_tct_sv_currentSetPoint.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'tcp_tct_sv_currentSetPoint' has no value: set it before calling the entry point (in a component test, with test_apis::put_tcp_tct_sv_currentSetPoint(..))");
     true
   }
 }
@@ -375,7 +375,7 @@ pub fn get_tcp_tct_sv_currentFanState(value: *mut TempControl_SysVerif::FanCmd) 
 {
   unsafe {
     let guard = IN_tcp_tct_sv_currentFanState.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'tcp_tct_sv_currentFanState' has no value: set it before calling the entry point (in a component test, with test_apis::put_tcp_tct_sv_currentFanState(..))");
     true
   }
 }
@@ -391,7 +391,7 @@ pub fn get_tcp_tct_sv_latestTemp(value: *mut TempControl_SysVerif::Temperature) 
 {
   unsafe {
     let guard = IN_tcp_tct_sv_latestTemp.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'tcp_tct_sv_latestTemp' has no value: set it before calling the entry point (in a component test, with test_apis::put_tcp_tct_sv_latestTemp(..))");
     true
   }
 }
@@ -407,7 +407,7 @@ pub fn get_tcp_tct_sv_fanError(value: *mut bool) -> bool
 {
   unsafe {
     let guard = IN_tcp_tct_sv_fanError.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'tcp_tct_sv_fanError' has no value: set it before calling the entry point (in a component test, with test_apis::put_tcp_tct_sv_fanError(..))");
     true
   }
 }

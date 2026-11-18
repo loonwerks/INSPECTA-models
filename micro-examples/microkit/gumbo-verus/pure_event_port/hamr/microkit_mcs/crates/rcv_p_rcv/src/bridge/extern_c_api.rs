@@ -65,7 +65,7 @@ pub fn get_in_val(value: *mut i32) -> bool
 {
   unsafe {
     let guard = IN_in_val.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'in_val' has no value: set it before calling the entry point (in a component test, with test_apis::put_in_val(..))");
     true
   }
 }

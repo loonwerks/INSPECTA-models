@@ -150,25 +150,25 @@ qemu:
 clean::
 	rm -f *.o
 
-test:: 
+test::
 	make -C ${CRATES_DIR}/seL4_ArduPilot_ArduPilot test
 	make -C ${CRATES_DIR}/seL4_Firewall_Firewall test
 	make -C ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver test
 
-clean:: 
+clean::
 	make -C ${CRATES_DIR}/seL4_ArduPilot_ArduPilot clean
 	make -C ${CRATES_DIR}/seL4_Firewall_Firewall clean
 	make -C ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver clean
 	make -C ${CRATES_DIR}/domain_monitor clean
 
-coverage: 
+coverage:
 	@open=; if [ ! -f $(TOP_DIR)/target/coverage/report/index.html ]; then open=open; fi; \
 	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/seL4_ArduPilot_ArduPilot ${CRATES_DIR}/seL4_Firewall_Firewall ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver out=$(TOP_DIR)/target/coverage $$open $(args)
 
-coverage-report: 
+coverage-report:
 	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/seL4_ArduPilot_ArduPilot ${CRATES_DIR}/seL4_Firewall_Firewall ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver out=$(TOP_DIR)/target/coverage no-run
 
-verus: 
+verus:
 	make -C ${CRATES_DIR}/seL4_ArduPilot_ArduPilot verus
 	make -C ${CRATES_DIR}/seL4_Firewall_Firewall verus
 	make -C ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver verus

@@ -55,7 +55,7 @@ pub fn get_producer_p_p_producer_write_port(value: *mut data_1_prod_2_cons_struc
 {
   unsafe {
     let guard = IN_producer_p_p_producer_write_port.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'producer_p_p_producer_write_port' has no value: set it before calling the entry point (in a component test, with test_apis::put_producer_p_p_producer_write_port(..))");
     true
   }
 }

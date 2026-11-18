@@ -141,23 +141,23 @@ qemu:
 clean::
 	rm -f *.o
 
-test:: 
+test::
 	make -C ${CRATES_DIR}/producer_producer test
 	make -C ${CRATES_DIR}/consumer_consumer test
 
-clean:: 
+clean::
 	make -C ${CRATES_DIR}/producer_producer clean
 	make -C ${CRATES_DIR}/consumer_consumer clean
 	make -C ${CRATES_DIR}/domain_monitor clean
 
-coverage: 
+coverage:
 	@open=; if [ ! -f $(TOP_DIR)/target/coverage/report/index.html ]; then open=open; fi; \
 	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/producer_producer ${CRATES_DIR}/consumer_consumer out=$(TOP_DIR)/target/coverage $$open $(args)
 
-coverage-report: 
+coverage-report:
 	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/producer_producer ${CRATES_DIR}/consumer_consumer out=$(TOP_DIR)/target/coverage no-run
 
-verus: 
+verus:
 	make -C ${CRATES_DIR}/producer_producer verus
 	make -C ${CRATES_DIR}/consumer_consumer verus
 	make -C ${CRATES_DIR}/domain_monitor verus

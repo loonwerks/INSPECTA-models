@@ -82,7 +82,7 @@ pub fn put_internal_failure(value: Isolette_Data_Model::Failure_Flag_i)
 /// getter for OUT DataPort
 pub fn get_regulator_mode() -> Isolette_Data_Model::Regulator_Mode
 {
-  return extern_api::OUT_regulator_mode.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_regulator_mode.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'regulator_mode' has no value: the component did not put one")
 }
 
 /// getter for GUMBO State Variable

@@ -247,7 +247,7 @@ pub fn get_sched_state(value: *mut hamr::SchedState) -> bool
 {
   unsafe {
     let guard = IN_sched_state.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'sched_state' has no value: set it before calling the entry point (in a component test, with test_apis::put_sched_state(..))");
     true
   }
 }
@@ -263,7 +263,7 @@ pub fn get_sched_schedule(value: *mut hamr::Schedule) -> bool
 {
   unsafe {
     let guard = IN_sched_schedule.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'sched_schedule' has no value: set it before calling the entry point (in a component test, with test_apis::put_sched_schedule(..))");
     true
   }
 }

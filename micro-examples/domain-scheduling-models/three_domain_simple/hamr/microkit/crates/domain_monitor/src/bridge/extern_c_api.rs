@@ -75,7 +75,7 @@ pub fn get_p1_t1_write_port(value: *mut i32) -> bool
 {
   unsafe {
     let guard = IN_p1_t1_write_port.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'p1_t1_write_port' has no value: set it before calling the entry point (in a component test, with test_apis::put_p1_t1_write_port(..))");
     true
   }
 }
@@ -91,7 +91,7 @@ pub fn get_p2_t2_write_port(value: *mut i32) -> bool
 {
   unsafe {
     let guard = IN_p2_t2_write_port.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'p2_t2_write_port' has no value: set it before calling the entry point (in a component test, with test_apis::put_p2_t2_write_port(..))");
     true
   }
 }

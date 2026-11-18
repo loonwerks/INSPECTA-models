@@ -62,23 +62,23 @@ pub fn put_alarm_control(value: Isolette_Data_Model::On_Off)
 /// getter for OUT DataPort
 pub fn get_lower_desired_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
-  return extern_api::OUT_lower_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_lower_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'lower_desired_tempWstatus' has no value: the component did not put one")
 }
 
 /// getter for OUT DataPort
 pub fn get_upper_desired_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
-  return extern_api::OUT_upper_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_upper_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'upper_desired_tempWstatus' has no value: the component did not put one")
 }
 
 /// getter for OUT DataPort
 pub fn get_lower_alarm_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
-  return extern_api::OUT_lower_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_lower_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'lower_alarm_tempWstatus' has no value: the component did not put one")
 }
 
 /// getter for OUT DataPort
 pub fn get_upper_alarm_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
-  return extern_api::OUT_upper_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_upper_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'upper_alarm_tempWstatus' has no value: the component did not put one")
 }

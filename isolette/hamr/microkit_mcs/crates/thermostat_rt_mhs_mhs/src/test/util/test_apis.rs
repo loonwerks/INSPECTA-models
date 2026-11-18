@@ -96,7 +96,7 @@ pub fn put_regulator_mode(value: Isolette_Data_Model::Regulator_Mode)
 /// getter for OUT DataPort
 pub fn get_heat_control() -> Isolette_Data_Model::On_Off
 {
-  return extern_api::OUT_heat_control.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_heat_control.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'heat_control' has no value: the component did not put one")
 }
 
 /// getter for GUMBO State Variable

@@ -164,7 +164,7 @@ pub fn get_healthy(value: *mut bool) -> bool
 {
   unsafe {
     let guard = IN_healthy.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'healthy' has no value: set it before calling the entry point (in a component test, with test_apis::put_healthy(..))");
     true
   }
 }

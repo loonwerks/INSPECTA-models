@@ -475,7 +475,7 @@ pub fn get_thermostat_rt_mri_mri_displayed_temp(value: *mut Isolette_Data_Model:
 {
   unsafe {
     let guard = IN_thermostat_rt_mri_mri_displayed_temp.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'thermostat_rt_mri_mri_displayed_temp' has no value: set it before calling the entry point (in a component test, with test_apis::put_thermostat_rt_mri_mri_displayed_temp(..))");
     true
   }
 }
@@ -491,7 +491,7 @@ pub fn get_thermostat_rt_mri_mri_regulator_status(value: *mut Isolette_Data_Mode
 {
   unsafe {
     let guard = IN_thermostat_rt_mri_mri_regulator_status.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'thermostat_rt_mri_mri_regulator_status' has no value: set it before calling the entry point (in a component test, with test_apis::put_thermostat_rt_mri_mri_regulator_status(..))");
     true
   }
 }
@@ -507,7 +507,7 @@ pub fn get_thermostat_rt_mhs_mhs_heat_control(value: *mut Isolette_Data_Model::O
 {
   unsafe {
     let guard = IN_thermostat_rt_mhs_mhs_heat_control.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'thermostat_rt_mhs_mhs_heat_control' has no value: set it before calling the entry point (in a component test, with test_apis::put_thermostat_rt_mhs_mhs_heat_control(..))");
     true
   }
 }
@@ -523,7 +523,7 @@ pub fn get_thermostat_mt_mmi_mmi_monitor_status(value: *mut Isolette_Data_Model:
 {
   unsafe {
     let guard = IN_thermostat_mt_mmi_mmi_monitor_status.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'thermostat_mt_mmi_mmi_monitor_status' has no value: set it before calling the entry point (in a component test, with test_apis::put_thermostat_mt_mmi_mmi_monitor_status(..))");
     true
   }
 }
@@ -539,7 +539,7 @@ pub fn get_thermostat_mt_ma_ma_alarm_control(value: *mut Isolette_Data_Model::On
 {
   unsafe {
     let guard = IN_thermostat_mt_ma_ma_alarm_control.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'thermostat_mt_ma_ma_alarm_control' has no value: set it before calling the entry point (in a component test, with test_apis::put_thermostat_mt_ma_ma_alarm_control(..))");
     true
   }
 }
@@ -555,7 +555,7 @@ pub fn get_operator_interface_oip_oit_lower_desired_tempWstatus(value: *mut Isol
 {
   unsafe {
     let guard = IN_operator_interface_oip_oit_lower_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'operator_interface_oip_oit_lower_desired_tempWstatus' has no value: set it before calling the entry point (in a component test, with test_apis::put_operator_interface_oip_oit_lower_desired_tempWstatus(..))");
     true
   }
 }
@@ -571,7 +571,7 @@ pub fn get_operator_interface_oip_oit_upper_desired_tempWstatus(value: *mut Isol
 {
   unsafe {
     let guard = IN_operator_interface_oip_oit_upper_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'operator_interface_oip_oit_upper_desired_tempWstatus' has no value: set it before calling the entry point (in a component test, with test_apis::put_operator_interface_oip_oit_upper_desired_tempWstatus(..))");
     true
   }
 }
@@ -587,7 +587,7 @@ pub fn get_operator_interface_oip_oit_lower_alarm_tempWstatus(value: *mut Isolet
 {
   unsafe {
     let guard = IN_operator_interface_oip_oit_lower_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'operator_interface_oip_oit_lower_alarm_tempWstatus' has no value: set it before calling the entry point (in a component test, with test_apis::put_operator_interface_oip_oit_lower_alarm_tempWstatus(..))");
     true
   }
 }
@@ -603,7 +603,7 @@ pub fn get_operator_interface_oip_oit_upper_alarm_tempWstatus(value: *mut Isolet
 {
   unsafe {
     let guard = IN_operator_interface_oip_oit_upper_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'operator_interface_oip_oit_upper_alarm_tempWstatus' has no value: set it before calling the entry point (in a component test, with test_apis::put_operator_interface_oip_oit_upper_alarm_tempWstatus(..))");
     true
   }
 }
@@ -619,7 +619,7 @@ pub fn get_temperature_sensor_cpi_thermostat_current_tempWstatus(value: *mut Iso
 {
   unsafe {
     let guard = IN_temperature_sensor_cpi_thermostat_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'temperature_sensor_cpi_thermostat_current_tempWstatus' has no value: set it before calling the entry point (in a component test, with test_apis::put_temperature_sensor_cpi_thermostat_current_tempWstatus(..))");
     true
   }
 }
@@ -635,7 +635,7 @@ pub fn get_thermostat_rt_mri_mri_upper_desired_temp(value: *mut Isolette_Data_Mo
 {
   unsafe {
     let guard = IN_thermostat_rt_mri_mri_upper_desired_temp.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'thermostat_rt_mri_mri_upper_desired_temp' has no value: set it before calling the entry point (in a component test, with test_apis::put_thermostat_rt_mri_mri_upper_desired_temp(..))");
     true
   }
 }
@@ -651,7 +651,7 @@ pub fn get_thermostat_rt_mri_mri_lower_desired_temp(value: *mut Isolette_Data_Mo
 {
   unsafe {
     let guard = IN_thermostat_rt_mri_mri_lower_desired_temp.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'thermostat_rt_mri_mri_lower_desired_temp' has no value: set it before calling the entry point (in a component test, with test_apis::put_thermostat_rt_mri_mri_lower_desired_temp(..))");
     true
   }
 }
@@ -667,7 +667,7 @@ pub fn get_thermostat_rt_mri_mri_interface_failure(value: *mut Isolette_Data_Mod
 {
   unsafe {
     let guard = IN_thermostat_rt_mri_mri_interface_failure.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'thermostat_rt_mri_mri_interface_failure' has no value: set it before calling the entry point (in a component test, with test_apis::put_thermostat_rt_mri_mri_interface_failure(..))");
     true
   }
 }
@@ -683,7 +683,7 @@ pub fn get_thermostat_rt_mrm_mrm_regulator_mode(value: *mut Isolette_Data_Model:
 {
   unsafe {
     let guard = IN_thermostat_rt_mrm_mrm_regulator_mode.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'thermostat_rt_mrm_mrm_regulator_mode' has no value: set it before calling the entry point (in a component test, with test_apis::put_thermostat_rt_mrm_mrm_regulator_mode(..))");
     true
   }
 }
@@ -699,7 +699,7 @@ pub fn get_thermostat_rt_drf_drf_internal_failure(value: *mut Isolette_Data_Mode
 {
   unsafe {
     let guard = IN_thermostat_rt_drf_drf_internal_failure.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'thermostat_rt_drf_drf_internal_failure' has no value: set it before calling the entry point (in a component test, with test_apis::put_thermostat_rt_drf_drf_internal_failure(..))");
     true
   }
 }
@@ -715,7 +715,7 @@ pub fn get_thermostat_mt_mmi_mmi_upper_alarm_temp(value: *mut Isolette_Data_Mode
 {
   unsafe {
     let guard = IN_thermostat_mt_mmi_mmi_upper_alarm_temp.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'thermostat_mt_mmi_mmi_upper_alarm_temp' has no value: set it before calling the entry point (in a component test, with test_apis::put_thermostat_mt_mmi_mmi_upper_alarm_temp(..))");
     true
   }
 }
@@ -731,7 +731,7 @@ pub fn get_thermostat_mt_mmi_mmi_lower_alarm_temp(value: *mut Isolette_Data_Mode
 {
   unsafe {
     let guard = IN_thermostat_mt_mmi_mmi_lower_alarm_temp.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'thermostat_mt_mmi_mmi_lower_alarm_temp' has no value: set it before calling the entry point (in a component test, with test_apis::put_thermostat_mt_mmi_mmi_lower_alarm_temp(..))");
     true
   }
 }
@@ -747,7 +747,7 @@ pub fn get_thermostat_mt_mmi_mmi_interface_failure(value: *mut Isolette_Data_Mod
 {
   unsafe {
     let guard = IN_thermostat_mt_mmi_mmi_interface_failure.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'thermostat_mt_mmi_mmi_interface_failure' has no value: set it before calling the entry point (in a component test, with test_apis::put_thermostat_mt_mmi_mmi_interface_failure(..))");
     true
   }
 }
@@ -763,7 +763,7 @@ pub fn get_thermostat_mt_mmm_mmm_monitor_mode(value: *mut Isolette_Data_Model::M
 {
   unsafe {
     let guard = IN_thermostat_mt_mmm_mmm_monitor_mode.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'thermostat_mt_mmm_mmm_monitor_mode' has no value: set it before calling the entry point (in a component test, with test_apis::put_thermostat_mt_mmm_mmm_monitor_mode(..))");
     true
   }
 }
@@ -779,7 +779,7 @@ pub fn get_thermostat_mt_dmf_dmf_internal_failure(value: *mut Isolette_Data_Mode
 {
   unsafe {
     let guard = IN_thermostat_mt_dmf_dmf_internal_failure.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'thermostat_mt_dmf_dmf_internal_failure' has no value: set it before calling the entry point (in a component test, with test_apis::put_thermostat_mt_dmf_dmf_internal_failure(..))");
     true
   }
 }
@@ -795,7 +795,7 @@ pub fn get_temperature_sensor_cpi_thermostat_air(value: *mut Isolette_Data_Model
 {
   unsafe {
     let guard = IN_temperature_sensor_cpi_thermostat_air.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'temperature_sensor_cpi_thermostat_air' has no value: set it before calling the entry point (in a component test, with test_apis::put_temperature_sensor_cpi_thermostat_air(..))");
     true
   }
 }
@@ -811,7 +811,7 @@ pub fn get_heat_source_cpi_heat_controller_heat_out(value: *mut Isolette_Environ
 {
   unsafe {
     let guard = IN_heat_source_cpi_heat_controller_heat_out.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'heat_source_cpi_heat_controller_heat_out' has no value: set it before calling the entry point (in a component test, with test_apis::put_heat_source_cpi_heat_controller_heat_out(..))");
     true
   }
 }

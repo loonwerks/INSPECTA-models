@@ -155,7 +155,7 @@ pub fn get_upper_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_
 {
   unsafe {
     let guard = IN_upper_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'upper_alarm_tempWstatus' has no value: set it before calling the entry point (in a component test, with test_apis::put_upper_alarm_tempWstatus(..))");
     true
   }
 }
@@ -171,7 +171,7 @@ pub fn get_lower_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_
 {
   unsafe {
     let guard = IN_lower_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'lower_alarm_tempWstatus' has no value: set it before calling the entry point (in a component test, with test_apis::put_lower_alarm_tempWstatus(..))");
     true
   }
 }
@@ -187,7 +187,7 @@ pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -
 {
   unsafe {
     let guard = IN_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'current_tempWstatus' has no value: set it before calling the entry point (in a component test, with test_apis::put_current_tempWstatus(..))");
     true
   }
 }
@@ -203,7 +203,7 @@ pub fn get_monitor_mode(value: *mut Isolette_Data_Model::Monitor_Mode) -> bool
 {
   unsafe {
     let guard = IN_monitor_mode.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'monitor_mode' has no value: set it before calling the entry point (in a component test, with test_apis::put_monitor_mode(..))");
     true
   }
 }

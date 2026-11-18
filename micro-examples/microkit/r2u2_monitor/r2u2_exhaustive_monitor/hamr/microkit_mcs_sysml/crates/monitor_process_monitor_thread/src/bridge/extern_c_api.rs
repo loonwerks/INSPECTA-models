@@ -560,7 +560,7 @@ pub fn get_level(value: *mut i32) -> bool
 {
   unsafe {
     let guard = IN_level.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'level' has no value: set it before calling the entry point (in a component test, with test_apis::put_level(..))");
     true
   }
 }
@@ -596,7 +596,7 @@ pub fn get_boolean_value(value: *mut bool) -> bool
 {
   unsafe {
     let guard = IN_boolean_value.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'boolean_value' has no value: set it before calling the entry point (in a component test, with test_apis::put_boolean_value(..))");
     true
   }
 }
@@ -612,7 +612,7 @@ pub fn get_character_value(value: *mut u8) -> bool
 {
   unsafe {
     let guard = IN_character_value.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'character_value' has no value: set it before calling the entry point (in a component test, with test_apis::put_character_value(..))");
     true
   }
 }
@@ -628,7 +628,7 @@ pub fn get_signed_8_value(value: *mut i8) -> bool
 {
   unsafe {
     let guard = IN_signed_8_value.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'signed_8_value' has no value: set it before calling the entry point (in a component test, with test_apis::put_signed_8_value(..))");
     true
   }
 }
@@ -644,7 +644,7 @@ pub fn get_signed_16_value(value: *mut i16) -> bool
 {
   unsafe {
     let guard = IN_signed_16_value.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'signed_16_value' has no value: set it before calling the entry point (in a component test, with test_apis::put_signed_16_value(..))");
     true
   }
 }
@@ -660,7 +660,7 @@ pub fn get_unsigned_8_value(value: *mut u8) -> bool
 {
   unsafe {
     let guard = IN_unsigned_8_value.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'unsigned_8_value' has no value: set it before calling the entry point (in a component test, with test_apis::put_unsigned_8_value(..))");
     true
   }
 }
@@ -676,7 +676,7 @@ pub fn get_unsigned_16_value(value: *mut u16) -> bool
 {
   unsafe {
     let guard = IN_unsigned_16_value.lock().unwrap_or_else(|e| e.into_inner());
-    *value = guard.expect("Not expecting None");
+    *value = guard.expect("incoming data port 'unsigned_16_value' has no value: set it before calling the entry point (in a component test, with test_apis::put_unsigned_16_value(..))");
     true
   }
 }

@@ -385,7 +385,7 @@ clobber:: clean
 	rm -f *.a
 	rm -f ${IMAGE_FILE} ${REPORT_FILE}
 
-test:: 
+test::
 	make -C ${CRATES_DIR}/thermostat_rt_mri_mri test
 	make -C ${CRATES_DIR}/thermostat_rt_mhs_mhs test
 	make -C ${CRATES_DIR}/thermostat_rt_mrm_mrm test
@@ -397,7 +397,7 @@ test::
 	make -C ${CRATES_DIR}/operator_interface_oip_oit test
 	make -C ${CRATES_DIR}/userland_monitor test
 
-clean:: 
+clean::
 	make -C ${CRATES_DIR}/thermostat_rt_mri_mri clean
 	make -C ${CRATES_DIR}/thermostat_rt_mhs_mhs clean
 	make -C ${CRATES_DIR}/thermostat_rt_mrm_mrm clean
@@ -412,14 +412,14 @@ clean::
 	make -C ${CRATES_DIR}/gumbo_monitor clean
 	make -C ${CRATES_DIR}/sys_nominal_monitor clean
 
-coverage: 
+coverage:
 	@open=; if [ ! -f $(TOP_DIR)/target/coverage/report/index.html ]; then open=open; fi; \
 	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/thermostat_rt_mri_mri ${CRATES_DIR}/thermostat_rt_mhs_mhs ${CRATES_DIR}/thermostat_rt_mrm_mrm ${CRATES_DIR}/thermostat_rt_drf_drf ${CRATES_DIR}/thermostat_mt_mmi_mmi ${CRATES_DIR}/thermostat_mt_ma_ma ${CRATES_DIR}/thermostat_mt_mmm_mmm ${CRATES_DIR}/thermostat_mt_dmf_dmf ${CRATES_DIR}/operator_interface_oip_oit out=$(TOP_DIR)/target/coverage $$open $(args)
 
-coverage-report: 
+coverage-report:
 	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/thermostat_rt_mri_mri ${CRATES_DIR}/thermostat_rt_mhs_mhs ${CRATES_DIR}/thermostat_rt_mrm_mrm ${CRATES_DIR}/thermostat_rt_drf_drf ${CRATES_DIR}/thermostat_mt_mmi_mmi ${CRATES_DIR}/thermostat_mt_ma_ma ${CRATES_DIR}/thermostat_mt_mmm_mmm ${CRATES_DIR}/thermostat_mt_dmf_dmf ${CRATES_DIR}/operator_interface_oip_oit out=$(TOP_DIR)/target/coverage no-run
 
-verus: 
+verus:
 	make -C ${CRATES_DIR}/thermostat_rt_mri_mri verus
 	make -C ${CRATES_DIR}/thermostat_rt_mhs_mhs verus
 	make -C ${CRATES_DIR}/thermostat_rt_mrm_mrm verus
@@ -433,5 +433,5 @@ verus:
 	make -C ${CRATES_DIR}/gumbo_monitor verus
 	make -C ${CRATES_DIR}/sys_nominal_monitor verus
 
-verus-sys-proof: 
+verus-sys-proof:
 	make -C ${CRATES_DIR}/sys_nominal_proof all

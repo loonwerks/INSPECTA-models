@@ -62,29 +62,29 @@ pub fn put_regulator_mode(value: Isolette_Data_Model::Regulator_Mode)
 /// getter for OUT DataPort
 pub fn get_upper_desired_temp() -> Isolette_Data_Model::Temp_i
 {
-  return extern_api::OUT_upper_desired_temp.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_upper_desired_temp.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'upper_desired_temp' has no value: the component did not put one")
 }
 
 /// getter for OUT DataPort
 pub fn get_lower_desired_temp() -> Isolette_Data_Model::Temp_i
 {
-  return extern_api::OUT_lower_desired_temp.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_lower_desired_temp.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'lower_desired_temp' has no value: the component did not put one")
 }
 
 /// getter for OUT DataPort
 pub fn get_displayed_temp() -> Isolette_Data_Model::Temp_i
 {
-  return extern_api::OUT_displayed_temp.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_displayed_temp.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'displayed_temp' has no value: the component did not put one")
 }
 
 /// getter for OUT DataPort
 pub fn get_regulator_status() -> Isolette_Data_Model::Status
 {
-  return extern_api::OUT_regulator_status.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_regulator_status.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'regulator_status' has no value: the component did not put one")
 }
 
 /// getter for OUT DataPort
 pub fn get_interface_failure() -> Isolette_Data_Model::Failure_Flag_i
 {
-  return extern_api::OUT_interface_failure.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_interface_failure.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'interface_failure' has no value: the component did not put one")
 }

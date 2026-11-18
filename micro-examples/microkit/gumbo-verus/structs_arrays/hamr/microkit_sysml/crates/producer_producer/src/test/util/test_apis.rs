@@ -24,19 +24,19 @@ pub fn put_concrete_inputs()
 /// getter for OUT DataPort
 pub fn get_p_myArrayInt32_DataPort() -> Gubmo_Structs_Arrays::MyArrayInt32
 {
-  return extern_api::OUT_p_myArrayInt32_DataPort.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_p_myArrayInt32_DataPort.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'p_myArrayInt32_DataPort' has no value: the component did not put one")
 }
 
 /// getter for OUT DataPort
 pub fn get_p_myArrayStruct_DataPort() -> Gubmo_Structs_Arrays::MyArrayStruct
 {
-  return extern_api::OUT_p_myArrayStruct_DataPort.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_p_myArrayStruct_DataPort.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'p_myArrayStruct_DataPort' has no value: the component did not put one")
 }
 
 /// getter for OUT DataPort
 pub fn get_p_myStructArray_DataPort() -> Gubmo_Structs_Arrays::MyStructArray_i
 {
-  return extern_api::OUT_p_myStructArray_DataPort.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_p_myStructArray_DataPort.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'p_myStructArray_DataPort' has no value: the component did not put one")
 }
 
 /// getter for OUT EventDataPort

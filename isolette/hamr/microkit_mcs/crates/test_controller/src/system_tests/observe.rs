@@ -889,20 +889,36 @@ impl core::fmt::Display for Position {
 
 /// Decides what becomes of a violation, prints its line, and returns whether its
 /// details (the pre/post values) should follow.
+///
+/// A matching violation meets the first matching expectation not yet met, so k
+/// identical expectations need k occurrences.  Once all are met, a further match is
+/// still expected (an expectation covers the rest of the test) and is reported as INFO.
 fn violation(v: Violation, what: core::fmt::Arguments) -> bool {
   unsafe {
     match REC.phase {
       Phase::Between => return false,
       Phase::Init => REC.init_failed = true,
       Phase::InTest => {
-        for e in REC.expected.iter_mut() {
-          if let Some((x, met)) = e {
+        let mut hit: Option<usize> = None;
+        for k in 0..MAX_EXPECTED {
+          if let Some((x, met)) = REC.expected[k] {
             if x.matches(&v) {
-              *met = true;
-              harness::line(format_args!("TEST | INFO  expected violation: {}", what));
-              return false;
+              if !met {
+                hit = Some(k);
+                break;
+              }
+              if hit.is_none() {
+                hit = Some(k);
+              }
             }
           }
+        }
+        if let Some(k) = hit {
+          if let Some((x, _)) = REC.expected[k] {
+            REC.expected[k] = Some((x, true));
+          }
+          harness::line(format_args!("TEST | INFO  expected violation: {}", what));
+          return false;
         }
         if REC.n_recorded < MAX_RECORDED {
           REC.recorded[REC.n_recorded] = Some(v);
@@ -1382,6 +1398,7 @@ pub(crate) fn end_test() {
 
 /// Declares a violation the rest of this test causes on purpose: a matching violation
 /// is reported as INFO instead of failing the test, and the test fails if none occurs.
+/// Declaring the same violation k times requires at least k occurrences.
 /// Its layer must be on while the violation happens: a switched-off layer reports
 /// nothing, and the test fails saying so.
 pub fn expect(e: Expect) {

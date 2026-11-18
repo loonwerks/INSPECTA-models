@@ -330,31 +330,31 @@ clobber:: clean
 	rm -f *.a
 	rm -f ${IMAGE_FILE} ${REPORT_FILE}
 
-test:: 
+test::
 	make -C ${CRATES_DIR}/tcp_tct test
 	make -C ${CRATES_DIR}/fp_ft test
 	make -C ${CRATES_DIR}/userland_monitor test
 
-clean:: 
+clean::
 	make -C ${CRATES_DIR}/tcp_tct clean
 	make -C ${CRATES_DIR}/fp_ft clean
 	make -C ${CRATES_DIR}/userland_monitor clean
 	make -C ${CRATES_DIR}/gumbo_monitor clean
 	make -C ${CRATES_DIR}/sys_nominal_monitor clean
 
-coverage: 
+coverage:
 	@open=; if [ ! -f $(TOP_DIR)/target/coverage/report/index.html ]; then open=open; fi; \
 	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/tcp_tct ${CRATES_DIR}/fp_ft out=$(TOP_DIR)/target/coverage $$open $(args)
 
-coverage-report: 
+coverage-report:
 	$(TOP_DIR)/bin/coverage-report.cmd ${CRATES_DIR}/tcp_tct ${CRATES_DIR}/fp_ft out=$(TOP_DIR)/target/coverage no-run
 
-verus: 
+verus:
 	make -C ${CRATES_DIR}/tcp_tct verus
 	make -C ${CRATES_DIR}/fp_ft verus
 	make -C ${CRATES_DIR}/userland_monitor verus
 	make -C ${CRATES_DIR}/gumbo_monitor verus
 	make -C ${CRATES_DIR}/sys_nominal_monitor verus
 
-verus-sys-proof: 
+verus-sys-proof:
 	make -C ${CRATES_DIR}/sys_nominal_proof all

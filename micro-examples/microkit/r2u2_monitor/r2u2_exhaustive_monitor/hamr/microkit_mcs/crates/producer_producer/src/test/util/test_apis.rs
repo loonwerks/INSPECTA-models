@@ -24,43 +24,43 @@ pub fn put_concrete_inputs()
 /// getter for OUT DataPort
 pub fn get_level() -> i32
 {
-  return extern_api::OUT_level.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_level.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'level' has no value: the component did not put one")
 }
 
 /// getter for OUT DataPort
 pub fn get_boolean_value() -> bool
 {
-  return extern_api::OUT_boolean_value.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_boolean_value.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'boolean_value' has no value: the component did not put one")
 }
 
 /// getter for OUT DataPort
 pub fn get_character_value() -> u8
 {
-  return extern_api::OUT_character_value.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_character_value.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'character_value' has no value: the component did not put one")
 }
 
 /// getter for OUT DataPort
 pub fn get_signed_8_value() -> i8
 {
-  return extern_api::OUT_signed_8_value.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_signed_8_value.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'signed_8_value' has no value: the component did not put one")
 }
 
 /// getter for OUT DataPort
 pub fn get_signed_16_value() -> i16
 {
-  return extern_api::OUT_signed_16_value.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_signed_16_value.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'signed_16_value' has no value: the component did not put one")
 }
 
 /// getter for OUT DataPort
 pub fn get_unsigned_8_value() -> u8
 {
-  return extern_api::OUT_unsigned_8_value.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_unsigned_8_value.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'unsigned_8_value' has no value: the component did not put one")
 }
 
 /// getter for OUT DataPort
 pub fn get_unsigned_16_value() -> u16
 {
-  return extern_api::OUT_unsigned_16_value.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_unsigned_16_value.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'unsigned_16_value' has no value: the component did not put one")
 }
 
 /// getter for OUT EventDataPort

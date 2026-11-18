@@ -186,7 +186,7 @@ pub fn put_unsigned_16_value(value: u16)
 /// getter for OUT DataPort
 pub fn get_healthy() -> bool
 {
-  return extern_api::OUT_healthy.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+  return extern_api::OUT_healthy.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'healthy' has no value: the component did not put one")
 }
 
 /// setter for IN EventDataPort
