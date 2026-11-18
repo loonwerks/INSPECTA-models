@@ -62,10 +62,20 @@ build-release: $(R2U2_BUILD_DEPS)
 build: $(R2U2_BUILD_DEPS)
 	$(BUILD_ENV_VARS) cargo build --features sel4 $(CARGO_FLAGS)
 
+# Run before every cargo-verus verify target below. cargo-verus caches
+# verification like any build: with nothing changed, `cargo-verus verify`
+# finishes without re-verifying and prints no `verification results::`
+# line. Removing only this crate's dev-profile artifacts makes each run
+# re-verify this crate and print its results; its dependencies (notably
+# vstd), the release build and the test/coverage artifacts are kept.
+VERUS_FRESH = $(ENV_VARS) cargo clean --quiet -p userland_monitor --profile dev $(CARGO_FLAGS)
+
 verus: $(R2U2_BUILD_DEPS)
+	$(VERUS_FRESH)
 	$(ENV_VARS) cargo-verus verify $(CARGO_VERUS_OPTS) $(CARGO_FLAGS) -- $(SMT_OPTS)
 
 verus-json: $(R2U2_BUILD_DEPS)
+	$(VERUS_FRESH)
 	$(ENV_VARS) cargo-verus verify $(CARGO_VERUS_OPTS) $(CARGO_FLAGS) -- $(SMT_OPTS) --output-json --time > verus_results.json
 
 # Test Example:
