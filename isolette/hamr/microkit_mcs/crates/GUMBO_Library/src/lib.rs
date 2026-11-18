@@ -175,6 +175,39 @@ verus! {
   {
     value.status == Isolette_Data_Model::ValueStatus::Valid
   }
+
+  pub assume_specification[ LowerAlarmTemp_lower ]() -> (res: i32)
+    ensures res == LowerAlarmTemp_lower_spec();
+
+  pub assume_specification[ LowerAlarmTemp_upper ]() -> (res: i32)
+    ensures res == LowerAlarmTemp_upper_spec();
+
+  pub assume_specification[ UpperAlarmTemp_lower ]() -> (res: i32)
+    ensures res == UpperAlarmTemp_lower_spec();
+
+  pub assume_specification[ UpperAlarmTemp_upper ]() -> (res: i32)
+    ensures res == UpperAlarmTemp_upper_spec();
+
+  pub assume_specification[ Allowed_LowerAlarmTemp ](lower: i32) -> (res: bool)
+    ensures res == Allowed_LowerAlarmTemp_spec(lower);
+
+  pub assume_specification[ Allowed_UpperAlarmTemp ](upper: i32) -> (res: bool)
+    ensures res == Allowed_UpperAlarmTemp_spec(upper);
+
+  pub assume_specification[ Allowed_LowerAlarmTempWStatus ](lower: Isolette_Data_Model::TempWstatus_i) -> (res: bool)
+    ensures res == Allowed_LowerAlarmTempWStatus_spec(lower);
+
+  pub assume_specification[ Allowed_UpperAlarmTempWStatus ](upper: Isolette_Data_Model::TempWstatus_i) -> (res: bool)
+    ensures res == Allowed_UpperAlarmTempWStatus_spec(upper);
+
+  pub assume_specification[ Allowed_AlarmTemp_Ranges ](lower: i32, upper: i32) -> (res: bool)
+    ensures res == Allowed_AlarmTemp_Ranges_spec(lower, upper);
+
+  pub assume_specification[ Allowed_AlarmTempWStatus_Ranges ](lower: Isolette_Data_Model::TempWstatus_i, upper: Isolette_Data_Model::TempWstatus_i) -> (res: bool)
+    ensures res == Allowed_AlarmTempWStatus_Ranges_spec(lower, upper);
+
+  pub assume_specification[ isValidTempWstatus ](value: Isolette_Data_Model::TempWstatus_i) -> (res: bool)
+    ensures res == isValidTempWstatus_spec(value);
   // END MARKER GUMBO VERUS MARKER
 
 }

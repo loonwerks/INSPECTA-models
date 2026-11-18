@@ -96,6 +96,17 @@ verus! {
   {
     librarySpecFunction_Guarantee__developer_verus(a)
   }
+
+  pub assume_specification[ librarySpecFunction_Assume ](a: Gubmo_Structs_Arrays::MyArrayInt32) -> (res: bool)
+    ensures res == librarySpecFunction_Assume_spec(a);
+
+  pub assume_specification[ librarySpecFunction_Guarantee ](a: Gubmo_Structs_Arrays::MyArrayInt32) -> (res: bool)
+    ensures res == librarySpecFunction_Guarantee_spec(a);
+
+  // No assume_specification, so not callable from verified code: normalLibraryFunction.
+  // Each uses arithmetic or a non-library call, directly or through a library function
+  // it calls, where the executable version (machine integers) and the spec version
+  // (mathematical integers) can disagree.
   // END MARKER GUMBO VERUS MARKER
 
   /// Developer-supplied Verus realization of the GUMBO spec function `test`.

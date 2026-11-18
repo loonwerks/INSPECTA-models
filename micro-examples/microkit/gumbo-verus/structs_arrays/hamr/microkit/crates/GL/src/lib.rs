@@ -52,6 +52,9 @@ verus! {
   {
     10i64
   }
+
+  pub assume_specification[ MAX_SPEED ]() -> (res: i64)
+    ensures res == MAX_SPEED_spec();
   // END MARKER GUMBO VERUS MARKER
 
 }
