@@ -38,8 +38,12 @@ static mut app: Option<consumer_consumer> = None;
 static mut init_api: consumer_consumer_Application_Api<consumer_consumer_Initialization_Api> = api::init_api();
 static mut compute_api: consumer_consumer_Application_Api<consumer_consumer_Compute_Api> = api::compute_api();
 
+// The entry points are "C-unwind" rather than "C" for the host tests, which call them
+// directly: a panic in the component then fails just that test (and proptest can shrink
+// its input) instead of aborting the whole test process. On the target nothing unwinds,
+// since the panic handler below faults the thread, so the C callers see no difference.
 #[no_mangle]
-pub extern "C" fn consumer_consumer_initialize() {
+pub extern "C-unwind" fn consumer_consumer_initialize() {
   logging::init_logging();
 
   unsafe {
@@ -54,7 +58,7 @@ pub extern "C" fn consumer_consumer_initialize() {
 }
 
 #[no_mangle]
-pub extern "C" fn consumer_consumer_timeTriggered() {
+pub extern "C-unwind" fn consumer_consumer_timeTriggered() {
   unsafe {
     if let Some(_app) = app.as_mut() {
       _app.r2u2_monitor_pre_timeTriggered(&compute_api);
@@ -67,7 +71,7 @@ pub extern "C" fn consumer_consumer_timeTriggered() {
 }
 
 #[no_mangle]
-pub extern "C" fn consumer_consumer_notify(channel: microkit_channel) {
+pub extern "C-unwind" fn consumer_consumer_notify(channel: microkit_channel) {
   unsafe {
     if let Some(_app) = app.as_mut() {
       _app.notify(channel);
