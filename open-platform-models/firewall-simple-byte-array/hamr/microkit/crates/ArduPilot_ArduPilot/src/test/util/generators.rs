@@ -35,24 +35,6 @@ pub fn u8_strategy_cust(range: core::ops::RangeInclusive<u8>) -> impl Strategy<V
   range
 }
 
-/// default proptest strategy for u16: any value of the type
-pub fn u16_strategy_default() -> impl Strategy<Value = u16>
-{
-  any::<u16>()
-}
-
-/// custom proptest strategy for u16 restricted to an inclusive range
-pub fn u16_strategy_cust(range: core::ops::RangeInclusive<u16>) -> impl Strategy<Value = u16>
-{
-  range
-}
-
-/// default proptest strategy for bool: any value of the type
-pub fn bool_strategy_default() -> impl Strategy<Value = bool>
-{
-  any::<bool>()
-}
-
 pub fn SW_RawEthernetMessage_strategy_default() -> impl Strategy<Value = SW::RawEthernetMessage>
 {
   SW_RawEthernetMessage_strategy_cust(any::<u8>())
@@ -63,20 +45,6 @@ pub fn SW_RawEthernetMessage_strategy_cust<u8_strategy: Strategy<Value = u8>> (b
   proptest::collection::vec(base_strategy, SW::SW_RawEthernetMessage_DIM_0)
     .prop_map(|v| {
       let boxed: Box<[u8; SW::SW_RawEthernetMessage_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
-      *boxed
-  })
-}
-
-pub fn SW_u16Array_strategy_default() -> impl Strategy<Value = SW::u16Array>
-{
-  SW_u16Array_strategy_cust(any::<u16>())
-}
-
-pub fn SW_u16Array_strategy_cust<u16_strategy: Strategy<Value = u16>> (base_strategy: u16_strategy) -> impl Strategy<Value = SW::u16Array>
-{
-  proptest::collection::vec(base_strategy, SW::SW_u16Array_DIM_0)
-    .prop_map(|v| {
-      let boxed: Box<[u16; SW::SW_u16Array_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
       *boxed
   })
 }

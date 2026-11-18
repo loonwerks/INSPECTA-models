@@ -50,59 +50,10 @@ pub fn Isolette_Data_Model_ValueStatus_strategy_cust(
   ]
 }
 
-pub fn Isolette_Data_Model_Regulator_Mode_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Regulator_Mode>
-{
-  Isolette_Data_Model_Regulator_Mode_strategy_cust(1, 1, 1)
-}
-
-pub fn Isolette_Data_Model_Regulator_Mode_strategy_cust(
-  Init_Regulator_Mode_bias: u32,
-  Normal_Regulator_Mode_bias: u32,
-  Failed_Regulator_Mode_bias: u32) -> impl Strategy<Value = Isolette_Data_Model::Regulator_Mode>
-{
-  prop_oneof![
-    Init_Regulator_Mode_bias => Just(Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode),
-    Normal_Regulator_Mode_bias => Just(Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode),
-    Failed_Regulator_Mode_bias => Just(Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)
-  ]
-}
-
-pub fn Isolette_Data_Model_Status_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Status>
-{
-  Isolette_Data_Model_Status_strategy_cust(1, 1, 1)
-}
-
-pub fn Isolette_Data_Model_Status_strategy_cust(
-  Init_Status_bias: u32,
-  On_Status_bias: u32,
-  Failed_Status_bias: u32) -> impl Strategy<Value = Isolette_Data_Model::Status>
-{
-  prop_oneof![
-    Init_Status_bias => Just(Isolette_Data_Model::Status::Init_Status),
-    On_Status_bias => Just(Isolette_Data_Model::Status::On_Status),
-    Failed_Status_bias => Just(Isolette_Data_Model::Status::Failed_Status)
-  ]
-}
-
 /// default proptest strategy for bool: any value of the type
 pub fn bool_strategy_default() -> impl Strategy<Value = bool>
 {
   any::<bool>()
-}
-
-pub fn Isolette_Data_Model_On_Off_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::On_Off>
-{
-  Isolette_Data_Model_On_Off_strategy_cust(1, 1)
-}
-
-pub fn Isolette_Data_Model_On_Off_strategy_cust(
-  Onn_bias: u32,
-  Off_bias: u32) -> impl Strategy<Value = Isolette_Data_Model::On_Off>
-{
-  prop_oneof![
-    Onn_bias => Just(Isolette_Data_Model::On_Off::Onn),
-    Off_bias => Just(Isolette_Data_Model::On_Off::Off)
-  ]
 }
 
 pub fn Isolette_Data_Model_Monitor_Mode_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Monitor_Mode>
@@ -120,46 +71,6 @@ pub fn Isolette_Data_Model_Monitor_Mode_strategy_cust(
     Normal_Monitor_Mode_bias => Just(Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
     Failed_Monitor_Mode_bias => Just(Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)
   ]
-}
-
-pub fn Isolette_Environment_Heat_strategy_default() -> impl Strategy<Value = Isolette_Environment::Heat>
-{
-  Isolette_Environment_Heat_strategy_cust(1)
-}
-
-pub fn Isolette_Environment_Heat_strategy_cust(Dummy_Head_Enum_bias: u32) -> impl Strategy<Value = Isolette_Environment::Heat>
-{
-  prop_oneof![
-    Dummy_Head_Enum_bias => Just(Isolette_Environment::Heat::Dummy_Head_Enum)
-  ]
-}
-
-pub fn Isolette_Data_Model_Temp_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Temp_i>
-{
-  Isolette_Data_Model_Temp_i_strategy_cust(
-    any::<i32>()
-  )
-}
-
-pub fn Isolette_Data_Model_Temp_i_strategy_cust<degrees_i32_strategy: Strategy<Value = i32>> (degrees_strategy: degrees_i32_strategy) -> impl Strategy<Value = Isolette_Data_Model::Temp_i>
-{
-  (degrees_strategy).prop_map(|(degrees)| {
-    Isolette_Data_Model::Temp_i { degrees }
-  })
-}
-
-pub fn Isolette_Data_Model_PhysicalTemp_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::PhysicalTemp_i>
-{
-  Isolette_Data_Model_PhysicalTemp_i_strategy_cust(
-    any::<i32>()
-  )
-}
-
-pub fn Isolette_Data_Model_PhysicalTemp_i_strategy_cust<degrees_i32_strategy: Strategy<Value = i32>> (degrees_strategy: degrees_i32_strategy) -> impl Strategy<Value = Isolette_Data_Model::PhysicalTemp_i>
-{
-  (degrees_strategy).prop_map(|(degrees)| {
-    Isolette_Data_Model::PhysicalTemp_i { degrees }
-  })
 }
 
 pub fn Isolette_Data_Model_TempWstatus_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::TempWstatus_i>

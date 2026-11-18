@@ -62,12 +62,6 @@ pub fn Gubmo_Structs_Arrays_MyEnum_strategy_cust(
   ]
 }
 
-/// default proptest strategy for bool: any value of the type
-pub fn bool_strategy_default() -> impl Strategy<Value = bool>
-{
-  any::<bool>()
-}
-
 pub fn Gubmo_Structs_Arrays_MyArrayInt32_strategy_default() -> impl Strategy<Value = Gubmo_Structs_Arrays::MyArrayInt32>
 {
   Gubmo_Structs_Arrays_MyArrayInt32_strategy_cust(any::<i32>())
