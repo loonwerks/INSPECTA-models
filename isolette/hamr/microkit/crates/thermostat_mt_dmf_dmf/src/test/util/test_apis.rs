@@ -26,3 +26,13 @@ pub fn get_internal_failure() -> Isolette_Data_Model::Failure_Flag_i
 {
   return extern_api::OUT_internal_failure.lock().unwrap_or_else(|e| e.into_inner()).expect("outgoing data port 'internal_failure' has no value: the component did not put one")
 }
+
+/// Call between two direct entry-point calls in one test, so the next call starts at a
+/// dispatch boundary as on the target: clears the outgoing event and event-data ports, so
+/// a dispatch that puts nothing on one leaves its getter returning None rather than the
+/// previous dispatch's value. Component state, data ports and incoming ports are kept;
+/// put each incoming event port for the next dispatch (None for no event).
+pub fn dispatch_boundary()
+{
+  // no outgoing event or event-data ports, so nothing is pending between dispatches
+}

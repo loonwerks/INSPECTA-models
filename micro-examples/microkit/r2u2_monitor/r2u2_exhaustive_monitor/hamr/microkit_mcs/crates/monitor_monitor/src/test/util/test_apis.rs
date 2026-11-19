@@ -243,6 +243,18 @@ pub fn get_ack() -> Option<u8>
   return extern_api::OUT_ack.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
+/// Call between two direct entry-point calls in one test, so the next call starts at a
+/// dispatch boundary as on the target: clears the outgoing event and event-data ports, so
+/// a dispatch that puts nothing on one leaves its getter returning None rather than the
+/// previous dispatch's value. Component state, data ports and incoming ports are kept;
+/// put each incoming event port for the next dispatch (None for no event).
+pub fn dispatch_boundary()
+{
+  *extern_api::OUT_echo.lock().unwrap_or_else(|e| e.into_inner()) = None;
+  *extern_api::OUT_alert_result.lock().unwrap_or_else(|e| e.into_inner()) = None;
+  *extern_api::OUT_ack.lock().unwrap_or_else(|e| e.into_inner()) = None;
+}
+
 /// getter for GUMBO State Variable
 pub fn get_sprevious_level() -> i32
 {
