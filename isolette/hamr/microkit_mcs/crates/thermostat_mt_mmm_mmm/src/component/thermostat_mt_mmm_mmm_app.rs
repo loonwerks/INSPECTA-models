@@ -116,13 +116,9 @@ impl thermostat_mt_mmm_mmm {
      // determine monitor status as specified in FAA REMH Table A-15
      //  monitor_status = NOT (Monitor Interface Failure OR Monitor Internal Failure)
      //                          AND Current Temperature.Status = Valid
-     //let monitor_status: bool =
-     //       (!(interface_failure.flag || internal_failure.flag)
-     //         && (current_temperature_status == ValueStatus::Valid));
-    let monitor_status: bool = match (interface_failure.flag, internal_failure.flag, current_temperature_status) {
-      (false, false, ValueStatus::Valid) => true,
-      _ => false,
-    };
+     let monitor_status: bool =
+            (!(interface_failure.flag || internal_failure.flag)
+              && (current_temperature_status == ValueStatus::Valid));
 
      match self.lastMonitorMode {
        // Transitions from INIT mode

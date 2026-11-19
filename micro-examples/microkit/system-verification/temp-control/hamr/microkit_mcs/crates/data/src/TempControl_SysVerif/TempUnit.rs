@@ -7,7 +7,7 @@ use super::*;
 verus! {
 
   #[repr(C)]
-  #[derive(Copy, Clone, Debug, PartialEq, Eq)]
+  #[derive(Copy, Clone, Debug, PartialEq, Eq, Structural)]
   pub enum TempUnit {
     pub Fahrenheit = 0,
   }

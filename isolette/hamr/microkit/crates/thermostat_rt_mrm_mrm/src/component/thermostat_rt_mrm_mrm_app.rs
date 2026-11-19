@@ -108,16 +108,9 @@ verus! {
       //    regulator_status = NOT (Monitor Interface Failure OR Monitor Internal Failure)
       //                          AND Current Temperature.Status = Valid
 
-      //let regulator_status: bool = 
-      //        (!(interface_failure.flag || internal_failure.flag)
-      //          && (current_temperature_status == ValueStatus::Valid));
-
-      let regulator_status: bool = 
-        (!(interface_failure.flag || internal_failure.flag) 
-          && match current_temperature_status {
-            ValueStatus::Valid => true,
-            ValueStatus::Invalid => false
-        });
+      let regulator_status: bool =
+              (!(interface_failure.flag || internal_failure.flag)
+                && (current_temperature_status == ValueStatus::Valid));
 
       match self.lastRegulatorMode {
         // Transitions from INIT mode

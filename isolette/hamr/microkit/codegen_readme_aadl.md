@@ -180,7 +180,7 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <tr><th colspan=4>GUMBO Methods</th></tr>
     <tr><td>ROUND</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L213>GUMBO</a></td>
-    <td><a href=crates/thermostat_rt_mri_mri/src/component/thermostat_rt_mri_mri_app.rs#L278>Verus</a></td>
+    <td><a href=crates/thermostat_rt_mri_mri/src/component/thermostat_rt_mri_mri_app.rs#L268>Verus</a></td>
     <td><a href=crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_GUMBOX.rs#L17>GUMBOX</a></td>
     </tr></table>
 
@@ -350,12 +350,12 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <tr><th colspan=4>GUMBO Methods</th></tr>
     <tr><td>regulator_status</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L372>GUMBO</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L177>Verus</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L170>Verus</a></td>
     <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L17>GUMBOX</a></td>
     </tr>
     <tr><td>timeout_condition_satisfied</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L380>GUMBO</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L186>Verus</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L179>Verus</a></td>
     <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L26>GUMBOX</a></td>
     </tr></table>
 
@@ -491,7 +491,7 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <tr><th colspan=4>GUMBO Methods</th></tr>
     <tr><td>timeout_condition_satisfied</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L178>GUMBO</a></td>
-    <td><a href=crates/thermostat_mt_mmi_mmi/src/component/thermostat_mt_mmi_mmi_app.rs#L239>Verus</a></td>
+    <td><a href=crates/thermostat_mt_mmi_mmi/src/component/thermostat_mt_mmi_mmi_app.rs#L227>Verus</a></td>
     <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L17>GUMBOX</a></td>
     </tr></table>
 
@@ -668,12 +668,12 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <tr><th colspan=4>GUMBO Methods</th></tr>
     <tr><td>monitor_status</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L326>GUMBO</a></td>
-    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L187>Verus</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L183>Verus</a></td>
     <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L17>GUMBOX</a></td>
     </tr>
     <tr><td>timeout_condition_satisfied</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L332>GUMBO</a></td>
-    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L196>Verus</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L192>Verus</a></td>
     <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L26>GUMBOX</a></td>
     </tr></table>
 

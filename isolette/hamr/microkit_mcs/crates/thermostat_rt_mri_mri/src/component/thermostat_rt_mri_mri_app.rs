@@ -217,7 +217,6 @@ impl thermostat_rt_mri_mri {
     // Set the Monitor Interface Failure value based on the status values of the
     //   upper and lower temperature
 
-    /*
     if !(upper_desired_temp_status == ValueStatus::Valid) ||
         !(lower_desired_temp_status == ValueStatus::Valid) {
         // REQ-MRI-6
@@ -225,15 +224,6 @@ impl thermostat_rt_mri_mri {
     } else {
         // REQ-MRI-7
         interface_failure = false;
-    }
-    */
-
-    // alt version using match rather than if/else
-    match (upper_desired_temp_status, lower_desired_temp_status) {
-        (ValueStatus::Invalid, _) |
-        (_, ValueStatus::Invalid)
-          => interface_failure = true,
-        _ => interface_failure = false
     }
 
 

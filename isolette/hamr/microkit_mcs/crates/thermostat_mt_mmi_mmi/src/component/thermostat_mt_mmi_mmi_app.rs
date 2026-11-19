@@ -176,7 +176,6 @@ impl thermostat_mt_mmi_mmi {
 
     // Set the Monitor Interface Failure value based on the status values of the
     //   upper and lower temperature
-    /*
     if !(upper_desired_temp_status == ValueStatus::Valid) ||
         !(lower_desired_temp_status == ValueStatus::Valid) {
         // REQ-MRI-4
@@ -185,17 +184,6 @@ impl thermostat_mt_mmi_mmi {
         // REQ-MRI-5
         interface_failure = false;
     }
-    */
-    match (upper_desired_temp_status, lower_desired_temp_status) {
-  (ValueStatus::Valid, ValueStatus::Valid) => {
-      // REQ-MRI-5
-      interface_failure = false;
-  }
-  _ => {
-      // REQ-MRI-4
-      interface_failure = true;
-  }
-}
 
     // create the appropriately typed value to send on the output port and set the port value
     let interface_failure_flag = Failure_Flag_i { flag: interface_failure };

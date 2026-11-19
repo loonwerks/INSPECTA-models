@@ -199,15 +199,8 @@ verus! {
         } else {
           // within [low, high]: maintain the current fan state
         }
-        // Only emit a command when the desired fan state actually changed. The enum's
-        // derived `==` lives outside `verus!` (in the data crate) so it is not usable in
-        // verified code; compare via `match`, which Verus reasons about structurally.
-        let fanStateChanged: bool = match (oldFanState, self.currentFanState) {
-          (TempControl_SysVerif::FanCmd::On, TempControl_SysVerif::FanCmd::On) => false,
-          (TempControl_SysVerif::FanCmd::Off, TempControl_SysVerif::FanCmd::Off) => false,
-          _ => true,
-        };
-        if fanStateChanged {
+        // Only emit a command when the desired fan state actually changed.
+        if oldFanState != self.currentFanState {
           api.put_fanCmd(self.currentFanState);
         }
       }

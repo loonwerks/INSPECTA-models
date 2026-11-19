@@ -7,7 +7,7 @@ use super::*;
 verus! {
 
   #[repr(C)]
-  #[derive(Copy, Clone, Debug, PartialEq, Eq)]
+  #[derive(Copy, Clone, Debug, PartialEq, Eq, Structural)]
   pub enum FanCmd {
     pub On = 0,
     pub Off = 1,

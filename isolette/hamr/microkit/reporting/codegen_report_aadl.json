@@ -3575,10 +3575,10 @@
                               },
                               "beginLine" : 49,
                               "beginColumn" : 5,
-                              "endLine" : 252,
+                              "endLine" : 242,
                               "endColumn" : 5,
                               "offset" : 1676,
-                              "length" : 9650
+                              "length" : 9344
                             }
                           ]
                         ]
@@ -3619,11 +3619,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mri_mri\/src\/component\/thermostat_rt_mri_mri_app.rs"
                               },
-                              "beginLine" : 278,
+                              "beginLine" : 268,
                               "beginColumn" : 3,
-                              "endLine" : 281,
+                              "endLine" : 271,
                               "endColumn" : 3,
-                              "offset" : 11854,
+                              "offset" : 11548,
                               "length" : 54
                             }
                           ]
@@ -6342,10 +6342,10 @@
                               },
                               "beginLine" : 43,
                               "beginColumn" : 5,
-                              "endLine" : 151,
+                              "endLine" : 144,
                               "endColumn" : 5,
                               "offset" : 1329,
-                              "length" : 6294
+                              "length" : 6047
                             }
                           ]
                         ]
@@ -6402,11 +6402,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/component\/thermostat_rt_mrm_mrm_app.rs"
                               },
-                              "beginLine" : 177,
+                              "beginLine" : 170,
                               "beginColumn" : 3,
-                              "endLine" : 184,
+                              "endLine" : 177,
                               "endColumn" : 3,
-                              "offset" : 8150,
+                              "offset" : 7903,
                               "length" : 365
                             }
                           ],
@@ -6418,11 +6418,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/component\/thermostat_rt_mrm_mrm_app.rs"
                               },
-                              "beginLine" : 186,
+                              "beginLine" : 179,
                               "beginColumn" : 3,
-                              "endLine" : 189,
+                              "endLine" : 182,
                               "endColumn" : 3,
-                              "offset" : 8520,
+                              "offset" : 8273,
                               "length" : 71
                             }
                           ]
@@ -8489,10 +8489,10 @@
                               },
                               "beginLine" : 53,
                               "beginColumn" : 5,
-                              "endLine" : 213,
+                              "endLine" : 201,
                               "endColumn" : 5,
                               "offset" : 1867,
-                              "length" : 7601
+                              "length" : 7328
                             }
                           ]
                         ]
@@ -8549,11 +8549,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmi_mmi\/src\/component\/thermostat_mt_mmi_mmi_app.rs"
                               },
-                              "beginLine" : 239,
+                              "beginLine" : 227,
                               "beginColumn" : 3,
-                              "endLine" : 242,
+                              "endLine" : 230,
                               "endColumn" : 3,
-                              "offset" : 9995,
+                              "offset" : 9722,
                               "length" : 70
                             }
                           ]
@@ -11255,10 +11255,10 @@
                               },
                               "beginLine" : 44,
                               "beginColumn" : 5,
-                              "endLine" : 154,
+                              "endLine" : 150,
                               "endColumn" : 5,
                               "offset" : 1437,
-                              "length" : 6798
+                              "length" : 6593
                             }
                           ]
                         ]
@@ -11315,11 +11315,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs"
                               },
-                              "beginLine" : 187,
+                              "beginLine" : 183,
                               "beginColumn" : 3,
-                              "endLine" : 194,
+                              "endLine" : 190,
                               "endColumn" : 3,
-                              "offset" : 8937,
+                              "offset" : 8732,
                               "length" : 363
                             }
                           ],
@@ -11331,11 +11331,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs"
                               },
-                              "beginLine" : 196,
+                              "beginLine" : 192,
                               "beginColumn" : 3,
-                              "endLine" : 199,
+                              "endLine" : 195,
                               "endColumn" : 3,
-                              "offset" : 9305,
+                              "offset" : 9100,
                               "length" : 71
                             }
                           ]
