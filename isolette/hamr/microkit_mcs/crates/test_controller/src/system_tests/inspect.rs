@@ -534,9 +534,13 @@ pub(crate) fn end_setup_batches() {
 /// variable it has.  There is deliberately no `Default` -- name every field.  An
 /// event input is an `Option`: `Some(v)` for exactly `v` pending, `None` for nothing.
 pub struct thermostat_rt_mri_mri_PreState {
+  /// One connection with `thermostat_rt_mhs_mhs.regulator_mode`: this sets the producer's
+  /// output, so they read the value too; there is no value for this consumer alone (D39).
   pub regulator_mode: Isolette_Data_Model::Regulator_Mode,
   pub lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   pub upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  /// One connection with `thermostat_rt_mhs_mhs.current_tempWstatus`, `thermostat_rt_mrm_mrm.current_tempWstatus`, `thermostat_mt_mmi_mmi.current_tempWstatus`, `thermostat_mt_ma_ma.current_tempWstatus`, `thermostat_mt_mmm_mmm.current_tempWstatus`: this sets the producer's
+  /// output, so they read the value too; there is no value for this consumer alone (D39).
   pub current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
 }
 
@@ -556,7 +560,11 @@ pub fn set_thermostat_rt_mri_mri(s: thermostat_rt_mri_mri_PreState) {
 pub struct thermostat_rt_mhs_mhs_PreState {
   pub upper_desired_temp: Isolette_Data_Model::Temp_i,
   pub lower_desired_temp: Isolette_Data_Model::Temp_i,
+  /// One connection with `thermostat_rt_mri_mri.regulator_mode`: this sets the producer's
+  /// output, so they read the value too; there is no value for this consumer alone (D39).
   pub regulator_mode: Isolette_Data_Model::Regulator_Mode,
+  /// One connection with `thermostat_rt_mri_mri.current_tempWstatus`, `thermostat_rt_mrm_mrm.current_tempWstatus`, `thermostat_mt_mmi_mmi.current_tempWstatus`, `thermostat_mt_ma_ma.current_tempWstatus`, `thermostat_mt_mmm_mmm.current_tempWstatus`: this sets the producer's
+  /// output, so they read the value too; there is no value for this consumer alone (D39).
   pub current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   pub sv_lastCmd: Isolette_Data_Model::On_Off,
 }
@@ -578,6 +586,8 @@ pub fn set_thermostat_rt_mhs_mhs(s: thermostat_rt_mhs_mhs_PreState) {
 pub struct thermostat_rt_mrm_mrm_PreState {
   pub interface_failure: Isolette_Data_Model::Failure_Flag_i,
   pub internal_failure: Isolette_Data_Model::Failure_Flag_i,
+  /// One connection with `thermostat_rt_mri_mri.current_tempWstatus`, `thermostat_rt_mhs_mhs.current_tempWstatus`, `thermostat_mt_mmi_mmi.current_tempWstatus`, `thermostat_mt_ma_ma.current_tempWstatus`, `thermostat_mt_mmm_mmm.current_tempWstatus`: this sets the producer's
+  /// output, so they read the value too; there is no value for this consumer alone (D39).
   pub current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   pub sv_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
 }
@@ -596,9 +606,13 @@ pub fn set_thermostat_rt_mrm_mrm(s: thermostat_rt_mrm_mrm_PreState) {
 /// variable it has.  There is deliberately no `Default` -- name every field.  An
 /// event input is an `Option`: `Some(v)` for exactly `v` pending, `None` for nothing.
 pub struct thermostat_mt_mmi_mmi_PreState {
+  /// One connection with `thermostat_mt_ma_ma.monitor_mode`: this sets the producer's
+  /// output, so they read the value too; there is no value for this consumer alone (D39).
   pub monitor_mode: Isolette_Data_Model::Monitor_Mode,
   pub lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   pub upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  /// One connection with `thermostat_rt_mri_mri.current_tempWstatus`, `thermostat_rt_mhs_mhs.current_tempWstatus`, `thermostat_rt_mrm_mrm.current_tempWstatus`, `thermostat_mt_ma_ma.current_tempWstatus`, `thermostat_mt_mmm_mmm.current_tempWstatus`: this sets the producer's
+  /// output, so they read the value too; there is no value for this consumer alone (D39).
   pub current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   pub sv_lastCmd: Isolette_Data_Model::On_Off,
 }
@@ -620,7 +634,11 @@ pub fn set_thermostat_mt_mmi_mmi(s: thermostat_mt_mmi_mmi_PreState) {
 pub struct thermostat_mt_ma_ma_PreState {
   pub upper_alarm_temp: Isolette_Data_Model::Temp_i,
   pub lower_alarm_temp: Isolette_Data_Model::Temp_i,
+  /// One connection with `thermostat_mt_mmi_mmi.monitor_mode`: this sets the producer's
+  /// output, so they read the value too; there is no value for this consumer alone (D39).
   pub monitor_mode: Isolette_Data_Model::Monitor_Mode,
+  /// One connection with `thermostat_rt_mri_mri.current_tempWstatus`, `thermostat_rt_mhs_mhs.current_tempWstatus`, `thermostat_rt_mrm_mrm.current_tempWstatus`, `thermostat_mt_mmi_mmi.current_tempWstatus`, `thermostat_mt_mmm_mmm.current_tempWstatus`: this sets the producer's
+  /// output, so they read the value too; there is no value for this consumer alone (D39).
   pub current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   pub sv_lastCmd: Isolette_Data_Model::On_Off,
 }
@@ -642,6 +660,8 @@ pub fn set_thermostat_mt_ma_ma(s: thermostat_mt_ma_ma_PreState) {
 pub struct thermostat_mt_mmm_mmm_PreState {
   pub interface_failure: Isolette_Data_Model::Failure_Flag_i,
   pub internal_failure: Isolette_Data_Model::Failure_Flag_i,
+  /// One connection with `thermostat_rt_mri_mri.current_tempWstatus`, `thermostat_rt_mhs_mhs.current_tempWstatus`, `thermostat_rt_mrm_mrm.current_tempWstatus`, `thermostat_mt_mmi_mmi.current_tempWstatus`, `thermostat_mt_ma_ma.current_tempWstatus`: this sets the producer's
+  /// output, so they read the value too; there is no value for this consumer alone (D39).
   pub current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   pub sv_lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
 }

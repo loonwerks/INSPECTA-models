@@ -104,8 +104,9 @@ verus! {
     ensures res == librarySpecFunction_Guarantee_spec(a);
 
   // No assume_specification, so not callable from verified code: normalLibraryFunction.
-  // Each uses arithmetic or a non-library call, directly or through a library function
-  // it calls, where the executable version (machine integers) and the spec version
+  // Each uses arithmetic or calls something outside this library (such as a conversion
+  // or another library's function), directly or through a function of this library it
+  // calls, where the executable version (machine integers) and the spec version
   // (mathematical integers) can disagree.
   // END MARKER GUMBO VERUS MARKER
 
